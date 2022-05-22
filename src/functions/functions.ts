@@ -107,6 +107,7 @@ export function setBackgroundImage(imageData:any){
     let img = new Image();
     let frostedGlass = document.getElementsByClassName('frostedGlass');
     let backgroundImage = document.getElementById('backgroundImage');
+
     img.src = imageData.urls.regular;
     img.onload = function() {
         for (let i = 0; i < frostedGlass.length; i++) {
@@ -123,6 +124,7 @@ export function setBackgroundImage(imageData:any){
             backgroundImage.style.transform = 'scale(1.05)';
             backgroundImage.style.transition = '5s';
         }
+
         setTimeout(mouseMoveEffect, 5000);
     }
 }

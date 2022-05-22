@@ -70,18 +70,31 @@ class SearchComponent extends React.Component {
         window.location.href = this.searchEngine + value;
     }
 
+    onPressEnter(e: any) {
+        window.location.href = this.searchEngine + e.target.value;
+    }
+
     render(){
         return (
             <Row>
                 <div className="mask" id="mask" style={{display:this.state.showMask}}/>
-                <Search
+                {/*<Search*/}
+                {/*    id={'searchInput'}*/}
+                {/*    addonBefore={this.selectBefore}*/}
+                {/*    placeholder="请输入搜索内容"*/}
+                {/*    allowClear*/}
+                {/*    onFocus={this.onFocus.bind(this)}*/}
+                {/*    onBlur={this.onBlur.bind(this)}*/}
+                {/*    onSearch={this.onSearch.bind(this)}*/}
+                {/*    size="large"*/}
+                {/*/>*/}
+                <Input
                     id={'searchInput'}
-                    addonBefore={this.selectBefore}
+                    // prefix={<SearchOutlined />}
                     placeholder="请输入搜索内容"
-                    allowClear
                     onFocus={this.onFocus.bind(this)}
                     onBlur={this.onBlur.bind(this)}
-                    onSearch={this.onSearch.bind(this)}
+                    onPressEnter={this.onPressEnter.bind(this)}
                     size="large"
                 />
             </Row>

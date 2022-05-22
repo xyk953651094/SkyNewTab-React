@@ -1,4 +1,5 @@
 @import '~antd/dist/antd.css';
+/*@import '~antd/dist/antd.variable.min.css';*/
 
 * {
   margin: 0;
@@ -52,35 +53,18 @@ html, body {
   bottom : 100px;
 }
 
-#greetBtn {
+#greetBtn, #createTimeBtn {
   cursor: default;
 }
 
-#weatherBtn {
+#weatherBtn, #downloadBtn, #gotoBtn, #authorBtn, #createTimeBtn {
   display: none;
-}
-
-#downloadBtn {
-  display: none;
-}
-
-#gotoBtn {
-  display: none;
-}
-
-#authorBtn {
-  display: none;
-}
-
-#createTimeBtn {
-  display: none;
-  cursor: default;
 }
 
 #searchInput {
-  min-width: 350px;
-  max-width: 750px;
+  width: 750px;
   z-index: 1002;
+  border-radius: 20px;
 }
 
 .ant-input-group-wrapper {  /* 修改antd样式 */
@@ -113,4 +97,13 @@ html, body {
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter:blur(10px);
   overflow:hidden;
+}
+
+/*移动端样式*/
+@media screen and (max-width: 768px) {
+  #searchInput {
+    width: 350px;
+    z-index: 1002;
+    border-radius: 20px;
+  }
 }

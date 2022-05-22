@@ -90,7 +90,7 @@ class WeatherComponent extends React.Component {
     render(){
         return (
             <Tooltip title="前往和风天气">
-                <Button type="primary" shape="round" onClick={this.handleClick.bind(this)} size={'large'} id={'weatherBtn'} className={'frostedGlass'} style={{display: this.state.display}}>
+                <Button shape="round" onClick={this.handleClick.bind(this)} size={'large'} id={'weatherBtn'} className={'frostedGlass'} style={{display: this.state.display}}>
                     {this.state.weather + ' ' + this.state.temperature + ' ｜ ' + this.state.AQI}
                 </Button>
             </Tooltip>

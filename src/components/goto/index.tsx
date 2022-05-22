@@ -44,7 +44,7 @@ class GotoComponent extends React.Component {
     render(){
         return (
             <Tooltip title="前往图片原网页">
-                <Button type="primary" shape="round" icon={<LinkOutlined />} size={'large'}
+                <Button shape="round" icon={<LinkOutlined />} size={'large'}
                         onClick={this.handleClick.bind(this)}
                         id={'gotoBtn'}
                         className={'frostedGlass'}

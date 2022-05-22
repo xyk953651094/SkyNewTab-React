@@ -44,7 +44,7 @@ class DownloadComponent extends React.Component {
     render(){
         return (
             <Tooltip title="下载图片">
-                <Button type="primary" shape="round" icon={<DownloadOutlined />}  size={'large'}
+                <Button shape="round" icon={<DownloadOutlined />}  size={'large'}
                         onClick={this.handleClick.bind(this)}
                         id={'downloadBtn'}
                         className={'frostedGlass'}

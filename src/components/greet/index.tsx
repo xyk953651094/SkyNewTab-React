@@ -61,7 +61,7 @@ class GreetComponent extends React.Component {
 
     render(){
         return (
-            <Button type="primary" shape="round" icon={<SmileOutlined />} size={'large'} id={'greetBtn'} className={'frostedGlass'}>
+            <Button shape="round" icon={<SmileOutlined />} size={'large'} id={'greetBtn'} className={'frostedGlass'}>
                 {this.state.greet}
             </Button>
         );

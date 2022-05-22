@@ -42,8 +42,8 @@ class AuthorComponent extends React.Component {
 
     render(){
         return (
-            <Tooltip title="前往图片作者网页">
-                <Button type="primary" shape="round" icon={<UserOutlined />} size={'large'}
+            <Tooltip title="前往图片作者主页">
+                <Button shape="round" icon={<UserOutlined />} size={'large'}
                         onClick={this.handleClick.bind(this)}
                         id={'authorBtn'}
                         className={'frostedGlass'}

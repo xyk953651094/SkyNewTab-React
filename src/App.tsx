@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+// import 'antd/dist/antd.variable.min.css';
 
 import GreetComponent from './components/greet'
 import WeatherComponent from './components/weather'
@@ -10,8 +11,7 @@ import SearchComponent from "./components/search";
 import AuthorComponent from "./components/author";
 import CreatTimeComponent from "./components/createTime";
 
-import {Layout, Row, Col, Space, Button, message} from 'antd';
-import {SettingOutlined} from '@ant-design/icons';
+import {Layout, Row, Col, Space, message, ConfigProvider} from 'antd';
 import {setColorTheme, setBackgroundImage} from "./functions/functions";
 const {Header, Content, Footer} = Layout;
 
@@ -66,7 +66,12 @@ class App extends React.Component {
                     authorLink: imageData.user.links.html,
                     createTime: imageData.created_at.split('T')[0],
                 }, () => {
-                    setBackgroundImage(imageData)
+                    setBackgroundImage(imageData);
+                    // ConfigProvider.config({
+                    //     theme: {
+                    //         primaryColor: imageData.color,
+                    //     },
+                    // });
                 })
             }
             else{
