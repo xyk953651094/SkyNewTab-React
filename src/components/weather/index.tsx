@@ -51,11 +51,11 @@ class WeatherComponent extends React.Component {
                             display: 'block',
                         });
                     }else{
-                        message.error('无法获取天气状况');
+                        // message.error('无法获取天气状况');
                     }
                 }
                 weatherXHR.onerror=function(){
-                    message.error('无法获取天气状况');
+                    // message.error('无法获取天气状况');
                 }
                 weatherXHR.send();
 
@@ -70,16 +70,16 @@ class WeatherComponent extends React.Component {
                             display: 'block',
                         });
                     }else{
-                       message.error('无法获取空气质量');
+                       // message.error('无法获取空气质量');
                     }
                 }
                 airXHR.onerror=function(){
-                    message.error('无法获取空气质量');
+                    // message.error('无法获取空气质量');
                 }
                 airXHR.send();
             });
         } else {
-            message.error('无法获取定位');
+            // message.error('无法获取定位');
         }
     }
 
