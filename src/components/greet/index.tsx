@@ -37,13 +37,15 @@ class GreetComponent extends React.Component {
         holidayXHR.onload=function() {
             if (holidayXHR.status === 200) {
                 let holidayData=JSON.parse(holidayXHR.responseText);
-                let holidayContent = holidayData.data.solarTerms;
-                if(holidayData.data.solarTerms.indexOf('后') === -1) {
-                    holidayContent = '今日' + holidayContent;
+                if(holidayData.code === 1) {
+                    let holidayContent = holidayData.data.solarTerms;
+                    if(holidayData.data.solarTerms.indexOf('后') === -1) {
+                        holidayContent = '今日' + holidayContent;
+                    }
+                    tempThis.setState({
+                        greet: getGreet(new Date()) + ' | ' + holidayContent,
+                    });
                 }
-                tempThis.setState({
-                    greet: getGreet(new Date()) + ' | ' + holidayContent,
-                })
             }
             else{
                 tempThis.setState({
