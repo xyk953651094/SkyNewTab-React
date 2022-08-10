@@ -9,7 +9,7 @@
 
 ## 简介
 适用于Chromium的新标签页插件。  
-基于 Html + Typescript + CSS + React。   
+基于 Html + Typescript + CSS + React + AntDesign。   
 * 节气来源：https://www.mxnzp.com  
 * 图片来源：https://unsplash.com
 * 图标来源：https://www.iconfont.cn 以及 Pixso 社区资源剪纸风图标。  
