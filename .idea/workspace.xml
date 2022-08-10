@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="7b6aa851-d91a-4d7e-aff0-98e24f63e226" name="变更" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/functions/functions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/functions/functions.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,6 +80,7 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/xiaoyunkai/Documents/Projects/WebStorm/SkyNewTab_React/node_modules/typescript/lib&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -103,10 +105,25 @@
       <option name="presentableId" value="Default" />
       <updated>1653623715121</updated>
       <workItem from="1653623716458" duration="2299000" />
+      <workItem from="1654142803048" duration="205000" />
+      <workItem from="1660052062030" duration="321000" />
+      <workItem from="1660097785807" duration="1200000" />
     </task>
+    <task id="LOCAL-00001" summary="关闭获取天气失败报错">
+      <created>1654142997686</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1654142997686</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="关闭获取天气失败报错" />
+    <option name="LAST_COMMIT_MESSAGE" value="关闭获取天气失败报错" />
   </component>
 </project>
