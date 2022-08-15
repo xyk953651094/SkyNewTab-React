@@ -1,14 +1,16 @@
-import React from 'react';
-import '../../App.css';
-import {Button, message} from 'antd';
-import {SmileOutlined} from "@ant-design/icons";
-import {formatDate, getGreet} from "../../functions/functions";
+import React from "react";
+import "../../App.css";
+import {Button} from "antd";
+import {CalendarOutlined} from "@ant-design/icons";
+import {getTimeDetails, getGreet, getFontColor} from "../../typescripts/publicFunctions";
 
 type propType = {
-    // username: string,
+    imageColor: string,
 }
 
 type stateType = {
+    backgroundColor: string,
+    fontColor: string,
     greet: string,
 }
 
@@ -21,49 +23,64 @@ class GreetComponent extends React.Component {
     constructor(props: any) {
         super(props);
         this.state = {
-            greet: '',
+            backgroundColor: "",
+            fontColor: "",
+            greet: getGreet(new Date()),
         };
     }
 
     componentDidMount() {
         let tempThis = this;
-        let tempDate = formatDate(new Date());
+        let tempDate = getTimeDetails(new Date());
         let date = tempDate.year + tempDate.month + tempDate.day;
 
-        let appId = 'cicgheqakgmpjclo'
-        let appSecret = 'RVlRVjZTYXVqeHB3WCtQUG5lM0h0UT09'
-        let holidayXHR=new XMLHttpRequest();
-        holidayXHR.open('GET','https://www.mxnzp.com/api/holiday/single/' + date + '?app_id=' + appId + '&app_secret=' + appSecret)
-        holidayXHR.onload=function() {
+        let appId = "cicgheqakgmpjclo"
+        let appSecret = "RVlRVjZTYXVqeHB3WCtQUG5lM0h0UT09"
+        let holidayXHR = new XMLHttpRequest();
+        holidayXHR.open("GET", "https://www.mxnzp.com/api/holiday/single/" + date + "?app_id=" + appId + "&app_secret=" + appSecret)
+        holidayXHR.onload = function () {
             if (holidayXHR.status === 200) {
-                let holidayData=JSON.parse(holidayXHR.responseText);
-                if(holidayData.code === 1) {
+                let holidayData = JSON.parse(holidayXHR.responseText);
+                if (holidayData.code === 1) {
                     let holidayContent = holidayData.data.solarTerms;
-                    if(holidayData.data.solarTerms.indexOf('后') === -1) {
-                        holidayContent = '今日' + holidayContent;
+                    if (holidayData.data.solarTerms.indexOf("后") === -1) {
+                        holidayContent = "今日" + holidayContent;
                     }
                     tempThis.setState({
-                        greet: getGreet(new Date()) + ' | ' + holidayContent,
+                        greet: tempThis.state.greet + " | " + holidayContent,
                     });
                 }
             }
-            else{
-                tempThis.setState({
-                    greet: getGreet(new Date()),
-                })
-            }
         }
-        holidayXHR.onerror=function(){
-            tempThis.setState({
-                greet: getGreet(new Date()),
-            })
+        holidayXHR.onerror = function () {
+
         }
         holidayXHR.send();
     }
 
-    render(){
+    componentWillReceiveProps(nextProps: any, prevProps: any) {
+        if (nextProps !== prevProps) {
+            this.setState({
+                backgroundColor: nextProps.imageColor,
+            }, () => {
+                this.setState({
+                    fontColor: getFontColor(this.state.backgroundColor),
+                })
+            })
+        }
+    }
+
+    render() {
         return (
-            <Button shape="round" icon={<SmileOutlined />} size={'large'} id={'greetBtn'} className={'frostedGlass'}>
+            <Button shape="round" icon={<CalendarOutlined/>} size={"large"}
+                    id={"greetBtn"}
+                    className={"frostedGlass"}
+                    style={{
+                        backgroundColor: this.state.backgroundColor,
+                        color: this.state.fontColor,
+                        cursor: "default"
+                    }}
+            >
                 {this.state.greet}
             </Button>
         );

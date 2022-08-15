@@ -1,0 +1,24 @@
+.mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    display: none;
+}
+
+.searchInput {
+    width: 750px;
+    border-radius: 20px;
+}
+
+/*移动端样式*/
+/*@media screen and (max-width: 768px) {*/
+/*    .searchInput {*/
+/*        width: 300px;*/
+/*        border-radius: 20px;*/
+/*    }*/
+/*}*/

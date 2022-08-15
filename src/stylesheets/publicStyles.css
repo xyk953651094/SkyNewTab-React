@@ -1,0 +1,38 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+    background-color: #FFFFFF;
+}
+
+/* z轴显示层数 */
+.zIndexHigh {
+    z-index: 2;
+}
+
+.zIndexMiddle {
+    z-index: 1;
+}
+
+.zIndexLow {
+    z-index: 0;
+}
+
+/*水平垂直居中*/
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/*毛玻璃效果*/
+.frostedGlass {
+    border-width: 0;
+    box-shadow: 0 0 0 1px rgb(0 0 0 / 10%), 0 2px 4px 1px rgb(0 0 0 / 18%);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    overflow:hidden;
+}

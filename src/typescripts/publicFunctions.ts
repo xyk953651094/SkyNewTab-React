@@ -1,7 +1,7 @@
-import {message} from 'antd';
+import {themes} from "./publicConstents"
 
 // 获取日期与时间
-export function formatDate(param: Date) {
+export function getTimeDetails(param: Date) {
     let year: string | number = param.getFullYear();
     let month: string | number = param.getMonth() + 1;
     let day: string | number = param.getDate();
@@ -53,87 +53,32 @@ export function getGreet(param: Date) {
     else if (hour >= 14 && hour < 17) {  // 下午
         return greets.afternoon;
     }
-    else if (hour >=17 && hour < 20) {   //傍晚
+    else if (hour >=17 && hour < 20) {   // 傍晚
         return greets.evening;
     }
-    else if (hour >=19 && hour < 24) {   //夜晚
+    else {                               // 夜晚
         return greets.night;
     }
 }
 
 // 请求unsplash图片前随机显示多彩颜色主题
 export function setColorTheme() {
-    let themes = [
-        {'bodyBackgroundColor': '#FFEBEE', 'frostedGlassBackgroundColor': '#F44336'},
-        {'bodyBackgroundColor': '#FCE4EC', 'frostedGlassBackgroundColor': '#E91E63'},
-        {'bodyBackgroundColor': '#F3E5F5', 'frostedGlassBackgroundColor': '#9C27B0'},
-        {'bodyBackgroundColor': '#EDE7F6', 'frostedGlassBackgroundColor': '#673AB7'},
-        {'bodyBackgroundColor': '#E8EAF6', 'frostedGlassBackgroundColor': '#3F51B5'},
-        {'bodyBackgroundColor': '#E3F2FD', 'frostedGlassBackgroundColor': '#2196F3'},
-        {'bodyBackgroundColor': '#E1F5FE', 'frostedGlassBackgroundColor': '#03A9F4'},
-        {'bodyBackgroundColor': '#E0F7FA', 'frostedGlassBackgroundColor': '#00BCD4'},
-        {'bodyBackgroundColor': '#E0F2F1', 'frostedGlassBackgroundColor': '#009688'},
-        {'bodyBackgroundColor': '#E8F5E9', 'frostedGlassBackgroundColor': '#4CAF50'},
-        {'bodyBackgroundColor': '#F1F8E9', 'frostedGlassBackgroundColor': '#8BC34A'},
-        {'bodyBackgroundColor': '#F9FBE7', 'frostedGlassBackgroundColor': '#CDDC39'},
-        {'bodyBackgroundColor': '#FFFDE7', 'frostedGlassBackgroundColor': '#FFEB3B'},
-        {'bodyBackgroundColor': '#FFF8E1', 'frostedGlassBackgroundColor': '#FFC107'},
-        {'bodyBackgroundColor': '#FFF3E0', 'frostedGlassBackgroundColor': '#FF9800'},
-        {'bodyBackgroundColor': '#FBE9E7', 'frostedGlassBackgroundColor': '#FF5722'},
-        {'bodyBackgroundColor': '#EFEBE9', 'frostedGlassBackgroundColor': '#795548'},
-        {'bodyBackgroundColor': '#ECEFF1', 'frostedGlassBackgroundColor': '#607D8B'},
-        {'bodyBackgroundColor': '#FAFAFA', 'frostedGlassBackgroundColor': '#9E9E9E'},
-    ];
     let randomNum = Math.floor(Math.random() * themes.length);
     let body = document.getElementsByTagName('body')[0];
-    body.style.backgroundColor = themes[randomNum].bodyBackgroundColor;
+    body.style.backgroundColor = themes[randomNum].bodyBackgroundColor;    // 设置body背景颜色
 
-    let frostedGlass = document.getElementsByClassName('frostedGlass');
-    for (let i = 0; i < frostedGlass.length; i++) {
-        const tempEle = frostedGlass[i];
-        if (tempEle instanceof HTMLElement) {
-            tempEle.style.color = getFontColor(themes[randomNum].frostedGlassBackgroundColor);
-            tempEle.style.backgroundColor = themes[randomNum].frostedGlassBackgroundColor;
-        }
-    }
-}
-
-// 图片加载完成后再设置背景图片
-export function setBackgroundImage(imageData:any){
-    let img = new Image();
-    let frostedGlass = document.getElementsByClassName('frostedGlass');
-    let backgroundImage = document.getElementById('backgroundImage');
-
-    img.src = imageData.urls.regular;
-    img.onload = function() {
-        for (let i = 0; i < frostedGlass.length; i++) {
-            let tempEle = frostedGlass[i];
-            if (tempEle instanceof HTMLElement) {
-                tempEle.style.color = getFontColor(getThemeColor(imageData.color));
-                tempEle.style.backgroundColor = getThemeColor(imageData.color);
-            }
-        }
-
-        if (backgroundImage instanceof HTMLElement) {
-            backgroundImage.setAttribute('src', img.src);  // this.src
-            // 设置动态效果
-            backgroundImage.style.transform = 'scale(1.05)';
-            backgroundImage.style.transition = '5s';
-        }
-
-        setTimeout(mouseMoveEffect, 5000);
-    }
+    return themes[randomNum].frostedGlassBackgroundColor;  // 返回各组件背景颜色
 }
 
 // 根据图片背景颜色获取元素反色效果
-function getThemeColor(color: string) {
+export function getThemeColor(color: string) {
     color = '0x' + color.replace('#', '');
     let newColor = '000000' + (0xFFFFFF - parseInt(color)).toString(16);
     return '#' + newColor.substring(newColor.length-6, newColor.length);
 }
 
 // 根据图片背景颜色改变字体颜色效果
-function getFontColor(color: string) {
+export function getFontColor(color: string) {
     let rgb = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(color);
     if (rgb) {
         let r = parseInt(rgb[1], 16);
@@ -152,7 +97,7 @@ function getFontColor(color: string) {
 }
 
 // PC端鼠标移动效果
-function mouseMoveEffect() {
+export function mouseMoveEffect() {
     let backgroundImage = document.getElementById('backgroundImage');
     window.addEventListener('mousemove',function(e){
         if(backgroundImage instanceof HTMLElement) {

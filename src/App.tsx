@@ -1,32 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-// import 'antd/dist/antd.variable.min.css';
+import React from "react";
+import "./App.css";
+import "./stylesheets/publicStyles.css"
 
-import GreetComponent from './components/greet'
-import WeatherComponent from './components/weather'
-import DownloadComponent from './components/download'
-import GotoComponent from "./components/goto";
+import GreetComponent from "./components/greet";
+import WeatherComponent from "./components/weather";
+import DownloadComponent from "./components/download";
+import HtmlLinkComponent from "./components/htmlLink";
+import WallpaperComponent from "./components/wallpaper";
 import SearchComponent from "./components/search";
 import AuthorComponent from "./components/author";
 import CreatTimeComponent from "./components/createTime";
 
-import {Layout, Row, Col, Space, message, ConfigProvider} from 'antd';
-import {setColorTheme, setBackgroundImage, deviceModel} from "./functions/functions";
-const {Header, Content, Footer} = Layout;
+import { Layout, Row, Col, Space } from "antd";
+import { setColorTheme, getThemeColor, deviceModel } from "./typescripts/publicFunctions";
+const { Header, Content, Footer } = Layout;
 
 type propType = {}
 
 type stateType = {
-    downloadBtnHeaderDisplay: 'none' | 'block',
-    gotoBtnHeaderDisplay: 'none' | 'block',
-    downloadBtnFooterDisplay: 'none' | 'block',
-    gotoBtnFooterDisplay: 'none' | 'block',
-    authorBtnDisplay: 'none' | 'block',
-    createTimeBtnDisplay: 'none' | 'block',
-    imageData: any,
+    componentDisplay: "none" | "block",
+    mobileComponentDisplay: "none" | "block",
+    wallpaperComponentDisplay: "none" | "block",
+    imageColor: string,
     downloadLink: string,
-    gotoLink: string,
+    htmlLink: string,
+    imageLink: string,
     author: string,
     authorLink: string,
     createTime: string,
@@ -41,80 +39,66 @@ class App extends React.Component {
     constructor(props: any) {
         super(props)
         this.state = {
-            downloadBtnHeaderDisplay: 'none',
-            gotoBtnHeaderDisplay: 'none',
-            downloadBtnFooterDisplay: 'none',
-            gotoBtnFooterDisplay: 'none',
-            authorBtnDisplay: 'none',
-            createTimeBtnDisplay: 'none',
-            imageData: '',
-            downloadLink: '',
-            gotoLink: '',
-            author: '',
-            authorLink: '',
-            createTime: '',
+            componentDisplay: "none",
+            mobileComponentDisplay: "none",
+            wallpaperComponentDisplay: "none",
+            imageColor: "",
+            downloadLink: "",
+            htmlLink: "",
+            imageLink: "",
+            author: "",
+            authorLink: "",
+            createTime: "",
         }
     }
 
     componentDidMount() {
         let tempThis = this;
-        setColorTheme();
-
         let device = deviceModel();
-
-        let clientId = 'ntHZZmwZUkhiLBMvwqqzmOG29nyXSCXlX7x_i-qhVHM';
-        let orientation = 'landscape';
+        this.setState({
+            imageColor: setColorTheme()
+        })
+        
+        let clientId = "ntHZZmwZUkhiLBMvwqqzmOG29nyXSCXlX7x_i-qhVHM";
+        let orientation = "landscape";
         let imageXHR=new XMLHttpRequest();
-        imageXHR.open('GET','https://api.unsplash.com/photos/random?client_id=' + clientId + '&orientation=' + orientation + '&content_filter=high');
+        imageXHR.open("GET","https://api.unsplash.com/photos/random?client_id=" + clientId + "&orientation=" + orientation + "&content_filter=high");
         imageXHR.onload=function(){
             if(imageXHR.status===200){
                 let imageData=JSON.parse(imageXHR.responseText);
 
-                if(device === 'iPhone' || device === 'Android') {  // 小屏显示底部按钮
+                if(device === "iPhone" || device === "Android") {  // 小屏显示底部按钮
                     tempThis.setState({
-                        downloadBtnFooterDisplay: 'block',
-                        gotoBtnFooterDisplay: 'block',
-                        imageData: imageData,
+                        componentDisplay: "none",
+                        mobileComponentDisplay: "block",
+                        wallpaperComponentDisplay: "block",
+                        imageColor: getThemeColor(imageData.color),
                         downloadLink: imageData.links.download,
-                        gotoLink: imageData.links.html,
-                    },() => {
-                        setBackgroundImage(imageData);
-                        // ConfigProvider.config({
-                        //     theme: {
-                        //         primaryColor: imageData.color,
-                        //     },
-                        // });)
+                        htmlLink: imageData.links.html,
+                        imageLink: imageData.urls.regular,
                     })
                 }
                 else {
                     tempThis.setState({
-                        downloadBtnHeaderDisplay: 'block',
-                        gotoBtnHeaderDisplay: 'block',
-                        authorBtnDisplay: 'block',
-                        createTimeBtnDisplay: 'block',
-                        imageData: imageData,
+                        componentDisplay: "block",
+                        mobileComponentDisplay: "none",
+                        wallpaperComponentDisplay: "block",
+                        imageColor: getThemeColor(imageData.color),
                         downloadLink: imageData.links.download,
-                        gotoLink: imageData.links.html,
+                        htmlLink: imageData.links.html,
+                        imageLink: imageData.urls.regular,
                         author: imageData.user.name,
                         authorLink: imageData.user.links.html,
-                        createTime: imageData.created_at.split('T')[0],
-                    },() => {
-                        setBackgroundImage(imageData);
-                        console.log(tempThis.state.authorBtnDisplay)
-                        // ConfigProvider.config({
-                        //     theme: {
-                        //         primaryColor: imageData.color,
-                        //     },
-                        // });)
+                        createTime: imageData.created_at.split("T")[0],
                     })
                 }
             }
             else{
-                message.error('无法获取背景图片');
+                // message.error("无法获取背景图片");
             }
         }
         imageXHR.onerror=function(){
-            message.error('无法获取背景图片');
+            // message.error("无法获取背景图片");
         }
         imageXHR.send();
     }
@@ -122,56 +106,70 @@ class App extends React.Component {
     render() {
         return (
             <Layout>
-                <Header id={'header'}>
+                <Header id={"header"}>
                     <Row>
                         <Col span={12}>
-                            <Space size={'small'}>
-                                <GreetComponent />
-                                <WeatherComponent />
+                            <Space size={"small"}>
+                                <GreetComponent
+                                    imageColor={this.state.imageColor}
+                                />
+                                {/*<WeatherComponent*/}
+                                {/*    display={this.state.componentDisplay}*/}
+                                {/*    imageColor={this.state.imageColor}*/}
+                                {/*/>*/}
                             </Space>
                         </Col>
-                        <Col span={12} style={{textAlign: 'right'}}>
-                            <Space size={'small'}>
+                        <Col span={12} style={{textAlign: "right"}}>
+                            <Space size={"small"}>
                                 <DownloadComponent
-                                    display={this.state.downloadBtnHeaderDisplay}
+                                    display={this.state.componentDisplay}
+                                    imageColor={this.state.imageColor}
                                     downloadLink={this.state.downloadLink}
                                 />
-                                <GotoComponent
-                                    display={this.state.gotoBtnHeaderDisplay}
-                                    gotoLink={this.state.gotoLink}
+                                <HtmlLinkComponent
+                                    display={this.state.componentDisplay}
+                                    imageColor={this.state.imageColor}
+                                    htmlLink={this.state.htmlLink}
                                 />
-                                {/*<Button type="primary" shape="round" icon={<SettingOutlined />} size={'large'} />*/}
+                                {/*<Button type="primary" shape="round" icon={<SettingOutlined />} size={"large"} />*/}
                             </Space>
                         </Col>
                     </Row>
                 </Header>
-                <Content id={'content'} className={'center'}>
-                    <img className="backgroundImage" id="backgroundImage"/>
+                <Content id={"content"} className={"center"}>
+                    <WallpaperComponent
+                        display={this.state.wallpaperComponentDisplay}
+                        imageLink={this.state.imageLink}
+                    />
                     <SearchComponent />
                 </Content>
-                <Footer id={'footer'}>
+                <Footer id={"footer"}>
                     <Row>
-                        <Col span={12} style={{textAlign: 'left'}}>
-                            <Space size={'small'}>
+                        <Col span={12} style={{textAlign: "left"}}>
+                            <Space size={"small"}>
                                 <DownloadComponent
-                                    display={this.state.downloadBtnFooterDisplay}
+                                    display={this.state.mobileComponentDisplay}
+                                    imageColor={this.state.imageColor}
                                     downloadLink={this.state.downloadLink}
                                 />
-                                <GotoComponent
-                                    display={this.state.gotoBtnFooterDisplay}
-                                    gotoLink={this.state.gotoLink}
+                                <HtmlLinkComponent
+                                    display={this.state.mobileComponentDisplay}
+                                    imageColor={this.state.imageColor}
+                                    htmlLink={this.state.htmlLink}
                                 />
                             </Space>
                         </Col>
-                        <Col span={12} style={{textAlign: 'right'}}>
-                            <Space size={'small'} align={'end'}>
+                        <Col span={12} style={{textAlign: "right"}}>
+                            <Space size={"small"} align={"end"}>
                                 <AuthorComponent
-                                    display={this.state.authorBtnDisplay}
+                                    display={this.state.componentDisplay}
+                                    imageColor={this.state.imageColor}
                                     author={this.state.author}
                                     authorLink={this.state.authorLink}
                                 />
                                 <CreatTimeComponent
-                                    display={this.state.createTimeBtnDisplay}
+                                    display={this.state.componentDisplay}
+                                    imageColor={this.state.imageColor}
                                     createTime={this.state.createTime}
                                 />
                             </Space>

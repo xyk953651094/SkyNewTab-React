@@ -1,17 +1,20 @@
-import React from 'react';
-import '../../App.css';
-import {Button, Tooltip, message } from 'antd';
+import React from "react";
+import "../../App.css";
+import {Button, Tooltip, message} from "antd";
 import {UserOutlined} from "@ant-design/icons";
-import {isEmptyString} from "../../functions/functions";
+import {getFontColor, isEmptyString} from "../../typescripts/publicFunctions";
 
 type propType = {
-    display: 'none' | 'block',
+    display: "none" | "block",
+    imageColor: string,
     author: string,
     authorLink: string,
 }
 
 type stateType = {
     authorLink: string,
+    backgroundColor: string,
+    fontColor: string,
 }
 
 interface AuthorComponent {
@@ -23,31 +26,44 @@ class AuthorComponent extends React.Component {
     constructor(props: any) {
         super(props);
         this.state = {
-            authorLink: '',
+            authorLink: "",
+            backgroundColor: "",
+            fontColor: "",
         };
     }
 
-    componentDidMount() {
-
+    componentWillReceiveProps(nextProps: any, prevProps: any) {
+        if (nextProps !== prevProps) {
+            this.setState({
+                backgroundColor: nextProps.imageColor,
+            }, () => {
+                this.setState({
+                    fontColor: getFontColor(this.state.backgroundColor),
+                })
+            })
+        }
     }
 
     handleClick() {
-        if( !isEmptyString(this.props.authorLink) ) {
+        if (!isEmptyString(this.props.authorLink)) {
             window.open(this.props.authorLink);
-        }
-        else {
-            message.warning('无图片作者网页链接');
+        } else {
+            message.error("无跳转链接");
         }
     }
 
-    render(){
+    render() {
         return (
             <Tooltip title="前往图片作者主页">
-                <Button shape="round" icon={<UserOutlined />} size={'large'}
+                <Button shape="round" icon={<UserOutlined/>} size={"large"}
                         onClick={this.handleClick.bind(this)}
-                        id={'authorBtn'}
-                        className={'frostedGlass'}
-                        style={{display: this.props.display}}
+                        id={"authorBtn"}
+                        className={"frostedGlass"}
+                        style={{
+                            display: this.props.display,
+                            backgroundColor: this.state.backgroundColor,
+                            color: this.state.fontColor
+                        }}
                 >
                     {this.props.author}
                 </Button>

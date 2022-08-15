@@ -1,0 +1,10 @@
+.ant-image {
+    position: fixed;
+    top: -1%;
+    left: -1%;
+}
+
+.backgroundImage {
+    object-fit: cover;
+}
+
