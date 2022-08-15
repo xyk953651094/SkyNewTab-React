@@ -58,7 +58,7 @@ class AuthorComponent extends React.Component {
                 <Button shape="round" icon={<UserOutlined/>} size={"large"}
                         onClick={this.handleClick.bind(this)}
                         id={"authorBtn"}
-                        className={"frostedGlass"}
+                        className={"frostedGlass zIndexHigh"}
                         style={{
                             display: this.props.display,
                             backgroundColor: this.state.backgroundColor,

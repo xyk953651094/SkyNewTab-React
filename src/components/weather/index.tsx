@@ -116,7 +116,7 @@ class WeatherComponent extends React.Component {
             <Tooltip title="前往和风天气">
                 <Button shape="round" onClick={this.handleClick.bind(this)} size={"large"}
                         id={"weatherBtn"}
-                        className={"frostedGlass"}
+                        className={"frostedGlass zIndexHigh"}
                         style={{
                             backgroundColor: this.state.backgroundColor,
                             color: this.state.fontColor,

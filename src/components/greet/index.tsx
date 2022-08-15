@@ -74,7 +74,7 @@ class GreetComponent extends React.Component {
         return (
             <Button shape="round" icon={<CalendarOutlined/>} size={"large"}
                     id={"greetBtn"}
-                    className={"frostedGlass"}
+                    className={"frostedGlass zIndexHigh"}
                     style={{
                         backgroundColor: this.state.backgroundColor,
                         color: this.state.fontColor,

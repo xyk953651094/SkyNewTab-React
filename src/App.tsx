@@ -106,7 +106,7 @@ class App extends React.Component {
     render() {
         return (
             <Layout>
-                <Header id={"header"}>
+                <Header id={"header"} className={"zIndexMiddle"}>
                     <Row>
                         <Col span={12}>
                             <Space size={"small"}>

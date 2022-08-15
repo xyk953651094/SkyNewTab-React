@@ -63,7 +63,7 @@ class DownloadComponent extends React.Component {
                 <Button shape="round" icon={<DownloadOutlined/>} size={"large"}
                         onClick={this.handleClick.bind(this)}
                         id={"downloadBtn"}
-                        className={"frostedGlass"}
+                        className={"frostedGlass zIndexHigh"}
                         style={{
                             display: this.props.display,
                             backgroundColor: this.state.backgroundColor,

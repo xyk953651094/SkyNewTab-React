@@ -46,7 +46,7 @@ class CreatTimeComponent extends React.Component {
             <Tooltip title="拍摄时间">
                 <Button shape="round" icon={<CameraOutlined/>} size={"large"}
                         id={"createTimeBtn"}
-                        className={"frostedGlass"}
+                        className={"frostedGlass zIndexHigh"}
                         style={{
                             display: this.props.display,
                             backgroundColor: this.state.backgroundColor,
