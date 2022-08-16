@@ -7,11 +7,9 @@
     <list default="true" id="7b6aa851-d91a-4d7e-aff0-98e24f63e226" name="变更" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/author/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/author/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/greet/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/greet/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/htmlLink/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/htmlLink/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/wallpaper/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/wallpaper/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/weather/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/weather/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/typescripts/publicFunctions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/typescripts/publicFunctions.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -142,7 +140,7 @@
       <workItem from="1660377572950" duration="2897000" />
       <workItem from="1660452685570" duration="10286000" />
       <workItem from="1660528830395" duration="9910000" />
-      <workItem from="1660639992297" duration="1390000" />
+      <workItem from="1660639992297" duration="5617000" />
     </task>
     <task id="LOCAL-00001" summary="关闭获取天气失败报错">
       <created>1654142997686</created>
@@ -172,7 +170,14 @@
       <option name="project" value="LOCAL" />
       <updated>1660539836981</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="添加简易天气功能，完善细节">
+      <created>1660641498935</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1660641498935</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -183,6 +188,7 @@
     <MESSAGE value="关闭获取天气失败报错" />
     <MESSAGE value="完善小细节" />
     <MESSAGE value="优化代码质量" />
-    <option name="LAST_COMMIT_MESSAGE" value="优化代码质量" />
+    <MESSAGE value="添加简易天气功能，完善细节" />
+    <option name="LAST_COMMIT_MESSAGE" value="添加简易天气功能，完善细节" />
   </component>
 </project>

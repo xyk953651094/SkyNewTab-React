@@ -52,7 +52,7 @@ class App extends React.Component {
         }
     }
 
-    componentDidMount() {
+    componentWillMount() {
         let tempThis = this;
         let device = deviceModel();
         this.setState({
@@ -61,11 +61,11 @@ class App extends React.Component {
         
         let clientId = "ntHZZmwZUkhiLBMvwqqzmOG29nyXSCXlX7x_i-qhVHM";
         let orientation = "landscape";
-        let imageXHR=new XMLHttpRequest();
+        let imageXHR = new XMLHttpRequest();
         imageXHR.open("GET","https://api.unsplash.com/photos/random?client_id=" + clientId + "&orientation=" + orientation + "&content_filter=high");
-        imageXHR.onload=function(){
-            if(imageXHR.status===200){
-                let imageData=JSON.parse(imageXHR.responseText);
+        imageXHR.onload = function(){
+            if(imageXHR.status === 200){
+                let imageData = JSON.parse(imageXHR.responseText);
 
                 if(device === "iPhone" || device === "Android") {  // 小屏显示底部按钮
                     tempThis.setState({

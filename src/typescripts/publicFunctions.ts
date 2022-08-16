@@ -98,7 +98,8 @@ export function getFontColor(color: string) {
 
 // PC端鼠标移动效果
 export function mouseMoveEffect() {
-    let backgroundImage = document.getElementById('backgroundImage');
+    // @ts-ignore
+    let backgroundImage: HTMLElement = document.getElementById('backgroundImage').children[0];
     window.addEventListener('mousemove',function(e){
         if(backgroundImage instanceof HTMLElement) {
             backgroundImage.style.transition = '0.5s';

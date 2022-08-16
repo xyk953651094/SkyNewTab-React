@@ -31,32 +31,21 @@ class WallpaperComponent extends React.Component {
         this.setState({
             imageLink: this.props.imageLink
         })
-        let backgroundImage = document.getElementById('backgroundImage');
+    }
+
+    componentDidMount() {
+        // @ts-ignore
+        let backgroundImage: HTMLElement = document.getElementById('backgroundImage').children[0];
+
         if (backgroundImage instanceof HTMLElement) {
             backgroundImage.onload = function () {
                 // 设置动态效果
-                if(backgroundImage !== null){
-                    backgroundImage.style.transform = 'scale(1.05)';
-                    backgroundImage.style.transition = '5s';
-                    setTimeout(mouseMoveEffect, 5000);
-                }
+                backgroundImage.style.transform = 'scale(1.05)';
+                backgroundImage.style.transition = '5s';
+                setTimeout(mouseMoveEffect, 5000);
             }
         }
     }
-
-    // componentDidMount() {
-    //     let backgroundImage = document.getElementById('backgroundImage');
-    //     if (backgroundImage instanceof HTMLElement) {
-    //         backgroundImage.onload = function () {
-    //             // 设置动态效果
-    //             if(backgroundImage !== null){
-    //                 backgroundImage.style.transform = 'scale(1.05)';
-    //                 backgroundImage.style.transition = '5s';
-    //                 setTimeout(mouseMoveEffect, 5000);
-    //             }
-    //         }
-    //     }
-    // }
 
     render() {
         return (

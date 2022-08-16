@@ -29,7 +29,7 @@ class GreetComponent extends React.Component {
         };
     }
 
-    componentDidMount() {
+    componentWillMount() {
         let tempThis = this;
         let tempDate = getTimeDetails(new Date());
         let date = tempDate.year + tempDate.month + tempDate.day;

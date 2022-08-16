@@ -32,24 +32,24 @@ class WeatherComponent extends React.Component {
     componentWillMount() {
         let tempThis = this;
 
-        let imageXHR=new XMLHttpRequest();
-        imageXHR.open("GET","https://v2.jinrishici.com/info");
-        imageXHR.onload=function(){
-            if(imageXHR.status===200){
-                let imageData=JSON.parse(imageXHR.responseText);
+        let weatherXHR  =new XMLHttpRequest();
+        weatherXHR.open("GET","https://v2.jinrishici.com/info");
+        weatherXHR.onload = function(){
+            if(weatherXHR.status === 200){
+                let reasult = JSON.parse(weatherXHR.responseText);
 
-                if (imageData.status === 'success') {
-                    let weatherData: any = imageData.data.weatherData;
+                if (reasult.status === 'success') {
                     tempThis.setState({
-                        weatherInfo: weatherData.weather  + " ｜ " + weatherData.temperature + "°C",
+                        weatherInfo: reasult.data.weatherData.weather  + " ｜ "
+                            + reasult.data.weatherData.temperature + "°C",
                     });
                 }
                 else {}
             }
             else{}
         }
-        imageXHR.onerror=function(){}
-        imageXHR.send();
+        weatherXHR.onerror=function(){}
+        weatherXHR.send();
     }
 
     componentWillReceiveProps(nextProps: any, prevProps: any) {
