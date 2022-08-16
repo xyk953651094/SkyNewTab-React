@@ -113,10 +113,10 @@ class App extends React.Component {
                                 <GreetComponent
                                     imageColor={this.state.imageColor}
                                 />
-                                {/*<WeatherComponent*/}
-                                {/*    display={this.state.componentDisplay}*/}
-                                {/*    imageColor={this.state.imageColor}*/}
-                                {/*/>*/}
+                                <WeatherComponent
+                                    display={this.state.componentDisplay}
+                                    imageColor={this.state.imageColor}
+                                />
                             </Space>
                         </Col>
                         <Col span={12} style={{textAlign: "right"}}>

@@ -1,6 +1,6 @@
 import React from "react";
 import "../../App.css";
-import {Button} from "antd";
+import {Tooltip, Button} from "antd";
 import {CalendarOutlined} from "@ant-design/icons";
 import {getTimeDetails, getGreet, getFontColor} from "../../typescripts/publicFunctions";
 
@@ -72,17 +72,19 @@ class GreetComponent extends React.Component {
 
     render() {
         return (
-            <Button shape="round" icon={<CalendarOutlined/>} size={"large"}
-                    id={"greetBtn"}
-                    className={"frostedGlass zIndexHigh"}
-                    style={{
-                        backgroundColor: this.state.backgroundColor,
-                        color: this.state.fontColor,
-                        cursor: "default"
-                    }}
-            >
-                {this.state.greet}
-            </Button>
+            <Tooltip title={this.state.greet}>
+                <Button shape="round" icon={<CalendarOutlined/>} size={"large"}
+                        id={"greetBtn"}
+                        className={"frostedGlass zIndexHigh"}
+                        style={{
+                            backgroundColor: this.state.backgroundColor,
+                            color: this.state.fontColor,
+                            cursor: "default"
+                        }}
+                >
+                    {this.state.greet}
+                </Button>
+            </Tooltip>
         );
     }
 }

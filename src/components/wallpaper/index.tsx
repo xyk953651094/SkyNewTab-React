@@ -31,9 +31,6 @@ class WallpaperComponent extends React.Component {
         this.setState({
             imageLink: this.props.imageLink
         })
-    }
-
-    componentDidMount() {
         let backgroundImage = document.getElementById('backgroundImage');
         if (backgroundImage instanceof HTMLElement) {
             backgroundImage.onload = function () {
@@ -46,6 +43,20 @@ class WallpaperComponent extends React.Component {
             }
         }
     }
+
+    // componentDidMount() {
+    //     let backgroundImage = document.getElementById('backgroundImage');
+    //     if (backgroundImage instanceof HTMLElement) {
+    //         backgroundImage.onload = function () {
+    //             // 设置动态效果
+    //             if(backgroundImage !== null){
+    //                 backgroundImage.style.transform = 'scale(1.05)';
+    //                 backgroundImage.style.transition = '5s';
+    //                 setTimeout(mouseMoveEffect, 5000);
+    //             }
+    //         }
+    //     }
+    // }
 
     render() {
         return (
