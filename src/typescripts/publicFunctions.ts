@@ -1,4 +1,4 @@
-import {themes} from "./publicConstents"
+import {lightThemeArray, darkThemeArray} from "./publicConstents"
 
 // 获取日期与时间
 export function getTimeDetails(param: Date) {
@@ -63,11 +63,16 @@ export function getGreet(param: Date) {
 
 // 请求unsplash图片前随机显示多彩颜色主题
 export function setColorTheme() {
-    let randomNum = Math.floor(Math.random() * themes.length);
+    let hour = new Date().getHours();
+    let theme = lightThemeArray;
+    if( 18 < hour || hour < 6) {
+        theme = darkThemeArray;
+    }
+    let randomNum = Math.floor(Math.random() * theme.length);
     let body = document.getElementsByTagName('body')[0];
-    body.style.backgroundColor = themes[randomNum].bodyBackgroundColor;    // 设置body背景颜色
+    body.style.backgroundColor = theme[randomNum].bodyBackgroundColor;    // 设置body背景颜色
 
-    return themes[randomNum].frostedGlassBackgroundColor;  // 返回各组件背景颜色
+    return theme[randomNum].frostedGlassBackgroundColor;  // 返回各组件背景颜色
 }
 
 // 根据图片背景颜色获取元素反色效果

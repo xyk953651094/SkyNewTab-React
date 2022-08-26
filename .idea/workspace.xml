@@ -6,10 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="7b6aa851-d91a-4d7e-aff0-98e24f63e226" name="变更" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/wallpaper/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/wallpaper/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/weather/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/weather/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/typescripts/publicFunctions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/typescripts/publicFunctions.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -140,7 +136,10 @@
       <workItem from="1660377572950" duration="2897000" />
       <workItem from="1660452685570" duration="10286000" />
       <workItem from="1660528830395" duration="9910000" />
-      <workItem from="1660639992297" duration="5617000" />
+      <workItem from="1660639992297" duration="6144000" />
+      <workItem from="1660657640214" duration="162000" />
+      <workItem from="1660786130710" duration="599000" />
+      <workItem from="1660792411064" duration="169000" />
     </task>
     <task id="LOCAL-00001" summary="关闭获取天气失败报错">
       <created>1654142997686</created>
@@ -177,7 +176,14 @@
       <option name="project" value="LOCAL" />
       <updated>1660641498935</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="修复部分问题">
+      <created>1660648873233</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1660648873233</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -189,6 +195,7 @@
     <MESSAGE value="完善小细节" />
     <MESSAGE value="优化代码质量" />
     <MESSAGE value="添加简易天气功能，完善细节" />
-    <option name="LAST_COMMIT_MESSAGE" value="添加简易天气功能，完善细节" />
+    <MESSAGE value="修复部分问题" />
+    <option name="LAST_COMMIT_MESSAGE" value="修复部分问题" />
   </component>
 </project>
