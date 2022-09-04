@@ -44,7 +44,7 @@ class WallpaperComponent extends React.Component {
         if (backgroundImage instanceof HTMLElement) {
             backgroundImage.onload = function () {
                 // 设置动态效果
-                // backgroundImage.className = "backgroundImage zIndexLow fadeIn";
+                backgroundImage.className = "backgroundImage zIndexLow wallpaplerFadeIn";
                 backgroundImage.style.transform = "scale(1.05)";
                 backgroundImage.style.transition = "5s";
                 setTimeout(mouseMoveEffect, 5000);
