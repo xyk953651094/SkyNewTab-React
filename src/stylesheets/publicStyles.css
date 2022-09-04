@@ -36,3 +36,43 @@ html, body {
     -webkit-backdrop-filter:blur(10px);
     overflow:hidden;
 }
+
+/* 淡入效果 */
+.fadeIn {
+    -webkit-animation-name: fadeIn;        /* 动画名称 */
+    -webkit-animation-duration: 3s;        /* 动画持续时间 */
+    -webkit-animation-iteration-count: 1;  /* 动画次数 */
+    -webkit-animation-delay: 0s;           /* 延迟时间 */
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }    /* 初始状态 */
+    50% { opacity: 0; }   /* 中间状态 */
+    100% { opacity: 1; }  /* 结尾状态 */
+}
+
+@-webkit-keyframes fadeIn {  /* Safari and Chrome */
+    0% { opacity: 0; }    /* 初始状态 */
+    50% { opacity: 0; }   /* 中间状态 */
+    100% { opacity: 1; }  /* 结尾状态 */
+}
+
+/* 淡出效果 */
+.fadeOut {
+    -webkit-animation-name: fadeOut;       /* 动画名称 */
+    -webkit-animation-duration: 3s;        /* 动画持续时间 */
+    -webkit-animation-iteration-count: 1;  /* 动画次数 */
+    -webkit-animation-delay: 0s;           /* 延迟时间 */
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1; }    /* 初始状态 */
+    50% { opacity: 0; }   /* 中间状态 */
+    100% { opacity: 0; }  /* 结尾状态 */
+}
+
+@-webkit-keyframes fadeOut {  /* Safari and Chrome */
+    0% { opacity: 1; }    /* 初始状态 */
+    50% { opacity: 0; }   /* 中间状态 */
+    100% { opacity: 0; }  /* 结尾状态 */
+}

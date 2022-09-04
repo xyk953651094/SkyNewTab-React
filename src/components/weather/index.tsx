@@ -4,11 +4,11 @@ import {Button, message, Tooltip} from "antd";
 import {getFontColor, getThemeColor} from "../../typescripts/publicFunctions";
 
 type propType = {
-    display: "none" | "block",
     imageColor: string,
 }
 
 type stateType = {
+    display: "none" | "block",
     backgroundColor: string,
     fontColor: string,
     weatherInfo: string,
@@ -23,6 +23,7 @@ class WeatherComponent extends React.Component {
     constructor(props: any) {
         super(props);
         this.state = {
+            display: "none",
             backgroundColor: "",
             fontColor: "",
             weatherInfo: "暂无天气信息",
@@ -31,7 +32,6 @@ class WeatherComponent extends React.Component {
 
     componentWillMount() {
         let tempThis = this;
-
         let weatherXHR  =new XMLHttpRequest();
         weatherXHR.open("GET","https://v2.jinrishici.com/info");
         weatherXHR.onload = function(){
@@ -40,6 +40,7 @@ class WeatherComponent extends React.Component {
 
                 if (reasult.status === 'success') {
                     tempThis.setState({
+                        display: "block",
                         weatherInfo: reasult.data.weatherData.weather  + " ｜ "
                             + reasult.data.weatherData.temperature + "°C",
                     });
@@ -71,7 +72,7 @@ class WeatherComponent extends React.Component {
                         id={"weatherBtn"}
                         className={"frostedGlass zIndexHigh"}
                         style={{
-                            display: this.props.display,
+                            display: this.state.display,
                             backgroundColor: this.state.backgroundColor,
                             color: this.state.fontColor,
                             cursor: "default"

@@ -4,14 +4,19 @@ import "../../stylesheets/wallpaper.css"
 import "../../stylesheets/publicStyles.css"
 import {Image} from "antd";
 import {mouseMoveEffect} from "../../typescripts/publicFunctions";
+import {isBlurhashValid, decode} from "blurhash";
 
 type propType = {
     display: "none" | "block",
     imageLink: string,
+    // imageData: any
 }
 
 type stateType = {
-    imageLink: string,
+    // imageLink: string,
+    // blurHash: string,
+    // width: number,
+    // height: number,
 }
 
 interface WallpaperComponent {
@@ -23,27 +28,50 @@ class WallpaperComponent extends React.Component {
     constructor(props: any) {
         super(props);
         this.state = {
-            imageLink: "",
+            // imageLink: "",
+            // blurHash: "",
+            // width: 0,
+            // height: 0,
         };
     }
 
-    componentWillMount() {
-        this.setState({
-            imageLink: this.props.imageLink
-        })
-    }
+    componentWillMount() {}
 
     componentDidMount() {
         // @ts-ignore
-        let backgroundImage: HTMLElement = document.getElementById('backgroundImage').children[0];
+        let backgroundImage: HTMLElement = document.getElementById("backgroundImage").children[0];
 
         if (backgroundImage instanceof HTMLElement) {
             backgroundImage.onload = function () {
                 // 设置动态效果
-                backgroundImage.style.transform = 'scale(1.05)';
-                backgroundImage.style.transition = '5s';
+                // backgroundImage.className = "backgroundImage zIndexLow fadeIn";
+                backgroundImage.style.transform = "scale(1.05)";
+                backgroundImage.style.transition = "5s";
                 setTimeout(mouseMoveEffect, 5000);
             }
+        }
+    }
+
+    componentWillReceiveProps(nextProps: any, prevProps: any) {
+        if (nextProps !== prevProps) {
+            // this.setState({
+            //     imageLink: this.props.imageData.urls.regular,
+            //     blurHash: this.props.imageData.blur_hash,
+            //     width: this.props.imageData.width,
+            //     height: this.props.imageData.height,
+            // }, () => {
+            //     // if(isBlurhashValid(this.state.blurHash)) {
+            //     //     const pixels = decode(this.state.blurHash, this.state.width, this.state.height);
+            //     //     const canvas = document.createElement("canvas");
+            //     //     const ctx = canvas.getContext("2d");
+            //     //     // @ts-ignore
+            //     //     const imageData = ctx.createImageData(this.state.width, this.state.height);
+            //     //     imageData.data.set(pixels);
+            //     //     // @ts-ignore
+            //     //     ctx.putImageData(imageData, 0, 0);
+            //     //     document.body.append(canvas);
+            //     // }
+            // });
         }
     }
 
@@ -51,9 +79,10 @@ class WallpaperComponent extends React.Component {
         return (
             <Image
                 id="backgroundImage"
+                key="1"
                 width="102%"
                 height="102%"
-                className={"backgroundImage zIndexLow"}
+                className={"backgroundImage zIndexLow fadeIn"}
                 preview={false}
                 src={this.props.imageLink}
                 style={{display: this.props.display}}

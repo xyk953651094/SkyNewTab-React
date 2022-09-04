@@ -11,6 +11,8 @@
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
     "antd": "^4.22.4",
+    "blurhash": "^1.1.5",
+    "rc-queue-anim": "^2.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "^5.0.1",

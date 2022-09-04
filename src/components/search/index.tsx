@@ -31,12 +31,16 @@ class SearchComponent extends React.Component {
     }
 
     onFocus() {
+        let mask: any = document.getElementById("mask");
+        // mask.className = "mask zIndexMiddle fadeIn";
         this.setState({
             maskDisplay: "block"
         })
     }
 
     onBlur() {
+        let mask: any = document.getElementById("mask");
+        // mask.className = "mask zIndexMiddle fadeOut";
         this.setState({
             maskDisplay: "none"
         })
@@ -50,6 +54,7 @@ class SearchComponent extends React.Component {
         return (
             <Row>
                 <div
+                    id={"mask"}
                     className={"mask zIndexMiddle"}
                     style={{display:this.state.maskDisplay}}
                 />

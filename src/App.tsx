@@ -21,6 +21,7 @@ type stateType = {
     componentDisplay: "none" | "block",
     mobileComponentDisplay: "none" | "block",
     wallpaperComponentDisplay: "none" | "block",
+    imageData: any,
     imageColor: string,
     downloadLink: string,
     htmlLink: string,
@@ -28,6 +29,7 @@ type stateType = {
     author: string,
     authorLink: string,
     createTime: string,
+    unsplashUrl: "?utm_source=SkyNewTab&utm_medium=referral"   // Unsplash API规范
 }
 
 interface App {
@@ -42,6 +44,7 @@ class App extends React.Component {
             componentDisplay: "none",
             mobileComponentDisplay: "none",
             wallpaperComponentDisplay: "none",
+            imageData: "",
             imageColor: "",
             downloadLink: "",
             htmlLink: "",
@@ -49,6 +52,7 @@ class App extends React.Component {
             author: "",
             authorLink: "",
             createTime: "",
+            unsplashUrl: "?utm_source=SkyNewTab&utm_medium=referral"   // Unsplash API规范
         }
     }
 
@@ -61,45 +65,44 @@ class App extends React.Component {
         
         let clientId = "ntHZZmwZUkhiLBMvwqqzmOG29nyXSCXlX7x_i-qhVHM";
         let orientation = "landscape";
+        if(device === "iPhone" || device === "Android") {
+            orientation = "portrait";  // 获取竖屏图片
+        }
         let imageXHR = new XMLHttpRequest();
         imageXHR.open("GET","https://api.unsplash.com/photos/random?client_id=" + clientId + "&orientation=" + orientation + "&content_filter=high");
         imageXHR.onload = function(){
             if(imageXHR.status === 200){
                 let imageData = JSON.parse(imageXHR.responseText);
 
-                if(device === "iPhone" || device === "Android") {  // 小屏显示底部按钮
-                    tempThis.setState({
-                        componentDisplay: "none",
-                        mobileComponentDisplay: "block",
-                        wallpaperComponentDisplay: "block",
-                        imageColor: getThemeColor(imageData.color),
-                        downloadLink: imageData.links.download,
-                        htmlLink: imageData.links.html,
-                        imageLink: imageData.urls.regular,
-                    })
-                }
-                else {
-                    tempThis.setState({
-                        componentDisplay: "block",
-                        mobileComponentDisplay: "none",
-                        wallpaperComponentDisplay: "block",
-                        imageColor: getThemeColor(imageData.color),
-                        downloadLink: imageData.links.download,
-                        htmlLink: imageData.links.html,
-                        imageLink: imageData.urls.regular,
-                        author: imageData.user.name,
-                        authorLink: imageData.user.links.html,
-                        createTime: imageData.created_at.split("T")[0],
-                    })
-                }
+                tempThis.setState({
+                    componentDisplay: "block",
+                    mobileComponentDisplay: "none",
+                    wallpaperComponentDisplay: "block",
+                    imageData: imageData,
+                    imageColor: getThemeColor(imageData.color),
+                    downloadLink: imageData.links.download,
+                    htmlLink: imageData.links.html,
+                    imageLink: imageData.urls.regular,
+                    author: imageData.user.name,
+                    authorLink: imageData.user.links.html,
+                    createTime: imageData.created_at.split("T")[0],
+                }, () => {
+                    // 小屏显示底部按钮
+                    if(device === "iPhone" || device === "Android") {
+                        tempThis.setState({
+                            componentDisplay: "none",
+                            mobileComponentDisplay: "block",
+                        })
+                    }
+                })
+
+                // 设置body背景颜色
+                let body = document.getElementsByTagName('body')[0];
+                body.style.backgroundColor = imageData.color;
             }
-            else{
-                // message.error("无法获取背景图片");
-            }
+            else{}
         }
-        imageXHR.onerror=function(){
-            // message.error("无法获取背景图片");
-        }
+        imageXHR.onerror=function(){}
         imageXHR.send();
     }
 
@@ -114,7 +117,6 @@ class App extends React.Component {
                                     imageColor={this.state.imageColor}
                                 />
                                 <WeatherComponent
-                                    display={this.state.componentDisplay}
                                     imageColor={this.state.imageColor}
                                 />
                             </Space>
@@ -124,12 +126,12 @@ class App extends React.Component {
                                 <DownloadComponent
                                     display={this.state.componentDisplay}
                                     imageColor={this.state.imageColor}
-                                    downloadLink={this.state.downloadLink}
+                                    downloadLink={this.state.downloadLink + this.state.unsplashUrl}
                                 />
                                 <HtmlLinkComponent
                                     display={this.state.componentDisplay}
                                     imageColor={this.state.imageColor}
-                                    htmlLink={this.state.htmlLink}
+                                    htmlLink={this.state.htmlLink + this.state.unsplashUrl}
                                 />
                                 {/*<Button type="primary" shape="round" icon={<SettingOutlined />} size={"large"} />*/}
                             </Space>
@@ -150,12 +152,12 @@ class App extends React.Component {
                                 <DownloadComponent
                                     display={this.state.mobileComponentDisplay}
                                     imageColor={this.state.imageColor}
-                                    downloadLink={this.state.downloadLink}
+                                    downloadLink={this.state.downloadLink + this.state.unsplashUrl}
                                 />
                                 <HtmlLinkComponent
                                     display={this.state.mobileComponentDisplay}
                                     imageColor={this.state.imageColor}
-                                    htmlLink={this.state.htmlLink}
+                                    htmlLink={this.state.htmlLink + this.state.unsplashUrl}
                                 />
                             </Space>
                         </Col>
@@ -165,7 +167,7 @@ class App extends React.Component {
                                     display={this.state.componentDisplay}
                                     imageColor={this.state.imageColor}
                                     author={this.state.author}
-                                    authorLink={this.state.authorLink}
+                                    authorLink={this.state.authorLink + this.state.unsplashUrl}
                                 />
                                 <CreatTimeComponent
                                     display={this.state.componentDisplay}

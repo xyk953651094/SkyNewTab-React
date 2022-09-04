@@ -27,3 +27,15 @@
   line-height: 100px;
   padding: 0 50px;
 }
+
+/*移动端竖屏样式*/
+@media screen and (max-width: 500px) and (orientation:portrait) {
+  #header, #footer {
+    padding: 0 15px;
+  }
+
+  #content {
+    left: 15px;
+    right: 15px;
+  }
+}
