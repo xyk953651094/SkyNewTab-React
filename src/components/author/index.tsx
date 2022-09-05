@@ -1,11 +1,12 @@
-import React from 'react';
-import '../../App.css';
-import {Button, Tooltip, message } from 'antd';
+import React from "react";
+import "../../App.css";
+import {Button, Tooltip, message} from "antd";
 import {UserOutlined} from "@ant-design/icons";
-import {isEmptyString} from "../../functions/functions";
+import {changeThemeColor, isEmptyString} from "../../typescripts/publicFunctions";
 
 type propType = {
-    display: 'none' | 'block',
+    display: "none" | "block",
+    imageColor: string,
     author: string,
     authorLink: string,
 }
@@ -23,30 +24,31 @@ class AuthorComponent extends React.Component {
     constructor(props: any) {
         super(props);
         this.state = {
-            authorLink: '',
+            authorLink: "",
         };
     }
 
-    componentDidMount() {
-
+    componentWillReceiveProps(nextProps: any, prevProps: any) {
+        if (nextProps !== prevProps) {
+            changeThemeColor("#authorBtn", nextProps.imageColor);
+        }
     }
 
     handleClick() {
-        if( !isEmptyString(this.props.authorLink) ) {
+        if (!isEmptyString(this.props.authorLink)) {
             window.open(this.props.authorLink);
-        }
-        else {
-            message.warning('无图片作者网页链接');
+        } else {
+            message.error("无跳转链接");
         }
     }
 
-    render(){
+    render() {
         return (
-            <Tooltip title="前往图片作者主页">
-                <Button shape="round" icon={<UserOutlined />} size={'large'}
+            <Tooltip title="作者主页">
+                <Button shape="round" icon={<UserOutlined/>} size={"large"}
                         onClick={this.handleClick.bind(this)}
-                        id={'authorBtn'}
-                        className={'frostedGlass'}
+                        id={"authorBtn"}
+                        className={"frostedGlass zIndexHigh"}
                         style={{display: this.props.display}}
                 >
                     {this.props.author}

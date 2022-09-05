@@ -1,16 +1,17 @@
-import React from 'react';
-import '../../App.css';
-import {Button, message, Tooltip} from 'antd';
+import React from "react";
+import "../../App.css";
+import {Button, message, Tooltip} from "antd";
+import {changeThemeColor, getFontColor, getThemeColor} from "../../typescripts/publicFunctions";
 
 type propType = {
-
+    imageColor: string,
 }
 
 type stateType = {
-    weather: string,
-    temperature: string,
-    AQI: string,
-    display: 'none' | 'block',
+    display: "none" | "block",
+    backgroundColor: string,
+    fontColor: string,
+    weatherInfo: string,
 }
 
 interface WeatherComponent {
@@ -22,76 +23,56 @@ class WeatherComponent extends React.Component {
     constructor(props: any) {
         super(props);
         this.state = {
-            weather: '',
-            temperature: '',
-            AQI: '',
-            display: 'none',
+            display: "none",
+            backgroundColor: "",
+            fontColor: "",
+            weatherInfo: "暂无天气信息",
         };
     }
 
-    componentDidMount() {
-        let currentLanguage = window.navigator.language.split('-')[0]; // 获取当前浏览器使用的语言
+    componentWillMount() {
+        let tempThis = this;
+        let weatherXHR  =new XMLHttpRequest();
+        weatherXHR.open("GET","https://v2.jinrishici.com/info");
+        weatherXHR.onload = function(){
+            if(weatherXHR.status === 200){
+                let reasult = JSON.parse(weatherXHR.responseText);
 
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition((position) =>{
-                let key = 'a95ea50455114671aa8d33a217f6a5a7';
-                let location = position.coords.longitude.toString() + ',' + position.coords.latitude.toString();
-                let lang = currentLanguage;
-                let tempThis = this;
-
-                // 获取温度与天气状况
-                let weatherXHR=new XMLHttpRequest();
-                weatherXHR.open('GET','https://devapi.qweather.com/v7/weather/now?key=' + key + '&location=' + location + '&lang=' + lang);
-                weatherXHR.onload=function(){
-                    if(weatherXHR.status===200){
-                        let weatherData=JSON.parse(weatherXHR.responseText);
-                        tempThis.setState({
-                            weather: weatherData.now.text,
-                            temperature: weatherData.now.temp + '°C',
-                            display: 'block',
-                        });
-                    }else{
-                        // message.error('无法获取天气状况');
-                    }
+                if (reasult.status === 'success') {
+                    tempThis.setState({
+                        display: "block",
+                        weatherInfo: reasult.data.weatherData.weather  + " ｜ "
+                            + reasult.data.weatherData.temperature + "°C",
+                    });
                 }
-                weatherXHR.onerror=function(){
-                    // message.error('无法获取天气状况');
-                }
-                weatherXHR.send();
-
-                // 获取空气质量
-                let airXHR=new XMLHttpRequest();
-                airXHR.open('GET','https://devapi.qweather.com/v7/air/now?key=' + key + '&location=' + location + '&lang=' + lang);
-                airXHR.onload=function(){
-                    if(airXHR.status===200){
-                        let airData=JSON.parse(airXHR.responseText);
-                        tempThis.setState({
-                            AQI: 'AQI: ' + airData.now.aqi,
-                            display: 'block',
-                        });
-                    }else{
-                       // message.error('无法获取空气质量');
-                    }
-                }
-                airXHR.onerror=function(){
-                    // message.error('无法获取空气质量');
-                }
-                airXHR.send();
-            });
-        } else {
-            // message.error('无法获取定位');
+                else {}
+            }
+            else{}
         }
+        weatherXHR.onerror=function(){}
+        weatherXHR.send();
     }
 
-    handleClick() {
-        window.open('https://www.qweather.com');
+    componentWillReceiveProps(nextProps: any, prevProps: any) {
+        if (nextProps !== prevProps) {
+            changeThemeColor("#weatherBtn", nextProps.imageColor);
+        }
     }
 
     render(){
         return (
-            <Tooltip title="前往和风天气">
-                <Button shape="round" onClick={this.handleClick.bind(this)} size={'large'} id={'weatherBtn'} className={'frostedGlass'} style={{display: this.state.display}}>
-                    {this.state.weather + ' ' + this.state.temperature + ' ｜ ' + this.state.AQI}
+            <Tooltip title={this.state.weatherInfo}>
+                <Button shape="round" size={"large"}
+                        id={"weatherBtn"}
+                        className={"frostedGlass zIndexHigh"}
+                        style={{
+                            display: this.state.display,
+                            backgroundColor: this.state.backgroundColor,
+                            color: this.state.fontColor,
+                            cursor: "default"
+                        }}
+                >
+                    {this.state.weatherInfo}
                 </Button>
             </Tooltip>
         );

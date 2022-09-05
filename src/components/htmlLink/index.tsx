@@ -1,67 +1,67 @@
 import React from "react";
 import "../../App.css";
 import {Button, Tooltip, message} from "antd";
-import {DownloadOutlined} from "@ant-design/icons";
-import {changeThemeColor, isEmptyString} from "../../typescripts/publicFunctions";
+import {LinkOutlined} from "@ant-design/icons";
+import {changeThemeColor, getFontColor, isEmptyString} from "../../typescripts/publicFunctions";
 
 type propType = {
     display: "none" | "block",
     imageColor: string,
-    downloadLink: string,
+    htmlLink: string,
 }
 
 type stateType = {
     backgroundColor: string,
     fontColor: string,
-    downloadLink: string,
+    htmlLink: string,
 }
 
-interface DownloadComponent {
+interface HtmlLinkComponent {
     state: stateType,
     props: propType
 }
 
-class DownloadComponent extends React.Component {
+class HtmlLinkComponent extends React.Component {
     constructor(props: any) {
         super(props);
         this.state = {
             backgroundColor: "",
             fontColor: "",
-            downloadLink: "",
+            htmlLink: "",
         };
     }
 
     componentDidMount() {
         this.setState({
-            downloadLink: this.props.downloadLink
+            htmlLink: this.props.htmlLink
         })
     }
 
     componentWillReceiveProps(nextProps: any, prevProps: any) {
         if (nextProps !== prevProps) {
-            changeThemeColor("#downloadBtn", nextProps.imageColor);
+            changeThemeColor("#gotoBtn", nextProps.imageColor);
         }
     }
 
     handleClick() {
-        if (!isEmptyString(this.props.downloadLink)) {
-            window.open(this.props.downloadLink);
+        if (!isEmptyString(this.props.htmlLink)) {
+            window.open(this.props.htmlLink);
         } else {
-            message.error("无下载链接");
+            message.warning("无原网页链接");
         }
     }
 
     render() {
         return (
-            <Tooltip title="下载图片">
-                <Button shape="round" icon={<DownloadOutlined/>} size={"large"}
+            <Tooltip title="图片链接">
+                <Button shape="round" icon={<LinkOutlined/>} size={"large"}
                         onClick={this.handleClick.bind(this)}
-                        id={"downloadBtn"}
+                        id={"gotoBtn"}
                         className={"frostedGlass zIndexHigh"}
                         style={{
                             display: this.props.display,
                             backgroundColor: this.state.backgroundColor,
-                            color: this.state.fontColor
+                            color: this.state.fontColor,
                         }}
                 />
             </Tooltip>
@@ -69,4 +69,4 @@ class DownloadComponent extends React.Component {
     }
 }
 
-export default DownloadComponent;
+export default HtmlLinkComponent;

@@ -1,35 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-// import 'antd/dist/antd.variable.min.css';
+import React from "react";
+import "./App.css";
+import "./stylesheets/publicStyles.css"
 
-import GreetComponent from './components/greet'
-import WeatherComponent from './components/weather'
-import DownloadComponent from './components/download'
-import GotoComponent from "./components/goto";
+import GreetComponent from "./components/greet";
+import WeatherComponent from "./components/weather";
+import DownloadComponent from "./components/download";
+import HtmlLinkComponent from "./components/htmlLink";
+import WallpaperComponent from "./components/wallpaper";
 import SearchComponent from "./components/search";
 import AuthorComponent from "./components/author";
 import CreatTimeComponent from "./components/createTime";
 
-import {Layout, Row, Col, Space, message, ConfigProvider} from 'antd';
-import {setColorTheme, setBackgroundImage, deviceModel} from "./functions/functions";
-const {Header, Content, Footer} = Layout;
+import { Layout, Row, Col, Space } from "antd";
+import {setColorTheme, getThemeColor, deviceModel, changeThemeColor} from "./typescripts/publicFunctions";
+const { Header, Content, Footer } = Layout;
 
 type propType = {}
 
 type stateType = {
-    downloadBtnHeaderDisplay: 'none' | 'block',
-    gotoBtnHeaderDisplay: 'none' | 'block',
-    downloadBtnFooterDisplay: 'none' | 'block',
-    gotoBtnFooterDisplay: 'none' | 'block',
-    authorBtnDisplay: 'none' | 'block',
-    createTimeBtnDisplay: 'none' | 'block',
+    componentDisplay: "none" | "block",
+    mobileComponentDisplay: "none" | "block",
+    wallpaperComponentDisplay: "none" | "block",
     imageData: any,
+    imageColor: string,
     downloadLink: string,
-    gotoLink: string,
+    htmlLink: string,
+    imageLink: string,
     author: string,
     authorLink: string,
     createTime: string,
+    unsplashUrl: "?utm_source=SkyNewTab&utm_medium=referral"   // Unsplash API规范
 }
 
 interface App {
@@ -41,137 +41,142 @@ class App extends React.Component {
     constructor(props: any) {
         super(props)
         this.state = {
-            downloadBtnHeaderDisplay: 'none',
-            gotoBtnHeaderDisplay: 'none',
-            downloadBtnFooterDisplay: 'none',
-            gotoBtnFooterDisplay: 'none',
-            authorBtnDisplay: 'none',
-            createTimeBtnDisplay: 'none',
-            imageData: '',
-            downloadLink: '',
-            gotoLink: '',
-            author: '',
-            authorLink: '',
-            createTime: '',
+            componentDisplay: "none",
+            mobileComponentDisplay: "none",
+            wallpaperComponentDisplay: "none",
+            imageData: "",
+            imageColor: "",
+            downloadLink: "",
+            htmlLink: "",
+            imageLink: "",
+            author: "",
+            authorLink: "",
+            createTime: "",
+            unsplashUrl: "?utm_source=SkyNewTab&utm_medium=referral"   // Unsplash API规范
         }
     }
 
-    componentDidMount() {
+    componentWillMount() {
         let tempThis = this;
-        setColorTheme();
-
         let device = deviceModel();
-
-        let clientId = 'ntHZZmwZUkhiLBMvwqqzmOG29nyXSCXlX7x_i-qhVHM';
-        let orientation = 'landscape';
-        let imageXHR=new XMLHttpRequest();
-        imageXHR.open('GET','https://api.unsplash.com/photos/random?client_id=' + clientId + '&orientation=' + orientation + '&content_filter=high');
-        imageXHR.onload=function(){
-            if(imageXHR.status===200){
-                let imageData=JSON.parse(imageXHR.responseText);
-
-                if(device === 'iPhone' || device === 'Android') {  // 小屏显示底部按钮
-                    tempThis.setState({
-                        downloadBtnFooterDisplay: 'block',
-                        gotoBtnFooterDisplay: 'block',
-                        imageData: imageData,
-                        downloadLink: imageData.links.download,
-                        gotoLink: imageData.links.html,
-                    },() => {
-                        setBackgroundImage(imageData);
-                        // ConfigProvider.config({
-                        //     theme: {
-                        //         primaryColor: imageData.color,
-                        //     },
-                        // });)
-                    })
-                }
-                else {
-                    tempThis.setState({
-                        downloadBtnHeaderDisplay: 'block',
-                        gotoBtnHeaderDisplay: 'block',
-                        authorBtnDisplay: 'block',
-                        createTimeBtnDisplay: 'block',
-                        imageData: imageData,
-                        downloadLink: imageData.links.download,
-                        gotoLink: imageData.links.html,
-                        author: imageData.user.name,
-                        authorLink: imageData.user.links.html,
-                        createTime: imageData.created_at.split('T')[0],
-                    },() => {
-                        setBackgroundImage(imageData);
-                        console.log(tempThis.state.authorBtnDisplay)
-                        // ConfigProvider.config({
-                        //     theme: {
-                        //         primaryColor: imageData.color,
-                        //     },
-                        // });)
-                    })
-                }
-            }
-            else{
-                message.error('无法获取背景图片');
-            }
+        this.setState({
+            imageColor: setColorTheme()
+        })
+        
+        let clientId = "ntHZZmwZUkhiLBMvwqqzmOG29nyXSCXlX7x_i-qhVHM";
+        let orientation = "landscape";
+        if(device === "iPhone" || device === "Android") {
+            orientation = "portrait";  // 获取竖屏图片
         }
-        imageXHR.onerror=function(){
-            message.error('无法获取背景图片');
+
+        let imageXHR = new XMLHttpRequest();
+        imageXHR
+        .open("GET", "https://api.unsplash.com/photos/random?client_id=" + clientId + "&orientation=" + orientation + "&content_filter=high");
+        imageXHR
+        .onload = function () {
+            if (imageXHR.status === 200) {
+                let imageData = JSON.parse(imageXHR.responseText);
+
+                tempThis.setState({
+                    componentDisplay: "block",
+                    mobileComponentDisplay: "none",
+                    wallpaperComponentDisplay: "block",
+                    imageData: imageData,
+                    imageColor: getThemeColor(imageData.color),
+                    downloadLink: imageData.links.download,
+                    htmlLink: imageData.links.html,
+                    imageLink: imageData.urls.regular,
+                    author: imageData.user.name,
+                    authorLink: imageData.user.links.html,
+                    createTime: imageData.created_at.split("T")[0],
+                }, () => {
+                    // 小屏显示底部按钮
+                    if (device === "iPhone" || device === "Android") {
+                        tempThis.setState({
+                            componentDisplay: "none",
+                            mobileComponentDisplay: "block",
+                        })
+                    }
+                })
+
+                // 设置body背景颜色
+                // let body = document.getElementsByTagName("body")[0];
+                // body.style.backgroundColor = imageData.color;
+                changeThemeColor("body", imageData.color);
+            }
+            else {}
         }
+        imageXHR.onerror = function () {}
         imageXHR.send();
     }
 
     render() {
         return (
             <Layout>
-                <Header id={'header'}>
+                <Header id={"header"} className={"zIndexMiddle"}>
                     <Row>
                         <Col span={12}>
-                            <Space size={'small'}>
-                                <GreetComponent />
-                                <WeatherComponent />
+                            <Space size={"small"}>
+                                <GreetComponent
+                                    imageColor={this.state.imageColor}
+                                />
+                                <WeatherComponent
+                                    imageColor={this.state.imageColor}
+                                />
                             </Space>
                         </Col>
-                        <Col span={12} style={{textAlign: 'right'}}>
-                            <Space size={'small'}>
+                        <Col span={12} style={{textAlign: "right"}}>
+                            <Space size={"small"}>
                                 <DownloadComponent
-                                    display={this.state.downloadBtnHeaderDisplay}
-                                    downloadLink={this.state.downloadLink}
+                                    display={this.state.componentDisplay}
+                                    imageColor={this.state.imageColor}
+                                    downloadLink={this.state.downloadLink + this.state.unsplashUrl}
                                 />
-                                <GotoComponent
-                                    display={this.state.gotoBtnHeaderDisplay}
-                                    gotoLink={this.state.gotoLink}
+                                <HtmlLinkComponent
+                                    display={this.state.componentDisplay}
+                                    imageColor={this.state.imageColor}
+                                    htmlLink={this.state.htmlLink + this.state.unsplashUrl}
                                 />
-                                {/*<Button type="primary" shape="round" icon={<SettingOutlined />} size={'large'} />*/}
+                                {/*<Button type="primary" shape="round" icon={<SettingOutlined />} size={"large"} />*/}
                             </Space>
                         </Col>
                     </Row>
                 </Header>
-                <Content id={'content'} className={'center'}>
-                    <img className="backgroundImage" id="backgroundImage"/>
+                <Content id={"content"} className={"center"}>
+                    <WallpaperComponent
+                        display={this.state.wallpaperComponentDisplay}
+                        // display={"none"}
+                        imageLink={this.state.imageLink}
+                    />
                     <SearchComponent />
                 </Content>
-                <Footer id={'footer'}>
+                <Footer id={"footer"}>
                     <Row>
-                        <Col span={12} style={{textAlign: 'left'}}>
-                            <Space size={'small'}>
+                        <Col span={12} style={{textAlign: "left"}}>
+                            <Space size={"small"}>
                                 <DownloadComponent
-                                    display={this.state.downloadBtnFooterDisplay}
-                                    downloadLink={this.state.downloadLink}
+                                    display={this.state.mobileComponentDisplay}
+                                    imageColor={this.state.imageColor}
+                                    downloadLink={this.state.downloadLink + this.state.unsplashUrl}
                                 />
-                                <GotoComponent
-                                    display={this.state.gotoBtnFooterDisplay}
-                                    gotoLink={this.state.gotoLink}
+                                <HtmlLinkComponent
+                                    display={this.state.mobileComponentDisplay}
+                                    imageColor={this.state.imageColor}
+                                    htmlLink={this.state.htmlLink + this.state.unsplashUrl}
                                 />
                             </Space>
                         </Col>
-                        <Col span={12} style={{textAlign: 'right'}}>
-                            <Space size={'small'} align={'end'}>
+                        <Col span={12} style={{textAlign: "right"}}>
+                            <Space size={"small"} align={"end"}>
                                 <AuthorComponent
-                                    display={this.state.authorBtnDisplay}
+                                    display={this.state.componentDisplay}
+                                    imageColor={this.state.imageColor}
                                     author={this.state.author}
-                                    authorLink={this.state.authorLink}
+                                    authorLink={this.state.authorLink + this.state.unsplashUrl}
                                 />
                                 <CreatTimeComponent
-                                    display={this.state.createTimeBtnDisplay}
+                                    display={this.state.componentDisplay}
+                                    imageColor={this.state.imageColor}
                                     createTime={this.state.createTime}
                                 />
                             </Space>
