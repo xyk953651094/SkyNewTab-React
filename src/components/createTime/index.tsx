@@ -2,7 +2,7 @@ import React from "react";
 import "../../App.css";
 import {Button, Tooltip} from "antd";
 import {CameraOutlined} from "@ant-design/icons";
-import {getFontColor} from "../../typescripts/publicFunctions";
+import {changeThemeColor} from "../../typescripts/publicFunctions";
 
 type propType = {
     display: "none" | "block",
@@ -31,13 +31,7 @@ class CreatTimeComponent extends React.Component {
 
     componentWillReceiveProps(nextProps: any, prevProps: any) {
         if (nextProps !== prevProps) {
-            this.setState({
-                backgroundColor: nextProps.imageColor,
-            }, () => {
-                this.setState({
-                    fontColor: getFontColor(this.state.backgroundColor),
-                })
-            })
+            changeThemeColor("#createTimeBtn", nextProps.imageColor);
         }
     }
 

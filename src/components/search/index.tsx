@@ -4,6 +4,7 @@ import "../../stylesheets/search.css"
 import "../../stylesheets/publicStyles.css"
 import { Input, Row } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
+import {fadeIn, fadeOut} from "../../typescripts/publicFunctions";
 
 type propType = {}
 
@@ -31,16 +32,18 @@ class SearchComponent extends React.Component {
     }
 
     onFocus() {
-        let mask: any = document.getElementById("mask");
-        mask.className = "mask zIndexMiddle maskFadeIn";
+        // let mask: any = document.getElementById("mask");
+        // mask.className = "mask zIndexMiddle maskFadeIn";
+        fadeIn("#mask", 300);
         this.setState({
             maskDisplay: "block"
         })
     }
 
     onBlur() {
-        let mask: any = document.getElementById("mask");
-        mask.className = "mask zIndexMiddle maskFadeOut";
+        // let mask: any = document.getElementById("mask");
+        // mask.className = "mask zIndexMiddle maskFadeOut";
+        fadeOut("#mask", 300);
         // this.setState({
         //     maskDisplay: "none"
         // })

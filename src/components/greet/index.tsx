@@ -2,7 +2,7 @@ import React from "react";
 import "../../App.css";
 import {Tooltip, Button} from "antd";
 import {CalendarOutlined} from "@ant-design/icons";
-import {getTimeDetails, getGreet, getFontColor} from "../../typescripts/publicFunctions";
+import {getTimeDetails, getGreet, changeThemeColor} from "../../typescripts/publicFunctions";
 
 type propType = {
     imageColor: string,
@@ -60,13 +60,7 @@ class GreetComponent extends React.Component {
 
     componentWillReceiveProps(nextProps: any, prevProps: any) {
         if (nextProps !== prevProps) {
-            this.setState({
-                backgroundColor: nextProps.imageColor,
-            }, () => {
-                this.setState({
-                    fontColor: getFontColor(this.state.backgroundColor),
-                })
-            })
+            changeThemeColor("#greetBtn", nextProps.imageColor);
         }
     }
 

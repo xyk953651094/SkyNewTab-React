@@ -1,4 +1,6 @@
 import {lightThemeArray, darkThemeArray} from "./publicConstents"
+import "jquery-color"
+const $ = require("jquery");
 
 // 获取日期与时间
 export function getTimeDetails(param: Date) {
@@ -128,4 +130,20 @@ export function deviceModel() {
     else if(ua.indexOf('iPad') > -1) { return 'iPad' }
     else if(ua.indexOf('Android') > -1) { return 'Android' }
     else { return '' }
+}
+
+// 过渡动画
+export function changeThemeColor(element: string, backgroundColor: string, time: number = 500) {
+    $(element).animate({
+        backgroundColor: backgroundColor,
+        color: getFontColor(backgroundColor),
+    }, time);
+}
+
+export function fadeIn(element: string, time = 300) {
+    $(element).fadeIn(time);
+}
+
+export function fadeOut(element: string, time = 300) {
+    $(element).fadeOut(time);
 }

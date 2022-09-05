@@ -3,7 +3,7 @@ import "../../App.css";
 import "../../stylesheets/wallpaper.css"
 import "../../stylesheets/publicStyles.css"
 import {Image} from "antd";
-import {mouseMoveEffect} from "../../typescripts/publicFunctions";
+import {fadeIn, mouseMoveEffect} from "../../typescripts/publicFunctions";
 import {isBlurhashValid, decode} from "blurhash";
 
 type propType = {
@@ -44,7 +44,8 @@ class WallpaperComponent extends React.Component {
         if (backgroundImage instanceof HTMLElement) {
             backgroundImage.onload = function () {
                 // 设置动态效果
-                backgroundImage.className = "backgroundImage zIndexLow wallpaplerFadeIn";
+                // backgroundImage.className = "backgroundImage zIndexLow wallpaplerFadeIn";
+                fadeIn("#backgroundImage", 3000);
                 backgroundImage.style.transform = "scale(1.05)";
                 backgroundImage.style.transition = "5s";
                 setTimeout(mouseMoveEffect, 5000);

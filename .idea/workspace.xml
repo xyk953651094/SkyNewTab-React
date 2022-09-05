@@ -6,9 +6,18 @@
   <component name="ChangeListManager">
     <list default="true" id="7b6aa851-d91a-4d7e-aff0-98e24f63e226" name="变更" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/author/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/author/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/createTime/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/createTime/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/download/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/download/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/greet/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/greet/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/htmlLink/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/htmlLink/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/search/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/search/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/wallpaper/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/wallpaper/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stylesheets/publicStyles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/stylesheets/publicStyles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/weather/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/weather/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/typescripts/publicFunctions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/typescripts/publicFunctions.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,7 +98,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/xiaoyunkai/Documents/Projects/WebStorm/SkyNewTab_React&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/xiaoyunkai/Documents/Projects/WebStorm/SkyNewTab_React/src&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -102,6 +111,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src" />
       <recent name="$PROJECT_DIR$" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -145,7 +155,9 @@
       <workItem from="1660792411064" duration="169000" />
       <workItem from="1661486600635" duration="208000" />
       <workItem from="1662175499620" duration="6222000" />
-      <workItem from="1662260854013" duration="8529000" />
+      <workItem from="1662260854013" duration="8741000" />
+      <workItem from="1662293183978" duration="2064000" />
+      <workItem from="1662362532941" duration="4500000" />
     </task>
     <task id="LOCAL-00001" summary="关闭获取天气失败报错">
       <created>1654142997686</created>
@@ -203,7 +215,14 @@
       <option name="project" value="LOCAL" />
       <updated>1662270238811</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="完善过渡动画细节">
+      <created>1662285459756</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1662285459756</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -218,6 +237,7 @@
     <MESSAGE value="修复部分问题" />
     <MESSAGE value="新增颜色主题" />
     <MESSAGE value="新增淡入淡出效果" />
-    <option name="LAST_COMMIT_MESSAGE" value="新增淡入淡出效果" />
+    <MESSAGE value="完善过渡动画细节" />
+    <option name="LAST_COMMIT_MESSAGE" value="完善过渡动画细节" />
   </component>
 </project>

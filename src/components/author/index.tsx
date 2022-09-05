@@ -2,7 +2,7 @@ import React from "react";
 import "../../App.css";
 import {Button, Tooltip, message} from "antd";
 import {UserOutlined} from "@ant-design/icons";
-import {getFontColor, isEmptyString} from "../../typescripts/publicFunctions";
+import {changeThemeColor, isEmptyString} from "../../typescripts/publicFunctions";
 
 type propType = {
     display: "none" | "block",
@@ -13,8 +13,6 @@ type propType = {
 
 type stateType = {
     authorLink: string,
-    backgroundColor: string,
-    fontColor: string,
 }
 
 interface AuthorComponent {
@@ -27,20 +25,12 @@ class AuthorComponent extends React.Component {
         super(props);
         this.state = {
             authorLink: "",
-            backgroundColor: "",
-            fontColor: "",
         };
     }
 
     componentWillReceiveProps(nextProps: any, prevProps: any) {
         if (nextProps !== prevProps) {
-            this.setState({
-                backgroundColor: nextProps.imageColor,
-            }, () => {
-                this.setState({
-                    fontColor: getFontColor(this.state.backgroundColor),
-                })
-            })
+            changeThemeColor("#authorBtn", nextProps.imageColor);
         }
     }
 
@@ -59,11 +49,7 @@ class AuthorComponent extends React.Component {
                         onClick={this.handleClick.bind(this)}
                         id={"authorBtn"}
                         className={"frostedGlass zIndexHigh"}
-                        style={{
-                            display: this.props.display,
-                            backgroundColor: this.state.backgroundColor,
-                            color: this.state.fontColor
-                        }}
+                        style={{display: this.props.display}}
                 >
                     {this.props.author}
                 </Button>

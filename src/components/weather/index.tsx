@@ -1,7 +1,7 @@
 import React from "react";
 import "../../App.css";
 import {Button, message, Tooltip} from "antd";
-import {getFontColor, getThemeColor} from "../../typescripts/publicFunctions";
+import {changeThemeColor, getFontColor, getThemeColor} from "../../typescripts/publicFunctions";
 
 type propType = {
     imageColor: string,
@@ -55,13 +55,7 @@ class WeatherComponent extends React.Component {
 
     componentWillReceiveProps(nextProps: any, prevProps: any) {
         if (nextProps !== prevProps) {
-            this.setState({
-                backgroundColor: nextProps.imageColor,
-            }, () => {
-                this.setState({
-                    fontColor: getFontColor(this.state.backgroundColor),
-                })
-            })
+            changeThemeColor("#weatherBtn", nextProps.imageColor);
         }
     }
 

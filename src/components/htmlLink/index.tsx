@@ -2,7 +2,7 @@ import React from "react";
 import "../../App.css";
 import {Button, Tooltip, message} from "antd";
 import {LinkOutlined} from "@ant-design/icons";
-import {getFontColor, isEmptyString} from "../../typescripts/publicFunctions";
+import {changeThemeColor, getFontColor, isEmptyString} from "../../typescripts/publicFunctions";
 
 type propType = {
     display: "none" | "block",
@@ -39,13 +39,7 @@ class HtmlLinkComponent extends React.Component {
 
     componentWillReceiveProps(nextProps: any, prevProps: any) {
         if (nextProps !== prevProps) {
-            this.setState({
-                backgroundColor: nextProps.imageColor,
-            }, () => {
-                this.setState({
-                    fontColor: getFontColor(this.state.backgroundColor),
-                })
-            })
+            changeThemeColor("#gotoBtn", nextProps.imageColor);
         }
     }
 

@@ -12,7 +12,7 @@ import AuthorComponent from "./components/author";
 import CreatTimeComponent from "./components/createTime";
 
 import { Layout, Row, Col, Space } from "antd";
-import { setColorTheme, getThemeColor, deviceModel } from "./typescripts/publicFunctions";
+import {setColorTheme, getThemeColor, deviceModel, changeThemeColor} from "./typescripts/publicFunctions";
 const { Header, Content, Footer } = Layout;
 
 type propType = {}
@@ -68,10 +68,13 @@ class App extends React.Component {
         if(device === "iPhone" || device === "Android") {
             orientation = "portrait";  // 获取竖屏图片
         }
+
         let imageXHR = new XMLHttpRequest();
-        imageXHR.open("GET","https://api.unsplash.com/photos/random?client_id=" + clientId + "&orientation=" + orientation + "&content_filter=high");
-        imageXHR.onload = function(){
-            if(imageXHR.status === 200){
+        imageXHR
+        .open("GET", "https://api.unsplash.com/photos/random?client_id=" + clientId + "&orientation=" + orientation + "&content_filter=high");
+        imageXHR
+        .onload = function () {
+            if (imageXHR.status === 200) {
                 let imageData = JSON.parse(imageXHR.responseText);
 
                 tempThis.setState({
@@ -88,7 +91,7 @@ class App extends React.Component {
                     createTime: imageData.created_at.split("T")[0],
                 }, () => {
                     // 小屏显示底部按钮
-                    if(device === "iPhone" || device === "Android") {
+                    if (device === "iPhone" || device === "Android") {
                         tempThis.setState({
                             componentDisplay: "none",
                             mobileComponentDisplay: "block",
@@ -97,12 +100,13 @@ class App extends React.Component {
                 })
 
                 // 设置body背景颜色
-                let body = document.getElementsByTagName('body')[0];
-                body.style.backgroundColor = imageData.color;
+                // let body = document.getElementsByTagName("body")[0];
+                // body.style.backgroundColor = imageData.color;
+                changeThemeColor("body", imageData.color);
             }
-            else{}
+            else {}
         }
-        imageXHR.onerror=function(){}
+        imageXHR.onerror = function () {}
         imageXHR.send();
     }
 
@@ -141,6 +145,7 @@ class App extends React.Component {
                 <Content id={"content"} className={"center"}>
                     <WallpaperComponent
                         display={this.state.wallpaperComponentDisplay}
+                        // display={"none"}
                         imageLink={this.state.imageLink}
                     />
                     <SearchComponent />
