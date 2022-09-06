@@ -64,7 +64,7 @@ class SearchComponent extends React.Component {
                 <Input
                     className={"searchInput zIndexHigh"}
                     prefix={<SearchOutlined />}
-                    placeholder="请输入搜索内容"
+                    placeholder="按下 Enter 键搜索"
                     onFocus={this.onFocus.bind(this)}
                     onBlur={this.onBlur.bind(this)}
                     onPressEnter={this.onPressEnter.bind(this)}

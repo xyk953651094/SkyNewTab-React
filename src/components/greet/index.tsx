@@ -47,7 +47,7 @@ class GreetComponent extends React.Component {
                         holidayContent = "今日" + holidayContent;
                     }
                     tempThis.setState({
-                        greet: tempThis.state.greet + " | " + holidayContent,
+                        greet: tempThis.state.greet + " ｜ " + holidayContent,
                     });
                 }
             }

@@ -12,6 +12,7 @@ type stateType = {
     backgroundColor: string,
     fontColor: string,
     weatherInfo: string,
+    weatherDetail: string
 }
 
 interface WeatherComponent {
@@ -27,6 +28,7 @@ class WeatherComponent extends React.Component {
             backgroundColor: "",
             fontColor: "",
             weatherInfo: "暂无天气信息",
+            weatherDetail: "暂无天气信息"
         };
     }
 
@@ -43,6 +45,11 @@ class WeatherComponent extends React.Component {
                         display: "block",
                         weatherInfo: reasult.data.weatherData.weather  + " ｜ "
                             + reasult.data.weatherData.temperature + "°C",
+                        weatherDetail:
+                            reasult.data.region.split("|")[1] + " ｜ " +
+                            reasult.data.weatherData.weather  + " ｜ " +
+                            reasult.data.weatherData.windDirection  + " ｜ " +
+                            reasult.data.weatherData.temperature + "°C",
                     });
                 }
                 else {}
@@ -61,7 +68,7 @@ class WeatherComponent extends React.Component {
 
     render(){
         return (
-            <Tooltip title={this.state.weatherInfo}>
+            <Tooltip title={this.state.weatherDetail}>
                 <Button shape="round" size={"large"}
                         id={"weatherBtn"}
                         className={"frostedGlass zIndexHigh"}

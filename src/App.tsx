@@ -83,7 +83,7 @@ class App extends React.Component {
                     wallpaperComponentDisplay: "block",
                     imageData: imageData,
                     imageColor: getThemeColor(imageData.color),
-                    downloadLink: imageData.links.download,
+                    downloadLink: imageData.links.download_location,
                     htmlLink: imageData.links.html,
                     imageLink: imageData.urls.regular,
                     author: imageData.user.name,

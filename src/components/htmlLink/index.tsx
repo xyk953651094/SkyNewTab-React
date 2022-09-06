@@ -53,7 +53,7 @@ class HtmlLinkComponent extends React.Component {
 
     render() {
         return (
-            <Tooltip title="图片链接">
+            <Tooltip title={"图片链接：" + this.props.htmlLink}>
                 <Button shape="round" icon={<LinkOutlined/>} size={"large"}
                         onClick={this.handleClick.bind(this)}
                         id={"gotoBtn"}
