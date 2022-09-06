@@ -38,18 +38,18 @@ class WeatherComponent extends React.Component {
         weatherXHR.open("GET","https://v2.jinrishici.com/info");
         weatherXHR.onload = function(){
             if(weatherXHR.status === 200){
-                let reasult = JSON.parse(weatherXHR.responseText);
+                let result = JSON.parse(weatherXHR.responseText);
 
-                if (reasult.status === 'success') {
+                if (result.status === 'success') {
                     tempThis.setState({
                         display: "block",
-                        weatherInfo: reasult.data.weatherData.weather  + " ｜ "
-                            + reasult.data.weatherData.temperature + "°C",
+                        weatherInfo: result.data.weatherData.weather  + " ｜ "
+                            + result.data.weatherData.temperature + "°C",
                         weatherDetail:
-                            reasult.data.region.split("|")[1] + " ｜ " +
-                            reasult.data.weatherData.weather  + " ｜ " +
-                            reasult.data.weatherData.windDirection  + " ｜ " +
-                            reasult.data.weatherData.temperature + "°C",
+                            result.data.region.split("|")[1] + " ｜ " +
+                            result.data.weatherData.weather  + " ｜ " +
+                            result.data.weatherData.windDirection  + " ｜ " +
+                            result.data.weatherData.temperature + "°C",
                     });
                 }
                 else {}
