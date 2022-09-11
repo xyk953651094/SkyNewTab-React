@@ -52,7 +52,11 @@ class WeatherComponent extends React.Component {
                             result.data.weatherData.temperature + "°C",
                     });
                 }
-                else {}
+                else {
+                    tempThis.setState({
+                        display: "none",
+                    });
+                }
             }
             else{}
         }
