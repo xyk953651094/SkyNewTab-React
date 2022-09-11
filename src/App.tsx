@@ -11,7 +11,7 @@ import SearchComponent from "./components/search";
 import AuthorComponent from "./components/author";
 import CreatTimeComponent from "./components/createTime";
 
-import {Layout, Row, Col, Space} from "antd";
+import {Layout, Row, Col, Space, message} from "antd";
 import {unsplashUrl, clientId} from "./typescripts/publicConstents";
 import {setColorTheme, getThemeColor, deviceModel, changeThemeColor} from "./typescripts/publicFunctions";
 const {Header, Content, Footer} = Layout;
@@ -103,9 +103,13 @@ class App extends React.Component {
                 // body.style.backgroundColor = imageData.color;
                 changeThemeColor("body", imageData.color);
             }
-            else {}
+            else {
+                message.error("获取图片失败");
+            }
         }
-        imageXHR.onerror = function () {}
+        imageXHR.onerror = function () {
+            message.error("获取图片失败");
+        }
         imageXHR.send();
     }
 
