@@ -32,21 +32,16 @@ class SearchComponent extends React.Component {
     }
 
     onFocus() {
-        // let mask: any = document.getElementById("mask");
-        // mask.className = "mask zIndexMiddle maskFadeIn";
         fadeIn("#mask", 300);
-        this.setState({
-            maskDisplay: "block"
-        })
+        if(this.state.maskDisplay !=="block"){
+            this.setState({
+                maskDisplay: "block"
+            })
+        }
     }
 
     onBlur() {
-        // let mask: any = document.getElementById("mask");
-        // mask.className = "mask zIndexMiddle maskFadeOut";
         fadeOut("#mask", 300);
-        // this.setState({
-        //     maskDisplay: "none"
-        // })
     }
 
     onPressEnter(e: any) {

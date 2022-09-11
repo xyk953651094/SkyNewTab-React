@@ -11,9 +11,10 @@ import SearchComponent from "./components/search";
 import AuthorComponent from "./components/author";
 import CreatTimeComponent from "./components/createTime";
 
-import { Layout, Row, Col, Space } from "antd";
+import {Layout, Row, Col, Space} from "antd";
+import {unsplashUrl, clientId} from "./typescripts/publicConstents";
 import {setColorTheme, getThemeColor, deviceModel, changeThemeColor} from "./typescripts/publicFunctions";
-const { Header, Content, Footer } = Layout;
+const {Header, Content, Footer} = Layout;
 
 type propType = {}
 
@@ -29,7 +30,6 @@ type stateType = {
     author: string,
     authorLink: string,
     createTime: string,
-    unsplashUrl: "?utm_source=SkyNewTab&utm_medium=referral"   // Unsplash API规范
 }
 
 interface App {
@@ -52,7 +52,6 @@ class App extends React.Component {
             author: "",
             authorLink: "",
             createTime: "",
-            unsplashUrl: "?utm_source=SkyNewTab&utm_medium=referral"   // Unsplash API规范
         }
     }
 
@@ -62,16 +61,16 @@ class App extends React.Component {
         this.setState({
             imageColor: setColorTheme()
         })
-        
-        let clientId = "ntHZZmwZUkhiLBMvwqqzmOG29nyXSCXlX7x_i-qhVHM";
+
         let orientation = "landscape";
         if(device === "iPhone" || device === "Android") {
             orientation = "portrait";  // 获取竖屏图片
         }
+        let topics = "bo8jQKTaE0Y,6sMVjTLSkeQ,bDo48cUhwnY,xHxYTMHLgOc,iUIsnVtjB0Y,R_Fyn-Gwtlw,Fzo3zuOHN6w";
 
         let imageXHR = new XMLHttpRequest();
         imageXHR
-        .open("GET", "https://api.unsplash.com/photos/random?client_id=" + clientId + "&orientation=" + orientation + "&content_filter=high");
+        .open("GET", "https://api.unsplash.com/photos/random?client_id=" + clientId + "&orientation=" + orientation + "&topics=" + topics + "&content_filter=high");
         imageXHR
         .onload = function () {
             if (imageXHR.status === 200) {
@@ -86,7 +85,7 @@ class App extends React.Component {
                     downloadLink: imageData.links.download_location,
                     htmlLink: imageData.links.html,
                     imageLink: imageData.urls.regular,
-                    author: imageData.user.name,
+                    author: imageData.user.name + " on Unsplash",
                     authorLink: imageData.user.links.html,
                     createTime: imageData.created_at.split("T")[0],
                 }, () => {
@@ -130,12 +129,12 @@ class App extends React.Component {
                                 <DownloadComponent
                                     display={this.state.componentDisplay}
                                     imageColor={this.state.imageColor}
-                                    downloadLink={this.state.downloadLink + this.state.unsplashUrl}
+                                    downloadLink={this.state.downloadLink}
                                 />
                                 <HtmlLinkComponent
                                     display={this.state.componentDisplay}
                                     imageColor={this.state.imageColor}
-                                    htmlLink={this.state.htmlLink + this.state.unsplashUrl}
+                                    htmlLink={this.state.htmlLink}
                                 />
                                 {/*<Button type="primary" shape="round" icon={<SettingOutlined />} size={"large"} />*/}
                             </Space>
@@ -157,12 +156,12 @@ class App extends React.Component {
                                 <DownloadComponent
                                     display={this.state.mobileComponentDisplay}
                                     imageColor={this.state.imageColor}
-                                    downloadLink={this.state.downloadLink + this.state.unsplashUrl}
+                                    downloadLink={this.state.downloadLink}
                                 />
                                 <HtmlLinkComponent
                                     display={this.state.mobileComponentDisplay}
                                     imageColor={this.state.imageColor}
-                                    htmlLink={this.state.htmlLink + this.state.unsplashUrl}
+                                    htmlLink={this.state.htmlLink}
                                 />
                             </Space>
                         </Col>
@@ -172,7 +171,7 @@ class App extends React.Component {
                                     display={this.state.componentDisplay}
                                     imageColor={this.state.imageColor}
                                     author={this.state.author}
-                                    authorLink={this.state.authorLink + this.state.unsplashUrl}
+                                    authorLink={this.state.authorLink + unsplashUrl}
                                 />
                                 <CreatTimeComponent
                                     display={this.state.componentDisplay}

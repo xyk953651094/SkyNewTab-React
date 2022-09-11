@@ -1,7 +1,7 @@
 import React from "react";
 import "../../App.css";
 import {Button, Tooltip} from "antd";
-import {CameraOutlined} from "@ant-design/icons";
+import {CalendarOutlined} from "@ant-design/icons";
 import {changeThemeColor} from "../../typescripts/publicFunctions";
 
 type propType = {
@@ -38,7 +38,7 @@ class CreatTimeComponent extends React.Component {
     render() {
         return (
             <Tooltip title={"拍摄时间：" + this.props.createTime}>
-                <Button shape="round" icon={<CameraOutlined/>} size={"large"}
+                <Button shape="round" icon={<CalendarOutlined />} size={"large"}
                         id={"createTimeBtn"}
                         className={"frostedGlass zIndexHigh"}
                         style={{

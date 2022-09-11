@@ -1,7 +1,8 @@
 import React from "react";
 import "../../App.css";
 import {Button, Tooltip, message} from "antd";
-import {UserOutlined} from "@ant-design/icons";
+import {CameraOutlined} from "@ant-design/icons";
+import {unsplashUrl} from "../../typescripts/publicConstents";
 import {changeThemeColor, isEmptyString} from "../../typescripts/publicFunctions";
 
 type propType = {
@@ -36,7 +37,7 @@ class AuthorComponent extends React.Component {
 
     handleClick() {
         if (!isEmptyString(this.props.authorLink)) {
-            window.open(this.props.authorLink);
+            window.open(this.props.authorLink + unsplashUrl);
         } else {
             message.error("无跳转链接");
         }
@@ -44,8 +45,8 @@ class AuthorComponent extends React.Component {
 
     render() {
         return (
-            <Tooltip title={"作者主页：" + this.props.authorLink}>
-                <Button shape="round" icon={<UserOutlined/>} size={"large"}
+            <Tooltip title={"前往作者主页"}>
+                <Button shape="round" icon={<CameraOutlined/>} size={"large"}
                         onClick={this.handleClick.bind(this)}
                         id={"authorBtn"}
                         className={"frostedGlass zIndexHigh"}

@@ -1,7 +1,7 @@
 import React from "react";
 import "../../App.css";
-import {Button, message, Tooltip} from "antd";
-import {changeThemeColor, getFontColor, getThemeColor} from "../../typescripts/publicFunctions";
+import {Button, Tooltip} from "antd";
+import {changeThemeColor} from "../../typescripts/publicFunctions";
 
 type propType = {
     imageColor: string,

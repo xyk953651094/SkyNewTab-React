@@ -2,7 +2,8 @@ import React from "react";
 import "../../App.css";
 import {Button, Tooltip, message} from "antd";
 import {LinkOutlined} from "@ant-design/icons";
-import {changeThemeColor, getFontColor, isEmptyString} from "../../typescripts/publicFunctions";
+import {unsplashUrl} from "../../typescripts/publicConstents";
+import {changeThemeColor, isEmptyString} from "../../typescripts/publicFunctions";
 
 type propType = {
     display: "none" | "block",
@@ -45,7 +46,7 @@ class HtmlLinkComponent extends React.Component {
 
     handleClick() {
         if (!isEmptyString(this.props.htmlLink)) {
-            window.open(this.props.htmlLink);
+            window.open(this.props.htmlLink + unsplashUrl);
         } else {
             message.warning("无原网页链接");
         }
@@ -53,7 +54,7 @@ class HtmlLinkComponent extends React.Component {
 
     render() {
         return (
-            <Tooltip title={"图片链接：" + this.props.htmlLink}>
+            <Tooltip title={"前往图片网页"}>
                 <Button shape="round" icon={<LinkOutlined/>} size={"large"}
                         onClick={this.handleClick.bind(this)}
                         id={"gotoBtn"}

@@ -1,3 +1,6 @@
+export let unsplashUrl = "?utm_source=SkyNewTab&utm_medium=referral";  // Unsplash API规范
+export let clientId = "ntHZZmwZUkhiLBMvwqqzmOG29nyXSCXlX7x_i-qhVHM";
+
 export let lightThemeArray = [
     // Material Design配色
     {'bodyBackgroundColor': '#FFEBEE', 'frostedGlassBackgroundColor': '#F44336'},

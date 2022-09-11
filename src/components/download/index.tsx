@@ -2,6 +2,7 @@ import React from "react";
 import "../../App.css";
 import {Button, Tooltip, message} from "antd";
 import {DownloadOutlined} from "@ant-design/icons";
+import {unsplashUrl, clientId} from "../../typescripts/publicConstents";
 import {changeThemeColor, isEmptyString} from "../../typescripts/publicFunctions";
 
 type propType = {
@@ -45,7 +46,21 @@ class DownloadComponent extends React.Component {
 
     handleClick() {
         if (!isEmptyString(this.props.downloadLink)) {
-            window.open(this.props.downloadLink);
+            let downloadXHR = new XMLHttpRequest();
+            downloadXHR.open("GET", this.props.downloadLink + "?client_id=" + clientId);
+            downloadXHR.onload = function () {
+                if (downloadXHR.status === 200) {
+                    let downloadUrl = JSON.parse(downloadXHR.responseText).url + unsplashUrl;
+                    window.open(downloadUrl);
+                }
+                else {
+                    message.error("获取下载链接失败");
+                }
+            }
+            downloadXHR.onerror = function () {
+                message.error("获取下载链接失败");
+            }
+            downloadXHR.send();
         } else {
             message.error("无下载链接");
         }
@@ -53,7 +68,7 @@ class DownloadComponent extends React.Component {
 
     render() {
         return (
-            <Tooltip title={"下载图片：" + this.props.downloadLink}>
+            <Tooltip title={"下载图片"}>
                 <Button shape="round" icon={<DownloadOutlined/>} size={"large"}
                         onClick={this.handleClick.bind(this)}
                         id={"downloadBtn"}
