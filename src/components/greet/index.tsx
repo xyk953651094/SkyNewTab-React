@@ -5,7 +5,7 @@ import {CalendarOutlined} from "@ant-design/icons";
 import {getTimeDetails, getGreet, changeThemeColor} from "../../typescripts/publicFunctions";
 
 type propType = {
-    imageColor: string,
+    themeColor: string,
 }
 
 type stateType = {
@@ -60,7 +60,7 @@ class GreetComponent extends React.Component {
 
     componentWillReceiveProps(nextProps: any, prevProps: any) {
         if (nextProps !== prevProps) {
-            changeThemeColor("#greetBtn", nextProps.imageColor);
+            changeThemeColor("#greetBtn", nextProps.themeColor);
         }
     }
 
@@ -71,8 +71,6 @@ class GreetComponent extends React.Component {
                         id={"greetBtn"}
                         className={"frostedGlass zIndexHigh"}
                         style={{
-                            backgroundColor: this.state.backgroundColor,
-                            color: this.state.fontColor,
                             cursor: "default"
                         }}
                 >

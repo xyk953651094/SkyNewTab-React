@@ -4,7 +4,7 @@ import {Button, Tooltip} from "antd";
 import {changeThemeColor} from "../../typescripts/publicFunctions";
 
 type propType = {
-    imageColor: string,
+    themeColor: string,
 }
 
 type stateType = {
@@ -66,7 +66,7 @@ class WeatherComponent extends React.Component {
 
     componentWillReceiveProps(nextProps: any, prevProps: any) {
         if (nextProps !== prevProps) {
-            changeThemeColor("#weatherBtn", nextProps.imageColor);
+            changeThemeColor("#weatherBtn", nextProps.themeColor);
         }
     }
 
@@ -78,8 +78,6 @@ class WeatherComponent extends React.Component {
                         className={"frostedGlass zIndexHigh"}
                         style={{
                             display: this.state.display,
-                            backgroundColor: this.state.backgroundColor,
-                            color: this.state.fontColor,
                             cursor: "default"
                         }}
                 >

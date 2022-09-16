@@ -7,14 +7,13 @@ import {changeThemeColor, isEmptyString} from "../../typescripts/publicFunctions
 
 type propType = {
     display: "none" | "block",
-    imageColor: string,
+    themeColor: string,
     downloadLink: string,
 }
 
 type stateType = {
     backgroundColor: string,
     fontColor: string,
-    downloadLink: string,
 }
 
 interface DownloadComponent {
@@ -28,19 +27,12 @@ class DownloadComponent extends React.Component {
         this.state = {
             backgroundColor: "",
             fontColor: "",
-            downloadLink: "",
         };
-    }
-
-    componentDidMount() {
-        this.setState({
-            downloadLink: this.props.downloadLink
-        })
     }
 
     componentWillReceiveProps(nextProps: any, prevProps: any) {
         if (nextProps !== prevProps) {
-            changeThemeColor("#downloadBtn", nextProps.imageColor);
+            changeThemeColor("#downloadBtn", nextProps.themeColor);
         }
     }
 
@@ -75,8 +67,6 @@ class DownloadComponent extends React.Component {
                         className={"frostedGlass zIndexHigh"}
                         style={{
                             display: this.props.display,
-                            backgroundColor: this.state.backgroundColor,
-                            color: this.state.fontColor
                         }}
                 />
             </Tooltip>

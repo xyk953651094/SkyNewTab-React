@@ -6,7 +6,7 @@ import {changeThemeColor} from "../../typescripts/publicFunctions";
 
 type propType = {
     display: "none" | "block",
-    imageColor: string,
+    themeColor: string,
     createTime: string,
 }
 
@@ -31,7 +31,7 @@ class CreatTimeComponent extends React.Component {
 
     componentWillReceiveProps(nextProps: any, prevProps: any) {
         if (nextProps !== prevProps) {
-            changeThemeColor("#createTimeBtn", nextProps.imageColor);
+            changeThemeColor("#createTimeBtn", nextProps.themeColor);
         }
     }
 
@@ -43,8 +43,6 @@ class CreatTimeComponent extends React.Component {
                         className={"frostedGlass zIndexHigh"}
                         style={{
                             display: this.props.display,
-                            backgroundColor: this.state.backgroundColor,
-                            color: this.state.fontColor,
                             cursor: "default"
                         }}
                 >

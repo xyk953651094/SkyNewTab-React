@@ -7,7 +7,7 @@ import {changeThemeColor, isEmptyString} from "../../typescripts/publicFunctions
 
 type propType = {
     display: "none" | "block",
-    imageColor: string,
+    themeColor: string,
     author: string,
     authorLink: string,
 }
@@ -31,7 +31,7 @@ class AuthorComponent extends React.Component {
 
     componentWillReceiveProps(nextProps: any, prevProps: any) {
         if (nextProps !== prevProps) {
-            changeThemeColor("#authorBtn", nextProps.imageColor);
+            changeThemeColor("#authorBtn", nextProps.themeColor);
         }
     }
 

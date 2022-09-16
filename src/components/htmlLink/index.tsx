@@ -7,7 +7,7 @@ import {changeThemeColor, isEmptyString} from "../../typescripts/publicFunctions
 
 type propType = {
     display: "none" | "block",
-    imageColor: string,
+    themeColor: string,
     htmlLink: string,
 }
 
@@ -40,7 +40,7 @@ class HtmlLinkComponent extends React.Component {
 
     componentWillReceiveProps(nextProps: any, prevProps: any) {
         if (nextProps !== prevProps) {
-            changeThemeColor("#gotoBtn", nextProps.imageColor);
+            changeThemeColor("#gotoBtn", nextProps.themeColor);
         }
     }
 
@@ -61,8 +61,6 @@ class HtmlLinkComponent extends React.Component {
                         className={"frostedGlass zIndexHigh"}
                         style={{
                             display: this.props.display,
-                            backgroundColor: this.state.backgroundColor,
-                            color: this.state.fontColor,
                         }}
                 />
             </Tooltip>

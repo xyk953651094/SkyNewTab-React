@@ -6,6 +6,7 @@ import GreetComponent from "./components/greet";
 import WeatherComponent from "./components/weather";
 import DownloadComponent from "./components/download";
 import HtmlLinkComponent from "./components/htmlLink";
+import PreferenceComponent from "./components/preference";
 import WallpaperComponent from "./components/wallpaper";
 import SearchComponent from "./components/search";
 import AuthorComponent from "./components/author";
@@ -23,7 +24,7 @@ type stateType = {
     mobileComponentDisplay: "none" | "block",
     wallpaperComponentDisplay: "none" | "block",
     imageData: any,
-    imageColor: string,
+    themeColor: string,
     downloadLink: string,
     htmlLink: string,
     imageLink: string,
@@ -45,7 +46,7 @@ class App extends React.Component {
             mobileComponentDisplay: "none",
             wallpaperComponentDisplay: "none",
             imageData: "",
-            imageColor: "",
+            themeColor: "",
             downloadLink: "",
             htmlLink: "",
             imageLink: "",
@@ -59,18 +60,25 @@ class App extends React.Component {
         let tempThis = this;
         let device = deviceModel();
         this.setState({
-            imageColor: setColorTheme()
+            themeColor: setColorTheme()    // 未加载图片前随机显示颜色主题
         })
 
         let orientation = "landscape";
+        let imageSize = "&w=2880&h=1800"
         if(device === "iPhone" || device === "Android") {
             orientation = "portrait";  // 获取竖屏图片
+            imageSize = "&w=828&h=1792"
         }
         let topics = "bo8jQKTaE0Y,6sMVjTLSkeQ,bDo48cUhwnY,xHxYTMHLgOc,iUIsnVtjB0Y,R_Fyn-Gwtlw,Fzo3zuOHN6w";
 
         let imageXHR = new XMLHttpRequest();
         imageXHR
-        .open("GET", "https://api.unsplash.com/photos/random?client_id=" + clientId + "&orientation=" + orientation + "&topics=" + topics + "&content_filter=high");
+        .open("GET", "https://api.unsplash.com/photos/random?" +
+            "client_id=" + clientId +
+            "&orientation=" + orientation +
+            "&topics=" + topics +
+            "&content_filter=high"
+        );
         imageXHR
         .onload = function () {
             if (imageXHR.status === 200) {
@@ -81,11 +89,11 @@ class App extends React.Component {
                     mobileComponentDisplay: "none",
                     wallpaperComponentDisplay: "block",
                     imageData: imageData,
-                    imageColor: getThemeColor(imageData.color),
+                    themeColor: getThemeColor(imageData.color),
                     downloadLink: imageData.links.download_location,
                     htmlLink: imageData.links.html,
-                    imageLink: imageData.urls.regular,
-                    author: imageData.user.name + " on Unsplash",
+                    imageLink: imageData.urls.regular + imageSize,
+                    author: "by " + imageData.user.name + " on Unsplash",
                     authorLink: imageData.user.links.html,
                     createTime: imageData.created_at.split("T")[0],
                 }, () => {
@@ -121,10 +129,10 @@ class App extends React.Component {
                         <Col span={12}>
                             <Space size={"small"}>
                                 <GreetComponent
-                                    imageColor={this.state.imageColor}
+                                    themeColor={this.state.themeColor}
                                 />
                                 <WeatherComponent
-                                    imageColor={this.state.imageColor}
+                                    themeColor={this.state.themeColor}
                                 />
                             </Space>
                         </Col>
@@ -132,15 +140,18 @@ class App extends React.Component {
                             <Space size={"small"}>
                                 <DownloadComponent
                                     display={this.state.componentDisplay}
-                                    imageColor={this.state.imageColor}
+                                    themeColor={this.state.themeColor}
                                     downloadLink={this.state.downloadLink}
                                 />
                                 <HtmlLinkComponent
                                     display={this.state.componentDisplay}
-                                    imageColor={this.state.imageColor}
+                                    themeColor={this.state.themeColor}
                                     htmlLink={this.state.htmlLink}
                                 />
-                                {/*<Button type="primary" shape="round" icon={<SettingOutlined />} size={"large"} />*/}
+                                <PreferenceComponent
+                                    display={this.state.componentDisplay}
+                                    themeColor={this.state.themeColor}
+                                />
                             </Space>
                         </Col>
                     </Row>
@@ -148,7 +159,6 @@ class App extends React.Component {
                 <Content id={"content"} className={"center"}>
                     <WallpaperComponent
                         display={this.state.wallpaperComponentDisplay}
-                        // display={"none"}
                         imageLink={this.state.imageLink}
                     />
                     <SearchComponent />
@@ -159,13 +169,17 @@ class App extends React.Component {
                             <Space size={"small"}>
                                 <DownloadComponent
                                     display={this.state.mobileComponentDisplay}
-                                    imageColor={this.state.imageColor}
+                                    themeColor={this.state.themeColor}
                                     downloadLink={this.state.downloadLink}
                                 />
                                 <HtmlLinkComponent
                                     display={this.state.mobileComponentDisplay}
-                                    imageColor={this.state.imageColor}
+                                    themeColor={this.state.themeColor}
                                     htmlLink={this.state.htmlLink}
+                                />
+                                <PreferenceComponent
+                                    display={this.state.mobileComponentDisplay}
+                                    themeColor={this.state.themeColor}
                                 />
                             </Space>
                         </Col>
@@ -173,13 +187,13 @@ class App extends React.Component {
                             <Space size={"small"} align={"end"}>
                                 <AuthorComponent
                                     display={this.state.componentDisplay}
-                                    imageColor={this.state.imageColor}
+                                    themeColor={this.state.themeColor}
                                     author={this.state.author}
                                     authorLink={this.state.authorLink + unsplashUrl}
                                 />
                                 <CreatTimeComponent
                                     display={this.state.componentDisplay}
-                                    imageColor={this.state.imageColor}
+                                    themeColor={this.state.themeColor}
                                     createTime={this.state.createTime}
                                 />
                             </Space>
