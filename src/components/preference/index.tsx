@@ -1,10 +1,12 @@
 import React from "react";
 import "../../App.css";
-import {Button, Tooltip, Drawer, Typography, Form, Row, Col, Switch, Radio} from "antd";
-import {SettingOutlined, ShareAltOutlined} from "@ant-design/icons";
-import {changeThemeColor, getThemeColor, getFontColor} from "../../typescripts/publicFunctions";
+import {Button, Tooltip, Drawer, Typography, Divider, Form, Row, Col, Radio, Checkbox} from "antd";
+import type { RadioChangeEvent } from 'antd';
+import type { CheckboxValueType } from 'antd/es/checkbox/Group';
+import {SettingOutlined} from "@ant-design/icons";
+import {getTimeDetails, changeThemeColor, getThemeColor, getFontColor} from "../../typescripts/publicFunctions";
 const $ = require("jquery");
-const {Text} = Typography;
+const {Title, Paragraph, Text} = Typography;
 
 type propType = {
     display: "none" | "block",
@@ -17,6 +19,7 @@ type stateType = {
     componentBackgroundColor: string,
     componentFontColor: string,
     displayDrawer: boolean,
+    timeDetails: String[],
 }
 
 interface PreferenceComponent {
@@ -32,8 +35,16 @@ class PreferenceComponent extends React.Component {
             fontColor: "",
             componentBackgroundColor: "",
             componentFontColor: "",
-            displayDrawer: false
+            displayDrawer: false,
+            timeDetails: [""]
         };
+    }
+
+    componentDidMount() {
+        let timeDetails = getTimeDetails(new Date());
+        this.setState({
+            timeDetails: [timeDetails.showDate2 + " " + timeDetails.showWeek, timeDetails.showLocaleDate]
+        })
     }
 
     componentWillReceiveProps(nextProps: any, prevProps: any) {
@@ -52,33 +63,34 @@ class PreferenceComponent extends React.Component {
         $(".ant-drawer-title").css("color", this.state.fontColor);             // 抽屉 header 样式
         $(".ant-form-item-label > label").css("color", this.state.fontColor);  // 抽屉 body 样式
         $(".ant-radio-wrapper").children(":last-child").css("color", this.state.fontColor);
+        $(".ant-checkbox-wrapper").children(":last-child").css("color", this.state.fontColor);
         $(".ant-typography").css("color", this.state.fontColor);               // 抽屉 footer 样式
     }
 
-    onShow() {
+    drawerOnShow() {
         this.setState({
             displayDrawer: true,
         })
     };
-    
-    onSubmit() {
-        this.setState({
-            displayDrawer: false,
-        })
-    }
 
-    onClose() {
+    drawerOnClose() {
         this.setState({
             displayDrawer: false,
         })
     };
 
-    switchDisplayImage(checked: boolean) {
-
+    // 图片质量
+    displayEffectRadioOnChange(event: RadioChangeEvent) {
+        console.log(event.target.value);
     }
 
-    switchDynamicImage() {
+    dynamicEffectRadioOnChange(event: RadioChangeEvent) {
+        console.log(event.target.value);
+    }
 
+    // 图片主题
+    imageTopicsCheckboxOnChange(checkedValues: CheckboxValueType[]) {
+        console.log('checked = ', checkedValues);
     }
 
     render() {
@@ -86,7 +98,7 @@ class PreferenceComponent extends React.Component {
             <>
                 <Tooltip title={"偏好设置"}>
                     <Button shape="round" icon={<SettingOutlined/>} size={"large"}
-                            onClick={this.onShow.bind(this)}
+                            onClick={this.drawerOnShow.bind(this)}
                             id={"preferenceBtn"}
                             className={"frostedGlass zIndexHigh"}
                             style={{
@@ -97,11 +109,10 @@ class PreferenceComponent extends React.Component {
                 <Drawer
                     title="偏好设置"
                     size={"default"}
-                    onClose={this.onClose.bind(this)}
+                    onClose={this.drawerOnClose.bind(this)}
                     open={this.state.displayDrawer}
                     drawerStyle={{
                         backgroundColor: this.state.backgroundColor,
-                        // color: this.state.fontColor
                     }}
                     footer={
                         <Row align={"middle"}>
@@ -112,34 +123,60 @@ class PreferenceComponent extends React.Component {
                     }
                 >
                     <Form colon={false}>
-                        <Form.Item name="switchDisplayImage" label="背景图片">
-                            <Switch checkedChildren="开启" unCheckedChildren="关闭" defaultChecked
-                                    onChange={this.switchDisplayImage.bind(this)}
-                            />
+                        <Form.Item name="time">
+                            <Title level={3}>{this.state.timeDetails[0]}</Title>
+                            <Text>{this.state.timeDetails[1]}</Text>
                         </Form.Item>
-                        <Form.Item name="switchDisplayEffect" label="图片质量">
-                            <Radio.Group defaultValue={"regular"} buttonStyle={"solid"}>
+                        <Form.Item name="poem">
+                            <Paragraph>
+                                「 江畔何人初见月，江月何年初照人，江畔何人初见月，江月何年初照人，江畔何人初见月，江月何年初照人 」--【唐】·张若虚·《春江花月夜》
+                            </Paragraph>
+                        </Form.Item>
+                        <Divider></Divider>
+                        <Form.Item name="displayEffectRadio" label="图片质量">
+                            <Radio.Group defaultValue={"regular"} buttonStyle={"solid"}
+                                         onChange={this.displayEffectRadioOnChange.bind(this)}
+                            >
                                 <Radio value={"regular"}>标准</Radio>
                                 <Radio value={"full"}>完整</Radio>
                             </Radio.Group>
                         </Form.Item>
-                        <Form.Item name="switchDynamicImage" label="图片动效">
-                            <Switch checkedChildren="开启" unCheckedChildren="关闭" defaultChecked
-                                    onChange={this.switchDynamicImage.bind(this)}
-                            />
-                        </Form.Item>
-                        <Form.Item name="switchDynamicEffect" label="动效样式">
-                            <Radio.Group defaultValue={1} buttonStyle={"solid"}>
+                        <Form.Item name="dynamicEffectRadio" label="动效样式">
+                            <Radio.Group defaultValue={1} buttonStyle={"solid"}
+                                         onChange={this.dynamicEffectRadioOnChange.bind(this)}
+                            >
                                 <Radio value={1}>平移</Radio>
                                 <Radio value={2}>旋转</Radio>
                             </Radio.Group>
                         </Form.Item>
-                        {/*<Form.Item name="switchImageEffect" label="字体样式">*/}
-                        {/*    <Radio.Group defaultValue={"regular"}>*/}
-                        {/*        <Radio value={"regular"}>标准</Radio>*/}
-                        {/*        <Radio value={"full"}>完整</Radio>*/}
-                        {/*    </Radio.Group>*/}
-                        {/*</Form.Item>*/}
+                        <Form.Item name="imageTopicsCheckbox" label="图片主题">
+                            <Checkbox.Group style={{ width: '100%' }} onChange={this.imageTopicsCheckboxOnChange.bind(this)}>
+                                <Row>
+                                    <Col span={12}>
+                                        <Checkbox value="travel">旅游</Checkbox>
+                                    </Col>
+                                    <Col span={12}>
+                                        <Checkbox value="wallpapers">壁纸</Checkbox>
+                                    </Col>
+                                    <Col span={12}>
+                                        <Checkbox value="textures-patterns">纹理 & 图案</Checkbox>
+                                    </Col>
+                                    <Col span={12}>
+                                        <Checkbox value="nature">自然</Checkbox>
+                                    </Col>
+                                    <Col span={12}>
+                                        <Checkbox value="Interiors">精神</Checkbox>
+                                    </Col>
+                                    <Col span={12}>
+                                        <Checkbox value="street-photography">街头摄影</Checkbox>
+                                    </Col>
+                                    <Col span={12}>
+                                        <Checkbox value="arts-culture">艺术 & 文化</Checkbox>
+                                    </Col>
+                                </Row>
+                            </Checkbox.Group>
+                        </Form.Item>
+
                     </Form>
                 </Drawer>
             </>

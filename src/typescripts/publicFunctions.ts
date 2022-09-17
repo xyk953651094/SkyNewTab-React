@@ -10,6 +10,8 @@ export function getTimeDetails(param: Date) {
     let hour: string | number = param.getHours();
     let minute: string | number = param.getMinutes();
     let second: string | number = param.getSeconds();
+    let week: string | number = param.getDay() + 1;
+    let localeDate: string = param.toLocaleString("zh-Hans-u-ca-chinese");
 
     year = year.toString();
     month = month < 10? ('0' + month) : month.toString();
@@ -17,11 +19,24 @@ export function getTimeDetails(param: Date) {
     hour = hour < 10? ('0' + hour) : hour.toString();
     minute = minute < 10? ('0' + minute) : minute.toString();
     second = second < 10? ('0' + second) : second.toString();
+    switch (week) {
+        case 1: week = "周一"; break;
+        case 2: week = "周二"; break;
+        case 3: week = "周三"; break;
+        case 4: week = "周四"; break;
+        case 5: week = "周五"; break;
+        case 6: week = "周六"; break;
+        case 7: week = "周日"; break;
+        default: week = "";
+    }
 
     return {
         year:year, month:month, day:day, hour:hour, minute:minute, second:second,
+        showWeek: week,
         showDate: year + "/" + month + "/" + day,
-        showTime: hour + ":" + minute
+        showDate2: year + "." + month + "." + day,
+        showTime: hour + ":" + minute,
+        showLocaleDate: "农历" + localeDate.split(" ")[0] + "日"
     };
 }
 

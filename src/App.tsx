@@ -107,8 +107,6 @@ class App extends React.Component {
                 })
 
                 // 设置body背景颜色
-                // let body = document.getElementsByTagName("body")[0];
-                // body.style.backgroundColor = imageData.color;
                 changeThemeColor("body", imageData.color);
             }
             else {
