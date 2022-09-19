@@ -119,24 +119,91 @@ export function getFontColor(color: string) {
 }
 
 // PC端鼠标移动效果
-export function mouseMoveEffect() {
+export function mouseMoveEffect(effectType: string) {
     // @ts-ignore
-    let backgroundImage: HTMLElement = document.getElementById('backgroundImage').children[0];
+    let backgroundImageDiv: HTMLElement = document.getElementById('backgroundImage');
+    backgroundImageDiv.style.perspective = "500px";
+    // @ts-ignore
+    let backgroundImage: HTMLElement = backgroundImageDiv.children[0];
+
+    // // @ts-ignore
+    // let backgroundImage: any = document.getElementById('backgroundImage').children[0];
+
     window.addEventListener('mousemove',function(e){
-        if(backgroundImage instanceof HTMLElement) {
-            backgroundImage.style.transition = '0.5s';
-            if (e.movementX > 0 && e.movementY > 0) {
-                backgroundImage.style.transform = 'scale(1.05) translate(-0.1%, -0.1%)';
-            } else if (e.movementX < 0 && e.movementY > 0) {
-                backgroundImage.style.transform = 'scale(1.05) translate(0.1%, -0.1%)';
-            } else if (e.movementX > 0 && e.movementY < 0) {
-                backgroundImage.style.transform = 'scale(1.05) translate(-0.1%, 0.1%)';
-            } else if (e.movementX < 0 && e.movementY < 0) {
-                backgroundImage.style.transform = 'scale(1.05) translate(0.1%, 0.1%)';
+        let mouseX = e.screenX;
+        let mouseY = e.screenY;
+        let screenWidth = document.body.clientWidth;
+        let screenHeight = document.body.clientHeight;
+        let screenMidWidth = screenWidth / 2;
+        let screenMidHeight = screenHeight / 2;
+        let relatedX = mouseX - screenMidWidth;
+        let relatedY = mouseY - screenMidHeight;
+        let relatedXRatio = Math.abs(relatedX / screenMidWidth / 3).toFixed(2);   // 大于0则在屏幕右边，小于0则在屏幕左边
+        let relatedYRatio = Math.abs(relatedY / screenMidHeight / 3).toFixed(2);  // 大于0则在屏幕下边，小于0则在屏幕上边
+
+        backgroundImage.style.transition = "0.1s";
+        if (backgroundImage instanceof HTMLElement) {
+            switch (effectType) {
+                case "translate":
+                    if (relatedX < 0 && relatedY < 0) {         // 左上角
+                        backgroundImage.style.transform = "scale(1.05) translate(" + relatedXRatio + "%, " + relatedYRatio + "%)";
+                    } else if (relatedX > 0 && relatedY < 0) {  // 右上角
+                        backgroundImage.style.transform = "scale(1.05) translate(" + (-relatedXRatio) + "%, " + (-relatedYRatio) + "%)";
+                    } else if (relatedX > 0 && relatedY > 0) {  // 右下角
+                        backgroundImage.style.transform = "scale(1.05) translate(" + (-relatedXRatio) + "%, " + (-relatedYRatio) + "%)";
+                    } else if (relatedX < 0 && relatedY > 0) {  // 左下角
+                        backgroundImage.style.transform = "scale(1.05) translate(" + relatedXRatio + "%, " + (-relatedYRatio) + "%)";
+                    }
+                    break;
+                case "rotate":
+                    if (relatedX < 0 && relatedY < 0) {          // 左上角
+                        backgroundImage.style.transform = "scale(1.05) rotateX(" + relatedXRatio + "deg) rotateY(" + (-relatedYRatio) + "deg)";
+                    } else if (relatedX > 0 && relatedY < 0) {  // 右上角
+                        backgroundImage.style.transform = "scale(1.05) rotateX(" + relatedXRatio + "deg) rotateY(" + relatedYRatio + "deg)";
+                    } else if (relatedX > 0 && relatedY > 0) {  // 右下角
+                        backgroundImage.style.transform = "scale(1.05) rotateX(" + (-relatedXRatio) + "deg) rotateY(" + relatedYRatio + "deg)";
+                    } else {                                    // 左下角
+                        backgroundImage.style.transform = "scale(1.05) rotateX(" + (-relatedXRatio) + "deg) rotateY(" + (-relatedYRatio) + "deg)";
+                    }
             }
         }
     });
 }
+
+// PC端鼠标旋转效果
+// export function rotateEffect() {
+//     // @ts-ignore
+//     let backgroundImageDiv: HTMLElement = document.getElementById('backgroundImage');
+//     backgroundImageDiv.style.perspective = "500px";
+//     // @ts-ignore
+//     let backgroundImage: HTMLElement = backgroundImageDiv.children[0];
+//
+//     window.addEventListener('mousemove',function(e){
+//         let mouseX = e.screenX;
+//         let mouseY = e.screenY;
+//         let screenWidth = document.body.clientWidth;
+//         let screenHeight = document.body.clientHeight;
+//         let screenMidWidth = screenWidth / 2;
+//         let screenMidHeight = screenHeight / 2;
+//         let relatedX = mouseX - screenMidWidth;
+//         let relatedY = mouseY - screenMidHeight;
+//         let relatedXRatio = Math.abs(relatedX / screenMidWidth / 2).toFixed(2);   // 大于0则在屏幕右边，小于0则在屏幕左边
+//         let relatedYRatio = Math.abs(relatedY / screenMidHeight / 2).toFixed(2);  // 大于0则在屏幕下边，小于0则在屏幕上边
+//
+//         backgroundImage.style.transition = "0.1s";
+//         if (backgroundImage instanceof HTMLElement) {
+//             if (relatedX < 0 && relatedY < 0) {          // 左上角
+//                 backgroundImage.style.transform = "scale(1.05) rotateX(" + relatedXRatio + "deg) rotateY(" + (-relatedYRatio) + "deg)";
+//             } else if (relatedX > 0 && relatedY < 0) {  // 右上角
+//                 backgroundImage.style.transform = "scale(1.05) rotateX(" + relatedXRatio + "deg) rotateY(" + relatedYRatio + "deg)";
+//             } else if (relatedX > 0 && relatedY > 0) {  // 右下角
+//                 backgroundImage.style.transform = "scale(1.05) rotateX(" + (-relatedXRatio) + "deg) rotateY(" + relatedYRatio + "deg)";
+//             } else {                                    // 左下角
+//                 backgroundImage.style.transform = "scale(1.05) rotateX(" + (-relatedXRatio) + "deg) rotateY(" + (-relatedYRatio) + "deg)";
+//             }
+//         }
+//     });
+// }
 
 // 判断设备型号
 export function deviceModel() {

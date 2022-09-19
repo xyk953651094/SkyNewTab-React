@@ -13,8 +13,8 @@ import AuthorComponent from "./components/author";
 import CreatTimeComponent from "./components/createTime";
 
 import {Layout, Row, Col, Space, message} from "antd";
-import {unsplashUrl, clientId} from "./typescripts/publicConstents";
-import {setColorTheme, getThemeColor, deviceModel, changeThemeColor} from "./typescripts/publicFunctions";
+import {clientId} from "./typescripts/publicConstents";
+import {setColorTheme, deviceModel, changeThemeColor, getThemeColor} from "./typescripts/publicFunctions";
 const {Header, Content, Footer} = Layout;
 
 type propType = {}
@@ -24,13 +24,7 @@ type stateType = {
     mobileComponentDisplay: "none" | "block",
     wallpaperComponentDisplay: "none" | "block",
     imageData: any,
-    themeColor: string,
-    downloadLink: string,
-    htmlLink: string,
-    imageLink: string,
-    author: string,
-    authorLink: string,
-    createTime: string,
+    themeColor: string
 }
 
 interface App {
@@ -46,13 +40,7 @@ class App extends React.Component {
             mobileComponentDisplay: "none",
             wallpaperComponentDisplay: "none",
             imageData: "",
-            themeColor: "",
-            downloadLink: "",
-            htmlLink: "",
-            imageLink: "",
-            author: "",
-            authorLink: "",
-            createTime: "",
+            themeColor: ""  // 未加载图片前随机显示颜色主题
         }
     }
 
@@ -62,25 +50,16 @@ class App extends React.Component {
         this.setState({
             themeColor: setColorTheme()    // 未加载图片前随机显示颜色主题
         })
-
         let orientation = "landscape";
-        let imageSize = "&w=2880&h=1800"
         if(device === "iPhone" || device === "Android") {
             orientation = "portrait";  // 获取竖屏图片
-            imageSize = "&w=828&h=1792"
         }
         let topics = "bo8jQKTaE0Y,6sMVjTLSkeQ,bDo48cUhwnY,xHxYTMHLgOc,iUIsnVtjB0Y,R_Fyn-Gwtlw,Fzo3zuOHN6w";
 
         let imageXHR = new XMLHttpRequest();
-        imageXHR
-        .open("GET", "https://api.unsplash.com/photos/random?" +
-            "client_id=" + clientId +
-            "&orientation=" + orientation +
-            "&topics=" + topics +
-            "&content_filter=high"
-        );
-        imageXHR
-        .onload = function () {
+        imageXHR.timeout = 5000;
+        imageXHR.open("GET", "https://api.unsplash.com/photos/random?" + "client_id=" + clientId + "&orientation=" + orientation + "&topics=" + topics + "&content_filter=high");
+        imageXHR.onload = function () {
             if (imageXHR.status === 200) {
                 let imageData = JSON.parse(imageXHR.responseText);
 
@@ -89,13 +68,7 @@ class App extends React.Component {
                     mobileComponentDisplay: "none",
                     wallpaperComponentDisplay: "block",
                     imageData: imageData,
-                    themeColor: getThemeColor(imageData.color),
-                    downloadLink: imageData.links.download_location,
-                    htmlLink: imageData.links.html,
-                    imageLink: imageData.urls.regular + imageSize,
-                    author: "by " + imageData.user.name + " on Unsplash",
-                    authorLink: imageData.user.links.html,
-                    createTime: imageData.created_at.split("T")[0],
+                    themeColor: getThemeColor(imageData.color)
                 }, () => {
                     // 小屏显示底部按钮
                     if (device === "iPhone" || device === "Android") {
@@ -124,7 +97,7 @@ class App extends React.Component {
             <Layout>
                 <Header id={"header"} className={"zIndexMiddle"}>
                     <Row>
-                        <Col span={12}>
+                        <Col xs={24} sm={24} md={12} lg={12} xl={12}>
                             <Space size={"small"}>
                                 <GreetComponent
                                     themeColor={this.state.themeColor}
@@ -134,21 +107,22 @@ class App extends React.Component {
                                 />
                             </Space>
                         </Col>
-                        <Col span={12} style={{textAlign: "right"}}>
+                        <Col xs={0} sm={0} md={12} lg={12} xl={12} style={{textAlign: "right"}}>
                             <Space size={"small"}>
                                 <DownloadComponent
-                                    display={this.state.componentDisplay}
                                     themeColor={this.state.themeColor}
-                                    downloadLink={this.state.downloadLink}
+                                    display={this.state.componentDisplay}
+                                    imageData={this.state.imageData}
                                 />
                                 <HtmlLinkComponent
-                                    display={this.state.componentDisplay}
                                     themeColor={this.state.themeColor}
-                                    htmlLink={this.state.htmlLink}
+                                    display={this.state.componentDisplay}
+                                    imageData={this.state.imageData}
                                 />
                                 <PreferenceComponent
-                                    display={this.state.componentDisplay}
                                     themeColor={this.state.themeColor}
+                                    display={this.state.componentDisplay}
+                                    imageData={this.state.imageData}
                                 />
                             </Space>
                         </Col>
@@ -157,42 +131,42 @@ class App extends React.Component {
                 <Content id={"content"} className={"center"}>
                     <WallpaperComponent
                         display={this.state.wallpaperComponentDisplay}
-                        imageLink={this.state.imageLink}
+                        imageData={this.state.imageData}
                     />
                     <SearchComponent />
                 </Content>
                 <Footer id={"footer"}>
                     <Row>
-                        <Col span={12} style={{textAlign: "left"}}>
+                        <Col xs={24} sm={24} md={0} lg={0} xl={0}>
                             <Space size={"small"}>
-                                <DownloadComponent
-                                    display={this.state.mobileComponentDisplay}
+                                <PreferenceComponent
                                     themeColor={this.state.themeColor}
-                                    downloadLink={this.state.downloadLink}
+                                    display={this.state.mobileComponentDisplay}
+                                    imageData={this.state.imageData}
+                                />
+                                <DownloadComponent
+                                    themeColor={this.state.themeColor}
+                                    display={this.state.mobileComponentDisplay}
+                                    imageData={this.state.imageData}
                                 />
                                 <HtmlLinkComponent
-                                    display={this.state.mobileComponentDisplay}
                                     themeColor={this.state.themeColor}
-                                    htmlLink={this.state.htmlLink}
-                                />
-                                <PreferenceComponent
                                     display={this.state.mobileComponentDisplay}
-                                    themeColor={this.state.themeColor}
+                                    imageData={this.state.imageData}
                                 />
                             </Space>
                         </Col>
-                        <Col span={12} style={{textAlign: "right"}}>
+                        <Col xs={0} sm={0} md={24} lg={24} xl={24} style={{textAlign: "right"}}>
                             <Space size={"small"} align={"end"}>
                                 <AuthorComponent
-                                    display={this.state.componentDisplay}
                                     themeColor={this.state.themeColor}
-                                    author={this.state.author}
-                                    authorLink={this.state.authorLink + unsplashUrl}
+                                    display={this.state.componentDisplay}
+                                    imageData={this.state.imageData}
                                 />
                                 <CreatTimeComponent
-                                    display={this.state.componentDisplay}
                                     themeColor={this.state.themeColor}
-                                    createTime={this.state.createTime}
+                                    display={this.state.componentDisplay}
+                                    imageData={this.state.imageData}
                                 />
                             </Space>
                         </Col>

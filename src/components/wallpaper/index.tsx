@@ -5,15 +5,15 @@ import "../../stylesheets/publicStyles.css"
 import {Image} from "antd";
 import {fadeIn, mouseMoveEffect} from "../../typescripts/publicFunctions";
 import {isBlurhashValid, decode} from "blurhash";
+import image from "antd/lib/image";
 
 type propType = {
     display: "none" | "block",
-    imageLink: string,
-    // imageData: any
+    imageData: any
 }
 
 type stateType = {
-    // imageLink: string,
+    imageLink: string,
     // blurHash: string,
     // width: number,
     // height: number,
@@ -28,7 +28,7 @@ class WallpaperComponent extends React.Component {
     constructor(props: any) {
         super(props);
         this.state = {
-            // imageLink: "",
+            imageLink: "",
             // blurHash: "",
             // width: 0,
             // height: 0,
@@ -48,13 +48,18 @@ class WallpaperComponent extends React.Component {
                 fadeIn("#backgroundImage", 3000);
                 backgroundImage.style.transform = "scale(1.05)";
                 backgroundImage.style.transition = "5s";
-                setTimeout(mouseMoveEffect, 5000);
+                let effectType  = "rotate";
+                setTimeout(()=>{mouseMoveEffect(effectType)}, 5000);
             }
         }
     }
 
     componentWillReceiveProps(nextProps: any, prevProps: any) {
         if (nextProps !== prevProps) {
+            this.setState({
+                imageLink: nextProps.imageData.urls.regular,
+            });
+
             // this.setState({
             //     imageLink: this.props.imageData.urls.regular,
             //     blurHash: this.props.imageData.blur_hash,
@@ -83,9 +88,9 @@ class WallpaperComponent extends React.Component {
                 key="1"
                 width="102%"
                 height="102%"
-                className={"backgroundImage zIndexLow fadeIn"}
+                className={"backgroundImage zIndexLow"}
                 preview={false}
-                src={this.props.imageLink}
+                src={this.state.imageLink}
                 style={{display: this.props.display}}
                 placeholder={
                     <Image

@@ -3,16 +3,16 @@ import "../../App.css";
 import {Button, Tooltip, message} from "antd";
 import {CameraOutlined} from "@ant-design/icons";
 import {unsplashUrl} from "../../typescripts/publicConstents";
-import {changeThemeColor, isEmptyString} from "../../typescripts/publicFunctions";
+import {changeThemeColor, getThemeColor, isEmptyString} from "../../typescripts/publicFunctions";
 
 type propType = {
-    display: "none" | "block",
     themeColor: string,
-    author: string,
-    authorLink: string,
+    display: "none" | "block",
+    imageData: any,
 }
 
 type stateType = {
+    author: string
     authorLink: string,
 }
 
@@ -25,6 +25,7 @@ class AuthorComponent extends React.Component {
     constructor(props: any) {
         super(props);
         this.state = {
+            author: "",
             authorLink: "",
         };
     }
@@ -32,12 +33,17 @@ class AuthorComponent extends React.Component {
     componentWillReceiveProps(nextProps: any, prevProps: any) {
         if (nextProps !== prevProps) {
             changeThemeColor("#authorBtn", nextProps.themeColor);
+
+            this.setState({
+                author: "by " + nextProps.imageData.user.name + " on Unsplash",
+                authorLink: nextProps.imageData.user.links.html
+            })
         }
     }
 
     handleClick() {
-        if (!isEmptyString(this.props.authorLink)) {
-            window.open(this.props.authorLink + unsplashUrl);
+        if (!isEmptyString(this.state.authorLink)) {
+            window.open(this.state.authorLink + unsplashUrl);
         } else {
             message.error("无跳转链接");
         }
@@ -52,7 +58,7 @@ class AuthorComponent extends React.Component {
                         className={"frostedGlass zIndexHigh"}
                         style={{display: this.props.display}}
                 >
-                    {this.props.author}
+                    {this.state.author}
                 </Button>
             </Tooltip>
         );

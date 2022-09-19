@@ -1,16 +1,14 @@
 import React from "react";
 import "../../App.css";
 import {Button, Tooltip} from "antd";
-import {changeThemeColor} from "../../typescripts/publicFunctions";
+import {changeThemeColor, getThemeColor} from "../../typescripts/publicFunctions";
 
 type propType = {
-    themeColor: string,
+    themeColor: string
 }
 
 type stateType = {
     display: "none" | "block",
-    backgroundColor: string,
-    fontColor: string,
     weatherInfo: string,
     weatherDetail: string
 }
@@ -25,8 +23,6 @@ class WeatherComponent extends React.Component {
         super(props);
         this.state = {
             display: "none",
-            backgroundColor: "",
-            fontColor: "",
             weatherInfo: "暂无天气信息",
             weatherDetail: "暂无天气信息"
         };

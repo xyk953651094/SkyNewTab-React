@@ -3,17 +3,18 @@ import "../../App.css";
 import {Button, Tooltip, message} from "antd";
 import {DownloadOutlined} from "@ant-design/icons";
 import {unsplashUrl, clientId} from "../../typescripts/publicConstents";
-import {changeThemeColor, isEmptyString} from "../../typescripts/publicFunctions";
+import {changeThemeColor, getFontColor, getThemeColor, isEmptyString} from "../../typescripts/publicFunctions";
 
 type propType = {
-    display: "none" | "block",
     themeColor: string,
-    downloadLink: string,
+    display: "none" | "block",
+    imageData: any,
 }
 
 type stateType = {
     backgroundColor: string,
     fontColor: string,
+    downloadLink: string,
 }
 
 interface DownloadComponent {
@@ -27,19 +28,26 @@ class DownloadComponent extends React.Component {
         this.state = {
             backgroundColor: "",
             fontColor: "",
+            downloadLink: "",
         };
     }
 
     componentWillReceiveProps(nextProps: any, prevProps: any) {
         if (nextProps !== prevProps) {
             changeThemeColor("#downloadBtn", nextProps.themeColor);
+
+            this.setState({
+                backgroundColor: nextProps.themeColor,
+                fontColor: getFontColor(nextProps.themeColor),
+                downloadLink: nextProps.imageData.links.download_location
+            })
         }
     }
 
     handleClick() {
-        if (!isEmptyString(this.props.downloadLink)) {
+        if (!isEmptyString(this.state.downloadLink)) {
             let downloadXHR = new XMLHttpRequest();
-            downloadXHR.open("GET", this.props.downloadLink + "?client_id=" + clientId);
+            downloadXHR.open("GET", this.state.downloadLink + "?client_id=" + clientId);
             downloadXHR.onload = function () {
                 if (downloadXHR.status === 200) {
                     let downloadUrl = JSON.parse(downloadXHR.responseText).url + unsplashUrl;
@@ -67,6 +75,8 @@ class DownloadComponent extends React.Component {
                         className={"frostedGlass zIndexHigh"}
                         style={{
                             display: this.props.display,
+                            backgroundColor: this.state.backgroundColor,
+                            color: this.state.fontColor
                         }}
                 />
             </Tooltip>

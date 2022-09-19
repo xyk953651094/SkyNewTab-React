@@ -2,17 +2,16 @@ import React from "react";
 import "../../App.css";
 import {Button, Tooltip} from "antd";
 import {CalendarOutlined} from "@ant-design/icons";
-import {changeThemeColor} from "../../typescripts/publicFunctions";
+import {changeThemeColor, getThemeColor} from "../../typescripts/publicFunctions";
 
 type propType = {
-    display: "none" | "block",
     themeColor: string,
-    createTime: string,
+    display: "none" | "block",
+    imageData: any,
 }
 
 type stateType = {
-    backgroundColor: string,
-    fontColor: string,
+    createTime: string,
 }
 
 interface CreatTimeComponent {
@@ -24,20 +23,23 @@ class CreatTimeComponent extends React.Component {
     constructor(props: any) {
         super(props);
         this.state = {
-            backgroundColor: "",
-            fontColor: "",
+            createTime: "",
         };
     }
 
     componentWillReceiveProps(nextProps: any, prevProps: any) {
         if (nextProps !== prevProps) {
             changeThemeColor("#createTimeBtn", nextProps.themeColor);
+
+            this.setState({
+                createTime: nextProps.imageData.created_at.split("T")[0]
+            })
         }
     }
 
     render() {
         return (
-            <Tooltip title={"拍摄时间：" + this.props.createTime}>
+            <Tooltip title={"拍摄时间：" + this.state.createTime}>
                 <Button shape="round" icon={<CalendarOutlined />} size={"large"}
                         id={"createTimeBtn"}
                         className={"frostedGlass zIndexHigh"}
@@ -46,7 +48,7 @@ class CreatTimeComponent extends React.Component {
                             cursor: "default"
                         }}
                 >
-                    {this.props.createTime}
+                    {this.state.createTime}
                 </Button>
             </Tooltip>
         );

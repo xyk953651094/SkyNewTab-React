@@ -3,12 +3,12 @@ import "../../App.css";
 import {Button, Tooltip, message} from "antd";
 import {LinkOutlined} from "@ant-design/icons";
 import {unsplashUrl} from "../../typescripts/publicConstents";
-import {changeThemeColor, isEmptyString} from "../../typescripts/publicFunctions";
+import {changeThemeColor, getFontColor, getThemeColor, isEmptyString} from "../../typescripts/publicFunctions";
 
 type propType = {
-    display: "none" | "block",
     themeColor: string,
-    htmlLink: string,
+    display: "none" | "block",
+    imageData: any,
 }
 
 type stateType = {
@@ -32,21 +32,21 @@ class HtmlLinkComponent extends React.Component {
         };
     }
 
-    componentDidMount() {
-        this.setState({
-            htmlLink: this.props.htmlLink
-        })
-    }
-
     componentWillReceiveProps(nextProps: any, prevProps: any) {
         if (nextProps !== prevProps) {
-            changeThemeColor("#gotoBtn", nextProps.themeColor);
+            changeThemeColor("#htmlLinkBtn", nextProps.themeColor);
+
+            this.setState({
+                backgroundColor: nextProps.themeColor,
+                fontColor: getFontColor(nextProps.themeColor),
+                htmlLink: nextProps.imageData.links.html
+            })
         }
     }
 
     handleClick() {
-        if (!isEmptyString(this.props.htmlLink)) {
-            window.open(this.props.htmlLink + unsplashUrl);
+        if (!isEmptyString(this.state.htmlLink)) {
+            window.open(this.state.htmlLink + unsplashUrl);
         } else {
             message.warning("无原网页链接");
         }
@@ -57,10 +57,12 @@ class HtmlLinkComponent extends React.Component {
             <Tooltip title={"前往图片主页"}>
                 <Button shape="round" icon={<LinkOutlined/>} size={"large"}
                         onClick={this.handleClick.bind(this)}
-                        id={"gotoBtn"}
+                        id={"htmlLinkBtn"}
                         className={"frostedGlass zIndexHigh"}
                         style={{
                             display: this.props.display,
+                            backgroundColor: this.state.backgroundColor,
+                            color: this.state.fontColor
                         }}
                 />
             </Tooltip>

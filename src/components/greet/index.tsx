@@ -1,16 +1,14 @@
 import React from "react";
 import "../../App.css";
 import {Tooltip, Button} from "antd";
-import {CalendarOutlined} from "@ant-design/icons";
-import {getTimeDetails, getGreet, changeThemeColor} from "../../typescripts/publicFunctions";
+import {SmileOutlined} from "@ant-design/icons";
+import {getTimeDetails, getGreet, changeThemeColor, getThemeColor} from "../../typescripts/publicFunctions";
 
 type propType = {
-    themeColor: string,
+    themeColor: string
 }
 
 type stateType = {
-    backgroundColor: string,
-    fontColor: string,
     greet: string,
 }
 
@@ -23,8 +21,6 @@ class GreetComponent extends React.Component {
     constructor(props: any) {
         super(props);
         this.state = {
-            backgroundColor: "",
-            fontColor: "",
             greet: getGreet(new Date()),
         };
     }
@@ -67,7 +63,7 @@ class GreetComponent extends React.Component {
     render() {
         return (
             <Tooltip title={this.state.greet}>
-                <Button shape="round" icon={<CalendarOutlined/>} size={"large"}
+                <Button shape="round" icon={<SmileOutlined />} size={"large"}
                         id={"greetBtn"}
                         className={"frostedGlass zIndexHigh"}
                         style={{
