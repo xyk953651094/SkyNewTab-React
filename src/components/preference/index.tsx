@@ -12,6 +12,9 @@ type propType = {
     themeColor: string,
     display: "none" | "block",
     imageData: any,
+    getDisplayEffect: any,
+    getDynamicEffect: any,
+    getImageTopics: any,
 }
 
 type stateType = {
@@ -22,6 +25,7 @@ type stateType = {
     displayDrawer: boolean,
     drawerPosition: "right" | "bottom",
     timeDetails: String[],
+    holidayData: any,
 }
 
 interface PreferenceComponent {
@@ -39,7 +43,8 @@ class PreferenceComponent extends React.Component {
             componentFontColor: "",
             displayDrawer: false,
             drawerPosition: "right",
-            timeDetails: [""]
+            timeDetails: [""],
+            holidayData: "",
         };
     }
 
@@ -65,7 +70,7 @@ class PreferenceComponent extends React.Component {
                 backgroundColor: nextProps.themeColor,
                 fontColor: getFontColor(nextProps.themeColor),
                 componentBackgroundColor: nextProps.imageData.color,
-                componentFontColor: getFontColor(nextProps.imageData.color)
+                componentFontColor: getFontColor(nextProps.imageData.color),
             });
         }
     }
@@ -95,20 +100,29 @@ class PreferenceComponent extends React.Component {
 
     // 图片质量
     displayEffectRadioOnChange(event: RadioChangeEvent) {
-        console.log(event.target.value);
+        this.props.getDisplayEffect(event.target.value);
     }
 
     // 动效样式
     dynamicEffectRadioOnChange(event: RadioChangeEvent) {
-        console.log(event.target.value);
+        this.props.getDynamicEffect(event.target.value);
     }
 
     // 图片主题
     imageTopicsCheckboxOnChange(checkedValues: CheckboxValueType[]) {
-        console.log('checked = ', checkedValues);
+        let value = "";
+        for (let i = 0; i < checkedValues.length; i++) {
+            value += checkedValues[i];
+            if (i !== checkedValues.length - 1) {
+                value += ",";
+            }
+        }
+        this.props.getImageTopics(value);
     }
 
     render() {
+
+
         return (
             <>
                 <Tooltip title={"偏好设置"}>
@@ -124,7 +138,7 @@ class PreferenceComponent extends React.Component {
                     />
                 </Tooltip>
                 <Drawer
-                    title="抽屉"
+                    title={this.state.timeDetails[0]}
                     size={"default"}
                     height={500}
                     placement={this.state.drawerPosition}
@@ -141,21 +155,23 @@ class PreferenceComponent extends React.Component {
                 >
                     <Row gutter={[16, 16]}>
                         <Col span={24}>
-                            <Card title={this.state.timeDetails[0]} headStyle={{"fontSize": "16px"}} bodyStyle={{"fontSize": "16px"}} size={"small"} hoverable>
-                                <Paragraph>
-                                    <ul>
-                                        <li>
-                                            <Text>{this.state.timeDetails[1]}</Text>
-                                        </li>
-                                        <li>
-                                            <Text>{this.state.timeDetails[1]}</Text>
-                                        </li>
-                                        <li>
-                                            <Text>{this.state.timeDetails[1]}</Text>
-                                        </li>
-                                    </ul>
-                                </Paragraph>
-                            </Card>
+                            {/*<Card title={"今日 " + this.state.holidayData.data.yearTips + "年 " + this.state.holidayData.data.lunarCalendar}*/}
+                            {/*      headStyle={{"fontSize": "16px"}}*/}
+                            {/*      bodyStyle={{"fontSize": "16px"}}*/}
+                            {/*      size={"small"}*/}
+                            {/*      hoverable*/}
+                            {/*>*/}
+                            {/*    <Paragraph>*/}
+                            {/*        <ul>*/}
+                            {/*            <li>*/}
+                            {/*                <Text>{"宜：" + this.state.holidayData.data.suit.replace(/\./g," · ")}</Text>*/}
+                            {/*            </li>*/}
+                            {/*            <li>*/}
+                            {/*                <Text>{"忌：" + this.state.holidayData.data.avoid.replace(/\./g," · ")}</Text>*/}
+                            {/*            </li>*/}
+                            {/*        </ul>*/}
+                            {/*    </Paragraph>*/}
+                            {/*</Card>*/}
                         </Col>
                         <Col span={24}>
                             <Card title={"【唐】· 张若虚 ·《春江花月夜》"} headStyle={{"fontSize": "16px"}} bodyStyle={{"fontSize": "16px"}} size={"small"} hoverable>
@@ -176,7 +192,7 @@ class PreferenceComponent extends React.Component {
                                         </Radio.Group>
                                     </Form.Item>
                                     <Form.Item name="dynamicEffectRadio" label="动效样式">
-                                        <Radio.Group defaultValue={1} buttonStyle={"solid"}
+                                        <Radio.Group defaultValue={"translate"} buttonStyle={"solid"}
                                                      onChange={this.dynamicEffectRadioOnChange.bind(this)}
                                         >
                                             <Radio value={"close"}>关闭</Radio>
@@ -185,15 +201,30 @@ class PreferenceComponent extends React.Component {
                                         </Radio.Group>
                                     </Form.Item>
                                     <Form.Item name="imageTopicsCheckbox" label="图片主题">
-                                        <Checkbox.Group style={{ width: '100%' }} onChange={this.imageTopicsCheckboxOnChange.bind(this)}>
+                                        <Checkbox.Group defaultValue={["travel"]}
+                                                        onChange={this.imageTopicsCheckboxOnChange.bind(this)}
+                                        >
                                             <Row>
-                                                <Col span={12}><Checkbox value="travel">旅游</Checkbox></Col>
-                                                <Col span={12}><Checkbox value="wallpapers">壁纸</Checkbox></Col>
-                                                <Col span={12}><Checkbox value="textures-patterns">纹理 & 图案</Checkbox></Col>
-                                                <Col span={12}><Checkbox value="nature">自然</Checkbox></Col>
-                                                <Col span={12}><Checkbox value="interiors">精神</Checkbox></Col>
-                                                <Col span={12}><Checkbox value="street-photography">街头摄影</Checkbox></Col>
-                                                <Col span={12}><Checkbox value="arts-culture">艺术 & 文化</Checkbox></Col>
+                                                <Col span={12}><Checkbox name={"travel"}             value="Fzo3zuOHN6w">旅游</Checkbox></Col>
+                                                <Col span={12}><Checkbox name={"wallpapers"}         value="bo8jQKTaE0Y">壁纸</Checkbox></Col>
+                                                <Col span={12}><Checkbox name={"3d-renders"}         value="CDwuwXJAbEw">3D渲染</Checkbox></Col>
+                                                <Col span={12}><Checkbox name={"textures-patterns"}  value="iUIsnVtjB0Y">纹理</Checkbox></Col>
+                                                <Col span={12}><Checkbox name={"experimental"}       value="qPYsDzvJOYc">实验</Checkbox></Col>
+                                                <Col span={12}><Checkbox name={"architecture"}       value="rnSKDHwwYUk">建筑</Checkbox></Col>
+                                                <Col span={12}><Checkbox name={"nature"}             value="6sMVjTLSkeQ">自然</Checkbox></Col>
+                                                <Col span={12}><Checkbox name={"business-work"}      value="aeu6rL-j6ew">商务</Checkbox></Col>
+                                                <Col span={12}><Checkbox name={"fashion"}            value="S4MKLAsBB74">时尚</Checkbox></Col>
+                                                <Col span={12}><Checkbox name={"film"}               value="hmenvQhUmxM">电影</Checkbox></Col>
+                                                <Col span={12}><Checkbox name={"food-drink"}         value="xjPR4hlkBGA">饮食</Checkbox></Col>
+                                                <Col span={12}><Checkbox name={"health"}             value="_hb-dl4Q-4U">健康</Checkbox></Col>
+                                                <Col span={12}><Checkbox name={"people"}             value="towJZFskpGg">人物</Checkbox></Col>
+                                                <Col span={12}><Checkbox name={"interiors"}          value="R_Fyn-Gwtlw">精神</Checkbox></Col>
+                                                <Col span={12}><Checkbox name={"street-photography"} value="xHxYTMHLgOc">街头</Checkbox></Col>
+                                                <Col span={12}><Checkbox name={"animals"}            value="Jpg6Kidl-Hk">动物</Checkbox></Col>
+                                                <Col span={12}><Checkbox name={"spirituality"}       value="_8zFHuhRhyo">灵魂</Checkbox></Col>
+                                                <Col span={12}><Checkbox name={"arts-culture"}       value="bDo48cUhwnY">文化</Checkbox></Col>
+                                                <Col span={12}><Checkbox name={"history"}            value="dijpbw99kQQ">历史</Checkbox></Col>
+                                                <Col span={12}><Checkbox name={"athletics"}          value="Bn-DjrcBrwo">体育</Checkbox></Col>
                                             </Row>
                                         </Checkbox.Group>
                                     </Form.Item>

@@ -35,6 +35,7 @@ export function getTimeDetails(param: Date) {
         showWeek: week,
         showDate: year + "/" + month + "/" + day,
         showDate2: year + "." + month + "." + day,
+        showDate3: year + month + day,
         showTime: hour + ":" + minute,
         showLocaleDate: "农历" + localeDate.split(" ")[0] + "日"
     };
@@ -165,6 +166,10 @@ export function mouseMoveEffect(effectType: string) {
                     } else {                                    // 左下角
                         backgroundImage.style.transform = "scale(1.05) rotateX(" + (-relatedXRatio) + "deg) rotateY(" + (-relatedYRatio) + "deg)";
                     }
+                    break;
+                case "close":
+                    backgroundImage.style.transform = "scale(1.05)";
+                    break;
             }
         }
     });

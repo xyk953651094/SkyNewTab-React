@@ -5,17 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7b6aa851-d91a-4d7e-aff0-98e24f63e226" name="变更" comment="">
-      <change afterPath="$PROJECT_DIR$/src/typescripts/httpRequests.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/author/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/author/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/createTime/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/createTime/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/download/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/download/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/greet/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/greet/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/htmlLink/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/htmlLink/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/preference/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/preference/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/wallpaper/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/wallpaper/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/weather/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/weather/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/typescripts/publicFunctions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/typescripts/publicFunctions.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -165,7 +159,8 @@
       <workItem from="1663312782190" duration="7420000" />
       <workItem from="1663386770177" duration="23497000" />
       <workItem from="1663467978864" duration="2851000" />
-      <workItem from="1663569036350" duration="13928000" />
+      <workItem from="1663569036350" duration="14315000" />
+      <workItem from="1663659618270" duration="13437000" />
     </task>
     <task id="LOCAL-00001" summary="关闭获取天气失败报错">
       <created>1654142997686</created>
@@ -286,7 +281,14 @@
       <option name="project" value="LOCAL" />
       <updated>1663399667008</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="增加图片旋转效果">
+      <created>1663596540780</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1663596540780</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -307,6 +309,7 @@
     <MESSAGE value="优化显示效果" />
     <MESSAGE value="优化代码质量，新增设置抽屉" />
     <MESSAGE value="完善设置抽屉功能" />
-    <option name="LAST_COMMIT_MESSAGE" value="完善设置抽屉功能" />
+    <MESSAGE value="增加图片旋转效果" />
+    <option name="LAST_COMMIT_MESSAGE" value="增加图片旋转效果" />
   </component>
 </project>

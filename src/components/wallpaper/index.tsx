@@ -9,7 +9,9 @@ import image from "antd/lib/image";
 
 type propType = {
     display: "none" | "block",
-    imageData: any
+    imageData: any,
+    displayEffect: "regular" | "full",
+    dynamicEffect: "close" | "translate" | "rotate",
 }
 
 type stateType = {
@@ -35,8 +37,6 @@ class WallpaperComponent extends React.Component {
         };
     }
 
-    componentWillMount() {}
-
     componentDidMount() {
         // @ts-ignore
         let backgroundImage: HTMLElement = document.getElementById("backgroundImage").children[0];
@@ -48,7 +48,7 @@ class WallpaperComponent extends React.Component {
                 fadeIn("#backgroundImage", 3000);
                 backgroundImage.style.transform = "scale(1.05)";
                 backgroundImage.style.transition = "5s";
-                let effectType  = "rotate";
+                let effectType  = "translate";
                 setTimeout(()=>{mouseMoveEffect(effectType)}, 5000);
             }
         }
@@ -56,9 +56,19 @@ class WallpaperComponent extends React.Component {
 
     componentWillReceiveProps(nextProps: any, prevProps: any) {
         if (nextProps !== prevProps) {
-            this.setState({
-                imageLink: nextProps.imageData.urls.regular,
-            });
+            if(nextProps.displayEffect === "regular") {
+                this.setState({
+                    imageLink: nextProps.imageData.urls.regular,
+                });
+            }
+            else if(nextProps.displayEffect === "full") {
+                this.setState({
+                    imageLink: nextProps.imageData.urls.full,
+                });
+            }
+
+            mouseMoveEffect(nextProps.dynamicEffect);
+
 
             // this.setState({
             //     imageLink: this.props.imageData.urls.regular,

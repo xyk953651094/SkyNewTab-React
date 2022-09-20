@@ -14,8 +14,14 @@ import CreatTimeComponent from "./components/createTime";
 
 import {Layout, Row, Col, Space, message} from "antd";
 import {clientId} from "./typescripts/publicConstents";
-import {setColorTheme, deviceModel, changeThemeColor, getThemeColor} from "./typescripts/publicFunctions";
+import {
+    setColorTheme,
+    deviceModel,
+    changeThemeColor,
+    getThemeColor,
+} from "./typescripts/publicFunctions";
 const {Header, Content, Footer} = Layout;
+const $ = require("jquery");
 
 type propType = {}
 
@@ -23,8 +29,12 @@ type stateType = {
     componentDisplay: "none" | "block",
     mobileComponentDisplay: "none" | "block",
     wallpaperComponentDisplay: "none" | "block",
+    themeColor: string,
     imageData: any,
-    themeColor: string
+
+    displayEffect: "regular" | "full",
+    dynamicEffect: "close" | "translate" | "rotate",
+    imageTopics: string,
 }
 
 interface App {
@@ -39,9 +49,31 @@ class App extends React.Component {
             componentDisplay: "none",
             mobileComponentDisplay: "none",
             wallpaperComponentDisplay: "none",
+            themeColor: "",
             imageData: "",
-            themeColor: ""  // 未加载图片前随机显示颜色主题
+
+            displayEffect: "regular",
+            dynamicEffect: "translate",
+            imageTopics: "bo8jQKTaE0Y,6sMVjTLSkeQ,bDo48cUhwnY,xHxYTMHLgOc,iUIsnVtjB0Y,R_Fyn-Gwtlw,Fzo3zuOHN6w",
         }
+    }
+
+    getDisplayEffect(displayEffect: "regular" | "full") {
+        this.setState({
+            displayEffect: displayEffect,
+        })
+    }
+
+    getDynamicEffect(dynamicEffect: "close" | "translate" | "rotate") {
+        this.setState({
+            dynamicEffect: dynamicEffect,
+        })
+    }
+
+    getImageTopics(imageTopics: string) {
+        this.setState({
+            imageTopics: imageTopics
+        })
     }
 
     componentWillMount() {
@@ -50,46 +82,45 @@ class App extends React.Component {
         this.setState({
             themeColor: setColorTheme()    // 未加载图片前随机显示颜色主题
         })
-        let orientation = "landscape";
-        if(device === "iPhone" || device === "Android") {
-            orientation = "portrait";  // 获取竖屏图片
-        }
-        let topics = "bo8jQKTaE0Y,6sMVjTLSkeQ,bDo48cUhwnY,xHxYTMHLgOc,iUIsnVtjB0Y,R_Fyn-Gwtlw,Fzo3zuOHN6w";
 
-        let imageXHR = new XMLHttpRequest();
-        imageXHR.timeout = 5000;
-        imageXHR.open("GET", "https://api.unsplash.com/photos/random?" + "client_id=" + clientId + "&orientation=" + orientation + "&topics=" + topics + "&content_filter=high");
-        imageXHR.onload = function () {
-            if (imageXHR.status === 200) {
-                let imageData = JSON.parse(imageXHR.responseText);
-
-                tempThis.setState({
-                    componentDisplay: "block",
-                    mobileComponentDisplay: "none",
-                    wallpaperComponentDisplay: "block",
-                    imageData: imageData,
-                    themeColor: getThemeColor(imageData.color)
-                }, () => {
-                    // 小屏显示底部按钮
-                    if (device === "iPhone" || device === "Android") {
-                        tempThis.setState({
-                            componentDisplay: "none",
-                            mobileComponentDisplay: "block",
-                        })
-                    }
-                })
+        // 获取背景图片
+        $.ajax({
+            url: "https://api.unsplash.com/photos/random?",
+            headers: {
+                "Authorization": "Client-ID " + clientId,
+            },
+            type: "GET",
+            data: {
+                "client_id": clientId,
+                "orientation": (device === "iPhone" || device === "Android")? "portrait" : "landscape",
+                "topics": this.state.imageTopics,
+                "content_filter": "high",
+            },
+            timeout: 5000,
+            success: (imageData: any) => {
+                    this.setState({
+                        componentDisplay: "block",
+                        mobileComponentDisplay: "none",
+                        wallpaperComponentDisplay: "block",
+                        themeColor: getThemeColor(imageData.color),
+                        imageData: imageData,
+                    }, () => {
+                        // 小屏显示底部按钮
+                        if (device === "iPhone" || device === "Android") {
+                            this.setState({
+                                componentDisplay: "none",
+                                mobileComponentDisplay: "block",
+                            })
+                        }
+                    })
 
                 // 设置body背景颜色
                 changeThemeColor("body", imageData.color);
-            }
-            else {
+            },
+            error: function () {
                 message.error("获取图片失败");
             }
-        }
-        imageXHR.onerror = function () {
-            message.error("获取图片失败");
-        }
-        imageXHR.send();
+        });
     }
 
     render() {
@@ -101,6 +132,7 @@ class App extends React.Component {
                             <Space size={"small"}>
                                 <GreetComponent
                                     themeColor={this.state.themeColor}
+                                    // getHolidayData={this.getHolidayData.bind(this)}
                                 />
                                 <WeatherComponent
                                     themeColor={this.state.themeColor}
@@ -123,6 +155,9 @@ class App extends React.Component {
                                     themeColor={this.state.themeColor}
                                     display={this.state.componentDisplay}
                                     imageData={this.state.imageData}
+                                    getDisplayEffect={this.getDisplayEffect.bind(this)}
+                                    getDynamicEffect={this.getDynamicEffect.bind(this)}
+                                    getImageTopics={this.getImageTopics.bind(this)}
                                 />
                             </Space>
                         </Col>
@@ -132,6 +167,8 @@ class App extends React.Component {
                     <WallpaperComponent
                         display={this.state.wallpaperComponentDisplay}
                         imageData={this.state.imageData}
+                        displayEffect={this.state.displayEffect}
+                        dynamicEffect={this.state.dynamicEffect}
                     />
                     <SearchComponent />
                 </Content>
@@ -143,6 +180,9 @@ class App extends React.Component {
                                     themeColor={this.state.themeColor}
                                     display={this.state.mobileComponentDisplay}
                                     imageData={this.state.imageData}
+                                    getDisplayEffect={this.getDisplayEffect.bind(this)}
+                                    getDynamicEffect={this.getDynamicEffect.bind(this)}
+                                    getImageTopics={this.getImageTopics.bind(this)}
                                 />
                                 <DownloadComponent
                                     themeColor={this.state.themeColor}
