@@ -54,7 +54,7 @@ class App extends React.Component {
 
             displayEffect: "regular",
             dynamicEffect: "translate",
-            imageTopics: "bo8jQKTaE0Y,6sMVjTLSkeQ,bDo48cUhwnY,xHxYTMHLgOc,iUIsnVtjB0Y,R_Fyn-Gwtlw,Fzo3zuOHN6w",
+            imageTopics: "Fzo3zuOHN6w",
         }
     }
 
@@ -77,7 +77,6 @@ class App extends React.Component {
     }
 
     componentWillMount() {
-        let tempThis = this;
         let device = deviceModel();
         this.setState({
             themeColor: setColorTheme()    // 未加载图片前随机显示颜色主题

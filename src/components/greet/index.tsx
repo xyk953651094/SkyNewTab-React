@@ -1,6 +1,6 @@
 import React from "react";
 import "../../App.css";
-import {Tooltip, Button, message} from "antd";
+import {Popover, Button} from "antd";
 import {SmileOutlined} from "@ant-design/icons";
 import {getTimeDetails, getGreet, changeThemeColor, getThemeColor} from "../../typescripts/publicFunctions";
 const $ = require("jquery");
@@ -11,6 +11,9 @@ type propType = {
 
 type stateType = {
     greet: string,
+    lunarCalendar: string,
+    suit: string,
+    avoid: string,
 }
 
 interface GreetComponent {
@@ -23,6 +26,9 @@ class GreetComponent extends React.Component {
         super(props);
         this.state = {
             greet: getGreet(new Date()),
+            lunarCalendar: "",
+            suit: "",
+            avoid: "",
         };
     }
 
@@ -36,14 +42,18 @@ class GreetComponent extends React.Component {
             type: "GET",
             data: holidayParameters,
             timeout: 5000,
-            success: (holidayData: any) => {
-                if (holidayData.code === 1) {
-                    let holidayContent = holidayData.data.solarTerms;
-                    if (holidayData.data.solarTerms.indexOf("后") === -1) {
+            success: (resultData: any) => {
+                if (resultData.code === 1) {
+                    let holidayContent = resultData.data.solarTerms;
+                    if (resultData.data.solarTerms.indexOf("后") === -1) {
                         holidayContent = "今日" + holidayContent;
                     }
                     this.setState({
                         greet: this.state.greet + " ｜ " + holidayContent,
+                        lunarCalendar: resultData.data.yearTips + resultData.data.chineseZodiac + "年｜" +
+                            resultData.data.lunarCalendar,
+                        suit: resultData.data.suit,
+                        avoid: resultData.data.avoid,
                     });
                 }
             },
@@ -58,8 +68,15 @@ class GreetComponent extends React.Component {
     }
 
     render() {
+        const popoverContent = (
+            <div>
+                <p>{"宜：" + this.state.suit}</p>
+                <p>{"忌：" + this.state.avoid}</p>
+            </div>
+        );
+        
         return (
-            <Tooltip title={this.state.greet}>
+            <Popover title={this.state.lunarCalendar} content={popoverContent} placement="topRight">
                 <Button shape="round" icon={<SmileOutlined />} size={"large"}
                         id={"greetBtn"}
                         className={"frostedGlass zIndexHigh"}
@@ -69,7 +86,7 @@ class GreetComponent extends React.Component {
                 >
                     {this.state.greet}
                 </Button>
-            </Tooltip>
+            </Popover>
         );
     }
 }

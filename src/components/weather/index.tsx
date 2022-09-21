@@ -1,7 +1,8 @@
 import React from "react";
 import "../../App.css";
-import {Button, Tooltip} from "antd";
+import {Popover, Button} from "antd";
 import {changeThemeColor, getThemeColor} from "../../typescripts/publicFunctions";
+const $ = require("jquery");
 
 type propType = {
     themeColor: string
@@ -10,7 +11,11 @@ type propType = {
 type stateType = {
     display: "none" | "block",
     weatherInfo: string,
-    weatherDetail: string
+    region: string;
+    pm25: string;
+    rainfall: string;
+    visibility: string;
+    windInfo: string;
 }
 
 interface WeatherComponent {
@@ -24,40 +29,40 @@ class WeatherComponent extends React.Component {
         this.state = {
             display: "none",
             weatherInfo: "暂无天气信息",
-            weatherDetail: "暂无天气信息"
+            region: "",
+            pm25: "",
+            rainfall: "",
+            visibility: "",
+            windInfo: "",
         };
     }
 
     componentWillMount() {
-        let tempThis = this;
-        let weatherXHR  =new XMLHttpRequest();
-        weatherXHR.open("GET","https://v2.jinrishici.com/info");
-        weatherXHR.onload = function(){
-            if(weatherXHR.status === 200){
-                let result = JSON.parse(weatherXHR.responseText);
-
-                if (result.status === 'success') {
-                    tempThis.setState({
+        $.ajax({
+            url: "https://v2.jinrishici.com/info",
+            type: "GET",
+            timeout: 5000,
+            success: (resultData: any) => {
+                if (resultData.status === 'success') {
+                    this.setState({
                         display: "block",
-                        weatherInfo: result.data.weatherData.weather  + " ｜ "
-                            + result.data.weatherData.temperature + "°C",
-                        weatherDetail:
-                            result.data.region.split("|")[1] + " ｜ " +
-                            result.data.weatherData.weather  + " ｜ " +
-                            result.data.weatherData.windDirection  + " ｜ " +
-                            result.data.weatherData.temperature + "°C",
+                        weatherInfo: resultData.data.weatherData.weather  + " ｜ "
+                            + resultData.data.weatherData.temperature + "°C",
+                        region:  resultData.data.region.replace("|", "｜"),
+                        pm25:  resultData.data.weatherData.pm25,
+                        rainfall:  resultData.data.weatherData.rainfall + "%",
+                        visibility:  resultData.data.weatherData.visibility,
+                        windInfo:  resultData.data.weatherData.windDirection + resultData.data.weatherData.windPower + "级",
                     });
                 }
                 else {
-                    tempThis.setState({
+                    this.setState({
                         display: "none",
                     });
                 }
-            }
-            else{}
-        }
-        weatherXHR.onerror=function(){}
-        weatherXHR.send();
+            },
+            error: function () {}
+        });
     }
 
     componentWillReceiveProps(nextProps: any, prevProps: any) {
@@ -67,8 +72,17 @@ class WeatherComponent extends React.Component {
     }
 
     render(){
+        const popoverContent = (
+            <div>
+                <p>{"空气：" + this.state.pm25}</p>
+                <p>{"降雨：" + this.state.rainfall}</p>
+                <p>{"视距：" + this.state.visibility}</p>
+                <p>{"风况：" + this.state.windInfo}</p>
+            </div>
+        );
+
         return (
-            <Tooltip title={this.state.weatherDetail}>
+            <Popover title={this.state.region} content={popoverContent}>
                 <Button shape="round" size={"large"}
                         id={"weatherBtn"}
                         className={"frostedGlass zIndexHigh"}
@@ -79,7 +93,7 @@ class WeatherComponent extends React.Component {
                 >
                     {this.state.weatherInfo}
                 </Button>
-            </Tooltip>
+            </Popover>
         );
     }
 }

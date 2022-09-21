@@ -39,7 +39,7 @@ class CreatTimeComponent extends React.Component {
 
     render() {
         return (
-            <Tooltip title={"拍摄时间：" + this.state.createTime}>
+            <Tooltip title={"拍摄时间：" + this.state.createTime}  placement="bottomRight">
                 <Button shape="round" icon={<CalendarOutlined />} size={"large"}
                         id={"createTimeBtn"}
                         className={"frostedGlass zIndexHigh"}

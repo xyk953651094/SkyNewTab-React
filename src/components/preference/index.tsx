@@ -3,7 +3,7 @@ import "../../App.css";
 import {Button, Tooltip, Drawer, Card, Typography, Form, Row, Col, Radio, Checkbox} from "antd";
 import type { RadioChangeEvent } from 'antd';
 import type { CheckboxValueType } from 'antd/es/checkbox/Group';
-import {MoreOutlined} from "@ant-design/icons";
+import {MoreOutlined, ReadOutlined, SettingOutlined} from "@ant-design/icons";
 import {getTimeDetails, changeThemeColor, getFontColor, deviceModel} from "../../typescripts/publicFunctions";
 const $ = require("jquery");
 const {Title, Paragraph, Text} = Typography;
@@ -76,9 +76,11 @@ class PreferenceComponent extends React.Component {
     }
 
     componentDidUpdate(prevProps: Readonly<{}>, prevState: Readonly<{}>, snapshot?: any) {
-        $(".ant-drawer-title").css("color", this.state.fontColor);               // 抽屉 header 样式
-        $(".ant-card-head").css("backgroundColor", this.state.backgroundColor);  // 抽屉 body 样式
+        $(".ant-drawer-title").css("color", this.state.fontColor);
+        $(".ant-card").css("border", "1px solid " + this.state.fontColor);
+        $(".ant-card-head").css({"backgroundColor": this.state.backgroundColor, "borderBottom": "2px solid " + this.state.fontColor});
         $(".ant-card-head-title").css("color", this.state.fontColor);
+        $(".ant-card-extra").css("color", this.state.fontColor);
         $(".ant-card-body").css("backgroundColor", this.state.backgroundColor);
         $(".ant-typography").css("color", this.state.fontColor);
         $(".ant-form-item-label > label").css({"color": this.state.fontColor, "fontSize": "16px"});
@@ -125,7 +127,7 @@ class PreferenceComponent extends React.Component {
 
         return (
             <>
-                <Tooltip title={"偏好设置"}>
+                <Tooltip title={"偏好设置"} placement="topRight">
                     <Button shape="round" icon={<MoreOutlined />} size={"large"}
                             onClick={this.drawerOnShow.bind(this)}
                             id={"preferenceBtn"}
@@ -155,34 +157,10 @@ class PreferenceComponent extends React.Component {
                 >
                     <Row gutter={[16, 16]}>
                         <Col span={24}>
-                            {/*<Card title={"今日 " + this.state.holidayData.data.yearTips + "年 " + this.state.holidayData.data.lunarCalendar}*/}
-                            {/*      headStyle={{"fontSize": "16px"}}*/}
-                            {/*      bodyStyle={{"fontSize": "16px"}}*/}
-                            {/*      size={"small"}*/}
-                            {/*      hoverable*/}
-                            {/*>*/}
-                            {/*    <Paragraph>*/}
-                            {/*        <ul>*/}
-                            {/*            <li>*/}
-                            {/*                <Text>{"宜：" + this.state.holidayData.data.suit.replace(/\./g," · ")}</Text>*/}
-                            {/*            </li>*/}
-                            {/*            <li>*/}
-                            {/*                <Text>{"忌：" + this.state.holidayData.data.avoid.replace(/\./g," · ")}</Text>*/}
-                            {/*            </li>*/}
-                            {/*        </ul>*/}
-                            {/*    </Paragraph>*/}
-                            {/*</Card>*/}
-                        </Col>
-                        <Col span={24}>
-                            <Card title={"【唐】· 张若虚 ·《春江花月夜》"} headStyle={{"fontSize": "16px"}} bodyStyle={{"fontSize": "16px"}} size={"small"} hoverable>
-                                <Paragraph>
-                                    「 江畔何人初见月，江月何年初照人，江畔何人初见月，江月何年初照人，江畔何人初见月，江月何年初照人 」
-                                </Paragraph>
-                            </Card>
-                        </Col>
-                        <Col span={24}>
-                            <Card title={"偏好设置"} headStyle={{"fontSize": "16px"}} bodyStyle={{"fontSize": "16px"}} size={"small"} hoverable>
-                                <Form colon={false}>
+                            <Card title={"偏好设置"} headStyle={{"fontSize": "16px"}} bodyStyle={{"fontSize": "16px"}} size={"small"} extra={<SettingOutlined />}>
+                                <Form layout={"vertical"} colon={false}
+                                    initialValues={{"displayEffectRadio": "regular", "dynamicEffectRadio": "translate", "imageTopicsCheckbox": "Fzo3zuOHN6w"}}
+                                >
                                     <Form.Item name="displayEffectRadio" label="图片质量">
                                         <Radio.Group defaultValue={"regular"} buttonStyle={"solid"}
                                                      onChange={this.displayEffectRadioOnChange.bind(this)}
@@ -201,7 +179,7 @@ class PreferenceComponent extends React.Component {
                                         </Radio.Group>
                                     </Form.Item>
                                     <Form.Item name="imageTopicsCheckbox" label="图片主题">
-                                        <Checkbox.Group defaultValue={["travel"]}
+                                        <Checkbox.Group defaultValue={["Fzo3zuOHN6w"]}
                                                         onChange={this.imageTopicsCheckboxOnChange.bind(this)}
                                         >
                                             <Row>

@@ -7,9 +7,11 @@
     <list default="true" id="7b6aa851-d91a-4d7e-aff0-98e24f63e226" name="变更" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/author/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/author/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/createTime/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/createTime/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/greet/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/greet/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/preference/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/preference/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/wallpaper/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/wallpaper/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/weather/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/weather/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/typescripts/publicFunctions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/typescripts/publicFunctions.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -160,7 +162,8 @@
       <workItem from="1663386770177" duration="23497000" />
       <workItem from="1663467978864" duration="2851000" />
       <workItem from="1663569036350" duration="14315000" />
-      <workItem from="1663659618270" duration="13437000" />
+      <workItem from="1663659618270" duration="17648000" />
+      <workItem from="1663745524555" duration="6022000" />
     </task>
     <task id="LOCAL-00001" summary="关闭获取天气失败报错">
       <created>1654142997686</created>
@@ -288,7 +291,14 @@
       <option name="project" value="LOCAL" />
       <updated>1663596540780</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="优化抽屉显示效果">
+      <created>1663679536435</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1663679536435</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -310,6 +320,7 @@
     <MESSAGE value="优化代码质量，新增设置抽屉" />
     <MESSAGE value="完善设置抽屉功能" />
     <MESSAGE value="增加图片旋转效果" />
-    <option name="LAST_COMMIT_MESSAGE" value="增加图片旋转效果" />
+    <MESSAGE value="优化抽屉显示效果" />
+    <option name="LAST_COMMIT_MESSAGE" value="优化抽屉显示效果" />
   </component>
 </project>

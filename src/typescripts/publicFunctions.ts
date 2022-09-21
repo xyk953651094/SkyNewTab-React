@@ -20,13 +20,13 @@ export function getTimeDetails(param: Date) {
     minute = minute < 10? ('0' + minute) : minute.toString();
     second = second < 10? ('0' + second) : second.toString();
     switch (week) {
+        case 0: week = "周日"; break;
         case 1: week = "周一"; break;
         case 2: week = "周二"; break;
         case 3: week = "周三"; break;
         case 4: week = "周四"; break;
         case 5: week = "周五"; break;
         case 6: week = "周六"; break;
-        case 7: week = "周日"; break;
         default: week = "";
     }
 
@@ -174,41 +174,6 @@ export function mouseMoveEffect(effectType: string) {
         }
     });
 }
-
-// PC端鼠标旋转效果
-// export function rotateEffect() {
-//     // @ts-ignore
-//     let backgroundImageDiv: HTMLElement = document.getElementById('backgroundImage');
-//     backgroundImageDiv.style.perspective = "500px";
-//     // @ts-ignore
-//     let backgroundImage: HTMLElement = backgroundImageDiv.children[0];
-//
-//     window.addEventListener('mousemove',function(e){
-//         let mouseX = e.screenX;
-//         let mouseY = e.screenY;
-//         let screenWidth = document.body.clientWidth;
-//         let screenHeight = document.body.clientHeight;
-//         let screenMidWidth = screenWidth / 2;
-//         let screenMidHeight = screenHeight / 2;
-//         let relatedX = mouseX - screenMidWidth;
-//         let relatedY = mouseY - screenMidHeight;
-//         let relatedXRatio = Math.abs(relatedX / screenMidWidth / 2).toFixed(2);   // 大于0则在屏幕右边，小于0则在屏幕左边
-//         let relatedYRatio = Math.abs(relatedY / screenMidHeight / 2).toFixed(2);  // 大于0则在屏幕下边，小于0则在屏幕上边
-//
-//         backgroundImage.style.transition = "0.1s";
-//         if (backgroundImage instanceof HTMLElement) {
-//             if (relatedX < 0 && relatedY < 0) {          // 左上角
-//                 backgroundImage.style.transform = "scale(1.05) rotateX(" + relatedXRatio + "deg) rotateY(" + (-relatedYRatio) + "deg)";
-//             } else if (relatedX > 0 && relatedY < 0) {  // 右上角
-//                 backgroundImage.style.transform = "scale(1.05) rotateX(" + relatedXRatio + "deg) rotateY(" + relatedYRatio + "deg)";
-//             } else if (relatedX > 0 && relatedY > 0) {  // 右下角
-//                 backgroundImage.style.transform = "scale(1.05) rotateX(" + (-relatedXRatio) + "deg) rotateY(" + relatedYRatio + "deg)";
-//             } else {                                    // 左下角
-//                 backgroundImage.style.transform = "scale(1.05) rotateX(" + (-relatedXRatio) + "deg) rotateY(" + (-relatedYRatio) + "deg)";
-//             }
-//         }
-//     });
-// }
 
 // 判断设备型号
 export function deviceModel() {
