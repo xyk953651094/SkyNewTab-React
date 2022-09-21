@@ -1,8 +1,8 @@
 import React from "react";
 import "../../App.css";
 import {Button, Tooltip, Drawer, Card, Typography, Form, Row, Col, Radio, Checkbox} from "antd";
-import type { RadioChangeEvent } from 'antd';
-import type { CheckboxValueType } from 'antd/es/checkbox/Group';
+import type { RadioChangeEvent } from "antd";
+import type { CheckboxValueType } from "antd/es/checkbox/Group";
 import {MoreOutlined, ReadOutlined, SettingOutlined} from "@ant-design/icons";
 import {getTimeDetails, changeThemeColor, getFontColor, deviceModel} from "../../typescripts/publicFunctions";
 const $ = require("jquery");
