@@ -36,6 +36,7 @@ export function getTimeDetails(param: Date) {
         showDate: year + "/" + month + "/" + day,
         showDate2: year + "." + month + "." + day,
         showDate3: year + month + day,
+        showDate4: year + "年" + month + "月" + day + "日",
         showTime: hour + ":" + minute,
         showLocaleDate: "农历" + localeDate.split(" ")[0] + "日"
     };
@@ -139,8 +140,8 @@ export function mouseMoveEffect(effectType: string) {
         let screenMidHeight = screenHeight / 2;
         let relatedX = mouseX - screenMidWidth;
         let relatedY = mouseY - screenMidHeight;
-        let relatedXRatio = Math.abs(relatedX / screenMidWidth / 3).toFixed(2);   // 大于0则在屏幕右边，小于0则在屏幕左边
-        let relatedYRatio = Math.abs(relatedY / screenMidHeight / 3).toFixed(2);  // 大于0则在屏幕下边，小于0则在屏幕上边
+        let relatedXRatio = Math.abs(relatedX / screenMidWidth / 4).toFixed(2);   // 大于0则在屏幕右边，小于0则在屏幕左边
+        let relatedYRatio = Math.abs(relatedY / screenMidHeight / 4).toFixed(2);  // 大于0则在屏幕下边，小于0则在屏幕上边
 
         backgroundImage.style.transition = "0.1s";
         if (backgroundImage instanceof HTMLElement) {

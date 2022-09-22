@@ -79,24 +79,23 @@ class App extends React.Component {
     componentWillMount() {
         let device = deviceModel();
         this.setState({
-            themeColor: setColorTheme()    // 未加载图片前随机显示颜色主题
-        })
-
-        // 获取背景图片
-        $.ajax({
-            url: "https://api.unsplash.com/photos/random?",
-            headers: {
-                "Authorization": "Client-ID " + clientId,
-            },
-            type: "GET",
-            data: {
-                "client_id": clientId,
-                "orientation": (device === "iPhone" || device === "Android")? "portrait" : "landscape",
-                "topics": this.state.imageTopics,
-                "content_filter": "high",
-            },
-            timeout: 5000,
-            success: (imageData: any) => {
+            themeColor: setColorTheme(),  // 未加载图片前随机显示颜色主题
+        }, () => {
+            // 获取背景图片
+            $.ajax({
+                url: "https://api.unsplash.com/photos/random?",
+                headers: {
+                    "Authorization": "Client-ID " + clientId,
+                },
+                type: "GET",
+                data: {
+                    "client_id": clientId,
+                    "orientation": (device === "iPhone" || device === "Android")? "portrait" : "landscape",
+                    "topics": this.state.imageTopics,
+                    "content_filter": "high",
+                },
+                timeout: 10000,
+                success: (imageData: any) => {
                     this.setState({
                         componentDisplay: "block",
                         mobileComponentDisplay: "none",
@@ -113,12 +112,13 @@ class App extends React.Component {
                         }
                     })
 
-                // 设置body背景颜色
-                changeThemeColor("body", imageData.color);
-            },
-            error: function () {
-                message.error("获取图片失败");
-            }
+                    // 设置body背景颜色
+                    changeThemeColor("body", imageData.color);
+                },
+                error: function () {
+                    message.error("获取图片失败");
+                }
+            });
         });
     }
 
@@ -131,7 +131,6 @@ class App extends React.Component {
                             <Space size={"small"}>
                                 <GreetComponent
                                     themeColor={this.state.themeColor}
-                                    // getHolidayData={this.getHolidayData.bind(this)}
                                 />
                                 <WeatherComponent
                                     themeColor={this.state.themeColor}

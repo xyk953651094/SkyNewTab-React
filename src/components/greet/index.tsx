@@ -2,7 +2,7 @@ import React from "react";
 import "../../App.css";
 import {Popover, Button} from "antd";
 import {SmileOutlined} from "@ant-design/icons";
-import {getTimeDetails, getGreet, changeThemeColor, getThemeColor} from "../../typescripts/publicFunctions";
+import {getTimeDetails, getGreet, changeThemeColor} from "../../typescripts/publicFunctions";
 const $ = require("jquery");
 
 type propType = {
@@ -11,7 +11,7 @@ type propType = {
 
 type stateType = {
     greet: string,
-    lunarCalendar: string,
+    calendar: string,
     suit: string,
     avoid: string,
 }
@@ -26,7 +26,7 @@ class GreetComponent extends React.Component {
         super(props);
         this.state = {
             greet: getGreet(new Date()),
-            lunarCalendar: "",
+            calendar: "",
             suit: "",
             avoid: "",
         };
@@ -48,12 +48,14 @@ class GreetComponent extends React.Component {
                     if (resultData.data.solarTerms.indexOf("后") === -1) {
                         holidayContent = "今日" + holidayContent;
                     }
+                    let temp = getTimeDetails(new Date());
                     this.setState({
                         greet: this.state.greet + " ｜ " + holidayContent,
-                        lunarCalendar: resultData.data.yearTips + resultData.data.chineseZodiac + "年｜" +
+                        calendar: temp.showDate4 + " " + temp.showWeek + "｜" +
+                            resultData.data.yearTips + resultData.data.chineseZodiac + "年｜" +
                             resultData.data.lunarCalendar,
-                        suit: resultData.data.suit,
-                        avoid: resultData.data.avoid,
+                        suit: resultData.data.suit.replace(/\./g, "·"),
+                        avoid: resultData.data.avoid.replace(/\./g, "·"),
                     });
                 }
             },
@@ -76,7 +78,7 @@ class GreetComponent extends React.Component {
         );
         
         return (
-            <Popover title={this.state.lunarCalendar} content={popoverContent} placement="topRight">
+            <Popover title={this.state.calendar} content={popoverContent} placement="topRight">
                 <Button shape="round" icon={<SmileOutlined />} size={"large"}
                         id={"greetBtn"}
                         className={"frostedGlass zIndexHigh"}

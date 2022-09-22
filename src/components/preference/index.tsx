@@ -24,7 +24,6 @@ type stateType = {
     componentFontColor: string,
     displayDrawer: boolean,
     drawerPosition: "right" | "bottom",
-    timeDetails: String[],
     holidayData: any,
 }
 
@@ -43,17 +42,11 @@ class PreferenceComponent extends React.Component {
             componentFontColor: "",
             displayDrawer: false,
             drawerPosition: "right",
-            timeDetails: [""],
             holidayData: "",
         };
     }
 
     componentDidMount() {
-        let timeDetails = getTimeDetails(new Date());
-        this.setState({
-            timeDetails: [timeDetails.showDate2 + " " + timeDetails.showWeek, timeDetails.showLocaleDate]
-        })
-
         let device = deviceModel();
         if(device === "iPhone" || device === "Android") {
             this.setState({
@@ -140,7 +133,7 @@ class PreferenceComponent extends React.Component {
                     />
                 </Tooltip>
                 <Drawer
-                    title={this.state.timeDetails[0]}
+                    title={"菜单栏"}
                     size={"default"}
                     height={500}
                     placement={this.state.drawerPosition}
