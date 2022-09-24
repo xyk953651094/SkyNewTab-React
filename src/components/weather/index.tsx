@@ -43,7 +43,7 @@ class WeatherComponent extends React.Component {
             type: "GET",
             timeout: 5000,
             success: (resultData: any) => {
-                if (resultData.status === "success") {
+                if (resultData.status === "success" && resultData.data.weatherData !== null) {
                     this.setState({
                         display: "block",
                         weatherInfo: resultData.data.weatherData.weather  + " ｜ "

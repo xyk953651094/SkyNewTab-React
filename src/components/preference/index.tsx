@@ -3,8 +3,8 @@ import "../../App.css";
 import {Button, Tooltip, Drawer, Card, Typography, Form, Row, Col, Radio, Checkbox} from "antd";
 import type { RadioChangeEvent } from "antd";
 import type { CheckboxValueType } from "antd/es/checkbox/Group";
-import {MoreOutlined, ReadOutlined, SettingOutlined} from "@ant-design/icons";
-import {getTimeDetails, changeThemeColor, getFontColor, deviceModel} from "../../typescripts/publicFunctions";
+import {MoreOutlined, SettingOutlined, AppstoreOutlined} from "@ant-design/icons";
+import {changeThemeColor, getFontColor, deviceModel} from "../../typescripts/publicFunctions";
 const $ = require("jquery");
 const {Title, Paragraph, Text} = Typography;
 
@@ -143,7 +143,7 @@ class PreferenceComponent extends React.Component {
                     footer={
                         <Row align={"middle"}>
                             <Col span={12}>
-                                <Text>版本号：V1.0.2</Text>
+                                <Text>Sky 新标签页 Pro V1.0.2</Text>
                             </Col>
                         </Row>
                     }
@@ -152,23 +152,25 @@ class PreferenceComponent extends React.Component {
                         <Col span={24}>
                             <Card title={"偏好设置"} headStyle={{"fontSize": "16px"}} bodyStyle={{"fontSize": "16px"}} size={"small"} extra={<SettingOutlined />}>
                                 <Form layout={"vertical"} colon={false}
-                                    initialValues={{"displayEffectRadio": "regular", "dynamicEffectRadio": "translate", "imageTopicsCheckbox": "Fzo3zuOHN6w"}}
+                                    initialValues={{"displayEffectRadio": "regular", "dynamicEffectRadio": "all", "imageTopicsCheckbox": "Fzo3zuOHN6w"}}
                                 >
                                     <Form.Item name="displayEffectRadio" label="图片质量">
                                         <Radio.Group defaultValue={"regular"} buttonStyle={"solid"}
                                                      onChange={this.displayEffectRadioOnChange.bind(this)}
                                         >
                                             <Radio value={"regular"}>标准</Radio>
-                                            <Radio value={"full"}>最高</Radio>
+                                            <Radio value={"full"}>较高</Radio>
+                                            <Radio value={"raw"}>最高</Radio>
                                         </Radio.Group>
                                     </Form.Item>
                                     <Form.Item name="dynamicEffectRadio" label="动效样式">
-                                        <Radio.Group defaultValue={"translate"} buttonStyle={"solid"}
+                                        <Radio.Group defaultValue={"all"} buttonStyle={"solid"}
                                                      onChange={this.dynamicEffectRadioOnChange.bind(this)}
                                         >
                                             <Radio value={"close"}>关闭</Radio>
                                             <Radio value={"translate"}>平移</Radio>
                                             <Radio value={"rotate"}>旋转</Radio>
+                                            <Radio value={"all"}>全部</Radio>
                                         </Radio.Group>
                                     </Form.Item>
                                     <Form.Item name="imageTopicsCheckbox" label="图片主题">
@@ -200,6 +202,13 @@ class PreferenceComponent extends React.Component {
                                         </Checkbox.Group>
                                     </Form.Item>
                                 </Form>
+                            </Card>
+                        </Col>
+                        <Col span={24}>
+                            <Card title="其它作品" headStyle={{"fontSize": "16px"}} bodyStyle={{"fontSize": "16px"}} size={"small"} extra={<AppstoreOutlined />}>
+                                <p>Card content</p>
+                                <p>Card content</p>
+                                <p>Card content</p>
                             </Card>
                         </Col>
                     </Row>

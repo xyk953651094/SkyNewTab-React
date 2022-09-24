@@ -128,9 +128,6 @@ export function mouseMoveEffect(effectType: string) {
     // @ts-ignore
     let backgroundImage: HTMLElement = backgroundImageDiv.children[0];
 
-    // // @ts-ignore
-    // let backgroundImage: any = document.getElementById("backgroundImage").children[0];
-
     window.addEventListener("mousemove",function(e){
         let mouseX = e.screenX;
         let mouseY = e.screenY;
@@ -138,39 +135,38 @@ export function mouseMoveEffect(effectType: string) {
         let screenHeight = document.body.clientHeight;
         let screenMidWidth = screenWidth / 2;
         let screenMidHeight = screenHeight / 2;
-        let relatedX = mouseX - screenMidWidth;
-        let relatedY = mouseY - screenMidHeight;
-        let relatedXRatio = Math.abs(relatedX / screenMidWidth / 4).toFixed(2);   // 大于0则在屏幕右边，小于0则在屏幕左边
-        let relatedYRatio = Math.abs(relatedY / screenMidHeight / 4).toFixed(2);  // 大于0则在屏幕下边，小于0则在屏幕上边
+        let relatedX = mouseX - screenMidWidth;   // 大于0则在屏幕右边，小于0则在屏幕左边
+        let relatedY = mouseY - screenMidHeight;  // 大于0则在屏幕下边，小于0则在屏幕上边
+        let relatedXRatio = relatedX / screenMidWidth;
+        let relatedYRatio = relatedY / screenMidHeight;
 
-        backgroundImage.style.transition = "0.1s";
+        backgroundImage.style.transition = "0.3s";
         if (backgroundImage instanceof HTMLElement) {
             switch (effectType) {
-                case "translate":
-                    if (relatedX < 0 && relatedY < 0) {         // 左上角
-                        backgroundImage.style.transform = "scale(1.05) translate(" + relatedXRatio + "%, " + relatedYRatio + "%)";
-                    } else if (relatedX > 0 && relatedY < 0) {  // 右上角
-                        backgroundImage.style.transform = "scale(1.05) translate(" + (-relatedXRatio) + "%, " + (-relatedYRatio) + "%)";
-                    } else if (relatedX > 0 && relatedY > 0) {  // 右下角
-                        backgroundImage.style.transform = "scale(1.05) translate(" + (-relatedXRatio) + "%, " + (-relatedYRatio) + "%)";
-                    } else if (relatedX < 0 && relatedY > 0) {  // 左下角
-                        backgroundImage.style.transform = "scale(1.05) translate(" + relatedXRatio + "%, " + (-relatedYRatio) + "%)";
-                    }
+                case "translate": {
+                    let translateX = (-relatedXRatio / 4).toFixed(2);  // 调整精度
+                    let translateY = (-relatedYRatio / 4).toFixed(2);  // 调整精度
+                    backgroundImage.style.transform = "scale(1.05, 1.05) translate(" + translateX + "%, " + translateY + "%)";
                     break;
-                case "rotate":
-                    if (relatedX < 0 && relatedY < 0) {          // 左上角
-                        backgroundImage.style.transform = "scale(1.05) rotateX(" + relatedXRatio + "deg) rotateY(" + (-relatedYRatio) + "deg)";
-                    } else if (relatedX > 0 && relatedY < 0) {  // 右上角
-                        backgroundImage.style.transform = "scale(1.05) rotateX(" + relatedXRatio + "deg) rotateY(" + relatedYRatio + "deg)";
-                    } else if (relatedX > 0 && relatedY > 0) {  // 右下角
-                        backgroundImage.style.transform = "scale(1.05) rotateX(" + (-relatedXRatio) + "deg) rotateY(" + relatedYRatio + "deg)";
-                    } else {                                    // 左下角
-                        backgroundImage.style.transform = "scale(1.05) rotateX(" + (-relatedXRatio) + "deg) rotateY(" + (-relatedYRatio) + "deg)";
-                    }
+                }
+                case "rotate": {
+                    let rotateX = (relatedXRatio / 4).toFixed(2);      // 调整精度
+                    let rotateY = (-relatedYRatio / 4).toFixed(2);     // 调整精度
+                    backgroundImage.style.transform = "scale(1.05, 1.05) rotateX(" + rotateY + "deg) rotateY(" + rotateX + "deg)";
                     break;
-                case "close":
+                }
+                case "all": {
+                    let rotateX = (relatedXRatio / 3).toFixed(2);      // 调整精度
+                    let rotateY = (-relatedYRatio / 3).toFixed(2);     // 调整精度
+                    let translateX = (-relatedXRatio / 3).toFixed(2);  // 调整精度
+                    let translateY = (-relatedYRatio / 3).toFixed(2);  // 调整精度
+                    backgroundImage.style.transform = "scale(1.05, 1.05) rotateX(" + rotateY + "deg) rotateY(" + rotateX + "deg) translate(" + translateX + "%, " + translateY + "%)";
+                    break;
+                }
+                case "close": {
                     backgroundImage.style.transform = "scale(1.05)";
                     break;
+                }
             }
         }
     });

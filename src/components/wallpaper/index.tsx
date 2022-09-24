@@ -10,8 +10,8 @@ import image from "antd/lib/image";
 type propType = {
     display: "none" | "block",
     imageData: any,
-    displayEffect: "regular" | "full",
-    dynamicEffect: "close" | "translate" | "rotate",
+    displayEffect: "regular" | "full" | "raw",
+    dynamicEffect: "close" | "translate" | "rotate" | "all",
 }
 
 type stateType = {
@@ -55,7 +55,7 @@ class WallpaperComponent extends React.Component {
                             // 设置动态效果
                             backgroundImage.className = "backgroundImage zIndexLow wallpaperFadeIn";
                             setTimeout(() => {
-                                backgroundImage.style.transform = "scale(1.05)";
+                                backgroundImage.style.transform = "scale(1.05, 1.05)";
                                 backgroundImage.style.transition = "5s";
                             }, 2000);
                             setTimeout(() => {
@@ -76,6 +76,12 @@ class WallpaperComponent extends React.Component {
             else if(nextProps.displayEffect === "full") {
                 this.setState({
                     imageLink: nextProps.imageData.urls.full,
+                    loadImageLink: nextProps.imageData.urls.thumb,
+                });
+            }
+            else if(nextProps.displayEffect === "raw") {
+                this.setState({
+                    imageLink: nextProps.imageData.urls.raw,
                     loadImageLink: nextProps.imageData.urls.thumb,
                 });
             }

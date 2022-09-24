@@ -6,13 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="7b6aa851-d91a-4d7e-aff0-98e24f63e226" name="变更" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/greet/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/greet/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/preference/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/preference/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/wallpaper/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/wallpaper/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stylesheets/publicStyles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/stylesheets/publicStyles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/weather/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/weather/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/typescripts/publicFunctions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/typescripts/publicFunctions.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -168,7 +165,9 @@
       <workItem from="1663765782372" duration="595000" />
       <workItem from="1663766885766" duration="382000" />
       <workItem from="1663812672663" duration="9159000" />
-      <workItem from="1663844553971" duration="916000" />
+      <workItem from="1663844553971" duration="1997000" />
+      <workItem from="1663925384221" duration="4603000" />
+      <workItem from="1663988131945" duration="9188000" />
     </task>
     <task id="LOCAL-00001" summary="关闭获取天气失败报错">
       <created>1654142997686</created>
@@ -317,7 +316,14 @@
       <option name="project" value="LOCAL" />
       <updated>1663767258280</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="优化代码质量，优化壁纸显示bug，解决依赖项高危漏洞">
+      <created>1663845810709</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1663845810709</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -341,6 +347,7 @@
     <MESSAGE value="优化抽屉显示效果" />
     <MESSAGE value="优化显示效果，优化代码质量" />
     <MESSAGE value="优化代码质量" />
-    <option name="LAST_COMMIT_MESSAGE" value="优化代码质量" />
+    <MESSAGE value="优化代码质量，优化壁纸显示bug，解决依赖项高危漏洞" />
+    <option name="LAST_COMMIT_MESSAGE" value="优化代码质量，优化壁纸显示bug，解决依赖项高危漏洞" />
   </component>
 </project>

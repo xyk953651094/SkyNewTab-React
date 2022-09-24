@@ -32,8 +32,8 @@ type stateType = {
     themeColor: string,
     imageData: any,
 
-    displayEffect: "regular" | "full",
-    dynamicEffect: "close" | "translate" | "rotate",
+    displayEffect: "regular" | "full" | "raw",
+    dynamicEffect: "close" | "translate" | "rotate" | "all",
     imageTopics: string,
 }
 
@@ -53,18 +53,18 @@ class App extends React.Component {
             imageData: "",
 
             displayEffect: "regular",
-            dynamicEffect: "translate",
+            dynamicEffect: "all",
             imageTopics: "Fzo3zuOHN6w",
         }
     }
 
-    getDisplayEffect(displayEffect: "regular" | "full") {
+    getDisplayEffect(displayEffect: "regular" | "full" | "raw") {
         this.setState({
             displayEffect: displayEffect,
         })
     }
 
-    getDynamicEffect(dynamicEffect: "close" | "translate" | "rotate") {
+    getDynamicEffect(dynamicEffect: "close" | "translate" | "rotate" | "all") {
         this.setState({
             dynamicEffect: dynamicEffect,
         })
