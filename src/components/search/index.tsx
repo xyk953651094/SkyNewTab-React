@@ -32,21 +32,16 @@ class SearchComponent extends React.Component {
     }
 
     onFocus() {
-        // let mask: any = document.getElementById("mask");
-        // mask.className = "mask zIndexMiddle maskFadeIn";
         fadeIn("#mask", 300);
-        this.setState({
-            maskDisplay: "block"
-        })
+        if(this.state.maskDisplay !=="block"){
+            this.setState({
+                maskDisplay: "block"
+            })
+        }
     }
 
     onBlur() {
-        // let mask: any = document.getElementById("mask");
-        // mask.className = "mask zIndexMiddle maskFadeOut";
         fadeOut("#mask", 300);
-        // this.setState({
-        //     maskDisplay: "none"
-        // })
     }
 
     onPressEnter(e: any) {
@@ -64,7 +59,7 @@ class SearchComponent extends React.Component {
                 <Input
                     className={"searchInput zIndexHigh"}
                     prefix={<SearchOutlined />}
-                    placeholder="请输入搜索内容"
+                    placeholder="按下 Enter 键搜索"
                     onFocus={this.onFocus.bind(this)}
                     onBlur={this.onBlur.bind(this)}
                     onPressEnter={this.onPressEnter.bind(this)}

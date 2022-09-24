@@ -1,17 +1,19 @@
 import React from "react";
 import "../../App.css";
-import {Tooltip, Button} from "antd";
-import {CalendarOutlined} from "@ant-design/icons";
+import {Popover, Button} from "antd";
+import {SmileOutlined} from "@ant-design/icons";
 import {getTimeDetails, getGreet, changeThemeColor} from "../../typescripts/publicFunctions";
+const $ = require("jquery");
 
 type propType = {
-    imageColor: string,
+    themeColor: string,
 }
 
 type stateType = {
-    backgroundColor: string,
-    fontColor: string,
     greet: string,
+    calendar: string,
+    suit: string,
+    avoid: string,
 }
 
 interface GreetComponent {
@@ -23,62 +25,70 @@ class GreetComponent extends React.Component {
     constructor(props: any) {
         super(props);
         this.state = {
-            backgroundColor: "",
-            fontColor: "",
             greet: getGreet(new Date()),
+            calendar: "",
+            suit: "",
+            avoid: "",
         };
     }
 
     componentWillMount() {
-        let tempThis = this;
-        let tempDate = getTimeDetails(new Date());
-        let date = tempDate.year + tempDate.month + tempDate.day;
-
-        let appId = "cicgheqakgmpjclo"
-        let appSecret = "RVlRVjZTYXVqeHB3WCtQUG5lM0h0UT09"
-        let holidayXHR = new XMLHttpRequest();
-        holidayXHR.open("GET", "https://www.mxnzp.com/api/holiday/single/" + date + "?app_id=" + appId + "&app_secret=" + appSecret)
-        holidayXHR.onload = function () {
-            if (holidayXHR.status === 200) {
-                let holidayData = JSON.parse(holidayXHR.responseText);
-                if (holidayData.code === 1) {
-                    let holidayContent = holidayData.data.solarTerms;
-                    if (holidayData.data.solarTerms.indexOf("后") === -1) {
+        let holidayParameters = {
+            "app_id": "cicgheqakgmpjclo",
+            "app_secret": "RVlRVjZTYXVqeHB3WCtQUG5lM0h0UT09",
+        };
+        $.ajax({
+            url: "https://www.mxnzp.com/api/holiday/single/" + getTimeDetails(new Date()).showDate3,
+            type: "GET",
+            data: holidayParameters,
+            timeout: 5000,
+            success: (resultData: any) => {
+                if (resultData.code === 1) {
+                    let holidayContent = resultData.data.solarTerms;
+                    if (resultData.data.solarTerms.indexOf("后") === -1) {
                         holidayContent = "今日" + holidayContent;
                     }
-                    tempThis.setState({
-                        greet: tempThis.state.greet + " | " + holidayContent,
+                    let temp = getTimeDetails(new Date());
+                    this.setState({
+                        greet: this.state.greet + " ｜ " + holidayContent,
+                        calendar: temp.showDate4 + " " + temp.showWeek + "｜" +
+                            resultData.data.yearTips + resultData.data.chineseZodiac + "年｜" +
+                            resultData.data.lunarCalendar,
+                        suit: resultData.data.suit.replace(/\./g, "·"),
+                        avoid: resultData.data.avoid.replace(/\./g, "·"),
                     });
                 }
-            }
-        }
-        holidayXHR.onerror = function () {
-
-        }
-        holidayXHR.send();
+            },
+            error: function () {}
+        });
     }
 
     componentWillReceiveProps(nextProps: any, prevProps: any) {
         if (nextProps !== prevProps) {
-            changeThemeColor("#greetBtn", nextProps.imageColor);
+            changeThemeColor("#greetBtn", nextProps.themeColor);
         }
     }
 
     render() {
+        const popoverContent = (
+            <div>
+                <p>{"宜：" + this.state.suit}</p>
+                <p>{"忌：" + this.state.avoid}</p>
+            </div>
+        );
+        
         return (
-            <Tooltip title={this.state.greet}>
-                <Button shape="round" icon={<CalendarOutlined/>} size={"large"}
+            <Popover title={this.state.calendar} content={popoverContent} placement="topRight">
+                <Button shape="round" icon={<SmileOutlined />} size={"large"}
                         id={"greetBtn"}
                         className={"frostedGlass zIndexHigh"}
                         style={{
-                            backgroundColor: this.state.backgroundColor,
-                            color: this.state.fontColor,
                             cursor: "default"
                         }}
                 >
                     {this.state.greet}
                 </Button>
-            </Tooltip>
+            </Popover>
         );
     }
 }

@@ -50,9 +50,9 @@ html, body {
     /*-webkit-animation-delay: 0s;           !* 延迟时间 *!*/
 }
 
-.wallpaplerFadeIn {
+.wallpaperFadeIn {
     animation-name: fadeIn;        /* 动画名称 */
-    animation-duration: 3s;        /* 动画持续时间 */
+    animation-duration: 2s;        /* 持续时间 */
     animation-iteration-count: 1;  /* 动画次数 */
     animation-delay: 0s;           /* 延迟时间 */
     animation-fill-mode: forwards;

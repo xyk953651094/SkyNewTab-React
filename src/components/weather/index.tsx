@@ -1,17 +1,21 @@
 import React from "react";
 import "../../App.css";
-import {Button, message, Tooltip} from "antd";
-import {changeThemeColor, getFontColor, getThemeColor} from "../../typescripts/publicFunctions";
+import {Popover, Button} from "antd";
+import {changeThemeColor, getThemeColor} from "../../typescripts/publicFunctions";
+const $ = require("jquery");
 
 type propType = {
-    imageColor: string,
+    themeColor: string
 }
 
 type stateType = {
     display: "none" | "block",
-    backgroundColor: string,
-    fontColor: string,
     weatherInfo: string,
+    region: string;
+    pm25: string;
+    rainfall: string;
+    visibility: string;
+    windInfo: string;
 }
 
 interface WeatherComponent {
@@ -24,57 +28,72 @@ class WeatherComponent extends React.Component {
         super(props);
         this.state = {
             display: "none",
-            backgroundColor: "",
-            fontColor: "",
             weatherInfo: "暂无天气信息",
+            region: "",
+            pm25: "",
+            rainfall: "",
+            visibility: "",
+            windInfo: "",
         };
     }
 
     componentWillMount() {
-        let tempThis = this;
-        let weatherXHR  =new XMLHttpRequest();
-        weatherXHR.open("GET","https://v2.jinrishici.com/info");
-        weatherXHR.onload = function(){
-            if(weatherXHR.status === 200){
-                let reasult = JSON.parse(weatherXHR.responseText);
-
-                if (reasult.status === 'success') {
-                    tempThis.setState({
+        $.ajax({
+            url: "https://v2.jinrishici.com/info",
+            type: "GET",
+            timeout: 5000,
+            success: (resultData: any) => {
+                if (resultData.status === "success" && resultData.data.weatherData !== null) {
+                    this.setState({
                         display: "block",
-                        weatherInfo: reasult.data.weatherData.weather  + " ｜ "
-                            + reasult.data.weatherData.temperature + "°C",
+                        weatherInfo: resultData.data.weatherData.weather  + " ｜ "
+                            + resultData.data.weatherData.temperature + "°C",
+                        region:  resultData.data.region.replace("|", "｜"),
+                        pm25:  resultData.data.weatherData.pm25,
+                        rainfall:  resultData.data.weatherData.rainfall + "%",
+                        visibility:  resultData.data.weatherData.visibility,
+                        windInfo:  resultData.data.weatherData.windDirection + resultData.data.weatherData.windPower + "级",
                     });
                 }
-                else {}
-            }
-            else{}
-        }
-        weatherXHR.onerror=function(){}
-        weatherXHR.send();
+                else {
+                    this.setState({
+                        display: "none",
+                    });
+                }
+            },
+            error: function () {}
+        });
     }
 
     componentWillReceiveProps(nextProps: any, prevProps: any) {
         if (nextProps !== prevProps) {
-            changeThemeColor("#weatherBtn", nextProps.imageColor);
+            changeThemeColor("#weatherBtn", nextProps.themeColor);
         }
     }
 
     render(){
+        const popoverContent = (
+            <div>
+                <p>{"空气：" + this.state.pm25}</p>
+                <p>{"降雨：" + this.state.rainfall}</p>
+                <p>{"视距：" + this.state.visibility}</p>
+                <p>{"风况：" + this.state.windInfo}</p>
+            </div>
+        );
+
         return (
-            <Tooltip title={this.state.weatherInfo}>
+            <Popover title={this.state.region} content={popoverContent}>
                 <Button shape="round" size={"large"}
                         id={"weatherBtn"}
                         className={"frostedGlass zIndexHigh"}
                         style={{
                             display: this.state.display,
-                            backgroundColor: this.state.backgroundColor,
-                            color: this.state.fontColor,
                             cursor: "default"
                         }}
                 >
                     {this.state.weatherInfo}
                 </Button>
-            </Tooltip>
+            </Popover>
         );
     }
 }

@@ -6,14 +6,22 @@ import GreetComponent from "./components/greet";
 import WeatherComponent from "./components/weather";
 import DownloadComponent from "./components/download";
 import HtmlLinkComponent from "./components/htmlLink";
+import PreferenceComponent from "./components/preference";
 import WallpaperComponent from "./components/wallpaper";
 import SearchComponent from "./components/search";
 import AuthorComponent from "./components/author";
 import CreatTimeComponent from "./components/createTime";
 
-import { Layout, Row, Col, Space } from "antd";
-import {setColorTheme, getThemeColor, deviceModel, changeThemeColor} from "./typescripts/publicFunctions";
-const { Header, Content, Footer } = Layout;
+import {Layout, Row, Col, Space, message} from "antd";
+import {clientId} from "./typescripts/publicConstents";
+import {
+    setColorTheme,
+    deviceModel,
+    changeThemeColor,
+    getThemeColor,
+} from "./typescripts/publicFunctions";
+const {Header, Content, Footer} = Layout;
+const $ = require("jquery");
 
 type propType = {}
 
@@ -21,15 +29,12 @@ type stateType = {
     componentDisplay: "none" | "block",
     mobileComponentDisplay: "none" | "block",
     wallpaperComponentDisplay: "none" | "block",
+    themeColor: string,
     imageData: any,
-    imageColor: string,
-    downloadLink: string,
-    htmlLink: string,
-    imageLink: string,
-    author: string,
-    authorLink: string,
-    createTime: string,
-    unsplashUrl: "?utm_source=SkyNewTab&utm_medium=referral"   // Unsplash API规范
+
+    displayEffect: "regular" | "full" | "raw",
+    dynamicEffect: "close" | "translate" | "rotate" | "all",
+    imageTopics: string,
 }
 
 interface App {
@@ -44,70 +49,77 @@ class App extends React.Component {
             componentDisplay: "none",
             mobileComponentDisplay: "none",
             wallpaperComponentDisplay: "none",
+            themeColor: "",
             imageData: "",
-            imageColor: "",
-            downloadLink: "",
-            htmlLink: "",
-            imageLink: "",
-            author: "",
-            authorLink: "",
-            createTime: "",
-            unsplashUrl: "?utm_source=SkyNewTab&utm_medium=referral"   // Unsplash API规范
+
+            displayEffect: "regular",
+            dynamicEffect: "all",
+            imageTopics: "Fzo3zuOHN6w",
         }
     }
 
+    getDisplayEffect(displayEffect: "regular" | "full" | "raw") {
+        this.setState({
+            displayEffect: displayEffect,
+        })
+    }
+
+    getDynamicEffect(dynamicEffect: "close" | "translate" | "rotate" | "all") {
+        this.setState({
+            dynamicEffect: dynamicEffect,
+        })
+    }
+
+    getImageTopics(imageTopics: string) {
+        this.setState({
+            imageTopics: imageTopics
+        })
+    }
+
     componentWillMount() {
-        let tempThis = this;
         let device = deviceModel();
         this.setState({
-            imageColor: setColorTheme()
-        })
-        
-        let clientId = "ntHZZmwZUkhiLBMvwqqzmOG29nyXSCXlX7x_i-qhVHM";
-        let orientation = "landscape";
-        if(device === "iPhone" || device === "Android") {
-            orientation = "portrait";  // 获取竖屏图片
-        }
+            themeColor: setColorTheme(),  // 未加载图片前随机显示颜色主题
+        }, () => {
+            // 获取背景图片
+            $.ajax({
+                url: "https://api.unsplash.com/photos/random?",
+                headers: {
+                    "Authorization": "Client-ID " + clientId,
+                },
+                type: "GET",
+                data: {
+                    "client_id": clientId,
+                    "orientation": (device === "iPhone" || device === "Android")? "portrait" : "landscape",
+                    "topics": this.state.imageTopics,
+                    "content_filter": "high",
+                },
+                timeout: 10000,
+                success: (imageData: any) => {
+                    this.setState({
+                        componentDisplay: "block",
+                        mobileComponentDisplay: "none",
+                        wallpaperComponentDisplay: "block",
+                        themeColor: getThemeColor(imageData.color),
+                        imageData: imageData,
+                    }, () => {
+                        // 小屏显示底部按钮
+                        if (device === "iPhone" || device === "Android") {
+                            this.setState({
+                                componentDisplay: "none",
+                                mobileComponentDisplay: "block",
+                            })
+                        }
+                    })
 
-        let imageXHR = new XMLHttpRequest();
-        imageXHR
-        .open("GET", "https://api.unsplash.com/photos/random?client_id=" + clientId + "&orientation=" + orientation + "&content_filter=high");
-        imageXHR
-        .onload = function () {
-            if (imageXHR.status === 200) {
-                let imageData = JSON.parse(imageXHR.responseText);
-
-                tempThis.setState({
-                    componentDisplay: "block",
-                    mobileComponentDisplay: "none",
-                    wallpaperComponentDisplay: "block",
-                    imageData: imageData,
-                    imageColor: getThemeColor(imageData.color),
-                    downloadLink: imageData.links.download,
-                    htmlLink: imageData.links.html,
-                    imageLink: imageData.urls.regular,
-                    author: imageData.user.name,
-                    authorLink: imageData.user.links.html,
-                    createTime: imageData.created_at.split("T")[0],
-                }, () => {
-                    // 小屏显示底部按钮
-                    if (device === "iPhone" || device === "Android") {
-                        tempThis.setState({
-                            componentDisplay: "none",
-                            mobileComponentDisplay: "block",
-                        })
-                    }
-                })
-
-                // 设置body背景颜色
-                // let body = document.getElementsByTagName("body")[0];
-                // body.style.backgroundColor = imageData.color;
-                changeThemeColor("body", imageData.color);
-            }
-            else {}
-        }
-        imageXHR.onerror = function () {}
-        imageXHR.send();
+                    // 设置body背景颜色
+                    changeThemeColor("body", imageData.color);
+                },
+                error: function () {
+                    message.error("获取图片失败");
+                }
+            });
+        });
     }
 
     render() {
@@ -115,29 +127,36 @@ class App extends React.Component {
             <Layout>
                 <Header id={"header"} className={"zIndexMiddle"}>
                     <Row>
-                        <Col span={12}>
+                        <Col xs={24} sm={24} md={12} lg={12} xl={12}>
                             <Space size={"small"}>
                                 <GreetComponent
-                                    imageColor={this.state.imageColor}
+                                    themeColor={this.state.themeColor}
                                 />
                                 <WeatherComponent
-                                    imageColor={this.state.imageColor}
+                                    themeColor={this.state.themeColor}
                                 />
                             </Space>
                         </Col>
-                        <Col span={12} style={{textAlign: "right"}}>
+                        <Col xs={0} sm={0} md={12} lg={12} xl={12} style={{textAlign: "right"}}>
                             <Space size={"small"}>
                                 <DownloadComponent
+                                    themeColor={this.state.themeColor}
                                     display={this.state.componentDisplay}
-                                    imageColor={this.state.imageColor}
-                                    downloadLink={this.state.downloadLink + this.state.unsplashUrl}
+                                    imageData={this.state.imageData}
                                 />
                                 <HtmlLinkComponent
+                                    themeColor={this.state.themeColor}
                                     display={this.state.componentDisplay}
-                                    imageColor={this.state.imageColor}
-                                    htmlLink={this.state.htmlLink + this.state.unsplashUrl}
+                                    imageData={this.state.imageData}
                                 />
-                                {/*<Button type="primary" shape="round" icon={<SettingOutlined />} size={"large"} />*/}
+                                <PreferenceComponent
+                                    themeColor={this.state.themeColor}
+                                    display={this.state.componentDisplay}
+                                    imageData={this.state.imageData}
+                                    getDisplayEffect={this.getDisplayEffect.bind(this)}
+                                    getDynamicEffect={this.getDynamicEffect.bind(this)}
+                                    getImageTopics={this.getImageTopics.bind(this)}
+                                />
                             </Space>
                         </Col>
                     </Row>
@@ -145,39 +164,47 @@ class App extends React.Component {
                 <Content id={"content"} className={"center"}>
                     <WallpaperComponent
                         display={this.state.wallpaperComponentDisplay}
-                        // display={"none"}
-                        imageLink={this.state.imageLink}
+                        imageData={this.state.imageData}
+                        displayEffect={this.state.displayEffect}
+                        dynamicEffect={this.state.dynamicEffect}
                     />
                     <SearchComponent />
                 </Content>
                 <Footer id={"footer"}>
                     <Row>
-                        <Col span={12} style={{textAlign: "left"}}>
+                        <Col xs={24} sm={24} md={0} lg={0} xl={0}>
                             <Space size={"small"}>
-                                <DownloadComponent
+                                <PreferenceComponent
+                                    themeColor={this.state.themeColor}
                                     display={this.state.mobileComponentDisplay}
-                                    imageColor={this.state.imageColor}
-                                    downloadLink={this.state.downloadLink + this.state.unsplashUrl}
+                                    imageData={this.state.imageData}
+                                    getDisplayEffect={this.getDisplayEffect.bind(this)}
+                                    getDynamicEffect={this.getDynamicEffect.bind(this)}
+                                    getImageTopics={this.getImageTopics.bind(this)}
+                                />
+                                <DownloadComponent
+                                    themeColor={this.state.themeColor}
+                                    display={this.state.mobileComponentDisplay}
+                                    imageData={this.state.imageData}
                                 />
                                 <HtmlLinkComponent
+                                    themeColor={this.state.themeColor}
                                     display={this.state.mobileComponentDisplay}
-                                    imageColor={this.state.imageColor}
-                                    htmlLink={this.state.htmlLink + this.state.unsplashUrl}
+                                    imageData={this.state.imageData}
                                 />
                             </Space>
                         </Col>
-                        <Col span={12} style={{textAlign: "right"}}>
+                        <Col xs={0} sm={0} md={24} lg={24} xl={24} style={{textAlign: "right"}}>
                             <Space size={"small"} align={"end"}>
                                 <AuthorComponent
+                                    themeColor={this.state.themeColor}
                                     display={this.state.componentDisplay}
-                                    imageColor={this.state.imageColor}
-                                    author={this.state.author}
-                                    authorLink={this.state.authorLink + this.state.unsplashUrl}
+                                    imageData={this.state.imageData}
                                 />
                                 <CreatTimeComponent
+                                    themeColor={this.state.themeColor}
                                     display={this.state.componentDisplay}
-                                    imageColor={this.state.imageColor}
-                                    createTime={this.state.createTime}
+                                    imageData={this.state.imageData}
                                 />
                             </Space>
                         </Col>

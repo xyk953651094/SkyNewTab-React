@@ -1,18 +1,17 @@
 import React from "react";
 import "../../App.css";
 import {Button, Tooltip} from "antd";
-import {CameraOutlined} from "@ant-design/icons";
-import {changeThemeColor} from "../../typescripts/publicFunctions";
+import {CalendarOutlined} from "@ant-design/icons";
+import {changeThemeColor, getThemeColor} from "../../typescripts/publicFunctions";
 
 type propType = {
+    themeColor: string,
     display: "none" | "block",
-    imageColor: string,
-    createTime: string,
+    imageData: any,
 }
 
 type stateType = {
-    backgroundColor: string,
-    fontColor: string,
+    createTime: string,
 }
 
 interface CreatTimeComponent {
@@ -24,31 +23,32 @@ class CreatTimeComponent extends React.Component {
     constructor(props: any) {
         super(props);
         this.state = {
-            backgroundColor: "",
-            fontColor: "",
+            createTime: "",
         };
     }
 
     componentWillReceiveProps(nextProps: any, prevProps: any) {
         if (nextProps !== prevProps) {
-            changeThemeColor("#createTimeBtn", nextProps.imageColor);
+            changeThemeColor("#createTimeBtn", nextProps.themeColor);
+
+            this.setState({
+                createTime: nextProps.imageData.created_at.split("T")[0]
+            })
         }
     }
 
     render() {
         return (
-            <Tooltip title="拍摄时间">
-                <Button shape="round" icon={<CameraOutlined/>} size={"large"}
+            <Tooltip title={"拍摄时间：" + this.state.createTime}  placement="bottomRight">
+                <Button shape="round" icon={<CalendarOutlined />} size={"large"}
                         id={"createTimeBtn"}
                         className={"frostedGlass zIndexHigh"}
                         style={{
                             display: this.props.display,
-                            backgroundColor: this.state.backgroundColor,
-                            color: this.state.fontColor,
                             cursor: "default"
                         }}
                 >
-                    {this.props.createTime}
+                    {this.state.createTime}
                 </Button>
             </Tooltip>
         );
