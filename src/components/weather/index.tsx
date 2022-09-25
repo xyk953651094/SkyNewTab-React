@@ -1,7 +1,7 @@
 import React from "react";
 import "../../App.css";
 import {Popover, Button} from "antd";
-import {changeThemeColor, getThemeColor} from "../../typescripts/publicFunctions";
+import {changeThemeColor, getThemeColor, getFontColor} from "../../typescripts/publicFunctions";
 const $ = require("jquery");
 
 type propType = {
@@ -37,7 +37,7 @@ class WeatherComponent extends React.Component {
         };
     }
 
-    componentWillMount() {
+    componentDidMount() {
         $.ajax({
             url: "https://v2.jinrishici.com/info",
             type: "GET",
@@ -66,7 +66,7 @@ class WeatherComponent extends React.Component {
     }
 
     componentWillReceiveProps(nextProps: any, prevProps: any) {
-        if (nextProps !== prevProps) {
+        if (nextProps.themeColor !== prevProps.themeColor) {
             changeThemeColor("#weatherBtn", nextProps.themeColor);
         }
     }
@@ -82,7 +82,15 @@ class WeatherComponent extends React.Component {
         );
 
         return (
-            <Popover title={this.state.region} content={popoverContent}>
+            <Popover title={this.state.region} content={popoverContent}
+                     color={this.props.themeColor}
+                     onOpenChange={(open)=>{
+                         if(open) {
+                             $(".ant-popover-title").css("color", getFontColor(this.props.themeColor));
+                             $(".ant-popover-inner-content").css("color", getFontColor(this.props.themeColor));
+                         }
+                     }}
+            >
                 <Button shape="round" size={"large"}
                         id={"weatherBtn"}
                         className={"frostedGlass zIndexHigh"}

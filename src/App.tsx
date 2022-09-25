@@ -13,13 +13,9 @@ import AuthorComponent from "./components/author";
 import CreatTimeComponent from "./components/createTime";
 
 import {Layout, Row, Col, Space, message} from "antd";
-import {clientId} from "./typescripts/publicConstents";
-import {
-    setColorTheme,
-    deviceModel,
-    changeThemeColor,
-    getThemeColor,
-} from "./typescripts/publicFunctions";
+import {clientId, defaultImage} from "./typescripts/publicConstents";
+import {setColorTheme, deviceModel, changeThemeColor, getThemeColor} from "./typescripts/publicFunctions";
+import {ImageDataInterface} from "./typescripts/publicInterface";
 const {Header, Content, Footer} = Layout;
 const $ = require("jquery");
 
@@ -30,7 +26,7 @@ type stateType = {
     mobileComponentDisplay: "none" | "block",
     wallpaperComponentDisplay: "none" | "block",
     themeColor: string,
-    imageData: any,
+    imageData: ImageDataInterface,
 
     displayEffect: "regular" | "full" | "raw",
     dynamicEffect: "close" | "translate" | "rotate" | "all",
@@ -49,8 +45,8 @@ class App extends React.Component {
             componentDisplay: "none",
             mobileComponentDisplay: "none",
             wallpaperComponentDisplay: "none",
-            themeColor: "",
-            imageData: "",
+            themeColor: setColorTheme(),
+            imageData: defaultImage,
 
             displayEffect: "regular",
             dynamicEffect: "all",
@@ -76,49 +72,64 @@ class App extends React.Component {
         })
     }
 
-    componentWillMount() {
-        let device = deviceModel();
+    componentDidMount() {
+        // 加载偏好设置
+        let tempDisplayEffect = localStorage.getItem("displayEffect");
+        let tempDynamicEffect = localStorage.getItem("dynamicEffect");
+        let tempImageTopics = localStorage.getItem("imageTopics");
         this.setState({
-            themeColor: setColorTheme(),  // 未加载图片前随机显示颜色主题
+            displayEffect: tempDisplayEffect === null ? "regular" : tempDisplayEffect,
+            dynamicEffect: tempDynamicEffect === null ? "all" : tempDynamicEffect,
+            imageTopics: tempImageTopics === null ? "Fzo3zuOHN6w" : tempImageTopics,
         }, () => {
-            // 获取背景图片
-            $.ajax({
-                url: "https://api.unsplash.com/photos/random?",
-                headers: {
-                    "Authorization": "Client-ID " + clientId,
-                },
-                type: "GET",
-                data: {
-                    "client_id": clientId,
-                    "orientation": (device === "iPhone" || device === "Android")? "portrait" : "landscape",
-                    "topics": this.state.imageTopics,
-                    "content_filter": "high",
-                },
-                timeout: 10000,
-                success: (imageData: any) => {
-                    this.setState({
-                        componentDisplay: "block",
-                        mobileComponentDisplay: "none",
-                        wallpaperComponentDisplay: "block",
-                        themeColor: getThemeColor(imageData.color),
-                        imageData: imageData,
-                    }, () => {
-                        // 小屏显示底部按钮
-                        if (device === "iPhone" || device === "Android") {
-                            this.setState({
-                                componentDisplay: "none",
-                                mobileComponentDisplay: "block",
-                            })
-                        }
-                    })
-
-                    // 设置body背景颜色
-                    changeThemeColor("body", imageData.color);
-                },
-                error: function () {
-                    message.error("获取图片失败");
-                }
-            });
+            // 请求图片
+            this.setState({
+                themeColor: setColorTheme()
+            }, () => {
+                let device = deviceModel();
+                
+                // 获取背景图片
+                $.ajax({
+                    url: "https://api.unsplash.com/photos/random?",
+                    headers: {
+                        "Authorization": "Client-ID " + clientId,
+                    },
+                    type: "GET",
+                    data: {
+                        "client_id": clientId,
+                        "orientation": (device === "iPhone" || device === "Android") ? "portrait" : "landscape",
+                        "topics": this.state.imageTopics,
+                        "content_filter": "high",
+                    },
+                    timeout: 10000,
+                    success: (imageData: ImageDataInterface) => {
+                        this.setState({
+                            componentDisplay: "block",
+                            mobileComponentDisplay: "none",
+                            wallpaperComponentDisplay: "block",
+                            imageData: imageData,
+                        }, () => {
+                            // 修改主题颜色
+                            if (imageData.color !== null) {
+                                this.setState({
+                                    themeColor: getThemeColor(imageData.color),
+                                })
+                                changeThemeColor("body", imageData.color);
+                            }
+                            // 小屏显示底部按钮
+                            if (device === "iPhone" || device === "Android") {
+                                this.setState({
+                                    componentDisplay: "none",
+                                    mobileComponentDisplay: "block",
+                                })
+                            }
+                        })
+                    },
+                    error: function () {
+                        message.error("获取图片失败");
+                    }
+                });
+            })
         });
     }
 

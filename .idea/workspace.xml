@@ -5,11 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7b6aa851-d91a-4d7e-aff0-98e24f63e226" name="变更" comment="">
+      <change afterPath="$PROJECT_DIR$/src/typescripts/publicInterface.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/author/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/author/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/createTime/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/createTime/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/download/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/download/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/greet/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/greet/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/htmlLink/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/htmlLink/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/preference/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/preference/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/wallpaper/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/wallpaper/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/weather/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/weather/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/typescripts/publicConstents.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/typescripts/publicConstents.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/typescripts/publicFunctions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/typescripts/publicFunctions.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -167,7 +175,8 @@
       <workItem from="1663812672663" duration="9159000" />
       <workItem from="1663844553971" duration="1997000" />
       <workItem from="1663925384221" duration="4603000" />
-      <workItem from="1663988131945" duration="9188000" />
+      <workItem from="1663988131945" duration="18530000" />
+      <workItem from="1664072249722" duration="12702000" />
     </task>
     <task id="LOCAL-00001" summary="关闭获取天气失败报错">
       <created>1654142997686</created>
@@ -323,7 +332,14 @@
       <option name="project" value="LOCAL" />
       <updated>1663845810709</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="新增壁纸显示效果">
+      <created>1664007954508</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1664007954508</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -348,6 +364,7 @@
     <MESSAGE value="优化显示效果，优化代码质量" />
     <MESSAGE value="优化代码质量" />
     <MESSAGE value="优化代码质量，优化壁纸显示bug，解决依赖项高危漏洞" />
-    <option name="LAST_COMMIT_MESSAGE" value="优化代码质量，优化壁纸显示bug，解决依赖项高危漏洞" />
+    <MESSAGE value="新增壁纸显示效果" />
+    <option name="LAST_COMMIT_MESSAGE" value="新增壁纸显示效果" />
   </component>
 </project>

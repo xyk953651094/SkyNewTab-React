@@ -140,8 +140,9 @@ export function mouseMoveEffect(effectType: string) {
         let relatedXRatio = relatedX / screenMidWidth;
         let relatedYRatio = relatedY / screenMidHeight;
 
-        backgroundImage.style.transition = "0.3s";
         if (backgroundImage instanceof HTMLElement) {
+            backgroundImage.style.transition = "0.3s";
+
             switch (effectType) {
                 case "translate": {
                     let translateX = (-relatedXRatio / 4).toFixed(2);  // 调整精度
@@ -156,11 +157,15 @@ export function mouseMoveEffect(effectType: string) {
                     break;
                 }
                 case "all": {
-                    let rotateX = (relatedXRatio / 3).toFixed(2);      // 调整精度
-                    let rotateY = (-relatedYRatio / 3).toFixed(2);     // 调整精度
-                    let translateX = (-relatedXRatio / 3).toFixed(2);  // 调整精度
-                    let translateY = (-relatedYRatio / 3).toFixed(2);  // 调整精度
-                    backgroundImage.style.transform = "scale(1.05, 1.05) rotateX(" + rotateY + "deg) rotateY(" + rotateX + "deg) translate(" + translateX + "%, " + translateY + "%)";
+                    let skewX = (relatedXRatio / 10).toFixed(2);       // 调整精度
+                    let rotateX = (relatedXRatio / 2).toFixed(2);      // 调整精度
+                    let rotateY = (-relatedYRatio / 2).toFixed(2);     // 调整精度
+                    let translateX = (-relatedXRatio / 2).toFixed(2);  // 调整精度
+                    let translateY = (-relatedYRatio / 2).toFixed(2);  // 调整精度
+                    backgroundImage.style.transform = "scale(1.05, 1.05) " +
+                        "skew(" + skewX + "deg)" +
+                        "rotateX(" + rotateY + "deg) rotateY(" + rotateX + "deg) " +
+                        "translate(" + translateX + "%, " + translateY + "%)";
                     break;
                 }
                 case "close": {

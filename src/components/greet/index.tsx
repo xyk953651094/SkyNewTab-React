@@ -2,7 +2,7 @@ import React from "react";
 import "../../App.css";
 import {Popover, Button} from "antd";
 import {SmileOutlined} from "@ant-design/icons";
-import {getTimeDetails, getGreet, changeThemeColor} from "../../typescripts/publicFunctions";
+import {getTimeDetails, getGreet, changeThemeColor, getFontColor} from "../../typescripts/publicFunctions";
 const $ = require("jquery");
 
 type propType = {
@@ -32,7 +32,7 @@ class GreetComponent extends React.Component {
         };
     }
 
-    componentWillMount() {
+    componentDidMount() {
         let holidayParameters = {
             "app_id": "cicgheqakgmpjclo",
             "app_secret": "RVlRVjZTYXVqeHB3WCtQUG5lM0h0UT09",
@@ -64,7 +64,7 @@ class GreetComponent extends React.Component {
     }
 
     componentWillReceiveProps(nextProps: any, prevProps: any) {
-        if (nextProps !== prevProps) {
+        if (nextProps.themeColor !== prevProps.themeColor) {
             changeThemeColor("#greetBtn", nextProps.themeColor);
         }
     }
@@ -78,7 +78,15 @@ class GreetComponent extends React.Component {
         );
         
         return (
-            <Popover title={this.state.calendar} content={popoverContent} placement="topRight">
+            <Popover title={this.state.calendar} content={popoverContent} placement="topRight"
+                     color={this.props.themeColor}
+                     onOpenChange={(open)=>{
+                         if(open) {
+                             $(".ant-popover-title").css("color", getFontColor(this.props.themeColor));
+                             $(".ant-popover-inner-content").css("color", getFontColor(this.props.themeColor));
+                         }
+                     }}
+            >
                 <Button shape="round" icon={<SmileOutlined />} size={"large"}
                         id={"greetBtn"}
                         className={"frostedGlass zIndexHigh"}

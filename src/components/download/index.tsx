@@ -4,6 +4,7 @@ import {Button, Tooltip, message} from "antd";
 import {DownloadOutlined} from "@ant-design/icons";
 import {unsplashUrl, clientId} from "../../typescripts/publicConstents";
 import {changeThemeColor, getFontColor, getThemeColor, isEmptyString} from "../../typescripts/publicFunctions";
+const $ = require("jquery");
 
 type propType = {
     themeColor: string,
@@ -12,8 +13,6 @@ type propType = {
 }
 
 type stateType = {
-    backgroundColor: string,
-    fontColor: string,
     downloadLink: string,
 }
 
@@ -26,22 +25,20 @@ class DownloadComponent extends React.Component {
     constructor(props: any) {
         super(props);
         this.state = {
-            backgroundColor: "",
-            fontColor: "",
             downloadLink: "",
         };
     }
 
     componentWillReceiveProps(nextProps: any, prevProps: any) {
-        if (nextProps !== prevProps) {
+        if (nextProps.themeColor !== prevProps.themeColor) {
             changeThemeColor("#downloadBtn", nextProps.themeColor);
-
+        }
+        if (nextProps.imageData !== prevProps.imageData){
             this.setState({
-                backgroundColor: nextProps.themeColor,
-                fontColor: getFontColor(nextProps.themeColor),
                 downloadLink: nextProps.imageData.links.download_location
             })
         }
+
     }
 
     handleClick() {
@@ -68,15 +65,20 @@ class DownloadComponent extends React.Component {
 
     render() {
         return (
-            <Tooltip title={"下载图片"}>
+            <Tooltip title={"下载图片"}
+                     color={this.props.themeColor}
+                     onOpenChange={(open)=>{
+                         if(open) {
+                             $(".ant-tooltip-inner").css("color", getFontColor(this.props.themeColor));
+                         }
+                     }}
+            >
                 <Button shape="round" icon={<DownloadOutlined/>} size={"large"}
                         onClick={this.handleClick.bind(this)}
                         id={"downloadBtn"}
                         className={"frostedGlass zIndexHigh"}
                         style={{
                             display: this.props.display,
-                            backgroundColor: this.state.backgroundColor,
-                            color: this.state.fontColor
                         }}
                 />
             </Tooltip>

@@ -2,7 +2,8 @@ import React from "react";
 import "../../App.css";
 import {Button, Tooltip} from "antd";
 import {CalendarOutlined} from "@ant-design/icons";
-import {changeThemeColor, getThemeColor} from "../../typescripts/publicFunctions";
+import {changeThemeColor, getFontColor, getThemeColor, isEmptyString} from "../../typescripts/publicFunctions";
+const $ = require("jquery");
 
 type propType = {
     themeColor: string,
@@ -28,9 +29,11 @@ class CreatTimeComponent extends React.Component {
     }
 
     componentWillReceiveProps(nextProps: any, prevProps: any) {
-        if (nextProps !== prevProps) {
+        if (nextProps.themeColor !== prevProps.themeColor) {
             changeThemeColor("#createTimeBtn", nextProps.themeColor);
+        }
 
+        if (nextProps.imageData !== prevProps.imageData) {
             this.setState({
                 createTime: nextProps.imageData.created_at.split("T")[0]
             })
@@ -39,7 +42,14 @@ class CreatTimeComponent extends React.Component {
 
     render() {
         return (
-            <Tooltip title={"拍摄时间：" + this.state.createTime}  placement="bottomRight">
+            <Tooltip title={"拍摄时间：" + this.state.createTime}  placement="bottomRight"
+                     color={this.props.themeColor}
+                     onOpenChange={(open)=>{
+                         if(open) {
+                             $(".ant-tooltip-inner").css("color", getFontColor(this.props.themeColor));
+                         }
+                     }}
+            >
                 <Button shape="round" icon={<CalendarOutlined />} size={"large"}
                         id={"createTimeBtn"}
                         className={"frostedGlass zIndexHigh"}

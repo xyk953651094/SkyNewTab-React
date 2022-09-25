@@ -1,10 +1,12 @@
 import React from "react";
 import "../../App.css";
-import {Button, Tooltip, Drawer, Card, Typography, Form, Row, Col, Radio, Checkbox} from "antd";
-import type { RadioChangeEvent } from "antd";
-import type { CheckboxValueType } from "antd/es/checkbox/Group";
+import {Button, Tooltip, Drawer, Card, Typography, Form, Row, Col, Radio, Checkbox, message} from "antd";
+import type {RadioChangeEvent} from "antd";
+import type {CheckboxValueType} from "antd/es/checkbox/Group";
 import {MoreOutlined, SettingOutlined, AppstoreOutlined} from "@ant-design/icons";
 import {changeThemeColor, getFontColor, deviceModel} from "../../typescripts/publicFunctions";
+import {FormInitialValuesInterface} from "../../typescripts/publicInterface";
+import {defaultFormInitialValues} from "../../typescripts/publicConstents";
 const $ = require("jquery");
 const {Title, Paragraph, Text} = Typography;
 
@@ -25,6 +27,7 @@ type stateType = {
     displayDrawer: boolean,
     drawerPosition: "right" | "bottom",
     holidayData: any,
+    formInitialValues: FormInitialValuesInterface
 }
 
 interface PreferenceComponent {
@@ -43,10 +46,28 @@ class PreferenceComponent extends React.Component {
             displayDrawer: false,
             drawerPosition: "right",
             holidayData: "",
+            formInitialValues: defaultFormInitialValues
         };
     }
 
     componentDidMount() {
+        // 初始化偏好设置
+        let tempDisplayEffectRadio: string | null = localStorage.getItem("displayEffect");
+        let tempDynamicEffectRadio: string | null = localStorage.getItem("dynamicEffect");
+        let tempImageTopicsCheckbox: string | string[] | null = localStorage.getItem("imageTopics");
+        if (tempImageTopicsCheckbox !== null) {
+            tempImageTopicsCheckbox = tempImageTopicsCheckbox.split(",");
+        }
+
+        this.setState({
+            formInitialValues: {
+                "displayEffectRadio": tempDisplayEffectRadio === null ? "regular" : tempDisplayEffectRadio,
+                "dynamicEffectRadio": tempDynamicEffectRadio === null ? "all" : tempDynamicEffectRadio,
+                "imageTopicsCheckbox": tempImageTopicsCheckbox === null ? ["Fzo3zuOHN6w"] : tempImageTopicsCheckbox,
+            }
+        });
+
+        // 屏幕适配
         let device = deviceModel();
         if(device === "iPhone" || device === "Android") {
             this.setState({
@@ -56,12 +77,16 @@ class PreferenceComponent extends React.Component {
     }
 
     componentWillReceiveProps(nextProps: any, prevProps: any) {
-        if (nextProps !== prevProps) {
+        if (nextProps.themeColor !== prevProps.themeColor) {
             changeThemeColor("#preferenceBtn", nextProps.themeColor);
-
             this.setState({
                 backgroundColor: nextProps.themeColor,
                 fontColor: getFontColor(nextProps.themeColor),
+            });
+        }
+
+        if (nextProps.imageData !== prevProps.imageData) {
+            this.setState({
                 componentBackgroundColor: nextProps.imageData.color,
                 componentFontColor: getFontColor(nextProps.imageData.color),
             });
@@ -69,6 +94,7 @@ class PreferenceComponent extends React.Component {
     }
 
     componentDidUpdate(prevProps: Readonly<{}>, prevState: Readonly<{}>, snapshot?: any) {
+        $(".ant-drawer-close").css("color", this.state.fontColor);
         $(".ant-drawer-title").css("color", this.state.fontColor);
         $(".ant-card").css("border", "1px solid " + this.state.fontColor);
         $(".ant-card-head").css({"backgroundColor": this.state.backgroundColor, "borderBottom": "2px solid " + this.state.fontColor});
@@ -79,6 +105,8 @@ class PreferenceComponent extends React.Component {
         $(".ant-form-item-label > label").css({"color": this.state.fontColor, "fontSize": "16px"});
         $(".ant-radio-wrapper").children(":last-child").css({"color": this.state.fontColor, "fontSize": "16px"});
         $(".ant-checkbox-wrapper").children(":last-child").css({"color": this.state.fontColor, "fontSize": "16px"});
+        // TODO: 通知主题颜色有bug
+        $(".ant-message-notice-content").css({"backgroundColor": this.state.backgroundColor, "color": this.state.fontColor});
     }
 
     drawerOnShow() {
@@ -96,11 +124,15 @@ class PreferenceComponent extends React.Component {
     // 图片质量
     displayEffectRadioOnChange(event: RadioChangeEvent) {
         this.props.getDisplayEffect(event.target.value);
+        localStorage.setItem("displayEffect", event.target.value);
+        message.success("调整成功，新的图片质量将在下次加载时生效");
     }
 
     // 动效样式
     dynamicEffectRadioOnChange(event: RadioChangeEvent) {
         this.props.getDynamicEffect(event.target.value);
+        localStorage.setItem("dynamicEffect", event.target.value);
+        message.success("调整成功，新的显示效果已生效");
     }
 
     // 图片主题
@@ -113,23 +145,29 @@ class PreferenceComponent extends React.Component {
             }
         }
         this.props.getImageTopics(value);
+        localStorage.setItem("imageTopics", value);
+        message.success("调整成功，新的主题将在下次加载时生效");
+        if (checkedValues.length === 0) {
+            message.info("全不选与全选的效果一样");
+        }
     }
 
     render() {
-
-
         return (
             <>
-                <Tooltip title={"偏好设置"} placement="topRight">
+                <Tooltip title={"偏好设置"} placement="topRight"
+                         color={this.props.themeColor}
+                         onOpenChange={(open)=>{
+                             if(open) {
+                                 $(".ant-tooltip-inner").css("color", getFontColor(this.props.themeColor));
+                             }
+                         }}
+                >
                     <Button shape="round" icon={<MoreOutlined />} size={"large"}
                             onClick={this.drawerOnShow.bind(this)}
                             id={"preferenceBtn"}
                             className={"frostedGlass zIndexHigh"}
-                            style={{
-                                display: this.props.display,
-                                backgroundColor: this.state.backgroundColor,
-                                color: this.state.fontColor
-                            }}
+                            style={{display: this.props.display}}
                     />
                 </Tooltip>
                 <Drawer
@@ -151,22 +189,16 @@ class PreferenceComponent extends React.Component {
                     <Row gutter={[16, 16]}>
                         <Col span={24}>
                             <Card title={"偏好设置"} headStyle={{"fontSize": "16px"}} bodyStyle={{"fontSize": "16px"}} size={"small"} extra={<SettingOutlined />}>
-                                <Form layout={"vertical"} colon={false}
-                                    initialValues={{"displayEffectRadio": "regular", "dynamicEffectRadio": "all", "imageTopicsCheckbox": "Fzo3zuOHN6w"}}
-                                >
+                                <Form layout={"vertical"} colon={false} initialValues={this.state.formInitialValues}>
                                     <Form.Item name="displayEffectRadio" label="图片质量">
-                                        <Radio.Group defaultValue={"regular"} buttonStyle={"solid"}
-                                                     onChange={this.displayEffectRadioOnChange.bind(this)}
-                                        >
+                                        <Radio.Group buttonStyle={"solid"} onChange={this.displayEffectRadioOnChange.bind(this)}>
                                             <Radio value={"regular"}>标准</Radio>
                                             <Radio value={"full"}>较高</Radio>
                                             <Radio value={"raw"}>最高</Radio>
                                         </Radio.Group>
                                     </Form.Item>
                                     <Form.Item name="dynamicEffectRadio" label="动效样式">
-                                        <Radio.Group defaultValue={"all"} buttonStyle={"solid"}
-                                                     onChange={this.dynamicEffectRadioOnChange.bind(this)}
-                                        >
+                                        <Radio.Group buttonStyle={"solid"} onChange={this.dynamicEffectRadioOnChange.bind(this)}>
                                             <Radio value={"close"}>关闭</Radio>
                                             <Radio value={"translate"}>平移</Radio>
                                             <Radio value={"rotate"}>旋转</Radio>
@@ -174,9 +206,7 @@ class PreferenceComponent extends React.Component {
                                         </Radio.Group>
                                     </Form.Item>
                                     <Form.Item name="imageTopicsCheckbox" label="图片主题">
-                                        <Checkbox.Group defaultValue={["Fzo3zuOHN6w"]}
-                                                        onChange={this.imageTopicsCheckboxOnChange.bind(this)}
-                                        >
+                                        <Checkbox.Group onChange={this.imageTopicsCheckboxOnChange.bind(this)}>
                                             <Row>
                                                 <Col span={12}><Checkbox name={"travel"}             value="Fzo3zuOHN6w">旅游</Checkbox></Col>
                                                 <Col span={12}><Checkbox name={"wallpapers"}         value="bo8jQKTaE0Y">壁纸</Checkbox></Col>

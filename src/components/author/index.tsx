@@ -4,6 +4,7 @@ import {Button, Tooltip, message} from "antd";
 import {CameraOutlined} from "@ant-design/icons";
 import {unsplashUrl} from "../../typescripts/publicConstents";
 import {changeThemeColor, getFontColor, getThemeColor, isEmptyString} from "../../typescripts/publicFunctions";
+const $ = require("jquery");
 
 type propType = {
     themeColor: string,
@@ -12,8 +13,6 @@ type propType = {
 }
 
 type stateType = {
-    backgroundColor: string,
-    fontColor: string,
     author: string
     authorLink: string,
 }
@@ -27,20 +26,18 @@ class AuthorComponent extends React.Component {
     constructor(props: any) {
         super(props);
         this.state = {
-            backgroundColor: "",
-            fontColor: "",
             author: "",
             authorLink: "",
         };
     }
 
     componentWillReceiveProps(nextProps: any, prevProps: any) {
-        if (nextProps !== prevProps) {
+        if (nextProps.themeColor !== prevProps.themeColor) {
             changeThemeColor("#authorBtn", nextProps.themeColor);
+        }
 
+        if (nextProps.imageData !== prevProps.imageData) {
             this.setState({
-                backgroundColor: nextProps.backgroundColor,
-                fontColor: getFontColor(nextProps.backgroundColor),
                 author: "by " + nextProps.imageData.user.name + " on Unsplash",
                 authorLink: nextProps.imageData.user.links.html
             })
@@ -57,7 +54,14 @@ class AuthorComponent extends React.Component {
 
     render() {
         return (
-            <Tooltip title={"前往作者主页"} overlayStyle={{backgroundColor: this.state.backgroundColor}}>
+            <Tooltip title={"前往作者主页"}
+                     color={this.props.themeColor}
+                     onOpenChange={(open)=>{
+                         if(open) {
+                             $(".ant-tooltip-inner").css("color", getFontColor(this.props.themeColor));
+                         }
+                     }}
+            >
                 <Button shape="round" icon={<CameraOutlined/>} size={"large"}
                         onClick={this.handleClick.bind(this)}
                         id={"authorBtn"}

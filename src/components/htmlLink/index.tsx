@@ -4,6 +4,7 @@ import {Button, Tooltip, message} from "antd";
 import {LinkOutlined} from "@ant-design/icons";
 import {unsplashUrl} from "../../typescripts/publicConstents";
 import {changeThemeColor, getFontColor, getThemeColor, isEmptyString} from "../../typescripts/publicFunctions";
+const $ = require("jquery");
 
 type propType = {
     themeColor: string,
@@ -12,8 +13,6 @@ type propType = {
 }
 
 type stateType = {
-    backgroundColor: string,
-    fontColor: string,
     htmlLink: string,
 }
 
@@ -26,19 +25,17 @@ class HtmlLinkComponent extends React.Component {
     constructor(props: any) {
         super(props);
         this.state = {
-            backgroundColor: "",
-            fontColor: "",
             htmlLink: "",
         };
     }
 
     componentWillReceiveProps(nextProps: any, prevProps: any) {
-        if (nextProps !== prevProps) {
+        if (nextProps.themeColor !== prevProps.themeColor) {
             changeThemeColor("#htmlLinkBtn", nextProps.themeColor);
+        }
 
+        if (nextProps.imageData !== prevProps.imageData) {
             this.setState({
-                backgroundColor: nextProps.themeColor,
-                fontColor: getFontColor(nextProps.themeColor),
                 htmlLink: nextProps.imageData.links.html
             })
         }
@@ -54,15 +51,20 @@ class HtmlLinkComponent extends React.Component {
 
     render() {
         return (
-            <Tooltip title={"前往图片主页"}>
+            <Tooltip title={"前往图片主页"}
+                     color={this.props.themeColor}
+                     onOpenChange={(open)=>{
+                         if(open) {
+                             $(".ant-tooltip-inner").css("color", getFontColor(this.props.themeColor));
+                         }
+                     }}
+            >
                 <Button shape="round" icon={<LinkOutlined/>} size={"large"}
                         onClick={this.handleClick.bind(this)}
                         id={"htmlLinkBtn"}
                         className={"frostedGlass zIndexHigh"}
                         style={{
                             display: this.props.display,
-                            backgroundColor: this.state.backgroundColor,
-                            color: this.state.fontColor
                         }}
                 />
             </Tooltip>
