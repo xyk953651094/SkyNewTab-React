@@ -24,7 +24,7 @@ class CreatTimeComponent extends React.Component {
     constructor(props: any) {
         super(props);
         this.state = {
-            createTime: "",
+            createTime: "暂无拍摄时间",
         };
     }
 
@@ -42,14 +42,7 @@ class CreatTimeComponent extends React.Component {
 
     render() {
         return (
-            <Tooltip title={"拍摄时间：" + this.state.createTime}  placement="bottomRight"
-                     color={this.props.themeColor}
-                     onOpenChange={(open)=>{
-                         if(open) {
-                             $(".ant-tooltip-inner").css("color", getFontColor(this.props.themeColor));
-                         }
-                     }}
-            >
+            <Tooltip title={"拍摄时间：" + this.state.createTime}  placement="bottomRight" color={this.props.themeColor}>
                 <Button shape="round" icon={<CalendarOutlined />} size={"large"}
                         id={"createTimeBtn"}
                         className={"frostedGlass zIndexHigh"}

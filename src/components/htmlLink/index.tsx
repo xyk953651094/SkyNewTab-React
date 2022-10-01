@@ -31,7 +31,7 @@ class HtmlLinkComponent extends React.Component {
 
     componentWillReceiveProps(nextProps: any, prevProps: any) {
         if (nextProps.themeColor !== prevProps.themeColor) {
-            changeThemeColor("#htmlLinkBtn", nextProps.themeColor);
+            changeThemeColor(".htmlLinkBtn", nextProps.themeColor);
         }
 
         if (nextProps.imageData !== prevProps.imageData) {
@@ -51,18 +51,11 @@ class HtmlLinkComponent extends React.Component {
 
     render() {
         return (
-            <Tooltip title={"前往图片主页"}
-                     color={this.props.themeColor}
-                     onOpenChange={(open)=>{
-                         if(open) {
-                             $(".ant-tooltip-inner").css("color", getFontColor(this.props.themeColor));
-                         }
-                     }}
-            >
+            <Tooltip title={"前往图片主页"} color={this.props.themeColor}>
                 <Button shape="round" icon={<LinkOutlined/>} size={"large"}
                         onClick={this.handleClick.bind(this)}
-                        id={"htmlLinkBtn"}
-                        className={"frostedGlass zIndexHigh"}
+                        // id={"htmlLinkBtn"}
+                        className={"htmlLinkBtn frostedGlass zIndexHigh"}
                         style={{
                             display: this.props.display,
                         }}

@@ -87,7 +87,7 @@ class App extends React.Component {
                 themeColor: setColorTheme()
             }, () => {
                 let device = deviceModel();
-                
+
                 // 获取背景图片
                 $.ajax({
                     url: "https://api.unsplash.com/photos/random?",

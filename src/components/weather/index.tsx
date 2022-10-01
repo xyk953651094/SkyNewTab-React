@@ -29,11 +29,11 @@ class WeatherComponent extends React.Component {
         this.state = {
             display: "none",
             weatherInfo: "暂无天气信息",
-            region: "",
-            pm25: "",
-            rainfall: "",
-            visibility: "",
-            windInfo: "",
+            region: "暂无地区信息",
+            pm25: "暂无PM2.5信息",
+            rainfall: "暂无降雨信息",
+            visibility: "暂无视距信息",
+            windInfo: "暂无风况信息",
         };
     }
 
@@ -82,15 +82,7 @@ class WeatherComponent extends React.Component {
         );
 
         return (
-            <Popover title={this.state.region} content={popoverContent}
-                     color={this.props.themeColor}
-                     onOpenChange={(open)=>{
-                         if(open) {
-                             $(".ant-popover-title").css("color", getFontColor(this.props.themeColor));
-                             $(".ant-popover-inner-content").css("color", getFontColor(this.props.themeColor));
-                         }
-                     }}
-            >
+            <Popover title={this.state.region} content={popoverContent} color={this.props.themeColor}>
                 <Button shape="round" size={"large"}
                         id={"weatherBtn"}
                         className={"frostedGlass zIndexHigh"}

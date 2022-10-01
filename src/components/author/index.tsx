@@ -26,7 +26,7 @@ class AuthorComponent extends React.Component {
     constructor(props: any) {
         super(props);
         this.state = {
-            author: "",
+            author: "暂无作者信息",
             authorLink: "",
         };
     }
@@ -54,14 +54,7 @@ class AuthorComponent extends React.Component {
 
     render() {
         return (
-            <Tooltip title={"前往作者主页"}
-                     color={this.props.themeColor}
-                     onOpenChange={(open)=>{
-                         if(open) {
-                             $(".ant-tooltip-inner").css("color", getFontColor(this.props.themeColor));
-                         }
-                     }}
-            >
+            <Tooltip title={"前往作者主页"} color={this.props.themeColor}>
                 <Button shape="round" icon={<CameraOutlined/>} size={"large"}
                         onClick={this.handleClick.bind(this)}
                         id={"authorBtn"}

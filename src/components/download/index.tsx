@@ -31,14 +31,13 @@ class DownloadComponent extends React.Component {
 
     componentWillReceiveProps(nextProps: any, prevProps: any) {
         if (nextProps.themeColor !== prevProps.themeColor) {
-            changeThemeColor("#downloadBtn", nextProps.themeColor);
+            changeThemeColor(".downloadBtn", nextProps.themeColor);
         }
         if (nextProps.imageData !== prevProps.imageData){
             this.setState({
                 downloadLink: nextProps.imageData.links.download_location
             })
         }
-
     }
 
     handleClick() {
@@ -65,18 +64,11 @@ class DownloadComponent extends React.Component {
 
     render() {
         return (
-            <Tooltip title={"下载图片"}
-                     color={this.props.themeColor}
-                     onOpenChange={(open)=>{
-                         if(open) {
-                             $(".ant-tooltip-inner").css("color", getFontColor(this.props.themeColor));
-                         }
-                     }}
-            >
+            <Tooltip title={"下载图片"} color={this.props.themeColor}>
                 <Button shape="round" icon={<DownloadOutlined/>} size={"large"}
                         onClick={this.handleClick.bind(this)}
-                        id={"downloadBtn"}
-                        className={"frostedGlass zIndexHigh"}
+                        // id={"downloadBtn"}
+                        className={"downloadBtn frostedGlass zIndexHigh"}
                         style={{
                             display: this.props.display,
                         }}

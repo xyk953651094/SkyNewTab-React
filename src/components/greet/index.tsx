@@ -26,9 +26,9 @@ class GreetComponent extends React.Component {
         super(props);
         this.state = {
             greet: getGreet(new Date()),
-            calendar: "",
-            suit: "",
-            avoid: "",
+            calendar: getTimeDetails(new Date()).showDate4 + " " + getTimeDetails(new Date()).showWeek,
+            suit: "暂无信息",
+            avoid: "暂无信息",
         };
     }
 
@@ -48,10 +48,10 @@ class GreetComponent extends React.Component {
                     if (resultData.data.solarTerms.indexOf("后") === -1) {
                         holidayContent = "今日" + holidayContent;
                     }
-                    let temp = getTimeDetails(new Date());
+                    let timeDetails = getTimeDetails(new Date());
                     this.setState({
                         greet: this.state.greet + " ｜ " + holidayContent,
-                        calendar: temp.showDate4 + " " + temp.showWeek + "｜" +
+                        calendar: timeDetails.showDate4 + " " + timeDetails.showWeek + "｜" +
                             resultData.data.yearTips + resultData.data.chineseZodiac + "年｜" +
                             resultData.data.lunarCalendar,
                         suit: resultData.data.suit.replace(/\./g, "·"),
@@ -78,15 +78,7 @@ class GreetComponent extends React.Component {
         );
         
         return (
-            <Popover title={this.state.calendar} content={popoverContent} placement="topRight"
-                     color={this.props.themeColor}
-                     onOpenChange={(open)=>{
-                         if(open) {
-                             $(".ant-popover-title").css("color", getFontColor(this.props.themeColor));
-                             $(".ant-popover-inner-content").css("color", getFontColor(this.props.themeColor));
-                         }
-                     }}
-            >
+            <Popover title={this.state.calendar} content={popoverContent} placement="topRight" color={this.props.themeColor}>
                 <Button shape="round" icon={<SmileOutlined />} size={"large"}
                         id={"greetBtn"}
                         className={"frostedGlass zIndexHigh"}
