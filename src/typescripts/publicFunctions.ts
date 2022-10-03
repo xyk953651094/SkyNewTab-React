@@ -1,6 +1,7 @@
 import {lightThemeArray, darkThemeArray, device} from "./publicConstents"
 import {message, Modal} from 'antd';
 import "jquery-color"
+import {ThemeColorInterface} from "./publicInterface";
 const $ = require("jquery");
 const {confirm} = Modal;
 
@@ -93,11 +94,15 @@ export function setColorTheme() {
     let body = document.getElementsByTagName("body")[0];
     body.style.backgroundColor = theme[randomNum].bodyBackgroundColor;    // 设置body背景颜色
 
-    return theme[randomNum].componentBackgroundColor;  // 返回各组件背景颜色
+    let returnValue: ThemeColorInterface = {
+        "componentBackgroundColor": theme[randomNum].componentBackgroundColor,
+        "componentFontColor": getFontColor(theme[randomNum].componentBackgroundColor),
+    }
+    return returnValue;  // 返回各组件背景颜色
 }
 
 // 根据图片背景颜色获取元素反色效果
-export function getThemeColor(color: string) {
+export function getComponentBackgroundColor(color: string) {
     color = "0x" + color.replace("#", '');
     let newColor = "000000" + (0xFFFFFF - parseInt(color)).toString(16);
     return "#" + newColor.substring(newColor.length-6, newColor.length);
@@ -235,10 +240,10 @@ export function getDevice() {
 }
 
 // 过渡动画
-export function changeThemeColor(element: string, backgroundColor: string, time: number = 300) {
+export function changeThemeColor(element: string, backgroundColor: string, fontColor: string, time: number = 300) {
     $(element).animate({
         backgroundColor: backgroundColor,
-        color: getFontColor(backgroundColor),
+        color: fontColor,
     }, time);
 }
 

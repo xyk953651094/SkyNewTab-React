@@ -3,16 +3,18 @@ import "../../App.css";
 import {Button, Tooltip, message} from "antd";
 import {LinkOutlined} from "@ant-design/icons";
 import {unsplashUrl} from "../../typescripts/publicConstents";
-import {changeThemeColor, getFontColor, getThemeColor, isEmptyString} from "../../typescripts/publicFunctions";
-const $ = require("jquery");
+import {changeThemeColor, isEmptyString} from "../../typescripts/publicFunctions";
+import {ThemeColorInterface} from "../../typescripts/publicInterface";
 
 type propType = {
-    themeColor: string,
+    themeColor: ThemeColorInterface,
     display: "none" | "block",
     imageData: any,
 }
 
 type stateType = {
+    backgroundColor: string,
+    fontColor: string,
     htmlLink: string,
 }
 
@@ -25,13 +27,20 @@ class HtmlLinkComponent extends React.Component {
     constructor(props: any) {
         super(props);
         this.state = {
+            backgroundColor: "",
+            fontColor: "",
             htmlLink: "",
         };
     }
 
     componentWillReceiveProps(nextProps: any, prevProps: any) {
         if (nextProps.themeColor !== prevProps.themeColor) {
-            changeThemeColor(".htmlLinkBtn", nextProps.themeColor);
+            this.setState({
+                backgroundColor: nextProps.themeColor.componentBackgroundColor,
+                fontColor: nextProps.themeColor.componentFontColor,
+            },() => {
+                changeThemeColor(".htmlLinkBtn", this.state.backgroundColor, this.state.fontColor);
+            });
         }
 
         if (nextProps.imageData !== prevProps.imageData) {
@@ -51,7 +60,7 @@ class HtmlLinkComponent extends React.Component {
 
     render() {
         return (
-            <Tooltip title={"前往图片主页"} color={this.props.themeColor}>
+            <Tooltip title={"前往图片主页"} color={this.state.backgroundColor}>
                 <Button shape="round" icon={<LinkOutlined/>} size={"large"}
                         onClick={this.handleClick.bind(this)}
                         // id={"htmlLinkBtn"}

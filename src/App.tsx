@@ -14,8 +14,8 @@ import CreatTimeComponent from "./components/createTime";
 
 import {Layout, Row, Col, Space, message} from "antd";
 import {clientId, defaultImage, device} from "./typescripts/publicConstents";
-import {setColorTheme, getDevice, changeThemeColor, getThemeColor} from "./typescripts/publicFunctions";
-import {ImageDataInterface} from "./typescripts/publicInterface";
+import {setColorTheme, changeThemeColor, getComponentBackgroundColor, getFontColor} from "./typescripts/publicFunctions";
+import {ImageDataInterface, ThemeColorInterface} from "./typescripts/publicInterface";
 const {Header, Content, Footer} = Layout;
 const $ = require("jquery");
 
@@ -25,7 +25,7 @@ type stateType = {
     componentDisplay: "none" | "block",
     mobileComponentDisplay: "none" | "block",
     wallpaperComponentDisplay: "none" | "block",
-    themeColor: string,
+    themeColor: ThemeColorInterface,
     imageData: ImageDataInterface,
 
     displayEffect: "regular" | "full" | "raw",
@@ -45,7 +45,10 @@ class App extends React.Component {
             componentDisplay: "none",
             mobileComponentDisplay: "none",
             wallpaperComponentDisplay: "none",
-            themeColor: setColorTheme(),
+            themeColor: {
+                "componentBackgroundColor": "",
+                "componentFontColor": "",
+            },
             imageData: defaultImage,
 
             displayEffect: "regular",
@@ -99,7 +102,7 @@ class App extends React.Component {
                         "topics": this.state.imageTopics,
                         "content_filter": "high",
                     },
-                    timeout: 5000,
+                    timeout: 10000,
                     success: (imageData: ImageDataInterface) => {
                         this.setState({
                             componentDisplay: "block",
@@ -109,10 +112,18 @@ class App extends React.Component {
                         }, () => {
                             // 修改主题颜色
                             if (imageData.color !== null) {
+                                let componentBackgroundColor = getComponentBackgroundColor(imageData.color);
+                                let componentFontColor = getFontColor(componentBackgroundColor);
                                 this.setState({
-                                    themeColor: getThemeColor(imageData.color),
+                                    themeColor: {
+                                        "componentBackgroundColor": componentBackgroundColor,
+                                        "componentFontColor": componentFontColor,
+                                    },
                                 })
-                                changeThemeColor("body", imageData.color);
+
+                                let bodyBackgroundColor = imageData.color;
+                                let bodyFontColor = getFontColor(bodyBackgroundColor);
+                                changeThemeColor("body", bodyBackgroundColor, bodyFontColor);
                             }
                             // 小屏显示底部按钮
                             if (device === "iPhone" || device === "Android") {

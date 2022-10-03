@@ -5,21 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7b6aa851-d91a-4d7e-aff0-98e24f63e226" name="变更" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/donation/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/otherApp/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/author/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/author/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/createTime/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/createTime/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/donation/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/donation/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/download/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/download/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/greet/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/greet/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/htmlLink/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/htmlLink/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/otherApp/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/otherApp/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/preference/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/preference/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/wallpaper/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/wallpaper/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/weather/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/weather/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stylesheets/publicStyles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/stylesheets/publicStyles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/typescripts/httpRequests.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/typescripts/publicConstents.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/typescripts/publicConstents.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/typescripts/publicFunctions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/typescripts/publicFunctions.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/typescripts/publicInterface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/typescripts/publicInterface.ts" afterDir="false" />
     </list>
@@ -184,7 +179,7 @@
       <workItem from="1664610088772" duration="6340000" />
       <workItem from="1664694459461" duration="1916000" />
       <workItem from="1664704807713" duration="783000" />
-      <workItem from="1664770901453" duration="5837000" />
+      <workItem from="1664770901453" duration="7956000" />
     </task>
     <task id="LOCAL-00001" summary="关闭获取天气失败报错">
       <created>1654142997686</created>
@@ -361,7 +356,14 @@
       <option name="project" value="LOCAL" />
       <updated>1664627793937</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="优化代码质量">
+      <created>1664788748783</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1664788748783</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -384,10 +386,10 @@
     <MESSAGE value="增加图片旋转效果" />
     <MESSAGE value="优化抽屉显示效果" />
     <MESSAGE value="优化显示效果，优化代码质量" />
-    <MESSAGE value="优化代码质量" />
     <MESSAGE value="优化代码质量，优化壁纸显示bug，解决依赖项高危漏洞" />
     <MESSAGE value="新增壁纸显示效果" />
     <MESSAGE value="优化代码质量，优化显示效果" />
-    <option name="LAST_COMMIT_MESSAGE" value="优化代码质量，优化显示效果" />
+    <MESSAGE value="优化代码质量" />
+    <option name="LAST_COMMIT_MESSAGE" value="优化代码质量" />
   </component>
 </project>

@@ -3,16 +3,19 @@ import "../../App.css";
 import {Button, Tooltip, message} from "antd";
 import {DownloadOutlined} from "@ant-design/icons";
 import {unsplashUrl, clientId} from "../../typescripts/publicConstents";
-import {changeThemeColor, getFontColor, getThemeColor, isEmptyString} from "../../typescripts/publicFunctions";
+import {changeThemeColor, isEmptyString} from "../../typescripts/publicFunctions";
+import {ThemeColorInterface} from "../../typescripts/publicInterface";
 const $ = require("jquery");
 
 type propType = {
-    themeColor: string,
+    themeColor: ThemeColorInterface,
     display: "none" | "block",
     imageData: any,
 }
 
 type stateType = {
+    backgroundColor: string,
+    fontColor: string,
     downloadLink: string,
 }
 
@@ -25,14 +28,22 @@ class DownloadComponent extends React.Component {
     constructor(props: any) {
         super(props);
         this.state = {
+            backgroundColor: "",
+            fontColor: "",
             downloadLink: "",
         };
     }
 
     componentWillReceiveProps(nextProps: any, prevProps: any) {
         if (nextProps.themeColor !== prevProps.themeColor) {
-            changeThemeColor(".downloadBtn", nextProps.themeColor);
+            this.setState({
+                backgroundColor: nextProps.themeColor.componentBackgroundColor,
+                fontColor: nextProps.themeColor.componentFontColor,
+            },() => {
+                changeThemeColor(".downloadBtn", this.state.backgroundColor, this.state.fontColor);
+            });
         }
+
         if (nextProps.imageData !== prevProps.imageData){
             this.setState({
                 downloadLink: nextProps.imageData.links.download_location
@@ -64,7 +75,7 @@ class DownloadComponent extends React.Component {
 
     render() {
         return (
-            <Tooltip title={"下载图片"} color={this.props.themeColor}>
+            <Tooltip title={"下载图片"} color={this.state.backgroundColor}>
                 <Button shape="round" icon={<DownloadOutlined/>} size={"large"}
                         onClick={this.handleClick.bind(this)}
                         // id={"downloadBtn"}

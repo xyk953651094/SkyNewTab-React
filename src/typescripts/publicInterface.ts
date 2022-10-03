@@ -1,3 +1,5 @@
+import {getFontColor} from "./publicFunctions";
+
 export interface ImageDataInterface {
     "id": string | null,
     "created_at": string | null,
@@ -83,6 +85,11 @@ export interface FormInitialValuesInterface {
     "displayEffectRadio": "regular" | "full" | "raw",
     "dynamicEffectRadio": "close" | "translate" | "rotate" | "all",
     "imageTopicsCheckbox": string
+}
+
+export interface ThemeColorInterface {
+    "componentBackgroundColor": string,
+    "componentFontColor": string,
 }
 
 export interface DeviceOrientationEventiOS extends DeviceOrientationEvent {

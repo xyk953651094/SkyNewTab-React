@@ -7,13 +7,13 @@ import type {RadioChangeEvent} from "antd";
 import type {CheckboxValueType} from "antd/es/checkbox/Group";
 import {MoreOutlined, SettingOutlined} from "@ant-design/icons";
 import {changeThemeColor, getFontColor} from "../../typescripts/publicFunctions";
-import {FormInitialValuesInterface} from "../../typescripts/publicInterface";
+import {FormInitialValuesInterface, ThemeColorInterface} from "../../typescripts/publicInterface";
 import {defaultFormInitialValues, device} from "../../typescripts/publicConstents";
 const $ = require("jquery");
 const {Text} = Typography;
 
 type propType = {
-    themeColor: string,
+    themeColor: ThemeColorInterface,
     display: "none" | "block",
     imageData: any,
     getDisplayEffect: any,
@@ -81,14 +81,14 @@ class PreferenceComponent extends React.Component {
             // popover
             let popoverEle = $(".ant-popover");
             if (popoverEle.length && popoverEle.length > 0) {
-                $(".ant-popover-title").css("color", getFontColor(this.props.themeColor));
-                $(".ant-popover-inner-content").css("color", getFontColor(this.props.themeColor));
+                $(".ant-popover-title").css("color", this.state.fontColor);
+                $(".ant-popover-inner-content").css("color", this.state.fontColor);
             }
             
             // toolTip
             let toolTipEle = $(".ant-tooltip");
             if (toolTipEle.length && toolTipEle.length > 0) {
-                $(".ant-tooltip-inner").css("color", getFontColor(this.props.themeColor));
+                $(".ant-tooltip-inner").css("color", this.state.fontColor);
             }
 
             // messgae
@@ -121,10 +121,11 @@ class PreferenceComponent extends React.Component {
 
     componentWillReceiveProps(nextProps: any, prevProps: any) {
         if (nextProps.themeColor !== prevProps.themeColor) {
-            changeThemeColor(".preferenceBtn", nextProps.themeColor);
             this.setState({
-                backgroundColor: nextProps.themeColor,
-                fontColor: getFontColor(nextProps.themeColor),
+                backgroundColor: nextProps.themeColor.componentBackgroundColor,
+                fontColor: nextProps.themeColor.componentFontColor,
+            },() => {
+                changeThemeColor(".preferenceBtn", this.state.backgroundColor, this.state.fontColor);
             });
         }
 
@@ -199,7 +200,7 @@ class PreferenceComponent extends React.Component {
     render() {
         return (
             <>
-                <Tooltip title={"偏好设置"} placement="topRight" color={this.props.themeColor}>
+                <Tooltip title={"偏好设置"} placement="topRight" color={this.state.backgroundColor}>
                     <Button shape="round" icon={<MoreOutlined />} size={"large"}
                             onClick={this.drawerOnShow.bind(this)}
                             // id={"preferenceBtn"}

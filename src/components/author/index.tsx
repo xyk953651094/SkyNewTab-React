@@ -3,15 +3,18 @@ import "../../App.css";
 import {Button, Tooltip, message} from "antd";
 import {CameraOutlined} from "@ant-design/icons";
 import {unsplashUrl} from "../../typescripts/publicConstents";
-import {changeThemeColor, getFontColor, getThemeColor, isEmptyString} from "../../typescripts/publicFunctions";
+import {changeThemeColor, isEmptyString} from "../../typescripts/publicFunctions";
+import {ThemeColorInterface} from "../../typescripts/publicInterface";
 
 type propType = {
-    themeColor: string,
+    themeColor: ThemeColorInterface,
     display: "none" | "block",
     imageData: any,
 }
 
 type stateType = {
+    backgroundColor: string,
+    fontColor: string,
     author: string
     authorLink: string,
 }
@@ -25,6 +28,8 @@ class AuthorComponent extends React.Component {
     constructor(props: any) {
         super(props);
         this.state = {
+            backgroundColor: "",
+            fontColor: "",
             author: "暂无作者信息",
             authorLink: "",
         };
@@ -32,7 +37,12 @@ class AuthorComponent extends React.Component {
 
     componentWillReceiveProps(nextProps: any, prevProps: any) {
         if (nextProps.themeColor !== prevProps.themeColor) {
-            changeThemeColor("#authorBtn", nextProps.themeColor);
+            this.setState({
+                backgroundColor: nextProps.themeColor.componentBackgroundColor,
+                fontColor: nextProps.themeColor.componentFontColor,
+            },() => {
+                changeThemeColor("#authorBtn", this.state.backgroundColor, this.state.fontColor);
+            });
         }
 
         if (nextProps.imageData !== prevProps.imageData) {
@@ -53,7 +63,7 @@ class AuthorComponent extends React.Component {
 
     render() {
         return (
-            <Tooltip title={"前往作者主页"} color={this.props.themeColor}>
+            <Tooltip title={"前往作者主页"} color={this.state.backgroundColor}>
                 <Button shape="round" icon={<CameraOutlined/>} size={"large"}
                         onClick={this.handleClick.bind(this)}
                         id={"authorBtn"}

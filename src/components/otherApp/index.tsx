@@ -4,10 +4,11 @@ import {List, Avatar, Card, Typography} from "antd";
 import {AppstoreOutlined} from "@ant-design/icons";
 import skyNewTabPoemIcon from "../../assets/otherApps/skyNewTabPoem.png";
 import skyNewTabIcon from "../../assets/otherApps/skyNewTab.png";
+import {ThemeColorInterface} from "../../typescripts/publicInterface";
 const {Link} = Typography;
 
 type propType = {
-    themeColor: string,
+    themeColor: ThemeColorInterface,
 }
 
 type stateType = {
