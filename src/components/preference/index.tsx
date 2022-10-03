@@ -7,15 +7,15 @@ import type {RadioChangeEvent} from "antd";
 import type {CheckboxValueType} from "antd/es/checkbox/Group";
 import {MoreOutlined, SettingOutlined} from "@ant-design/icons";
 import {changeThemeColor, getFontColor} from "../../typescripts/publicFunctions";
-import {FormInitialValuesInterface, ThemeColorInterface} from "../../typescripts/publicInterface";
-import {defaultFormInitialValues, device} from "../../typescripts/publicConstents";
+import {FormInitialValuesInterface, ImageDataInterface, ThemeColorInterface} from "../../typescripts/publicInterface";
+import {defaultFormInitialValues, device} from "../../typescripts/publicConstants";
 const $ = require("jquery");
 const {Text} = Typography;
 
 type propType = {
     themeColor: ThemeColorInterface,
     display: "none" | "block",
-    imageData: any,
+    imageData: ImageDataInterface,
     getDisplayEffect: any,
     getDynamicEffect: any,
     getImageTopics: any,
@@ -60,6 +60,7 @@ class PreferenceComponent extends React.Component {
         if (tempImageTopicsCheckbox !== null) {
             tempImageTopicsCheckbox = tempImageTopicsCheckbox.split(",");
         }
+        console.log(tempImageTopicsCheckbox);
 
         this.setState({
             formInitialValues: {
@@ -67,6 +68,8 @@ class PreferenceComponent extends React.Component {
                 "dynamicEffectRadio": tempDynamicEffectRadio === null ? "all" : tempDynamicEffectRadio,
                 "imageTopicsCheckbox": tempImageTopicsCheckbox === null ? ["Fzo3zuOHN6w"] : tempImageTopicsCheckbox,
             }
+        }, ()=>{
+            console.log(this.state.formInitialValues)
         });
 
         // 屏幕适配
@@ -112,8 +115,8 @@ class PreferenceComponent extends React.Component {
                 $(".ant-form-item-label > label").css("color", this.state.fontColor);
                 $(".ant-radio-wrapper").children(":last-child").css("color", this.state.fontColor);
                 $(".ant-checkbox-wrapper").children(":last-child").css("color", this.state.fontColor);
-                // $(".ant-collapse").css("backgroundColor", this.state.backgroundColor);
-                // $(".ant-collapse-header").css("color", this.state.fontColor);
+                $(".ant-collapse").css("backgroundColor", this.state.backgroundColor);
+                $(".ant-collapse-header").css("color", this.state.fontColor);
                 $(".ant-list-item-meta-title").css("color", this.state.fontColor);
             }
         });
@@ -244,33 +247,30 @@ class PreferenceComponent extends React.Component {
                                         </Radio.Group>
                                     </Form.Item>
                                     <Form.Item name="imageTopicsCheckbox" label="图片主题">
-                                        <Space direction="vertical" size="small">
-                                            <Alert message="全不选与全选效果相同" type="info" showIcon/>
-                                            <Checkbox.Group onChange={this.imageTopicsCheckboxOnChange.bind(this)}>
-                                                <Row>
-                                                    <Col span={12}><Checkbox name={"travel"}             value="Fzo3zuOHN6w">旅游</Checkbox></Col>
-                                                    <Col span={12}><Checkbox name={"wallpapers"}         value="bo8jQKTaE0Y">壁纸</Checkbox></Col>
-                                                    <Col span={12}><Checkbox name={"3d-renders"}         value="CDwuwXJAbEw">3D渲染</Checkbox></Col>
-                                                    <Col span={12}><Checkbox name={"textures-patterns"}  value="iUIsnVtjB0Y">纹理</Checkbox></Col>
-                                                    <Col span={12}><Checkbox name={"experimental"}       value="qPYsDzvJOYc">实验</Checkbox></Col>
-                                                    <Col span={12}><Checkbox name={"architecture"}       value="rnSKDHwwYUk">建筑</Checkbox></Col>
-                                                    <Col span={12}><Checkbox name={"nature"}             value="6sMVjTLSkeQ">自然</Checkbox></Col>
-                                                    <Col span={12}><Checkbox name={"business-work"}      value="aeu6rL-j6ew">商务</Checkbox></Col>
-                                                    <Col span={12}><Checkbox name={"fashion"}            value="S4MKLAsBB74">时尚</Checkbox></Col>
-                                                    <Col span={12}><Checkbox name={"film"}               value="hmenvQhUmxM">电影</Checkbox></Col>
-                                                    <Col span={12}><Checkbox name={"food-drink"}         value="xjPR4hlkBGA">饮食</Checkbox></Col>
-                                                    <Col span={12}><Checkbox name={"health"}             value="_hb-dl4Q-4U">健康</Checkbox></Col>
-                                                    <Col span={12}><Checkbox name={"people"}             value="towJZFskpGg">人物</Checkbox></Col>
-                                                    <Col span={12}><Checkbox name={"interiors"}          value="R_Fyn-Gwtlw">精神</Checkbox></Col>
-                                                    <Col span={12}><Checkbox name={"street-photography"} value="xHxYTMHLgOc">街头</Checkbox></Col>
-                                                    <Col span={12}><Checkbox name={"animals"}            value="Jpg6Kidl-Hk">动物</Checkbox></Col>
-                                                    <Col span={12}><Checkbox name={"spirituality"}       value="_8zFHuhRhyo">灵魂</Checkbox></Col>
-                                                    <Col span={12}><Checkbox name={"arts-culture"}       value="bDo48cUhwnY">文化</Checkbox></Col>
-                                                    <Col span={12}><Checkbox name={"history"}            value="dijpbw99kQQ">历史</Checkbox></Col>
-                                                    <Col span={12}><Checkbox name={"athletics"}          value="Bn-DjrcBrwo">体育</Checkbox></Col>
-                                                </Row>
-                                            </Checkbox.Group>
-                                        </Space>
+                                        <Checkbox.Group onChange={this.imageTopicsCheckboxOnChange.bind(this)}>
+                                            <Row>
+                                                <Col span={12}><Checkbox name={"travel"}             value="Fzo3zuOHN6w">旅游</Checkbox></Col>
+                                                <Col span={12}><Checkbox name={"wallpapers"}         value="bo8jQKTaE0Y">壁纸</Checkbox></Col>
+                                                <Col span={12}><Checkbox name={"3d-renders"}         value="CDwuwXJAbEw">3D渲染</Checkbox></Col>
+                                                <Col span={12}><Checkbox name={"textures-patterns"}  value="iUIsnVtjB0Y">纹理</Checkbox></Col>
+                                                <Col span={12}><Checkbox name={"experimental"}       value="qPYsDzvJOYc">实验</Checkbox></Col>
+                                                <Col span={12}><Checkbox name={"architecture"}       value="rnSKDHwwYUk">建筑</Checkbox></Col>
+                                                <Col span={12}><Checkbox name={"nature"}             value="6sMVjTLSkeQ">自然</Checkbox></Col>
+                                                <Col span={12}><Checkbox name={"business-work"}      value="aeu6rL-j6ew">商务</Checkbox></Col>
+                                                <Col span={12}><Checkbox name={"fashion"}            value="S4MKLAsBB74">时尚</Checkbox></Col>
+                                                <Col span={12}><Checkbox name={"film"}               value="hmenvQhUmxM">电影</Checkbox></Col>
+                                                <Col span={12}><Checkbox name={"food-drink"}         value="xjPR4hlkBGA">饮食</Checkbox></Col>
+                                                <Col span={12}><Checkbox name={"health"}             value="_hb-dl4Q-4U">健康</Checkbox></Col>
+                                                <Col span={12}><Checkbox name={"people"}             value="towJZFskpGg">人物</Checkbox></Col>
+                                                <Col span={12}><Checkbox name={"interiors"}          value="R_Fyn-Gwtlw">精神</Checkbox></Col>
+                                                <Col span={12}><Checkbox name={"street-photography"} value="xHxYTMHLgOc">街头</Checkbox></Col>
+                                                <Col span={12}><Checkbox name={"animals"}            value="Jpg6Kidl-Hk">动物</Checkbox></Col>
+                                                <Col span={12}><Checkbox name={"spirituality"}       value="_8zFHuhRhyo">灵魂</Checkbox></Col>
+                                                <Col span={12}><Checkbox name={"arts-culture"}       value="bDo48cUhwnY">文化</Checkbox></Col>
+                                                <Col span={12}><Checkbox name={"history"}            value="dijpbw99kQQ">历史</Checkbox></Col>
+                                                <Col span={12}><Checkbox name={"athletics"}          value="Bn-DjrcBrwo">体育</Checkbox></Col>
+                                            </Row>
+                                        </Checkbox.Group>
                                     </Form.Item>
                                 </Form>
                             </Card>

@@ -3,14 +3,14 @@ import "../../App.css";
 import "../../stylesheets/wallpaper.css"
 import "../../stylesheets/publicStyles.css"
 import {Image} from "antd";
-import {fadeIn, isEmptyString, imageDynamicEffect, iOSImageDynamicEffect} from "../../typescripts/publicFunctions";
-import {device} from "../../typescripts/publicConstents";
+import {imageDynamicEffect, iOSImageDynamicEffect} from "../../typescripts/publicFunctions";
+import {device} from "../../typescripts/publicConstants";
 import {isBlurhashValid, decode} from "blurhash";
-const $ = require("jquery");
+import {ImageDataInterface} from "../../typescripts/publicInterface";
 
 type propType = {
     display: "none" | "block",
-    imageData: any,
+    imageData: ImageDataInterface,
     displayEffect: "regular" | "full" | "raw",
     dynamicEffect: "close" | "translate" | "rotate" | "all",
 }
@@ -47,7 +47,6 @@ class WallpaperComponent extends React.Component {
         let backgroundImageDiv: HTMLElement = document.getElementById("backgroundImage");
         // @ts-ignore
         let backgroundImage: HTMLElement = backgroundImageDiv.children[0];
-        // let backgroundImage: HTMLElement = $("#backgroundImage").children(":first");
 
         if (nextProps.display !== prevProps.display) {
             if(nextProps.display === "block") {

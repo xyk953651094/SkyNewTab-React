@@ -2,15 +2,14 @@ import React from "react";
 import "../../App.css";
 import {Button, Tooltip, message} from "antd";
 import {DownloadOutlined} from "@ant-design/icons";
-import {unsplashUrl, clientId} from "../../typescripts/publicConstents";
+import {unsplashUrl, clientId} from "../../typescripts/publicConstants";
 import {changeThemeColor, isEmptyString} from "../../typescripts/publicFunctions";
-import {ThemeColorInterface} from "../../typescripts/publicInterface";
-const $ = require("jquery");
+import {ImageDataInterface, ThemeColorInterface} from "../../typescripts/publicInterface";
 
 type propType = {
     themeColor: ThemeColorInterface,
     display: "none" | "block",
-    imageData: any,
+    imageData: ImageDataInterface,
 }
 
 type stateType = {

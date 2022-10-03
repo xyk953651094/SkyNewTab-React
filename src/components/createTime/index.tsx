@@ -3,13 +3,12 @@ import "../../App.css";
 import {Button, Tooltip} from "antd";
 import {CalendarOutlined} from "@ant-design/icons";
 import {changeThemeColor} from "../../typescripts/publicFunctions";
-import {ThemeColorInterface} from "../../typescripts/publicInterface";
-const $ = require("jquery");
+import {ImageDataInterface, ThemeColorInterface} from "../../typescripts/publicInterface";
 
 type propType = {
     themeColor: ThemeColorInterface,
     display: "none" | "block",
-    imageData: any,
+    imageData: ImageDataInterface,
 }
 
 type stateType = {

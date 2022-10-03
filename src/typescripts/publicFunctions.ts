@@ -1,4 +1,4 @@
-import {lightThemeArray, darkThemeArray, device} from "./publicConstents"
+import {lightThemeArray, darkThemeArray, device} from "./publicConstants"
 import {message, Modal} from 'antd';
 import "jquery-color"
 import {ThemeColorInterface} from "./publicInterface";

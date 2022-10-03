@@ -13,7 +13,7 @@ import AuthorComponent from "./components/author";
 import CreatTimeComponent from "./components/createTime";
 
 import {Layout, Row, Col, Space, message} from "antd";
-import {clientId, defaultImage, device} from "./typescripts/publicConstents";
+import {clientId, defaultImage, device} from "./typescripts/publicConstants";
 import {setColorTheme, changeThemeColor, getComponentBackgroundColor, getFontColor} from "./typescripts/publicFunctions";
 import {ImageDataInterface, ThemeColorInterface} from "./typescripts/publicInterface";
 const {Header, Content, Footer} = Layout;
@@ -70,6 +70,7 @@ class App extends React.Component {
     }
 
     getImageTopics(imageTopics: string) {
+        console.log(imageTopics);
         this.setState({
             imageTopics: imageTopics
         })

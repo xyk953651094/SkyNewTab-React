@@ -2,14 +2,14 @@ import React from "react";
 import "../../App.css";
 import {Button, Tooltip, message} from "antd";
 import {LinkOutlined} from "@ant-design/icons";
-import {unsplashUrl} from "../../typescripts/publicConstents";
+import {unsplashUrl} from "../../typescripts/publicConstants";
 import {changeThemeColor, isEmptyString} from "../../typescripts/publicFunctions";
-import {ThemeColorInterface} from "../../typescripts/publicInterface";
+import {ImageDataInterface, ThemeColorInterface} from "../../typescripts/publicInterface";
 
 type propType = {
     themeColor: ThemeColorInterface,
     display: "none" | "block",
-    imageData: any,
+    imageData: ImageDataInterface,
 }
 
 type stateType = {
