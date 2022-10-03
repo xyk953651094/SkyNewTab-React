@@ -4,7 +4,6 @@ import {Button, Tooltip, message} from "antd";
 import {CameraOutlined} from "@ant-design/icons";
 import {unsplashUrl} from "../../typescripts/publicConstents";
 import {changeThemeColor, getFontColor, getThemeColor, isEmptyString} from "../../typescripts/publicFunctions";
-const $ = require("jquery");
 
 type propType = {
     themeColor: string,
@@ -58,7 +57,7 @@ class AuthorComponent extends React.Component {
                 <Button shape="round" icon={<CameraOutlined/>} size={"large"}
                         onClick={this.handleClick.bind(this)}
                         id={"authorBtn"}
-                        className={"frostedGlass zIndexHigh"}
+                        className={"componentTheme zIndexHigh"}
                         style={{display: this.props.display}}
                 >
                     {this.state.author}

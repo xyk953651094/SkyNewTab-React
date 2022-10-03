@@ -55,7 +55,7 @@ class HtmlLinkComponent extends React.Component {
                 <Button shape="round" icon={<LinkOutlined/>} size={"large"}
                         onClick={this.handleClick.bind(this)}
                         // id={"htmlLinkBtn"}
-                        className={"htmlLinkBtn frostedGlass zIndexHigh"}
+                        className={"htmlLinkBtn componentTheme zIndexHigh"}
                         style={{
                             display: this.props.display,
                         }}

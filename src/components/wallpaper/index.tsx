@@ -3,9 +3,10 @@ import "../../App.css";
 import "../../stylesheets/wallpaper.css"
 import "../../stylesheets/publicStyles.css"
 import {Image} from "antd";
-import {fadeIn, isEmptyString, mouseMoveEffect} from "../../typescripts/publicFunctions";
+import {fadeIn, isEmptyString, imageDynamicEffect, iOSImageDynamicEffect} from "../../typescripts/publicFunctions";
+import {device} from "../../typescripts/publicConstents";
 import {isBlurhashValid, decode} from "blurhash";
-import image from "antd/lib/image";
+const $ = require("jquery");
 
 type propType = {
     display: "none" | "block",
@@ -42,10 +43,14 @@ class WallpaperComponent extends React.Component {
     }
 
     componentWillReceiveProps(nextProps: any, prevProps: any) {
+        // @ts-ignore
+        let backgroundImageDiv: HTMLElement = document.getElementById("backgroundImage");
+        // @ts-ignore
+        let backgroundImage: HTMLElement = backgroundImageDiv.children[0];
+        // let backgroundImage: HTMLElement = $("#backgroundImage").children(":first");
+
         if (nextProps.display !== prevProps.display) {
             if(nextProps.display === "block") {
-                // @ts-ignore
-                let backgroundImage: HTMLElement = document.getElementById("backgroundImage").children[0];
                 if (backgroundImage instanceof HTMLElement) {
                     backgroundImage.onload = () => {
                         this.setState({
@@ -58,7 +63,9 @@ class WallpaperComponent extends React.Component {
                                 backgroundImage.style.transition = "5s";
                             }, 2000);
                             setTimeout(() => {
-                                mouseMoveEffect(this.props.dynamicEffect)
+                                backgroundImageDiv.style.perspective = "500px";
+                                (device === "iPhone" || device === "iPad")?
+                                    iOSImageDynamicEffect(backgroundImage) : imageDynamicEffect(backgroundImage, this.props.dynamicEffect);
                             }, 7000);
                         })
                     }
@@ -88,7 +95,7 @@ class WallpaperComponent extends React.Component {
 
         // 鼠标移动效果
         if(nextProps.dynamicEffect !== this.props.dynamicEffect) {
-            mouseMoveEffect(nextProps.dynamicEffect);
+            imageDynamicEffect(backgroundImage, nextProps.dynamicEffect);
         }
 
         // this.setState({

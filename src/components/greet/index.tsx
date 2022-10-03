@@ -81,7 +81,7 @@ class GreetComponent extends React.Component {
             <Popover title={this.state.calendar} content={popoverContent} placement="topRight" color={this.props.themeColor}>
                 <Button shape="round" icon={<SmileOutlined />} size={"large"}
                         id={"greetBtn"}
-                        className={"frostedGlass zIndexHigh"}
+                        className={"componentTheme zIndexHigh"}
                         style={{
                             cursor: "default"
                         }}

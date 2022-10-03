@@ -84,3 +84,7 @@ export interface FormInitialValuesInterface {
     "dynamicEffectRadio": "close" | "translate" | "rotate" | "all",
     "imageTopicsCheckbox": string
 }
+
+export interface DeviceOrientationEventiOS extends DeviceOrientationEvent {
+    requestPermission?: () => Promise<'granted' | 'denied'>;
+}

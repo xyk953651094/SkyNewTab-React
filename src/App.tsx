@@ -13,8 +13,8 @@ import AuthorComponent from "./components/author";
 import CreatTimeComponent from "./components/createTime";
 
 import {Layout, Row, Col, Space, message} from "antd";
-import {clientId, defaultImage} from "./typescripts/publicConstents";
-import {setColorTheme, deviceModel, changeThemeColor, getThemeColor} from "./typescripts/publicFunctions";
+import {clientId, defaultImage, device} from "./typescripts/publicConstents";
+import {setColorTheme, getDevice, changeThemeColor, getThemeColor} from "./typescripts/publicFunctions";
 import {ImageDataInterface} from "./typescripts/publicInterface";
 const {Header, Content, Footer} = Layout;
 const $ = require("jquery");
@@ -86,8 +86,6 @@ class App extends React.Component {
             this.setState({
                 themeColor: setColorTheme()
             }, () => {
-                let device = deviceModel();
-
                 // 获取背景图片
                 $.ajax({
                     url: "https://api.unsplash.com/photos/random?",
@@ -101,7 +99,7 @@ class App extends React.Component {
                         "topics": this.state.imageTopics,
                         "content_filter": "high",
                     },
-                    timeout: 10000,
+                    timeout: 5000,
                     success: (imageData: ImageDataInterface) => {
                         this.setState({
                             componentDisplay: "block",

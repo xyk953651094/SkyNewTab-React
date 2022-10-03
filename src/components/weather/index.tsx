@@ -85,7 +85,7 @@ class WeatherComponent extends React.Component {
             <Popover title={this.state.region} content={popoverContent} color={this.props.themeColor}>
                 <Button shape="round" size={"large"}
                         id={"weatherBtn"}
-                        className={"frostedGlass zIndexHigh"}
+                        className={"componentTheme zIndexHigh"}
                         style={{
                             display: this.state.display,
                             cursor: "default"

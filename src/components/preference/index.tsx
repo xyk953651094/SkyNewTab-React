@@ -1,17 +1,16 @@
 import React from "react";
 import "../../App.css";
-import {Button, Tooltip, Drawer, Card, Typography, Form, Row, Col, Radio, Checkbox, Collapse, Avatar, List, Space, Alert, message} from "antd";
+import DonationComponent from "../donation";
+import OtherAppComponent from "../otherApp";
+import {Button, Tooltip, Drawer, Card, Typography, Form, Row, Col, Radio, Checkbox, Space, Alert, message} from "antd";
 import type {RadioChangeEvent} from "antd";
 import type {CheckboxValueType} from "antd/es/checkbox/Group";
-import {MoreOutlined, SettingOutlined, HeartOutlined, AlipayCircleOutlined, WechatOutlined, AppstoreOutlined} from "@ant-design/icons";
-import {changeThemeColor, getFontColor, deviceModel} from "../../typescripts/publicFunctions";
+import {MoreOutlined, SettingOutlined} from "@ant-design/icons";
+import {changeThemeColor, getFontColor} from "../../typescripts/publicFunctions";
 import {FormInitialValuesInterface} from "../../typescripts/publicInterface";
-import {defaultFormInitialValues} from "../../typescripts/publicConstents";
-import skyNewTabIcon from "../../assets/otherApps/skyNewTab.png";
-import skyNewTabPoemIcon from "../../assets/otherApps/skyNewTabPoem.png";
+import {defaultFormInitialValues, device} from "../../typescripts/publicConstents";
 const $ = require("jquery");
-const {Title, Paragraph, Text, Link} = Typography;
-const { Panel } = Collapse;
+const {Text} = Typography;
 
 type propType = {
     themeColor: string,
@@ -71,7 +70,6 @@ class PreferenceComponent extends React.Component {
         });
 
         // 屏幕适配
-        let device = deviceModel();
         if(device === "iPhone" || device === "Android") {
             this.setState({
                 drawerPosition: "bottom"
@@ -114,8 +112,8 @@ class PreferenceComponent extends React.Component {
                 $(".ant-form-item-label > label").css("color", this.state.fontColor);
                 $(".ant-radio-wrapper").children(":last-child").css("color", this.state.fontColor);
                 $(".ant-checkbox-wrapper").children(":last-child").css("color", this.state.fontColor);
-                $(".ant-collapse").css("backgroundColor", this.state.backgroundColor);
-                $(".ant-collapse-header").css("color", this.state.fontColor);
+                // $(".ant-collapse").css("backgroundColor", this.state.backgroundColor);
+                // $(".ant-collapse-header").css("color", this.state.fontColor);
                 $(".ant-list-item-meta-title").css("color", this.state.fontColor);
             }
         });
@@ -205,7 +203,7 @@ class PreferenceComponent extends React.Component {
                     <Button shape="round" icon={<MoreOutlined />} size={"large"}
                             onClick={this.drawerOnShow.bind(this)}
                             // id={"preferenceBtn"}
-                            className={"preferenceBtn frostedGlass zIndexHigh"}
+                            className={"preferenceBtn componentTheme zIndexHigh"}
                             style={{display: this.props.display}}
                     />
                 </Tooltip>
@@ -277,41 +275,10 @@ class PreferenceComponent extends React.Component {
                             </Card>
                         </Col>
                         <Col span={24}>
-                            <Card title="捐款鼓励" size={"small"} extra={<HeartOutlined />}>
-                                <Space direction="vertical" size="small" style={{display: "flex"}}>
-                                    <Alert message="捐款不会为您带来额外体验" type="warning" showIcon/>
-                                    <Collapse accordion={true} bordered={false}>
-                                        <Panel header="支付宝" key="AliPay" extra={<AlipayCircleOutlined />}>
-
-                                        </Panel>
-                                        <Panel header="微信支付" key="WeChatPay" extra={<WechatOutlined />}>
-
-                                        </Panel>
-                                        <Panel header="PayPal" key="PayPal">
-                                        </Panel>
-                                    </Collapse>
-                                </Space>
-                            </Card>
+                            <DonationComponent themeColor={this.props.themeColor}/>
                         </Col>
                         <Col span={24}>
-                            <Card title="其它作品" size={"small"} extra={<AppstoreOutlined />}>
-                                <List size="small" itemLayout="horizontal">
-                                    <List.Item>
-                                        <List.Item.Meta
-                                            avatar={<Avatar size="large" shape="square" src={skyNewTabPoemIcon}/>}
-                                            title="Sky 诗词新标签页"
-                                            description={<Link href="https://ant.design" target="_blank">前往扩展商店</Link>}
-                                        />
-                                    </List.Item>
-                                    <List.Item>
-                                        <List.Item.Meta
-                                            avatar={<Avatar size="large" shape="square" src={skyNewTabIcon} />}
-                                            title="Sky 新标签页"
-                                            description={<Link href="https://ant.design" target="_blank">前往扩展商店</Link>}
-                                        />
-                                    </List.Item>
-                                </List>
-                            </Card>
+                            <OtherAppComponent themeColor={this.props.themeColor}/>
                         </Col>
                     </Row>
                 </Drawer>
