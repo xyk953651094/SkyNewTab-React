@@ -224,19 +224,20 @@ class PreferenceComponent extends React.Component {
                             前往作者主页（捐赠支持、其它作品）
                         </Button>
                     }
+                    footerStyle={{textAlign: "center"}}
                 >
                     <Row gutter={[16, 16]}>
                         <Col span={24}>
                             <Card title={"偏好设置"} size={"small"} extra={<SettingOutlined />}>
                                 <Form layout={"vertical"} colon={false} initialValues={this.state.formInitialValues}>
-                                    <Form.Item name="displayEffectRadio" label="图片质量">
+                                    <Form.Item name="displayEffectRadio" label="图片质量（推荐选择标准）">
                                         <Radio.Group buttonStyle={"solid"} onChange={this.displayEffectRadioOnChange.bind(this)}>
                                             <Radio value={"regular"}>标准</Radio>
                                             <Radio value={"full"}>较高</Radio>
                                             <Radio value={"raw"}>最高</Radio>
                                         </Radio.Group>
                                     </Form.Item>
-                                    <Form.Item name="dynamicEffectRadio" label="图片动效">
+                                    <Form.Item name="dynamicEffectRadio" label="图片动效（推荐选择全部）">
                                         <Radio.Group buttonStyle={"solid"} onChange={this.dynamicEffectRadioOnChange.bind(this)}>
                                             <Radio value={"close"}>关闭</Radio>
                                             <Radio value={"translate"}>平移</Radio>
@@ -244,7 +245,7 @@ class PreferenceComponent extends React.Component {
                                             <Radio value={"all"}>全部</Radio>
                                         </Radio.Group>
                                     </Form.Item>
-                                    <Form.Item name="imageTopicsCheckbox" label="图片主题">
+                                    <Form.Item name="imageTopicsCheckbox" label="图片主题（全不选与全选效果一致）">
                                         <Checkbox.Group onChange={this.imageTopicsCheckboxOnChange.bind(this)}>
                                             <Row>
                                                 <Col span={12}><Checkbox name={"travel"}             value="Fzo3zuOHN6w">旅游</Checkbox></Col>

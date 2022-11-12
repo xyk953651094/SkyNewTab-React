@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="7b6aa851-d91a-4d7e-aff0-98e24f63e226" name="变更" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/author/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/author/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/preference/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/preference/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -175,7 +174,7 @@
       <workItem from="1666150757278" duration="954000" />
       <workItem from="1666615721089" duration="638000" />
       <workItem from="1667122778185" duration="908000" />
-      <workItem from="1668212005604" duration="5050000" />
+      <workItem from="1668212005604" duration="6417000" />
     </task>
     <task id="LOCAL-00001" summary="关闭获取天气失败报错">
       <created>1654142997686</created>
@@ -380,7 +379,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668215461928</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="优化功能">
+      <created>1668227769274</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1668227769274</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
