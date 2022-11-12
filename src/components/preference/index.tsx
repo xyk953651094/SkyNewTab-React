@@ -275,12 +275,12 @@ class PreferenceComponent extends React.Component {
                                 </Form>
                             </Card>
                         </Col>
-                        <Col span={24}>
-                            <DonationComponent themeColor={this.props.themeColor}/>
-                        </Col>
-                        <Col span={24}>
-                            <OtherAppComponent themeColor={this.props.themeColor}/>
-                        </Col>
+                        {/*<Col span={24}>*/}
+                        {/*    <DonationComponent themeColor={this.props.themeColor}/>*/}
+                        {/*</Col>*/}
+                        {/*<Col span={24}>*/}
+                        {/*    <OtherAppComponent themeColor={this.props.themeColor}/>*/}
+                        {/*</Col>*/}
                     </Row>
                 </Drawer>
             </>
