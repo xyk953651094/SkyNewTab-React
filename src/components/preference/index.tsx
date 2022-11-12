@@ -2,15 +2,15 @@ import React from "react";
 import "../../App.css";
 import DonationComponent from "../donation";
 import OtherAppComponent from "../otherApp";
-import {Button, Tooltip, Drawer, Card, Typography, Form, Row, Col, Radio, Checkbox, Space, Alert, message} from "antd";
+import {Button, Tooltip, Drawer, Card, Typography, Form, Row, Col, Radio, Checkbox, message} from "antd";
 import type {RadioChangeEvent} from "antd";
 import type {CheckboxValueType} from "antd/es/checkbox/Group";
-import {MoreOutlined, SettingOutlined} from "@ant-design/icons";
+import {MoreOutlined, SettingOutlined, GithubOutlined} from "@ant-design/icons";
 import {changeThemeColor, getFontColor} from "../../typescripts/publicFunctions";
 import {FormInitialValuesInterface, ImageDataInterface, ThemeColorInterface} from "../../typescripts/publicInterface";
 import {defaultFormInitialValues, device} from "../../typescripts/publicConstants";
 const $ = require("jquery");
-const {Text} = Typography;
+const {Link} = Typography;
 
 type propType = {
     themeColor: ThemeColorInterface,
@@ -220,11 +220,9 @@ class PreferenceComponent extends React.Component {
                     open={this.state.displayDrawer}
                     drawerStyle={{backgroundColor: this.state.backgroundColor}}
                     footer={
-                        <Row align={"middle"}>
-                            <Col span={12}>
-                                <Text>Sky 新标签页 Pro V1.0.2</Text>
-                            </Col>
-                        </Row>
+                        <Button type="link" href="https://github.com/xyk953651094" target="_blank" icon={<GithubOutlined />}>
+                            前往作者主页（捐赠支持、其它作品）
+                        </Button>
                     }
                 >
                     <Row gutter={[16, 16]}>

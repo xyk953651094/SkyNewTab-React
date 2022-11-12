@@ -63,7 +63,7 @@ class AuthorComponent extends React.Component {
 
     render() {
         return (
-            <Tooltip title={"前往作者主页"} color={this.state.backgroundColor}>
+            <Tooltip title={"前往图片作者主页"} color={this.state.backgroundColor}>
                 <Button shape="round" icon={<CameraOutlined/>} size={"large"}
                         onClick={this.handleClick.bind(this)}
                         id={"authorBtn"}
