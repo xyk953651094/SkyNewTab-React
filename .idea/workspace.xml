@@ -5,8 +5,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7b6aa851-d91a-4d7e-aff0-98e24f63e226" name="变更" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/icon-128.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/icon-16.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/icon-32.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/icon-48.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/extensionFiles/_locales/en/messages.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/extensionFiles/_locales/zh_CN/messages.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/extensionFiles/background.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/extensionFiles/manifest.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/webpack.config.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/preference/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/preference/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/logo192.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/logo512.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/manifest.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/robots.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/logo.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,6 +38,7 @@
         <option value="CSS File" />
         <option value="TypeScript File" />
         <option value="TypeScript JSX File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -84,26 +104,34 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/Users/xiaoyunkai/Documents/Projects/WebStorm/SkyNewTab_React/src",
+    "javascript.nodejs.core.library.configured.version": "18.7.0",
+    "javascript.nodejs.core.library.typings.version": "18.7.0",
+    "last_opened_file_path": "/Users/xiaoyunkai/Documents/Projects/WebStorm/SkyNewTab_React/src/assets",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
     "ts.external.directory.path": "/Users/xiaoyunkai/Documents/Projects/WebStorm/SkyNewTab_React/node_modules/typescript/lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/assets" />
+      <recent name="$PROJECT_DIR$/src/extensionFiles" />
       <recent name="$PROJECT_DIR$/src" />
       <recent name="$PROJECT_DIR$" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/extensionFiles" />
       <recent name="$PROJECT_DIR$/src/styleSheets" />
     </key>
   </component>
@@ -174,7 +202,8 @@
       <workItem from="1666150757278" duration="954000" />
       <workItem from="1666615721089" duration="638000" />
       <workItem from="1667122778185" duration="908000" />
-      <workItem from="1668212005604" duration="6417000" />
+      <workItem from="1668212005604" duration="6458000" />
+      <workItem from="1669707292909" duration="9525000" />
     </task>
     <task id="LOCAL-00001" summary="关闭获取天气失败报错">
       <created>1654142997686</created>
@@ -386,7 +415,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668227769274</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="优化功能">
+      <created>1668243268649</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1668243268649</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

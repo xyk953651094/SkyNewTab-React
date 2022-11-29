@@ -1,0 +1,58 @@
+{
+  "extensionName":{
+    "message": "SkyNewTab",
+    "description": "extension_name"
+  },
+  "extensionDescription":{
+    "message": "SkyNewTab by XYK",
+    "description": "extension_description"
+  },
+  "extensionDefaultTitle":{
+    "message": "SkyNewTab",
+    "description": "extension_default_title"
+  },
+
+  "greetMorning":{
+    "message": "Morning",
+    "description": "greetMorning"
+  },
+  "greetNoon": {
+    "message": "Noon",
+    "description": "greetNoon"
+  },
+  "greetAfternoon":{
+    "message": "Afternoon",
+    "description": "greetAfternoon"
+  },
+  "greetEvening":{
+    "message": "Evening",
+    "description": "greetEvening"
+  },
+  "greetNight":{
+    "message": "Night",
+    "description": "greetNight"
+  },
+  "greetDawn":{
+    "message": "Before Dawn",
+    "description": "greetDawn"
+  },
+
+  "getImageError":{
+    "message": "Error: Failed to get the image's info, please try again later",
+    "description": "getImageError"
+  },
+
+  "downloadImage":{
+    "message": "Download image",
+    "description": "downloadImage"
+  },
+  "gotoImage":{
+    "message": "View image in Unsplash.com",
+    "description": "gotoImage"
+  },
+
+  "searchPlaceholder":{
+    "message": "Press Enter to search",
+    "description": "searchPlaceholder"
+  }
+}
