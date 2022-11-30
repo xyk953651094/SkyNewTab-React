@@ -1,5 +1,4 @@
 import React from "react";
-import "../../App.css";
 import "../../stylesheets/wallpaper.css"
 import "../../stylesheets/publicStyles.css"
 import {Image} from "antd";

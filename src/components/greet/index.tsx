@@ -1,5 +1,4 @@
 import React from "react";
-import "../../App.css";
 import {Popover, Button} from "antd";
 import {SmileOutlined} from "@ant-design/icons";
 import {getTimeDetails, getGreet, changeThemeColor} from "../../typescripts/publicFunctions";

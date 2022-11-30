@@ -1,5 +1,4 @@
 import React from "react";
-import "../../App.css";
 import {Card, Space, Alert, Collapse} from "antd";
 import {AlipayCircleOutlined, HeartOutlined, WechatOutlined} from "@ant-design/icons";
 import {ThemeColorInterface} from "../../typescripts/publicInterface";

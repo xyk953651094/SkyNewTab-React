@@ -1,5 +1,4 @@
 import React from "react";
-import "../../App.css";
 import {List, Avatar, Card, Typography} from "antd";
 import {AppstoreOutlined} from "@ant-design/icons";
 import skyNewTabPoemIcon from "../../assets/otherApps/skyNewTabPoem.png";

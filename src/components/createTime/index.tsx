@@ -1,5 +1,4 @@
 import React from "react";
-import "../../App.css";
 import {Button, Tooltip} from "antd";
 import {CalendarOutlined} from "@ant-design/icons";
 import {changeThemeColor} from "../../typescripts/publicFunctions";

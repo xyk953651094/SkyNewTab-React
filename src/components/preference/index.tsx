@@ -1,5 +1,4 @@
 import React from "react";
-import "../../App.css";
 import DonationComponent from "../donation";
 import OtherAppComponent from "../otherApp";
 import {Button, Tooltip, Drawer, Card, Typography, Form, Row, Col, Radio, Checkbox, message} from "antd";

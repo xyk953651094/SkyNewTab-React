@@ -4,17 +4,18 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
-    mode: 'development',  // production
+    // mode: 'development',
+    mode: 'production',
     // devServer: {
     //     contentBase: path.resolve(__dirname, './src'),
     //     historyApiFallback: true
     // },
     entry: {
-        mainpage: path.resolve(__dirname, "./src/index.tsx"),
+        mainPage: path.resolve(__dirname, "./src/index.tsx"),
     },
     output: {
-        // filename: '[name].bundle.js',
-        filename: '[name].js',
+        filename: '[name].bundle.js',
+        // filename: '[name].js',
         path: path.resolve(__dirname, 'dist')
     },
     resolve: {
@@ -52,9 +53,9 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             title: 'SkyNewTab',
-            filename: 'mainpage.html',
-            // template: 'src/devtools.html',  // ???
-            // chunks: ['mainpage']
+            filename: 'mainPage.html',
+            template: 'public/index.html',
+            chunks: ['mainPage']
         }),
         new CopyWebpackPlugin({
             patterns: [

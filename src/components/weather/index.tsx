@@ -1,5 +1,4 @@
 import React from "react";
-import "../../App.css";
 import {Popover, Button} from "antd";
 import {changeThemeColor} from "../../typescripts/publicFunctions";
 import {ThemeColorInterface} from "../../typescripts/publicInterface";
