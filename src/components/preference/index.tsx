@@ -18,6 +18,7 @@ type propType = {
     getDisplayEffect: any,
     getDynamicEffect: any,
     getImageTopics: any,
+    getSearchEngine: any,
 }
 
 type stateType = {
@@ -56,20 +57,19 @@ class PreferenceComponent extends React.Component {
         let tempDisplayEffectRadio: string | null = localStorage.getItem("displayEffect");
         let tempDynamicEffectRadio: string | null = localStorage.getItem("dynamicEffect");
         let tempImageTopicsCheckbox: string | string[] | null = localStorage.getItem("imageTopics");
+        let tempSearchEngineRadio: string | null = localStorage.getItem("searchEngine");
         if (tempImageTopicsCheckbox !== null) {
             tempImageTopicsCheckbox = tempImageTopicsCheckbox.split(",");
         }
-        console.log(tempImageTopicsCheckbox);
 
         this.setState({
             formInitialValues: {
                 "displayEffectRadio": tempDisplayEffectRadio === null ? "regular" : tempDisplayEffectRadio,
                 "dynamicEffectRadio": tempDynamicEffectRadio === null ? "all" : tempDynamicEffectRadio,
                 "imageTopicsCheckbox": tempImageTopicsCheckbox === null ? ["Fzo3zuOHN6w"] : tempImageTopicsCheckbox,
+                "searchEngineRadio": tempSearchEngineRadio === null ? "bing" : tempSearchEngineRadio,
             }
-        }, ()=>{
-            console.log(this.state.formInitialValues)
-        });
+        })
 
         // 屏幕适配
         if(device === "iPhone" || device === "Android") {
@@ -199,6 +199,13 @@ class PreferenceComponent extends React.Component {
         }
     }
 
+    // 搜索引擎
+    searchEngineRadioOnChange(event: RadioChangeEvent) {
+        this.props.getSearchEngine(event.target.value);
+        localStorage.setItem("searchEngine", event.target.value);
+        message.success("已更换搜索引擎");
+    }
+
     render() {
         return (
             <>
@@ -269,6 +276,13 @@ class PreferenceComponent extends React.Component {
                                                 <Col span={12}><Checkbox name={"athletics"}          value="Bn-DjrcBrwo">体育</Checkbox></Col>
                                             </Row>
                                         </Checkbox.Group>
+                                    </Form.Item>
+                                    <Form.Item name="searchEngineRadio" label="搜索引擎">
+                                        <Radio.Group buttonStyle={"solid"} onChange={this.searchEngineRadioOnChange.bind(this)}>
+                                            <Radio value={"bing"}>必应</Radio>
+                                            <Radio value={"baidu"}>百度</Radio>
+                                            <Radio value={"google"}>谷歌</Radio>
+                                        </Radio.Group>
                                     </Form.Item>
                                 </Form>
                             </Card>

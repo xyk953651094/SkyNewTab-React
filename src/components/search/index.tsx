@@ -3,13 +3,16 @@ import "../../stylesheets/search.css"
 import "../../stylesheets/publicStyles.css"
 import { Input, Row } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
-import {fadeIn, fadeOut} from "../../typescripts/publicFunctions";
+import {changeThemeColor, fadeIn, fadeOut, getFontColor} from "../../typescripts/publicFunctions";
 
-type propType = {}
+type propType = {
+    searchEngine: "bing" | "baidu" | "google"
+}
 
 type stateType = {
     searchValue: string
     maskDisplay: "none" | "block"
+    searchEngineUrl: string,
 }
 
 interface SearchComponent {
@@ -22,12 +25,28 @@ class SearchComponent extends React.Component {
         super(props);
         this.state = {
             searchValue: "",
-            maskDisplay: "none"
+            maskDisplay: "none",
+            searchEngineUrl: "https://www.bing.com/search?q="
         };
     }
 
     componentDidMount() {
 
+    }
+
+    componentWillReceiveProps(nextProps: any, prevProps: any) {
+        if (nextProps.searchEngine !== prevProps.searchEngine) {
+            let tempSearchEngineUrl: string;
+            switch (nextProps.searchEngine) {
+                case "bing": tempSearchEngineUrl = "https://www.bing.com/search?q="; break;
+                case "baidu": tempSearchEngineUrl = "https://www.baidu.com/s?wd="; break;
+                case "google": tempSearchEngineUrl = "https://www.google.com/search?q="; break;
+                default: tempSearchEngineUrl = "https://www.bing.com/search?q="; break;
+            }
+            this.setState({
+                searchEngineUrl: tempSearchEngineUrl
+            })
+        }
     }
 
     onFocus() {
@@ -44,7 +63,7 @@ class SearchComponent extends React.Component {
     }
 
     onPressEnter(e: any) {
-        window.location.href = "https://www.bing.com/search?q=" + e.target.value;
+        window.location.href = this.state.searchEngineUrl + e.target.value;
     }
 
     render(){

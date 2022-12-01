@@ -30,6 +30,7 @@ type stateType = {
     displayEffect: "regular" | "full" | "raw",
     dynamicEffect: "close" | "translate" | "rotate" | "all",
     imageTopics: string,
+    searchEngine: "bing" | "baidu" | "google",
 }
 
 interface App {
@@ -53,6 +54,7 @@ class App extends React.Component {
             displayEffect: "regular",
             dynamicEffect: "all",
             imageTopics: "Fzo3zuOHN6w",
+            searchEngine: "bing",
         }
     }
 
@@ -69,9 +71,14 @@ class App extends React.Component {
     }
 
     getImageTopics(imageTopics: string) {
-        console.log(imageTopics);
         this.setState({
             imageTopics: imageTopics
+        })
+    }
+
+    getSearchEngine(searchEngine: string) {
+        this.setState({
+            searchEngine: searchEngine
         })
     }
 
@@ -80,10 +87,12 @@ class App extends React.Component {
         let tempDisplayEffect = localStorage.getItem("displayEffect");
         let tempDynamicEffect = localStorage.getItem("dynamicEffect");
         let tempImageTopics = localStorage.getItem("imageTopics");
+        let tempSearchEngine = localStorage.getItem("searchEngine");
         this.setState({
             displayEffect: tempDisplayEffect === null ? "regular" : tempDisplayEffect,
             dynamicEffect: tempDynamicEffect === null ? "all" : tempDynamicEffect,
             imageTopics: tempImageTopics === null ? "Fzo3zuOHN6w" : tempImageTopics,
+            searchEngine: tempSearchEngine === null ? "bing" : tempSearchEngine,
         }, () => {
             // 请求图片
             this.setState({
@@ -176,6 +185,7 @@ class App extends React.Component {
                                     getDisplayEffect={this.getDisplayEffect.bind(this)}
                                     getDynamicEffect={this.getDynamicEffect.bind(this)}
                                     getImageTopics={this.getImageTopics.bind(this)}
+                                    getSearchEngine={this.getSearchEngine.bind(this)}
                                 />
                             </Space>
                         </Col>
@@ -188,7 +198,7 @@ class App extends React.Component {
                         displayEffect={this.state.displayEffect}
                         dynamicEffect={this.state.dynamicEffect}
                     />
-                    <SearchComponent />
+                    <SearchComponent searchEngine={this.state.searchEngine}/>
                 </Content>
                 <Footer id={"footer"}>
                     <Row>
@@ -201,6 +211,7 @@ class App extends React.Component {
                                     getDisplayEffect={this.getDisplayEffect.bind(this)}
                                     getDynamicEffect={this.getDynamicEffect.bind(this)}
                                     getImageTopics={this.getImageTopics.bind(this)}
+                                    getSearchEngine={this.getSearchEngine.bind(this)}
                                 />
                                 <DownloadComponent
                                     themeColor={this.state.themeColor}

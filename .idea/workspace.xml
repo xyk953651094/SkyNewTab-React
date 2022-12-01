@@ -6,27 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="7b6aa851-d91a-4d7e-aff0-98e24f63e226" name="变更" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.test.tsx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/author/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/author/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/createTime/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/createTime/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/donation/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/donation/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/download/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/download/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/greet/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/greet/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/htmlLink/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/htmlLink/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/otherApp/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/otherApp/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/preference/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/preference/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/search/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/search/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/wallpaper/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/wallpaper/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/weather/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/weather/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reportWebVitals.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/setupTests.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stylesheets/publicStyles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/stylesheets/publicStyles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/extensionFiles/_locales/en/messages.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/extensionFiles/_locales/en/messages.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/extensionFiles/_locales/zh_CN/messages.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/extensionFiles/_locales/zh_CN/messages.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webpack.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.config.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -206,7 +191,8 @@
       <workItem from="1667122778185" duration="908000" />
       <workItem from="1668212005604" duration="6458000" />
       <workItem from="1669707292909" duration="10150000" />
-      <workItem from="1669779339374" duration="3363000" />
+      <workItem from="1669779339374" duration="7021000" />
+      <workItem from="1669867799384" duration="4081000" />
     </task>
     <task id="LOCAL-00001" summary="关闭获取天气失败报错">
       <created>1654142997686</created>
@@ -432,7 +418,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669728568491</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="优化代码质量，完成webpack打包测试，即将发布商店版本">
+      <created>1669800096277</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1669800096277</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -461,6 +454,7 @@
     <MESSAGE value="优化代码质量" />
     <MESSAGE value="优化功能" />
     <MESSAGE value="优化代码质量，新增webpack配置文件" />
-    <option name="LAST_COMMIT_MESSAGE" value="优化代码质量，新增webpack配置文件" />
+    <MESSAGE value="优化代码质量，完成webpack打包测试，即将发布商店版本" />
+    <option name="LAST_COMMIT_MESSAGE" value="优化代码质量，完成webpack打包测试，即将发布商店版本" />
   </component>
 </project>

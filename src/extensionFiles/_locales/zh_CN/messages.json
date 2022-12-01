@@ -4,7 +4,7 @@
     "description": "extension_name"
   },
   "extensionDescription":{
-    "message": "由待看云开创作的 Sky 新标签页",
+    "message": "由待看云开创作的基于React的 Sky 新标签页",
     "description": "extension_description"
   },
   "extensionDefaultTitle":{
