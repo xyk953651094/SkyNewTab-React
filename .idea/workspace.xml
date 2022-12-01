@@ -5,14 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7b6aa851-d91a-4d7e-aff0-98e24f63e226" name="变更" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/preference/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/preference/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/search/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/search/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/extensionFiles/_locales/en/messages.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/extensionFiles/_locales/en/messages.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/extensionFiles/_locales/zh_CN/messages.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/extensionFiles/_locales/zh_CN/messages.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webpack.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.config.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,11 +96,13 @@
     &quot;last_opened_file_path&quot;: &quot;/Users/xiaoyunkai/Documents/Projects/WebStorm/SkyNewTab_React/src/assets&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;settings.javascript.linters.eslint&quot;,
     &quot;ts.external.directory.path&quot;: &quot;/Users/xiaoyunkai/Documents/Projects/WebStorm/SkyNewTab_React/node_modules/typescript/lib&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
@@ -192,7 +189,8 @@
       <workItem from="1668212005604" duration="6458000" />
       <workItem from="1669707292909" duration="10150000" />
       <workItem from="1669779339374" duration="7021000" />
-      <workItem from="1669867799384" duration="4081000" />
+      <workItem from="1669867799384" duration="4305000" />
+      <workItem from="1669885811771" duration="2427000" />
     </task>
     <task id="LOCAL-00001" summary="关闭获取天气失败报错">
       <created>1654142997686</created>
@@ -425,7 +423,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669800096277</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="优化代码质量，新增修改搜索引擎设置">
+      <created>1669885624625</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1669885624625</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -455,6 +460,7 @@
     <MESSAGE value="优化功能" />
     <MESSAGE value="优化代码质量，新增webpack配置文件" />
     <MESSAGE value="优化代码质量，完成webpack打包测试，即将发布商店版本" />
-    <option name="LAST_COMMIT_MESSAGE" value="优化代码质量，完成webpack打包测试，即将发布商店版本" />
+    <MESSAGE value="优化代码质量，新增修改搜索引擎设置" />
+    <option name="LAST_COMMIT_MESSAGE" value="优化代码质量，新增修改搜索引擎设置" />
   </component>
 </project>
