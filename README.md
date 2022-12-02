@@ -18,6 +18,10 @@
 * 或：下载本页面提供的文件进行安装
 
 ## 效果展示
+<img width="282" alt="截屏2022-12-02 21 21 04" src="https://user-images.githubusercontent.com/28004442/205302024-14aa95e9-9c9b-48ab-a62e-c5b22cca2e38.png">
+
+<img width="283" alt="截屏2022-12-02 21 22 09" src="https://user-images.githubusercontent.com/28004442/205302209-f99c8ed6-5ed4-43d3-ac46-27250f5edacb.png">
+
 <img width="1440" alt="截屏2022-11-12 16 18 57" src="https://user-images.githubusercontent.com/28004442/201465323-df5dc931-a204-4d4f-b151-067f2c70935a.png">
 
 <img width="1440" alt="截屏2022-11-12 16 20 48" src="https://user-images.githubusercontent.com/28004442/201465357-25954124-04f2-4842-8562-fcf879fb2c9c.png">
