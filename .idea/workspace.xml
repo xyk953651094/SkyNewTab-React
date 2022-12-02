@@ -5,12 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7b6aa851-d91a-4d7e-aff0-98e24f63e226" name="变更" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/preference/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/preference/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/wallpaper/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/wallpaper/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/weather/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/weather/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/typescripts/publicFunctions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/typescripts/publicFunctions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,8 +18,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="CSS File" />
-        <option value="TypeScript JSX File" />
         <option value="TypeScript File" />
+        <option value="TypeScript JSX File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -88,26 +86,36 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/xiaoyunkai/Documents/Projects/WebStorm/SkyNewTab_React/src&quot;,
+    &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;18.7.0&quot;,
+    &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;18.7.0&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/xiaoyunkai/Documents/Projects/WebStorm/SkyNewTab_React/src/assets&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;settings.javascript.linters.eslint&quot;,
     &quot;ts.external.directory.path&quot;: &quot;/Users/xiaoyunkai/Documents/Projects/WebStorm/SkyNewTab_React/node_modules/typescript/lib&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/assets" />
+      <recent name="$PROJECT_DIR$/src/extensionFiles" />
       <recent name="$PROJECT_DIR$/src" />
       <recent name="$PROJECT_DIR$" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/extensionFiles" />
       <recent name="$PROJECT_DIR$/src/styleSheets" />
     </key>
   </component>
@@ -167,7 +175,22 @@
       <workItem from="1663812672663" duration="9159000" />
       <workItem from="1663844553971" duration="1997000" />
       <workItem from="1663925384221" duration="4603000" />
-      <workItem from="1663988131945" duration="9188000" />
+      <workItem from="1663988131945" duration="18530000" />
+      <workItem from="1664072249722" duration="12997000" />
+      <workItem from="1664527750413" duration="8163000" />
+      <workItem from="1664610088772" duration="6340000" />
+      <workItem from="1664694459461" duration="1916000" />
+      <workItem from="1664704807713" duration="783000" />
+      <workItem from="1664770901453" duration="13902000" />
+      <workItem from="1665575756732" duration="187000" />
+      <workItem from="1666150757278" duration="954000" />
+      <workItem from="1666615721089" duration="638000" />
+      <workItem from="1667122778185" duration="908000" />
+      <workItem from="1668212005604" duration="6458000" />
+      <workItem from="1669707292909" duration="10150000" />
+      <workItem from="1669779339374" duration="7021000" />
+      <workItem from="1669867799384" duration="4305000" />
+      <workItem from="1669885811771" duration="2427000" />
     </task>
     <task id="LOCAL-00001" summary="关闭获取天气失败报错">
       <created>1654142997686</created>
@@ -323,7 +346,91 @@
       <option name="project" value="LOCAL" />
       <updated>1663845810709</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="新增壁纸显示效果">
+      <created>1664007954508</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1664007954508</updated>
+    </task>
+    <task id="LOCAL-00024" summary="优化代码质量，优化显示效果">
+      <created>1664108897001</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1664108897001</updated>
+    </task>
+    <task id="LOCAL-00025" summary="优化代码质量，优化显示效果">
+      <created>1664627793937</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1664627793937</updated>
+    </task>
+    <task id="LOCAL-00026" summary="优化代码质量">
+      <created>1664788748783</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1664788748783</updated>
+    </task>
+    <task id="LOCAL-00027" summary="优化代码质量">
+      <created>1664790959320</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1664790959320</updated>
+    </task>
+    <task id="LOCAL-00028" summary="优化代码质量">
+      <created>1664805356451</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1664805356451</updated>
+    </task>
+    <task id="LOCAL-00029" summary="优化功能">
+      <created>1668215461928</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1668215461928</updated>
+    </task>
+    <task id="LOCAL-00030" summary="优化功能">
+      <created>1668227769274</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1668227769274</updated>
+    </task>
+    <task id="LOCAL-00031" summary="优化功能">
+      <created>1668243268649</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1668243268649</updated>
+    </task>
+    <task id="LOCAL-00032" summary="优化代码质量，新增webpack配置文件">
+      <created>1669728568491</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1669728568491</updated>
+    </task>
+    <task id="LOCAL-00033" summary="优化代码质量，完成webpack打包测试，即将发布商店版本">
+      <created>1669800096277</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1669800096277</updated>
+    </task>
+    <task id="LOCAL-00034" summary="优化代码质量，新增修改搜索引擎设置">
+      <created>1669885624625</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1669885624625</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -346,8 +453,14 @@
     <MESSAGE value="增加图片旋转效果" />
     <MESSAGE value="优化抽屉显示效果" />
     <MESSAGE value="优化显示效果，优化代码质量" />
-    <MESSAGE value="优化代码质量" />
     <MESSAGE value="优化代码质量，优化壁纸显示bug，解决依赖项高危漏洞" />
-    <option name="LAST_COMMIT_MESSAGE" value="优化代码质量，优化壁纸显示bug，解决依赖项高危漏洞" />
+    <MESSAGE value="新增壁纸显示效果" />
+    <MESSAGE value="优化代码质量，优化显示效果" />
+    <MESSAGE value="优化代码质量" />
+    <MESSAGE value="优化功能" />
+    <MESSAGE value="优化代码质量，新增webpack配置文件" />
+    <MESSAGE value="优化代码质量，完成webpack打包测试，即将发布商店版本" />
+    <MESSAGE value="优化代码质量，新增修改搜索引擎设置" />
+    <option name="LAST_COMMIT_MESSAGE" value="优化代码质量，新增修改搜索引擎设置" />
   </component>
 </project>

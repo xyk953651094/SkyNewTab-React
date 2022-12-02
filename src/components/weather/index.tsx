@@ -1,14 +1,16 @@
 import React from "react";
-import "../../App.css";
 import {Popover, Button} from "antd";
-import {changeThemeColor, getThemeColor} from "../../typescripts/publicFunctions";
+import {changeThemeColor} from "../../typescripts/publicFunctions";
+import {ThemeColorInterface} from "../../typescripts/publicInterface";
 const $ = require("jquery");
 
 type propType = {
-    themeColor: string
+    themeColor: ThemeColorInterface
 }
 
 type stateType = {
+    backgroundColor: string,
+    fontColor: string,
     display: "none" | "block",
     weatherInfo: string,
     region: string;
@@ -27,21 +29,23 @@ class WeatherComponent extends React.Component {
     constructor(props: any) {
         super(props);
         this.state = {
+            backgroundColor: "",
+            fontColor: "",
             display: "none",
             weatherInfo: "暂无天气信息",
-            region: "",
-            pm25: "",
-            rainfall: "",
-            visibility: "",
-            windInfo: "",
+            region: "暂无地区信息",
+            pm25: "暂无PM2.5信息",
+            rainfall: "暂无降雨信息",
+            visibility: "暂无视距信息",
+            windInfo: "暂无风况信息",
         };
     }
 
-    componentWillMount() {
+    componentDidMount() {
         $.ajax({
             url: "https://v2.jinrishici.com/info",
             type: "GET",
-            timeout: 5000,
+            timeout: 10000,
             success: (resultData: any) => {
                 if (resultData.status === "success" && resultData.data.weatherData !== null) {
                     this.setState({
@@ -66,8 +70,13 @@ class WeatherComponent extends React.Component {
     }
 
     componentWillReceiveProps(nextProps: any, prevProps: any) {
-        if (nextProps !== prevProps) {
-            changeThemeColor("#weatherBtn", nextProps.themeColor);
+        if (nextProps.themeColor !== prevProps.themeColor) {
+            this.setState({
+                backgroundColor: nextProps.themeColor.componentBackgroundColor,
+                fontColor: nextProps.themeColor.componentFontColor,
+            },() => {
+                changeThemeColor("#weatherBtn", this.state.backgroundColor, this.state.fontColor);
+            });
         }
     }
 
@@ -82,10 +91,10 @@ class WeatherComponent extends React.Component {
         );
 
         return (
-            <Popover title={this.state.region} content={popoverContent}>
+            <Popover title={this.state.region} content={popoverContent} color={this.state.backgroundColor}>
                 <Button shape="round" size={"large"}
                         id={"weatherBtn"}
-                        className={"frostedGlass zIndexHigh"}
+                        className={"componentTheme zIndexHigh"}
                         style={{
                             display: this.state.display,
                             cursor: "default"

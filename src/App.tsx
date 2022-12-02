@@ -1,5 +1,4 @@
 import React from "react";
-import "./App.css";
 import "./stylesheets/publicStyles.css"
 
 import GreetComponent from "./components/greet";
@@ -13,13 +12,9 @@ import AuthorComponent from "./components/author";
 import CreatTimeComponent from "./components/createTime";
 
 import {Layout, Row, Col, Space, message} from "antd";
-import {clientId} from "./typescripts/publicConstents";
-import {
-    setColorTheme,
-    deviceModel,
-    changeThemeColor,
-    getThemeColor,
-} from "./typescripts/publicFunctions";
+import {clientId, defaultImage, device} from "./typescripts/publicConstants";
+import {setColorTheme, changeThemeColor, getComponentBackgroundColor, getFontColor} from "./typescripts/publicFunctions";
+import {ImageDataInterface, ThemeColorInterface} from "./typescripts/publicInterface";
 const {Header, Content, Footer} = Layout;
 const $ = require("jquery");
 
@@ -29,12 +24,13 @@ type stateType = {
     componentDisplay: "none" | "block",
     mobileComponentDisplay: "none" | "block",
     wallpaperComponentDisplay: "none" | "block",
-    themeColor: string,
-    imageData: any,
+    themeColor: ThemeColorInterface,
+    imageData: ImageDataInterface,
 
     displayEffect: "regular" | "full" | "raw",
     dynamicEffect: "close" | "translate" | "rotate" | "all",
     imageTopics: string,
+    searchEngine: "bing" | "baidu" | "google",
 }
 
 interface App {
@@ -49,12 +45,16 @@ class App extends React.Component {
             componentDisplay: "none",
             mobileComponentDisplay: "none",
             wallpaperComponentDisplay: "none",
-            themeColor: "",
-            imageData: "",
+            themeColor: {
+                "componentBackgroundColor": "",
+                "componentFontColor": "",
+            },
+            imageData: defaultImage,
 
             displayEffect: "regular",
             dynamicEffect: "all",
             imageTopics: "Fzo3zuOHN6w",
+            searchEngine: "bing",
         }
     }
 
@@ -76,49 +76,78 @@ class App extends React.Component {
         })
     }
 
-    componentWillMount() {
-        let device = deviceModel();
+    getSearchEngine(searchEngine: string) {
         this.setState({
-            themeColor: setColorTheme(),  // 未加载图片前随机显示颜色主题
-        }, () => {
-            // 获取背景图片
-            $.ajax({
-                url: "https://api.unsplash.com/photos/random?",
-                headers: {
-                    "Authorization": "Client-ID " + clientId,
-                },
-                type: "GET",
-                data: {
-                    "client_id": clientId,
-                    "orientation": (device === "iPhone" || device === "Android")? "portrait" : "landscape",
-                    "topics": this.state.imageTopics,
-                    "content_filter": "high",
-                },
-                timeout: 10000,
-                success: (imageData: any) => {
-                    this.setState({
-                        componentDisplay: "block",
-                        mobileComponentDisplay: "none",
-                        wallpaperComponentDisplay: "block",
-                        themeColor: getThemeColor(imageData.color),
-                        imageData: imageData,
-                    }, () => {
-                        // 小屏显示底部按钮
-                        if (device === "iPhone" || device === "Android") {
-                            this.setState({
-                                componentDisplay: "none",
-                                mobileComponentDisplay: "block",
-                            })
-                        }
-                    })
+            searchEngine: searchEngine
+        })
+    }
 
-                    // 设置body背景颜色
-                    changeThemeColor("body", imageData.color);
-                },
-                error: function () {
-                    message.error("获取图片失败");
-                }
-            });
+    componentDidMount() {
+        // 加载偏好设置
+        let tempDisplayEffect = localStorage.getItem("displayEffect");
+        let tempDynamicEffect = localStorage.getItem("dynamicEffect");
+        let tempImageTopics = localStorage.getItem("imageTopics");
+        let tempSearchEngine = localStorage.getItem("searchEngine");
+        this.setState({
+            displayEffect: tempDisplayEffect === null ? "regular" : tempDisplayEffect,
+            dynamicEffect: tempDynamicEffect === null ? "all" : tempDynamicEffect,
+            imageTopics: tempImageTopics === null ? "Fzo3zuOHN6w" : tempImageTopics,
+            searchEngine: tempSearchEngine === null ? "bing" : tempSearchEngine,
+        }, () => {
+            // 请求图片
+            this.setState({
+                themeColor: setColorTheme()
+            }, () => {
+                // 获取背景图片
+                $.ajax({
+                    url: "https://api.unsplash.com/photos/random?",
+                    headers: {
+                        "Authorization": "Client-ID " + clientId,
+                    },
+                    type: "GET",
+                    data: {
+                        "client_id": clientId,
+                        "orientation": (device === "iPhone" || device === "Android") ? "portrait" : "landscape",
+                        "topics": this.state.imageTopics,
+                        "content_filter": "high",
+                    },
+                    timeout: 10000,
+                    success: (imageData: ImageDataInterface) => {
+                        this.setState({
+                            componentDisplay: "block",
+                            mobileComponentDisplay: "none",
+                            wallpaperComponentDisplay: "block",
+                            imageData: imageData,
+                        }, () => {
+                            // 修改主题颜色
+                            if (imageData.color !== null) {
+                                let componentBackgroundColor = getComponentBackgroundColor(imageData.color);
+                                let componentFontColor = getFontColor(componentBackgroundColor);
+                                this.setState({
+                                    themeColor: {
+                                        "componentBackgroundColor": componentBackgroundColor,
+                                        "componentFontColor": componentFontColor,
+                                    },
+                                })
+
+                                let bodyBackgroundColor = imageData.color;
+                                let bodyFontColor = getFontColor(bodyBackgroundColor);
+                                changeThemeColor("body", bodyBackgroundColor, bodyFontColor);
+                            }
+                            // 小屏显示底部按钮
+                            if (device === "iPhone" || device === "Android") {
+                                this.setState({
+                                    componentDisplay: "none",
+                                    mobileComponentDisplay: "block",
+                                })
+                            }
+                        })
+                    },
+                    error: function () {
+                        message.error("获取图片失败");
+                    }
+                });
+            })
         });
     }
 
@@ -156,6 +185,7 @@ class App extends React.Component {
                                     getDisplayEffect={this.getDisplayEffect.bind(this)}
                                     getDynamicEffect={this.getDynamicEffect.bind(this)}
                                     getImageTopics={this.getImageTopics.bind(this)}
+                                    getSearchEngine={this.getSearchEngine.bind(this)}
                                 />
                             </Space>
                         </Col>
@@ -168,7 +198,7 @@ class App extends React.Component {
                         displayEffect={this.state.displayEffect}
                         dynamicEffect={this.state.dynamicEffect}
                     />
-                    <SearchComponent />
+                    <SearchComponent searchEngine={this.state.searchEngine}/>
                 </Content>
                 <Footer id={"footer"}>
                     <Row>
@@ -181,6 +211,7 @@ class App extends React.Component {
                                     getDisplayEffect={this.getDisplayEffect.bind(this)}
                                     getDynamicEffect={this.getDynamicEffect.bind(this)}
                                     getImageTopics={this.getImageTopics.bind(this)}
+                                    getSearchEngine={this.getSearchEngine.bind(this)}
                                 />
                                 <DownloadComponent
                                     themeColor={this.state.themeColor}

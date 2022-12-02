@@ -1,0 +1,58 @@
+{
+  "extensionName":{
+    "message": "Sky 新标签页",
+    "description": "extension_name"
+  },
+  "extensionDescription":{
+    "message": "由待看云开创作的基于 React 的 Sky 新标签页",
+    "description": "extension_description"
+  },
+  "extensionDefaultTitle":{
+    "message": "Sky 新标签页",
+    "description": "extension_default_title"
+  },
+
+  "greetMorning":{
+    "message": "朝霞满",
+    "description": "greetMorning"
+  },
+  "greetNoon": {
+    "message": "正当午",
+    "description": "greetNoon"
+  },
+  "greetAfternoon":{
+    "message": "斜阳下",
+    "description": "greetAfternoon"
+  },
+  "greetEvening":{
+    "message": "日暮里",
+    "description": "greetEvening"
+  },
+  "greetNight":{
+    "message": "见星辰",
+    "description": "greetNight"
+  },
+  "greetDawn":{
+    "message": "又一宿",
+    "description": "greetDawn"
+  },
+
+  "getImageError":{
+    "message": "错误：获取图片信息失败，请稍后再试",
+    "description": "getImageError"
+  },
+
+  "downloadImage":{
+    "message": "下载图片",
+    "description": "downloadImage"
+  },
+  "gotoImage":{
+    "message": "在 Unsplash.com 中查看图片",
+    "description": "gotoImage"
+  },
+
+  "searchPlaceholder":{
+    "message": "按下 Enter 键搜索",
+    "description": "searchPlaceholder"
+  }
+}

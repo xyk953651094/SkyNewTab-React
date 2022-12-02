@@ -1,15 +1,17 @@
 import React from "react";
-import "../../App.css";
 import {Popover, Button} from "antd";
 import {SmileOutlined} from "@ant-design/icons";
 import {getTimeDetails, getGreet, changeThemeColor} from "../../typescripts/publicFunctions";
+import {ThemeColorInterface} from "../../typescripts/publicInterface";
 const $ = require("jquery");
 
 type propType = {
-    themeColor: string,
+    themeColor: ThemeColorInterface,
 }
 
 type stateType = {
+    backgroundColor: string,
+    fontColor: string,
     greet: string,
     calendar: string,
     suit: string,
@@ -25,14 +27,16 @@ class GreetComponent extends React.Component {
     constructor(props: any) {
         super(props);
         this.state = {
+            backgroundColor: "",
+            fontColor: "",
             greet: getGreet(new Date()),
-            calendar: "",
-            suit: "",
-            avoid: "",
+            calendar: getTimeDetails(new Date()).showDate4 + " " + getTimeDetails(new Date()).showWeek,
+            suit: "暂无信息",
+            avoid: "暂无信息",
         };
     }
 
-    componentWillMount() {
+    componentDidMount() {
         let holidayParameters = {
             "app_id": "cicgheqakgmpjclo",
             "app_secret": "RVlRVjZTYXVqeHB3WCtQUG5lM0h0UT09",
@@ -41,17 +45,17 @@ class GreetComponent extends React.Component {
             url: "https://www.mxnzp.com/api/holiday/single/" + getTimeDetails(new Date()).showDate3,
             type: "GET",
             data: holidayParameters,
-            timeout: 5000,
+            timeout: 10000,
             success: (resultData: any) => {
                 if (resultData.code === 1) {
                     let holidayContent = resultData.data.solarTerms;
                     if (resultData.data.solarTerms.indexOf("后") === -1) {
                         holidayContent = "今日" + holidayContent;
                     }
-                    let temp = getTimeDetails(new Date());
+                    let timeDetails = getTimeDetails(new Date());
                     this.setState({
                         greet: this.state.greet + " ｜ " + holidayContent,
-                        calendar: temp.showDate4 + " " + temp.showWeek + "｜" +
+                        calendar: timeDetails.showDate4 + " " + timeDetails.showWeek + "｜" +
                             resultData.data.yearTips + resultData.data.chineseZodiac + "年｜" +
                             resultData.data.lunarCalendar,
                         suit: resultData.data.suit.replace(/\./g, "·"),
@@ -64,8 +68,13 @@ class GreetComponent extends React.Component {
     }
 
     componentWillReceiveProps(nextProps: any, prevProps: any) {
-        if (nextProps !== prevProps) {
-            changeThemeColor("#greetBtn", nextProps.themeColor);
+        if (nextProps.themeColor !== prevProps.themeColor) {
+            this.setState({
+                backgroundColor: nextProps.themeColor.componentBackgroundColor,
+                fontColor: nextProps.themeColor.componentFontColor,
+            },() => {
+                changeThemeColor("#greetBtn", this.state.backgroundColor, this.state.fontColor);
+            });
         }
     }
 
@@ -78,10 +87,10 @@ class GreetComponent extends React.Component {
         );
         
         return (
-            <Popover title={this.state.calendar} content={popoverContent} placement="topRight">
+            <Popover title={this.state.calendar} content={popoverContent} placement="topRight" color={this.state.backgroundColor}>
                 <Button shape="round" icon={<SmileOutlined />} size={"large"}
                         id={"greetBtn"}
-                        className={"frostedGlass zIndexHigh"}
+                        className={"componentTheme zIndexHigh"}
                         style={{
                             cursor: "default"
                         }}

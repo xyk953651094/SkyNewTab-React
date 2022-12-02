@@ -1,16 +1,18 @@
 import React from "react";
-import "../../App.css";
 import {Button, Tooltip} from "antd";
 import {CalendarOutlined} from "@ant-design/icons";
-import {changeThemeColor, getThemeColor} from "../../typescripts/publicFunctions";
+import {changeThemeColor} from "../../typescripts/publicFunctions";
+import {ImageDataInterface, ThemeColorInterface} from "../../typescripts/publicInterface";
 
 type propType = {
-    themeColor: string,
+    themeColor: ThemeColorInterface,
     display: "none" | "block",
-    imageData: any,
+    imageData: ImageDataInterface,
 }
 
 type stateType = {
+    backgroundColor: string,
+    fontColor: string,
     createTime: string,
 }
 
@@ -23,14 +25,23 @@ class CreatTimeComponent extends React.Component {
     constructor(props: any) {
         super(props);
         this.state = {
-            createTime: "",
+            backgroundColor: "",
+            fontColor: "",
+            createTime: "暂无拍摄时间",
         };
     }
 
     componentWillReceiveProps(nextProps: any, prevProps: any) {
-        if (nextProps !== prevProps) {
-            changeThemeColor("#createTimeBtn", nextProps.themeColor);
+        if (nextProps.themeColor !== prevProps.themeColor) {
+            this.setState({
+                backgroundColor: nextProps.themeColor.componentBackgroundColor,
+                fontColor: nextProps.themeColor.componentFontColor,
+            },() => {
+                changeThemeColor("#createTimeBtn", this.state.backgroundColor, this.state.fontColor);
+            });
+        }
 
+        if (nextProps.imageData !== prevProps.imageData) {
             this.setState({
                 createTime: nextProps.imageData.created_at.split("T")[0]
             })
@@ -39,10 +50,10 @@ class CreatTimeComponent extends React.Component {
 
     render() {
         return (
-            <Tooltip title={"拍摄时间：" + this.state.createTime}  placement="bottomRight">
+            <Tooltip title={"拍摄时间：" + this.state.createTime}  placement="bottomRight" color={this.state.backgroundColor}>
                 <Button shape="round" icon={<CalendarOutlined />} size={"large"}
                         id={"createTimeBtn"}
-                        className={"frostedGlass zIndexHigh"}
+                        className={"componentTheme zIndexHigh"}
                         style={{
                             display: this.props.display,
                             cursor: "default"

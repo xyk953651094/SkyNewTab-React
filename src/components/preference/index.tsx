@@ -1,20 +1,24 @@
 import React from "react";
-import "../../App.css";
-import {Button, Tooltip, Drawer, Card, Typography, Form, Row, Col, Radio, Checkbox} from "antd";
-import type { RadioChangeEvent } from "antd";
-import type { CheckboxValueType } from "antd/es/checkbox/Group";
-import {MoreOutlined, SettingOutlined, AppstoreOutlined} from "@ant-design/icons";
-import {changeThemeColor, getFontColor, deviceModel} from "../../typescripts/publicFunctions";
+import DonationComponent from "../donation";
+import OtherAppComponent from "../otherApp";
+import {Button, Tooltip, Drawer, Card, Typography, Form, Row, Col, Radio, Checkbox, message} from "antd";
+import type {RadioChangeEvent} from "antd";
+import type {CheckboxValueType} from "antd/es/checkbox/Group";
+import {MoreOutlined, SettingOutlined, GithubOutlined} from "@ant-design/icons";
+import {changeThemeColor, getFontColor} from "../../typescripts/publicFunctions";
+import {FormInitialValuesInterface, ImageDataInterface, ThemeColorInterface} from "../../typescripts/publicInterface";
+import {defaultFormInitialValues, device} from "../../typescripts/publicConstants";
 const $ = require("jquery");
-const {Title, Paragraph, Text} = Typography;
+const {Link} = Typography;
 
 type propType = {
-    themeColor: string,
+    themeColor: ThemeColorInterface,
     display: "none" | "block",
-    imageData: any,
+    imageData: ImageDataInterface,
     getDisplayEffect: any,
     getDynamicEffect: any,
     getImageTopics: any,
+    getSearchEngine: any,
 }
 
 type stateType = {
@@ -25,6 +29,7 @@ type stateType = {
     displayDrawer: boolean,
     drawerPosition: "right" | "bottom",
     holidayData: any,
+    formInitialValues: FormInitialValuesInterface
 }
 
 interface PreferenceComponent {
@@ -43,43 +48,113 @@ class PreferenceComponent extends React.Component {
             displayDrawer: false,
             drawerPosition: "right",
             holidayData: "",
+            formInitialValues: defaultFormInitialValues
         };
     }
 
     componentDidMount() {
-        let device = deviceModel();
+        // 初始化偏好设置
+        let tempDisplayEffectRadio: string | null = localStorage.getItem("displayEffect");
+        let tempDynamicEffectRadio: string | null = localStorage.getItem("dynamicEffect");
+        let tempImageTopicsCheckbox: string | string[] | null = localStorage.getItem("imageTopics");
+        let tempSearchEngineRadio: string | null = localStorage.getItem("searchEngine");
+        if (tempImageTopicsCheckbox !== null) {
+            tempImageTopicsCheckbox = tempImageTopicsCheckbox.split(",");
+        }
+
+        this.setState({
+            formInitialValues: {
+                "displayEffectRadio": tempDisplayEffectRadio === null ? "regular" : tempDisplayEffectRadio,
+                "dynamicEffectRadio": tempDynamicEffectRadio === null ? "all" : tempDynamicEffectRadio,
+                "imageTopicsCheckbox": tempImageTopicsCheckbox === null ? ["Fzo3zuOHN6w"] : tempImageTopicsCheckbox,
+                "searchEngineRadio": tempSearchEngineRadio === null ? "bing" : tempSearchEngineRadio,
+            }
+        })
+
+        // 屏幕适配
         if(device === "iPhone" || device === "Android") {
             this.setState({
                 drawerPosition: "bottom"
             })
         }
+
+        // 修改各类弹窗样式
+        $("body").bind("DOMNodeInserted", () => {
+            // popover
+            let popoverEle = $(".ant-popover");
+            if (popoverEle.length && popoverEle.length > 0) {
+                $(".ant-popover-title").css("color", this.state.fontColor);
+                $(".ant-popover-inner-content").css("color", this.state.fontColor);
+            }
+            
+            // toolTip
+            let toolTipEle = $(".ant-tooltip");
+            if (toolTipEle.length && toolTipEle.length > 0) {
+                $(".ant-tooltip-inner").css("color", this.state.fontColor);
+            }
+
+            // messgae
+            let messageEle = $(".ant-message");
+            if(messageEle.length && messageEle.length > 0) {
+                $(".ant-message-notice-content").css({"backgroundColor": this.state.backgroundColor, "color": this.state.fontColor});
+                $(".ant-message-custom-content > .anticon").css("color", this.state.fontColor);
+            }
+
+            // drawer
+            let drawerEle = $(".ant-drawer");
+            if (drawerEle.length && drawerEle.length > 0) {
+                $(".ant-drawer-close").css("color", this.state.fontColor);
+                $(".ant-drawer-title").css("color", this.state.fontColor);
+                $(".ant-card").css("border", "1px solid " + this.state.fontColor);
+                $(".ant-card-head").css({"backgroundColor": this.state.backgroundColor, "borderBottom": "2px solid " + this.state.fontColor});
+                $(".ant-card-head-title").css("color", this.state.fontColor);
+                $(".ant-card-extra").css("color", this.state.fontColor);
+                $(".ant-card-body").css("backgroundColor", this.state.backgroundColor);
+                $(".ant-typography").css("color", this.state.fontColor);
+                $(".ant-form-item-label > label").css("color", this.state.fontColor);
+                $(".ant-radio-wrapper").children(":last-child").css("color", this.state.fontColor);
+                $(".ant-checkbox-wrapper").children(":last-child").css("color", this.state.fontColor);
+                $(".ant-collapse").css("backgroundColor", this.state.backgroundColor);
+                $(".ant-collapse-header").css("color", this.state.fontColor);
+                $(".ant-list-item-meta-title").css("color", this.state.fontColor);
+            }
+        });
     }
 
     componentWillReceiveProps(nextProps: any, prevProps: any) {
-        if (nextProps !== prevProps) {
-            changeThemeColor("#preferenceBtn", nextProps.themeColor);
-
+        if (nextProps.themeColor !== prevProps.themeColor) {
             this.setState({
-                backgroundColor: nextProps.themeColor,
-                fontColor: getFontColor(nextProps.themeColor),
+                backgroundColor: nextProps.themeColor.componentBackgroundColor,
+                fontColor: nextProps.themeColor.componentFontColor,
+            },() => {
+                changeThemeColor(".preferenceBtn", this.state.backgroundColor, this.state.fontColor);
+            });
+        }
+
+        if (nextProps.imageData !== prevProps.imageData) {
+            this.setState({
                 componentBackgroundColor: nextProps.imageData.color,
                 componentFontColor: getFontColor(nextProps.imageData.color),
             });
         }
     }
 
-    componentDidUpdate(prevProps: Readonly<{}>, prevState: Readonly<{}>, snapshot?: any) {
-        $(".ant-drawer-title").css("color", this.state.fontColor);
-        $(".ant-card").css("border", "1px solid " + this.state.fontColor);
-        $(".ant-card-head").css({"backgroundColor": this.state.backgroundColor, "borderBottom": "2px solid " + this.state.fontColor});
-        $(".ant-card-head-title").css("color", this.state.fontColor);
-        $(".ant-card-extra").css("color", this.state.fontColor);
-        $(".ant-card-body").css("backgroundColor", this.state.backgroundColor);
-        $(".ant-typography").css("color", this.state.fontColor);
-        $(".ant-form-item-label > label").css({"color": this.state.fontColor, "fontSize": "16px"});
-        $(".ant-radio-wrapper").children(":last-child").css({"color": this.state.fontColor, "fontSize": "16px"});
-        $(".ant-checkbox-wrapper").children(":last-child").css({"color": this.state.fontColor, "fontSize": "16px"});
-    }
+    // componentDidUpdate(prevProps: Readonly<{}>, prevState: Readonly<{}>, snapshot?: any) {
+    //     $(".ant-drawer-close").css("color", this.state.fontColor);
+    //     $(".ant-drawer-title").css("color", this.state.fontColor);
+    //     $(".ant-card").css("border", "1px solid " + this.state.fontColor);
+    //     $(".ant-card-head").css({"backgroundColor": this.state.backgroundColor, "borderBottom": "2px solid " + this.state.fontColor});
+    //     $(".ant-card-head-title").css("color", this.state.fontColor);
+    //     $(".ant-card-extra").css("color", this.state.fontColor);
+    //     $(".ant-card-body").css("backgroundColor", this.state.backgroundColor);
+    //     $(".ant-typography").css("color", this.state.fontColor);
+    //     $(".ant-form-item-label > label").css("color", this.state.fontColor);
+    //     $(".ant-radio-wrapper").children(":last-child").css("color", this.state.fontColor);
+    //     $(".ant-checkbox-wrapper").children(":last-child").css("color", this.state.fontColor);
+    //     $(".ant-collapse").css("backgroundColor", this.state.backgroundColor);
+    //     $(".ant-collapse-header").css("color", this.state.fontColor);
+    //     $(".ant-list-item-meta-title").css("color", this.state.fontColor);
+    // }
 
     drawerOnShow() {
         this.setState({
@@ -96,11 +171,15 @@ class PreferenceComponent extends React.Component {
     // 图片质量
     displayEffectRadioOnChange(event: RadioChangeEvent) {
         this.props.getDisplayEffect(event.target.value);
+        localStorage.setItem("displayEffect", event.target.value);
+        message.success("调整成功，新的图片质量将在下次加载时生效");
     }
 
-    // 动效样式
+    // 图片动效
     dynamicEffectRadioOnChange(event: RadioChangeEvent) {
         this.props.getDynamicEffect(event.target.value);
+        localStorage.setItem("dynamicEffect", event.target.value);
+        message.success("调整成功，新的显示效果已生效");
     }
 
     // 图片主题
@@ -113,23 +192,29 @@ class PreferenceComponent extends React.Component {
             }
         }
         this.props.getImageTopics(value);
+        localStorage.setItem("imageTopics", value);
+        message.success("调整成功，新的主题将在下次加载时生效");
+        if (checkedValues.length === 0) {
+            message.info("全不选与全选的效果一样");
+        }
+    }
+
+    // 搜索引擎
+    searchEngineRadioOnChange(event: RadioChangeEvent) {
+        this.props.getSearchEngine(event.target.value);
+        localStorage.setItem("searchEngine", event.target.value);
+        message.success("已更换搜索引擎");
     }
 
     render() {
-
-
         return (
             <>
-                <Tooltip title={"偏好设置"} placement="topRight">
+                <Tooltip title={"偏好设置"} placement="topRight" color={this.state.backgroundColor}>
                     <Button shape="round" icon={<MoreOutlined />} size={"large"}
                             onClick={this.drawerOnShow.bind(this)}
-                            id={"preferenceBtn"}
-                            className={"frostedGlass zIndexHigh"}
-                            style={{
-                                display: this.props.display,
-                                backgroundColor: this.state.backgroundColor,
-                                color: this.state.fontColor
-                            }}
+                            // id={"preferenceBtn"}
+                            className={"preferenceBtn componentTheme zIndexHigh"}
+                            style={{display: this.props.display}}
                     />
                 </Tooltip>
                 <Drawer
@@ -141,42 +226,33 @@ class PreferenceComponent extends React.Component {
                     open={this.state.displayDrawer}
                     drawerStyle={{backgroundColor: this.state.backgroundColor}}
                     footer={
-                        <Row align={"middle"}>
-                            <Col span={12}>
-                                <Text>Sky 新标签页 Pro V1.0.2</Text>
-                            </Col>
-                        </Row>
+                        <Button type="link" href="https://github.com/xyk953651094" target="_blank" icon={<GithubOutlined />}>
+                            前往作者主页（捐赠支持、其它作品）
+                        </Button>
                     }
+                    footerStyle={{textAlign: "center"}}
                 >
                     <Row gutter={[16, 16]}>
                         <Col span={24}>
-                            <Card title={"偏好设置"} headStyle={{"fontSize": "16px"}} bodyStyle={{"fontSize": "16px"}} size={"small"} extra={<SettingOutlined />}>
-                                <Form layout={"vertical"} colon={false}
-                                    initialValues={{"displayEffectRadio": "regular", "dynamicEffectRadio": "all", "imageTopicsCheckbox": "Fzo3zuOHN6w"}}
-                                >
-                                    <Form.Item name="displayEffectRadio" label="图片质量">
-                                        <Radio.Group defaultValue={"regular"} buttonStyle={"solid"}
-                                                     onChange={this.displayEffectRadioOnChange.bind(this)}
-                                        >
+                            <Card title={"偏好设置"} size={"small"} extra={<SettingOutlined />}>
+                                <Form layout={"vertical"} colon={false} initialValues={this.state.formInitialValues}>
+                                    <Form.Item name="displayEffectRadio" label="图片质量（推荐选择标准）">
+                                        <Radio.Group buttonStyle={"solid"} onChange={this.displayEffectRadioOnChange.bind(this)}>
                                             <Radio value={"regular"}>标准</Radio>
                                             <Radio value={"full"}>较高</Radio>
                                             <Radio value={"raw"}>最高</Radio>
                                         </Radio.Group>
                                     </Form.Item>
-                                    <Form.Item name="dynamicEffectRadio" label="动效样式">
-                                        <Radio.Group defaultValue={"all"} buttonStyle={"solid"}
-                                                     onChange={this.dynamicEffectRadioOnChange.bind(this)}
-                                        >
+                                    <Form.Item name="dynamicEffectRadio" label="图片动效（推荐选择全部）">
+                                        <Radio.Group buttonStyle={"solid"} onChange={this.dynamicEffectRadioOnChange.bind(this)}>
                                             <Radio value={"close"}>关闭</Radio>
                                             <Radio value={"translate"}>平移</Radio>
                                             <Radio value={"rotate"}>旋转</Radio>
                                             <Radio value={"all"}>全部</Radio>
                                         </Radio.Group>
                                     </Form.Item>
-                                    <Form.Item name="imageTopicsCheckbox" label="图片主题">
-                                        <Checkbox.Group defaultValue={["Fzo3zuOHN6w"]}
-                                                        onChange={this.imageTopicsCheckboxOnChange.bind(this)}
-                                        >
+                                    <Form.Item name="imageTopicsCheckbox" label="图片主题（全不选与全选效果一致）">
+                                        <Checkbox.Group onChange={this.imageTopicsCheckboxOnChange.bind(this)}>
                                             <Row>
                                                 <Col span={12}><Checkbox name={"travel"}             value="Fzo3zuOHN6w">旅游</Checkbox></Col>
                                                 <Col span={12}><Checkbox name={"wallpapers"}         value="bo8jQKTaE0Y">壁纸</Checkbox></Col>
@@ -201,16 +277,22 @@ class PreferenceComponent extends React.Component {
                                             </Row>
                                         </Checkbox.Group>
                                     </Form.Item>
+                                    <Form.Item name="searchEngineRadio" label="搜索引擎">
+                                        <Radio.Group buttonStyle={"solid"} onChange={this.searchEngineRadioOnChange.bind(this)}>
+                                            <Radio value={"bing"}>必应</Radio>
+                                            <Radio value={"baidu"}>百度</Radio>
+                                            <Radio value={"google"}>谷歌</Radio>
+                                        </Radio.Group>
+                                    </Form.Item>
                                 </Form>
                             </Card>
                         </Col>
-                        <Col span={24}>
-                            <Card title="其它作品" headStyle={{"fontSize": "16px"}} bodyStyle={{"fontSize": "16px"}} size={"small"} extra={<AppstoreOutlined />}>
-                                <p>Card content</p>
-                                <p>Card content</p>
-                                <p>Card content</p>
-                            </Card>
-                        </Col>
+                        {/*<Col span={24}>*/}
+                        {/*    <DonationComponent themeColor={this.props.themeColor}/>*/}
+                        {/*</Col>*/}
+                        {/*<Col span={24}>*/}
+                        {/*    <OtherAppComponent themeColor={this.props.themeColor}/>*/}
+                        {/*</Col>*/}
                     </Row>
                 </Drawer>
             </>

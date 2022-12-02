@@ -1,15 +1,15 @@
 import React from "react";
-import "../../App.css";
 import "../../stylesheets/wallpaper.css"
 import "../../stylesheets/publicStyles.css"
 import {Image} from "antd";
-import {fadeIn, mouseMoveEffect} from "../../typescripts/publicFunctions";
+import {imageDynamicEffect, iOSImageDynamicEffect} from "../../typescripts/publicFunctions";
+import {device} from "../../typescripts/publicConstants";
 import {isBlurhashValid, decode} from "blurhash";
-import image from "antd/lib/image";
+import {ImageDataInterface} from "../../typescripts/publicInterface";
 
 type propType = {
     display: "none" | "block",
-    imageData: any,
+    imageData: ImageDataInterface,
     displayEffect: "regular" | "full" | "raw",
     dynamicEffect: "close" | "translate" | "rotate" | "all",
 }
@@ -42,11 +42,13 @@ class WallpaperComponent extends React.Component {
     }
 
     componentWillReceiveProps(nextProps: any, prevProps: any) {
-        if (nextProps !== prevProps) {
-            // 图片加载
+        // @ts-ignore
+        let backgroundImageDiv: HTMLElement = document.getElementById("backgroundImage");
+        // @ts-ignore
+        let backgroundImage: HTMLElement = backgroundImageDiv.children[0];
+
+        if (nextProps.display !== prevProps.display) {
             if(nextProps.display === "block") {
-                // @ts-ignore
-                let backgroundImage: HTMLElement = document.getElementById("backgroundImage").children[0];
                 if (backgroundImage instanceof HTMLElement) {
                     backgroundImage.onload = () => {
                         this.setState({
@@ -59,57 +61,59 @@ class WallpaperComponent extends React.Component {
                                 backgroundImage.style.transition = "5s";
                             }, 2000);
                             setTimeout(() => {
-                                mouseMoveEffect(this.props.dynamicEffect)
+                                backgroundImageDiv.style.perspective = "500px";
+                                (device === "iPhone" || device === "iPad")?
+                                    iOSImageDynamicEffect(backgroundImage) : imageDynamicEffect(backgroundImage, this.props.dynamicEffect);
                             }, 7000);
                         })
                     }
                 }
             }
+        }
 
-            // 图片质量
-            if(nextProps.displayEffect === "regular") {
+        // 图片质量
+        if (nextProps.displayEffect !== prevProps.displayEffect) {
+            if (nextProps.displayEffect === "regular") {
                 this.setState({
                     imageLink: nextProps.imageData.urls.regular,
                     loadImageLink: nextProps.imageData.urls.thumb,
                 });
-            }
-            else if(nextProps.displayEffect === "full") {
+            } else if (nextProps.displayEffect === "full") {
                 this.setState({
                     imageLink: nextProps.imageData.urls.full,
                     loadImageLink: nextProps.imageData.urls.thumb,
                 });
-            }
-            else if(nextProps.displayEffect === "raw") {
+            } else if (nextProps.displayEffect === "raw") {
                 this.setState({
                     imageLink: nextProps.imageData.urls.raw,
                     loadImageLink: nextProps.imageData.urls.thumb,
                 });
             }
-
-            // 鼠标移动效果
-            if(nextProps.dynamicEffect !== this.props.dynamicEffect) {
-                mouseMoveEffect(nextProps.dynamicEffect);
-            }
-
-            // this.setState({
-            //     imageLink: this.props.imageData.urls.regular,
-            //     blurHash: this.props.imageData.blur_hash,
-            //     width: this.props.imageData.width,
-            //     height: this.props.imageData.height,
-            // }, () => {
-            //     // if(isBlurhashValid(this.state.blurHash)) {
-            //     //     const pixels = decode(this.state.blurHash, this.state.width, this.state.height);
-            //     //     const canvas = document.createElement("canvas");
-            //     //     const ctx = canvas.getContext("2d");
-            //     //     // @ts-ignore
-            //     //     const imageData = ctx.createImageData(this.state.width, this.state.height);
-            //     //     imageData.data.set(pixels);
-            //     //     // @ts-ignore
-            //     //     ctx.putImageData(imageData, 0, 0);
-            //     //     document.body.append(canvas);
-            //     // }
-            // });
         }
+
+        // 鼠标移动效果
+        if(nextProps.dynamicEffect !== this.props.dynamicEffect) {
+            imageDynamicEffect(backgroundImage, nextProps.dynamicEffect);
+        }
+
+        // this.setState({
+        //     imageLink: this.props.imageData.urls.regular,
+        //     blurHash: this.props.imageData.blur_hash,
+        //     width: this.props.imageData.width,
+        //     height: this.props.imageData.height,
+        // }, () => {
+        //     // if(isBlurhashValid(this.state.blurHash)) {
+        //     //     const pixels = decode(this.state.blurHash, this.state.width, this.state.height);
+        //     //     const canvas = document.createElement("canvas");
+        //     //     const ctx = canvas.getContext("2d");
+        //     //     // @ts-ignore
+        //     //     const imageData = ctx.createImageData(this.state.width, this.state.height);
+        //     //     imageData.data.set(pixels);
+        //     //     // @ts-ignore
+        //     //     ctx.putImageData(imageData, 0, 0);
+        //     //     document.body.append(canvas);
+        //     // }
+        // });
     }
 
     render() {
