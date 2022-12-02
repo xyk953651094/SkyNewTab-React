@@ -15,7 +15,7 @@
 
 ## 安装
 * 商店版即将发布，敬请期待
-* 或，下载本页面提供的 crx 文件进行安装
+* 或：下载本页面提供的 crx 文件进行安装
 
 ## 效果展示
 <img width="1440" alt="截屏2022-11-12 16 18 57" src="https://user-images.githubusercontent.com/28004442/201465323-df5dc931-a204-4d4f-b151-067f2c70935a.png">
