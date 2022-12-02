@@ -12,7 +12,6 @@
 * 节气来源：https://www.mxnzp.com  
 * 天气来源：https://www.jinrishici.com
 * 图片来源：https://unsplash.com
-* 图标来源：https://www.iconfont.cn 以及 https://pixso.cn  
 
 ## 效果展示
 <img width="1440" alt="截屏2022-11-12 16 18 57" src="https://user-images.githubusercontent.com/28004442/201465323-df5dc931-a204-4d4f-b151-067f2c70935a.png">
