@@ -52,7 +52,7 @@ class WeatherComponent extends React.Component {
                         display: "block",
                         weatherInfo: resultData.data.weatherData.weather  + " ｜ "
                             + resultData.data.weatherData.temperature + "°C",
-                        region:  resultData.data.region.replace("|", "｜"),
+                        region:  resultData.data.region.replace("|", " · "),
                         pm25:  resultData.data.weatherData.pm25,
                         rainfall:  resultData.data.weatherData.rainfall + "%",
                         visibility:  resultData.data.weatherData.visibility,
