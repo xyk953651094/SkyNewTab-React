@@ -139,23 +139,6 @@ class PreferenceComponent extends React.Component {
         }
     }
 
-    // componentDidUpdate(prevProps: Readonly<{}>, prevState: Readonly<{}>, snapshot?: any) {
-    //     $(".ant-drawer-close").css("color", this.state.fontColor);
-    //     $(".ant-drawer-title").css("color", this.state.fontColor);
-    //     $(".ant-card").css("border", "1px solid " + this.state.fontColor);
-    //     $(".ant-card-head").css({"backgroundColor": this.state.backgroundColor, "borderBottom": "2px solid " + this.state.fontColor});
-    //     $(".ant-card-head-title").css("color", this.state.fontColor);
-    //     $(".ant-card-extra").css("color", this.state.fontColor);
-    //     $(".ant-card-body").css("backgroundColor", this.state.backgroundColor);
-    //     $(".ant-typography").css("color", this.state.fontColor);
-    //     $(".ant-form-item-label > label").css("color", this.state.fontColor);
-    //     $(".ant-radio-wrapper").children(":last-child").css("color", this.state.fontColor);
-    //     $(".ant-checkbox-wrapper").children(":last-child").css("color", this.state.fontColor);
-    //     $(".ant-collapse").css("backgroundColor", this.state.backgroundColor);
-    //     $(".ant-collapse-header").css("color", this.state.fontColor);
-    //     $(".ant-list-item-meta-title").css("color", this.state.fontColor);
-    // }
-
     drawerOnShow() {
         this.setState({
             displayDrawer: true,
@@ -230,7 +213,7 @@ class PreferenceComponent extends React.Component {
                             前往作者主页（捐赠支持、其它作品）
                         </Button>
                     }
-                    footerStyle={{textAlign: "center"}}
+                    footerStyle={{backgroundColor: this.state.backgroundColor, textAlign: "center"}}
                 >
                     <Row gutter={[16, 16]}>
                         <Col span={24}>

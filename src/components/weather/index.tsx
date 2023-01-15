@@ -50,7 +50,7 @@ class WeatherComponent extends React.Component {
                 if (resultData.status === "success" && resultData.data.weatherData !== null) {
                     this.setState({
                         display: "block",
-                        weatherInfo: resultData.data.weatherData.weather  + " ｜ "
+                        weatherInfo: resultData.data.weatherData.weather  + "｜"
                             + resultData.data.weatherData.temperature + "°C",
                         region:  resultData.data.region.replace("|", " · "),
                         pm25:  resultData.data.weatherData.pm25,
