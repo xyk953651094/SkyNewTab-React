@@ -16,8 +16,6 @@ export function getTimeDetails(param: Date) {
     let week: string | number = param.getDay();
     let localeDate: string = param.toLocaleString("zh-Hans-u-ca-chinese");
 
-    console.log("week: " + param.getDay())
-
     year = year.toString();
     month = month < 10? ("0" + month) : month.toString();
     day = day < 10? ("0" + day) : day.toString();
@@ -101,6 +99,7 @@ export function getHoliday(): string {
     else return "";
 }
 
+// 获取农历节日
 export function getChineseHoliday(today: string): string {
     if (today === "正月初一") { return "｜春节"}
     else if (today === "正月十五") { return "｜元宵节"}
