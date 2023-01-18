@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7b6aa851-d91a-4d7e-aff0-98e24f63e226" name="变更" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+    <list default="true" id="7b6aa851-d91a-4d7e-aff0-98e24f63e226" name="变更" comment="修复部分bug，新增中国阳历节日与农历节日显示">
+      <change beforePath="$PROJECT_DIR$/src/typescripts/publicFunctions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/typescripts/publicFunctions.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,8 +89,8 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;18.7.0&quot;,
-    &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;18.7.0&quot;,
+    &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;19.2.0&quot;,
+    &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;18.11.18&quot;,
     &quot;last_opened_file_path&quot;: &quot;/Users/xiaoyunkai/Documents/Projects/WebStorm/SkyNewTab_React/src/assets&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
@@ -102,7 +100,7 @@
     &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;settings.javascript.linters.eslint&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.sourceCode.HTML&quot;,
     &quot;ts.external.directory.path&quot;: &quot;/Users/xiaoyunkai/Documents/Projects/WebStorm/SkyNewTab_React/node_modules/typescript/lib&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
@@ -190,7 +188,16 @@
       <workItem from="1669707292909" duration="10150000" />
       <workItem from="1669779339374" duration="7021000" />
       <workItem from="1669867799384" duration="4305000" />
-      <workItem from="1669885811771" duration="2427000" />
+      <workItem from="1669885811771" duration="3920000" />
+      <workItem from="1669986212183" duration="1027000" />
+      <workItem from="1670074014574" duration="1146000" />
+      <workItem from="1670237764650" duration="47000" />
+      <workItem from="1670244034091" duration="1976000" />
+      <workItem from="1670936076396" duration="185000" />
+      <workItem from="1673513587017" duration="5556000" />
+      <workItem from="1673523309014" duration="51000" />
+      <workItem from="1673523704436" duration="8000" />
+      <workItem from="1673754255116" duration="4082000" />
     </task>
     <task id="LOCAL-00001" summary="关闭获取天气失败报错">
       <created>1654142997686</created>
@@ -430,7 +437,35 @@
       <option name="project" value="LOCAL" />
       <updated>1669885624625</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="优化代码质量">
+      <created>1669896832408</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1669896832408</updated>
+    </task>
+    <task id="LOCAL-00036" summary="优化显示细节">
+      <created>1673514732114</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1673514732114</updated>
+    </task>
+    <task id="LOCAL-00037" summary="AntDesign版本升级至5.x">
+      <created>1673522838509</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1673522838509</updated>
+    </task>
+    <task id="LOCAL-00038" summary="修复部分bug，新增中国阳历节日与农历节日显示">
+      <created>1673774197564</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1673774197564</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -438,7 +473,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="关闭获取天气失败报错" />
     <MESSAGE value="完善小细节" />
     <MESSAGE value="添加简易天气功能，完善细节" />
     <MESSAGE value="修复部分问题" />
@@ -456,11 +490,14 @@
     <MESSAGE value="优化代码质量，优化壁纸显示bug，解决依赖项高危漏洞" />
     <MESSAGE value="新增壁纸显示效果" />
     <MESSAGE value="优化代码质量，优化显示效果" />
-    <MESSAGE value="优化代码质量" />
     <MESSAGE value="优化功能" />
     <MESSAGE value="优化代码质量，新增webpack配置文件" />
     <MESSAGE value="优化代码质量，完成webpack打包测试，即将发布商店版本" />
     <MESSAGE value="优化代码质量，新增修改搜索引擎设置" />
-    <option name="LAST_COMMIT_MESSAGE" value="优化代码质量，新增修改搜索引擎设置" />
+    <MESSAGE value="优化代码质量" />
+    <MESSAGE value="优化显示细节" />
+    <MESSAGE value="AntDesign版本升级至5.x" />
+    <MESSAGE value="修复部分bug，新增中国阳历节日与农历节日显示" />
+    <option name="LAST_COMMIT_MESSAGE" value="修复部分bug，新增中国阳历节日与农历节日显示" />
   </component>
 </project>

@@ -1,7 +1,13 @@
 import React from "react";
 import {Popover, Button} from "antd";
-import {SmileOutlined} from "@ant-design/icons";
-import {getTimeDetails, getGreet, changeThemeColor} from "../../typescripts/publicFunctions";
+import {SmileOutlined, CheckCircleOutlined, CloseCircleOutlined} from "@ant-design/icons";
+import {
+    getTimeDetails,
+    getGreet,
+    changeThemeColor,
+    getHoliday,
+    getChineseHoliday
+} from "../../typescripts/publicFunctions";
 import {ThemeColorInterface} from "../../typescripts/publicInterface";
 const $ = require("jquery");
 
@@ -54,12 +60,12 @@ class GreetComponent extends React.Component {
                     }
                     let timeDetails = getTimeDetails(new Date());
                     this.setState({
-                        greet: this.state.greet + " ｜ " + holidayContent,
+                        greet: this.state.greet + "｜" + holidayContent + getHoliday() + getChineseHoliday(resultData.data.lunarCalendar),
                         calendar: timeDetails.showDate4 + " " + timeDetails.showWeek + "｜" +
                             resultData.data.yearTips + resultData.data.chineseZodiac + "年｜" +
                             resultData.data.lunarCalendar,
-                        suit: resultData.data.suit.replace(/\./g, "·"),
-                        avoid: resultData.data.avoid.replace(/\./g, "·"),
+                        suit: resultData.data.suit.replace(/\./g, " · "),
+                        avoid: resultData.data.avoid.replace(/\./g, " · "),
                     });
                 }
             },
@@ -81,8 +87,8 @@ class GreetComponent extends React.Component {
     render() {
         const popoverContent = (
             <div>
-                <p>{"宜：" + this.state.suit}</p>
-                <p>{"忌：" + this.state.avoid}</p>
+                <p><CheckCircleOutlined />{" 宜：" + this.state.suit}</p>
+                <p><CloseCircleOutlined />{" 忌：" + this.state.avoid}</p>
             </div>
         );
         

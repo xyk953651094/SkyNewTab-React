@@ -13,7 +13,7 @@ export function getTimeDetails(param: Date) {
     let hour: string | number = param.getHours();
     let minute: string | number = param.getMinutes();
     let second: string | number = param.getSeconds();
-    let week: string | number = param.getDay() + 1;
+    let week: string | number = param.getDay();
     let localeDate: string = param.toLocaleString("zh-Hans-u-ca-chinese");
 
     year = year.toString();
@@ -81,6 +81,38 @@ export function getGreet(param: Date) {
     else {                               // 夜晚
         return greets.night;
     }
+}
+
+// 获取阳历节日
+export function getHoliday(): string {
+    let today = new Date();
+    let month: number = today.getMonth();
+    let day: number = today.getDate();
+    if (month === 1 && day === 1) { return "｜元旦节" }
+    else if (month === 3 && day === 8) { return "｜妇女节"}
+    else if (month === 4 && day === 5) { return "｜清明节"}
+    else if (month === 5 && day === 1) { return "｜劳动节"}
+    else if (month === 5 && day === 4) { return "｜青年节"}
+    else if (month === 6 && day === 1) { return "｜儿童节"}
+    else if (month === 8 && day === 1) { return "｜建军节"}
+    else if (month === 10 && day === 1) { return "｜国庆节"}
+    else return "";
+}
+
+// 获取农历节日
+export function getChineseHoliday(today: string): string {
+    if (today === "正月初一") { return "｜春节"}
+    else if (today === "正月十五") { return "｜元宵节"}
+    else if (today === "二月初二") { return "｜龙抬头"}
+    else if (today === "五月初五") { return "｜端午节"}
+    else if (today === "七月初七") { return "｜七夕节"}
+    else if (today === "七月十五") { return "｜中元节"}
+    else if (today === "八月十五") { return "｜中秋节"}
+    else if (today === "九月初九") { return "｜重阳节"}
+    else if (today === "腊月初八") { return "｜腊八节"}
+    else if (today === "腊月廿四") { return "｜小年"}
+    else if (today === "腊月三十") { return "｜除夕"}
+    else return ""
 }
 
 // 请求unsplash图片前随机显示多彩颜色主题
