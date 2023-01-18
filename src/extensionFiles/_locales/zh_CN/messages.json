@@ -1,14 +1,14 @@
 {
   "extensionName":{
-    "message": "Sky 新标签页 React",
+    "message": "Sky 新标签页 Pro React",
     "description": "extension_name"
   },
   "extensionDescription":{
-    "message": "由待看云开创作的基于 React 的 Sky 新标签页",
+    "message": "由待看云开创作的基于 React 的 Sky 新标签页 Pro",
     "description": "extension_description"
   },
   "extensionDefaultTitle":{
-    "message": "Sky 新标签页",
+    "message": "Sky 新标签页 Pro",
     "description": "extension_default_title"
   },
 

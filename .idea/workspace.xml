@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7b6aa851-d91a-4d7e-aff0-98e24f63e226" name="变更" comment="修复部分bug，新增中国阳历节日与农历节日显示">
+    <list default="true" id="7b6aa851-d91a-4d7e-aff0-98e24f63e226" name="变更" comment="修复部分bug">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -200,6 +200,7 @@
       <workItem from="1673754255116" duration="4082000" />
       <workItem from="1673923500224" duration="159000" />
       <workItem from="1673924080660" duration="1129000" />
+      <workItem from="1674046399095" duration="477000" />
     </task>
     <task id="LOCAL-00001" summary="关闭获取天气失败报错">
       <created>1654142997686</created>
@@ -474,7 +475,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673923517711</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="修复部分bug">
+      <created>1674046490132</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1674046490132</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -482,7 +490,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="完善小细节" />
     <MESSAGE value="添加简易天气功能，完善细节" />
     <MESSAGE value="修复部分问题" />
     <MESSAGE value="新增颜色主题" />
@@ -507,6 +514,7 @@
     <MESSAGE value="优化显示细节" />
     <MESSAGE value="AntDesign版本升级至5.x" />
     <MESSAGE value="修复部分bug，新增中国阳历节日与农历节日显示" />
-    <option name="LAST_COMMIT_MESSAGE" value="修复部分bug，新增中国阳历节日与农历节日显示" />
+    <MESSAGE value="修复部分bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="修复部分bug" />
   </component>
 </project>

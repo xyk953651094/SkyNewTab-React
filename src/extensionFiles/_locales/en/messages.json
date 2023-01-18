@@ -1,14 +1,14 @@
 {
   "extensionName":{
-    "message": "SkyNewTab React",
+    "message": "SkyNewTab Pro React",
     "description": "extension_name"
   },
   "extensionDescription":{
-    "message": "SkyNewTab by  待看云开, based on React",
+    "message": "SkyNewTab Pro by  待看云开, based on React",
     "description": "extension_description"
   },
   "extensionDefaultTitle":{
-    "message": "SkyNewTab",
+    "message": "SkyNewTab Pro",
     "description": "extension_default_title"
   },
 
