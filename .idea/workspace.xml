@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7b6aa851-d91a-4d7e-aff0-98e24f63e226" name="变更" comment="修复部分bug">
+    <list default="true" id="7b6aa851-d91a-4d7e-aff0-98e24f63e226" name="变更" comment="发布前调试">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,7 +92,7 @@
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;19.2.0&quot;,
     &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;18.11.18&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/xiaoyunkai/Documents/Projects/WebStorm/SkyNewTab_React/src/assets&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/xiaoyunkai/Documents/Projects/WebStorm/SkyNewTab_React/dist&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
@@ -107,6 +108,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/dist" />
       <recent name="$PROJECT_DIR$/src/assets" />
       <recent name="$PROJECT_DIR$/src/extensionFiles" />
       <recent name="$PROJECT_DIR$/src" />
@@ -201,6 +203,9 @@
       <workItem from="1673923500224" duration="159000" />
       <workItem from="1673924080660" duration="1129000" />
       <workItem from="1674046399095" duration="477000" />
+      <workItem from="1674047872534" duration="477000" />
+      <workItem from="1674122453429" duration="73000" />
+      <workItem from="1674122926335" duration="629000" />
     </task>
     <task id="LOCAL-00001" summary="关闭获取天气失败报错">
       <created>1654142997686</created>
@@ -482,7 +487,21 @@
       <option name="project" value="LOCAL" />
       <updated>1674046490132</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="发布前调试">
+      <created>1674047980627</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1674047980627</updated>
+    </task>
+    <task id="LOCAL-00042" summary="发布前调试">
+      <created>1674048166278</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1674048166278</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -490,7 +509,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="添加简易天气功能，完善细节" />
     <MESSAGE value="修复部分问题" />
     <MESSAGE value="新增颜色主题" />
     <MESSAGE value="新增淡入淡出效果" />
@@ -515,6 +533,7 @@
     <MESSAGE value="AntDesign版本升级至5.x" />
     <MESSAGE value="修复部分bug，新增中国阳历节日与农历节日显示" />
     <MESSAGE value="修复部分bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="修复部分bug" />
+    <MESSAGE value="发布前调试" />
+    <option name="LAST_COMMIT_MESSAGE" value="发布前调试" />
   </component>
 </project>
