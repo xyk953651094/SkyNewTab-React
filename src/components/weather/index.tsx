@@ -1,5 +1,7 @@
 import React from "react";
 import {Popover, Button} from "antd";
+import {EnvironmentOutlined, EyeOutlined} from "@ant-design/icons";
+import {AirIcon, WeatherPouringIcon, WindyIcon} from "../../typescripts/publicIcons"
 import {changeThemeColor} from "../../typescripts/publicFunctions";
 import {ThemeColorInterface} from "../../typescripts/publicInterface";
 const $ = require("jquery");
@@ -83,15 +85,15 @@ class WeatherComponent extends React.Component {
     render(){
         const popoverContent = (
             <div>
-                <p>{"空气：" + this.state.pm25}</p>
-                <p>{"降雨：" + this.state.rainfall}</p>
-                <p>{"视距：" + this.state.visibility}</p>
-                <p>{"风况：" + this.state.windInfo}</p>
+                <p><AirIcon />{" 空气质量：" + this.state.pm25}</p>
+                <p><WeatherPouringIcon />{" 降雨概率：" + this.state.rainfall}</p>
+                <p><EyeOutlined />{" 视线距离：" + this.state.visibility}</p>
+                <p><WindyIcon />{" 风速情况：" + this.state.windInfo}</p>
             </div>
         );
 
         return (
-            <Popover title={this.state.region} content={popoverContent} color={this.state.backgroundColor}>
+            <Popover title={<p><EnvironmentOutlined />{" " + this.state.region}</p>} content={popoverContent} color={this.state.backgroundColor}>
                 <Button shape="round" size={"large"}
                         id={"weatherBtn"}
                         className={"componentTheme zIndexHigh"}

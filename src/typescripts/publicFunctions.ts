@@ -1,4 +1,5 @@
 import {lightThemeArray, darkThemeArray, device} from "./publicConstants"
+import {SunriseSvg, SunMaxSvg, SunsetSvg, MoonStarSvg} from "./publicIcons"
 import {message, Modal} from 'antd';
 import "jquery-color"
 import {ThemeColorInterface} from "./publicInterface";
@@ -51,8 +52,8 @@ export function isEmptyString(param: string) {
 }
 
 // 根据当前时间段返回问候语
-export function getGreet(param: Date) {
-    let hour = param.getHours();
+export function getGreetContent() {
+    let hour = new Date().getHours();
 
     const greets = {
         morning: "朝霞满",
@@ -80,6 +81,23 @@ export function getGreet(param: Date) {
     }
     else {                               // 夜晚
         return greets.night;
+    }
+}
+
+// 获取问候语图标
+export function getGreetIcon() {
+    let hour = new Date().getHours();
+    if (hour >= 6 && hour < 11) {   // 上午
+        return SunriseSvg;
+    }
+    else if (hour >= 11 && hour < 13) {  // 中午
+        return SunMaxSvg;
+    }
+    else if (hour >= 13 && hour < 18) {  // 下午
+        return SunsetSvg;
+    }
+    else {                               // 夜晚
+        return MoonStarSvg;
     }
 }
 
