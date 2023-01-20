@@ -14,8 +14,10 @@
 * 图片来源：https://unsplash.com
 
 ## 安装
-* 商店版即将发布，敬请期待
-* 或：下载本页面提供的文件进行安装
+* [Chrome 网上应用商店](https://chrome.google.com/webstore/detail/sky%E6%96%B0%E6%A0%87%E7%AD%BE%E9%A1%B5-pro/mhnihmooegnonhmnapjlnbponpnclfcb)
+* [Edge 外接程序商店]()
+* [Firefox 附加组件商店]()
+* 下载本页面提供的文件进行安装
 
 ## 效果展示
 <img width="282" alt="截屏2022-12-02 21 21 04" src="https://user-images.githubusercontent.com/28004442/205302024-14aa95e9-9c9b-48ab-a62e-c5b22cca2e38.png">
