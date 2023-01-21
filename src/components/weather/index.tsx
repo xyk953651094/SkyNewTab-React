@@ -1,7 +1,7 @@
 import React from "react";
 import {Popover, Button} from "antd";
 import {EnvironmentOutlined, EyeOutlined} from "@ant-design/icons";
-import {changeThemeColor} from "../../typescripts/publicFunctions";
+import {getWeatherIcon, changeThemeColor} from "../../typescripts/publicFunctions";
 import {ThemeColorInterface} from "../../typescripts/publicInterface";
 const $ = require("jquery");
 
@@ -13,6 +13,7 @@ type stateType = {
     backgroundColor: string,
     fontColor: string,
     display: "none" | "block",
+    weatherIcon: string,
     weatherInfo: string,
     region: string;
     pm25: string;
@@ -33,6 +34,7 @@ class WeatherComponent extends React.Component {
             backgroundColor: "",
             fontColor: "",
             display: "none",
+            weatherIcon: "",
             weatherInfo: "暂无天气信息",
             region: "暂无地区信息",
             pm25: "暂无PM2.5信息",
@@ -51,6 +53,7 @@ class WeatherComponent extends React.Component {
                 if (resultData.status === "success" && resultData.data.weatherData !== null) {
                     this.setState({
                         display: "block",
+                        weatherIcon: getWeatherIcon(resultData.data.weatherData.weather),
                         weatherInfo: resultData.data.weatherData.weather  + "｜"
                             + resultData.data.weatherData.temperature + "°C",
                         region:  resultData.data.region.replace("|", " · "),
@@ -93,7 +96,7 @@ class WeatherComponent extends React.Component {
 
         return (
             <Popover title={<p><EnvironmentOutlined />{" " + this.state.region}</p>} content={popoverContent} color={this.state.backgroundColor}>
-                <Button shape="round" size={"large"}
+                <Button shape="round" icon={<i className={this.state.weatherIcon}> </i>} size={"large"}
                         id={"weatherBtn"}
                         className={"componentTheme zIndexHigh"}
                         style={{

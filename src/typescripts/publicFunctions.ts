@@ -129,6 +129,28 @@ export function getChineseHoliday(today: string): string {
     else return ""
 }
 
+// 获取天气图标className
+export function getWeatherIcon(weatherInfo: string) {
+    if( weatherInfo.indexOf("晴") !== -1 ) {
+        return "bi bi-sun"
+    }
+    else if( weatherInfo.indexOf("云") !== -1 ) {
+        return "bi bi-cloud"
+    }
+    else if ( weatherInfo.indexOf("雨") !== -1 ) {
+        return "bi bi-cloud-rain"
+    }
+    else if ( weatherInfo.indexOf("雾") !== -1 ) {
+        return "bi bi-cloud-fog"
+    }
+    else if ( weatherInfo.indexOf("雪") !== -1 ) {
+        return "bi bi-cloud-snow"
+    }
+    else if ( weatherInfo.indexOf("雹") !== -1 ) {
+        return "bi bi-cloud-hail"
+    }
+}
+
 // 请求unsplash图片前随机显示多彩颜色主题
 export function setColorTheme() {
     let hour = new Date().getHours();
