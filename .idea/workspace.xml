@@ -4,8 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7b6aa851-d91a-4d7e-aff0-98e24f63e226" name="变更" comment="修复部分bug，新增中国阳历节日与农历节日显示">
-      <change beforePath="$PROJECT_DIR$/src/typescripts/publicFunctions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/typescripts/publicFunctions.ts" afterDir="false" />
+    <list default="true" id="7b6aa851-d91a-4d7e-aff0-98e24f63e226" name="变更" comment="优化显示效果">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,9 +16,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="CSS File" />
-        <option value="TypeScript File" />
         <option value="TypeScript JSX File" />
         <option value="JavaScript File" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
@@ -81,38 +81,40 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;19.2.0&quot;,
-    &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;18.11.18&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/xiaoyunkai/Documents/Projects/WebStorm/SkyNewTab_React/src/assets&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.sourceCode.HTML&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Users/xiaoyunkai/Documents/Projects/WebStorm/SkyNewTab_React/node_modules/typescript/lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "javascript.nodejs.core.library.configured.version": "19.2.0",
+    "javascript.nodejs.core.library.typings.version": "18.11.18",
+    "last_opened_file_path": "/Users/xiaoyunkai/Documents/Projects/WebStorm/SkyNewTab_React/src/assets",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.standard": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.sourceCode.HTML",
+    "ts.external.directory.path": "/Users/xiaoyunkai/Documents/Projects/WebStorm/SkyNewTab_React/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/assets" />
+      <recent name="$PROJECT_DIR$/src/assets/Qweather" />
+      <recent name="$PROJECT_DIR$/src/assets/iconFont" />
+      <recent name="$PROJECT_DIR$/dist" />
       <recent name="$PROJECT_DIR$/src/extensionFiles" />
-      <recent name="$PROJECT_DIR$/src" />
-      <recent name="$PROJECT_DIR$" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/typescripts" />
       <recent name="$PROJECT_DIR$/src/extensionFiles" />
       <recent name="$PROJECT_DIR$/src/styleSheets" />
     </key>
@@ -198,6 +200,14 @@
       <workItem from="1673523309014" duration="51000" />
       <workItem from="1673523704436" duration="8000" />
       <workItem from="1673754255116" duration="4082000" />
+      <workItem from="1673923500224" duration="159000" />
+      <workItem from="1673924080660" duration="1129000" />
+      <workItem from="1674046399095" duration="477000" />
+      <workItem from="1674047872534" duration="477000" />
+      <workItem from="1674122453429" duration="73000" />
+      <workItem from="1674122926335" duration="2682000" />
+      <workItem from="1674136666529" duration="47000" />
+      <workItem from="1674204363270" duration="7848000" />
     </task>
     <task id="LOCAL-00001" summary="关闭获取天气失败报错">
       <created>1654142997686</created>
@@ -465,7 +475,49 @@
       <option name="project" value="LOCAL" />
       <updated>1673774197564</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="修复部分bug，新增中国阳历节日与农历节日显示">
+      <created>1673923517711</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1673923517711</updated>
+    </task>
+    <task id="LOCAL-00040" summary="修复部分bug">
+      <created>1674046490132</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1674046490132</updated>
+    </task>
+    <task id="LOCAL-00041" summary="发布前调试">
+      <created>1674047980627</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1674047980627</updated>
+    </task>
+    <task id="LOCAL-00042" summary="发布前调试">
+      <created>1674048166278</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1674048166278</updated>
+    </task>
+    <task id="LOCAL-00043" summary="发布前调试">
+      <created>1674127603976</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1674127603976</updated>
+    </task>
+    <task id="LOCAL-00044" summary="优化显示效果">
+      <created>1674215591757</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1674215591757</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -473,15 +525,12 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="完善小细节" />
-    <MESSAGE value="添加简易天气功能，完善细节" />
     <MESSAGE value="修复部分问题" />
     <MESSAGE value="新增颜色主题" />
     <MESSAGE value="新增淡入淡出效果" />
     <MESSAGE value="完善过渡动画细节" />
     <MESSAGE value="完善过渡动画细节，优化代码质量" />
     <MESSAGE value="符合 Unsplash API 标准，优化显示效果" />
-    <MESSAGE value="优化显示效果" />
     <MESSAGE value="优化代码质量，新增设置抽屉" />
     <MESSAGE value="完善设置抽屉功能" />
     <MESSAGE value="增加图片旋转效果" />
@@ -498,6 +547,9 @@
     <MESSAGE value="优化显示细节" />
     <MESSAGE value="AntDesign版本升级至5.x" />
     <MESSAGE value="修复部分bug，新增中国阳历节日与农历节日显示" />
-    <option name="LAST_COMMIT_MESSAGE" value="修复部分bug，新增中国阳历节日与农历节日显示" />
+    <MESSAGE value="修复部分bug" />
+    <MESSAGE value="发布前调试" />
+    <MESSAGE value="优化显示效果" />
+    <option name="LAST_COMMIT_MESSAGE" value="优化显示效果" />
   </component>
 </project>

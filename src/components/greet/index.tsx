@@ -1,14 +1,16 @@
 import React from "react";
 import {Popover, Button} from "antd";
-import {SmileOutlined, CheckCircleOutlined, CloseCircleOutlined} from "@ant-design/icons";
+import Icon, {SmileOutlined, CalendarOutlined, CheckCircleOutlined, CloseCircleOutlined} from "@ant-design/icons";
 import {
     getTimeDetails,
-    getGreet,
+    getGreetContent,
+    getGreetIcon,
     changeThemeColor,
     getHoliday,
     getChineseHoliday
 } from "../../typescripts/publicFunctions";
 import {ThemeColorInterface} from "../../typescripts/publicInterface";
+import {SunriseSvg} from "../../typescripts/publicIcons";
 const $ = require("jquery");
 
 type propType = {
@@ -19,6 +21,7 @@ type stateType = {
     backgroundColor: string,
     fontColor: string,
     greet: string,
+    greetSvg: any,
     calendar: string,
     suit: string,
     avoid: string,
@@ -35,7 +38,8 @@ class GreetComponent extends React.Component {
         this.state = {
             backgroundColor: "",
             fontColor: "",
-            greet: getGreet(new Date()),
+            greet: getGreetContent(),
+            greetSvg: getGreetIcon(),
             calendar: getTimeDetails(new Date()).showDate4 + " " + getTimeDetails(new Date()).showWeek,
             suit: "暂无信息",
             avoid: "暂无信息",
@@ -93,8 +97,10 @@ class GreetComponent extends React.Component {
         );
         
         return (
-            <Popover title={this.state.calendar} content={popoverContent} placement="topRight" color={this.state.backgroundColor}>
-                <Button shape="round" icon={<SmileOutlined />} size={"large"}
+            <Popover
+                title={<p><CalendarOutlined />{ " " + this.state.calendar}</p>}
+                content={popoverContent} placement="topRight" color={this.state.backgroundColor}>
+                <Button shape="round" icon={<Icon component={this.state.greetSvg} />} size={"large"}
                         id={"greetBtn"}
                         className={"componentTheme zIndexHigh"}
                         style={{
