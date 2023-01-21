@@ -163,6 +163,7 @@ class App extends React.Component {
                                 />
                                 <WeatherComponent
                                     themeColor={this.state.themeColor}
+                                    display={this.state.componentDisplay}
                                 />
                             </Space>
                         </Col>

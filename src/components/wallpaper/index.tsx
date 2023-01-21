@@ -2,8 +2,7 @@ import React from "react";
 import "../../stylesheets/wallpaper.css"
 import "../../stylesheets/publicStyles.css"
 import {Image} from "antd";
-import {imageDynamicEffect, iOSImageDynamicEffect} from "../../typescripts/publicFunctions";
-import {device} from "../../typescripts/publicConstants";
+import {imageDynamicEffect} from "../../typescripts/publicFunctions";
 import {isBlurhashValid, decode} from "blurhash";
 import {ImageDataInterface} from "../../typescripts/publicInterface";
 
@@ -62,8 +61,7 @@ class WallpaperComponent extends React.Component {
                             }, 2000);
                             setTimeout(() => {
                                 backgroundImageDiv.style.perspective = "500px";
-                                (device === "iPhone" || device === "iPad")?
-                                    iOSImageDynamicEffect(backgroundImage) : imageDynamicEffect(backgroundImage, this.props.dynamicEffect);
+                                imageDynamicEffect(backgroundImage, this.props.dynamicEffect);
                             }, 7000);
                         })
                     }

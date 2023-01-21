@@ -6,7 +6,8 @@ import {ThemeColorInterface} from "../../typescripts/publicInterface";
 const $ = require("jquery");
 
 type propType = {
-    themeColor: ThemeColorInterface
+    themeColor: ThemeColorInterface,
+    display: string
 }
 
 type stateType = {
@@ -34,7 +35,7 @@ class WeatherComponent extends React.Component {
         this.state = {
             backgroundColor: "",
             fontColor: "",
-            display: "none",
+            display: "block",
             weatherIcon: "",
             weatherInfo: "暂无天气信息",
             region: "暂无地区信息",
@@ -54,7 +55,6 @@ class WeatherComponent extends React.Component {
             success: (resultData: any) => {
                 if (resultData.status === "success" && resultData.data.weatherData !== null) {
                     this.setState({
-                        display: "block",
                         weatherIcon: getWeatherIcon(resultData.data.weatherData.weather),
                         weatherInfo: resultData.data.weatherData.weather  + "｜"
                             + resultData.data.weatherData.temperature + "°C",
@@ -64,11 +64,6 @@ class WeatherComponent extends React.Component {
                         rainfall:  resultData.data.weatherData.rainfall + "%",
                         visibility:  resultData.data.weatherData.visibility,
                         windInfo:  resultData.data.weatherData.windDirection + resultData.data.weatherData.windPower + "级",
-                    });
-                }
-                else {
-                    this.setState({
-                        display: "none",
                     });
                 }
             },
@@ -83,6 +78,11 @@ class WeatherComponent extends React.Component {
                 fontColor: nextProps.themeColor.componentFontColor,
             },() => {
                 changeThemeColor("#weatherBtn", this.state.backgroundColor, this.state.fontColor);
+            });
+        }
+        if (nextProps.display !== prevProps.display) {
+            this.setState({
+                display: nextProps.display,
             });
         }
     }
