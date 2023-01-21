@@ -1,5 +1,4 @@
 import {lightThemeArray, darkThemeArray, device} from "./publicConstants"
-import {SunriseSvg, SunMaxSvg, SunsetSvg, MoonStarSvg} from "./publicIcons"
 import {message, Modal} from 'antd';
 import "jquery-color"
 import {ThemeColorInterface} from "./publicInterface";
@@ -84,20 +83,17 @@ export function getGreetContent() {
     }
 }
 
-// 获取问候语图标
+// 获取问候语图标 className
 export function getGreetIcon() {
     let hour = new Date().getHours();
-    if (hour >= 6 && hour < 11) {   // 上午
-        return SunriseSvg;
+    if (hour >= 6 && hour < 12) {   // 上午
+        return "bi bi-sunrise";
     }
-    else if (hour >= 11 && hour < 13) {  // 中午
-        return SunMaxSvg;
-    }
-    else if (hour >= 13 && hour < 18) {  // 下午
-        return SunsetSvg;
+    else if (hour >= 12 && hour < 18) {  // 下午
+        return "bi bi-sunset";
     }
     else {                               // 夜晚
-        return MoonStarSvg;
+        return "bi bi-moon-stars";
     }
 }
 

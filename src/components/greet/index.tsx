@@ -1,6 +1,6 @@
 import React from "react";
 import {Popover, Button} from "antd";
-import Icon, {SmileOutlined, CalendarOutlined, CheckCircleOutlined, CloseCircleOutlined} from "@ant-design/icons";
+import {SmileOutlined, CalendarOutlined, CheckCircleOutlined, CloseCircleOutlined} from "@ant-design/icons";
 import {
     getTimeDetails,
     getGreetContent,
@@ -10,7 +10,6 @@ import {
     getChineseHoliday
 } from "../../typescripts/publicFunctions";
 import {ThemeColorInterface} from "../../typescripts/publicInterface";
-import {SunriseSvg} from "../../typescripts/publicIcons";
 const $ = require("jquery");
 
 type propType = {
@@ -21,7 +20,7 @@ type stateType = {
     backgroundColor: string,
     fontColor: string,
     greet: string,
-    greetSvg: any,
+    greetIcon: string,
     calendar: string,
     suit: string,
     avoid: string,
@@ -39,7 +38,7 @@ class GreetComponent extends React.Component {
             backgroundColor: "",
             fontColor: "",
             greet: getGreetContent(),
-            greetSvg: getGreetIcon(),
+            greetIcon: getGreetIcon(),
             calendar: getTimeDetails(new Date()).showDate4 + " " + getTimeDetails(new Date()).showWeek,
             suit: "暂无信息",
             avoid: "暂无信息",
@@ -100,7 +99,7 @@ class GreetComponent extends React.Component {
             <Popover
                 title={<p><CalendarOutlined />{ " " + this.state.calendar}</p>}
                 content={popoverContent} placement="topRight" color={this.state.backgroundColor}>
-                <Button shape="round" icon={<Icon component={this.state.greetSvg} />} size={"large"}
+                <Button shape="round" icon={<i className={this.state.greetIcon}> </i>} size={"large"}
                         id={"greetBtn"}
                         className={"componentTheme zIndexHigh"}
                         style={{

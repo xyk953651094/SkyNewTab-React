@@ -1,7 +1,6 @@
 import React from "react";
 import {Popover, Button} from "antd";
 import {EnvironmentOutlined, EyeOutlined} from "@ant-design/icons";
-import {AirIcon, WeatherPouringIcon, WindyIcon} from "../../typescripts/publicIcons"
 import {changeThemeColor} from "../../typescripts/publicFunctions";
 import {ThemeColorInterface} from "../../typescripts/publicInterface";
 const $ = require("jquery");
@@ -85,10 +84,10 @@ class WeatherComponent extends React.Component {
     render(){
         const popoverContent = (
             <div>
-                <p><AirIcon />{" 空气质量：" + this.state.pm25}</p>
-                <p><WeatherPouringIcon />{" 降雨概率：" + this.state.rainfall}</p>
-                <p><EyeOutlined />{" 视线距离：" + this.state.visibility}</p>
-                <p><WindyIcon />{" 风速情况：" + this.state.windInfo}</p>
+                <p><i className="bi bi-water"></i>{" 空气质量：" + this.state.pm25}</p>
+                <p><i className="bi bi-cloud-rain"></i>{" 降雨概率：" + this.state.rainfall}</p>
+                <p><i className="bi bi-eye"></i>{" 视线距离：" + this.state.visibility}</p>
+                <p><i className="bi bi-wind"></i>{" 风速情况：" + this.state.windInfo}</p>
             </div>
         );
 
