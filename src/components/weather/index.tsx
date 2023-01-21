@@ -16,6 +16,7 @@ type stateType = {
     weatherIcon: string,
     weatherInfo: string,
     region: string;
+    humidity: string;
     pm25: string;
     rainfall: string;
     visibility: string;
@@ -37,6 +38,7 @@ class WeatherComponent extends React.Component {
             weatherIcon: "",
             weatherInfo: "暂无天气信息",
             region: "暂无地区信息",
+            humidity: "暂无湿度信息",
             pm25: "暂无PM2.5信息",
             rainfall: "暂无降雨信息",
             visibility: "暂无视距信息",
@@ -57,6 +59,7 @@ class WeatherComponent extends React.Component {
                         weatherInfo: resultData.data.weatherData.weather  + "｜"
                             + resultData.data.weatherData.temperature + "°C",
                         region:  resultData.data.region.replace("|", " · "),
+                        humidity: resultData.data.weatherData.humidity,
                         pm25:  resultData.data.weatherData.pm25,
                         rainfall:  resultData.data.weatherData.rainfall + "%",
                         visibility:  resultData.data.weatherData.visibility,
@@ -87,6 +90,7 @@ class WeatherComponent extends React.Component {
     render(){
         const popoverContent = (
             <div>
+                <p><i className="bi bi-moisture"></i>{" 空气湿度：" + this.state.humidity}</p>
                 <p><i className="bi bi-water"></i>{" 空气质量：" + this.state.pm25}</p>
                 <p><i className="bi bi-cloud-rain"></i>{" 降雨概率：" + this.state.rainfall}</p>
                 <p><i className="bi bi-eye"></i>{" 视线距离：" + this.state.visibility}</p>
@@ -95,7 +99,7 @@ class WeatherComponent extends React.Component {
         );
 
         return (
-            <Popover title={<p><EnvironmentOutlined />{" " + this.state.region}</p>} content={popoverContent} color={this.state.backgroundColor}>
+            <Popover title={this.state.region} content={popoverContent} color={this.state.backgroundColor}>
                 <Button shape="round" icon={<i className={this.state.weatherIcon}> </i>} size={"large"}
                         id={"weatherBtn"}
                         className={"componentTheme zIndexHigh"}

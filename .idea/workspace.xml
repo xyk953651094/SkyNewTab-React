@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7b6aa851-d91a-4d7e-aff0-98e24f63e226" name="变更" comment="优化显示效果，新增Bootstrap Icon依赖">
+    <list default="true" id="7b6aa851-d91a-4d7e-aff0-98e24f63e226" name="变更" comment="新增天气图标">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/greet/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/greet/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/weather/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/weather/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/typescripts/publicFunctions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/typescripts/publicFunctions.ts" afterDir="false" />
     </list>
@@ -211,7 +213,7 @@
       <workItem from="1674122926335" duration="2682000" />
       <workItem from="1674136666529" duration="47000" />
       <workItem from="1674204363270" duration="7848000" />
-      <workItem from="1674282615224" duration="3819000" />
+      <workItem from="1674282615224" duration="7056000" />
     </task>
     <task id="LOCAL-00001" summary="关闭获取天气失败报错">
       <created>1654142997686</created>
@@ -528,7 +530,14 @@
       <option name="project" value="LOCAL" />
       <updated>1674285705061</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="新增天气图标">
+      <created>1674287590492</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1674287590492</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -536,7 +545,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="新增颜色主题" />
     <MESSAGE value="新增淡入淡出效果" />
     <MESSAGE value="完善过渡动画细节" />
     <MESSAGE value="完善过渡动画细节，优化代码质量" />
@@ -561,6 +569,7 @@
     <MESSAGE value="发布前调试" />
     <MESSAGE value="优化显示效果" />
     <MESSAGE value="优化显示效果，新增Bootstrap Icon依赖" />
-    <option name="LAST_COMMIT_MESSAGE" value="优化显示效果，新增Bootstrap Icon依赖" />
+    <MESSAGE value="新增天气图标" />
+    <option name="LAST_COMMIT_MESSAGE" value="新增天气图标" />
   </component>
 </project>

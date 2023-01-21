@@ -5,9 +5,7 @@ import {
     getTimeDetails,
     getGreetContent,
     getGreetIcon,
-    changeThemeColor,
-    getHoliday,
-    getChineseHoliday
+    changeThemeColor
 } from "../../typescripts/publicFunctions";
 import {ThemeColorInterface} from "../../typescripts/publicInterface";
 const $ = require("jquery");
@@ -57,13 +55,13 @@ class GreetComponent extends React.Component {
             timeout: 10000,
             success: (resultData: any) => {
                 if (resultData.code === 1) {
-                    let holidayContent = resultData.data.solarTerms;
+                    let holidayContent = resultData.data.solarTerms + " " + resultData.data.typeDes;
                     if (resultData.data.solarTerms.indexOf("后") === -1) {
                         holidayContent = "今日" + holidayContent;
                     }
                     let timeDetails = getTimeDetails(new Date());
                     this.setState({
-                        greet: this.state.greet + "｜" + holidayContent + getHoliday() + getChineseHoliday(resultData.data.lunarCalendar),
+                        greet: this.state.greet + "｜" + holidayContent,
                         calendar: timeDetails.showDate4 + " " + timeDetails.showWeek + "｜" +
                             resultData.data.yearTips + resultData.data.chineseZodiac + "年｜" +
                             resultData.data.lunarCalendar,
@@ -97,7 +95,7 @@ class GreetComponent extends React.Component {
         
         return (
             <Popover
-                title={<p><CalendarOutlined />{ " " + this.state.calendar}</p>}
+                title={this.state.calendar}
                 content={popoverContent} placement="topRight" color={this.state.backgroundColor}>
                 <Button shape="round" icon={<i className={this.state.greetIcon}> </i>} size={"large"}
                         id={"greetBtn"}
