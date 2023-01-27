@@ -58,12 +58,12 @@ class WeatherComponent extends React.Component {
                         weatherIcon: getWeatherIcon(resultData.data.weatherData.weather),
                         weatherInfo: resultData.data.weatherData.weather  + "｜"
                             + resultData.data.weatherData.temperature + "°C",
-                        region:  resultData.data.region.replace("|", " · "),
+                        region: resultData.data.region.replace("|", " · "),
                         humidity: resultData.data.weatherData.humidity,
-                        pm25:  resultData.data.weatherData.pm25,
-                        rainfall:  resultData.data.weatherData.rainfall + "%",
-                        visibility:  resultData.data.weatherData.visibility,
-                        windInfo:  resultData.data.weatherData.windDirection + resultData.data.weatherData.windPower + "级",
+                        pm25: resultData.data.weatherData.pm25,
+                        rainfall: resultData.data.weatherData.rainfall + "%",
+                        visibility: resultData.data.weatherData.visibility,
+                        windInfo: resultData.data.weatherData.windDirection + resultData.data.weatherData.windPower + "级",
                     });
                 }
             },
@@ -99,7 +99,7 @@ class WeatherComponent extends React.Component {
         );
 
         return (
-            <Popover title={this.state.region} content={popoverContent} color={this.state.backgroundColor}>
+            <Popover title={this.state.region} trigger="click" content={popoverContent} color={this.state.backgroundColor}>
                 <Button shape="round" icon={<i className={this.state.weatherIcon}> </i>} size={"large"}
                         id={"weatherBtn"}
                         className={"componentTheme zIndexHigh"}

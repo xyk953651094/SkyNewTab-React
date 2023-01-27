@@ -17,6 +17,7 @@
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.7.2",
     "css-select": "^5.1.0",
+    "file-loader": "^6.2.0",
     "html-loader": "^4.2.0",
     "html-webpack-plugin": "^5.5.0",
     "jquery": "^3.6.1",

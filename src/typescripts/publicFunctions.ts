@@ -111,6 +111,9 @@ export function getWeatherIcon(weatherInfo: string) {
     else if ( weatherInfo.indexOf("雾") !== -1 ) {
         return "bi bi-cloud-fog"
     }
+    else if ( weatherInfo.indexOf("霾") !== -1 ) {
+        return "bi bi-cloud-haze"
+    }
     else if ( weatherInfo.indexOf("雪") !== -1 ) {
         return "bi bi-cloud-snow"
     }
