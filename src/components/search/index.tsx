@@ -1,6 +1,6 @@
 import React from "react";
-import "../../stylesheets/search.css"
-import "../../stylesheets/publicStyles.css"
+import "../../stylesheets/search.scss"
+import "../../stylesheets/publicStyles.scss"
 import { Input, Row } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import {changeThemeColor, fadeIn, fadeOut, getFontColor} from "../../typescripts/publicFunctions";

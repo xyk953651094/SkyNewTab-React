@@ -1,6 +1,6 @@
 import React from "react";
-import "../../stylesheets/wallpaper.css"
-import "../../stylesheets/publicStyles.css"
+import "../../stylesheets/wallpaper.scss"
+import "../../stylesheets/publicStyles.scss"
 import {Image} from "antd";
 import {imageDynamicEffect} from "../../typescripts/publicFunctions";
 import {isBlurhashValid, decode} from "blurhash";
