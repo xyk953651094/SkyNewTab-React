@@ -156,7 +156,7 @@ class App extends React.Component {
             <Layout>
                 <Header id={"header"} className={"zIndexMiddle"}>
                     <Row>
-                        <Col xs={24} sm={24} md={12} lg={12} xl={12}>
+                        <Col xs={24} sm={24} md={12} lg={{span: 11, offset: 1}} xl={{span: 11, offset: 1}}>
                             <Space size={"small"}>
                                 <GreetComponent
                                     themeColor={this.state.themeColor}
@@ -167,7 +167,7 @@ class App extends React.Component {
                                 />
                             </Space>
                         </Col>
-                        <Col xs={0} sm={0} md={12} lg={12} xl={12} style={{textAlign: "right"}}>
+                        <Col xs={0} sm={0} md={12} lg={11} xl={11} style={{textAlign: "right"}}>
                             <Space size={"small"}>
                                 <DownloadComponent
                                     themeColor={this.state.themeColor}
@@ -226,7 +226,7 @@ class App extends React.Component {
                                 />
                             </Space>
                         </Col>
-                        <Col xs={0} sm={0} md={24} lg={24} xl={24} style={{textAlign: "right"}}>
+                        <Col xs={0} sm={0} md={24} lg={23} xl={23} style={{textAlign: "right"}}>
                             <Space size={"small"} align={"end"}>
                                 <AuthorComponent
                                     themeColor={this.state.themeColor}
