@@ -96,7 +96,7 @@ class GreetComponent extends React.Component {
         return (
             <Popover
                 title={this.state.calendar}
-                content={popoverContent} placement="topRight" color={this.state.backgroundColor}>
+                content={popoverContent} placement="topLeft" color={this.state.backgroundColor}>
                 <Button shape="round" icon={<i className={this.state.greetIcon}> </i>} size={"large"}
                         id={"greetBtn"}
                         className={"componentTheme zIndexHigh"}

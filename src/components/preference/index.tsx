@@ -13,7 +13,6 @@ const {Link} = Typography;
 
 type propType = {
     themeColor: ThemeColorInterface,
-    display: "none" | "block",
     imageData: ImageDataInterface,
     getDisplayEffect: any,
     getDynamicEffect: any,
@@ -195,9 +194,7 @@ class PreferenceComponent extends React.Component {
                 <Tooltip title={"偏好设置"} placement="topRight" color={this.state.backgroundColor}>
                     <Button shape="round" icon={<MoreOutlined />} size={"large"}
                             onClick={this.drawerOnShow.bind(this)}
-                            // id={"preferenceBtn"}
                             className={"preferenceBtn componentTheme zIndexHigh"}
-                            style={{display: this.props.display}}
                     />
                 </Tooltip>
                 <Drawer

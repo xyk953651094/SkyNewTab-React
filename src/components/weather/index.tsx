@@ -1,13 +1,12 @@
 import React from "react";
 import {Popover, Button} from "antd";
-import {EnvironmentOutlined, EyeOutlined} from "@ant-design/icons";
+import {device} from "../../typescripts/publicConstants";
 import {getWeatherIcon, changeThemeColor} from "../../typescripts/publicFunctions";
 import {ThemeColorInterface} from "../../typescripts/publicInterface";
 const $ = require("jquery");
 
 type propType = {
     themeColor: ThemeColorInterface,
-    display: string
 }
 
 type stateType = {
@@ -37,38 +36,45 @@ class WeatherComponent extends React.Component {
             fontColor: "",
             display: "block",
             weatherIcon: "",
-            weatherInfo: "暂无天气信息",
-            region: "暂无地区信息",
-            humidity: "暂无湿度信息",
-            pm25: "暂无PM2.5信息",
-            rainfall: "暂无降雨信息",
-            visibility: "暂无视距信息",
-            windInfo: "暂无风况信息",
+            weatherInfo: "暂无信息",
+            region: "暂无信息",
+            humidity: "暂无信息",
+            pm25: "暂无信息",
+            rainfall: "暂无信息",
+            visibility: "暂无信息",
+            windInfo: "暂无信息",
         };
     }
 
     componentDidMount() {
-        $.ajax({
-            url: "https://v2.jinrishici.com/info",
-            type: "GET",
-            timeout: 10000,
-            success: (resultData: any) => {
-                if (resultData.status === "success" && resultData.data.weatherData !== null) {
-                    this.setState({
-                        weatherIcon: getWeatherIcon(resultData.data.weatherData.weather),
-                        weatherInfo: resultData.data.weatherData.weather  + "｜"
-                            + resultData.data.weatherData.temperature + "°C",
-                        region: resultData.data.region.replace("|", " · "),
-                        humidity: resultData.data.weatherData.humidity,
-                        pm25: resultData.data.weatherData.pm25,
-                        rainfall: resultData.data.weatherData.rainfall + "%",
-                        visibility: resultData.data.weatherData.visibility,
-                        windInfo: resultData.data.weatherData.windDirection + resultData.data.weatherData.windPower + "级",
-                    });
-                }
-            },
-            error: function () {}
-        });
+        if (device === "iPhone" || device === "Android") {
+            this.setState({
+                display: "none",
+            })
+        }
+        else {
+            $.ajax({
+                url: "https://v2.jinrishici.com/info",
+                type: "GET",
+                timeout: 10000,
+                success: (resultData: any) => {
+                    if (resultData.status === "success" && resultData.data.weatherData !== null) {
+                        this.setState({
+                            weatherIcon: getWeatherIcon(resultData.data.weatherData.weather),
+                            weatherInfo: resultData.data.weatherData.weather  + "｜"
+                                + resultData.data.weatherData.temperature + "°C",
+                            region: resultData.data.region.replace("|", " · "),
+                            humidity: resultData.data.weatherData.humidity,
+                            pm25: resultData.data.weatherData.pm25,
+                            rainfall: resultData.data.weatherData.rainfall + "%",
+                            visibility: resultData.data.weatherData.visibility,
+                            windInfo: resultData.data.weatherData.windDirection + resultData.data.weatherData.windPower + "级",
+                        });
+                    }
+                },
+                error: function () {}
+            });
+        }
     }
 
     componentWillReceiveProps(nextProps: any, prevProps: any) {
@@ -78,11 +84,6 @@ class WeatherComponent extends React.Component {
                 fontColor: nextProps.themeColor.componentFontColor,
             },() => {
                 changeThemeColor("#weatherBtn", this.state.backgroundColor, this.state.fontColor);
-            });
-        }
-        if (nextProps.display !== prevProps.display) {
-            this.setState({
-                display: nextProps.display,
             });
         }
     }
@@ -99,7 +100,7 @@ class WeatherComponent extends React.Component {
         );
 
         return (
-            <Popover title={this.state.region} trigger="click" content={popoverContent} color={this.state.backgroundColor}>
+            <Popover title={this.state.region} content={popoverContent} color={this.state.backgroundColor}>
                 <Button shape="round" icon={<i className={this.state.weatherIcon}> </i>} size={"large"}
                         id={"weatherBtn"}
                         className={"componentTheme zIndexHigh"}

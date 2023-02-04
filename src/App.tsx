@@ -163,7 +163,6 @@ class App extends React.Component {
                                 />
                                 <WeatherComponent
                                     themeColor={this.state.themeColor}
-                                    display={this.state.componentDisplay}
                                 />
                             </Space>
                         </Col>
@@ -181,7 +180,6 @@ class App extends React.Component {
                                 />
                                 <PreferenceComponent
                                     themeColor={this.state.themeColor}
-                                    display={this.state.componentDisplay}
                                     imageData={this.state.imageData}
                                     getDisplayEffect={this.getDisplayEffect.bind(this)}
                                     getDynamicEffect={this.getDynamicEffect.bind(this)}
@@ -207,7 +205,6 @@ class App extends React.Component {
                             <Space size={"small"}>
                                 <PreferenceComponent
                                     themeColor={this.state.themeColor}
-                                    display={this.state.mobileComponentDisplay}
                                     imageData={this.state.imageData}
                                     getDisplayEffect={this.getDisplayEffect.bind(this)}
                                     getDynamicEffect={this.getDynamicEffect.bind(this)}
