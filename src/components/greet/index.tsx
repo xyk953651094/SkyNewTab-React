@@ -55,7 +55,10 @@ class GreetComponent extends React.Component {
             timeout: 10000,
             success: (resultData: any) => {
                 if (resultData.code === 1) {
-                    let holidayContent = resultData.data.solarTerms + " · " + resultData.data.typeDes;
+                    let holidayContent = resultData.data.solarTerms;
+                    if (resultData.data.typeDes !== "休息日" && resultData.data.typeDes !== "工作日"){
+                        holidayContent = holidayContent + " · " + resultData.data.typeDes;
+                    }
                     if (resultData.data.solarTerms.indexOf("后") === -1) {
                         holidayContent = "今日" + holidayContent;
                     }
