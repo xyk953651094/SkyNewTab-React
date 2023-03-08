@@ -1,11 +1,11 @@
 import React from "react";
 import {Popover, Button} from "antd";
-import {SmileOutlined, CalendarOutlined, CheckCircleOutlined, CloseCircleOutlined} from "@ant-design/icons";
+import {CheckCircleOutlined, CloseCircleOutlined} from "@ant-design/icons";
 import {
     getTimeDetails,
     getGreetContent,
     getGreetIcon,
-    changeThemeColor
+    changeThemeColor, httpRequest
 } from "../../typescripts/publicFunctions";
 import {ThemeColorInterface} from "../../typescripts/publicInterface";
 const $ = require("jquery");
@@ -44,16 +44,14 @@ class GreetComponent extends React.Component {
     }
 
     componentDidMount() {
-        let holidayParameters = {
+        let url = "https://www.mxnzp.com/api/holiday/single/" + getTimeDetails(new Date()).showDate3;
+        let data = {
             "app_id": "cicgheqakgmpjclo",
             "app_secret": "RVlRVjZTYXVqeHB3WCtQUG5lM0h0UT09",
         };
-        $.ajax({
-            url: "https://www.mxnzp.com/api/holiday/single/" + getTimeDetails(new Date()).showDate3,
-            type: "GET",
-            data: holidayParameters,
-            timeout: 10000,
-            success: (resultData: any) => {
+        let tempThis = this;
+        httpRequest(url, data, "GET")
+            .then(function(resultData: any){
                 if (resultData.code === 1) {
                     let holidayContent = resultData.data.solarTerms;
                     if (resultData.data.typeDes !== "休息日" && resultData.data.typeDes !== "工作日"){
@@ -63,8 +61,8 @@ class GreetComponent extends React.Component {
                         holidayContent = "今日" + holidayContent;
                     }
                     let timeDetails = getTimeDetails(new Date());
-                    this.setState({
-                        greet: this.state.greet + "｜" + holidayContent,
+                    tempThis.setState({
+                        greet: tempThis.state.greet + "｜" + holidayContent,
                         calendar: timeDetails.showDate4 + " " + timeDetails.showWeek + "｜" +
                             resultData.data.yearTips + resultData.data.chineseZodiac + "年｜" +
                             resultData.data.lunarCalendar,
@@ -72,9 +70,8 @@ class GreetComponent extends React.Component {
                         avoid: resultData.data.avoid.replace(/\./g, " · "),
                     });
                 }
-            },
-            error: function () {}
-        });
+            })
+            .catch(function(){});
     }
 
     componentWillReceiveProps(nextProps: any, prevProps: any) {

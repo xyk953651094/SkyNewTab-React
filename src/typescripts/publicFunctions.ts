@@ -5,6 +5,24 @@ import {ThemeColorInterface} from "./publicInterface";
 const $ = require("jquery");
 const {confirm} = Modal;
 
+// 网络请求
+export function httpRequest(url: string, data: object, method: "GET" | "POST") {
+    return new Promise(function(resolve,reject){
+        $.ajax({
+            url: url,
+            type: method,
+            data: data,
+            timeout: 10000,
+            success: (resultData: any) => {
+                resolve(resultData);
+            },
+            error: function () {
+                reject();
+            }
+        });
+    })
+}
+
 // 获取日期与时间
 export function getTimeDetails(param: Date) {
     let year: string | number = param.getFullYear();

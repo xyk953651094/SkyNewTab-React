@@ -1,7 +1,7 @@
 import React from "react";
 import {Popover, Button} from "antd";
 import {device} from "../../typescripts/publicConstants";
-import {getWeatherIcon, changeThemeColor} from "../../typescripts/publicFunctions";
+import {getWeatherIcon, changeThemeColor, httpRequest, getTimeDetails} from "../../typescripts/publicFunctions";
 import {ThemeColorInterface} from "../../typescripts/publicInterface";
 const $ = require("jquery");
 
@@ -53,13 +53,13 @@ class WeatherComponent extends React.Component {
             })
         }
         else {
-            $.ajax({
-                url: "https://v2.jinrishici.com/info",
-                type: "GET",
-                timeout: 10000,
-                success: (resultData: any) => {
+            let url = "https://v2.jinrishici.com/info";
+            let data = {};
+            let tempThis = this;
+            httpRequest(url, data, "GET")
+                .then(function(resultData: any){
                     if (resultData.status === "success" && resultData.data.weatherData !== null) {
-                        this.setState({
+                        tempThis.setState({
                             weatherIcon: getWeatherIcon(resultData.data.weatherData.weather),
                             weatherInfo: resultData.data.weatherData.weather  + "｜"
                                 + resultData.data.weatherData.temperature + "°C",
@@ -71,9 +71,8 @@ class WeatherComponent extends React.Component {
                             windInfo: resultData.data.weatherData.windDirection + resultData.data.weatherData.windPower + "级",
                         });
                     }
-                },
-                error: function () {}
-            });
+                })
+                .catch(function(){});
         }
     }
 

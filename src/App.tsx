@@ -13,7 +13,13 @@ import CreatTimeComponent from "./components/createTime";
 
 import {Layout, Row, Col, Space, message} from "antd";
 import {clientId, defaultImage, device} from "./typescripts/publicConstants";
-import {setColorTheme, changeThemeColor, getComponentBackgroundColor, getFontColor} from "./typescripts/publicFunctions";
+import {
+    setColorTheme,
+    changeThemeColor,
+    getComponentBackgroundColor,
+    getFontColor,
+    httpRequest
+} from "./typescripts/publicFunctions";
 import {ImageDataInterface, ThemeColorInterface} from "./typescripts/publicInterface";
 const {Header, Content, Footer} = Layout;
 const $ = require("jquery");
@@ -94,26 +100,21 @@ class App extends React.Component {
             imageTopics: tempImageTopics === null ? "Fzo3zuOHN6w" : tempImageTopics,
             searchEngine: tempSearchEngine === null ? "bing" : tempSearchEngine,
         }, () => {
-            // 请求图片
+            // 获取背景图片
             this.setState({
                 themeColor: setColorTheme()
             }, () => {
-                // 获取背景图片
-                $.ajax({
-                    url: "https://api.unsplash.com/photos/random?",
-                    headers: {
-                        "Authorization": "Client-ID " + clientId,
-                    },
-                    type: "GET",
-                    data: {
-                        "client_id": clientId,
-                        "orientation": (device === "iPhone" || device === "Android") ? "portrait" : "landscape",
-                        "topics": this.state.imageTopics,
-                        "content_filter": "high",
-                    },
-                    timeout: 10000,
-                    success: (imageData: ImageDataInterface) => {
-                        this.setState({
+                let url = "https://api.unsplash.com/photos/random?";
+                let data = {
+                    "client_id": clientId,
+                    "orientation": (device === "iPhone" || device === "Android") ? "portrait" : "landscape",
+                    "topics": this.state.imageTopics,
+                    "content_filter": "high",
+                }
+                let tempThis = this;
+                httpRequest(url, data, "GET")
+                    .then(function(imageData: any){
+                        tempThis.setState({
                             componentDisplay: "block",
                             mobileComponentDisplay: "none",
                             wallpaperComponentDisplay: "block",
@@ -123,7 +124,7 @@ class App extends React.Component {
                             if (imageData.color !== null) {
                                 let componentBackgroundColor = getComponentBackgroundColor(imageData.color);
                                 let componentFontColor = getFontColor(componentBackgroundColor);
-                                this.setState({
+                                tempThis.setState({
                                     themeColor: {
                                         "componentBackgroundColor": componentBackgroundColor,
                                         "componentFontColor": componentFontColor,
@@ -136,17 +137,16 @@ class App extends React.Component {
                             }
                             // 小屏显示底部按钮
                             if (device === "iPhone" || device === "Android") {
-                                this.setState({
+                                tempThis.setState({
                                     componentDisplay: "none",
                                     mobileComponentDisplay: "block",
                                 })
                             }
                         })
-                    },
-                    error: function () {
+                    })
+                    .catch(function(){
                         message.error("获取图片失败");
-                    }
-                });
+                    });
             })
         });
     }
