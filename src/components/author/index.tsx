@@ -2,7 +2,7 @@ import React from "react";
 import {Button, Tooltip, message} from "antd";
 import {CameraOutlined} from "@ant-design/icons";
 import {unsplashUrl} from "../../typescripts/publicConstants";
-import {isEmptyString} from "../../typescripts/publicFunctions";
+import {changeThemeColor, isEmptyString} from "../../typescripts/publicFunctions";
 import {ThemeColorInterface} from "../../typescripts/publicInterface";
 
 type propType = {
@@ -46,6 +46,8 @@ class AuthorComponent extends React.Component {
             this.setState({
                 author: "by " + nextProps.imageData.user.name + " on Unsplash",
                 authorLink: nextProps.imageData.user.links.html
+            }, ()=>{
+                changeThemeColor("#authorBtn", this.state.backgroundColor, this.state.fontColor);
             })
         }
     }
@@ -67,8 +69,6 @@ class AuthorComponent extends React.Component {
                         className={"componentTheme zIndexHigh"}
                         style={{
                             display: this.props.display,
-                            backgroundColor: this.state.backgroundColor,
-                            color: this.state.fontColor
                         }}
                 >
                     {this.state.author}

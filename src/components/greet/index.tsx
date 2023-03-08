@@ -5,7 +5,7 @@ import {
     getTimeDetails,
     getGreetContent,
     getGreetIcon,
-    httpRequest
+    httpRequest, changeThemeColor
 } from "../../typescripts/publicFunctions";
 import {ThemeColorInterface} from "../../typescripts/publicInterface";
 
@@ -42,7 +42,28 @@ class GreetComponent extends React.Component {
         };
     }
 
-    componentDidMount() {
+    // 请求完成后处理步骤
+    setHoliday(data: any) {
+        let holidayContent = data.solarTerms;
+        if (data.typeDes !== "休息日" && data.typeDes !== "工作日"){
+            holidayContent = holidayContent + " · " + data.typeDes;
+        }
+        if (data.solarTerms.indexOf("后") === -1) {
+            holidayContent = "今日" + holidayContent;
+        }
+        let timeDetails = getTimeDetails(new Date());
+        this.setState({
+            greet: this.state.greet + "｜" + holidayContent,
+            calendar: timeDetails.showDate4 + " " + timeDetails.showWeek + "｜" +
+                data.yearTips + data.chineseZodiac + "年｜" +
+                data.lunarCalendar,
+            suit: data.suit.replace(/\./g, " · "),
+            avoid: data.avoid.replace(/\./g, " · "),
+        });
+    }
+
+    // 获取节假日信息
+    getHoliday() {
         let tempThis = this;
         let url = "https://www.mxnzp.com/api/holiday/single/" + getTimeDetails(new Date()).showDate3;
         let data = {
@@ -51,26 +72,35 @@ class GreetComponent extends React.Component {
         };
         httpRequest(url, data, "GET")
             .then(function(resultData: any){
+                localStorage.setItem("lastHolidayRequestTime", String(new Date().getTime()));  // 保存请求时间，防抖节流
                 if (resultData.code === 1) {
-                    let holidayContent = resultData.data.solarTerms;
-                    if (resultData.data.typeDes !== "休息日" && resultData.data.typeDes !== "工作日"){
-                        holidayContent = holidayContent + " · " + resultData.data.typeDes;
-                    }
-                    if (resultData.data.solarTerms.indexOf("后") === -1) {
-                        holidayContent = "今日" + holidayContent;
-                    }
-                    let timeDetails = getTimeDetails(new Date());
-                    tempThis.setState({
-                        greet: tempThis.state.greet + "｜" + holidayContent,
-                        calendar: timeDetails.showDate4 + " " + timeDetails.showWeek + "｜" +
-                            resultData.data.yearTips + resultData.data.chineseZodiac + "年｜" +
-                            resultData.data.lunarCalendar,
-                        suit: resultData.data.suit.replace(/\./g, " · "),
-                        avoid: resultData.data.avoid.replace(/\./g, " · "),
-                    });
+                    localStorage.setItem("lastHoliday", JSON.stringify(resultData.data));      // 保存请求结果，防抖节流
+                    tempThis.setHoliday(resultData.data);
                 }
             })
-            .catch(function(){});
+            .catch(function(){
+                // 请求失败也更新请求时间，防止超时后无信息可显示
+                localStorage.setItem("lastHolidayRequestTime", String(new Date().getTime()));  // 保存请求时间，防抖节流
+            });
+    }
+
+    componentDidMount() {
+        // 防抖节流
+        let lastRequestTime: any = localStorage.getItem("lastHolidayRequestTime");
+        let nowTimeStamp = new Date().getTime();
+        if(lastRequestTime === null) {  // 第一次请求时 lastRequestTime 为 null，因此直接进行请求赋值 lastRequestTime
+            this.getHoliday();
+        }
+        else if(nowTimeStamp - parseInt(lastRequestTime) > 60 * 60 * 1000) {  // 必须多于一小时才能进行新的请求
+            this.getHoliday();
+        }
+        else {  // 一小时之内使用上一次请求结果
+            let lastHoliday: any = localStorage.getItem("lastHoliday");
+            if (lastHoliday) {
+                lastHoliday = JSON.parse(lastHoliday);
+                this.setHoliday(lastHoliday);
+            }
+        }
     }
 
     componentWillReceiveProps(nextProps: any, prevProps: any) {
@@ -78,6 +108,8 @@ class GreetComponent extends React.Component {
             this.setState({
                 backgroundColor: nextProps.themeColor.componentBackgroundColor,
                 fontColor: nextProps.themeColor.componentFontColor,
+            }, ()=>{
+                changeThemeColor("#greetBtn", this.state.backgroundColor, this.state.fontColor);
             });
         }
     }
@@ -97,11 +129,7 @@ class GreetComponent extends React.Component {
                 <Button shape="round" icon={<i className={this.state.greetIcon}> </i>} size={"large"}
                         id={"greetBtn"}
                         className={"componentTheme zIndexHigh"}
-                        style={{
-                            backgroundColor: this.state.backgroundColor,
-                            color: this.state.fontColor,
-                            cursor: "default"
-                        }}
+                        style={{}}
                 >
                     {this.state.greet}
                 </Button>

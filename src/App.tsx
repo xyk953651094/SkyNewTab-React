@@ -86,6 +86,69 @@ class App extends React.Component {
         })
     }
 
+    // 请求完成后处理步骤
+    setWallpaper(imageData: any) {
+        this.setState({
+            componentDisplay: "block",
+            mobileComponentDisplay: "none",
+            wallpaperComponentDisplay: "block",
+            imageData: imageData,
+        }, () => {
+            // 修改主题颜色
+            if (imageData.color !== null) {
+                let componentBackgroundColor = getComponentBackgroundColor(imageData.color);
+                let componentFontColor = getFontColor(componentBackgroundColor);
+                this.setState({
+                    themeColor: {
+                        "componentBackgroundColor": componentBackgroundColor,
+                        "componentFontColor": componentFontColor,
+                    },
+                })
+
+                document.getElementsByTagName("body")[0].style.backgroundColor = imageData.color;
+                document.getElementsByTagName("body")[0].style.color = getFontColor(imageData.color);
+            }
+        })
+    }
+
+    // 获取背景图片
+    getWallpaper() {
+        let tempThis = this;
+        let url = "https://api.unsplash.com/photos/random?";
+        let data = {
+            "client_id": clientId,
+            "orientation": (device === "iPhone" || device === "Android") ? "portrait" : "landscape",
+            "topics": this.state.imageTopics,
+            "content_filter": "high",
+        }
+        httpRequest(url, data, "GET")
+            .then(function(resultData: any){
+                localStorage.setItem("lastImageRequestTime", String(new Date().getTime()));  // 保存请求时间，防抖节流
+                localStorage.setItem("lastImage", JSON.stringify(resultData));               // 保存请求结果，防抖节流
+                tempThis.setWallpaper(resultData);
+            })
+            .catch(function(){
+                // message.error("获取图片失败");
+                // 请求失败也更新请求时间，防止超时后无信息可显示
+                localStorage.setItem("lastImageRequestTime", String(new Date().getTime()));  // 保存请求时间，防抖节流
+                // 获取图片失败时显示上次图片
+                let lastImage: any = localStorage.getItem("lastImage");
+                if (lastImage) {
+                    lastImage = JSON.parse(lastImage);
+                    tempThis.setWallpaper(lastImage);
+                }
+            })
+            .finally(function(){
+                // 小屏显示底部按钮
+                if (device === "iPhone" || device === "Android") {
+                    tempThis.setState({
+                        componentDisplay: "none",
+                        mobileComponentDisplay: "block",
+                    })
+                }
+            });
+    }
+
     componentDidMount() {
         // 加载偏好设置
         let tempDisplayEffect = localStorage.getItem("displayEffect");
@@ -98,81 +161,26 @@ class App extends React.Component {
             imageTopics: tempImageTopics === null ? "Fzo3zuOHN6w" : tempImageTopics,
             searchEngine: tempSearchEngine === null ? "bing" : tempSearchEngine,
         }, () => {
-            // 获取背景图片
+            // 设置颜色主题
             this.setState({
                 themeColor: setColorTheme()
             }, () => {
-                let tempThis = this;
-                let url = "https://api.unsplash.com/photos/random?";
-                let data = {
-                    "client_id": clientId,
-                    "orientation": (device === "iPhone" || device === "Android") ? "portrait" : "landscape",
-                    "topics": this.state.imageTopics,
-                    "content_filter": "high",
+                // 防抖节流
+                let lastRequestTime: any = localStorage.getItem("lastImageRequestTime");
+                let nowTimeStamp = new Date().getTime();
+                if(lastRequestTime === null) {  // 第一次请求时 lastRequestTime 为 null，因此直接进行请求赋值 lastRequestTime
+                    this.getWallpaper();
                 }
-                httpRequest(url, data, "GET")
-                    .then(function(resultData: any){
-                        localStorage.setItem("lastImage", JSON.stringify(resultData));  // 保存本次图片，便于未来无互联网时显示
-                        tempThis.setState({
-                            componentDisplay: "block",
-                            mobileComponentDisplay: "none",
-                            wallpaperComponentDisplay: "block",
-                            imageData: resultData,
-                        }, () => {
-                            // 修改主题颜色
-                            if (resultData.color !== null) {
-                                let componentBackgroundColor = getComponentBackgroundColor(resultData.color);
-                                let componentFontColor = getFontColor(componentBackgroundColor);
-                                tempThis.setState({
-                                    themeColor: {
-                                        "componentBackgroundColor": componentBackgroundColor,
-                                        "componentFontColor": componentFontColor,
-                                    },
-                                })
-
-                                document.getElementsByTagName("body")[0].style.backgroundColor = resultData.color;
-                                document.getElementsByTagName("body")[0].style.color = getFontColor(resultData.color);
-                            }
-                        })
-                    })
-                    .catch(function(){
-                        // message.error("获取图片失败");
-                        // 获取图片失败时显示上次图片
-                        let lastImage: any = localStorage.getItem("lastImage");
-                        if (lastImage) {
-                            lastImage = JSON.parse(lastImage);
-                            tempThis.setState({
-                                componentDisplay: "block",
-                                mobileComponentDisplay: "none",
-                                wallpaperComponentDisplay: "block",
-                                imageData: lastImage,
-                            }, () => {
-                                // 修改主题颜色
-                                if (lastImage.color !== null) {
-                                    let componentBackgroundColor = getComponentBackgroundColor(lastImage.color);
-                                    let componentFontColor = getFontColor(componentBackgroundColor);
-                                    tempThis.setState({
-                                        themeColor: {
-                                            "componentBackgroundColor": componentBackgroundColor,
-                                            "componentFontColor": componentFontColor,
-                                        },
-                                    })
-
-                                    document.getElementsByTagName("body")[0].style.backgroundColor = lastImage.color;
-                                    document.getElementsByTagName("body")[0].style.color = getFontColor(lastImage.color);
-                                }
-                            })
-                        }
-                    })
-                    .finally(function(){
-                        // 小屏显示底部按钮
-                        if (device === "iPhone" || device === "Android") {
-                            tempThis.setState({
-                                componentDisplay: "none",
-                                mobileComponentDisplay: "block",
-                            })
-                        }
-                    });
+                else if(nowTimeStamp - parseInt(lastRequestTime) > 60* 1000) {  // 必须多于一分钟才能进行新的请求
+                    this.getWallpaper();
+                }
+                else {  // 一分钟之内使用上一次请求结果
+                    let lastImage: any = localStorage.getItem("lastImage");
+                    if (lastImage) {
+                        lastImage = JSON.parse(lastImage);
+                        this.setWallpaper(lastImage);
+                    }
+                }
             })
         });
     }

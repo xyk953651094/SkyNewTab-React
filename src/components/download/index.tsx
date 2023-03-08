@@ -2,7 +2,7 @@ import React from "react";
 import {Button, Tooltip, message} from "antd";
 import {DownloadOutlined} from "@ant-design/icons";
 import {unsplashUrl, clientId} from "../../typescripts/publicConstants";
-import {isEmptyString} from "../../typescripts/publicFunctions";
+import {changeThemeColor, isEmptyString} from "../../typescripts/publicFunctions";
 import {ThemeColorInterface} from "../../typescripts/publicInterface";
 
 type propType = {
@@ -43,6 +43,8 @@ class DownloadComponent extends React.Component {
         if (nextProps.imageData && nextProps.imageData !== prevProps.imageData){
             this.setState({
                 downloadLink: nextProps.imageData.links.download_location
+            }, ()=>{
+                changeThemeColor("#downloadBtn", this.state.backgroundColor, this.state.fontColor);
             })
         }
     }
@@ -74,12 +76,10 @@ class DownloadComponent extends React.Component {
             <Tooltip title={"下载图片"} color={this.state.backgroundColor}>
                 <Button shape="round" icon={<DownloadOutlined/>} size={"large"}
                         onClick={this.handleClick.bind(this)}
-                        // id={"downloadBtn"}
+                        id={"downloadBtn"}
                         className={"downloadBtn componentTheme zIndexHigh"}
                         style={{
                             display: this.props.display,
-                            backgroundColor: this.state.backgroundColor,
-                            color: this.state.fontColor
                         }}
                 />
             </Tooltip>

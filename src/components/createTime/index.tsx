@@ -2,6 +2,7 @@ import React from "react";
 import {Button, Tooltip} from "antd";
 import {CalendarOutlined} from "@ant-design/icons";
 import {ThemeColorInterface} from "../../typescripts/publicInterface";
+import {changeThemeColor} from "../../typescripts/publicFunctions";
 
 type propType = {
     themeColor: ThemeColorInterface,
@@ -41,6 +42,8 @@ class CreatTimeComponent extends React.Component {
         if (nextProps.imageData && nextProps.imageData !== prevProps.imageData) {
             this.setState({
                 createTime: nextProps.imageData.created_at.split("T")[0]
+            }, ()=>{
+                changeThemeColor("#createTimeBtn", this.state.backgroundColor, this.state.fontColor);
             })
         }
     }
@@ -53,8 +56,6 @@ class CreatTimeComponent extends React.Component {
                         className={"componentTheme zIndexHigh"}
                         style={{
                             display: this.props.display,
-                            backgroundColor: this.state.backgroundColor,
-                            color: this.state.fontColor,
                             cursor: "default"
                         }}
                 >

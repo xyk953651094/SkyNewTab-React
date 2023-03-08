@@ -1,7 +1,7 @@
 import React from "react";
 import {Popover, Button} from "antd";
 import {device} from "../../typescripts/publicConstants";
-import {getWeatherIcon, httpRequest} from "../../typescripts/publicFunctions";
+import {changeThemeColor, getWeatherIcon, httpRequest} from "../../typescripts/publicFunctions";
 import {ThemeColorInterface} from "../../typescripts/publicInterface";
 
 type propType = {
@@ -45,6 +45,38 @@ class WeatherComponent extends React.Component {
         };
     }
 
+    setWeather(data: any) {
+        this.setState({
+            weatherIcon: getWeatherIcon(data.weatherData.weather),
+            weatherInfo: data.weatherData.weather  + "｜"
+                + data.weatherData.temperature + "°C",
+            region: data.region.replace("|", " · "),
+            humidity: data.weatherData.humidity,
+            pm25: data.weatherData.pm25,
+            rainfall: data.weatherData.rainfall + "%",
+            visibility: data.weatherData.visibility,
+            windInfo: data.weatherData.windDirection + data.weatherData.windPower + "级",
+        });
+    }
+
+    getWeather() {
+        let tempThis = this;
+        let url = "https://v2.jinrishici.com/info";
+        let data = {};
+        httpRequest(url, data, "GET")
+            .then(function(resultData: any){
+                localStorage.setItem("lastWeatherRequestTime", String(new Date().getTime()));  // 保存请求时间，防抖节流
+                if (resultData.status === "success" && resultData.data.weatherData !== null) {
+                    localStorage.setItem("lastWeather", JSON.stringify(resultData.data));      // 保存请求结果，防抖节流
+                    tempThis.setWeather(resultData.data.weatherData);
+                }
+            })
+            .catch(function(){
+                // 请求失败也更新请求时间，防止超时后无信息可显示
+                localStorage.setItem("lastWeatherRequestTime", String(new Date().getTime()));  // 保存请求时间，防抖节流
+            });
+    }
+
     componentDidMount() {
         if (device === "iPhone" || device === "Android") {
             this.setState({
@@ -52,26 +84,22 @@ class WeatherComponent extends React.Component {
             })
         }
         else {
-            let tempThis = this;
-            let url = "https://v2.jinrishici.com/info";
-            let data = {};
-            httpRequest(url, data, "GET")
-                .then(function(resultData: any){
-                    if (resultData.status === "success" && resultData.data.weatherData !== null) {
-                        tempThis.setState({
-                            weatherIcon: getWeatherIcon(resultData.data.weatherData.weather),
-                            weatherInfo: resultData.data.weatherData.weather  + "｜"
-                                + resultData.data.weatherData.temperature + "°C",
-                            region: resultData.data.region.replace("|", " · "),
-                            humidity: resultData.data.weatherData.humidity,
-                            pm25: resultData.data.weatherData.pm25,
-                            rainfall: resultData.data.weatherData.rainfall + "%",
-                            visibility: resultData.data.weatherData.visibility,
-                            windInfo: resultData.data.weatherData.windDirection + resultData.data.weatherData.windPower + "级",
-                        });
-                    }
-                })
-                .catch(function(){});
+            // 防抖节流
+            let lastRequestTime: any = localStorage.getItem("lastWeatherRequestTime");
+            let nowTimeStamp = new Date().getTime();
+            if(lastRequestTime === null) {  // 第一次请求时 lastRequestTime 为 null，因此直接进行请求赋值 lastRequestTime
+                this.getWeather();
+            }
+            else if(nowTimeStamp - parseInt(lastRequestTime) > 60 * 60 * 1000) {  // 必须多于一小时才能进行新的请求
+                this.getWeather();
+            }
+            else {  // 一小时之内使用上一次请求结果
+                let lastWeather: any = localStorage.getItem("lastWeather");
+                if (lastWeather) {
+                    lastWeather = JSON.parse(lastWeather);
+                    this.setWeather(lastWeather);
+                }
+            }
         }
     }
 
@@ -80,6 +108,8 @@ class WeatherComponent extends React.Component {
             this.setState({
                 backgroundColor: nextProps.themeColor.componentBackgroundColor,
                 fontColor: nextProps.themeColor.componentFontColor,
+            }, ()=>{
+                changeThemeColor("#weatherBtn", this.state.backgroundColor, this.state.fontColor);
             });
         }
     }
@@ -102,9 +132,6 @@ class WeatherComponent extends React.Component {
                         className={"componentTheme zIndexHigh"}
                         style={{
                             display: this.state.display,
-                            backgroundColor: this.state.backgroundColor,
-                            color: this.state.fontColor,
-                            cursor: "default"
                         }}
                 >
                     {this.state.weatherInfo}

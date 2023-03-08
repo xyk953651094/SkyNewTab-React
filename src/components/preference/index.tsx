@@ -3,7 +3,7 @@ import {Button, Tooltip, Drawer, Card, Form, Row, Col, Radio, Checkbox, message}
 import type {RadioChangeEvent} from "antd";
 import type {CheckboxValueType} from "antd/es/checkbox/Group";
 import {MoreOutlined, SettingOutlined, GithubOutlined} from "@ant-design/icons";
-import {getFontColor} from "../../typescripts/publicFunctions";
+import {changeThemeColor, getFontColor} from "../../typescripts/publicFunctions";
 import {FormInitialValuesInterface, ThemeColorInterface} from "../../typescripts/publicInterface";
 import {defaultFormInitialValues, device} from "../../typescripts/publicConstants";
 const $ = require("jquery");
@@ -129,6 +129,8 @@ class PreferenceComponent extends React.Component {
             this.setState({
                 componentBackgroundColor: nextProps.imageData.color,
                 componentFontColor: getFontColor(nextProps.imageData.color),
+            }, ()=>{
+                changeThemeColor("#preferenceBtn", this.state.backgroundColor, this.state.fontColor);
             });
         }
     }
@@ -189,11 +191,9 @@ class PreferenceComponent extends React.Component {
                 <Tooltip title={"偏好设置"} placement="topRight" color={this.state.backgroundColor}>
                     <Button shape="round" icon={<MoreOutlined />} size={"large"}
                             onClick={this.drawerOnShow.bind(this)}
-                            className={"preferenceBtn componentTheme zIndexHigh"}
-                            style={{
-                                backgroundColor: this.state.backgroundColor,
-                                color: this.state.fontColor
-                            }}
+                            id={"preferenceBtn"}
+                            className={"componentTheme zIndexHigh"}
+                            style={{}}
                     />
                 </Tooltip>
                 <Drawer

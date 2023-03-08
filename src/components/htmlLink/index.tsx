@@ -2,7 +2,7 @@ import React from "react";
 import {Button, Tooltip, message} from "antd";
 import {LinkOutlined} from "@ant-design/icons";
 import {unsplashUrl} from "../../typescripts/publicConstants";
-import {isEmptyString} from "../../typescripts/publicFunctions";
+import {changeThemeColor, isEmptyString} from "../../typescripts/publicFunctions";
 import {ThemeColorInterface} from "../../typescripts/publicInterface";
 
 type propType = {
@@ -43,6 +43,8 @@ class HtmlLinkComponent extends React.Component {
         if (nextProps.imageData && nextProps.imageData !== prevProps.imageData) {
             this.setState({
                 htmlLink: nextProps.imageData.links.html
+            }, ()=>{
+                changeThemeColor("#htmlLinkBtn", this.state.backgroundColor, this.state.fontColor);
             })
         }
     }
@@ -60,12 +62,10 @@ class HtmlLinkComponent extends React.Component {
             <Tooltip title={"前往图片主页"} color={this.state.backgroundColor}>
                 <Button shape="round" icon={<LinkOutlined/>} size={"large"}
                         onClick={this.handleClick.bind(this)}
-                        // id={"htmlLinkBtn"}
-                        className={"htmlLinkBtn componentTheme zIndexHigh"}
+                        id={"htmlLinkBtn"}
+                        className={"componentTheme zIndexHigh"}
                         style={{
                             display: this.props.display,
-                            backgroundColor: this.state.backgroundColor,
-                            color: this.state.fontColor
                         }}
                 />
             </Tooltip>
