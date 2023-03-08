@@ -2,13 +2,13 @@ import React from "react";
 import {Button, Tooltip, message} from "antd";
 import {DownloadOutlined} from "@ant-design/icons";
 import {unsplashUrl, clientId} from "../../typescripts/publicConstants";
-import {changeThemeColor, isEmptyString} from "../../typescripts/publicFunctions";
-import {ImageDataInterface, ThemeColorInterface} from "../../typescripts/publicInterface";
+import {isEmptyString} from "../../typescripts/publicFunctions";
+import {ThemeColorInterface} from "../../typescripts/publicInterface";
 
 type propType = {
     themeColor: ThemeColorInterface,
     display: "none" | "block",
-    imageData: ImageDataInterface,
+    imageData: any,
 }
 
 type stateType = {
@@ -37,12 +37,10 @@ class DownloadComponent extends React.Component {
             this.setState({
                 backgroundColor: nextProps.themeColor.componentBackgroundColor,
                 fontColor: nextProps.themeColor.componentFontColor,
-            },() => {
-                changeThemeColor(".downloadBtn", this.state.backgroundColor, this.state.fontColor);
             });
         }
 
-        if (nextProps.imageData !== prevProps.imageData){
+        if (nextProps.imageData && nextProps.imageData !== prevProps.imageData){
             this.setState({
                 downloadLink: nextProps.imageData.links.download_location
             })
@@ -80,6 +78,8 @@ class DownloadComponent extends React.Component {
                         className={"downloadBtn componentTheme zIndexHigh"}
                         style={{
                             display: this.props.display,
+                            backgroundColor: this.state.backgroundColor,
+                            color: this.state.fontColor
                         }}
                 />
             </Tooltip>

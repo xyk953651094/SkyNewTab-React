@@ -11,18 +11,16 @@ import SearchComponent from "./components/search";
 import AuthorComponent from "./components/author";
 import CreatTimeComponent from "./components/createTime";
 
-import {Layout, Row, Col, Space, message} from "antd";
-import {clientId, defaultImage, device} from "./typescripts/publicConstants";
+import {Layout, Row, Col, Space} from "antd";
+import {clientId, device} from "./typescripts/publicConstants";
 import {
     setColorTheme,
-    changeThemeColor,
     getComponentBackgroundColor,
     getFontColor,
     httpRequest
 } from "./typescripts/publicFunctions";
-import {ImageDataInterface, ThemeColorInterface} from "./typescripts/publicInterface";
+import {ThemeColorInterface} from "./typescripts/publicInterface";
 const {Header, Content, Footer} = Layout;
-const $ = require("jquery");
 
 type propType = {}
 
@@ -31,7 +29,7 @@ type stateType = {
     mobileComponentDisplay: "none" | "block",
     wallpaperComponentDisplay: "none" | "block",
     themeColor: ThemeColorInterface,
-    imageData: ImageDataInterface,
+    imageData: any,
 
     displayEffect: "regular" | "full" | "raw",
     dynamicEffect: "close" | "translate" | "rotate" | "all",
@@ -55,7 +53,7 @@ class App extends React.Component {
                 "componentBackgroundColor": "",
                 "componentFontColor": "",
             },
-            imageData: defaultImage,
+            imageData: null,
 
             displayEffect: "regular",
             dynamicEffect: "all",
@@ -114,6 +112,7 @@ class App extends React.Component {
                 }
                 httpRequest(url, data, "GET")
                     .then(function(resultData: any){
+                        localStorage.setItem("lastImage", JSON.stringify(resultData));  // 保存本次图片，便于未来无互联网时显示
                         tempThis.setState({
                             componentDisplay: "block",
                             mobileComponentDisplay: "none",
@@ -131,37 +130,39 @@ class App extends React.Component {
                                     },
                                 })
 
-                                let bodyBackgroundColor = resultData.color;
-                                let bodyFontColor = getFontColor(bodyBackgroundColor);
-                                changeThemeColor("body", bodyBackgroundColor, bodyFontColor);
+                                document.getElementsByTagName("body")[0].style.backgroundColor = resultData.color;
+                                document.getElementsByTagName("body")[0].style.color = getFontColor(resultData.color);
                             }
                         })
                     })
                     .catch(function(){
-                        // 获取图片失败时显示默认图片
                         // message.error("获取图片失败");
-                        tempThis.setState({
-                            componentDisplay: "block",
-                            mobileComponentDisplay: "none",
-                            wallpaperComponentDisplay: "block",
-                            imageData: defaultImage,
-                        }, () => {
-                            // 修改主题颜色
-                            if (defaultImage.color !== null) {
-                                let componentBackgroundColor = getComponentBackgroundColor(defaultImage.color);
-                                let componentFontColor = getFontColor(componentBackgroundColor);
-                                tempThis.setState({
-                                    themeColor: {
-                                        "componentBackgroundColor": componentBackgroundColor,
-                                        "componentFontColor": componentFontColor,
-                                    },
-                                })
+                        // 获取图片失败时显示上次图片
+                        let lastImage: any = localStorage.getItem("lastImage");
+                        if (lastImage) {
+                            lastImage = JSON.parse(lastImage);
+                            tempThis.setState({
+                                componentDisplay: "block",
+                                mobileComponentDisplay: "none",
+                                wallpaperComponentDisplay: "block",
+                                imageData: lastImage,
+                            }, () => {
+                                // 修改主题颜色
+                                if (lastImage.color !== null) {
+                                    let componentBackgroundColor = getComponentBackgroundColor(lastImage.color);
+                                    let componentFontColor = getFontColor(componentBackgroundColor);
+                                    tempThis.setState({
+                                        themeColor: {
+                                            "componentBackgroundColor": componentBackgroundColor,
+                                            "componentFontColor": componentFontColor,
+                                        },
+                                    })
 
-                                let bodyBackgroundColor = defaultImage.color;
-                                let bodyFontColor = getFontColor(bodyBackgroundColor);
-                                changeThemeColor("body", bodyBackgroundColor, bodyFontColor);
-                            }
-                        })
+                                    document.getElementsByTagName("body")[0].style.backgroundColor = lastImage.color;
+                                    document.getElementsByTagName("body")[0].style.color = getFontColor(lastImage.color);
+                                }
+                            })
+                        }
                     })
                     .finally(function(){
                         // 小屏显示底部按钮

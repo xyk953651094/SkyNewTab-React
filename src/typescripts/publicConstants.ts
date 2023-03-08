@@ -1,4 +1,4 @@
-import {FormInitialValuesInterface, ImageDataInterface} from './publicInterface'
+import {FormInitialValuesInterface} from './publicInterface'
 import {getDevice} from "./publicFunctions";
 
 export let lightThemeArray = [
@@ -118,96 +118,6 @@ export let darkThemeArray = [
     {"bodyBackgroundColor": "#474361", "componentBackgroundColor": "#DCB28C"},
     {"bodyBackgroundColor": "#50543B", "componentBackgroundColor": "#FFE7B6"},
 ];
-
-// 默认图片
-export let defaultImage: ImageDataInterface = {
-    "id": "a8YKQkLOUH8",
-    "created_at": "2022-08-08T19:27:42Z",
-    "updated_at": "2022-08-28T10:33:48Z",
-    "promoted_at": "2022-08-09T06:29:16Z",
-    "width": 5882,
-    "height": 3922,
-    "color": "#d9d9d9",
-    "blur_hash": "LBNKbX009ZV[s:WUWBofSeofWBf6",
-    "description": null,
-    "alt_description": null,
-    "urls": {
-        "raw": "https://images.unsplash.com/photo-1659986828231-49ecf659b69c?ixid=MnwzMDIwODF8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NjE3Nzg4MDY\u0026ixlib=rb-1.2.1",
-        "full": "https://images.unsplash.com/photo-1659986828231-49ecf659b69c?crop=entropy\u0026cs=tinysrgb\u0026fm=jpg\u0026ixid=MnwzMDIwODF8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NjE3Nzg4MDY\u0026ixlib=rb-1.2.1\u0026q=80",
-        "regular": "https://images.unsplash.com/photo-1659986828231-49ecf659b69c?crop=entropy\u0026cs=tinysrgb\u0026fit=max\u0026fm=jpg\u0026ixid=MnwzMDIwODF8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NjE3Nzg4MDY\u0026ixlib=rb-1.2.1\u0026q=80\u0026w=1080",
-        "small": "https://images.unsplash.com/photo-1659986828231-49ecf659b69c?crop=entropy\u0026cs=tinysrgb\u0026fit=max\u0026fm=jpg\u0026ixid=MnwzMDIwODF8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NjE3Nzg4MDY\u0026ixlib=rb-1.2.1\u0026q=80\u0026w=400",
-        "thumb": "https://images.unsplash.com/photo-1659986828231-49ecf659b69c?crop=entropy\u0026cs=tinysrgb\u0026fit=max\u0026fm=jpg\u0026ixid=MnwzMDIwODF8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NjE3Nzg4MDY\u0026ixlib=rb-1.2.1\u0026q=80\u0026w=200",
-        "small_s3": "https://s3.us-west-2.amazonaws.com/images.unsplash.com/small/photo-1659986828231-49ecf659b69c"
-    },
-    "links": {
-        "self": "https://api.unsplash.com/photos/a8YKQkLOUH8",
-        "html": "https://unsplash.com/photos/a8YKQkLOUH8",
-        "download": "https://unsplash.com/photos/a8YKQkLOUH8/download?ixid=MnwzMDIwODF8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NjE3Nzg4MDY",
-        "download_location": "https://api.unsplash.com/photos/a8YKQkLOUH8/download?ixid=MnwzMDIwODF8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NjE3Nzg4MDY"
-    },
-    "categories": [],
-    "likes": 7,
-    "liked_by_user": false,
-    "current_user_collections": [],
-    "sponsorship": null,
-    "topic_submissions": {},
-    "user": {
-        "id": "Dfz97dEHsTo",
-        "updated_at": "2022-08-28T23:15:05Z",
-        "username": "lalasse",
-        "name": "Lasse Møller",
-        "first_name": "Lasse",
-        "last_name": "Møller",
-        "twitter_username": null,
-        "portfolio_url": "http://gurami.studio",
-        "bio": "Owner of graphic design studio, GURAMI.\r\nFree time photographer — capturing moments, feelings, structures or what ever I find interesting, sweet or cool.",
-        "location": "Denmark",
-        "links": {
-            "self": "https://api.unsplash.com/users/lalasse",
-            "html": "https://unsplash.com/@lalasse",
-            "photos": "https://api.unsplash.com/users/lalasse/photos",
-            "likes": "https://api.unsplash.com/users/lalasse/likes",
-            "portfolio": "https://api.unsplash.com/users/lalasse/portfolio",
-            "following": "https://api.unsplash.com/users/lalasse/following",
-            "followers": "https://api.unsplash.com/users/lalasse/followers"
-        },
-        "profile_image": {
-            "small": "https://images.unsplash.com/profile-fb-1537623231-509f7dea469e.jpg?ixlib=rb-1.2.1\u0026crop=faces\u0026fit=crop\u0026w=32\u0026h=32",
-            "medium": "https://images.unsplash.com/profile-fb-1537623231-509f7dea469e.jpg?ixlib=rb-1.2.1\u0026crop=faces\u0026fit=crop\u0026w=64\u0026h=64",
-            "large": "https://images.unsplash.com/profile-fb-1537623231-509f7dea469e.jpg?ixlib=rb-1.2.1\u0026crop=faces\u0026fit=crop\u0026w=128\u0026h=128"
-        },
-        "instagram_username": "la_lasse",
-        "total_collections": 0,
-        "total_likes": 0,
-        "total_photos": 235,
-        "accepted_tos": true,
-        "for_hire": true,
-        "social": {
-            "instagram_username": "la_lasse",
-            "portfolio_url": "http://gurami.studio",
-            "twitter_username": null,
-            "paypal_email": null
-        }
-    },
-    "exif": {
-        "make": "FUJIFILM",
-        "model": "X-E3",
-        "name": "FUJIFILM, X-E3",
-        "exposure_time": "1/3800",
-        "aperture": "1.0",
-        "focal_length": "35.0",
-        "iso": 200
-    },
-    "location": {
-        "title": null,
-        "name": null,
-        "city": null,
-        "country": null,
-        "position": {"latitude": null, "longitude": null}
-    },
-    "views": 242381,
-    "downloads": 3975
-}
 
 export let defaultFormInitialValues: FormInitialValuesInterface = {
     "displayEffectRadio": "regular",

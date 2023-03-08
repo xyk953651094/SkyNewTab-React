@@ -5,10 +5,9 @@ import {
     getTimeDetails,
     getGreetContent,
     getGreetIcon,
-    changeThemeColor, httpRequest
+    httpRequest
 } from "../../typescripts/publicFunctions";
 import {ThemeColorInterface} from "../../typescripts/publicInterface";
-const $ = require("jquery");
 
 type propType = {
     themeColor: ThemeColorInterface,
@@ -79,8 +78,6 @@ class GreetComponent extends React.Component {
             this.setState({
                 backgroundColor: nextProps.themeColor.componentBackgroundColor,
                 fontColor: nextProps.themeColor.componentFontColor,
-            },() => {
-                changeThemeColor("#greetBtn", this.state.backgroundColor, this.state.fontColor);
             });
         }
     }
@@ -101,6 +98,8 @@ class GreetComponent extends React.Component {
                         id={"greetBtn"}
                         className={"componentTheme zIndexHigh"}
                         style={{
+                            backgroundColor: this.state.backgroundColor,
+                            color: this.state.fontColor,
                             cursor: "default"
                         }}
                 >

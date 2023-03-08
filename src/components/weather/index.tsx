@@ -1,9 +1,8 @@
 import React from "react";
 import {Popover, Button} from "antd";
 import {device} from "../../typescripts/publicConstants";
-import {getWeatherIcon, changeThemeColor, httpRequest, getTimeDetails} from "../../typescripts/publicFunctions";
+import {getWeatherIcon, httpRequest} from "../../typescripts/publicFunctions";
 import {ThemeColorInterface} from "../../typescripts/publicInterface";
-const $ = require("jquery");
 
 type propType = {
     themeColor: ThemeColorInterface,
@@ -81,8 +80,6 @@ class WeatherComponent extends React.Component {
             this.setState({
                 backgroundColor: nextProps.themeColor.componentBackgroundColor,
                 fontColor: nextProps.themeColor.componentFontColor,
-            },() => {
-                changeThemeColor("#weatherBtn", this.state.backgroundColor, this.state.fontColor);
             });
         }
     }
@@ -105,6 +102,8 @@ class WeatherComponent extends React.Component {
                         className={"componentTheme zIndexHigh"}
                         style={{
                             display: this.state.display,
+                            backgroundColor: this.state.backgroundColor,
+                            color: this.state.fontColor,
                             cursor: "default"
                         }}
                 >

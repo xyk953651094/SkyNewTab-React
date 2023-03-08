@@ -2,13 +2,11 @@ import React from "react";
 import "../../stylesheets/wallpaper.scss"
 import "../../stylesheets/publicStyles.scss"
 import {Image} from "antd";
-import {imageDynamicEffect} from "../../typescripts/publicFunctions";
-import {isBlurhashValid, decode} from "blurhash";
-import {ImageDataInterface} from "../../typescripts/publicInterface";
+import {fadeIn, imageDynamicEffect} from "../../typescripts/publicFunctions";
 
 type propType = {
     display: "none" | "block",
-    imageData: ImageDataInterface,
+    imageData: any,
     displayEffect: "regular" | "full" | "raw",
     dynamicEffect: "close" | "translate" | "rotate" | "all",
 }
@@ -70,7 +68,7 @@ class WallpaperComponent extends React.Component {
         }
 
         // 图片质量
-        if (nextProps.displayEffect !== prevProps.displayEffect) {
+        if (nextProps.displayEffect !== prevProps.displayEffect && nextProps.imageData) {
             if (nextProps.displayEffect === "regular") {
                 this.setState({
                     imageLink: nextProps.imageData.urls.regular,
@@ -93,25 +91,6 @@ class WallpaperComponent extends React.Component {
         if(nextProps.dynamicEffect !== this.props.dynamicEffect) {
             imageDynamicEffect(backgroundImage, nextProps.dynamicEffect);
         }
-
-        // this.setState({
-        //     imageLink: this.props.imageData.urls.regular,
-        //     blurHash: this.props.imageData.blur_hash,
-        //     width: this.props.imageData.width,
-        //     height: this.props.imageData.height,
-        // }, () => {
-        //     // if(isBlurhashValid(this.state.blurHash)) {
-        //     //     const pixels = decode(this.state.blurHash, this.state.width, this.state.height);
-        //     //     const canvas = document.createElement("canvas");
-        //     //     const ctx = canvas.getContext("2d");
-        //     //     // @ts-ignore
-        //     //     const imageData = ctx.createImageData(this.state.width, this.state.height);
-        //     //     imageData.data.set(pixels);
-        //     //     // @ts-ignore
-        //     //     ctx.putImageData(imageData, 0, 0);
-        //     //     document.body.append(canvas);
-        //     // }
-        // });
     }
 
     render() {

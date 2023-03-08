@@ -2,13 +2,13 @@ import React from "react";
 import {Button, Tooltip, message} from "antd";
 import {CameraOutlined} from "@ant-design/icons";
 import {unsplashUrl} from "../../typescripts/publicConstants";
-import {changeThemeColor, isEmptyString} from "../../typescripts/publicFunctions";
-import {ImageDataInterface, ThemeColorInterface} from "../../typescripts/publicInterface";
+import {isEmptyString} from "../../typescripts/publicFunctions";
+import {ThemeColorInterface} from "../../typescripts/publicInterface";
 
 type propType = {
     themeColor: ThemeColorInterface,
     display: "none" | "block",
-    imageData: ImageDataInterface,
+    imageData: any,
 }
 
 type stateType = {
@@ -39,12 +39,10 @@ class AuthorComponent extends React.Component {
             this.setState({
                 backgroundColor: nextProps.themeColor.componentBackgroundColor,
                 fontColor: nextProps.themeColor.componentFontColor,
-            },() => {
-                changeThemeColor("#authorBtn", this.state.backgroundColor, this.state.fontColor);
             });
         }
 
-        if (nextProps.imageData !== prevProps.imageData) {
+        if (nextProps.imageData && nextProps.imageData !== prevProps.imageData) {
             this.setState({
                 author: "by " + nextProps.imageData.user.name + " on Unsplash",
                 authorLink: nextProps.imageData.user.links.html
@@ -67,7 +65,11 @@ class AuthorComponent extends React.Component {
                         onClick={this.handleClick.bind(this)}
                         id={"authorBtn"}
                         className={"componentTheme zIndexHigh"}
-                        style={{display: this.props.display}}
+                        style={{
+                            display: this.props.display,
+                            backgroundColor: this.state.backgroundColor,
+                            color: this.state.fontColor
+                        }}
                 >
                     {this.state.author}
                 </Button>

@@ -1,10 +1,7 @@
-import {lightThemeArray, darkThemeArray, device} from "./publicConstants"
-import {message, Modal} from 'antd';
+import {lightThemeArray, darkThemeArray} from "./publicConstants"
 import "jquery-color"
 import {ThemeColorInterface} from "./publicInterface";
 const $ = require("jquery");
-const {confirm} = Modal;
-
 // 网络请求
 export function httpRequest(url: string, data: object, method: "GET" | "POST") {
     return new Promise(function(resolve,reject){
