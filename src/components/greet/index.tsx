@@ -44,12 +44,12 @@ class GreetComponent extends React.Component {
     }
 
     componentDidMount() {
+        let tempThis = this;
         let url = "https://www.mxnzp.com/api/holiday/single/" + getTimeDetails(new Date()).showDate3;
         let data = {
             "app_id": "cicgheqakgmpjclo",
             "app_secret": "RVlRVjZTYXVqeHB3WCtQUG5lM0h0UT09",
         };
-        let tempThis = this;
         httpRequest(url, data, "GET")
             .then(function(resultData: any){
                 if (resultData.code === 1) {

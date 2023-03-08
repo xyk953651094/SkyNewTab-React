@@ -53,9 +53,9 @@ class WeatherComponent extends React.Component {
             })
         }
         else {
+            let tempThis = this;
             let url = "https://v2.jinrishici.com/info";
             let data = {};
-            let tempThis = this;
             httpRequest(url, data, "GET")
                 .then(function(resultData: any){
                     if (resultData.status === "success" && resultData.data.weatherData !== null) {

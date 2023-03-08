@@ -138,6 +138,7 @@ export let darkThemeArray = [
     {"bodyBackgroundColor": "#50543B", "componentBackgroundColor": "#FFE7B6"},
 ];
 
+// 默认图片
 export let defaultImage: ImageDataInterface = {
     "id": "a8YKQkLOUH8",
     "created_at": "2022-08-08T19:27:42Z",

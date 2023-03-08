@@ -12,7 +12,7 @@ export function httpRequest(url: string, data: object, method: "GET" | "POST") {
             url: url,
             type: method,
             data: data,
-            timeout: 10000,
+            timeout: 5000,
             success: (resultData: any) => {
                 resolve(resultData);
             },

@@ -104,6 +104,7 @@ class App extends React.Component {
             this.setState({
                 themeColor: setColorTheme()
             }, () => {
+                let tempThis = this;
                 let url = "https://api.unsplash.com/photos/random?";
                 let data = {
                     "client_id": clientId,
@@ -111,18 +112,17 @@ class App extends React.Component {
                     "topics": this.state.imageTopics,
                     "content_filter": "high",
                 }
-                let tempThis = this;
                 httpRequest(url, data, "GET")
-                    .then(function(imageData: any){
+                    .then(function(resultData: any){
                         tempThis.setState({
                             componentDisplay: "block",
                             mobileComponentDisplay: "none",
                             wallpaperComponentDisplay: "block",
-                            imageData: imageData,
+                            imageData: resultData,
                         }, () => {
                             // 修改主题颜色
-                            if (imageData.color !== null) {
-                                let componentBackgroundColor = getComponentBackgroundColor(imageData.color);
+                            if (resultData.color !== null) {
+                                let componentBackgroundColor = getComponentBackgroundColor(resultData.color);
                                 let componentFontColor = getFontColor(componentBackgroundColor);
                                 tempThis.setState({
                                     themeColor: {
@@ -131,21 +131,46 @@ class App extends React.Component {
                                     },
                                 })
 
-                                let bodyBackgroundColor = imageData.color;
+                                let bodyBackgroundColor = resultData.color;
                                 let bodyFontColor = getFontColor(bodyBackgroundColor);
                                 changeThemeColor("body", bodyBackgroundColor, bodyFontColor);
-                            }
-                            // 小屏显示底部按钮
-                            if (device === "iPhone" || device === "Android") {
-                                tempThis.setState({
-                                    componentDisplay: "none",
-                                    mobileComponentDisplay: "block",
-                                })
                             }
                         })
                     })
                     .catch(function(){
-                        message.error("获取图片失败");
+                        // 获取图片失败时显示默认图片
+                        // message.error("获取图片失败");
+                        tempThis.setState({
+                            componentDisplay: "block",
+                            mobileComponentDisplay: "none",
+                            wallpaperComponentDisplay: "block",
+                            imageData: defaultImage,
+                        }, () => {
+                            // 修改主题颜色
+                            if (defaultImage.color !== null) {
+                                let componentBackgroundColor = getComponentBackgroundColor(defaultImage.color);
+                                let componentFontColor = getFontColor(componentBackgroundColor);
+                                tempThis.setState({
+                                    themeColor: {
+                                        "componentBackgroundColor": componentBackgroundColor,
+                                        "componentFontColor": componentFontColor,
+                                    },
+                                })
+
+                                let bodyBackgroundColor = defaultImage.color;
+                                let bodyFontColor = getFontColor(bodyBackgroundColor);
+                                changeThemeColor("body", bodyBackgroundColor, bodyFontColor);
+                            }
+                        })
+                    })
+                    .finally(function(){
+                        // 小屏显示底部按钮
+                        if (device === "iPhone" || device === "Android") {
+                            tempThis.setState({
+                                componentDisplay: "none",
+                                mobileComponentDisplay: "block",
+                            })
+                        }
                     });
             })
         });
