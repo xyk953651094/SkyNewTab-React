@@ -17,7 +17,8 @@ import {
     setColorTheme,
     getComponentBackgroundColor,
     getFontColor,
-    httpRequest
+    httpRequest,
+    changeThemeColor
 } from "./typescripts/publicFunctions";
 import {ThemeColorInterface} from "./typescripts/publicInterface";
 const {Header, Content, Footer} = Layout;
@@ -87,16 +88,16 @@ class App extends React.Component {
     }
 
     // 请求完成后处理步骤
-    setWallpaper(imageData: any) {
+    setWallpaper(data: any) {
         this.setState({
             componentDisplay: "block",
             mobileComponentDisplay: "none",
             wallpaperComponentDisplay: "block",
-            imageData: imageData,
+            imageData: data,
         }, () => {
             // 修改主题颜色
-            if (imageData.color !== null) {
-                let componentBackgroundColor = getComponentBackgroundColor(imageData.color);
+            if (data.color !== null) {
+                let componentBackgroundColor = getComponentBackgroundColor(data.color);
                 let componentFontColor = getFontColor(componentBackgroundColor);
                 this.setState({
                     themeColor: {
@@ -105,8 +106,9 @@ class App extends React.Component {
                     },
                 })
 
-                document.getElementsByTagName("body")[0].style.backgroundColor = imageData.color;
-                document.getElementsByTagName("body")[0].style.color = getFontColor(imageData.color);
+                let bodyBackgroundColor = data.color;
+                let bodyFontColor = getFontColor(bodyBackgroundColor);
+                changeThemeColor("body", bodyBackgroundColor, bodyFontColor);
             }
         })
     }
@@ -165,7 +167,7 @@ class App extends React.Component {
             this.setState({
                 themeColor: setColorTheme()
             }, () => {
-                // 防抖节流
+                // 设置背景图片，防抖节流
                 let lastRequestTime: any = localStorage.getItem("lastImageRequestTime");
                 let nowTimeStamp = new Date().getTime();
                 if(lastRequestTime === null) {  // 第一次请求时 lastRequestTime 为 null，因此直接进行请求赋值 lastRequestTime

@@ -48,8 +48,7 @@ class WeatherComponent extends React.Component {
     setWeather(data: any) {
         this.setState({
             weatherIcon: getWeatherIcon(data.weatherData.weather),
-            weatherInfo: data.weatherData.weather  + "｜"
-                + data.weatherData.temperature + "°C",
+            weatherInfo: data.weatherData.weather  + "｜" + data.weatherData.temperature + "°C",
             region: data.region.replace("|", " · "),
             humidity: data.weatherData.humidity,
             pm25: data.weatherData.pm25,
@@ -68,7 +67,7 @@ class WeatherComponent extends React.Component {
                 localStorage.setItem("lastWeatherRequestTime", String(new Date().getTime()));  // 保存请求时间，防抖节流
                 if (resultData.status === "success" && resultData.data.weatherData !== null) {
                     localStorage.setItem("lastWeather", JSON.stringify(resultData.data));      // 保存请求结果，防抖节流
-                    tempThis.setWeather(resultData.data.weatherData);
+                    tempThis.setWeather(resultData.data);
                 }
             })
             .catch(function(){
