@@ -1,13 +1,13 @@
 import React from "react";
 import {Button, Tooltip} from "antd";
 import {CalendarOutlined} from "@ant-design/icons";
+import {ThemeColorInterface} from "../../typescripts/publicInterface";
 import {changeThemeColor} from "../../typescripts/publicFunctions";
-import {ImageDataInterface, ThemeColorInterface} from "../../typescripts/publicInterface";
 
 type propType = {
     themeColor: ThemeColorInterface,
     display: "none" | "block",
-    imageData: ImageDataInterface,
+    imageData: any,
 }
 
 type stateType = {
@@ -36,14 +36,14 @@ class CreatTimeComponent extends React.Component {
             this.setState({
                 backgroundColor: nextProps.themeColor.componentBackgroundColor,
                 fontColor: nextProps.themeColor.componentFontColor,
-            },() => {
-                changeThemeColor("#createTimeBtn", this.state.backgroundColor, this.state.fontColor);
             });
         }
 
-        if (nextProps.imageData !== prevProps.imageData) {
+        if (nextProps.imageData && nextProps.imageData !== prevProps.imageData) {
             this.setState({
                 createTime: nextProps.imageData.created_at.split("T")[0]
+            }, ()=>{
+                changeThemeColor("#createTimeBtn", this.state.backgroundColor, this.state.fontColor);
             })
         }
     }

@@ -1,0 +1,134 @@
+@import "~antd/dist/reset.css";
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  background-color: #FFFFFF;
+}
+
+.ant-layout {
+  background: transparent;
+}
+
+#header {
+  height: 100px;
+  line-height: 100px;
+  background-color: transparent;
+}
+
+#content {
+  position: fixed;
+  top: 100px;
+  bottom : 100px;
+  left: 50px;
+  right: 50px;
+}
+
+#footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: transparent;
+  height: 100px;
+  line-height: 100px;
+  padding: 0 50px;
+}
+
+/* z轴显示层数 */
+.zIndexHigh {
+  z-index: 2;
+}
+
+.zIndexMiddle {
+  z-index: 1;
+}
+
+.zIndexLow {
+  z-index: 0;
+}
+
+/*水平垂直居中*/
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/*毛玻璃效果*/
+.componentTheme {
+  border-width: 0;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1), 0 2px 4px 1px rgba(0, 0, 0, 0.18);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  overflow:hidden;
+}
+
+/* 淡入效果 */
+.maskFadeIn {
+  animation-name: fadeIn;        /* 动画名称 */
+  animation-duration: 0.5s;        /* 动画持续时间 */
+  animation-iteration-count: 1;  /* 动画次数 */
+  animation-delay: 0s;           /* 延迟时间 */
+  animation-fill-mode: forwards;
+  /*-webkit-animation-name: fadeIn;        !* 动画名称 *!*/
+  /*-webkit-animation-duration: 3s;        !* 动画持续时间 *!*/
+  /*-webkit-animation-iteration-count: 1;  !* 动画次数 *!*/
+  /*-webkit-animation-delay: 0s;           !* 延迟时间 *!*/
+}
+
+.wallpaperFadeIn {
+  animation-name: fadeIn;        /* 动画名称 */
+  animation-duration: 2s;        /* 持续时间 */
+  animation-iteration-count: 1;  /* 动画次数 */
+  animation-delay: 0s;           /* 延迟时间 */
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }    /* 初始状态 */
+  50% { opacity: 1; }   /* 中间状态 */
+  100% { opacity: 1; }  /* 结尾状态 */
+}
+
+@-webkit-keyframes fadeIn {  /* Safari and Chrome */
+  0% { opacity: 0; }    /* 初始状态 */
+  50% { opacity: 1; }   /* 中间状态 */
+  100% { opacity: 1; }  /* 结尾状态 */
+}
+
+/* 淡出效果 */
+.maskFadeOut {
+  animation-name: fadeOut;       /* 动画名称 */
+  animation-duration: 0.5s;      /* 动画持续时间 */
+  animation-iteration-count: 1;  /* 动画次数 */
+  animation-delay: 0s;           /* 延迟时间 */
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeOut {
+  0% { opacity: 1; }    /* 初始状态 */
+  50% { opacity: 0; }   /* 中间状态 */
+  100% { opacity: 0; }  /* 结尾状态 */
+}
+
+@-webkit-keyframes fadeOut {
+  0% { opacity: 1; }    /* 初始状态 */
+  50% { opacity: 0; }   /* 中间状态 */
+  100% { opacity: 0; }  /* 结尾状态 */
+}
+
+/*移动端竖屏样式*/
+@media screen and (max-width: 500px) and (orientation:portrait) {
+  #header, #footer {
+    padding: 0 15px;
+  }
+
+  #content {
+    left: 15px;
+    right: 15px;
+  }
+}

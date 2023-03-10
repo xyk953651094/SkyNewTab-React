@@ -1,17 +1,13 @@
 import React from "react";
 import {Popover, Button} from "antd";
-import Icon, {SmileOutlined, CalendarOutlined, CheckCircleOutlined, CloseCircleOutlined} from "@ant-design/icons";
+import {CheckCircleOutlined, CloseCircleOutlined} from "@ant-design/icons";
 import {
     getTimeDetails,
     getGreetContent,
     getGreetIcon,
-    changeThemeColor,
-    getHoliday,
-    getChineseHoliday
+    httpRequest, changeThemeColor
 } from "../../typescripts/publicFunctions";
 import {ThemeColorInterface} from "../../typescripts/publicInterface";
-import {SunriseSvg} from "../../typescripts/publicIcons";
-const $ = require("jquery");
 
 type propType = {
     themeColor: ThemeColorInterface,
@@ -21,7 +17,7 @@ type stateType = {
     backgroundColor: string,
     fontColor: string,
     greet: string,
-    greetSvg: any,
+    greetIcon: string,
     calendar: string,
     suit: string,
     avoid: string,
@@ -39,42 +35,72 @@ class GreetComponent extends React.Component {
             backgroundColor: "",
             fontColor: "",
             greet: getGreetContent(),
-            greetSvg: getGreetIcon(),
+            greetIcon: getGreetIcon(),
             calendar: getTimeDetails(new Date()).showDate4 + " " + getTimeDetails(new Date()).showWeek,
             suit: "暂无信息",
             avoid: "暂无信息",
         };
     }
 
-    componentDidMount() {
-        let holidayParameters = {
+    // 请求完成后处理步骤
+    setHoliday(data: any) {
+        let holidayContent = data.solarTerms;
+        if (data.typeDes !== "休息日" && data.typeDes !== "工作日"){
+            holidayContent = holidayContent + " · " + data.typeDes;
+        }
+        if (data.solarTerms.indexOf("后") === -1) {
+            holidayContent = "今日" + holidayContent;
+        }
+        let timeDetails = getTimeDetails(new Date());
+        this.setState({
+            greet: this.state.greet + "｜" + holidayContent,
+            calendar: timeDetails.showDate4 + " " + timeDetails.showWeek + "｜" +
+                data.yearTips + data.chineseZodiac + "年｜" +
+                data.lunarCalendar,
+            suit: data.suit.replace(/\./g, " · "),
+            avoid: data.avoid.replace(/\./g, " · "),
+        });
+    }
+
+    // 获取节假日信息
+    getHoliday() {
+        let tempThis = this;
+        let url = "https://www.mxnzp.com/api/holiday/single/" + getTimeDetails(new Date()).showDate3;
+        let data = {
             "app_id": "cicgheqakgmpjclo",
             "app_secret": "RVlRVjZTYXVqeHB3WCtQUG5lM0h0UT09",
         };
-        $.ajax({
-            url: "https://www.mxnzp.com/api/holiday/single/" + getTimeDetails(new Date()).showDate3,
-            type: "GET",
-            data: holidayParameters,
-            timeout: 10000,
-            success: (resultData: any) => {
+        httpRequest(url, data, "GET")
+            .then(function(resultData: any){
+                localStorage.setItem("lastHolidayRequestTime", String(new Date().getTime()));  // 保存请求时间，防抖节流
                 if (resultData.code === 1) {
-                    let holidayContent = resultData.data.solarTerms;
-                    if (resultData.data.solarTerms.indexOf("后") === -1) {
-                        holidayContent = "今日" + holidayContent;
-                    }
-                    let timeDetails = getTimeDetails(new Date());
-                    this.setState({
-                        greet: this.state.greet + "｜" + holidayContent + getHoliday() + getChineseHoliday(resultData.data.lunarCalendar),
-                        calendar: timeDetails.showDate4 + " " + timeDetails.showWeek + "｜" +
-                            resultData.data.yearTips + resultData.data.chineseZodiac + "年｜" +
-                            resultData.data.lunarCalendar,
-                        suit: resultData.data.suit.replace(/\./g, " · "),
-                        avoid: resultData.data.avoid.replace(/\./g, " · "),
-                    });
+                    localStorage.setItem("lastHoliday", JSON.stringify(resultData.data));      // 保存请求结果，防抖节流
+                    tempThis.setHoliday(resultData.data);
                 }
-            },
-            error: function () {}
-        });
+            })
+            .catch(function(){
+                // 请求失败也更新请求时间，防止超时后无信息可显示
+                localStorage.setItem("lastHolidayRequestTime", String(new Date().getTime()));  // 保存请求时间，防抖节流
+            });
+    }
+
+    componentDidMount() {
+        // 防抖节流
+        let lastRequestTime: any = localStorage.getItem("lastHolidayRequestTime");
+        let nowTimeStamp = new Date().getTime();
+        if(lastRequestTime === null) {  // 第一次请求时 lastRequestTime 为 null，因此直接进行请求赋值 lastRequestTime
+            this.getHoliday();
+        }
+        else if(nowTimeStamp - parseInt(lastRequestTime) > 60 * 60 * 1000) {  // 必须多于一小时才能进行新的请求
+            this.getHoliday();
+        }
+        else {  // 一小时之内使用上一次请求结果
+            let lastHoliday: any = localStorage.getItem("lastHoliday");
+            if (lastHoliday) {
+                lastHoliday = JSON.parse(lastHoliday);
+                this.setHoliday(lastHoliday);
+            }
+        }
     }
 
     componentWillReceiveProps(nextProps: any, prevProps: any) {
@@ -82,7 +108,7 @@ class GreetComponent extends React.Component {
             this.setState({
                 backgroundColor: nextProps.themeColor.componentBackgroundColor,
                 fontColor: nextProps.themeColor.componentFontColor,
-            },() => {
+            }, ()=>{
                 changeThemeColor("#greetBtn", this.state.backgroundColor, this.state.fontColor);
             });
         }
@@ -98,14 +124,12 @@ class GreetComponent extends React.Component {
         
         return (
             <Popover
-                title={<p><CalendarOutlined />{ " " + this.state.calendar}</p>}
-                content={popoverContent} placement="topRight" color={this.state.backgroundColor}>
-                <Button shape="round" icon={<Icon component={this.state.greetSvg} />} size={"large"}
+                title={this.state.calendar}
+                content={popoverContent} placement="topLeft" color={this.state.backgroundColor}>
+                <Button shape="round" icon={<i className={this.state.greetIcon}> </i>} size={"large"}
                         id={"greetBtn"}
                         className={"componentTheme zIndexHigh"}
-                        style={{
-                            cursor: "default"
-                        }}
+                        style={{}}
                 >
                     {this.state.greet}
                 </Button>

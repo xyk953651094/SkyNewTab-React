@@ -3,12 +3,12 @@ import {Button, Tooltip, message} from "antd";
 import {LinkOutlined} from "@ant-design/icons";
 import {unsplashUrl} from "../../typescripts/publicConstants";
 import {changeThemeColor, isEmptyString} from "../../typescripts/publicFunctions";
-import {ImageDataInterface, ThemeColorInterface} from "../../typescripts/publicInterface";
+import {ThemeColorInterface} from "../../typescripts/publicInterface";
 
 type propType = {
     themeColor: ThemeColorInterface,
     display: "none" | "block",
-    imageData: ImageDataInterface,
+    imageData: any,
 }
 
 type stateType = {
@@ -37,14 +37,14 @@ class HtmlLinkComponent extends React.Component {
             this.setState({
                 backgroundColor: nextProps.themeColor.componentBackgroundColor,
                 fontColor: nextProps.themeColor.componentFontColor,
-            },() => {
-                changeThemeColor(".htmlLinkBtn", this.state.backgroundColor, this.state.fontColor);
             });
         }
 
-        if (nextProps.imageData !== prevProps.imageData) {
+        if (nextProps.imageData && nextProps.imageData !== prevProps.imageData) {
             this.setState({
                 htmlLink: nextProps.imageData.links.html
+            }, ()=>{
+                changeThemeColor("#htmlLinkBtn", this.state.backgroundColor, this.state.fontColor);
             })
         }
     }
@@ -62,8 +62,8 @@ class HtmlLinkComponent extends React.Component {
             <Tooltip title={"前往图片主页"} color={this.state.backgroundColor}>
                 <Button shape="round" icon={<LinkOutlined/>} size={"large"}
                         onClick={this.handleClick.bind(this)}
-                        // id={"htmlLinkBtn"}
-                        className={"htmlLinkBtn componentTheme zIndexHigh"}
+                        id={"htmlLinkBtn"}
+                        className={"componentTheme zIndexHigh"}
                         style={{
                             display: this.props.display,
                         }}

@@ -1,20 +1,16 @@
 import React from "react";
-import DonationComponent from "../donation";
-import OtherAppComponent from "../otherApp";
-import {Button, Tooltip, Drawer, Card, Typography, Form, Row, Col, Radio, Checkbox, message} from "antd";
+import {Button, Tooltip, Drawer, Card, Form, Row, Col, Radio, Checkbox, message} from "antd";
 import type {RadioChangeEvent} from "antd";
 import type {CheckboxValueType} from "antd/es/checkbox/Group";
 import {MoreOutlined, SettingOutlined, GithubOutlined} from "@ant-design/icons";
 import {changeThemeColor, getFontColor} from "../../typescripts/publicFunctions";
-import {FormInitialValuesInterface, ImageDataInterface, ThemeColorInterface} from "../../typescripts/publicInterface";
+import {FormInitialValuesInterface, ThemeColorInterface} from "../../typescripts/publicInterface";
 import {defaultFormInitialValues, device} from "../../typescripts/publicConstants";
 const $ = require("jquery");
-const {Link} = Typography;
 
 type propType = {
     themeColor: ThemeColorInterface,
-    display: "none" | "block",
-    imageData: ImageDataInterface,
+    imageData: any,
     getDisplayEffect: any,
     getDynamicEffect: any,
     getImageTopics: any,
@@ -126,15 +122,15 @@ class PreferenceComponent extends React.Component {
             this.setState({
                 backgroundColor: nextProps.themeColor.componentBackgroundColor,
                 fontColor: nextProps.themeColor.componentFontColor,
-            },() => {
-                changeThemeColor(".preferenceBtn", this.state.backgroundColor, this.state.fontColor);
             });
         }
 
-        if (nextProps.imageData !== prevProps.imageData) {
+        if (nextProps.imageData && nextProps.imageData !== prevProps.imageData) {
             this.setState({
                 componentBackgroundColor: nextProps.imageData.color,
                 componentFontColor: getFontColor(nextProps.imageData.color),
+            }, ()=>{
+                changeThemeColor("#preferenceBtn", this.state.backgroundColor, this.state.fontColor);
             });
         }
     }
@@ -195,9 +191,9 @@ class PreferenceComponent extends React.Component {
                 <Tooltip title={"偏好设置"} placement="topRight" color={this.state.backgroundColor}>
                     <Button shape="round" icon={<MoreOutlined />} size={"large"}
                             onClick={this.drawerOnShow.bind(this)}
-                            // id={"preferenceBtn"}
-                            className={"preferenceBtn componentTheme zIndexHigh"}
-                            style={{display: this.props.display}}
+                            id={"preferenceBtn"}
+                            className={"componentTheme zIndexHigh"}
+                            style={{}}
                     />
                 </Tooltip>
                 <Drawer

@@ -11,12 +11,17 @@ import SearchComponent from "./components/search";
 import AuthorComponent from "./components/author";
 import CreatTimeComponent from "./components/createTime";
 
-import {Layout, Row, Col, Space, message} from "antd";
-import {clientId, defaultImage, device} from "./typescripts/publicConstants";
-import {setColorTheme, changeThemeColor, getComponentBackgroundColor, getFontColor} from "./typescripts/publicFunctions";
-import {ImageDataInterface, ThemeColorInterface} from "./typescripts/publicInterface";
+import {Layout, Row, Col, Space} from "antd";
+import {clientId, device} from "./typescripts/publicConstants";
+import {
+    setColorTheme,
+    getComponentBackgroundColor,
+    getFontColor,
+    httpRequest,
+    changeThemeColor
+} from "./typescripts/publicFunctions";
+import {ThemeColorInterface} from "./typescripts/publicInterface";
 const {Header, Content, Footer} = Layout;
-const $ = require("jquery");
 
 type propType = {}
 
@@ -25,7 +30,7 @@ type stateType = {
     mobileComponentDisplay: "none" | "block",
     wallpaperComponentDisplay: "none" | "block",
     themeColor: ThemeColorInterface,
-    imageData: ImageDataInterface,
+    imageData: any,
 
     displayEffect: "regular" | "full" | "raw",
     dynamicEffect: "close" | "translate" | "rotate" | "all",
@@ -49,7 +54,7 @@ class App extends React.Component {
                 "componentBackgroundColor": "",
                 "componentFontColor": "",
             },
-            imageData: defaultImage,
+            imageData: null,
 
             displayEffect: "regular",
             dynamicEffect: "all",
@@ -82,6 +87,70 @@ class App extends React.Component {
         })
     }
 
+    // 请求完成后处理步骤
+    setWallpaper(data: any) {
+        this.setState({
+            componentDisplay: "block",
+            mobileComponentDisplay: "none",
+            wallpaperComponentDisplay: "block",
+            imageData: data,
+        }, () => {
+            // 修改主题颜色
+            if (data.color !== null) {
+                let componentBackgroundColor = getComponentBackgroundColor(data.color);
+                let componentFontColor = getFontColor(componentBackgroundColor);
+                this.setState({
+                    themeColor: {
+                        "componentBackgroundColor": componentBackgroundColor,
+                        "componentFontColor": componentFontColor,
+                    },
+                })
+
+                let bodyBackgroundColor = data.color;
+                let bodyFontColor = getFontColor(bodyBackgroundColor);
+                changeThemeColor("body", bodyBackgroundColor, bodyFontColor);
+            }
+        })
+    }
+
+    // 获取背景图片
+    getWallpaper() {
+        let tempThis = this;
+        let url = "https://api.unsplash.com/photos/random?";
+        let data = {
+            "client_id": clientId,
+            "orientation": (device === "iPhone" || device === "Android") ? "portrait" : "landscape",
+            "topics": this.state.imageTopics,
+            "content_filter": "high",
+        }
+        httpRequest(url, data, "GET")
+            .then(function(resultData: any){
+                localStorage.setItem("lastImageRequestTime", String(new Date().getTime()));  // 保存请求时间，防抖节流
+                localStorage.setItem("lastImage", JSON.stringify(resultData));               // 保存请求结果，防抖节流
+                tempThis.setWallpaper(resultData);
+            })
+            .catch(function(){
+                // message.error("获取图片失败");
+                // 请求失败也更新请求时间，防止超时后无信息可显示
+                localStorage.setItem("lastImageRequestTime", String(new Date().getTime()));  // 保存请求时间，防抖节流
+                // 获取图片失败时显示上次图片
+                let lastImage: any = localStorage.getItem("lastImage");
+                if (lastImage) {
+                    lastImage = JSON.parse(lastImage);
+                    tempThis.setWallpaper(lastImage);
+                }
+            })
+            .finally(function(){
+                // 小屏显示底部按钮
+                if (device === "iPhone" || device === "Android") {
+                    tempThis.setState({
+                        componentDisplay: "none",
+                        mobileComponentDisplay: "block",
+                    })
+                }
+            });
+    }
+
     componentDidMount() {
         // 加载偏好设置
         let tempDisplayEffect = localStorage.getItem("displayEffect");
@@ -94,59 +163,26 @@ class App extends React.Component {
             imageTopics: tempImageTopics === null ? "Fzo3zuOHN6w" : tempImageTopics,
             searchEngine: tempSearchEngine === null ? "bing" : tempSearchEngine,
         }, () => {
-            // 请求图片
+            // 设置颜色主题
             this.setState({
                 themeColor: setColorTheme()
             }, () => {
-                // 获取背景图片
-                $.ajax({
-                    url: "https://api.unsplash.com/photos/random?",
-                    headers: {
-                        "Authorization": "Client-ID " + clientId,
-                    },
-                    type: "GET",
-                    data: {
-                        "client_id": clientId,
-                        "orientation": (device === "iPhone" || device === "Android") ? "portrait" : "landscape",
-                        "topics": this.state.imageTopics,
-                        "content_filter": "high",
-                    },
-                    timeout: 10000,
-                    success: (imageData: ImageDataInterface) => {
-                        this.setState({
-                            componentDisplay: "block",
-                            mobileComponentDisplay: "none",
-                            wallpaperComponentDisplay: "block",
-                            imageData: imageData,
-                        }, () => {
-                            // 修改主题颜色
-                            if (imageData.color !== null) {
-                                let componentBackgroundColor = getComponentBackgroundColor(imageData.color);
-                                let componentFontColor = getFontColor(componentBackgroundColor);
-                                this.setState({
-                                    themeColor: {
-                                        "componentBackgroundColor": componentBackgroundColor,
-                                        "componentFontColor": componentFontColor,
-                                    },
-                                })
-
-                                let bodyBackgroundColor = imageData.color;
-                                let bodyFontColor = getFontColor(bodyBackgroundColor);
-                                changeThemeColor("body", bodyBackgroundColor, bodyFontColor);
-                            }
-                            // 小屏显示底部按钮
-                            if (device === "iPhone" || device === "Android") {
-                                this.setState({
-                                    componentDisplay: "none",
-                                    mobileComponentDisplay: "block",
-                                })
-                            }
-                        })
-                    },
-                    error: function () {
-                        message.error("获取图片失败");
+                // 设置背景图片，防抖节流
+                let lastRequestTime: any = localStorage.getItem("lastImageRequestTime");
+                let nowTimeStamp = new Date().getTime();
+                if(lastRequestTime === null) {  // 第一次请求时 lastRequestTime 为 null，因此直接进行请求赋值 lastRequestTime
+                    this.getWallpaper();
+                }
+                else if(nowTimeStamp - parseInt(lastRequestTime) > 60* 1000) {  // 必须多于一分钟才能进行新的请求
+                    this.getWallpaper();
+                }
+                else {  // 一分钟之内使用上一次请求结果
+                    let lastImage: any = localStorage.getItem("lastImage");
+                    if (lastImage) {
+                        lastImage = JSON.parse(lastImage);
+                        this.setWallpaper(lastImage);
                     }
-                });
+                }
             })
         });
     }
@@ -156,7 +192,7 @@ class App extends React.Component {
             <Layout>
                 <Header id={"header"} className={"zIndexMiddle"}>
                     <Row>
-                        <Col xs={24} sm={24} md={12} lg={12} xl={12}>
+                        <Col xs={24} sm={24} md={12} lg={{span: 11, offset: 1}} xl={{span: 11, offset: 1}}>
                             <Space size={"small"}>
                                 <GreetComponent
                                     themeColor={this.state.themeColor}
@@ -166,7 +202,7 @@ class App extends React.Component {
                                 />
                             </Space>
                         </Col>
-                        <Col xs={0} sm={0} md={12} lg={12} xl={12} style={{textAlign: "right"}}>
+                        <Col xs={0} sm={0} md={12} lg={11} xl={11} style={{textAlign: "right"}}>
                             <Space size={"small"}>
                                 <DownloadComponent
                                     themeColor={this.state.themeColor}
@@ -180,7 +216,6 @@ class App extends React.Component {
                                 />
                                 <PreferenceComponent
                                     themeColor={this.state.themeColor}
-                                    display={this.state.componentDisplay}
                                     imageData={this.state.imageData}
                                     getDisplayEffect={this.getDisplayEffect.bind(this)}
                                     getDynamicEffect={this.getDynamicEffect.bind(this)}
@@ -206,7 +241,6 @@ class App extends React.Component {
                             <Space size={"small"}>
                                 <PreferenceComponent
                                     themeColor={this.state.themeColor}
-                                    display={this.state.mobileComponentDisplay}
                                     imageData={this.state.imageData}
                                     getDisplayEffect={this.getDisplayEffect.bind(this)}
                                     getDynamicEffect={this.getDynamicEffect.bind(this)}
@@ -225,7 +259,7 @@ class App extends React.Component {
                                 />
                             </Space>
                         </Col>
-                        <Col xs={0} sm={0} md={24} lg={24} xl={24} style={{textAlign: "right"}}>
+                        <Col xs={0} sm={0} md={24} lg={23} xl={23} style={{textAlign: "right"}}>
                             <Space size={"small"} align={"end"}>
                                 <AuthorComponent
                                     themeColor={this.state.themeColor}
