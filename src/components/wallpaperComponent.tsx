@@ -1,8 +1,8 @@
 import React from "react";
-import "../../stylesheets/wallpaper.scss"
-import "../../stylesheets/publicStyles.scss"
+import "../stylesheets/wallpaperComponent.scss"
+import "../stylesheets/publicStyles.scss"
 import {Image} from "antd";
-import {fadeIn, imageDynamicEffect} from "../../typescripts/publicFunctions";
+import {imageDynamicEffect} from "../typescripts/publicFunctions";
 
 type propType = {
     display: "none" | "block",

@@ -1,11 +1,11 @@
 import React from "react";
 import {Button, Popover, Row, Col, Space, List, Avatar, message} from "antd";
 import {CameraOutlined, InfoCircleOutlined, MessageOutlined} from "@ant-design/icons";
-import {unsplashUrl} from "../../typescripts/publicConstants";
-import {changeThemeColor, isEmptyString} from "../../typescripts/publicFunctions";
-import {ThemeColorInterface} from "../../typescripts/publicInterface";
-import "../../stylesheets/publicStyles.scss"
-import "../../stylesheets/author.scss"
+import {unsplashUrl} from "../typescripts/publicConstants";
+import {changeThemeColor, isEmptyString} from "../typescripts/publicFunctions";
+import {ThemeColorInterface} from "../typescripts/publicInterface";
+import "../stylesheets/publicStyles.scss"
+import "../stylesheets/authorComponent.scss"
 
 type propType = {
     themeColor: ThemeColorInterface,

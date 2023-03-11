@@ -1,8 +1,8 @@
 import React from "react";
 import {Popover, Button} from "antd";
-import {device} from "../../typescripts/publicConstants";
-import {changeThemeColor, getWeatherIcon, httpRequest} from "../../typescripts/publicFunctions";
-import {ThemeColorInterface} from "../../typescripts/publicInterface";
+import {device} from "../typescripts/publicConstants";
+import {changeThemeColor, getWeatherIcon, httpRequest} from "../typescripts/publicFunctions";
+import {ThemeColorInterface} from "../typescripts/publicInterface";
 
 type propType = {
     themeColor: ThemeColorInterface,

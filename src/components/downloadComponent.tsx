@@ -1,9 +1,9 @@
 import React from "react";
 import {Button, Tooltip, message} from "antd";
 import {DownloadOutlined} from "@ant-design/icons";
-import {unsplashUrl, clientId} from "../../typescripts/publicConstants";
-import {changeThemeColor, isEmptyString} from "../../typescripts/publicFunctions";
-import {ThemeColorInterface} from "../../typescripts/publicInterface";
+import {unsplashUrl, clientId} from "../typescripts/publicConstants";
+import {changeThemeColor, isEmptyString} from "../typescripts/publicFunctions";
+import {ThemeColorInterface} from "../typescripts/publicInterface";
 
 type propType = {
     themeColor: ThemeColorInterface,

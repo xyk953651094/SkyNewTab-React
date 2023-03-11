@@ -1,9 +1,9 @@
 import React from "react";
 import {Button, Popover} from "antd";
 import {CalendarOutlined, InfoCircleOutlined, MessageOutlined} from "@ant-design/icons";
-import {ThemeColorInterface} from "../../typescripts/publicInterface";
-import {changeThemeColor} from "../../typescripts/publicFunctions";
-import "../../stylesheets/createTime.scss"
+import {ThemeColorInterface} from "../typescripts/publicInterface";
+import {changeThemeColor} from "../typescripts/publicFunctions";
+import "../stylesheets/createTimeComponent.scss"
 
 type propType = {
     themeColor: ThemeColorInterface,

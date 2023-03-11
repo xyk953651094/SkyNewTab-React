@@ -1,9 +1,9 @@
 import React from "react";
-import "../../stylesheets/search.scss"
-import "../../stylesheets/publicStyles.scss"
+import "../stylesheets/searchComponent.scss"
+import "../stylesheets/publicStyles.scss"
 import { Input, Row } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
-import {fadeIn, fadeOut} from "../../typescripts/publicFunctions";
+import {fadeIn, fadeOut} from "../typescripts/publicFunctions";
 
 type propType = {
     searchEngine: "bing" | "baidu" | "google"

@@ -3,9 +3,9 @@ import {Button, Tooltip, Drawer, Card, Form, Row, Col, Radio, Checkbox, message}
 import type {RadioChangeEvent} from "antd";
 import type {CheckboxValueType} from "antd/es/checkbox/Group";
 import {MoreOutlined, SettingOutlined, GithubOutlined} from "@ant-design/icons";
-import {changeThemeColor, getFontColor} from "../../typescripts/publicFunctions";
-import {FormInitialValuesInterface, ThemeColorInterface} from "../../typescripts/publicInterface";
-import {defaultFormInitialValues, device} from "../../typescripts/publicConstants";
+import {changeThemeColor, getFontColor} from "../typescripts/publicFunctions";
+import {FormInitialValuesInterface, ThemeColorInterface} from "../typescripts/publicInterface";
+import {defaultFormInitialValues, device} from "../typescripts/publicConstants";
 const $ = require("jquery");
 
 type propType = {

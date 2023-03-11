@@ -1,15 +1,15 @@
 import React from "react";
 import "./stylesheets/publicStyles.scss"
 
-import GreetComponent from "./components/greet";
-import WeatherComponent from "./components/weather";
-import DownloadComponent from "./components/download";
-import HtmlLinkComponent from "./components/htmlLink";
-import PreferenceComponent from "./components/preference";
-import WallpaperComponent from "./components/wallpaper";
-import SearchComponent from "./components/search";
-import AuthorComponent from "./components/author";
-import CreatTimeComponent from "./components/createTime";
+import GreetComponent from "./components/greetComponent";
+import WeatherComponent from "./components/weatherComponent";
+import DownloadComponent from "./components/downloadComponent";
+import HtmlLinkComponent from "./components/htmlLinkComponent";
+import PreferenceComponent from "./components/preferenceComponent";
+import WallpaperComponent from "./components/wallpaperComponent";
+import SearchComponent from "./components/searchComponent";
+import AuthorComponent from "./components/authorComponent"
+import CreatTimeComponent from "./components/createTimeComponent";
 
 import {Layout, Row, Col, Space} from "antd";
 import {clientId, device} from "./typescripts/publicConstants";

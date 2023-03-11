@@ -1,0 +1,7 @@
+.createTimePopoverP {
+    max-width: 350px;
+    word-break: keep-all;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

@@ -6,8 +6,8 @@ import {
     getGreetContent,
     getGreetIcon,
     httpRequest, changeThemeColor
-} from "../../typescripts/publicFunctions";
-import {ThemeColorInterface} from "../../typescripts/publicInterface";
+} from "../typescripts/publicFunctions";
+import {ThemeColorInterface} from "../typescripts/publicInterface";
 
 type propType = {
     themeColor: ThemeColorInterface,
