@@ -1,8 +1,9 @@
 import React from "react";
 import {Button, Popover} from "antd";
-import {CalendarOutlined, InfoCircleOutlined, SnippetsOutlined} from "@ant-design/icons";
+import {CalendarOutlined, InfoCircleOutlined, MessageOutlined} from "@ant-design/icons";
 import {ThemeColorInterface} from "../../typescripts/publicInterface";
 import {changeThemeColor} from "../../typescripts/publicFunctions";
+import "../../stylesheets/createTime.scss"
 
 type propType = {
     themeColor: ThemeColorInterface,
@@ -46,27 +47,19 @@ class CreatTimeComponent extends React.Component {
         if (nextProps.imageData && nextProps.imageData !== prevProps.imageData) {
             this.setState({
                 createTime: nextProps.imageData.created_at.split("T")[0],
+                description: nextProps.imageData.description,
+                altDescription: nextProps.imageData.alt_description,
             }, ()=>{
                 changeThemeColor("#createTimeBtn", this.state.backgroundColor, this.state.fontColor);
             })
-            if(nextProps.imageData.description){
-                this.setState({
-                    description: nextProps.imageData.description,
-                });
-            }
-            if(nextProps.imageData.altDescription){
-                this.setState({
-                    altDescription: nextProps.imageData.alt_description,
-                });
-            }
         }
     }
 
     render() {
         const popoverContent = (
             <div>
-                <p><InfoCircleOutlined />{" 图片描述：" + this.state.description}</p>
-                <p><SnippetsOutlined />{" 附加描述：" + this.state.altDescription}</p>
+                <p className={"createTimePopoverP"}><InfoCircleOutlined />{" 图片描述：" + (this.state.description == null ? "暂无信息" : this.state.description)}</p>
+                <p className={"createTimePopoverP"}><MessageOutlined />{" 附加描述：" + (this.state.altDescription == null ? "暂无信息" : this.state.altDescription)}</p>
             </div>
         );
 
@@ -78,7 +71,6 @@ class CreatTimeComponent extends React.Component {
                         className={"componentTheme zIndexHigh"}
                         style={{
                             display: this.props.display,
-                            cursor: "default"
                         }}
                 >
                     {this.state.createTime}

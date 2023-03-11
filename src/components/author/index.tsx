@@ -1,9 +1,11 @@
 import React from "react";
-import {Button, Tooltip, message} from "antd";
-import {CameraOutlined} from "@ant-design/icons";
+import {Button, Popover, Row, Col, Space, List, Avatar, message} from "antd";
+import {CameraOutlined, InfoCircleOutlined, MessageOutlined} from "@ant-design/icons";
 import {unsplashUrl} from "../../typescripts/publicConstants";
 import {changeThemeColor, isEmptyString} from "../../typescripts/publicFunctions";
 import {ThemeColorInterface} from "../../typescripts/publicInterface";
+import "../../stylesheets/publicStyles.scss"
+import "../../stylesheets/author.scss"
 
 type propType = {
     themeColor: ThemeColorInterface,
@@ -14,7 +16,10 @@ type propType = {
 type stateType = {
     backgroundColor: string,
     fontColor: string,
-    author: string
+    authorName: string,
+    userAvatar: string,
+    userName: string,
+    userLocation: string,
     authorLink: string,
 }
 
@@ -29,7 +34,10 @@ class AuthorComponent extends React.Component {
         this.state = {
             backgroundColor: "",
             fontColor: "",
-            author: "暂无作者信息",
+            authorName: "暂无信息",
+            userAvatar: "",
+            userName: "暂无信息",
+            userLocation: "暂无信息",
             authorLink: "",
         };
     }
@@ -44,7 +52,10 @@ class AuthorComponent extends React.Component {
 
         if (nextProps.imageData && nextProps.imageData !== prevProps.imageData) {
             this.setState({
-                author: "by " + nextProps.imageData.user.name + " on Unsplash",
+                authorName: nextProps.imageData.user.name,
+                userAvatar: nextProps.imageData.user.profile_image.large,
+                userName: nextProps.imageData.user.username,
+                userLocation: nextProps.imageData.user.location,
                 authorLink: nextProps.imageData.user.links.html
             }, ()=>{
                 changeThemeColor("#authorBtn", this.state.backgroundColor, this.state.fontColor);
@@ -61,8 +72,20 @@ class AuthorComponent extends React.Component {
     }
 
     render() {
+        const popoverContent = (
+            <div className="authorPopoverContentDiv">
+                <div className="avatarDiv center">
+                    <Avatar size="large" src={this.state.userAvatar} />
+                </div>
+                <div className="userDiv">
+                    <p className={"authorPopoverP"}><i className="bi bi-person"></i>{" " + this.state.userName}</p>
+                    <p className={"authorPopoverP"}><i className="bi bi-geo-alt"></i>{this.state.userLocation == null? " 暂无信息" : " " + this.state.userLocation}</p>
+                </div>
+            </div>
+        )
+
         return (
-            <Tooltip title={"前往作者主页"} color={this.state.backgroundColor}>
+            <Popover title={"摄影师：" + this.state.authorName} content={popoverContent} color={this.state.backgroundColor}>
                 <Button shape="round" icon={<CameraOutlined/>} size={"large"}
                         onClick={this.handleClick.bind(this)}
                         id={"authorBtn"}
@@ -71,9 +94,9 @@ class AuthorComponent extends React.Component {
                             display: this.props.display,
                         }}
                 >
-                    {this.state.author}
+                    {"by " + this.state.authorName + " on Unsplash"}
                 </Button>
-            </Tooltip>
+            </Popover>
         );
     }
 }
