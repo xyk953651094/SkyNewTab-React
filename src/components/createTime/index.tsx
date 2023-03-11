@@ -1,6 +1,6 @@
 import React from "react";
-import {Button, Tooltip} from "antd";
-import {CalendarOutlined} from "@ant-design/icons";
+import {Button, Popover} from "antd";
+import {CalendarOutlined, InfoCircleOutlined, SnippetsOutlined} from "@ant-design/icons";
 import {ThemeColorInterface} from "../../typescripts/publicInterface";
 import {changeThemeColor} from "../../typescripts/publicFunctions";
 
@@ -14,6 +14,8 @@ type stateType = {
     backgroundColor: string,
     fontColor: string,
     createTime: string,
+    description: string | null,
+    altDescription: string | null
 }
 
 interface CreatTimeComponent {
@@ -27,7 +29,9 @@ class CreatTimeComponent extends React.Component {
         this.state = {
             backgroundColor: "",
             fontColor: "",
-            createTime: "暂无拍摄时间",
+            createTime: "暂无信息",
+            description: "暂无信息",
+            altDescription: "暂无信息"
         };
     }
 
@@ -41,16 +45,34 @@ class CreatTimeComponent extends React.Component {
 
         if (nextProps.imageData && nextProps.imageData !== prevProps.imageData) {
             this.setState({
-                createTime: nextProps.imageData.created_at.split("T")[0]
+                createTime: nextProps.imageData.created_at.split("T")[0],
             }, ()=>{
                 changeThemeColor("#createTimeBtn", this.state.backgroundColor, this.state.fontColor);
             })
+            if(nextProps.imageData.description){
+                this.setState({
+                    description: nextProps.imageData.description,
+                });
+            }
+            if(nextProps.imageData.altDescription){
+                this.setState({
+                    altDescription: nextProps.imageData.alt_description,
+                });
+            }
         }
     }
 
     render() {
+        const popoverContent = (
+            <div>
+                <p><InfoCircleOutlined />{" 图片描述：" + this.state.description}</p>
+                <p><SnippetsOutlined />{" 附加描述：" + this.state.altDescription}</p>
+            </div>
+        );
+
         return (
-            <Tooltip title={"拍摄日期：" + this.state.createTime}  placement="bottomRight" color={this.state.backgroundColor}>
+            <Popover title={"拍摄日期：" + this.state.createTime}
+                     content={popoverContent} placement="bottomRight" color={this.state.backgroundColor}>
                 <Button shape="round" icon={<CalendarOutlined />} size={"large"}
                         id={"createTimeBtn"}
                         className={"componentTheme zIndexHigh"}
@@ -61,7 +83,7 @@ class CreatTimeComponent extends React.Component {
                 >
                     {this.state.createTime}
                 </Button>
-            </Tooltip>
+            </Popover>
         );
     }
 }
