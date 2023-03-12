@@ -184,7 +184,7 @@ export function getFontColor(color: string) {
     }
 }
 
-// Android端与桌面端壁纸动态效果
+// 桌面端壁纸动态效果
 export function imageDynamicEffect(element: HTMLElement, effectType: string) {
     window.addEventListener("mousemove", function (e) {
         let mouseX = e.screenX;

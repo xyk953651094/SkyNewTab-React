@@ -20,8 +20,6 @@ type propType = {
 type stateType = {
     backgroundColor: string,
     fontColor: string,
-    componentBackgroundColor: string,
-    componentFontColor: string,
     displayDrawer: boolean,
     drawerPosition: "right" | "bottom",
     holidayData: any,
@@ -39,8 +37,6 @@ class PreferenceComponent extends React.Component {
         this.state = {
             backgroundColor: "",
             fontColor: "",
-            componentBackgroundColor: "",
-            componentFontColor: "",
             displayDrawer: false,
             drawerPosition: "right",
             holidayData: "",
@@ -122,13 +118,6 @@ class PreferenceComponent extends React.Component {
             this.setState({
                 backgroundColor: nextProps.themeColor.componentBackgroundColor,
                 fontColor: nextProps.themeColor.componentFontColor,
-            });
-        }
-
-        if (nextProps.imageData && nextProps.imageData !== prevProps.imageData) {
-            this.setState({
-                componentBackgroundColor: nextProps.imageData.color,
-                componentFontColor: getFontColor(nextProps.imageData.color),
             }, ()=>{
                 changeThemeColor("#preferenceBtn", this.state.backgroundColor, this.state.fontColor);
             });
@@ -193,7 +182,9 @@ class PreferenceComponent extends React.Component {
                             onClick={this.drawerOnShow.bind(this)}
                             id={"preferenceBtn"}
                             className={"componentTheme zIndexHigh"}
-                            style={{}}
+                            style={{
+                                backgroundColor: this.state.backgroundColor
+                            }}
                     />
                 </Tooltip>
                 <Drawer
@@ -266,12 +257,6 @@ class PreferenceComponent extends React.Component {
                                 </Form>
                             </Card>
                         </Col>
-                        {/*<Col span={24}>*/}
-                        {/*    <DonationComponent themeColor={this.props.themeColor}/>*/}
-                        {/*</Col>*/}
-                        {/*<Col span={24}>*/}
-                        {/*    <OtherAppComponent themeColor={this.props.themeColor}/>*/}
-                        {/*</Col>*/}
                     </Row>
                 </Drawer>
             </>

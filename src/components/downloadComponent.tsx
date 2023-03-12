@@ -2,7 +2,7 @@ import React from "react";
 import {Button, Tooltip, message} from "antd";
 import {DownloadOutlined} from "@ant-design/icons";
 import {unsplashUrl, clientId} from "../typescripts/publicConstants";
-import {changeThemeColor, isEmptyString} from "../typescripts/publicFunctions";
+import {httpRequest, changeThemeColor, isEmptyString} from "../typescripts/publicFunctions";
 import {ThemeColorInterface} from "../typescripts/publicInterface";
 
 type propType = {
@@ -51,21 +51,18 @@ class DownloadComponent extends React.Component {
 
     handleClick() {
         if (!isEmptyString(this.state.downloadLink)) {
-            let downloadXHR = new XMLHttpRequest();
-            downloadXHR.open("GET", this.state.downloadLink + "?client_id=" + clientId);
-            downloadXHR.onload = function () {
-                if (downloadXHR.status === 200) {
-                    let downloadUrl = JSON.parse(downloadXHR.responseText).url + unsplashUrl;
-                    window.open(downloadUrl);
-                }
-                else {
-                    message.error("获取下载链接失败");
-                }
+            let url = this.state.downloadLink;
+            let data = {
+                "client_id": clientId,
             }
-            downloadXHR.onerror = function () {
-                message.error("获取下载链接失败");
-            }
-            downloadXHR.send();
+            httpRequest(url, data, "GET")
+                .then(function(resultData: any){
+                    window.open(resultData.url + unsplashUrl);
+                })
+                .catch(function(){
+                    message.error("下载 Unsplash 图片失败");
+                })
+                .finally(function(){});
         } else {
             message.error("无下载链接");
         }
