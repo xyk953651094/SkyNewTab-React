@@ -27,7 +27,6 @@ type propType = {}
 
 type stateType = {
     componentDisplay: "none" | "block",
-    mobileComponentDisplay: "none" | "block",
     wallpaperComponentDisplay: "none" | "block",
     themeColor: ThemeColorInterface,
     imageData: any,
@@ -48,7 +47,6 @@ class App extends React.Component {
         super(props)
         this.state = {
             componentDisplay: "none",
-            mobileComponentDisplay: "none",
             wallpaperComponentDisplay: "none",
             themeColor: {
                 "componentBackgroundColor": "",
@@ -91,7 +89,6 @@ class App extends React.Component {
     setWallpaper(data: any) {
         this.setState({
             componentDisplay: "block",
-            mobileComponentDisplay: "none",
             wallpaperComponentDisplay: "block",
             imageData: data,
         }, () => {
@@ -140,15 +137,7 @@ class App extends React.Component {
                     tempThis.setWallpaper(lastImage);
                 }
             })
-            .finally(function(){
-                // 小屏显示底部按钮
-                if (device === "iPhone" || device === "Android") {
-                    tempThis.setState({
-                        componentDisplay: "none",
-                        mobileComponentDisplay: "block",
-                    })
-                }
-            });
+            .finally(function(){});
     }
 
     componentDidMount() {
@@ -173,7 +162,7 @@ class App extends React.Component {
                 if(lastRequestTime === null) {  // 第一次请求时 lastRequestTime 为 null，因此直接进行请求赋值 lastRequestTime
                     this.getWallpaper();
                 }
-                else if(nowTimeStamp - parseInt(lastRequestTime) > 0) {  // 必须多于一分钟才能进行新的请求
+                else if(nowTimeStamp - parseInt(lastRequestTime) > 60 * 1000) {  // 必须多于一分钟才能进行新的请求
                     this.getWallpaper();
                 }
                 else {  // 一分钟之内使用上一次请求结果
@@ -192,7 +181,7 @@ class App extends React.Component {
             <Layout>
                 <Header id={"header"} className={"zIndexMiddle"}>
                     <Row>
-                        <Col xs={24} sm={24} md={12} lg={{span: 11, offset: 1}} xl={{span: 11, offset: 1}}>
+                        <Col xs={0} sm={0} md={12} lg={{span: 12, offset: 0}} xl={{span: 12, offset: 0}}>
                             <Space size={"small"}>
                                 <GreetComponent
                                     themeColor={this.state.themeColor}
@@ -202,13 +191,13 @@ class App extends React.Component {
                                 />
                             </Space>
                         </Col>
-                        <Col xs={0} sm={0} md={12} lg={11} xl={11} style={{textAlign: "right"}}>
+                        <Col xs={24} sm={24} md={12} lg={12} xl={12} style={{textAlign: "right"}}>
                             <Space size={"small"}>
-                                <DownloadComponent
-                                    themeColor={this.state.themeColor}
-                                    display={this.state.componentDisplay}
-                                    imageData={this.state.imageData}
-                                />
+                                {/*<DownloadComponent*/}
+                                {/*    themeColor={this.state.themeColor}*/}
+                                {/*    display={this.state.componentDisplay}*/}
+                                {/*    imageData={this.state.imageData}*/}
+                                {/*/>*/}
                                 <HtmlLinkComponent
                                     themeColor={this.state.themeColor}
                                     display={this.state.componentDisplay}
@@ -237,40 +226,18 @@ class App extends React.Component {
                 </Content>
                 <Footer id={"footer"}>
                     <Row>
-                        <Col xs={24} sm={24} md={0} lg={0} xl={0}>
-                            <Space size={"small"}>
-                                <PreferenceComponent
-                                    themeColor={this.state.themeColor}
-                                    imageData={this.state.imageData}
-                                    getDisplayEffect={this.getDisplayEffect.bind(this)}
-                                    getDynamicEffect={this.getDynamicEffect.bind(this)}
-                                    getImageTopics={this.getImageTopics.bind(this)}
-                                    getSearchEngine={this.getSearchEngine.bind(this)}
-                                />
-                                <DownloadComponent
-                                    themeColor={this.state.themeColor}
-                                    display={this.state.mobileComponentDisplay}
-                                    imageData={this.state.imageData}
-                                />
-                                <HtmlLinkComponent
-                                    themeColor={this.state.themeColor}
-                                    display={this.state.mobileComponentDisplay}
-                                    imageData={this.state.imageData}
-                                />
-                            </Space>
-                        </Col>
-                        <Col xs={0} sm={0} md={24} lg={23} xl={23} style={{textAlign: "right"}}>
+                        <Col xs={0} sm={0} md={24} lg={24} xl={24} style={{textAlign: "right"}}>
                             <Space size={"small"} align={"end"}>
                                 <AuthorComponent
                                     themeColor={this.state.themeColor}
                                     display={this.state.componentDisplay}
                                     imageData={this.state.imageData}
                                 />
-                                <CreatTimeComponent
-                                    themeColor={this.state.themeColor}
-                                    display={this.state.componentDisplay}
-                                    imageData={this.state.imageData}
-                                />
+                                {/*<CreatTimeComponent*/}
+                                {/*    themeColor={this.state.themeColor}*/}
+                                {/*    display={this.state.componentDisplay}*/}
+                                {/*    imageData={this.state.imageData}*/}
+                                {/*/>*/}
                             </Space>
                         </Col>
                     </Row>

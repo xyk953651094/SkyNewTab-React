@@ -221,6 +221,12 @@ class PreferenceComponent extends React.Component {
                                             <Radio value={"all"}>全部</Radio>
                                         </Radio.Group>
                                     </Form.Item>
+                                    {/*<Form.Item name="imageSourceRadio" label="图片来源">*/}
+                                    {/*    <Radio.Group buttonStyle={"solid"} onChange={this.dynamicEffectRadioOnChange.bind(this)}>*/}
+                                    {/*        <Radio value={"Unsplash"}>Unsplash</Radio>*/}
+                                    {/*        <Radio value={"Pixelbay"}>Pixelbay</Radio>*/}
+                                    {/*    </Radio.Group>*/}
+                                    {/*</Form.Item>*/}
                                     <Form.Item name="imageTopicsCheckbox" label="图片主题（全不选与全选效果一致）">
                                         <Checkbox.Group onChange={this.imageTopicsCheckboxOnChange.bind(this)}>
                                             <Row>

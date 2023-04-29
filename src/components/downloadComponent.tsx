@@ -58,12 +58,6 @@ class DownloadComponent extends React.Component {
             httpRequest(url, data, "GET")
                 .then(function(resultData: any){
                     window.open(resultData.url + unsplashUrl);
-                    // let a = document.createElement("a");
-                    // a.href = resultData.url + unsplashUrl;
-                    // a.download = "unsplashWallpaper.jpg";
-                    // document.body.appendChild(a);
-                    // a.click();
-                    // document.body.removeChild(a);
                 })
                 .catch(function(){
                     message.error("下载 Unsplash 图片失败");
