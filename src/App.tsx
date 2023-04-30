@@ -31,10 +31,9 @@ type stateType = {
     themeColor: ThemeColorInterface,
     imageData: any,
 
-    displayEffect: "regular" | "full" | "raw",
-    dynamicEffect: "close" | "translate" | "rotate" | "all",
-    imageTopics: string,
     searchEngine: "bing" | "baidu" | "google",
+    dynamicEffect: "close" | "translate" | "rotate" | "all",
+    imageSource: "unsplash" | "pexels" | "pixabay"
 }
 
 interface App {
@@ -54,16 +53,16 @@ class App extends React.Component {
             },
             imageData: null,
 
-            displayEffect: "regular",
-            dynamicEffect: "all",
-            imageTopics: "Fzo3zuOHN6w",
             searchEngine: "bing",
+            dynamicEffect: "all",
+            imageSource: "unsplash",
         }
     }
 
-    getDisplayEffect(displayEffect: "regular" | "full" | "raw") {
+    // 偏好设置
+    getSearchEngine(searchEngine: string) {
         this.setState({
-            displayEffect: displayEffect,
+            searchEngine: searchEngine
         })
     }
 
@@ -73,15 +72,9 @@ class App extends React.Component {
         })
     }
 
-    getImageTopics(imageTopics: string) {
+    getImageSource(imageSource: "unsplash" | "pexels" | "pixabay") {
         this.setState({
-            imageTopics: imageTopics
-        })
-    }
-
-    getSearchEngine(searchEngine: string) {
-        this.setState({
-            searchEngine: searchEngine
+            imageSource: imageSource,
         })
     }
 
@@ -117,7 +110,6 @@ class App extends React.Component {
         let data = {
             "client_id": clientId,
             "orientation": (device === "iPhone" || device === "Android") ? "portrait" : "landscape",
-            "topics": this.state.imageTopics,
             "content_filter": "high",
         }
         httpRequest(url, data, "GET")
@@ -127,7 +119,6 @@ class App extends React.Component {
                 tempThis.setWallpaper(resultData);
             })
             .catch(function(){
-                // message.error("获取图片失败");
                 // 请求失败也更新请求时间，防止超时后无信息可显示
                 localStorage.setItem("lastImageRequestTime", String(new Date().getTime()));  // 保存请求时间，防抖节流
                 // 获取图片失败时显示上次图片
@@ -142,15 +133,14 @@ class App extends React.Component {
 
     componentDidMount() {
         // 加载偏好设置
-        let tempDisplayEffect = localStorage.getItem("displayEffect");
-        let tempDynamicEffect = localStorage.getItem("dynamicEffect");
-        let tempImageTopics = localStorage.getItem("imageTopics");
         let tempSearchEngine = localStorage.getItem("searchEngine");
+        let tempDynamicEffect = localStorage.getItem("dynamicEffect");
+        let tempImageSource = localStorage.getItem("imageSource");
+
         this.setState({
-            displayEffect: tempDisplayEffect === null ? "regular" : tempDisplayEffect,
-            dynamicEffect: tempDynamicEffect === null ? "all" : tempDynamicEffect,
-            imageTopics: tempImageTopics === null ? "Fzo3zuOHN6w" : tempImageTopics,
             searchEngine: tempSearchEngine === null ? "bing" : tempSearchEngine,
+            dynamicEffect: tempDynamicEffect === null ? "all" : tempDynamicEffect,
+            imageSource: tempImageSource === null ? "unsplash" : tempImageSource,
         }, () => {
             // 设置颜色主题
             this.setState({
@@ -206,10 +196,9 @@ class App extends React.Component {
                                 <PreferenceComponent
                                     themeColor={this.state.themeColor}
                                     imageData={this.state.imageData}
-                                    getDisplayEffect={this.getDisplayEffect.bind(this)}
-                                    getDynamicEffect={this.getDynamicEffect.bind(this)}
-                                    getImageTopics={this.getImageTopics.bind(this)}
                                     getSearchEngine={this.getSearchEngine.bind(this)}
+                                    getDynamicEffect={this.getDynamicEffect.bind(this)}
+                                    getImageSource={this.getImageSource.bind(this)}
                                 />
                             </Space>
                         </Col>
@@ -219,7 +208,6 @@ class App extends React.Component {
                     <WallpaperComponent
                         display={this.state.wallpaperComponentDisplay}
                         imageData={this.state.imageData}
-                        displayEffect={this.state.displayEffect}
                         dynamicEffect={this.state.dynamicEffect}
                     />
                     <SearchComponent searchEngine={this.state.searchEngine}/>

@@ -120,9 +120,9 @@ export let darkThemeArray = [
 ];
 
 export let defaultFormInitialValues: FormInitialValuesInterface = {
-    "displayEffectRadio": "regular",
+    "searchEngineRadio": "bing",
     "dynamicEffectRadio": "all",
-    "imageTopicsCheckbox": "Fzo3zuOHN6w"
+    "imageSourceRadio": "unsplash",
 }
 
 // 常用变量

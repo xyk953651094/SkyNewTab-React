@@ -1,6 +1,6 @@
 import React from "react";
-import {Button, Popover, Row, Col, Space, List, Avatar, message} from "antd";
-import {CameraOutlined, InfoCircleOutlined, MessageOutlined} from "@ant-design/icons";
+import {Button, Tooltip, message} from "antd";
+import {CameraOutlined} from "@ant-design/icons";
 import {unsplashUrl} from "../typescripts/publicConstants";
 import {changeThemeColor, isEmptyString} from "../typescripts/publicFunctions";
 import {ThemeColorInterface} from "../typescripts/publicInterface";
@@ -72,20 +72,8 @@ class AuthorComponent extends React.Component {
     }
 
     render() {
-        const popoverContent = (
-            <div className="authorPopoverContentDiv">
-                <div className="avatarDiv center">
-                    <Avatar size="large" src={this.state.userAvatar} />
-                </div>
-                <div className="userDiv">
-                    <p className={"authorPopoverP"}><i className="bi bi-person"></i>{" " + this.state.userName}</p>
-                    <p className={"authorPopoverP"}><i className="bi bi-geo-alt"></i>{this.state.userLocation == null? " 暂无信息" : " " + this.state.userLocation}</p>
-                </div>
-            </div>
-        )
-
         return (
-            <Popover title={"摄影师：" + this.state.authorName} content={popoverContent} color={this.state.backgroundColor}>
+            <Tooltip title={"前往摄影师主页"} color={this.state.backgroundColor}>
                 <Button shape="round" icon={<CameraOutlined/>} size={"large"}
                         onClick={this.handleClick.bind(this)}
                         id={"authorBtn"}
@@ -96,7 +84,7 @@ class AuthorComponent extends React.Component {
                 >
                     {"by " + this.state.authorName + " on Unsplash"}
                 </Button>
-            </Popover>
+            </Tooltip>
         );
     }
 }

@@ -1,7 +1,6 @@
 import React from "react";
-import {Button, Tooltip, Drawer, Card, List, Form, Row, Col, Radio, Checkbox, message, Typography} from "antd";
+import {Button, Tooltip, Drawer, Card, List, Form, Row, Col, Radio, message, Typography} from "antd";
 import type {RadioChangeEvent} from "antd";
-import type {CheckboxValueType} from "antd/es/checkbox/Group";
 import {MoreOutlined, SettingOutlined, GithubOutlined, LinkOutlined} from "@ant-design/icons";
 import {changeThemeColor} from "../typescripts/publicFunctions";
 import {FormInitialValuesInterface, ThemeColorInterface} from "../typescripts/publicInterface";
@@ -13,10 +12,9 @@ const {Link} = Typography;
 type propType = {
     themeColor: ThemeColorInterface,
     imageData: any,
-    getDisplayEffect: any,
-    getDynamicEffect: any,
-    getImageTopics: any,
     getSearchEngine: any,
+    getDynamicEffect: any,
+    getImageSource: any,
 }
 
 type stateType = {
@@ -46,22 +44,50 @@ class PreferenceComponent extends React.Component {
         };
     }
 
+    drawerOnShow() {
+        this.setState({
+            displayDrawer: true,
+        })
+    };
+
+    drawerOnClose() {
+        this.setState({
+            displayDrawer: false,
+        })
+    };
+
+    // 搜索引擎
+    searchEngineRadioOnChange(event: RadioChangeEvent) {
+        this.props.getSearchEngine(event.target.value);
+        localStorage.setItem("searchEngine", event.target.value);
+        message.success("已更换搜索引擎");
+    }
+
+    // 图片动效
+    dynamicEffectRadioOnChange(event: RadioChangeEvent) {
+        this.props.getDynamicEffect(event.target.value);
+        localStorage.setItem("dynamicEffect", event.target.value);
+        message.success("调整成功，新的显示效果已生效");
+    }
+
+    // 图片来源
+    imageSourceRadioOnChange(event: RadioChangeEvent) {
+        this.props.getImageSource(event.target.value);
+        localStorage.setItem("imageSource", event.target.value);
+        message.success("调整成功，新的图片来源将在下次加载时生效");
+    }
+
     componentDidMount() {
         // 初始化偏好设置
-        let tempDisplayEffectRadio: string | null = localStorage.getItem("displayEffect");
-        let tempDynamicEffectRadio: string | null = localStorage.getItem("dynamicEffect");
-        let tempImageTopicsCheckbox: string | string[] | null = localStorage.getItem("imageTopics");
         let tempSearchEngineRadio: string | null = localStorage.getItem("searchEngine");
-        if (tempImageTopicsCheckbox !== null) {
-            tempImageTopicsCheckbox = tempImageTopicsCheckbox.split(",");
-        }
+        let tempDynamicEffectRadio: string | null = localStorage.getItem("dynamicEffect");
+        let tempImageSourceRadio: string | null = localStorage.getItem("imageSource");
 
         this.setState({
             formInitialValues: {
-                "displayEffectRadio": tempDisplayEffectRadio === null ? "regular" : tempDisplayEffectRadio,
-                "dynamicEffectRadio": tempDynamicEffectRadio === null ? "all" : tempDynamicEffectRadio,
-                "imageTopicsCheckbox": tempImageTopicsCheckbox === null ? ["Fzo3zuOHN6w"] : tempImageTopicsCheckbox,
                 "searchEngineRadio": tempSearchEngineRadio === null ? "bing" : tempSearchEngineRadio,
+                "dynamicEffectRadio": tempDynamicEffectRadio === null ? "all" : tempDynamicEffectRadio,
+                "imageSourceRadio": tempImageSourceRadio === null ? "unsplash" : tempImageSourceRadio,
             }
         })
 
@@ -80,7 +106,7 @@ class PreferenceComponent extends React.Component {
                 $(".ant-popover-title").css("color", this.state.fontColor);
                 $(".ant-popover-inner-content").css("color", this.state.fontColor);
             }
-            
+
             // toolTip
             let toolTipEle = $(".ant-tooltip");
             if (toolTipEle.length && toolTipEle.length > 0) {
@@ -126,64 +152,7 @@ class PreferenceComponent extends React.Component {
         }
     }
 
-    drawerOnShow() {
-        this.setState({
-            displayDrawer: true,
-        })
-    };
-
-    drawerOnClose() {
-        this.setState({
-            displayDrawer: false,
-        })
-    };
-
-    // 图片质量
-    displayEffectRadioOnChange(event: RadioChangeEvent) {
-        this.props.getDisplayEffect(event.target.value);
-        localStorage.setItem("displayEffect", event.target.value);
-        message.success("调整成功，新的图片质量将在下次加载时生效");
-    }
-
-    // 图片动效
-    dynamicEffectRadioOnChange(event: RadioChangeEvent) {
-        this.props.getDynamicEffect(event.target.value);
-        localStorage.setItem("dynamicEffect", event.target.value);
-        message.success("调整成功，新的显示效果已生效");
-    }
-
-    // 图片主题
-    imageTopicsCheckboxOnChange(checkedValues: CheckboxValueType[]) {
-        let value = "";
-        for (let i = 0; i < checkedValues.length; i++) {
-            value += checkedValues[i];
-            if (i !== checkedValues.length - 1) {
-                value += ",";
-            }
-        }
-        this.props.getImageTopics(value);
-        localStorage.setItem("imageTopics", value);
-        message.success("调整成功，新的主题将在下次加载时生效");
-        if (checkedValues.length === 0) {
-            message.info("全不选与全选的效果一样");
-        }
-    }
-
-    // 搜索引擎
-    searchEngineRadioOnChange(event: RadioChangeEvent) {
-        this.props.getSearchEngine(event.target.value);
-        localStorage.setItem("searchEngine", event.target.value);
-        message.success("已更换搜索引擎");
-    }
-
     render() {
-        const listData = [
-            "https://unsplash.com",
-            "https://www.pexels.com",
-            "https://pixabay.com",
-        ];
-
-
         return (
             <>
                 <Tooltip title={"偏好设置"} placement="topRight" color={this.state.backgroundColor}>
@@ -215,11 +184,11 @@ class PreferenceComponent extends React.Component {
                         <Col span={24}>
                             <Card title={"偏好设置"} size={"small"} extra={<SettingOutlined />}>
                                 <Form layout={"vertical"} colon={false} initialValues={this.state.formInitialValues}>
-                                    <Form.Item name="displayEffectRadio" label="图片质量（推荐选择标准）">
-                                        <Radio.Group buttonStyle={"solid"} onChange={this.displayEffectRadioOnChange.bind(this)}>
-                                            <Radio value={"regular"}>标准</Radio>
-                                            <Radio value={"full"}>较高</Radio>
-                                            <Radio value={"raw"}>最高</Radio>
+                                    <Form.Item name="searchEngineRadio" label="搜索引擎">
+                                        <Radio.Group buttonStyle={"solid"} onChange={this.searchEngineRadioOnChange.bind(this)}>
+                                            <Radio value={"bing"}>必应</Radio>
+                                            <Radio value={"google"}>谷歌</Radio>
+                                            <Radio value={"baidu"}>百度</Radio>
                                         </Radio.Group>
                                     </Form.Item>
                                     <Form.Item name="dynamicEffectRadio" label="图片动效（推荐选择全部）">
@@ -230,43 +199,11 @@ class PreferenceComponent extends React.Component {
                                             <Radio value={"all"}>全部</Radio>
                                         </Radio.Group>
                                     </Form.Item>
-                                    {/*<Form.Item name="imageSourceRadio" label="图片来源">*/}
-                                    {/*    <Radio.Group buttonStyle={"solid"} onChange={this.dynamicEffectRadioOnChange.bind(this)}>*/}
-                                    {/*        <Radio value={"Unsplash"}>Unsplash</Radio>*/}
-                                    {/*        <Radio value={"Pixelbay"}>Pixelbay</Radio>*/}
-                                    {/*    </Radio.Group>*/}
-                                    {/*</Form.Item>*/}
-                                    <Form.Item name="imageTopicsCheckbox" label="图片主题（全不选与全选效果一致）">
-                                        <Checkbox.Group onChange={this.imageTopicsCheckboxOnChange.bind(this)}>
-                                            <Row>
-                                                <Col span={12}><Checkbox name={"travel"}             value="Fzo3zuOHN6w">旅游</Checkbox></Col>
-                                                <Col span={12}><Checkbox name={"wallpapers"}         value="bo8jQKTaE0Y">壁纸</Checkbox></Col>
-                                                <Col span={12}><Checkbox name={"3d-renders"}         value="CDwuwXJAbEw">3D渲染</Checkbox></Col>
-                                                <Col span={12}><Checkbox name={"textures-patterns"}  value="iUIsnVtjB0Y">纹理</Checkbox></Col>
-                                                <Col span={12}><Checkbox name={"experimental"}       value="qPYsDzvJOYc">实验</Checkbox></Col>
-                                                <Col span={12}><Checkbox name={"architecture"}       value="rnSKDHwwYUk">建筑</Checkbox></Col>
-                                                <Col span={12}><Checkbox name={"nature"}             value="6sMVjTLSkeQ">自然</Checkbox></Col>
-                                                <Col span={12}><Checkbox name={"business-work"}      value="aeu6rL-j6ew">商务</Checkbox></Col>
-                                                <Col span={12}><Checkbox name={"fashion"}            value="S4MKLAsBB74">时尚</Checkbox></Col>
-                                                <Col span={12}><Checkbox name={"film"}               value="hmenvQhUmxM">电影</Checkbox></Col>
-                                                <Col span={12}><Checkbox name={"food-drink"}         value="xjPR4hlkBGA">饮食</Checkbox></Col>
-                                                <Col span={12}><Checkbox name={"health"}             value="_hb-dl4Q-4U">健康</Checkbox></Col>
-                                                <Col span={12}><Checkbox name={"people"}             value="towJZFskpGg">人物</Checkbox></Col>
-                                                <Col span={12}><Checkbox name={"interiors"}          value="R_Fyn-Gwtlw">精神</Checkbox></Col>
-                                                <Col span={12}><Checkbox name={"street-photography"} value="xHxYTMHLgOc">街头</Checkbox></Col>
-                                                <Col span={12}><Checkbox name={"animals"}            value="Jpg6Kidl-Hk">动物</Checkbox></Col>
-                                                <Col span={12}><Checkbox name={"spirituality"}       value="_8zFHuhRhyo">灵魂</Checkbox></Col>
-                                                <Col span={12}><Checkbox name={"arts-culture"}       value="bDo48cUhwnY">文化</Checkbox></Col>
-                                                <Col span={12}><Checkbox name={"history"}            value="dijpbw99kQQ">历史</Checkbox></Col>
-                                                <Col span={12}><Checkbox name={"athletics"}          value="Bn-DjrcBrwo">体育</Checkbox></Col>
-                                            </Row>
-                                        </Checkbox.Group>
-                                    </Form.Item>
-                                    <Form.Item name="searchEngineRadio" label="搜索引擎">
-                                        <Radio.Group buttonStyle={"solid"} onChange={this.searchEngineRadioOnChange.bind(this)}>
-                                            <Radio value={"bing"}>必应</Radio>
-                                            <Radio value={"baidu"}>百度</Radio>
-                                            <Radio value={"google"}>谷歌</Radio>
+                                    <Form.Item name="imageSourceRadio" label="图片来源">
+                                        <Radio.Group buttonStyle={"solid"} onChange={this.imageSourceRadioOnChange.bind(this)}>
+                                            <Radio value={"unsplash"}>Unsplash</Radio>
+                                            <Radio value={"pexels"}>Pixabay</Radio>
+                                            <Radio value={"pixabay"}>Pixabay</Radio>
                                         </Radio.Group>
                                     </Form.Item>
                                 </Form>
@@ -274,15 +211,11 @@ class PreferenceComponent extends React.Component {
                         </Col>
                         <Col span={24}>
                             <Card title={"网站推荐"} size={"small"} extra={<LinkOutlined />}>
-                                <List
-                                    size="small"
-                                    dataSource={listData}
-                                    renderItem={(item) => (
-                                        <List.Item>
-                                            <Link href={item} target="_blank">{item}</Link>
-                                        </List.Item>
-                                    )}
-                                />
+                                <List size="small">
+                                    <List.Item><Link href="https://unsplash.com/" target="_blank">Unsplash.com</Link></List.Item>
+                                    <List.Item><Link href="https://www.pexels.com/" target="_blank">Pexels.com</Link></List.Item>
+                                    <List.Item><Link href="https://pixabay.com/" target="_blank">Pixabay.com</Link></List.Item>
+                                </List>
                             </Card>
                         </Col>
                     </Row>
