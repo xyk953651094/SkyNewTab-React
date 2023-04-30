@@ -60,9 +60,10 @@ class WeatherComponent extends React.Component {
 
     getWeather() {
         let tempThis = this;
+        let headers = {};
         let url = "https://v2.jinrishici.com/info";
         let data = {};
-        httpRequest(url, data, "GET")
+        httpRequest(headers, url, data, "GET")
             .then(function(resultData: any){
                 localStorage.setItem("lastWeatherRequestTime", String(new Date().getTime()));  // 保存请求时间，防抖节流
                 if (resultData.status === "success" && resultData.data.weatherData !== null) {

@@ -122,7 +122,7 @@ export let darkThemeArray = [
 export let defaultFormInitialValues: FormInitialValuesInterface = {
     "searchEngineRadio": "bing",
     "dynamicEffectRadio": "all",
-    "imageSourceRadio": "unsplash",
+    "imageSourceRadio": "Unsplash",
 }
 
 // 常用变量

@@ -3,9 +3,10 @@ import "jquery-color"
 import {ThemeColorInterface} from "./publicInterface";
 const $ = require("jquery");
 // 网络请求
-export function httpRequest(url: string, data: object, method: "GET" | "POST") {
+export function httpRequest(headers: object, url: string, data: object, method: "GET" | "POST") {
     return new Promise(function(resolve,reject){
         $.ajax({
+            headers: headers,
             url: url,
             type: method,
             data: data,

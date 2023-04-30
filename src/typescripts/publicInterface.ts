@@ -1,7 +1,7 @@
 export interface FormInitialValuesInterface {
     "searchEngineRadio": "bing" | "google" | "baidu",
     "dynamicEffectRadio": "close" | "translate" | "rotate" | "all",
-    "imageSourceRadio": "unsplash" | "pexels" | "pixabay",
+    "imageSourceRadio": "Unsplash" | "Pexels",
 }
 
 export interface ThemeColorInterface {

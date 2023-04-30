@@ -63,8 +63,8 @@ class WallpaperComponent extends React.Component {
         // 图片质量
         if (nextProps.imageData !== prevProps.imageData && nextProps.imageData) {
             this.setState({
-                imageLink: nextProps.imageData.urls.regular,
-                loadImageLink: nextProps.imageData.urls.thumb,
+                imageLink: nextProps.imageData.displayUrl,
+                loadImageLink: nextProps.imageData.previewUrl,
             });
         }
 

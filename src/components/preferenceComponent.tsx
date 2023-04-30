@@ -67,14 +67,15 @@ class PreferenceComponent extends React.Component {
     dynamicEffectRadioOnChange(event: RadioChangeEvent) {
         this.props.getDynamicEffect(event.target.value);
         localStorage.setItem("dynamicEffect", event.target.value);
-        message.success("调整成功，新的显示效果已生效");
+        message.success("已更新显示效果");
     }
 
     // 图片来源
     imageSourceRadioOnChange(event: RadioChangeEvent) {
         this.props.getImageSource(event.target.value);
         localStorage.setItem("imageSource", event.target.value);
-        message.success("调整成功，新的图片来源将在下次加载时生效");
+        message.success("已更换图片来源");
+        window.location.reload();
     }
 
     componentDidMount() {
@@ -87,7 +88,7 @@ class PreferenceComponent extends React.Component {
             formInitialValues: {
                 "searchEngineRadio": tempSearchEngineRadio === null ? "bing" : tempSearchEngineRadio,
                 "dynamicEffectRadio": tempDynamicEffectRadio === null ? "all" : tempDynamicEffectRadio,
-                "imageSourceRadio": tempImageSourceRadio === null ? "unsplash" : tempImageSourceRadio,
+                "imageSourceRadio": tempImageSourceRadio === null ? "Unsplash" : tempImageSourceRadio,
             }
         })
 
@@ -201,9 +202,8 @@ class PreferenceComponent extends React.Component {
                                     </Form.Item>
                                     <Form.Item name="imageSourceRadio" label="图片来源">
                                         <Radio.Group buttonStyle={"solid"} onChange={this.imageSourceRadioOnChange.bind(this)}>
-                                            <Radio value={"unsplash"}>Unsplash</Radio>
-                                            <Radio value={"pexels"}>Pixabay</Radio>
-                                            <Radio value={"pixabay"}>Pixabay</Radio>
+                                            <Radio value={"Unsplash"}>Unsplash</Radio>
+                                            <Radio value={"Pexels"}>Pexels</Radio>
                                         </Radio.Group>
                                     </Form.Item>
                                 </Form>
