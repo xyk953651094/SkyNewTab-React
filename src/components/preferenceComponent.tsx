@@ -1,12 +1,14 @@
 import React from "react";
-import {Button, Tooltip, Drawer, Card, Form, Row, Col, Radio, Checkbox, message} from "antd";
+import {Button, Tooltip, Drawer, Card, List, Form, Row, Col, Radio, Checkbox, message, Typography} from "antd";
 import type {RadioChangeEvent} from "antd";
 import type {CheckboxValueType} from "antd/es/checkbox/Group";
-import {MoreOutlined, SettingOutlined, GithubOutlined} from "@ant-design/icons";
-import {changeThemeColor, getFontColor} from "../typescripts/publicFunctions";
+import {MoreOutlined, SettingOutlined, GithubOutlined, LinkOutlined} from "@ant-design/icons";
+import {changeThemeColor} from "../typescripts/publicFunctions";
 import {FormInitialValuesInterface, ThemeColorInterface} from "../typescripts/publicInterface";
 import {defaultFormInitialValues, device} from "../typescripts/publicConstants";
 const $ = require("jquery");
+
+const {Link} = Typography;
 
 type propType = {
     themeColor: ThemeColorInterface,
@@ -175,6 +177,13 @@ class PreferenceComponent extends React.Component {
     }
 
     render() {
+        const listData = [
+            "https://unsplash.com",
+            "https://www.pexels.com",
+            "https://pixabay.com",
+        ];
+
+
         return (
             <>
                 <Tooltip title={"偏好设置"} placement="topRight" color={this.state.backgroundColor}>
@@ -197,7 +206,7 @@ class PreferenceComponent extends React.Component {
                     drawerStyle={{backgroundColor: this.state.backgroundColor}}
                     footer={
                         <Button type="link" href="https://github.com/xyk953651094" target="_blank" icon={<GithubOutlined />}>
-                            前往作者主页（捐赠支持、其它作品）
+                            作者主页
                         </Button>
                     }
                     footerStyle={{backgroundColor: this.state.backgroundColor, textAlign: "center"}}
@@ -261,6 +270,19 @@ class PreferenceComponent extends React.Component {
                                         </Radio.Group>
                                     </Form.Item>
                                 </Form>
+                            </Card>
+                        </Col>
+                        <Col span={24}>
+                            <Card title={"网站推荐"} size={"small"} extra={<LinkOutlined />}>
+                                <List
+                                    size="small"
+                                    dataSource={listData}
+                                    renderItem={(item) => (
+                                        <List.Item>
+                                            <Link href={item} target="_blank">{item}</Link>
+                                        </List.Item>
+                                    )}
+                                />
                             </Card>
                         </Col>
                     </Row>
