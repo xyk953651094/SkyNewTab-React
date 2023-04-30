@@ -69,7 +69,7 @@ class WallpaperComponent extends React.Component {
         }
 
         // 鼠标移动效果
-        if(nextProps.dynamicEffect !== prevProps.dynamicEffect) {
+        if(nextProps.dynamicEffect !== this.props.dynamicEffect) {
             imageDynamicEffect(backgroundImage, nextProps.dynamicEffect);
         }
     }

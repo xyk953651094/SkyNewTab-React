@@ -75,6 +75,7 @@ class PreferenceComponent extends React.Component {
         this.props.getImageSource(event.target.value);
         localStorage.setItem("imageSource", event.target.value);
         message.success("已更换图片来源");
+        localStorage.removeItem("lastImageRequestTime");
         window.location.reload();
     }
 
