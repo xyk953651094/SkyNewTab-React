@@ -1,20 +1,23 @@
 import React from "react";
 import {Button, Tooltip, message} from "antd";
 import {CameraOutlined} from "@ant-design/icons";
-import {unsplashUrl} from "../../typescripts/publicConstants";
-import {changeThemeColor, isEmptyString} from "../../typescripts/publicFunctions";
-import {ThemeColorInterface} from "../../typescripts/publicInterface";
+import {unsplashUrl} from "../typescripts/publicConstants";
+import {changeThemeColor, isEmptyString} from "../typescripts/publicFunctions";
+import {ThemeColorInterface} from "../typescripts/publicInterface";
+import "../stylesheets/publicStyles.scss"
+import "../stylesheets/authorComponent.scss"
 
 type propType = {
     themeColor: ThemeColorInterface,
     display: "none" | "block",
     imageData: any,
+    imageSource: "Unsplash" | "Pexels"
 }
 
 type stateType = {
     backgroundColor: string,
     fontColor: string,
-    author: string
+    authorName: string,
     authorLink: string,
 }
 
@@ -29,7 +32,7 @@ class AuthorComponent extends React.Component {
         this.state = {
             backgroundColor: "",
             fontColor: "",
-            author: "暂无作者信息",
+            authorName: "暂无信息",
             authorLink: "",
         };
     }
@@ -44,8 +47,8 @@ class AuthorComponent extends React.Component {
 
         if (nextProps.imageData && nextProps.imageData !== prevProps.imageData) {
             this.setState({
-                author: "by " + nextProps.imageData.user.name + " on Unsplash",
-                authorLink: nextProps.imageData.user.links.html
+                authorName: nextProps.imageData.userName,
+                authorLink: nextProps.imageData.userLink,
             }, ()=>{
                 changeThemeColor("#authorBtn", this.state.backgroundColor, this.state.fontColor);
             })
@@ -62,7 +65,7 @@ class AuthorComponent extends React.Component {
 
     render() {
         return (
-            <Tooltip title={"前往作者主页"} color={this.state.backgroundColor}>
+            <Tooltip title={"前往摄影师主页"} color={this.state.backgroundColor}>
                 <Button shape="round" icon={<CameraOutlined/>} size={"large"}
                         onClick={this.handleClick.bind(this)}
                         id={"authorBtn"}
@@ -71,7 +74,7 @@ class AuthorComponent extends React.Component {
                             display: this.props.display,
                         }}
                 >
-                    {this.state.author}
+                    {"by " + this.state.authorName + " on " + this.props.imageSource}
                 </Button>
             </Tooltip>
         );

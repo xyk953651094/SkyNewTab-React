@@ -1,9 +1,9 @@
 import React from "react";
 import {Button, Tooltip, message} from "antd";
 import {LinkOutlined} from "@ant-design/icons";
-import {unsplashUrl} from "../../typescripts/publicConstants";
-import {changeThemeColor, isEmptyString} from "../../typescripts/publicFunctions";
-import {ThemeColorInterface} from "../../typescripts/publicInterface";
+import {unsplashUrl} from "../typescripts/publicConstants";
+import {changeThemeColor, isEmptyString} from "../typescripts/publicFunctions";
+import {ThemeColorInterface} from "../typescripts/publicInterface";
 
 type propType = {
     themeColor: ThemeColorInterface,
@@ -42,7 +42,7 @@ class HtmlLinkComponent extends React.Component {
 
         if (nextProps.imageData && nextProps.imageData !== prevProps.imageData) {
             this.setState({
-                htmlLink: nextProps.imageData.links.html
+                htmlLink: nextProps.imageData.imageLink
             }, ()=>{
                 changeThemeColor("#htmlLinkBtn", this.state.backgroundColor, this.state.fontColor);
             })

@@ -1,13 +1,12 @@
 import React from "react";
-import "../../stylesheets/wallpaper.scss"
-import "../../stylesheets/publicStyles.scss"
+import "../stylesheets/wallpaperComponent.scss"
+import "../stylesheets/publicStyles.scss"
 import {Image} from "antd";
-import {fadeIn, imageDynamicEffect} from "../../typescripts/publicFunctions";
+import {imageDynamicEffect} from "../typescripts/publicFunctions";
 
 type propType = {
     display: "none" | "block",
     imageData: any,
-    displayEffect: "regular" | "full" | "raw",
     dynamicEffect: "close" | "translate" | "rotate" | "all",
 }
 
@@ -15,9 +14,6 @@ type stateType = {
     imageLink: string,
     loadImageLink: string,
     display: "none" | "block",
-    // blurHash: string,
-    // width: number,
-    // height: number,
 }
 
 interface WallpaperComponent {
@@ -32,9 +28,6 @@ class WallpaperComponent extends React.Component {
             imageLink: "",
             loadImageLink: "",
             display: "none",
-            // blurHash: "",
-            // width: 0,
-            // height: 0,
         };
     }
 
@@ -68,23 +61,11 @@ class WallpaperComponent extends React.Component {
         }
 
         // 图片质量
-        if (nextProps.displayEffect !== prevProps.displayEffect && nextProps.imageData) {
-            if (nextProps.displayEffect === "regular") {
-                this.setState({
-                    imageLink: nextProps.imageData.urls.regular,
-                    loadImageLink: nextProps.imageData.urls.thumb,
-                });
-            } else if (nextProps.displayEffect === "full") {
-                this.setState({
-                    imageLink: nextProps.imageData.urls.full,
-                    loadImageLink: nextProps.imageData.urls.thumb,
-                });
-            } else if (nextProps.displayEffect === "raw") {
-                this.setState({
-                    imageLink: nextProps.imageData.urls.raw,
-                    loadImageLink: nextProps.imageData.urls.thumb,
-                });
-            }
+        if (nextProps.imageData !== prevProps.imageData && nextProps.imageData) {
+            this.setState({
+                imageLink: nextProps.imageData.displayUrl,
+                loadImageLink: nextProps.imageData.previewUrl,
+            });
         }
 
         // 鼠标移动效果

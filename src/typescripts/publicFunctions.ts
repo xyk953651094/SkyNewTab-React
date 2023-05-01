@@ -3,9 +3,10 @@ import "jquery-color"
 import {ThemeColorInterface} from "./publicInterface";
 const $ = require("jquery");
 // 网络请求
-export function httpRequest(url: string, data: object, method: "GET" | "POST") {
+export function httpRequest(headers: object, url: string, data: object, method: "GET" | "POST") {
     return new Promise(function(resolve,reject){
         $.ajax({
+            headers: headers,
             url: url,
             type: method,
             data: data,
@@ -184,7 +185,7 @@ export function getFontColor(color: string) {
     }
 }
 
-// Android端与桌面端壁纸动态效果
+// 桌面端壁纸动态效果
 export function imageDynamicEffect(element: HTMLElement, effectType: string) {
     window.addEventListener("mousemove", function (e) {
         let mouseX = e.screenX;
