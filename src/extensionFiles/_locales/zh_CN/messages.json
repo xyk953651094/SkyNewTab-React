@@ -1,14 +1,14 @@
 {
   "extensionName":{
-    "message": "Sky新标签页 Pro",
+    "message": "云开新标签页",
     "description": "extension_name"
   },
   "extensionDescription":{
-    "message": "由待看云开创作的基于 React 的 Sky新标签页 Pro",
+    "message": "替换浏览器默认新标签页",
     "description": "extension_description"
   },
   "extensionDefaultTitle":{
-    "message": "Sky新标签页 Pro",
+    "message": "云开新标签页",
     "description": "extension_default_title"
   },
 
@@ -41,13 +41,8 @@
     "message": "错误：获取图片信息失败，请稍后再试",
     "description": "getImageError"
   },
-
-  "downloadImage":{
-    "message": "下载图片",
-    "description": "downloadImage"
-  },
   "gotoImage":{
-    "message": "在 Unsplash.com 中查看图片",
+    "message": "前往图片主页",
     "description": "gotoImage"
   },
 
