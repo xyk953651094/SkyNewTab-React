@@ -11,7 +11,7 @@
 支持语言：中文  
 * 节气来源：https://www.mxnzp.com  
 * 天气来源：https://www.jinrishici.com
-* 图片来源：https://unsplash.com
+* 图片来源：https://unsplash.com && https://www.pexels.com
 
 ## 安装
 * [Chrome 网上应用商店](https://chrome.google.com/webstore/detail/mhnihmooegnonhmnapjlnbponpnclfcb)
