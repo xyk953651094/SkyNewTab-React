@@ -191,7 +191,7 @@ class App extends React.Component {
                 if(lastRequestTime === null) {  // 第一次请求时 lastRequestTime 为 null，因此直接进行请求赋值 lastRequestTime
                     this.getWallpaper(this.state.imageSource);
                 }
-                else if(nowTimeStamp - parseInt(lastRequestTime) > 0) {  // 必须多于一分钟才能进行新的请求
+                else if(nowTimeStamp - parseInt(lastRequestTime) > 60 * 1000) {  // 必须多于一分钟才能进行新的请求
                     this.getWallpaper(this.state.imageSource);
                 }
                 else {  // 一分钟之内使用上一次请求结果
@@ -236,6 +236,7 @@ class App extends React.Component {
                 $(".ant-checkbox-wrapper").children(":last-child").css("color", this.state.themeColor.componentFontColor);
                 $(".ant-collapse").css("backgroundColor", this.state.themeColor.componentBackgroundColor);
                 $(".ant-collapse-header").css("color", this.state.themeColor.componentFontColor);
+                $(".ant-list-item").css("borderBlockEndColor", this.state.themeColor.componentFontColor);
                 $(".ant-list-item-meta-title").css("color", this.state.themeColor.componentFontColor);
             }
         });

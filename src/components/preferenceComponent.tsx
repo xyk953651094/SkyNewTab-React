@@ -1,7 +1,7 @@
 import React from "react";
 import {Button, Tooltip, Drawer, Card, List, Form, Row, Col, Radio, message, Typography} from "antd";
 import type {RadioChangeEvent} from "antd";
-import {MoreOutlined, SettingOutlined, GithubOutlined, LinkOutlined} from "@ant-design/icons";
+import {MoreOutlined, SettingOutlined, GithubOutlined, LinkOutlined, SearchOutlined} from "@ant-design/icons";
 import {changeThemeColor} from "../typescripts/publicFunctions";
 import {FormInitialValuesInterface, ThemeColorInterface} from "../typescripts/publicInterface";
 import {defaultFormInitialValues, device} from "../typescripts/publicConstants";
@@ -131,7 +131,7 @@ class PreferenceComponent extends React.Component {
                     placement={this.state.drawerPosition}
                     onClose={this.drawerOnClose.bind(this)}
                     open={this.state.displayDrawer}
-                    headerStyle={{color: this.state.fontColor}}
+                    headerStyle={{color: this.state.fontColor, borderBottomColor: this.state.fontColor}}
                     drawerStyle={{backgroundColor: this.state.backgroundColor}}
                     maskStyle={{backgroundColor: this.state.backgroundColor, opacity: 0.45}}
                     footer={
@@ -139,7 +139,7 @@ class PreferenceComponent extends React.Component {
                             作者主页
                         </Button>
                     }
-                    footerStyle={{backgroundColor: this.state.backgroundColor, textAlign: "center"}}
+                    footerStyle={{backgroundColor: this.state.backgroundColor, borderTopColor: this.state.fontColor, textAlign: "center"}}
                 >
                     <Row gutter={[16, 16]}>
                         <Col span={24}>
@@ -152,8 +152,8 @@ class PreferenceComponent extends React.Component {
                                     <Form.Item name="searchEngineRadio" label="搜索引擎">
                                         <Radio.Group buttonStyle={"solid"} onChange={this.searchEngineRadioOnChange.bind(this)}>
                                             <Radio value={"bing"}>必应</Radio>
-                                            <Radio value={"google"}>谷歌</Radio>
                                             <Radio value={"baidu"}>百度</Radio>
+                                            <Radio value={"google"}>谷歌</Radio>
                                         </Radio.Group>
                                     </Form.Item>
                                     <Form.Item name="dynamicEffectRadio" label="图片动效（推荐选择全部）">
@@ -175,6 +175,7 @@ class PreferenceComponent extends React.Component {
                         </Col>
                         <Col span={24}>
                             <Card title={"网站推荐"} size={"small"} extra={<LinkOutlined />}
+                                  style={{border: "1px solid " + this.state.fontColor}}
                                   headStyle={{backgroundColor: this.state.backgroundColor, color: this.state.fontColor, borderBottom: "2px solid " + this.state.fontColor}}
                                   bodyStyle={{backgroundColor: this.state.backgroundColor}}
                             >
@@ -183,6 +184,15 @@ class PreferenceComponent extends React.Component {
                                     <List.Item><Link href="https://www.pexels.com/" target="_blank">Pexels.com</Link></List.Item>
                                     <List.Item><Link href="https://pixabay.com/" target="_blank">Pixabay.com</Link></List.Item>
                                 </List>
+                            </Card>
+                        </Col>
+                        <Col span={24}>
+                            <Card title={"今日热搜"} size={"small"} extra={<SearchOutlined />}
+                                  style={{border: "1px solid " + this.state.fontColor}}
+                                  headStyle={{backgroundColor: this.state.backgroundColor, color: this.state.fontColor, borderBottom: "2px solid " + this.state.fontColor}}
+                                  bodyStyle={{backgroundColor: this.state.backgroundColor}}
+                            >
+
                             </Card>
                         </Col>
                     </Row>
