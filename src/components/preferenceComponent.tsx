@@ -5,7 +5,6 @@ import {MoreOutlined, SettingOutlined, GithubOutlined, LinkOutlined} from "@ant-
 import {changeThemeColor} from "../typescripts/publicFunctions";
 import {FormInitialValuesInterface, ThemeColorInterface} from "../typescripts/publicInterface";
 import {defaultFormInitialValues, device} from "../typescripts/publicConstants";
-const $ = require("jquery");
 
 const {Link} = Typography;
 
@@ -99,48 +98,6 @@ class PreferenceComponent extends React.Component {
                 drawerPosition: "bottom"
             })
         }
-
-        // 修改各类弹窗样式
-        $("body").bind("DOMNodeInserted", () => {
-            // popover
-            let popoverEle = $(".ant-popover");
-            if (popoverEle.length && popoverEle.length > 0) {
-                $(".ant-popover-title").css("color", this.state.fontColor);
-                $(".ant-popover-inner-content").css("color", this.state.fontColor);
-            }
-
-            // toolTip
-            let toolTipEle = $(".ant-tooltip");
-            if (toolTipEle.length && toolTipEle.length > 0) {
-                $(".ant-tooltip-inner").css("color", this.state.fontColor);
-            }
-
-            // messgae
-            let messageEle = $(".ant-message");
-            if(messageEle.length && messageEle.length > 0) {
-                $(".ant-message-notice-content").css({"backgroundColor": this.state.backgroundColor, "color": this.state.fontColor});
-                $(".ant-message-custom-content > .anticon").css("color", this.state.fontColor);
-            }
-
-            // drawer
-            let drawerEle = $(".ant-drawer");
-            if (drawerEle.length && drawerEle.length > 0) {
-                $(".ant-drawer-close").css("color", this.state.fontColor);
-                $(".ant-drawer-title").css("color", this.state.fontColor);
-                $(".ant-card").css("border", "1px solid " + this.state.fontColor);
-                $(".ant-card-head").css({"backgroundColor": this.state.backgroundColor, "borderBottom": "2px solid " + this.state.fontColor});
-                $(".ant-card-head-title").css("color", this.state.fontColor);
-                $(".ant-card-extra").css("color", this.state.fontColor);
-                $(".ant-card-body").css("backgroundColor", this.state.backgroundColor);
-                $(".ant-typography").css("color", this.state.fontColor);
-                $(".ant-form-item-label > label").css("color", this.state.fontColor);
-                $(".ant-radio-wrapper").children(":last-child").css("color", this.state.fontColor);
-                $(".ant-checkbox-wrapper").children(":last-child").css("color", this.state.fontColor);
-                $(".ant-collapse").css("backgroundColor", this.state.backgroundColor);
-                $(".ant-collapse-header").css("color", this.state.fontColor);
-                $(".ant-list-item-meta-title").css("color", this.state.fontColor);
-            }
-        });
     }
 
     componentWillReceiveProps(nextProps: any, prevProps: any) {
@@ -174,7 +131,9 @@ class PreferenceComponent extends React.Component {
                     placement={this.state.drawerPosition}
                     onClose={this.drawerOnClose.bind(this)}
                     open={this.state.displayDrawer}
+                    headerStyle={{color: this.state.fontColor}}
                     drawerStyle={{backgroundColor: this.state.backgroundColor}}
+                    maskStyle={{backgroundColor: this.state.backgroundColor, opacity: 0.45}}
                     footer={
                         <Button type="link" href="https://github.com/xyk953651094" target="_blank" icon={<GithubOutlined />}>
                             作者主页
@@ -184,7 +143,11 @@ class PreferenceComponent extends React.Component {
                 >
                     <Row gutter={[16, 16]}>
                         <Col span={24}>
-                            <Card title={"偏好设置"} size={"small"} extra={<SettingOutlined />}>
+                            <Card title={"偏好设置"} size={"small"} extra={<SettingOutlined />}
+                                  style={{border: "1px solid " + this.state.fontColor}}
+                                  headStyle={{backgroundColor: this.state.backgroundColor, color: this.state.fontColor, borderBottom: "2px solid " + this.state.fontColor}}
+                                  bodyStyle={{backgroundColor: this.state.backgroundColor}}
+                            >
                                 <Form layout={"vertical"} colon={false} initialValues={this.state.formInitialValues}>
                                     <Form.Item name="searchEngineRadio" label="搜索引擎">
                                         <Radio.Group buttonStyle={"solid"} onChange={this.searchEngineRadioOnChange.bind(this)}>
@@ -211,7 +174,10 @@ class PreferenceComponent extends React.Component {
                             </Card>
                         </Col>
                         <Col span={24}>
-                            <Card title={"网站推荐"} size={"small"} extra={<LinkOutlined />}>
+                            <Card title={"网站推荐"} size={"small"} extra={<LinkOutlined />}
+                                  headStyle={{backgroundColor: this.state.backgroundColor, color: this.state.fontColor, borderBottom: "2px solid " + this.state.fontColor}}
+                                  bodyStyle={{backgroundColor: this.state.backgroundColor}}
+                            >
                                 <List size="small">
                                     <List.Item><Link href="https://unsplash.com/" target="_blank">Unsplash.com</Link></List.Item>
                                     <List.Item><Link href="https://www.pexels.com/" target="_blank">Pexels.com</Link></List.Item>

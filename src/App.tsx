@@ -20,6 +20,7 @@ import {
 } from "./typescripts/publicFunctions";
 import {ThemeColorInterface} from "./typescripts/publicInterface";
 const {Header, Content, Footer} = Layout;
+const $ = require("jquery");
 
 type propType = {}
 
@@ -190,7 +191,7 @@ class App extends React.Component {
                 if(lastRequestTime === null) {  // 第一次请求时 lastRequestTime 为 null，因此直接进行请求赋值 lastRequestTime
                     this.getWallpaper(this.state.imageSource);
                 }
-                else if(nowTimeStamp - parseInt(lastRequestTime) > 60 * 1000) {  // 必须多于一分钟才能进行新的请求
+                else if(nowTimeStamp - parseInt(lastRequestTime) > 0) {  // 必须多于一分钟才能进行新的请求
                     this.getWallpaper(this.state.imageSource);
                 }
                 else {  // 一分钟之内使用上一次请求结果
@@ -201,6 +202,42 @@ class App extends React.Component {
                     }
                 }
             })
+        });
+
+        // 修改各类弹窗样式
+        $("body").bind("DOMNodeInserted", () => {
+            // popover
+            let popoverEle = $(".ant-popover");
+            if (popoverEle.length && popoverEle.length > 0) {
+                $(".ant-popover-title").css("color", this.state.themeColor.componentFontColor);
+                $(".ant-popover-inner-content").css("color", this.state.themeColor.componentFontColor);
+            }
+
+            // toolTip
+            let toolTipEle = $(".ant-tooltip");
+            if (toolTipEle.length && toolTipEle.length > 0) {
+                $(".ant-tooltip-inner").css("color", this.state.themeColor.componentFontColor);
+            }
+
+            // messgae
+            let messageEle = $(".ant-message");
+            if(messageEle.length && messageEle.length > 0) {
+                $(".ant-message-notice-content").css({"backgroundColor": this.state.themeColor.componentBackgroundColor, "color": this.state.themeColor.componentFontColor});
+                $(".ant-message-custom-content > .anticon").css("color", this.state.themeColor.componentFontColor);
+            }
+
+            // drawer
+            let drawerEle = $(".ant-drawer");
+            if (drawerEle.length && drawerEle.length > 0) {
+                $(".ant-drawer-close").css("color", this.state.themeColor.componentFontColor);
+                $(".ant-drawer-title").css("color", this.state.themeColor.componentFontColor);
+                $(".ant-form-item-label > label").css("color", this.state.themeColor.componentFontColor);
+                $(".ant-radio-wrapper").children(":last-child").css("color", this.state.themeColor.componentFontColor);
+                $(".ant-checkbox-wrapper").children(":last-child").css("color", this.state.themeColor.componentFontColor);
+                $(".ant-collapse").css("backgroundColor", this.state.themeColor.componentBackgroundColor);
+                $(".ant-collapse-header").css("color", this.state.themeColor.componentFontColor);
+                $(".ant-list-item-meta-title").css("color", this.state.themeColor.componentFontColor);
+            }
         });
     }
 
@@ -221,11 +258,6 @@ class App extends React.Component {
                         </Col>
                         <Col xs={24} sm={24} md={12} lg={11} xl={11} style={{textAlign: "right"}}>
                             <Space size={"small"}>
-                                {/*<DownloadComponent*/}
-                                {/*    themeColor={this.state.themeColor}*/}
-                                {/*    display={this.state.componentDisplay}*/}
-                                {/*    imageData={this.state.imageData}*/}
-                                {/*/>*/}
                                 <HtmlLinkComponent
                                     themeColor={this.state.themeColor}
                                     display={this.state.componentDisplay}
@@ -260,11 +292,6 @@ class App extends React.Component {
                                     imageData={this.state.imageData}
                                     imageSource={this.state.imageSource}
                                 />
-                                {/*<CreatTimeComponent*/}
-                                {/*    themeColor={this.state.themeColor}*/}
-                                {/*    display={this.state.componentDisplay}*/}
-                                {/*    imageData={this.state.imageData}*/}
-                                {/*/>*/}
                             </Space>
                         </Col>
                     </Row>

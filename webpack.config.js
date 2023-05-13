@@ -56,7 +56,7 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            title: 'Sky 新标签页',
+            title: '云开新标签页',
             filename: 'mainPage.html',
             template: 'public/index.html',
             chunks: ['mainPage']
