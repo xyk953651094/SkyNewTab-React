@@ -90,13 +90,6 @@ class PreferenceComponent extends React.Component {
         localStorage.setItem("searchEngine", "bing");
         localStorage.setItem("dynamicEffect", "all");
         localStorage.setItem("imageSource", "Unsplash");
-        this.setState({
-            formInitialValues: {
-                "searchEngineRadio": "bing",
-                "dynamicEffectRadio": "all",
-                "imageSourceRadio": "Unsplash",
-            }
-        })
         message.success("已重置设置");
         window.location.reload();
     }
@@ -158,7 +151,8 @@ class PreferenceComponent extends React.Component {
                     drawerStyle={{backgroundColor: this.state.backgroundColor}}
                     maskStyle={{backgroundColor: this.state.backgroundColor, opacity: 0.45}}
                     footer={
-                        <Button type="link" href="https://github.com/xyk953651094" target="_blank" icon={<GithubOutlined />}>
+                        <Button type="text" href="https://github.com/xyk953651094" target="_blank" icon={<GithubOutlined />}
+                                style={{color: this.state.fontColor}}>
                             作者主页
                         </Button>
                     }
@@ -193,10 +187,9 @@ class PreferenceComponent extends React.Component {
                                             <Radio value={"Pexels"}>Pexels</Radio>
                                         </Radio.Group>
                                     </Form.Item>
-                                    <Form.Item name="clearStorageButton" label="插件相关">
-                                        <Button icon={<RedoOutlined />}
-                                                onClick={this.handleClearStorageButtonClick.bind(this)}
-                                        >
+                                    <Form.Item name="clearStorageButton" label="其他设置">
+                                        <Button type="primary" danger
+                                                onClick={this.handleClearStorageButtonClick.bind(this)}>
                                             重置设置
                                         </Button>
                                     </Form.Item>
