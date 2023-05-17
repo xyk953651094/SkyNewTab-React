@@ -1,7 +1,14 @@
 import React from "react";
 import {Button, Tooltip, Drawer, Card, List, Form, Row, Col, Radio, message, Typography} from "antd";
 import type {RadioChangeEvent} from "antd";
-import {MoreOutlined, SettingOutlined, GithubOutlined, LinkOutlined, SearchOutlined} from "@ant-design/icons";
+import {
+    MoreOutlined,
+    SettingOutlined,
+    GithubOutlined,
+    LinkOutlined,
+    SearchOutlined,
+    RedoOutlined
+} from "@ant-design/icons";
 import {changeThemeColor} from "../typescripts/publicFunctions";
 import {FormInitialValuesInterface, ThemeColorInterface} from "../typescripts/publicInterface";
 import {defaultFormInitialValues, device} from "../typescripts/publicConstants";
@@ -75,6 +82,22 @@ class PreferenceComponent extends React.Component {
         localStorage.setItem("imageSource", event.target.value);
         message.success("已更换图片来源");
         localStorage.removeItem("lastImageRequestTime");
+        window.location.reload();
+    }
+
+    // 重置设置
+    handleClearStorageButtonClick() {
+        localStorage.setItem("searchEngine", "bing");
+        localStorage.setItem("dynamicEffect", "all");
+        localStorage.setItem("imageSource", "Unsplash");
+        this.setState({
+            formInitialValues: {
+                "searchEngineRadio": "bing",
+                "dynamicEffectRadio": "all",
+                "imageSourceRadio": "Unsplash",
+            }
+        })
+        message.success("已重置设置");
         window.location.reload();
     }
 
@@ -169,6 +192,13 @@ class PreferenceComponent extends React.Component {
                                             <Radio value={"Unsplash"}>Unsplash</Radio>
                                             <Radio value={"Pexels"}>Pexels</Radio>
                                         </Radio.Group>
+                                    </Form.Item>
+                                    <Form.Item name="clearStorageButton" label="插件相关">
+                                        <Button icon={<RedoOutlined />}
+                                                onClick={this.handleClearStorageButtonClick.bind(this)}
+                                        >
+                                            重置设置
+                                        </Button>
                                     </Form.Item>
                                 </Form>
                             </Card>
