@@ -1,7 +1,7 @@
 import React from "react";
 import "../stylesheets/searchComponent.scss"
 import "../stylesheets/publicStyles.scss"
-import { Input, Row } from "antd";
+import { Input, Col } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import {fadeIn, fadeOut} from "../typescripts/publicFunctions";
 
@@ -68,7 +68,7 @@ class SearchComponent extends React.Component {
 
     render(){
         return (
-            <Row>
+            <Col span={24} className={"center"}>
                 <div
                     id={"mask"}
                     className={"mask zIndexMiddle"}
@@ -82,7 +82,7 @@ class SearchComponent extends React.Component {
                     onBlur={this.onBlur.bind(this)}
                     onPressEnter={this.onPressEnter.bind(this)}
                     size="large" />
-            </Row>
+            </Col>
         );
     }
 }

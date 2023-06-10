@@ -7,6 +7,7 @@ import HtmlLinkComponent from "./components/htmlLinkComponent";
 import PreferenceComponent from "./components/preferenceComponent";
 import WallpaperComponent from "./components/wallpaperComponent";
 import SearchComponent from "./components/searchComponent";
+import CollectionComponent from "./components/collectionComponent";
 import AuthorComponent from "./components/authorComponent"
 
 import {Layout, Row, Col, Space} from "antd";
@@ -281,7 +282,10 @@ class App extends React.Component {
                         imageData={this.state.imageData}
                         dynamicEffect={this.state.dynamicEffect}
                     />
-                    <SearchComponent searchEngine={this.state.searchEngine}/>
+                    <Space direction={"vertical"}>
+                        <SearchComponent searchEngine={this.state.searchEngine}/>
+                        <CollectionComponent themeColor={this.state.themeColor}/>
+                    </Space>
                 </Content>
                 <Footer id={"footer"}>
                     <Row>
