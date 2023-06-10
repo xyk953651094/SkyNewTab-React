@@ -1,6 +1,6 @@
 import React from "react";
 import {Col, Space, Button, Modal, Form, Input, List, message} from "antd";
-import {PlusOutlined, EditOutlined} from "@ant-design/icons";
+import {PlusOutlined, EditOutlined, DeleteOutlined} from "@ant-design/icons";
 import {changeThemeColor} from "../typescripts/publicFunctions";
 import {ThemeColorInterface} from "../typescripts/publicInterface";
 
@@ -37,11 +37,21 @@ class CollectionComponent extends React.Component {
 
     // 添加导航弹窗
     showAddModal() {
-        $("#webNameInput").val("");
-        $("#webUrlInput").val("");
-        this.setState({
-            displayAddModal: true
-        })
+        let collections = [];
+        let tempCollections = localStorage.getItem("collections");
+        if(tempCollections){
+            collections = JSON.parse(tempCollections);
+        }
+        if(collections.length < 5) {
+            $("#webNameInput").val("");
+            $("#webUrlInput").val("");
+            this.setState({
+                displayAddModal: true
+            })
+        }
+        else {
+            message.error("链接数量最多为5个");
+        }
     }
 
     handleAddModalOk() {
@@ -58,7 +68,8 @@ class CollectionComponent extends React.Component {
 
             this.setState({
                 displayAddModal: false
-            })
+            });
+            message.success("添加成功");
         }
         else {
             message.error("网页名称或网页地址不能为空");
@@ -118,7 +129,7 @@ class CollectionComponent extends React.Component {
     }
 
     componentDidMount() {
-        // TODO
+
     }
 
     componentWillReceiveProps(nextProps: any, prevProps: any) {
@@ -131,20 +142,20 @@ class CollectionComponent extends React.Component {
     }
 
     render() {
+        // TODO：根据 localstorage 动态加载按钮
+
         return (
-            <Col span={24} className={"center"}>
+            <Col span={24} className={"center zIndexHigh"}>
                 <Space>
-                    <Button type="primary" shape="round" style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}}>百度</Button>
-                    <Button type="primary" shape="round" style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}}>京东</Button>
-                    <Button type="primary" shape="round" style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}}>淘宝</Button>
-                    <Button type="primary" shape="round" style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}}>支付宝</Button>
-                    <Button type="primary" shape="round" style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}}>谷歌</Button>
-                    <Button type="primary" shape="round" style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}} icon={<PlusOutlined />}
-                            onClick={this.showAddModal.bind(this)}
-                    />
-                    <Button type="primary" shape="round" style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}} icon={<EditOutlined />}
-                            onClick={this.showEditModal.bind(this)}
-                    />
+                    <Button type="primary" shape="round" className="componentTheme" style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}}>百度</Button>
+                    <Button type="primary" shape="round" className="componentTheme" style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}}>京东</Button>
+                    <Button type="primary" shape="round" className="componentTheme" style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}}>淘宝</Button>
+                    <Button type="primary" shape="round" className="componentTheme" style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}}>支付宝</Button>
+                    <Button type="primary" shape="round" className="componentTheme" style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}}>谷歌</Button>
+                    <Button type="primary" shape="round" className="componentTheme" style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}}
+                            icon={<PlusOutlined />} onClick={this.showAddModal.bind(this)}/>
+                    <Button type="primary" shape="round" className="componentTheme" style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}}
+                            icon={<EditOutlined />} onClick={this.showEditModal.bind(this)}/>
                     <Modal title="添加链接" open={this.state.displayAddModal} onOk={this.handleAddModalOk.bind(this)} onCancel={this.handleAddModalCancel.bind(this)}>
                         <Form>
                             <Form.Item label="网页名称" name="webName" rules={[{ required: true, message: "网页名称不能为空"}]}>
@@ -161,7 +172,7 @@ class CollectionComponent extends React.Component {
                             size="small"
                             dataSource={this.state.listData}
                             renderItem={(item: any) => (
-                                <List.Item actions={[<Button type="text" onClick={this.handleRemoveCollection.bind(this, item)}>删除</Button>]}>
+                                <List.Item actions={[<Button type="text" danger icon={<DeleteOutlined />} onClick={this.handleRemoveCollection.bind(this, item)}>删除</Button>]}>
                                     <List.Item.Meta title={item.webName} description={item.webUrl}/>
                                 </List.Item>
                             )}
