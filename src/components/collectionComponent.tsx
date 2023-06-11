@@ -15,7 +15,8 @@ type stateType = {
     fontColor: string,
     displayAddModal: boolean,
     displayEditModal: boolean,
-    listData: any
+    listData: any,
+    collectionMaxSize: number
 }
 
 interface CollectionComponent {
@@ -31,7 +32,8 @@ class CollectionComponent extends React.Component {
             fontColor: "",
             displayAddModal: false,
             displayEditModal: false,
-            listData: []
+            listData: [],
+            collectionMaxSize: 5
         };
     }
 
@@ -42,7 +44,7 @@ class CollectionComponent extends React.Component {
         if(tempCollections){
             collections = JSON.parse(tempCollections);
         }
-        if(collections.length < 5) {
+        if(collections.length < this.state.collectionMaxSize) {
             $("#webNameInput").val("");
             $("#webUrlInput").val("");
             this.setState({
@@ -63,13 +65,18 @@ class CollectionComponent extends React.Component {
             if(tempCollections){
                 collections = JSON.parse(tempCollections);
             }
-            collections.push({"webName": webName, "webUrl": webUrl, "timeStamp": Date.now ()});
-            localStorage.setItem("collections", JSON.stringify(collections));
+            if(collections.length < this.state.collectionMaxSize) {
+                collections.push({"webName": webName, "webUrl": webUrl, "timeStamp": Date.now ()});
+                localStorage.setItem("collections", JSON.stringify(collections));
 
-            this.setState({
-                displayAddModal: false
-            });
-            message.success("添加成功");
+                this.setState({
+                    displayAddModal: false
+                });
+                message.success("添加成功");
+            }
+            else {
+                message.error("链接数量最多为5个");
+            }
         }
         else {
             message.error("网页名称或网页地址不能为空");
@@ -112,14 +119,16 @@ class CollectionComponent extends React.Component {
         let tempCollections = localStorage.getItem("collections");
         if(tempCollections){
             collections = JSON.parse(tempCollections);
-            let index = 0;
+            let index = -1;
             for(let i = 0; i < collections.length; i++) {
                 if (item.timeStamp === collections[i].timeStamp) {
                     index = i;
                     break;
                 }
             }
-            collections.splice(index, 1);
+            if(index !== -1) {
+                collections.splice(index, 1);
+            }
             localStorage.setItem("collections", JSON.stringify(collections));
 
             this.setState({

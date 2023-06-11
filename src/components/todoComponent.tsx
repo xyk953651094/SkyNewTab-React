@@ -16,7 +16,8 @@ type stateType = {
     backgroundColor: string,
     fontColor: string,
     displayAddModal: boolean,
-    checkboxOptions: any
+    checkboxOptions: any,
+    todoMaxSize: number
 }
 
 interface TodoComponent {
@@ -31,7 +32,8 @@ class TodoComponent extends React.Component {
             backgroundColor: "",
             fontColor: "",
             displayAddModal: false,
-            checkboxOptions: []
+            checkboxOptions: [],
+            todoMaxSize: 5
         };
     }
 
@@ -41,7 +43,7 @@ class TodoComponent extends React.Component {
         if(tempTodos){
             todos = JSON.parse(tempTodos);
         }
-        if(todos.length < 5) {
+        if(todos.length < this.state.todoMaxSize) {
             $("#todoInput").val("");
             this.setState({
                 displayAddModal: true
@@ -60,14 +62,19 @@ class TodoComponent extends React.Component {
             if(tempTodos){
                 todos = JSON.parse(tempTodos);
             }
-            todos.push({"label": todoContent, "value": todoContent});
-            localStorage.setItem("todos", JSON.stringify(todos));
+            if(todos.length < this.state.todoMaxSize) {
+                todos.push({"label": todoContent, "value": todoContent});
+                localStorage.setItem("todos", JSON.stringify(todos));
 
-            this.setState({
-                displayAddModal: false,
-                checkboxOptions: todos
-            });
-            message.success("添加成功");
+                this.setState({
+                    displayAddModal: false,
+                    checkboxOptions: todos
+                });
+                message.success("添加成功");
+            }
+            else {
+                message.error("待办数量最多为5个");
+            }
         }
         else {
             message.error("待办内容不能为空");
@@ -80,21 +87,23 @@ class TodoComponent extends React.Component {
         })
     }
 
-    CheckboxOnChange(checkedValues: CheckboxValueType[]) {
-        // console.log('checked = ', checkedValues);
+    checkboxOnChange(checkedValues: CheckboxValueType[]) {
+        console.log('checked = ', checkedValues);
 
         let checkboxOptions = [];
         let tempCheckboxOptions = localStorage.getItem("todos");
         if(tempCheckboxOptions){
             checkboxOptions = JSON.parse(tempCheckboxOptions);
-            let index = 0;
+            let index = -1;
             for(let i = 0; i < checkboxOptions.length; i++) {
                 if (checkedValues[0] === checkboxOptions[i].label) {
                     index = i;
                     break;
                 }
             }
-            checkboxOptions.splice(index, 1);
+            if(index !== -1) {
+                checkboxOptions.splice(index, 1);
+            }
             localStorage.setItem("todos", JSON.stringify(checkboxOptions));
 
             this.setState({
@@ -149,7 +158,7 @@ class TodoComponent extends React.Component {
         const popoverContent = (
             <Checkbox.Group
                 options={this.state.checkboxOptions}
-                onChange={this.CheckboxOnChange.bind(this)}
+                onChange={this.checkboxOnChange.bind(this)}
             />
         );
 
