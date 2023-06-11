@@ -152,9 +152,9 @@ class CollectionComponent extends React.Component {
                     <Button type="primary" shape="round" className="componentTheme" style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}}>淘宝</Button>
                     <Button type="primary" shape="round" className="componentTheme" style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}}>支付宝</Button>
                     <Button type="primary" shape="round" className="componentTheme" style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}}>谷歌</Button>
-                    <Button type="primary" shape="round" className="componentTheme" style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}}
+                    <Button type="primary" shape="circle" className="componentTheme" style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}}
                             icon={<PlusOutlined />} onClick={this.showAddModal.bind(this)}/>
-                    <Button type="primary" shape="round" className="componentTheme" style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}}
+                    <Button type="primary" shape="circle" className="componentTheme" style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}}
                             icon={<EditOutlined />} onClick={this.showEditModal.bind(this)}/>
                     <Modal title="添加链接" open={this.state.displayAddModal} onOk={this.handleAddModalOk.bind(this)} onCancel={this.handleAddModalCancel.bind(this)}>
                         <Form>

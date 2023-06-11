@@ -131,7 +131,7 @@ class PreferenceComponent extends React.Component {
         return (
             <>
                 <Tooltip title={"偏好设置"} placement="topRight" color={this.state.backgroundColor}>
-                    <Button shape="round" icon={<MoreOutlined />} size={"large"}
+                    <Button shape="circle" icon={<MoreOutlined />} size={"large"}
                             onClick={this.drawerOnShow.bind(this)}
                             id={"preferenceBtn"}
                             className={"componentTheme zIndexHigh"}

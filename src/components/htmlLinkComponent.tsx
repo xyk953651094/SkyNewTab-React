@@ -60,7 +60,7 @@ class HtmlLinkComponent extends React.Component {
     render() {
         return (
             <Tooltip title={"前往图片主页"} color={this.state.backgroundColor}>
-                <Button shape="round" icon={<LinkOutlined/>} size={"large"}
+                <Button shape="circle" icon={<LinkOutlined/>} size={"large"}
                         onClick={this.handleClick.bind(this)}
                         id={"htmlLinkBtn"}
                         className={"componentTheme zIndexHigh"}

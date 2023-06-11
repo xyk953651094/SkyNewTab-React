@@ -3,6 +3,7 @@ import "./stylesheets/publicStyles.scss"
 
 import GreetComponent from "./components/greetComponent";
 import WeatherComponent from "./components/weatherComponent";
+import TodoComponent from "./components/todoComponent";
 import HtmlLinkComponent from "./components/htmlLinkComponent";
 import PreferenceComponent from "./components/preferenceComponent";
 import WallpaperComponent from "./components/wallpaperComponent";
@@ -212,6 +213,7 @@ class App extends React.Component {
             if (popoverEle.length && popoverEle.length > 0) {
                 $(".ant-popover-title").css("color", this.state.themeColor.componentFontColor);
                 $(".ant-popover-inner-content").css("color", this.state.themeColor.componentFontColor);
+                $(".ant-checkbox-group-item").css("color", this.state.themeColor.componentFontColor);
             }
 
             // toolTip
@@ -234,7 +236,6 @@ class App extends React.Component {
                 $(".ant-drawer-title").css("color", this.state.themeColor.componentFontColor);
                 $(".ant-form-item-label > label").css("color", this.state.themeColor.componentFontColor);
                 $(".ant-radio-wrapper").children(":last-child").css("color", this.state.themeColor.componentFontColor);
-                $(".ant-checkbox-wrapper").children(":last-child").css("color", this.state.themeColor.componentFontColor);
                 $(".ant-collapse").css("backgroundColor", this.state.themeColor.componentBackgroundColor);
                 $(".ant-collapse-header").css("color", this.state.themeColor.componentFontColor);
                 $(".ant-list-item").css("borderBlockEndColor", this.state.themeColor.componentFontColor);
@@ -260,6 +261,9 @@ class App extends React.Component {
                         </Col>
                         <Col xs={24} sm={24} md={12} lg={11} xl={11} style={{textAlign: "right"}}>
                             <Space size={"small"}>
+                                <TodoComponent
+                                    themeColor={this.state.themeColor}
+                                />
                                 <HtmlLinkComponent
                                     themeColor={this.state.themeColor}
                                     display={this.state.componentDisplay}
