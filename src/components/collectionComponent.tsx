@@ -1,7 +1,6 @@
 import React from "react";
 import {Col, Space, Button, Modal, Form, Input, List, message} from "antd";
 import {PlusOutlined, EditOutlined, DeleteOutlined} from "@ant-design/icons";
-import {changeThemeColor} from "../typescripts/publicFunctions";
 import {ThemeColorInterface} from "../typescripts/publicInterface";
 
 const $ = require("jquery");
@@ -13,9 +12,10 @@ type propType = {
 type stateType = {
     backgroundColor: string,
     fontColor: string,
+    collections: any,
     displayAddModal: boolean,
     displayEditModal: boolean,
-    listData: any,
+    collectionData: any,
     collectionMaxSize: number
 }
 
@@ -30,9 +30,10 @@ class CollectionComponent extends React.Component {
         this.state = {
             backgroundColor: "",
             fontColor: "",
+            collections: [],
             displayAddModal: false,
             displayEditModal: false,
-            listData: [],
+            collectionData: [],
             collectionMaxSize: 5
         };
     }
@@ -70,9 +71,12 @@ class CollectionComponent extends React.Component {
                 localStorage.setItem("collections", JSON.stringify(collections));
 
                 this.setState({
-                    displayAddModal: false
+                    displayAddModal: false,
+                    collectionData: collections,
                 });
                 message.success("添加成功");
+
+                this.forceUpdate(); // 强制更新组件
             }
             else {
                 message.error("链接数量最多为5个");
@@ -98,7 +102,7 @@ class CollectionComponent extends React.Component {
         }
         this.setState({
             displayEditModal: true,
-            listData: collections
+            collectionData: collections
         })
     }
 
@@ -132,13 +136,23 @@ class CollectionComponent extends React.Component {
             localStorage.setItem("collections", JSON.stringify(collections));
 
             this.setState({
-                listData: collections
+                collectionData: collections
             })
+
+            this.forceUpdate(); // 强制更新组件
         }
     }
 
     componentDidMount() {
+        let collections = [];
+        let tempCollections = localStorage.getItem("collections");
+        if(tempCollections){
+            collections = JSON.parse(tempCollections);
 
+            this.setState({
+                collectionData: collections
+            })
+        }
     }
 
     componentWillReceiveProps(nextProps: any, prevProps: any) {
@@ -151,16 +165,19 @@ class CollectionComponent extends React.Component {
     }
 
     render() {
-        // TODO：根据 localstorage 动态加载按钮
-
         return (
             <Col span={24} className={"center zIndexHigh"}>
-                <Space>
-                    <Button type="primary" shape="round" className="componentTheme" style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}}>百度</Button>
-                    <Button type="primary" shape="round" className="componentTheme" style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}}>京东</Button>
-                    <Button type="primary" shape="round" className="componentTheme" style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}}>淘宝</Button>
-                    <Button type="primary" shape="round" className="componentTheme" style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}}>支付宝</Button>
-                    <Button type="primary" shape="round" className="componentTheme" style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}}>谷歌</Button>
+                <Space id="buttonGroup">
+                    {this.state.collectionData.map((item: any) => {
+                        return (
+                            <Button type="primary" shape="round" className="componentTheme" key={item.timeStamp}
+                                    onClick={() => {window.open(item.webUrl)}}
+                                    style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}}>
+                                {item.webName}
+                            </Button>
+                        )
+                    })}
+
                     <Button type="primary" shape="circle" className="componentTheme" style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}}
                             icon={<PlusOutlined />} onClick={this.showAddModal.bind(this)}/>
                     <Button type="primary" shape="circle" className="componentTheme" style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}}
@@ -179,7 +196,7 @@ class CollectionComponent extends React.Component {
                         <List
                             itemLayout="horizontal"
                             size="small"
-                            dataSource={this.state.listData}
+                            dataSource={this.state.collectionData}
                             renderItem={(item: any) => (
                                 <List.Item actions={[<Button type="text" danger icon={<DeleteOutlined />} onClick={this.handleRemoveCollection.bind(this, item)}>删除</Button>]}>
                                     <List.Item.Meta title={item.webName} description={item.webUrl}/>
