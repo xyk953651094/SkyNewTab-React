@@ -102,6 +102,13 @@ class GreetComponent extends React.Component {
                 this.setHoliday(lastHoliday);
             }
         }
+
+        setInterval(() => {
+            this.setState({
+                greet: getGreetContent(),
+                greetIcon: getGreetIcon(),
+            })
+        }, 60 * 1000);
     }
 
     componentWillReceiveProps(nextProps: any, prevProps: any) {

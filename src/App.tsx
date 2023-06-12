@@ -21,6 +21,7 @@ import {
     changeThemeColor
 } from "./typescripts/publicFunctions";
 import {ThemeColorInterface} from "./typescripts/publicInterface";
+import ClockComponent from "./components/clockComponent";
 const {Header, Content, Footer} = Layout;
 const $ = require("jquery");
 
@@ -241,6 +242,18 @@ class App extends React.Component {
                 $(".ant-list-item").css("borderBlockEndColor", this.state.themeColor.componentFontColor);
                 $(".ant-list-item-meta-title").css("color", this.state.themeColor.componentFontColor);
             }
+
+            // modal
+            let modalEle = $(".ant-modal");
+            if (modalEle.length && modalEle.length > 0) {
+                $(".ant-modal-content").css("backgroundColor", this.state.themeColor.componentBackgroundColor);
+                $(".ant-modal-title").css({"backgroundColor": this.state.themeColor.componentBackgroundColor, "color": this.state.themeColor.componentFontColor});
+                $(".ant-form-item-required").css("color", this.state.themeColor.componentFontColor);
+                $(".ant-list-item-meta-title").css("color", this.state.themeColor.componentFontColor);
+                $(".ant-list-item-meta-description").css("color", this.state.themeColor.componentFontColor);
+                $(".ant-modal-close-x").css("color", this.state.themeColor.componentFontColor);
+                $(".ant-empty-description").css("color", this.state.themeColor.componentFontColor);
+            }
         });
     }
 
@@ -286,7 +299,8 @@ class App extends React.Component {
                         imageData={this.state.imageData}
                         dynamicEffect={this.state.dynamicEffect}
                     />
-                    <Space direction={"vertical"}>
+                    <Space direction={"vertical"} align={"center"}>
+                        <ClockComponent themeColor={this.state.themeColor}/>
                         <SearchComponent searchEngine={this.state.searchEngine}/>
                         <CollectionComponent themeColor={this.state.themeColor}/>
                     </Space>

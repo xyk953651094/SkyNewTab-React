@@ -144,13 +144,6 @@ class TodoComponent extends React.Component {
                 <Col span={12} style={{textAlign: "right"}}>
                     <Button type="text" shape="circle" icon={<PlusOutlined />}
                             style={{color: this.state.fontColor, float: "right"}} onClick={this.showAddModal.bind(this)} />
-                    <Modal title="添加待办事项" open={this.state.displayAddModal} onOk={this.handleAddModalOk.bind(this)} onCancel={this.handleAddModalCancel.bind(this)}>
-                        <Form>
-                            <Form.Item label="待办内容" name="todoInput" rules={[{ required: true, message: "待办内容不能为空"}]}>
-                                <Input placeholder="请输入待办内容" id="todoInput"/>
-                            </Form.Item>
-                        </Form>
-                    </Modal>
                 </Col>
             </Row>
         );
@@ -163,15 +156,24 @@ class TodoComponent extends React.Component {
         );
 
         return (
-            <Popover title={popoverTitle} content={popoverContent} color={this.state.backgroundColor}>
-                <Badge size="small" count={this.state.checkboxOptions.length}>
-                    <Button shape="circle" icon={<CheckSquareOutlined />} size={"large"}
-                            // onClick={this.handleClick.bind(this)}
-                            id={"todoBtn"}
-                            className={"componentTheme zIndexHigh"}
-                    />
-                </Badge>
-            </Popover>
+            <Row>
+                <Popover title={popoverTitle} content={popoverContent} color={this.state.backgroundColor} trigger={"click"}>
+                    <Badge size="small" count={this.state.checkboxOptions.length}>
+                        <Button shape="circle" icon={<CheckSquareOutlined />} size={"large"}
+                                // onClick={this.handleClick.bind(this)}
+                                id={"todoBtn"}
+                                className={"componentTheme zIndexHigh"}
+                        />
+                    </Badge>
+                </Popover>
+                <Modal title="添加待办事项" open={this.state.displayAddModal} onOk={this.handleAddModalOk.bind(this)} onCancel={this.handleAddModalCancel.bind(this)}>
+                    <Form>
+                        <Form.Item label="待办内容" name="todoInput" rules={[{ required: true, message: "待办内容不能为空"}]}>
+                            <Input placeholder="请输入待办内容" id="todoInput"/>
+                        </Form.Item>
+                    </Form>
+                </Modal>
+            </Row>
         );
     }
 }
