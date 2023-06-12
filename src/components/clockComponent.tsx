@@ -1,10 +1,10 @@
 import React from "react";
-import {Row, Col, Button, Typography, Space} from "antd";
-import {changeThemeColor, getTimeDetails, isEmptyString} from "../typescripts/publicFunctions";
+import {Row, Typography, Space} from "antd";
+import "../stylesheets/clockComponent.scss"
+import {getTimeDetails} from "../typescripts/publicFunctions";
 import {ThemeColorInterface} from "../typescripts/publicInterface";
 
 const {Text} = Typography;
-const $ = require("jquery");
 
 type propType = {
     themeColor: ThemeColorInterface,
@@ -29,9 +29,9 @@ class ClockComponent extends React.Component {
         this.state = {
             backgroundColor: "",
             fontColor: "",
-            currentTime: "--:--",
-            currentWeek: "暂无信息",
-            currentDate: "--年--月--日",
+            currentTime: getTimeDetails(new Date()).showTime,
+            currentWeek: getTimeDetails(new Date()).showWeek,
+            currentDate: getTimeDetails(new Date()).showDate,
         };
     }
 
@@ -41,15 +41,9 @@ class ClockComponent extends React.Component {
             this.setState({
                 currentTime: timeDetails.showTime,
                 currentWeek: timeDetails.showWeek,
-                currentDate: timeDetails.showDate4,
+                currentDate: timeDetails.showDate,
             })
         }, 1000);
-
-        // $("#clock").hover(function(){
-        //     $("#clock").css("background-color","rgba(0, 0, 0, 0.06)");
-        // },function(){
-        //     $("#clock").css("background-color","transparent");
-        // });
     }
 
     componentWillReceiveProps(nextProps: any, prevProps: any) {
@@ -64,27 +58,19 @@ class ClockComponent extends React.Component {
     render() {
         return (
             <Row>
-                <Row id={"clock"} className={"center zIndexHigh"}>
-                    <Col span={12} className={"center"}>
-                        <Text style={{fontSize: "50px", height: "70px", lineHeight: "70px", color: this.state.backgroundColor}}>
-                            {this.state.currentTime}
+                <Space  align="center" size="small" id={"clock"} className={"zIndexHigh"}>
+                    <Text className={"clockText"} style={{color: this.state.backgroundColor}}>
+                        {this.state.currentTime}
+                    </Text>
+                    <Space align="center" size="small" direction="vertical">
+                        <Text className={"dateText"} style={{color: this.state.backgroundColor}}>
+                            {this.state.currentWeek}
                         </Text>
-                    </Col>
-                    <Col span={12}>
-                        <Row>
-                            <Col span={24}>
-                                <Text style={{fontSize: "20px", height: "25px", lineHeight: "25px", color: this.state.backgroundColor}}>
-                                    {this.state.currentWeek}
-                                </Text>
-                            </Col>
-                            <Col span={24}>
-                                <Text style={{fontSize: "20px", height: "25px", lineHeight: "25px", color: this.state.backgroundColor}}>
-                                    {this.state.currentDate}
-                                </Text>
-                            </Col>
-                        </Row>
-                    </Col>
-                </Row>
+                        <Text className={"dateText"} style={{color: this.state.backgroundColor}}>
+                            {this.state.currentDate}
+                        </Text>
+                    </Space>
+                </Space>
             </Row>
         );
     }

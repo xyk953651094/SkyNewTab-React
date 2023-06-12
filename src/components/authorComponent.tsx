@@ -5,7 +5,6 @@ import {unsplashUrl} from "../typescripts/publicConstants";
 import {changeThemeColor, isEmptyString} from "../typescripts/publicFunctions";
 import {ThemeColorInterface} from "../typescripts/publicInterface";
 import "../stylesheets/publicStyles.scss"
-import "../stylesheets/authorComponent.scss"
 
 type propType = {
     themeColor: ThemeColorInterface,

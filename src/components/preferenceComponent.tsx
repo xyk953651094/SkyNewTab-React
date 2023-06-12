@@ -7,7 +7,6 @@ import {
     GithubOutlined,
     LinkOutlined,
     SearchOutlined,
-    RedoOutlined
 } from "@ant-design/icons";
 import {changeThemeColor} from "../typescripts/publicFunctions";
 import {FormInitialValuesInterface, ThemeColorInterface} from "../typescripts/publicInterface";

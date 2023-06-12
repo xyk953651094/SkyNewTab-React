@@ -1,0 +1,16 @@
+$clockFontSize: 60px;
+$dateFontSize: 20px;
+
+.clockText {
+  font-size: $clockFontSize;
+  height: $clockFontSize;
+  line-height: $clockFontSize;
+  text-shadow: 0px 0px 10px currentColor;
+}
+
+.dateText {
+  font-size: $dateFontSize;
+  height: $dateFontSize;
+  line-height: $dateFontSize;
+  text-shadow: 0px 0px 10px currentColor;
+}

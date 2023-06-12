@@ -16,8 +16,9 @@ type propType = {
 type stateType = {
     backgroundColor: string,
     fontColor: string,
-    greet: string,
     greetIcon: string,
+    greetContent: string,
+    holidayContent: string,
     calendar: string,
     suit: string,
     avoid: string,
@@ -34,8 +35,9 @@ class GreetComponent extends React.Component {
         this.state = {
             backgroundColor: "",
             fontColor: "",
-            greet: getGreetContent(),
             greetIcon: getGreetIcon(),
+            greetContent: getGreetContent(),
+            holidayContent: "暂无信息",
             calendar: getTimeDetails(new Date()).showDate4 + " " + getTimeDetails(new Date()).showWeek,
             suit: "暂无信息",
             avoid: "暂无信息",
@@ -45,18 +47,18 @@ class GreetComponent extends React.Component {
     // 请求完成后处理步骤
     setHoliday(data: any) {
         let holidayContent = data.solarTerms;
-        if (data.typeDes !== "休息日" && data.typeDes !== "工作日"){
-            holidayContent = holidayContent + " · " + data.typeDes;
-        }
         if (data.solarTerms.indexOf("后") === -1) {
             holidayContent = "今日" + holidayContent;
         }
+        if (data.typeDes !== "休息日" && data.typeDes !== "工作日"){
+            holidayContent = holidayContent + " · " + data.typeDes;
+        }
+
         let timeDetails = getTimeDetails(new Date());
         this.setState({
-            greet: this.state.greet + "｜" + holidayContent,
+            holidayContent: holidayContent,
             calendar: timeDetails.showDate4 + " " + timeDetails.showWeek + "｜" +
-                data.yearTips + data.chineseZodiac + "年｜" +
-                data.lunarCalendar,
+                data.yearTips + data.chineseZodiac + "年｜" + data.lunarCalendar,
             suit: data.suit.replace(/\./g, " · "),
             avoid: data.avoid.replace(/\./g, " · "),
         });
@@ -105,8 +107,8 @@ class GreetComponent extends React.Component {
 
         setInterval(() => {
             this.setState({
-                greet: getGreetContent(),
                 greetIcon: getGreetIcon(),
+                greetContent: getGreetContent(),
             })
         }, 60 * 1000);
     }
@@ -139,7 +141,7 @@ class GreetComponent extends React.Component {
                         className={"componentTheme zIndexHigh"}
                         style={{}}
                 >
-                    {this.state.greet}
+                    {this.state.greetContent  + "｜" + this.state.holidayContent}
                 </Button>
             </Popover>
         );

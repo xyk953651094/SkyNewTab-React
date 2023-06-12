@@ -1,11 +1,11 @@
 import React from "react";
-import {Popover, Space, Col, Badge, Typography, Button, Checkbox, message, Row, Form, Input, Modal} from "antd";
+import {Popover, Col, Badge, Typography, Button, Checkbox, message, Row, Form, Input, Modal} from "antd";
 import type { CheckboxValueType } from 'antd/es/checkbox/Group';
 import {CheckSquareOutlined, PlusOutlined} from "@ant-design/icons";
-import {changeThemeColor, isEmptyString} from "../typescripts/publicFunctions";
+import {changeThemeColor} from "../typescripts/publicFunctions";
 import {ThemeColorInterface} from "../typescripts/publicInterface";
 
-const { Text, Link } = Typography;
+const { Text } = Typography;
 const $ = require("jquery");
 
 type propType = {

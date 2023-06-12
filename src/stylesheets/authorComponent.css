@@ -1,8 +1,0 @@
-.ant-list-item {
-    padding: 0;
-    min-width: 200px;
-    word-break: keep-all;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}

@@ -1,0 +1,13 @@
+.clockText {
+    font-size: 60px;
+    height: 60px;
+    line-height: 60px;
+    text-shadow: 0px 0px 10px currentColor;
+}
+
+.dateText {
+    font-size: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-shadow: 0px 0px 10px currentColor;
+}
