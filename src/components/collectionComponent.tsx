@@ -76,7 +76,7 @@ class CollectionComponent extends React.Component {
                 });
                 message.success("添加成功");
 
-                this.forceUpdate(); // 强制更新组件
+                // this.forceUpdate(); // 强制更新组件
             }
             else {
                 message.error("链接数量最多为5个");
@@ -139,7 +139,7 @@ class CollectionComponent extends React.Component {
                 collectionData: collections
             })
 
-            this.forceUpdate(); // 强制更新组件
+            // this.forceUpdate(); // 强制更新组件
         }
     }
 
@@ -168,15 +168,17 @@ class CollectionComponent extends React.Component {
         return (
             <Col span={24} className={"center zIndexHigh"}>
                 <Space id="buttonGroup">
-                    {this.state.collectionData.map((item: any) => {
-                        return (
-                            <Button type="primary" shape="round" className="componentTheme" key={item.timeStamp}
-                                    onClick={() => {window.open(item.webUrl)}}
-                                    style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}}>
-                                {item.webName}
-                            </Button>
-                        )
-                    })}
+                    {
+                        this.state.collectionData.map((item: any) => {
+                            return (
+                                <Button type="primary" shape="round" className="componentTheme" key={item.timeStamp}
+                                        onClick={() => {window.open(item.webUrl)}}
+                                        style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}}>
+                                    {item.webName}
+                                </Button>
+                            )
+                        })
+                    }
 
                     <Button type="primary" shape="circle" className="componentTheme" style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}}
                             icon={<PlusOutlined />} onClick={this.showAddModal.bind(this)}/>
