@@ -53,7 +53,7 @@ class CollectionComponent extends React.Component {
             })
         }
         else {
-            message.error("链接数量最多为5个");
+            message.error("链接数量最多为" + this.state.collectionMaxSize + "个");
         }
     }
 
@@ -79,7 +79,7 @@ class CollectionComponent extends React.Component {
                 // this.forceUpdate(); // 强制更新组件
             }
             else {
-                message.error("链接数量最多为5个");
+                message.error("链接数量最多为" + this.state.collectionMaxSize + "个");
             }
         }
         else {

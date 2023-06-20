@@ -50,7 +50,7 @@ class TodoComponent extends React.Component {
             })
         }
         else {
-            message.error("待办数量最多为5个");
+            message.error("待办数量最多为" + this.state.todoMaxSize + "个");
         }
     }
 
@@ -73,7 +73,7 @@ class TodoComponent extends React.Component {
                 message.success("添加成功");
             }
             else {
-                message.error("待办数量最多为5个");
+                message.error("待办数量最多为" + this.state.todoMaxSize + "个");
             }
         }
         else {
@@ -88,8 +88,6 @@ class TodoComponent extends React.Component {
     }
 
     checkboxOnChange(checkedValues: CheckboxValueType[]) {
-        console.log('checked = ', checkedValues);
-
         let checkboxOptions = [];
         let tempCheckboxOptions = localStorage.getItem("todos");
         if(tempCheckboxOptions){

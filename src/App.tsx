@@ -22,6 +22,7 @@ import {
 } from "./typescripts/publicFunctions";
 import {ThemeColorInterface} from "./typescripts/publicInterface";
 import ClockComponent from "./components/clockComponent";
+import DailyComponent from "./components/dailyComponent";
 const {Header, Content, Footer} = Layout;
 const $ = require("jquery");
 
@@ -274,6 +275,9 @@ class App extends React.Component {
                         </Col>
                         <Col xs={24} sm={24} md={12} lg={11} xl={11} style={{textAlign: "right"}}>
                             <Space size={"small"}>
+                                <DailyComponent
+                                    themeColor={this.state.themeColor}
+                                />
                                 <TodoComponent
                                     themeColor={this.state.themeColor}
                                 />
