@@ -170,7 +170,9 @@ class DailyComponent extends React.Component {
                 dataSource={this.state.listItems}
                 renderItem={(item: any) => (
                     <List.Item
-                        actions={[<Button type="text" shape="circle" icon={<DeleteOutlined />} onClick={this.removeDaily.bind(this, item)}/>]}
+                        actions={[
+                            <Button type="text" shape="circle" icon={<DeleteOutlined />} onClick={this.removeDaily.bind(this, item)} style={{color: this.state.fontColor}}/>
+                        ]}
                     >
                         <List.Item.Meta
                             title={item.title}
