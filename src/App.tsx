@@ -216,6 +216,11 @@ class App extends React.Component {
                 $(".ant-popover-title").css("color", this.state.themeColor.componentFontColor);
                 $(".ant-popover-inner-content").css("color", this.state.themeColor.componentFontColor);
                 $(".ant-checkbox-group-item").css("color", this.state.themeColor.componentFontColor);
+                $(".ant-list-item").css("borderBlockEndColor", this.state.themeColor.componentFontColor);
+                $(".ant-list-item-meta-title").css("color", this.state.themeColor.componentFontColor);
+                $(".ant-list-item-meta-description").css("color", this.state.themeColor.componentFontColor);
+                $(".ant-modal-close-x").css("color", this.state.themeColor.componentFontColor);
+                $(".ant-empty-description").css("color", this.state.themeColor.componentFontColor);
             }
 
             // toolTip

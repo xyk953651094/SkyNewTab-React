@@ -90,6 +90,7 @@ class DailyComponent extends React.Component {
             }
             if(daily.length < this.state.dailyMaxSize) {
                 let todayTimeStamp = new Date(getTimeDetails(new Date()).showDate5).getTime();
+                console.log(todayTimeStamp);
                 let description;
                 if (todayTimeStamp - this.state.selectedTimeStamp > 0) {
                     description = "已过 " + ((todayTimeStamp - this.state.selectedTimeStamp) / 86400000) + " 天";
@@ -103,7 +104,7 @@ class DailyComponent extends React.Component {
 
                 this.setState({
                     displayAddModal: false,
-                    checkboxOptions: daily
+                    listItems: daily
                 });
                 message.success("添加成功");
             }
@@ -124,7 +125,7 @@ class DailyComponent extends React.Component {
 
     datePickerOnChange: DatePickerProps['onChange'] = (date, dateString) => {
         this.setState({
-            selectedTimeStamp: dateString
+            selectedTimeStamp: new Date(dateString).getTime()
         })
     };
 
@@ -169,7 +170,7 @@ class DailyComponent extends React.Component {
                 dataSource={this.state.listItems}
                 renderItem={(item: any) => (
                     <List.Item
-                        actions={[<Button type="text" shape="circle" icon={<DeleteOutlined />} onClick={this.removeDaily.bind(this)}/>]}
+                        actions={[<Button type="text" shape="circle" icon={<DeleteOutlined />} onClick={this.removeDaily.bind(this, item)}/>]}
                     >
                         <List.Item.Meta
                             title={item.title}
