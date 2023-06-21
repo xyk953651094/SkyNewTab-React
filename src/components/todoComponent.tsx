@@ -1,7 +1,7 @@
 import React from "react";
 import {Popover, Col, Badge, Typography, Button, Checkbox, message, Row, Form, Input, Modal} from "antd";
 import type { CheckboxValueType } from 'antd/es/checkbox/Group';
-import {CheckSquareOutlined, PlusOutlined} from "@ant-design/icons";
+import {CheckSquareOutlined, DeleteOutlined, PlusOutlined} from "@ant-design/icons";
 import {changeThemeColor} from "../typescripts/publicFunctions";
 import {ThemeColorInterface} from "../typescripts/publicInterface";
 
@@ -17,6 +17,7 @@ type stateType = {
     fontColor: string,
     displayAddModal: boolean,
     checkboxOptions: any,
+    todoSize: number,
     todoMaxSize: number
 }
 
@@ -33,8 +34,20 @@ class TodoComponent extends React.Component {
             fontColor: "",
             displayAddModal: false,
             checkboxOptions: [],
+            todoSize: 0,
             todoMaxSize: 5
         };
+    }
+
+    removeAllTodos() {
+        let tempTodos = localStorage.getItem("todos");
+        if(tempTodos){
+            localStorage.removeItem("todos");
+            this.setState({
+                checkboxOptions: [],
+                todoSize: 0
+            })
+        }
     }
 
     showAddModal() {
@@ -68,7 +81,8 @@ class TodoComponent extends React.Component {
 
                 this.setState({
                     displayAddModal: false,
-                    checkboxOptions: todos
+                    checkboxOptions: todos,
+                    todoSize: todos.length
                 });
                 message.success("添加成功");
             }
@@ -88,37 +102,39 @@ class TodoComponent extends React.Component {
     }
 
     checkboxOnChange(checkedValues: CheckboxValueType[]) {
-        let checkboxOptions = [];
-        let tempCheckboxOptions = localStorage.getItem("todos");
-        if(tempCheckboxOptions){
-            checkboxOptions = JSON.parse(tempCheckboxOptions);
+        let todos = [];
+        let tempTodos = localStorage.getItem("todos");
+        if(tempTodos){
+            todos = JSON.parse(tempTodos);
             let index = -1;
-            for(let i = 0; i < checkboxOptions.length; i++) {
-                if (checkedValues[0] === checkboxOptions[i].label) {
+            for(let i = 0; i < todos.length; i++) {
+                if (checkedValues[0] === todos[i].label) {
                     index = i;
                     break;
                 }
             }
             if(index !== -1) {
-                checkboxOptions.splice(index, 1);
+                todos.splice(index, 1);
             }
-            localStorage.setItem("todos", JSON.stringify(checkboxOptions));
+            localStorage.setItem("todos", JSON.stringify(todos));
 
             this.setState({
-                checkboxOptions: checkboxOptions
+                checkboxOptions: todos,
+                todoSize: todos.length
             })
         }
     }
 
     componentDidMount() {
-        let checkboxOptions = [];
-        let tempCheckboxOptions = localStorage.getItem("todos");
-        if(tempCheckboxOptions){
-            checkboxOptions = JSON.parse(tempCheckboxOptions);
+        let todos = [];
+        let tempTodos = localStorage.getItem("todos");
+        if(tempTodos){
+            todos = JSON.parse(tempTodos);
         }
 
         this.setState({
-            checkboxOptions: checkboxOptions
+            checkboxOptions: todos,
+            todoSize: todos.length
         })
     }
 
@@ -137,11 +153,13 @@ class TodoComponent extends React.Component {
         const popoverTitle = (
             <Row>
                 <Col span={12} style={{display: "flex", alignItems: "center"}}>
-                    <Text style={{color: this.state.fontColor}}>待办事项</Text>
+                    <Text style={{color: this.state.fontColor}}>{"待办 " + this.state.todoSize + " / " + this.state.todoMaxSize}</Text>
                 </Col>
                 <Col span={12} style={{textAlign: "right"}}>
                     <Button type="text" shape="circle" icon={<PlusOutlined />}
-                            style={{color: this.state.fontColor, float: "right"}} onClick={this.showAddModal.bind(this)} />
+                            style={{color: this.state.fontColor}} onClick={this.showAddModal.bind(this)} />
+                    <Button type="text" shape="circle" icon={<DeleteOutlined />}
+                            style={{color: this.state.fontColor}} onClick={this.removeAllTodos.bind(this)} />
                 </Col>
             </Row>
         );
@@ -155,7 +173,7 @@ class TodoComponent extends React.Component {
 
         return (
             <Row>
-                <Popover title={popoverTitle} content={popoverContent} color={this.state.backgroundColor} trigger={"click"}>
+                <Popover title={popoverTitle} content={popoverContent} color={this.state.backgroundColor} trigger={"click"} overlayStyle={{width: "300px"}}>
                     <Badge size="small" count={this.state.checkboxOptions.length}>
                         <Button shape="circle" icon={<CheckSquareOutlined />} size={"large"}
                                 // onClick={this.handleClick.bind(this)}

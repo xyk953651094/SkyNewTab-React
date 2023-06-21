@@ -16,6 +16,7 @@ type stateType = {
     displayAddModal: boolean,
     displayEditModal: boolean,
     collectionData: any,
+    collectionSize: number,
     collectionMaxSize: number
 }
 
@@ -34,6 +35,7 @@ class CollectionComponent extends React.Component {
             displayAddModal: false,
             displayEditModal: false,
             collectionData: [],
+            collectionSize: 0,
             collectionMaxSize: 5
         };
     }
@@ -73,6 +75,7 @@ class CollectionComponent extends React.Component {
                 this.setState({
                     displayAddModal: false,
                     collectionData: collections,
+                    collectionSize: collections.length
                 });
                 message.success("添加成功");
 
@@ -136,7 +139,8 @@ class CollectionComponent extends React.Component {
             localStorage.setItem("collections", JSON.stringify(collections));
 
             this.setState({
-                collectionData: collections
+                collectionData: collections,
+                collectionSize: collections.length
             })
 
             // this.forceUpdate(); // 强制更新组件
@@ -150,7 +154,8 @@ class CollectionComponent extends React.Component {
             collections = JSON.parse(tempCollections);
 
             this.setState({
-                collectionData: collections
+                collectionData: collections,
+                collectionSize: collections.length
             })
         }
     }
@@ -184,7 +189,8 @@ class CollectionComponent extends React.Component {
                             icon={<PlusOutlined />} onClick={this.showAddModal.bind(this)}/>
                     <Button type="primary" shape="circle" className="componentTheme" style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}}
                             icon={<EditOutlined />} onClick={this.showEditModal.bind(this)}/>
-                    <Modal title="添加链接" open={this.state.displayAddModal} onOk={this.handleAddModalOk.bind(this)} onCancel={this.handleAddModalCancel.bind(this)}>
+                    <Modal title={"添加链接 " + this.state.collectionSize + " / " + this.state.collectionMaxSize}
+                           open={this.state.displayAddModal} onOk={this.handleAddModalOk.bind(this)} onCancel={this.handleAddModalCancel.bind(this)}>
                         <Form>
                             <Form.Item label="网页名称" name="webName" rules={[{ required: true, message: "网页名称不能为空"}]}>
                                 <Input placeholder="请输入网页名称" id="webNameInput"/>
@@ -194,7 +200,8 @@ class CollectionComponent extends React.Component {
                             </Form.Item>
                         </Form>
                     </Modal>
-                    <Modal title="编辑链接" open={this.state.displayEditModal} onOk={this.handleEditModalOk.bind(this)} onCancel={this.handleEditModalCancel.bind(this)}>
+                    <Modal title={"编辑链接 " + this.state.collectionSize + " / " + this.state.collectionMaxSize}
+                           open={this.state.displayEditModal} onOk={this.handleEditModalOk.bind(this)} onCancel={this.handleEditModalCancel.bind(this)}>
                         <List
                             itemLayout="horizontal"
                             size="small"
