@@ -104,15 +104,17 @@ class DailyComponent extends React.Component {
             }
             if(daily.length < this.state.dailyMaxSize) {
                 let todayTimeStamp = new Date(getTimeDetails(new Date()).showDate5).getTime();
-                let description;
+                let description, status;
                 if (todayTimeStamp - this.state.selectedTimeStamp > 0) {
                     description = "已过 " + ((todayTimeStamp - this.state.selectedTimeStamp) / 86400000) + " 天";
+                    status = "expired";
                 }
                 else {
                     description = "还剩 " + ((this.state.selectedTimeStamp - todayTimeStamp) / 86400000) + " 天";
+                    status = "not expired";
                 }
 
-                daily.push({"title": title, "description": description, "timeStamp": Date.now()});
+                daily.push({"title": title, "description": description, "status": status, "timeStamp": Date.now()});
                 localStorage.setItem("daily", JSON.stringify(daily));
 
                 this.setState({
@@ -194,6 +196,7 @@ class DailyComponent extends React.Component {
                         <List.Item.Meta
                             title={item.title}
                             description={item.description}
+                            // description={<Text style={{color: (item.status === "expired"? "red":"blue")}}>{item.description}</Text>}
                         />
                     </List.Item>
                 )}

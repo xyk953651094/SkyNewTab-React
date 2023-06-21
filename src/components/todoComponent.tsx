@@ -5,7 +5,7 @@ import {CheckSquareOutlined, DeleteOutlined, PlusOutlined} from "@ant-design/ico
 import {changeThemeColor} from "../typescripts/publicFunctions";
 import {ThemeColorInterface} from "../typescripts/publicInterface";
 
-const { Text } = Typography;
+const {Text} = Typography;
 const $ = require("jquery");
 
 type propType = {
