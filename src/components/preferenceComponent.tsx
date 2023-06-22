@@ -1,12 +1,12 @@
 import React from "react";
-import {Button, Tooltip, Drawer, Card, List, Form, Row, Col, Radio, message, Typography} from "antd";
+import {Button, Tooltip, Drawer, Card, List, Form, Row, Col, Radio, Switch, message, Typography} from "antd";
 import type {RadioChangeEvent} from "antd";
 import {
     MoreOutlined,
+    RedoOutlined,
     SettingOutlined,
     GithubOutlined,
     LinkOutlined,
-    SearchOutlined,
 } from "@ant-design/icons";
 import {changeThemeColor} from "../typescripts/publicFunctions";
 import {FormInitialValuesInterface, ThemeColorInterface} from "../typescripts/publicInterface";
@@ -129,7 +129,7 @@ class PreferenceComponent extends React.Component {
     render() {
         return (
             <>
-                <Tooltip title={"偏好设置"} placement="topRight" color={this.state.backgroundColor}>
+                <Tooltip title={"菜单栏"} placement="topRight" color={this.state.backgroundColor}>
                     <Button shape="circle" icon={<MoreOutlined />} size={"large"}
                             onClick={this.drawerOnShow.bind(this)}
                             id={"preferenceBtn"}
@@ -150,8 +150,7 @@ class PreferenceComponent extends React.Component {
                     drawerStyle={{backgroundColor: this.state.backgroundColor}}
                     maskStyle={{backgroundColor: this.state.backgroundColor, opacity: 0.45}}
                     footer={
-                        <Button type="text" href="https://github.com/xyk953651094" target="_blank" icon={<GithubOutlined />}
-                                style={{color: this.state.fontColor}}>
+                        <Button type="link" href="https://github.com/xyk953651094" target="_blank" icon={<GithubOutlined />}>
                             作者主页
                         </Button>
                     }
@@ -180,6 +179,9 @@ class PreferenceComponent extends React.Component {
                                             <Radio value={"all"}>全部</Radio>
                                         </Radio.Group>
                                     </Form.Item>
+                                    <Form.Item name="backgroundMaskSwitch" label="背景模糊">
+                                        <Switch checkedChildren="开启" unCheckedChildren="关闭"/>
+                                    </Form.Item>
                                     <Form.Item name="imageSourceRadio" label="图片来源">
                                         <Radio.Group buttonStyle={"solid"} onChange={this.imageSourceRadioOnChange.bind(this)}>
                                             <Radio value={"Unsplash"}>Unsplash</Radio>
@@ -187,8 +189,7 @@ class PreferenceComponent extends React.Component {
                                         </Radio.Group>
                                     </Form.Item>
                                     <Form.Item name="clearStorageButton" label="其他设置">
-                                        <Button type="primary" danger
-                                                onClick={this.handleClearStorageButtonClick.bind(this)}>
+                                        <Button type="primary" shape="round" danger icon={<RedoOutlined />} onClick={this.handleClearStorageButtonClick.bind(this)} style={{color: this.state.fontColor}}>
                                             重置设置
                                         </Button>
                                     </Form.Item>
@@ -206,15 +207,6 @@ class PreferenceComponent extends React.Component {
                                     <List.Item><Link href="https://www.pexels.com/" target="_blank">Pexels.com</Link></List.Item>
                                     <List.Item><Link href="https://pixabay.com/" target="_blank">Pixabay.com</Link></List.Item>
                                 </List>
-                            </Card>
-                        </Col>
-                        <Col span={24}>
-                            <Card title={"今日热搜"} size={"small"} extra={<SearchOutlined />}
-                                  style={{border: "1px solid " + this.state.fontColor}}
-                                  headStyle={{backgroundColor: this.state.backgroundColor, color: this.state.fontColor, borderBottom: "2px solid " + this.state.fontColor}}
-                                  bodyStyle={{backgroundColor: this.state.backgroundColor}}
-                            >
-
                             </Card>
                         </Col>
                     </Row>

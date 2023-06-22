@@ -85,7 +85,8 @@ class DailyComponent extends React.Component {
         if(daily.length < this.state.dailyMaxSize) {
             $("#dailyInput").val("");
             this.setState({
-                displayAddModal: true
+                displayAddModal: true,
+                selectedTimeStamp: 0
             })
         }
         else {
@@ -213,7 +214,9 @@ class DailyComponent extends React.Component {
                         />
                     </Badge>
                 </Popover>
-                <Modal title="添加倒数日" open={this.state.displayAddModal} onOk={this.handleAddModalOk.bind(this)} onCancel={this.handleAddModalCancel.bind(this)}>
+                <Modal title="添加倒数日" open={this.state.displayAddModal} onOk={this.handleAddModalOk.bind(this)} onCancel={this.handleAddModalCancel.bind(this)}
+                       maskStyle={{backgroundColor: this.state.backgroundColor, opacity: 0.45}}
+                >
                     <Form>
                         <Form.Item label="标题" name="dailyInput" rules={[{ required: true, message: "标题不能为空"}]}>
                             <Input placeholder="请输入标题" id="dailyInput"/>

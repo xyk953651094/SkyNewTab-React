@@ -1,5 +1,5 @@
 import React from "react";
-import {Popover, Col, Badge, Typography, Button, Checkbox, message, Row, Form, Input, Modal} from "antd";
+import {Popover, Col, Badge, Typography, Button, Checkbox, message, Row, Form, Input, Rate, Modal} from "antd";
 import type { CheckboxValueType } from 'antd/es/checkbox/Group';
 import {CheckSquareOutlined, DeleteOutlined, PlusOutlined} from "@ant-design/icons";
 import {changeThemeColor} from "../typescripts/publicFunctions";
@@ -18,7 +18,8 @@ type stateType = {
     displayAddModal: boolean,
     checkboxOptions: any,
     todoSize: number,
-    todoMaxSize: number
+    todoMaxSize: number,
+    priority: number
 }
 
 interface TodoComponent {
@@ -35,7 +36,8 @@ class TodoComponent extends React.Component {
             displayAddModal: false,
             checkboxOptions: [],
             todoSize: 0,
-            todoMaxSize: 5
+            todoMaxSize: 5,
+            priority: 0
         };
     }
 
@@ -59,7 +61,8 @@ class TodoComponent extends React.Component {
         if(todos.length < this.state.todoMaxSize) {
             $("#todoInput").val("");
             this.setState({
-                displayAddModal: true
+                displayAddModal: true,
+                priority: 0,
             })
         }
         else {
@@ -76,7 +79,8 @@ class TodoComponent extends React.Component {
                 todos = JSON.parse(tempTodos);
             }
             if(todos.length < this.state.todoMaxSize) {
-                todos.push({"label": todoContent, "value": todoContent});
+                todoContent = todoContent + " ";
+                todos.push({"label": todoContent + "★".repeat(this.state.priority), "value": todoContent + "★".repeat(this.state.priority)});
                 localStorage.setItem("todos", JSON.stringify(todos));
 
                 this.setState({
@@ -123,6 +127,12 @@ class TodoComponent extends React.Component {
                 todoSize: todos.length
             })
         }
+    }
+
+    rateOnChange(value: number) {
+        this.setState({
+            priority: value
+        })
     }
 
     componentDidMount() {
@@ -182,10 +192,15 @@ class TodoComponent extends React.Component {
                         />
                     </Badge>
                 </Popover>
-                <Modal title="添加待办事项" open={this.state.displayAddModal} onOk={this.handleAddModalOk.bind(this)} onCancel={this.handleAddModalCancel.bind(this)}>
+                <Modal title="添加待办事项" open={this.state.displayAddModal} onOk={this.handleAddModalOk.bind(this)} onCancel={this.handleAddModalCancel.bind(this)}
+                       maskStyle={{backgroundColor: this.state.backgroundColor, opacity: 0.45}}
+                >
                     <Form>
                         <Form.Item label="待办内容" name="todoInput" rules={[{ required: true, message: "待办内容不能为空"}]}>
                             <Input placeholder="请输入待办内容" id="todoInput"/>
+                        </Form.Item>
+                        <Form.Item label="优先级别" name="todoRate" rules={[{ required: true, message: "优先级别不能为空"}]}>
+                            <Rate onChange={this.rateOnChange.bind(this)} style={{color: this.state.fontColor}}/>
                         </Form.Item>
                     </Form>
                 </Modal>

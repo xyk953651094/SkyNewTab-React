@@ -190,7 +190,9 @@ class CollectionComponent extends React.Component {
                     <Button type="primary" shape="circle" className="componentTheme" style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}}
                             icon={<EditOutlined />} onClick={this.showEditModal.bind(this)}/>
                     <Modal title={"添加链接 " + this.state.collectionSize + " / " + this.state.collectionMaxSize}
-                           open={this.state.displayAddModal} onOk={this.handleAddModalOk.bind(this)} onCancel={this.handleAddModalCancel.bind(this)}>
+                           open={this.state.displayAddModal} onOk={this.handleAddModalOk.bind(this)} onCancel={this.handleAddModalCancel.bind(this)}
+                           maskStyle={{backgroundColor: this.state.backgroundColor, opacity: 0.45}}
+                    >
                         <Form>
                             <Form.Item label="网页名称" name="webName" rules={[{ required: true, message: "网页名称不能为空"}]}>
                                 <Input placeholder="请输入网页名称" id="webNameInput"/>
@@ -201,13 +203,19 @@ class CollectionComponent extends React.Component {
                         </Form>
                     </Modal>
                     <Modal title={"编辑链接 " + this.state.collectionSize + " / " + this.state.collectionMaxSize}
-                           open={this.state.displayEditModal} onOk={this.handleEditModalOk.bind(this)} onCancel={this.handleEditModalCancel.bind(this)}>
+                           open={this.state.displayEditModal} onOk={this.handleEditModalOk.bind(this)} onCancel={this.handleEditModalCancel.bind(this)}
+                           maskStyle={{backgroundColor: this.state.backgroundColor, opacity: 0.45}}
+                    >
                         <List
                             itemLayout="horizontal"
                             size="small"
                             dataSource={this.state.collectionData}
                             renderItem={(item: any) => (
-                                <List.Item actions={[<Button type="text" danger icon={<DeleteOutlined />} onClick={this.handleRemoveCollection.bind(this, item)}>删除</Button>]}>
+                                <List.Item actions={[
+                                    <Button type="text" icon={<DeleteOutlined />} onClick={this.handleRemoveCollection.bind(this, item)} style={{color: this.state.fontColor}}>
+                                        删除
+                                    </Button>
+                                ]}>
                                     <List.Item.Meta title={item.webName} description={item.webUrl}/>
                                 </List.Item>
                             )}

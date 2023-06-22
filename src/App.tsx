@@ -258,6 +258,7 @@ class App extends React.Component {
                 $(".ant-list-item-meta-description").css("color", this.state.themeColor.componentFontColor);
                 $(".ant-modal-close-x").css("color", this.state.themeColor.componentFontColor);
                 $(".ant-empty-description").css("color", this.state.themeColor.componentFontColor);
+                $(".ant-tooltip-inner").css("color", this.state.themeColor.componentFontColor);
             }
         });
     }
