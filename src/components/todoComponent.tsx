@@ -59,7 +59,7 @@ class TodoComponent extends React.Component {
             todos = JSON.parse(tempTodos);
         }
         if(todos.length < this.state.todoMaxSize) {
-            $("#todoInput").val("");
+            // $("#todoInput").val("");
             this.setState({
                 displayAddModal: true,
                 priority: 0,
@@ -193,14 +193,15 @@ class TodoComponent extends React.Component {
                     </Badge>
                 </Popover>
                 <Modal title="添加待办事项" open={this.state.displayAddModal} onOk={this.handleAddModalOk.bind(this)} onCancel={this.handleAddModalCancel.bind(this)}
-                       maskStyle={{backgroundColor: this.state.backgroundColor, opacity: 0.45}}
+                       destroyOnClose={true}
+                       maskStyle={{backdropFilter: "blur(10px)"}}
                 >
                     <Form>
                         <Form.Item label="待办内容" name="todoInput" rules={[{ required: true, message: "待办内容不能为空"}]}>
-                            <Input placeholder="请输入待办内容" id="todoInput"/>
+                            <Input placeholder="请输入待办内容" id="todoInput" maxLength={10} showCount/>
                         </Form.Item>
                         <Form.Item label="优先级别" name="todoRate" rules={[{ required: true, message: "优先级别不能为空"}]}>
-                            <Rate onChange={this.rateOnChange.bind(this)} style={{color: this.state.fontColor}}/>
+                            <Rate onChange={this.rateOnChange.bind(this)} style={{color: this.state.fontColor, stroke: this.state.fontColor, strokeWidth: "25px"}}/>
                         </Form.Item>
                     </Form>
                 </Modal>

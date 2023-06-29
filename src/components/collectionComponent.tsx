@@ -1,5 +1,5 @@
 import React from "react";
-import {Col, Space, Button, Modal, Form, Input, List, message} from "antd";
+import {Col, Space, Button, Tooltip, Modal, Form, Input, List, message} from "antd";
 import {PlusOutlined, EditOutlined, DeleteOutlined} from "@ant-design/icons";
 import {ThemeColorInterface} from "../typescripts/publicInterface";
 
@@ -48,8 +48,8 @@ class CollectionComponent extends React.Component {
             collections = JSON.parse(tempCollections);
         }
         if(collections.length < this.state.collectionMaxSize) {
-            $("#webNameInput").val("");
-            $("#webUrlInput").val("");
+            // $("#webNameInput").val("");
+            // $("#webUrlInput").val("");
             this.setState({
                 displayAddModal: true
             })
@@ -176,11 +176,13 @@ class CollectionComponent extends React.Component {
                     {
                         this.state.collectionData.map((item: any) => {
                             return (
-                                <Button type="primary" shape="round" className="componentTheme" key={item.timeStamp}
-                                        onClick={() => {window.open(item.webUrl)}}
-                                        style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}}>
-                                    {item.webName}
-                                </Button>
+                                <Tooltip title={item.webUrl} placement="bottom" color={this.state.backgroundColor}>
+                                    <Button type="primary" shape="round" className="componentTheme" key={item.timeStamp}
+                                            onClick={() => {window.open(item.webUrl)}}
+                                            style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}}>
+                                        {item.webName}
+                                    </Button>
+                                </Tooltip>
                             )
                         })
                     }
@@ -191,11 +193,12 @@ class CollectionComponent extends React.Component {
                             icon={<EditOutlined />} onClick={this.showEditModal.bind(this)}/>
                     <Modal title={"添加链接 " + this.state.collectionSize + " / " + this.state.collectionMaxSize}
                            open={this.state.displayAddModal} onOk={this.handleAddModalOk.bind(this)} onCancel={this.handleAddModalCancel.bind(this)}
-                           maskStyle={{backgroundColor: this.state.backgroundColor, opacity: 0.45}}
+                           destroyOnClose={true}
+                           maskStyle={{backdropFilter: "blur(10px)"}}
                     >
                         <Form>
                             <Form.Item label="网页名称" name="webName" rules={[{ required: true, message: "网页名称不能为空"}]}>
-                                <Input placeholder="请输入网页名称" id="webNameInput"/>
+                                <Input placeholder="请输入网页名称" id="webNameInput" maxLength={5} showCount/>
                             </Form.Item>
                             <Form.Item label="网页地址" name="webNameUrl" rules={[{ required: true, message: "网页地址不能为空"}]}>
                                 <Input placeholder="请输入网页地址" id="webUrlInput"/>
@@ -204,7 +207,7 @@ class CollectionComponent extends React.Component {
                     </Modal>
                     <Modal title={"编辑链接 " + this.state.collectionSize + " / " + this.state.collectionMaxSize}
                            open={this.state.displayEditModal} onOk={this.handleEditModalOk.bind(this)} onCancel={this.handleEditModalCancel.bind(this)}
-                           maskStyle={{backgroundColor: this.state.backgroundColor, opacity: 0.45}}
+                           maskStyle={{backdropFilter: "blur(10px)"}}
                     >
                         <List
                             itemLayout="horizontal"

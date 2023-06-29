@@ -90,6 +90,10 @@ class App extends React.Component {
         }, () => {
             // 修改主题颜色
             if (data.color !== null) {
+                let bodyBackgroundColor = data.color;
+                let bodyFontColor = getFontColor(bodyBackgroundColor);
+                changeThemeColor("body", bodyBackgroundColor, bodyFontColor);
+
                 let componentBackgroundColor = getComponentBackgroundColor(data.color);
                 let componentFontColor = getFontColor(componentBackgroundColor);
                 this.setState({
@@ -98,10 +102,6 @@ class App extends React.Component {
                         "componentFontColor": componentFontColor,
                     },
                 })
-
-                let bodyBackgroundColor = data.color;
-                let bodyFontColor = getFontColor(bodyBackgroundColor);
-                changeThemeColor("body", bodyBackgroundColor, bodyFontColor);
             }
         })
     }
@@ -286,11 +286,6 @@ class App extends React.Component {
                                 <TodoComponent
                                     themeColor={this.state.themeColor}
                                 />
-                                <HtmlLinkComponent
-                                    themeColor={this.state.themeColor}
-                                    display={this.state.componentDisplay}
-                                    imageData={this.state.imageData}
-                                />
                                 <PreferenceComponent
                                     themeColor={this.state.themeColor}
                                     imageData={this.state.imageData}
@@ -323,6 +318,11 @@ class App extends React.Component {
                                     display={this.state.componentDisplay}
                                     imageData={this.state.imageData}
                                     imageSource={this.state.imageSource}
+                                />
+                                <HtmlLinkComponent
+                                    themeColor={this.state.themeColor}
+                                    display={this.state.componentDisplay}
+                                    imageData={this.state.imageData}
                                 />
                             </Space>
                         </Col>

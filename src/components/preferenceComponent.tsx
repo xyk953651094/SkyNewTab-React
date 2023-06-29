@@ -148,7 +148,8 @@ class PreferenceComponent extends React.Component {
                     open={this.state.displayDrawer}
                     headerStyle={{color: this.state.fontColor, borderBottomColor: this.state.fontColor}}
                     drawerStyle={{backgroundColor: this.state.backgroundColor}}
-                    maskStyle={{backgroundColor: this.state.backgroundColor, opacity: 0.45}}
+                    // maskStyle={{backgroundColor: this.state.backgroundColor, opacity: 0.45}}
+                    maskStyle={{backdropFilter: "blur(10px)"}}
                     footer={
                         <Button type="link" href="https://github.com/xyk953651094" target="_blank" icon={<GithubOutlined />}>
                             作者主页
@@ -178,9 +179,6 @@ class PreferenceComponent extends React.Component {
                                             <Radio value={"rotate"}>旋转</Radio>
                                             <Radio value={"all"}>全部</Radio>
                                         </Radio.Group>
-                                    </Form.Item>
-                                    <Form.Item name="backgroundMaskSwitch" label="背景模糊">
-                                        <Switch checkedChildren="开启" unCheckedChildren="关闭"/>
                                     </Form.Item>
                                     <Form.Item name="imageSourceRadio" label="图片来源">
                                         <Radio.Group buttonStyle={"solid"} onChange={this.imageSourceRadioOnChange.bind(this)}>

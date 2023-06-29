@@ -83,7 +83,7 @@ class DailyComponent extends React.Component {
             daily = JSON.parse(tempDaily);
         }
         if(daily.length < this.state.dailyMaxSize) {
-            $("#dailyInput").val("");
+            // $("#dailyInput").val("");
             this.setState({
                 displayAddModal: true,
                 selectedTimeStamp: 0
@@ -109,6 +109,10 @@ class DailyComponent extends React.Component {
                 if (todayTimeStamp - this.state.selectedTimeStamp > 0) {
                     description = "已过 " + ((todayTimeStamp - this.state.selectedTimeStamp) / 86400000) + " 天";
                     status = "expired";
+                }
+                else if (todayTimeStamp - this.state.selectedTimeStamp === 0) {
+                    description = "就是今天";
+                    status = "today";
                 }
                 else {
                     description = "还剩 " + ((this.state.selectedTimeStamp - todayTimeStamp) / 86400000) + " 天";
@@ -215,11 +219,12 @@ class DailyComponent extends React.Component {
                     </Badge>
                 </Popover>
                 <Modal title="添加倒数日" open={this.state.displayAddModal} onOk={this.handleAddModalOk.bind(this)} onCancel={this.handleAddModalCancel.bind(this)}
-                       maskStyle={{backgroundColor: this.state.backgroundColor, opacity: 0.45}}
+                       destroyOnClose={true}
+                       maskStyle={{backdropFilter: "blur(10px)"}}
                 >
                     <Form>
                         <Form.Item label="标题" name="dailyInput" rules={[{ required: true, message: "标题不能为空"}]}>
-                            <Input placeholder="请输入标题" id="dailyInput"/>
+                            <Input placeholder="请输入标题" id="dailyInput" maxLength={10} showCount/>
                         </Form.Item>
                         <Form.Item label="日期" name="dailyDatePicker" rules={[{ required: true, message: "日期不能为空"}]}>
                             <DatePicker onChange={this.datePickerOnChange} id={"dailyDatePicker"}/>
