@@ -192,7 +192,7 @@ class TodoComponent extends React.Component {
                         />
                     </Badge>
                 </Popover>
-                <Modal title="添加待办事项" open={this.state.displayAddModal} onOk={this.handleAddModalOk.bind(this)} onCancel={this.handleAddModalCancel.bind(this)}
+                <Modal title={"添加待办事项 " + this.state.todoSize + " / " + this.state.todoMaxSize} open={this.state.displayAddModal} onOk={this.handleAddModalOk.bind(this)} onCancel={this.handleAddModalCancel.bind(this)}
                        destroyOnClose={true}
                        maskStyle={{backdropFilter: "blur(10px)"}}
                 >

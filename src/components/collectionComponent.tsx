@@ -176,7 +176,7 @@ class CollectionComponent extends React.Component {
                     {
                         this.state.collectionData.map((item: any) => {
                             return (
-                                <Tooltip title={item.webUrl} placement="bottom" color={this.state.backgroundColor}>
+                                <Tooltip title={item.webUrl} key={item.timeStamp} placement="bottom" color={this.state.backgroundColor}>
                                     <Button type="primary" shape="round" className="componentTheme" key={item.timeStamp}
                                             onClick={() => {window.open(item.webUrl)}}
                                             style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}}>

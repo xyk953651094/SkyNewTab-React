@@ -129,7 +129,7 @@ class PreferenceComponent extends React.Component {
     render() {
         return (
             <>
-                <Tooltip title={"菜单栏"} placement="topRight" color={this.state.backgroundColor}>
+                <Tooltip title={"菜单栏"} placement="bottomRight" color={this.state.backgroundColor}>
                     <Button shape="circle" icon={<MoreOutlined />} size={"large"}
                             onClick={this.drawerOnShow.bind(this)}
                             id={"preferenceBtn"}

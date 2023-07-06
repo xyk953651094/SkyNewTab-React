@@ -259,6 +259,7 @@ class App extends React.Component {
                 $(".ant-modal-close-x").css("color", this.state.themeColor.componentFontColor);
                 $(".ant-empty-description").css("color", this.state.themeColor.componentFontColor);
                 $(".ant-tooltip-inner").css("color", this.state.themeColor.componentFontColor);
+                // $(".ant-modal-mask").css("zIndex", 1);
             }
         });
     }
@@ -306,7 +307,9 @@ class App extends React.Component {
                     <Space direction={"vertical"} align={"center"}>
                         <ClockComponent themeColor={this.state.themeColor}/>
                         <SearchComponent searchEngine={this.state.searchEngine}/>
-                        <CollectionComponent themeColor={this.state.themeColor}/>
+                        <Col xs={0} sm={0} md={24} lg={24} xl={24}>
+                            <CollectionComponent themeColor={this.state.themeColor}/>
+                        </Col>
                     </Space>
                 </Content>
                 <Footer id={"footer"}>

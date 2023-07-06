@@ -218,7 +218,7 @@ class DailyComponent extends React.Component {
                         />
                     </Badge>
                 </Popover>
-                <Modal title="添加倒数日" open={this.state.displayAddModal} onOk={this.handleAddModalOk.bind(this)} onCancel={this.handleAddModalCancel.bind(this)}
+                <Modal title={"添加倒数日 " + this.state.dailySize + " / " + this.state.dailyMaxSize} open={this.state.displayAddModal} onOk={this.handleAddModalOk.bind(this)} onCancel={this.handleAddModalCancel.bind(this)}
                        destroyOnClose={true}
                        maskStyle={{backdropFilter: "blur(10px)"}}
                 >

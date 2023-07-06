@@ -12,3 +12,17 @@
   width: 750px;
   border-radius: 20px;
 }
+
+/*移动端竖屏样式*/
+@media screen and (max-width: 500px) and (orientation:portrait) {
+  .searchInput {
+    width: 300px;
+  }
+}
+
+/*移动端横屏样式*/
+@media screen and (max-width: 1000px) and (orientation:landscape) {
+  .searchInput {
+    width: 600px;
+  }
+}
