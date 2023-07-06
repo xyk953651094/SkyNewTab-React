@@ -1,9 +1,11 @@
 import React from "react";
 import "../stylesheets/searchComponent.scss"
 import "../stylesheets/publicStyles.scss"
-import { Input, Col } from "antd";
+import { Input, Col, Space, Select } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import {fadeIn, fadeOut} from "../typescripts/publicFunctions";
+
+const { Search } = Input;
 
 type propType = {
     searchEngine: "bing" | "baidu" | "google"
@@ -74,14 +76,29 @@ class SearchComponent extends React.Component {
                     className={"mask zIndexMiddle"}
                     style={{display:this.state.maskDisplay}}
                 />
+
                 <Input
                     className={"searchInput zIndexHigh"}
-                    prefix={<SearchOutlined />}
+                    // prefix={<SearchOutlined />}
+                    suffix={<SearchOutlined />}
                     placeholder="按下 Enter 键搜索"
                     onFocus={this.onFocus.bind(this)}
                     onBlur={this.onBlur.bind(this)}
                     onPressEnter={this.onPressEnter.bind(this)}
-                    size="large" />
+                    size="large"
+                    allowClear
+                />
+                {/*<Search*/}
+                {/*    className={"searchInput zIndexHigh"}*/}
+                {/*    prefix={<SearchOutlined />}*/}
+                {/*    placeholder="按下 Enter 键搜索"*/}
+                {/*    onFocus={this.onFocus.bind(this)}*/}
+                {/*    onBlur={this.onBlur.bind(this)}*/}
+                {/*    onPressEnter={this.onPressEnter.bind(this)}*/}
+                {/*    onSearch={this.onPressEnter.bind(this)}*/}
+                {/*    size="large"*/}
+                {/*    allowClear*/}
+                {/*/>*/}
             </Col>
         );
     }

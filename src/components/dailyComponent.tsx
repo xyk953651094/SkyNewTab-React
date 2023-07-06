@@ -224,7 +224,7 @@ class DailyComponent extends React.Component {
                 >
                     <Form>
                         <Form.Item label="标题" name="dailyInput" rules={[{ required: true, message: "标题不能为空"}]}>
-                            <Input placeholder="请输入标题" id="dailyInput" maxLength={10} showCount/>
+                            <Input placeholder="请输入标题" id="dailyInput" maxLength={10} allowClear showCount/>
                         </Form.Item>
                         <Form.Item label="日期" name="dailyDatePicker" rules={[{ required: true, message: "日期不能为空"}]}>
                             <DatePicker onChange={this.datePickerOnChange} id={"dailyDatePicker"}/>

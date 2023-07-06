@@ -198,10 +198,10 @@ class CollectionComponent extends React.Component {
                     >
                         <Form>
                             <Form.Item label="网页名称" name="webName" rules={[{ required: true, message: "网页名称不能为空"}]}>
-                                <Input placeholder="请输入网页名称" id="webNameInput" maxLength={5} showCount/>
+                                <Input placeholder="请输入网页名称" id="webNameInput" maxLength={5} allowClear showCount/>
                             </Form.Item>
                             <Form.Item label="网页地址" name="webNameUrl" rules={[{ required: true, message: "网页地址不能为空"}]}>
-                                <Input placeholder="请输入网页地址" id="webUrlInput"/>
+                                <Input placeholder="请输入网页地址" id="webUrlInput" allowClear/>
                             </Form.Item>
                         </Form>
                     </Modal>

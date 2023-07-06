@@ -198,7 +198,7 @@ class TodoComponent extends React.Component {
                 >
                     <Form>
                         <Form.Item label="待办内容" name="todoInput" rules={[{ required: true, message: "待办内容不能为空"}]}>
-                            <Input placeholder="请输入待办内容" id="todoInput" maxLength={10} showCount/>
+                            <Input placeholder="请输入待办内容" id="todoInput" maxLength={10} allowClear showCount/>
                         </Form.Item>
                         <Form.Item label="优先级别" name="todoRate" rules={[{ required: true, message: "优先级别不能为空"}]}>
                             <Rate onChange={this.rateOnChange.bind(this)} style={{color: this.state.fontColor, stroke: this.state.fontColor, strokeWidth: "25px"}}/>
