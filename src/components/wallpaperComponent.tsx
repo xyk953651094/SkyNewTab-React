@@ -102,16 +102,16 @@ class WallpaperComponent extends React.Component {
                 preview={false}
                 src={this.state.imageLink}
                 style={{display: this.props.display}}
-                // placeholder={
-                //     <Image
-                //         width="102%"
-                //         height="102%"
-                //         className={"backgroundImage zIndexLow"}
-                //         preview={false}
-                //         // src={this.state.loadImageLink}
-                //         style={{filter: "blur(5px)"}}
-                //     />
-                // }
+                placeholder={
+                    <Image
+                        width="102%"
+                        height="102%"
+                        className={"backgroundImage zIndexLow"}
+                        preview={false}
+                        src={this.state.loadImageLink}
+                        style={{filter: "blur(5px)"}}
+                    />
+                }
             />
         );
     }

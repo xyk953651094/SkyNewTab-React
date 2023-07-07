@@ -210,7 +210,7 @@ class DailyComponent extends React.Component {
 
         return (
             <Row>
-                <Popover title={popoverTitle} content={popoverContent} color={this.state.backgroundColor} trigger={"click"} overlayStyle={{width: "300px"}}>
+                <Popover title={popoverTitle} content={popoverContent} color={this.state.backgroundColor} overlayStyle={{width: "300px"}}>
                     <Badge size="small" count={this.state.listItems.length}>
                         <Button shape="circle" icon={<CalendarOutlined />} size={"large"}
                                 id={"dailyBtn"}

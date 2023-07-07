@@ -35,6 +35,7 @@ type stateType = {
     searchEngine: "bing" | "baidu" | "google",
     dynamicEffect: "all" | "rotate" | "translate" | "close",
     imageQuality: "full" | "regular" | "small",
+    imageTopics: string,
 }
 
 interface App {
@@ -56,6 +57,7 @@ class App extends React.Component {
             searchEngine: "bing",
             dynamicEffect: "all",
             imageQuality: "regular",
+            imageTopics: "Fzo3zuOHN6w",
         }
     }
 
@@ -75,6 +77,12 @@ class App extends React.Component {
     getImageQuality(imageQuality: "full" | "regular" | "small") {
         this.setState({
             imageQuality: imageQuality,
+        })
+    }
+
+    getImageTopics(imageTopics: string) {
+        this.setState({
+            imageTopics: imageTopics
         })
     }
 
@@ -110,6 +118,7 @@ class App extends React.Component {
         let data = {
             "client_id": clientId,
             "orientation": (device === "iPhone" || device === "Android") ? "portrait" : "landscape",
+            "topics": this.state.imageTopics,
             "content_filter": "high",
         };
 
@@ -140,11 +149,13 @@ class App extends React.Component {
         let tempSearchEngine = localStorage.getItem("searchEngine");
         let tempDynamicEffect = localStorage.getItem("dynamicEffect");
         let tempImageQuality = localStorage.getItem("imageQuality");
+        let tempImageTopics = localStorage.getItem("imageTopics");
 
         this.setState({
             searchEngine: tempSearchEngine === null ? "bing" : tempSearchEngine,
             dynamicEffect: tempDynamicEffect === null ? "all" : tempDynamicEffect,
             imageQuality: tempImageQuality === null ? "regular" : tempImageQuality,
+            imageTopics: tempImageTopics === null ? "Fzo3zuOHN6w" : tempImageTopics,
         }, () => {
             // 设置颜色主题
             this.setState({
@@ -156,7 +167,7 @@ class App extends React.Component {
                 if(lastRequestTime === null) {  // 第一次请求时 lastRequestTime 为 null，因此直接进行请求赋值 lastRequestTime
                     this.getWallpaper();
                 }
-                else if(nowTimeStamp - parseInt(lastRequestTime) > 0) {  // 必须多于一分钟才能进行新的请求
+                else if(nowTimeStamp - parseInt(lastRequestTime) > 60 * 1000) {  // 必须多于一分钟才能进行新的请求
                     this.getWallpaper();
                 }
                 else {  // 一分钟之内使用上一次请求结果
@@ -206,6 +217,7 @@ class App extends React.Component {
                 $(".ant-drawer-title").css("color", this.state.themeColor.componentFontColor);
                 $(".ant-form-item-label > label").css("color", this.state.themeColor.componentFontColor);
                 $(".ant-radio-wrapper").children(":last-child").css("color", this.state.themeColor.componentFontColor);
+                $(".ant-checkbox-wrapper").children(":last-child").css("color", this.state.themeColor.componentFontColor);
                 $(".ant-collapse").css("backgroundColor", this.state.themeColor.componentBackgroundColor);
                 $(".ant-collapse-header").css("color", this.state.themeColor.componentFontColor);
                 $(".ant-list-item").css("borderBlockEndColor", this.state.themeColor.componentFontColor);
@@ -256,6 +268,7 @@ class App extends React.Component {
                                     getSearchEngine={this.getSearchEngine.bind(this)}
                                     getDynamicEffect={this.getDynamicEffect.bind(this)}
                                     getImageQuality={this.getImageQuality.bind(this)}
+                                    getImageTopics={this.getImageTopics.bind(this)}
                                 />
                             </Space>
                         </Col>

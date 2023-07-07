@@ -1,13 +1,23 @@
 import React from "react";
-import {Button, Tooltip, Drawer, Card, List, Form, Row, Col, Radio, Switch, message, Typography} from "antd";
-import type {RadioChangeEvent} from "antd";
 import {
-    MoreOutlined,
-    RedoOutlined,
-    SettingOutlined,
-    GithubOutlined,
-    LinkOutlined,
-} from "@ant-design/icons";
+    Button,
+    Tooltip,
+    Drawer,
+    Card,
+    List,
+    Form,
+    Row,
+    Col,
+    Radio,
+    Checkbox,
+    message,
+    Typography,
+    Space,
+    Avatar
+} from "antd";
+import type {RadioChangeEvent} from "antd";
+import {MoreOutlined, RedoOutlined, SettingOutlined, GithubOutlined, LinkOutlined} from "@ant-design/icons";
+import type {CheckboxValueType} from "antd/es/checkbox/Group";
 import {changeThemeColor} from "../typescripts/publicFunctions";
 import {PreferenceInterface, ThemeColorInterface} from "../typescripts/publicInterface";
 import {defaultFormInitialValues, device} from "../typescripts/publicConstants";
@@ -19,6 +29,7 @@ type propType = {
     getSearchEngine: any,
     getDynamicEffect: any,
     getImageQuality: any,
+    getImageTopics: any,
 }
 
 type stateType = {
@@ -74,6 +85,7 @@ class PreferenceComponent extends React.Component {
         message.success("已更新显示效果");
     }
 
+    // 图片质量
     imageQualityRadioOnChange(event: RadioChangeEvent) {
         this.props.getImageQuality(event.target.value);
         localStorage.setItem("imageQuality", event.target.value);
@@ -81,13 +93,27 @@ class PreferenceComponent extends React.Component {
         window.location.reload();
     }
 
+    // 图片主题
+    imageTopicsCheckboxOnChange(checkedValues: CheckboxValueType[]) {
+        let value = "";
+        for (let i = 0; i < checkedValues.length; i++) {
+            value += checkedValues[i];
+            if (i !== checkedValues.length - 1) {
+                value += ",";
+            }
+        }
+        this.props.getImageTopics(value);
+        localStorage.setItem("imageTopics", value);
+        message.success("调整成功，新的主题将在下次加载时生效");
+        if (checkedValues.length === 0) {
+            message.info("全不选与全选的效果一样");
+        }
+    }
+
     // 重置设置
     handleClearStorageButtonClick() {
-        localStorage.setItem("searchEngine", "bing");
-        localStorage.setItem("dynamicEffect", "all");
-        localStorage.setItem("imageQuality", "regular");
-        // localStorage.clear();
-        message.success("已重置设置");
+        localStorage.clear();
+        message.success("已重置所有内容");
         window.location.reload();
     }
 
@@ -96,12 +122,17 @@ class PreferenceComponent extends React.Component {
         let tempSearchEngineRadio: string | null = localStorage.getItem("searchEngine");
         let tempDynamicEffectRadio: string | null = localStorage.getItem("dynamicEffect");
         let tempImageQualityRadio: string | null = localStorage.getItem("imageQuality");
+        let tempImageTopicsCheckbox: string | string[] | null = localStorage.getItem("imageTopics");
+        if (tempImageTopicsCheckbox !== null) {
+            tempImageTopicsCheckbox = tempImageTopicsCheckbox.split(",");
+        }
 
         this.setState({
             formInitialValues: {
                 "searchEngineRadio": tempSearchEngineRadio === null ? "bing" : tempSearchEngineRadio,
                 "dynamicEffectRadio": tempDynamicEffectRadio === null ? "all" : tempDynamicEffectRadio,
                 "imageQualityRadio": tempImageQualityRadio === null ? "regular" : tempImageQualityRadio,
+                "imageTopicsCheckbox": tempImageTopicsCheckbox === null ? ["Fzo3zuOHN6w"] : tempImageTopicsCheckbox,
             }
         })
 
@@ -149,7 +180,7 @@ class PreferenceComponent extends React.Component {
                     // maskStyle={{backgroundColor: this.state.backgroundColor, opacity: 0.45}}
                     maskStyle={{backdropFilter: "blur(10px)"}}
                     footer={
-                        <Button type="link" href="https://github.com/xyk953651094" target="_blank" icon={<GithubOutlined />}>
+                        <Button type="text" shape="round" icon={<GithubOutlined />} href="https://github.com/xyk953651094" target="_blank" style={{color: this.state.fontColor}}>
                             作者主页
                         </Button>
                     }
@@ -188,8 +219,34 @@ class PreferenceComponent extends React.Component {
                                             <Radio value={"small"}>低</Radio>
                                         </Radio.Group>
                                     </Form.Item>
+                                    <Form.Item name="imageTopicsCheckbox" label="图片主题（全不选与全选效果一致）">
+                                        <Checkbox.Group onChange={this.imageTopicsCheckboxOnChange.bind(this)}>
+                                            <Row>
+                                                <Col span={12}><Checkbox name={"travel"}             value="Fzo3zuOHN6w">旅游</Checkbox></Col>
+                                                <Col span={12}><Checkbox name={"wallpapers"}         value="bo8jQKTaE0Y">壁纸</Checkbox></Col>
+                                                <Col span={12}><Checkbox name={"3d-renders"}         value="CDwuwXJAbEw">3D渲染</Checkbox></Col>
+                                                <Col span={12}><Checkbox name={"textures-patterns"}  value="iUIsnVtjB0Y">纹理</Checkbox></Col>
+                                                <Col span={12}><Checkbox name={"experimental"}       value="qPYsDzvJOYc">实验</Checkbox></Col>
+                                                <Col span={12}><Checkbox name={"architecture"}       value="rnSKDHwwYUk">建筑</Checkbox></Col>
+                                                <Col span={12}><Checkbox name={"nature"}             value="6sMVjTLSkeQ">自然</Checkbox></Col>
+                                                <Col span={12}><Checkbox name={"business-work"}      value="aeu6rL-j6ew">商务</Checkbox></Col>
+                                                <Col span={12}><Checkbox name={"fashion"}            value="S4MKLAsBB74">时尚</Checkbox></Col>
+                                                <Col span={12}><Checkbox name={"film"}               value="hmenvQhUmxM">电影</Checkbox></Col>
+                                                <Col span={12}><Checkbox name={"food-drink"}         value="xjPR4hlkBGA">饮食</Checkbox></Col>
+                                                <Col span={12}><Checkbox name={"health"}             value="_hb-dl4Q-4U">健康</Checkbox></Col>
+                                                <Col span={12}><Checkbox name={"people"}             value="towJZFskpGg">人物</Checkbox></Col>
+                                                <Col span={12}><Checkbox name={"interiors"}          value="R_Fyn-Gwtlw">精神</Checkbox></Col>
+                                                <Col span={12}><Checkbox name={"street-photography"} value="xHxYTMHLgOc">街头</Checkbox></Col>
+                                                <Col span={12}><Checkbox name={"animals"}            value="Jpg6Kidl-Hk">动物</Checkbox></Col>
+                                                <Col span={12}><Checkbox name={"spirituality"}       value="_8zFHuhRhyo">灵魂</Checkbox></Col>
+                                                <Col span={12}><Checkbox name={"arts-culture"}       value="bDo48cUhwnY">文化</Checkbox></Col>
+                                                <Col span={12}><Checkbox name={"history"}            value="dijpbw99kQQ">历史</Checkbox></Col>
+                                                <Col span={12}><Checkbox name={"athletics"}          value="Bn-DjrcBrwo">体育</Checkbox></Col>
+                                            </Row>
+                                        </Checkbox.Group>
+                                    </Form.Item>
                                     <Form.Item name="clearStorageButton" label="其他设置">
-                                        <Button type="primary" shape="round" danger icon={<RedoOutlined />} onClick={this.handleClearStorageButtonClick.bind(this)} style={{color: this.state.fontColor}}>
+                                        <Button type="text" shape="round" icon={<RedoOutlined />} onClick={this.handleClearStorageButtonClick.bind(this)} style={{color: this.state.fontColor}}>
                                             重置设置
                                         </Button>
                                     </Form.Item>
@@ -203,9 +260,24 @@ class PreferenceComponent extends React.Component {
                                   bodyStyle={{backgroundColor: this.state.backgroundColor}}
                             >
                                 <List size="small">
-                                    <List.Item><Link href="https://unsplash.com/" target="_blank">Unsplash.com</Link></List.Item>
-                                    <List.Item><Link href="https://www.pexels.com/" target="_blank">Pexels.com</Link></List.Item>
-                                    <List.Item><Link href="https://pixabay.com/" target="_blank">Pixabay.com</Link></List.Item>
+                                    <List.Item>
+                                        <Space>
+                                            <Avatar size={"small"} shape={"square"} src={"https://unsplash.com/favicon.ico"} />
+                                            <Button type="text" shape="round" href="https://unsplash.com/" target="_blank"  style={{color: this.state.fontColor}}>Unsplash.com</Button>
+                                        </Space>
+                                    </List.Item>
+                                    <List.Item>
+                                        <Space>
+                                            <Avatar size={"small"} shape={"square"} src={"https://www.pexels.com/favicon.ico"} />
+                                            <Button type="text" shape="round" href="https://www.pexels.com/" target="_blank"  style={{color: this.state.fontColor}}>Pexels.com</Button>
+                                        </Space>
+                                    </List.Item>
+                                    <List.Item>
+                                        <Space>
+                                            <Avatar size={"small"} shape={"square"} src={"https://pixabay.com/favicon.ico"} />
+                                            <Button type="text" shape="round" href="https://pixabay.com/" target="_blank"  style={{color: this.state.fontColor}}>Pixabay.com</Button>
+                                        </Space>
+                                    </List.Item>
                                 </List>
                             </Card>
                         </Col>

@@ -100,7 +100,7 @@ class AuthorComponent extends React.Component {
             <List>
                 <List.Item actions={[<Button type="text" shape="circle" icon={<LinkOutlined />} onClick={this.gotoUser.bind(this)} style={{color: this.state.fontColor}}/>]}>
                     <List.Item.Meta
-                        avatar={<Avatar size="large" src={this.state.authorIconUrl} />}
+                        avatar={<Avatar size="large" src={this.state.authorIconUrl} alt={"作者"}/>}
                         title={this.state.authorName}
                         description={
                             <Space>
@@ -108,12 +108,12 @@ class AuthorComponent extends React.Component {
                                     <i className="bi bi-collection"></i>
                                     <Text style={{color: this.state.fontColor}}>{" " + this.state.authorCollections}</Text>
                                 </Space>
-                                <Divider type="vertical" />
+                                <Divider type="vertical" style={{borderColor: this.state.fontColor}}/>
                                 <Space>
                                     <i className="bi bi-heart"></i>
                                     <Text style={{color: this.state.fontColor}}>{" " + this.state.authorLikes}</Text>
                                 </Space>
-                                <Divider type="vertical" />
+                                <Divider type="vertical" style={{borderColor: this.state.fontColor}}/>
                                 <Space>
                                     <i className="bi bi-images"></i>
                                     <Text style={{color: this.state.fontColor}}>{" " + this.state.authorPhotos}</Text>
@@ -124,7 +124,7 @@ class AuthorComponent extends React.Component {
                 </List.Item>
                 <List.Item actions={[<Button type="text" shape="circle" icon={<LinkOutlined />} onClick={this.gotoImage.bind(this)} style={{color: this.state.fontColor}}/>]}>
                     <List.Item.Meta
-                        avatar={<Avatar size="large" shape={"square"} src={this.state.imagePreviewUrl} />}
+                        avatar={<Avatar size="large" shape={"square"} src={this.state.imagePreviewUrl} alt={"信息"}/>}
                         title={this.state.imageLocation}
                         description={this.state.imageDescription}
                     />

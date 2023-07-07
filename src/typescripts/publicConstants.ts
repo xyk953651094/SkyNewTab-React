@@ -123,6 +123,7 @@ export let defaultFormInitialValues: PreferenceInterface = {
     "searchEngineRadio": "bing",
     "dynamicEffectRadio": "all",
     "imageQualityRadio": "regular",
+    "imageTopicsCheckbox": "Fzo3zuOHN6w",
 }
 
 // 常用变量
