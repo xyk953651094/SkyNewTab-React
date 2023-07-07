@@ -42,7 +42,7 @@ class HtmlLinkComponent extends React.Component {
 
         if (nextProps.imageData && nextProps.imageData !== prevProps.imageData) {
             this.setState({
-                htmlLink: nextProps.imageData.imageLink
+                htmlLink: nextProps.imageData.links.html
             }, ()=>{
                 changeThemeColor("#htmlLinkBtn", this.state.backgroundColor, this.state.fontColor);
             })

@@ -11,7 +11,7 @@ import SearchComponent from "./components/searchComponent";
 import CollectionComponent from "./components/collectionComponent";
 import AuthorComponent from "./components/authorComponent"
 
-import {Layout, Row, Col, Space} from "antd";
+import {Layout, Row, Col, Space, message} from "antd";
 import {clientId, device} from "./typescripts/publicConstants";
 import {
     setColorTheme,
@@ -35,8 +35,8 @@ type stateType = {
     imageData: any,
 
     searchEngine: "bing" | "baidu" | "google",
-    dynamicEffect: "close" | "translate" | "rotate" | "all",
-    imageSource: "Unsplash" | "Pexels"
+    dynamicEffect: "all" | "rotate" | "translate" | "close",
+    imageQuality: "full" | "regular" | "small",
 }
 
 interface App {
@@ -58,7 +58,7 @@ class App extends React.Component {
 
             searchEngine: "bing",
             dynamicEffect: "all",
-            imageSource: "Unsplash",
+            imageQuality: "regular",
         }
     }
 
@@ -75,9 +75,9 @@ class App extends React.Component {
         })
     }
 
-    getImageSource(imageSource: "Unsplash" | "Pexels") {
+    getImageQuality(imageQuality: "full" | "regular" | "small") {
         this.setState({
-            imageSource: imageSource,
+            imageQuality: imageQuality,
         })
     }
 
@@ -107,59 +107,21 @@ class App extends React.Component {
     }
 
     // 获取背景图片
-    getWallpaper(imageSource: "Unsplash" | "Pexels") {
+    getWallpaper() {
         let tempThis = this;
         let headers = {};
-        let url = "";
-        let data = {};
-
-        switch (imageSource) {
-            case "Unsplash":
-                url = "https://api.unsplash.com/photos/random?";
-                data = {
-                    "client_id": clientId,
-                    "orientation": (device === "iPhone" || device === "Android") ? "portrait" : "landscape",
-                    "content_filter": "high",
-                };
-                break;
-            case "Pexels":
-                headers = { "authorization": "sbJpn7uRC2FAknG1nefeRAYquBuMxyP68BaJ2joKCr6MtxAjqwBvth6h"};
-                url = "https://api.pexels.com/v1/curated";
-                data = {
-                    "per_page": 1,
-                };
-                break;
-        }
+        let url = "https://api.unsplash.com/photos/random?";
+        let data = {
+            "client_id": clientId,
+            "orientation": (device === "iPhone" || device === "Android") ? "portrait" : "landscape",
+            "content_filter": "high",
+        };
 
         httpRequest(headers, url, data, "GET")
             .then(function(resultData: any){
-                let imageData = {};
-                switch (imageSource) {
-                    case "Unsplash":
-                        imageData = {
-                            displayUrl: resultData.urls.regular,
-                            previewUrl: resultData.urls.small,
-                            imageLink: resultData.links.html,
-                            userName: resultData.user.name,
-                            userLink: resultData.user.links.html,
-                            color: resultData.color,
-                        };
-                        break;
-                    case "Pexels":
-                        imageData = {
-                            displayUrl: resultData.photos[0].src.landscape,
-                            previewUrl: resultData.photos[0].src.tiny,
-                            imageLink: resultData.photos[0].url,
-                            userName: resultData.photos[0].photographer,
-                            userLink: resultData.photos[0].photographer_url,
-                            color: resultData.photos[0].avg_color,
-                        };
-                        break;
-                }
-
                 localStorage.setItem("lastImageRequestTime", String(new Date().getTime()));  // 保存请求时间，防抖节流
-                localStorage.setItem("lastImage", JSON.stringify(imageData));                 // 保存请求结果，防抖节流
-                tempThis.setWallpaper(imageData);
+                localStorage.setItem("lastImage", JSON.stringify(resultData));                // 保存请求结果，防抖节流
+                tempThis.setWallpaper(resultData);
             })
             .catch(function(){
                 // 请求失败也更新请求时间，防止超时后无信息可显示
@@ -170,6 +132,9 @@ class App extends React.Component {
                     lastImage = JSON.parse(lastImage);
                     tempThis.setWallpaper(lastImage);
                 }
+                else {
+                    message.error("获取图片失败");
+                }
             })
             .finally(function(){});
     }
@@ -178,12 +143,12 @@ class App extends React.Component {
         // 加载偏好设置
         let tempSearchEngine = localStorage.getItem("searchEngine");
         let tempDynamicEffect = localStorage.getItem("dynamicEffect");
-        let tempImageSource = localStorage.getItem("imageSource");
+        let tempImageQuality = localStorage.getItem("imageQuality");
 
         this.setState({
             searchEngine: tempSearchEngine === null ? "bing" : tempSearchEngine,
             dynamicEffect: tempDynamicEffect === null ? "all" : tempDynamicEffect,
-            imageSource: tempImageSource === null ? "Unsplash" : tempImageSource,
+            imageQuality: tempImageQuality === null ? "regular" : tempImageQuality,
         }, () => {
             // 设置颜色主题
             this.setState({
@@ -193,16 +158,19 @@ class App extends React.Component {
                 let lastRequestTime: any = localStorage.getItem("lastImageRequestTime");
                 let nowTimeStamp = new Date().getTime();
                 if(lastRequestTime === null) {  // 第一次请求时 lastRequestTime 为 null，因此直接进行请求赋值 lastRequestTime
-                    this.getWallpaper(this.state.imageSource);
+                    this.getWallpaper();
                 }
-                else if(nowTimeStamp - parseInt(lastRequestTime) > 60 * 1000) {  // 必须多于一分钟才能进行新的请求
-                    this.getWallpaper(this.state.imageSource);
+                else if(nowTimeStamp - parseInt(lastRequestTime) > 5 * 60 * 1000) {  // 必须多于一分钟才能进行新的请求
+                    this.getWallpaper();
                 }
                 else {  // 一分钟之内使用上一次请求结果
                     let lastImage: any = localStorage.getItem("lastImage");
                     if (lastImage) {
                         lastImage = JSON.parse(lastImage);
                         this.setWallpaper(lastImage);
+                    }
+                    else {
+                        message.error("获取图片失败");
                     }
                 }
             })
@@ -289,10 +257,9 @@ class App extends React.Component {
                                 />
                                 <PreferenceComponent
                                     themeColor={this.state.themeColor}
-                                    imageData={this.state.imageData}
                                     getSearchEngine={this.getSearchEngine.bind(this)}
                                     getDynamicEffect={this.getDynamicEffect.bind(this)}
-                                    getImageSource={this.getImageSource.bind(this)}
+                                    getImageQuality={this.getImageQuality.bind(this)}
                                 />
                             </Space>
                         </Col>
@@ -303,6 +270,7 @@ class App extends React.Component {
                         display={this.state.wallpaperComponentDisplay}
                         imageData={this.state.imageData}
                         dynamicEffect={this.state.dynamicEffect}
+                        imageQuality={this.state.imageQuality}
                     />
                     <Space direction={"vertical"} align={"center"}>
                         <ClockComponent themeColor={this.state.themeColor}/>
@@ -320,7 +288,6 @@ class App extends React.Component {
                                     themeColor={this.state.themeColor}
                                     display={this.state.componentDisplay}
                                     imageData={this.state.imageData}
-                                    imageSource={this.state.imageSource}
                                 />
                                 <HtmlLinkComponent
                                     themeColor={this.state.themeColor}

@@ -1,4 +1,4 @@
-import {FormInitialValuesInterface} from './publicInterface'
+import {PreferenceInterface} from './publicInterface'
 import {getDevice} from "./publicFunctions";
 
 export let lightThemeArray = [
@@ -119,10 +119,10 @@ export let darkThemeArray = [
     {"bodyBackgroundColor": "#50543B", "componentBackgroundColor": "#FFE7B6"},
 ];
 
-export let defaultFormInitialValues: FormInitialValuesInterface = {
+export let defaultFormInitialValues: PreferenceInterface = {
     "searchEngineRadio": "bing",
     "dynamicEffectRadio": "all",
-    "imageSourceRadio": "Unsplash",
+    "imageQualityRadio": "regular",
 }
 
 // 常用变量

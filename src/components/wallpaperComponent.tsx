@@ -7,7 +7,8 @@ import {imageDynamicEffect} from "../typescripts/publicFunctions";
 type propType = {
     display: "none" | "block",
     imageData: any,
-    dynamicEffect: "close" | "translate" | "rotate" | "all",
+    dynamicEffect: "all" | "rotate" | "translate" | "close",
+    imageQuality: "full" | "regular" | "small",
 }
 
 type stateType = {
@@ -60,17 +61,39 @@ class WallpaperComponent extends React.Component {
             }
         }
 
-        // 图片质量
-        if (nextProps.imageData !== prevProps.imageData && nextProps.imageData) {
-            this.setState({
-                imageLink: nextProps.imageData.displayUrl,
-                loadImageLink: nextProps.imageData.previewUrl,
-            });
-        }
-
         // 鼠标移动效果
         if(nextProps.dynamicEffect !== this.props.dynamicEffect) {
             imageDynamicEffect(backgroundImage, nextProps.dynamicEffect);
+        }
+
+        // 图片质量
+        if (nextProps.imageData !== prevProps.imageData && nextProps.imageData) {
+            switch (this.props.imageQuality){
+                case "full":
+                    this.setState({
+                        imageLink: nextProps.imageData.urls.full,
+                        loadImageLink: nextProps.imageData.urls.small,
+                    });
+                    break;
+                case "regular":
+                    this.setState({
+                        imageLink: nextProps.imageData.urls.regular,
+                        loadImageLink: nextProps.imageData.urls.small,
+                    });
+                    break;
+                case "small":
+                    this.setState({
+                        imageLink: nextProps.imageData.urls.regular,
+                        loadImageLink: nextProps.imageData.urls.small,
+                    });
+                    break;
+                default:
+                    this.setState({
+                        imageLink: this.props.imageData.urls.regular,
+                        loadImageLink: this.props.imageData.urls.small,
+                    });
+                    break;
+            }
         }
     }
 

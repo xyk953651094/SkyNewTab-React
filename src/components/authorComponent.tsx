@@ -10,7 +10,6 @@ type propType = {
     themeColor: ThemeColorInterface,
     display: "none" | "block",
     imageData: any,
-    imageSource: "Unsplash" | "Pexels"
 }
 
 type stateType = {
@@ -46,8 +45,8 @@ class AuthorComponent extends React.Component {
 
         if (nextProps.imageData && nextProps.imageData !== prevProps.imageData) {
             this.setState({
-                authorName: nextProps.imageData.userName,
-                authorLink: nextProps.imageData.userLink,
+                authorName: nextProps.imageData.user.name,
+                authorLink: nextProps.imageData.user.links.html,
             }, ()=>{
                 changeThemeColor("#authorBtn", this.state.backgroundColor, this.state.fontColor);
             })
@@ -73,7 +72,7 @@ class AuthorComponent extends React.Component {
                             display: this.props.display,
                         }}
                 >
-                    {"by " + this.state.authorName + " on " + this.props.imageSource}
+                    {"by " + this.state.authorName + " on Unsplash"}
                 </Button>
             </Tooltip>
         );

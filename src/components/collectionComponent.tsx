@@ -1,5 +1,5 @@
 import React from "react";
-import {Col, Space, Button, Tooltip, Modal, Form, Input, List, message} from "antd";
+import {Col, Space, Button, Tooltip, Modal, Form, Input, List, Avatar, message} from "antd";
 import {PlusOutlined, EditOutlined, DeleteOutlined} from "@ant-design/icons";
 import {ThemeColorInterface} from "../typescripts/publicInterface";
 
@@ -219,7 +219,11 @@ class CollectionComponent extends React.Component {
                                         删除
                                     </Button>
                                 ]}>
-                                    <List.Item.Meta title={item.webName} description={item.webUrl}/>
+                                    <List.Item.Meta
+                                        avatar={<Avatar src={item.webUrl + "/favicon.ico"} />}
+                                        title={item.webName}
+                                        description={item.webUrl}
+                                    />
                                 </List.Item>
                             )}
                         />

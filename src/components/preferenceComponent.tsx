@@ -1,5 +1,5 @@
 import React from "react";
-import {Button, Tooltip, Drawer, Card, List, Form, Row, Col, Radio, Switch, message, Typography} from "antd";
+import {Button, Tooltip, Drawer, Card, List, Form, Row, Col, Radio, message, Typography} from "antd";
 import type {RadioChangeEvent} from "antd";
 import {
     MoreOutlined,
@@ -9,17 +9,16 @@ import {
     LinkOutlined,
 } from "@ant-design/icons";
 import {changeThemeColor} from "../typescripts/publicFunctions";
-import {FormInitialValuesInterface, ThemeColorInterface} from "../typescripts/publicInterface";
+import {PreferenceInterface, ThemeColorInterface} from "../typescripts/publicInterface";
 import {defaultFormInitialValues, device} from "../typescripts/publicConstants";
 
 const {Link} = Typography;
 
 type propType = {
     themeColor: ThemeColorInterface,
-    imageData: any,
     getSearchEngine: any,
     getDynamicEffect: any,
-    getImageSource: any,
+    getImageQuality: any,
 }
 
 type stateType = {
@@ -28,7 +27,7 @@ type stateType = {
     displayDrawer: boolean,
     drawerPosition: "right" | "bottom",
     holidayData: any,
-    formInitialValues: FormInitialValuesInterface
+    formInitialValues: PreferenceInterface
 }
 
 interface PreferenceComponent {
@@ -75,12 +74,10 @@ class PreferenceComponent extends React.Component {
         message.success("已更新显示效果");
     }
 
-    // 图片来源
-    imageSourceRadioOnChange(event: RadioChangeEvent) {
-        this.props.getImageSource(event.target.value);
-        localStorage.setItem("imageSource", event.target.value);
-        message.success("已更换图片来源");
-        localStorage.removeItem("lastImageRequestTime");
+    imageQualityRadioOnChange(event: RadioChangeEvent) {
+        this.props.getImageQuality(event.target.value);
+        localStorage.setItem("imageQuality", event.target.value);
+        message.success("已更新图片质量");
         window.location.reload();
     }
 
@@ -88,7 +85,7 @@ class PreferenceComponent extends React.Component {
     handleClearStorageButtonClick() {
         localStorage.setItem("searchEngine", "bing");
         localStorage.setItem("dynamicEffect", "all");
-        localStorage.setItem("imageSource", "Unsplash");
+        localStorage.setItem("imageQuality", "regular");
         message.success("已重置设置");
         window.location.reload();
     }
@@ -97,13 +94,13 @@ class PreferenceComponent extends React.Component {
         // 初始化偏好设置
         let tempSearchEngineRadio: string | null = localStorage.getItem("searchEngine");
         let tempDynamicEffectRadio: string | null = localStorage.getItem("dynamicEffect");
-        let tempImageSourceRadio: string | null = localStorage.getItem("imageSource");
+        let tempImageQualityRadio: string | null = localStorage.getItem("imageQuality");
 
         this.setState({
             formInitialValues: {
                 "searchEngineRadio": tempSearchEngineRadio === null ? "bing" : tempSearchEngineRadio,
                 "dynamicEffectRadio": tempDynamicEffectRadio === null ? "all" : tempDynamicEffectRadio,
-                "imageSourceRadio": tempImageSourceRadio === null ? "Unsplash" : tempImageSourceRadio,
+                "imageQualityRadio": tempImageQualityRadio === null ? "regular" : tempImageQualityRadio,
             }
         })
 
@@ -159,7 +156,7 @@ class PreferenceComponent extends React.Component {
                 >
                     <Row gutter={[16, 16]}>
                         <Col span={24}>
-                            <Card title={"偏好设置"} size={"small"} extra={<SettingOutlined />}
+                            <Card title={"偏好设置"} size={"small"} extra={<SettingOutlined style={{color: this.state.fontColor}}/>}
                                   style={{border: "1px solid " + this.state.fontColor}}
                                   headStyle={{backgroundColor: this.state.backgroundColor, color: this.state.fontColor, borderBottom: "2px solid " + this.state.fontColor}}
                                   bodyStyle={{backgroundColor: this.state.backgroundColor}}
@@ -172,18 +169,19 @@ class PreferenceComponent extends React.Component {
                                             <Radio value={"google"}>谷歌</Radio>
                                         </Radio.Group>
                                     </Form.Item>
-                                    <Form.Item name="dynamicEffectRadio" label="图片动效（推荐选择全部）">
+                                    <Form.Item name="dynamicEffectRadio" label="图片动效（推荐视差）">
                                         <Radio.Group buttonStyle={"solid"} onChange={this.dynamicEffectRadioOnChange.bind(this)}>
-                                            <Radio value={"close"}>关闭</Radio>
+                                            <Radio value={"all"}>视差</Radio>
                                             <Radio value={"translate"}>平移</Radio>
                                             <Radio value={"rotate"}>旋转</Radio>
-                                            <Radio value={"all"}>全部</Radio>
+                                            <Radio value={"close"}>关闭</Radio>
                                         </Radio.Group>
                                     </Form.Item>
-                                    <Form.Item name="imageSourceRadio" label="图片来源">
-                                        <Radio.Group buttonStyle={"solid"} onChange={this.imageSourceRadioOnChange.bind(this)}>
-                                            <Radio value={"Unsplash"}>Unsplash</Radio>
-                                            <Radio value={"Pexels"}>Pexels</Radio>
+                                    <Form.Item name="imageQualityRadio" label="图片质量（推荐标准）">
+                                        <Radio.Group buttonStyle={"solid"} onChange={this.imageQualityRadioOnChange.bind(this)}>
+                                            <Radio value={"full"}>高</Radio>
+                                            <Radio value={"regular"}>标准</Radio>
+                                            <Radio value={"small"}>低</Radio>
                                         </Radio.Group>
                                     </Form.Item>
                                     <Form.Item name="clearStorageButton" label="其他设置">
@@ -195,7 +193,7 @@ class PreferenceComponent extends React.Component {
                             </Card>
                         </Col>
                         <Col span={24}>
-                            <Card title={"网站推荐"} size={"small"} extra={<LinkOutlined />}
+                            <Card title={"网站推荐"} size={"small"} extra={<LinkOutlined style={{color: this.state.fontColor}}/>}
                                   style={{border: "1px solid " + this.state.fontColor}}
                                   headStyle={{backgroundColor: this.state.backgroundColor, color: this.state.fontColor, borderBottom: "2px solid " + this.state.fontColor}}
                                   bodyStyle={{backgroundColor: this.state.backgroundColor}}

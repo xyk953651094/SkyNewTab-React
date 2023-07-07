@@ -1,7 +1,7 @@
 import React from "react";
 import "../stylesheets/searchComponent.scss"
 import "../stylesheets/publicStyles.scss"
-import { Input, Col, Space, Select } from "antd";
+import {Input, Col, Space, Select, Avatar} from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import {fadeIn, fadeOut} from "../typescripts/publicFunctions";
 
@@ -15,6 +15,7 @@ type stateType = {
     searchValue: string
     maskDisplay: "none" | "block"
     searchEngineUrl: string,
+    searchEngineIconUrl: string,
 }
 
 interface SearchComponent {
@@ -28,7 +29,8 @@ class SearchComponent extends React.Component {
         this.state = {
             searchValue: "",
             maskDisplay: "none",
-            searchEngineUrl: "https://www.bing.com/search?q="
+            searchEngineUrl: "https://www.bing.com/search?q=",
+            searchEngineIconUrl: "https://www.bing.com/favicon.ico"
         };
     }
 
@@ -39,14 +41,28 @@ class SearchComponent extends React.Component {
     componentWillReceiveProps(nextProps: any, prevProps: any) {
         if (nextProps.searchEngine !== prevProps.searchEngine) {
             let tempSearchEngineUrl: string;
+            let tempSearchEngineIconUrl: string;
             switch (nextProps.searchEngine) {
-                case "bing": tempSearchEngineUrl = "https://www.bing.com/search?q="; break;
-                case "baidu": tempSearchEngineUrl = "https://www.baidu.com/s?wd="; break;
-                case "google": tempSearchEngineUrl = "https://www.google.com/search?q="; break;
-                default: tempSearchEngineUrl = "https://www.bing.com/search?q="; break;
+                case "bing":
+                    tempSearchEngineUrl = "https://www.bing.com/search?q=";
+                    tempSearchEngineIconUrl = "https://www.bing.com/favicon.ico";
+                    break;
+                case "baidu":
+                    tempSearchEngineUrl = "https://www.baidu.com/s?wd=";
+                    tempSearchEngineIconUrl = "https://www.baidu.com/favicon.ico";
+                    break;
+                case "google":
+                    tempSearchEngineUrl = "https://www.google.com/search?q=";
+                    tempSearchEngineIconUrl = "https://www.google.com/favicon.ico";
+                    break;
+                default:
+                    tempSearchEngineUrl = "https://www.bing.com/search?q=";
+                    tempSearchEngineIconUrl = "https://www.bing.com/favicon.ico";
+                    break;
             }
             this.setState({
-                searchEngineUrl: tempSearchEngineUrl
+                searchEngineUrl: tempSearchEngineUrl,
+                searchEngineIconUrl: tempSearchEngineIconUrl
             })
         }
     }
@@ -79,7 +95,7 @@ class SearchComponent extends React.Component {
 
                 <Input
                     className={"searchInput zIndexHigh"}
-                    // prefix={<SearchOutlined />}
+                    prefix={<Avatar size="small" src={this.state.searchEngineIconUrl} />}
                     suffix={<SearchOutlined />}
                     placeholder="按下 Enter 键搜索"
                     onFocus={this.onFocus.bind(this)}
