@@ -1,5 +1,5 @@
 import React from "react";
-import {Popover, Button} from "antd";
+import {Popover, Button, Space, Typography} from "antd";
 import {CheckCircleOutlined, CloseCircleOutlined} from "@ant-design/icons";
 import {
     getTimeDetails,
@@ -8,6 +8,8 @@ import {
     httpRequest, changeThemeColor
 } from "../typescripts/publicFunctions";
 import {ThemeColorInterface} from "../typescripts/publicInterface";
+
+const {Text} = Typography;
 
 type propType = {
     themeColor: ThemeColorInterface,
@@ -126,10 +128,16 @@ class GreetComponent extends React.Component {
 
     render() {
         const popoverContent = (
-            <div>
-                <p><CheckCircleOutlined />{" 宜：" + this.state.suit}</p>
-                <p><CloseCircleOutlined />{" 忌：" + this.state.avoid}</p>
-            </div>
+            <Space direction="vertical">
+                <Space>
+                    <CheckCircleOutlined />
+                    <Text style={{color: this.state.fontColor}}>{" 宜：" + this.state.suit}</Text>
+                </Space>
+                <Space>
+                    <CloseCircleOutlined />
+                    <Text style={{color: this.state.fontColor}}>{" 忌：" + this.state.avoid}</Text>
+                </Space>
+            </Space>
         );
         
         return (

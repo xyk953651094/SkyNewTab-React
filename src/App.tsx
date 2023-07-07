@@ -4,7 +4,6 @@ import "./stylesheets/publicStyles.scss"
 import GreetComponent from "./components/greetComponent";
 import WeatherComponent from "./components/weatherComponent";
 import TodoComponent from "./components/todoComponent";
-import HtmlLinkComponent from "./components/htmlLinkComponent";
 import PreferenceComponent from "./components/preferenceComponent";
 import WallpaperComponent from "./components/wallpaperComponent";
 import SearchComponent from "./components/searchComponent";
@@ -30,7 +29,6 @@ type propType = {}
 
 type stateType = {
     componentDisplay: "none" | "block",
-    wallpaperComponentDisplay: "none" | "block",
     themeColor: ThemeColorInterface,
     imageData: any,
 
@@ -49,7 +47,6 @@ class App extends React.Component {
         super(props)
         this.state = {
             componentDisplay: "none",
-            wallpaperComponentDisplay: "none",
             themeColor: {
                 "componentBackgroundColor": "",
                 "componentFontColor": "",
@@ -85,7 +82,6 @@ class App extends React.Component {
     setWallpaper(data: any) {
         this.setState({
             componentDisplay: "block",
-            wallpaperComponentDisplay: "block",
             imageData: data,
         }, () => {
             // 修改主题颜色
@@ -133,7 +129,7 @@ class App extends React.Component {
                     tempThis.setWallpaper(lastImage);
                 }
                 else {
-                    message.error("获取图片失败");
+                    message.success("获取图片失败");
                 }
             })
             .finally(function(){});
@@ -160,7 +156,7 @@ class App extends React.Component {
                 if(lastRequestTime === null) {  // 第一次请求时 lastRequestTime 为 null，因此直接进行请求赋值 lastRequestTime
                     this.getWallpaper();
                 }
-                else if(nowTimeStamp - parseInt(lastRequestTime) > 5 * 60 * 1000) {  // 必须多于一分钟才能进行新的请求
+                else if(nowTimeStamp - parseInt(lastRequestTime) > 0) {  // 必须多于一分钟才能进行新的请求
                     this.getWallpaper();
                 }
                 else {  // 一分钟之内使用上一次请求结果
@@ -170,7 +166,7 @@ class App extends React.Component {
                         this.setWallpaper(lastImage);
                     }
                     else {
-                        message.error("获取图片失败");
+                        message.success("获取图片失败");
                     }
                 }
             })
@@ -267,7 +263,7 @@ class App extends React.Component {
                 </Header>
                 <Content id={"content"} className={"center"}>
                     <WallpaperComponent
-                        display={this.state.wallpaperComponentDisplay}
+                        display={this.state.componentDisplay}
                         imageData={this.state.imageData}
                         dynamicEffect={this.state.dynamicEffect}
                         imageQuality={this.state.imageQuality}
@@ -285,11 +281,6 @@ class App extends React.Component {
                         <Col xs={0} sm={0} md={24} lg={23} xl={23} style={{textAlign: "right"}}>
                             <Space size={"small"} align={"end"}>
                                 <AuthorComponent
-                                    themeColor={this.state.themeColor}
-                                    display={this.state.componentDisplay}
-                                    imageData={this.state.imageData}
-                                />
-                                <HtmlLinkComponent
                                     themeColor={this.state.themeColor}
                                     display={this.state.componentDisplay}
                                     imageData={this.state.imageData}

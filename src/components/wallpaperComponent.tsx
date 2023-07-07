@@ -14,7 +14,6 @@ type propType = {
 type stateType = {
     imageLink: string,
     loadImageLink: string,
-    display: "none" | "block",
 }
 
 interface WallpaperComponent {
@@ -28,7 +27,6 @@ class WallpaperComponent extends React.Component {
         this.state = {
             imageLink: "",
             loadImageLink: "",
-            display: "none",
         };
     }
 
@@ -42,20 +40,16 @@ class WallpaperComponent extends React.Component {
             if(nextProps.display === "block") {
                 if (backgroundImage instanceof HTMLElement) {
                     backgroundImage.onload = () => {
-                        this.setState({
-                            display: "block",
-                        }, () => {
-                            // 设置动态效果
-                            backgroundImage.className = "backgroundImage zIndexLow wallpaperFadeIn";
-                            setTimeout(() => {
-                                backgroundImage.style.transform = "scale(1.05, 1.05)";
-                                backgroundImage.style.transition = "5s";
-                            }, 2000);
-                            setTimeout(() => {
-                                backgroundImageDiv.style.perspective = "500px";
-                                imageDynamicEffect(backgroundImage, this.props.dynamicEffect);
-                            }, 7000);
-                        })
+                        // 设置动态效果
+                        backgroundImage.className = "backgroundImage zIndexLow wallpaperFadeIn";
+                        setTimeout(() => {
+                            backgroundImage.style.transform = "scale(1.05, 1.05)";
+                            backgroundImage.style.transition = "5s";
+                        }, 2000);
+                        setTimeout(() => {
+                            backgroundImageDiv.style.perspective = "500px";
+                            imageDynamicEffect(backgroundImage, this.props.dynamicEffect);
+                        }, 7000);
                     }
                 }
             }
@@ -107,17 +101,17 @@ class WallpaperComponent extends React.Component {
                 className={"backgroundImage zIndexLow"}
                 preview={false}
                 src={this.state.imageLink}
-                style={{display: this.state.display}}
-                placeholder={
-                    <Image
-                        width="102%"
-                        height="102%"
-                        className={"backgroundImage zIndexLow"}
-                        preview={false}
-                        // src={this.state.loadImageLink}
-                        style={{filter: "blur(5px)"}}
-                    />
-                }
+                style={{display: this.props.display}}
+                // placeholder={
+                //     <Image
+                //         width="102%"
+                //         height="102%"
+                //         className={"backgroundImage zIndexLow"}
+                //         preview={false}
+                //         // src={this.state.loadImageLink}
+                //         style={{filter: "blur(5px)"}}
+                //     />
+                // }
             />
         );
     }

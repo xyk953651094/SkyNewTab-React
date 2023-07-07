@@ -1,5 +1,5 @@
 import React from "react";
-import {Button, Tooltip, Drawer, Card, List, Form, Row, Col, Radio, message, Typography} from "antd";
+import {Button, Tooltip, Drawer, Card, List, Form, Row, Col, Radio, Switch, message, Typography} from "antd";
 import type {RadioChangeEvent} from "antd";
 import {
     MoreOutlined,
@@ -86,6 +86,7 @@ class PreferenceComponent extends React.Component {
         localStorage.setItem("searchEngine", "bing");
         localStorage.setItem("dynamicEffect", "all");
         localStorage.setItem("imageQuality", "regular");
+        // localStorage.clear();
         message.success("已重置设置");
         window.location.reload();
     }
@@ -169,6 +170,9 @@ class PreferenceComponent extends React.Component {
                                             <Radio value={"google"}>谷歌</Radio>
                                         </Radio.Group>
                                     </Form.Item>
+                                    {/*<Form.Item name="showImageSwitch" label="显示图片（推荐开启）">*/}
+                                    {/*    <Switch checkedChildren="已开启" unCheckedChildren="已关闭" onChange={this.showImageSwitch.bind(this)} defaultChecked={this.state.formInitialValues.showImageSwitch}/>*/}
+                                    {/*</Form.Item>*/}
                                     <Form.Item name="dynamicEffectRadio" label="图片动效（推荐视差）">
                                         <Radio.Group buttonStyle={"solid"} onChange={this.dynamicEffectRadioOnChange.bind(this)}>
                                             <Radio value={"all"}>视差</Radio>
