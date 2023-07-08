@@ -11,7 +11,7 @@
 支持语言：中文  
 * 节气来源：https://www.mxnzp.com  
 * 天气来源：https://www.jinrishici.com
-* 图片来源：https://unsplash.com && https://www.pexels.com
+* 图片来源：https://unsplash.com
 
 ## 安装
 * [Chrome 网上应用商店](https://chrome.google.com/webstore/detail/mhnihmooegnonhmnapjlnbponpnclfcb)
@@ -20,12 +20,3 @@
 * 下载本页面提供的文件进行安装
 
 ## 效果展示
-<img width="283" alt="截屏2023-01-21 17 12 44" src="https://user-images.githubusercontent.com/28004442/213860365-16cb24b2-6014-4a72-99b7-f10890292425.png">
-
-<img width="1440" alt="截屏2023-01-21 16 59 35" src="https://user-images.githubusercontent.com/28004442/213859933-73eae745-7797-4255-97b7-f29d52d35744.png">
-
-<img width="1440" alt="截屏2023-01-21 17 00 03" src="https://user-images.githubusercontent.com/28004442/213859949-f8a7a7c9-1885-4f28-be6e-2f66e45fbb1b.png">
-
-<img width="1440" alt="截屏2023-01-23 20 54 55" src="https://user-images.githubusercontent.com/28004442/214044899-690b6de5-da6b-4534-8a74-87090071b6d6.png">
-
-<img width="1440" alt="截屏2023-01-23 20 56 06" src="https://user-images.githubusercontent.com/28004442/214045163-39a10256-a934-4e93-bb0a-c2b53528fd07.png">
