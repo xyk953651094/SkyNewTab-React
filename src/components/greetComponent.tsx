@@ -1,5 +1,5 @@
 import React from "react";
-import {Popover, Button} from "antd";
+import {Popover, Button, Space, Typography} from "antd";
 import {CheckCircleOutlined, CloseCircleOutlined} from "@ant-design/icons";
 import {
     getTimeDetails,
@@ -9,6 +9,8 @@ import {
 } from "../typescripts/publicFunctions";
 import {ThemeColorInterface} from "../typescripts/publicInterface";
 
+const {Text} = Typography;
+
 type propType = {
     themeColor: ThemeColorInterface,
 }
@@ -16,8 +18,9 @@ type propType = {
 type stateType = {
     backgroundColor: string,
     fontColor: string,
-    greet: string,
     greetIcon: string,
+    greetContent: string,
+    holidayContent: string,
     calendar: string,
     suit: string,
     avoid: string,
@@ -34,8 +37,9 @@ class GreetComponent extends React.Component {
         this.state = {
             backgroundColor: "",
             fontColor: "",
-            greet: getGreetContent(),
             greetIcon: getGreetIcon(),
+            greetContent: getGreetContent(),
+            holidayContent: "暂无信息",
             calendar: getTimeDetails(new Date()).showDate4 + " " + getTimeDetails(new Date()).showWeek,
             suit: "暂无信息",
             avoid: "暂无信息",
@@ -45,18 +49,18 @@ class GreetComponent extends React.Component {
     // 请求完成后处理步骤
     setHoliday(data: any) {
         let holidayContent = data.solarTerms;
-        if (data.typeDes !== "休息日" && data.typeDes !== "工作日"){
-            holidayContent = holidayContent + " · " + data.typeDes;
-        }
         if (data.solarTerms.indexOf("后") === -1) {
             holidayContent = "今日" + holidayContent;
         }
+        if (data.typeDes !== "休息日" && data.typeDes !== "工作日"){
+            holidayContent = holidayContent + " · " + data.typeDes;
+        }
+
         let timeDetails = getTimeDetails(new Date());
         this.setState({
-            greet: this.state.greet + "｜" + holidayContent,
+            holidayContent: holidayContent,
             calendar: timeDetails.showDate4 + " " + timeDetails.showWeek + "｜" +
-                data.yearTips + data.chineseZodiac + "年｜" +
-                data.lunarCalendar,
+                data.yearTips + data.chineseZodiac + "年｜" + data.lunarCalendar,
             suit: data.suit.replace(/\./g, " · "),
             avoid: data.avoid.replace(/\./g, " · "),
         });
@@ -102,6 +106,13 @@ class GreetComponent extends React.Component {
                 this.setHoliday(lastHoliday);
             }
         }
+
+        setInterval(() => {
+            this.setState({
+                greetIcon: getGreetIcon(),
+                greetContent: getGreetContent(),
+            })
+        }, 60 * 1000);
     }
 
     componentWillReceiveProps(nextProps: any, prevProps: any) {
@@ -117,10 +128,16 @@ class GreetComponent extends React.Component {
 
     render() {
         const popoverContent = (
-            <div>
-                <p><CheckCircleOutlined />{" 宜：" + this.state.suit}</p>
-                <p><CloseCircleOutlined />{" 忌：" + this.state.avoid}</p>
-            </div>
+            <Space direction="vertical">
+                <Space>
+                    <CheckCircleOutlined />
+                    <Text style={{color: this.state.fontColor}}>{" 宜：" + this.state.suit}</Text>
+                </Space>
+                <Space>
+                    <CloseCircleOutlined />
+                    <Text style={{color: this.state.fontColor}}>{" 忌：" + this.state.avoid}</Text>
+                </Space>
+            </Space>
         );
         
         return (
@@ -132,7 +149,7 @@ class GreetComponent extends React.Component {
                         className={"componentTheme zIndexHigh"}
                         style={{}}
                 >
-                    {this.state.greet}
+                    {this.state.greetContent  + "｜" + this.state.holidayContent}
                 </Button>
             </Popover>
         );

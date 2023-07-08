@@ -3,13 +3,14 @@ import "./stylesheets/publicStyles.scss"
 
 import GreetComponent from "./components/greetComponent";
 import WeatherComponent from "./components/weatherComponent";
-import HtmlLinkComponent from "./components/htmlLinkComponent";
+import TodoComponent from "./components/todoComponent";
 import PreferenceComponent from "./components/preferenceComponent";
 import WallpaperComponent from "./components/wallpaperComponent";
 import SearchComponent from "./components/searchComponent";
+import CollectionComponent from "./components/collectionComponent";
 import AuthorComponent from "./components/authorComponent"
 
-import {Layout, Row, Col, Space} from "antd";
+import {Layout, Row, Col, Space, message} from "antd";
 import {clientId, device} from "./typescripts/publicConstants";
 import {
     setColorTheme,
@@ -19,19 +20,22 @@ import {
     changeThemeColor
 } from "./typescripts/publicFunctions";
 import {ThemeColorInterface} from "./typescripts/publicInterface";
+import ClockComponent from "./components/clockComponent";
+import DailyComponent from "./components/dailyComponent";
 const {Header, Content, Footer} = Layout;
+const $ = require("jquery");
 
 type propType = {}
 
 type stateType = {
     componentDisplay: "none" | "block",
-    wallpaperComponentDisplay: "none" | "block",
     themeColor: ThemeColorInterface,
     imageData: any,
 
     searchEngine: "bing" | "baidu" | "google",
-    dynamicEffect: "close" | "translate" | "rotate" | "all",
-    imageSource: "Unsplash" | "Pexels"
+    dynamicEffect: "all" | "rotate" | "translate" | "close",
+    imageQuality: "full" | "regular" | "small",
+    imageTopics: string,
 }
 
 interface App {
@@ -44,7 +48,6 @@ class App extends React.Component {
         super(props)
         this.state = {
             componentDisplay: "none",
-            wallpaperComponentDisplay: "none",
             themeColor: {
                 "componentBackgroundColor": "",
                 "componentFontColor": "",
@@ -53,7 +56,8 @@ class App extends React.Component {
 
             searchEngine: "bing",
             dynamicEffect: "all",
-            imageSource: "Unsplash",
+            imageQuality: "regular",
+            imageTopics: "Fzo3zuOHN6w",
         }
     }
 
@@ -70,9 +74,15 @@ class App extends React.Component {
         })
     }
 
-    getImageSource(imageSource: "Unsplash" | "Pexels") {
+    getImageQuality(imageQuality: "full" | "regular" | "small") {
         this.setState({
-            imageSource: imageSource,
+            imageQuality: imageQuality,
+        })
+    }
+
+    getImageTopics(imageTopics: string) {
+        this.setState({
+            imageTopics: imageTopics
         })
     }
 
@@ -80,11 +90,14 @@ class App extends React.Component {
     setWallpaper(data: any) {
         this.setState({
             componentDisplay: "block",
-            wallpaperComponentDisplay: "block",
             imageData: data,
         }, () => {
             // 修改主题颜色
             if (data.color !== null) {
+                let bodyBackgroundColor = data.color;
+                let bodyFontColor = getFontColor(bodyBackgroundColor);
+                changeThemeColor("body", bodyBackgroundColor, bodyFontColor);
+
                 let componentBackgroundColor = getComponentBackgroundColor(data.color);
                 let componentFontColor = getFontColor(componentBackgroundColor);
                 this.setState({
@@ -93,68 +106,27 @@ class App extends React.Component {
                         "componentFontColor": componentFontColor,
                     },
                 })
-
-                let bodyBackgroundColor = data.color;
-                let bodyFontColor = getFontColor(bodyBackgroundColor);
-                changeThemeColor("body", bodyBackgroundColor, bodyFontColor);
             }
         })
     }
 
     // 获取背景图片
-    getWallpaper(imageSource: "Unsplash" | "Pexels") {
+    getWallpaper() {
         let tempThis = this;
         let headers = {};
-        let url = "";
-        let data = {};
-
-        switch (imageSource) {
-            case "Unsplash":
-                url = "https://api.unsplash.com/photos/random?";
-                data = {
-                    "client_id": clientId,
-                    "orientation": (device === "iPhone" || device === "Android") ? "portrait" : "landscape",
-                    "content_filter": "high",
-                };
-                break;
-            case "Pexels":
-                headers = { "authorization": "sbJpn7uRC2FAknG1nefeRAYquBuMxyP68BaJ2joKCr6MtxAjqwBvth6h"};
-                url = "https://api.pexels.com/v1/curated";
-                data = {
-                    "per_page": 1,
-                };
-                break;
-        }
+        let url = "https://api.unsplash.com/photos/random?";
+        let data = {
+            "client_id": clientId,
+            "orientation": (device === "iPhone" || device === "Android") ? "portrait" : "landscape",
+            "topics": this.state.imageTopics,
+            "content_filter": "high",
+        };
 
         httpRequest(headers, url, data, "GET")
             .then(function(resultData: any){
-                let imageData = {};
-                switch (imageSource) {
-                    case "Unsplash":
-                        imageData = {
-                            displayUrl: resultData.urls.regular,
-                            previewUrl: resultData.urls.small,
-                            imageLink: resultData.links.html,
-                            userName: resultData.user.name,
-                            userLink: resultData.user.links.html,
-                            color: resultData.color,
-                        };
-                        break;
-                    case "Pexels":
-                        imageData = {
-                            displayUrl: resultData.photos[0].src.landscape,
-                            previewUrl: resultData.photos[0].src.tiny,
-                            imageLink: resultData.photos[0].url,
-                            userName: resultData.photos[0].photographer,
-                            userLink: resultData.photos[0].photographer_url,
-                            color: resultData.photos[0].avg_color,
-                        };
-                        break;
-                }
-
                 localStorage.setItem("lastImageRequestTime", String(new Date().getTime()));  // 保存请求时间，防抖节流
-                localStorage.setItem("lastImage", JSON.stringify(imageData));                 // 保存请求结果，防抖节流
-                tempThis.setWallpaper(imageData);
+                localStorage.setItem("lastImage", JSON.stringify(resultData));                // 保存请求结果，防抖节流
+                tempThis.setWallpaper(resultData);
             })
             .catch(function(){
                 // 请求失败也更新请求时间，防止超时后无信息可显示
@@ -165,6 +137,9 @@ class App extends React.Component {
                     lastImage = JSON.parse(lastImage);
                     tempThis.setWallpaper(lastImage);
                 }
+                else {
+                    message.success("获取图片失败");
+                }
             })
             .finally(function(){});
     }
@@ -173,12 +148,14 @@ class App extends React.Component {
         // 加载偏好设置
         let tempSearchEngine = localStorage.getItem("searchEngine");
         let tempDynamicEffect = localStorage.getItem("dynamicEffect");
-        let tempImageSource = localStorage.getItem("imageSource");
+        let tempImageQuality = localStorage.getItem("imageQuality");
+        let tempImageTopics = localStorage.getItem("imageTopics");
 
         this.setState({
             searchEngine: tempSearchEngine === null ? "bing" : tempSearchEngine,
             dynamicEffect: tempDynamicEffect === null ? "all" : tempDynamicEffect,
-            imageSource: tempImageSource === null ? "Unsplash" : tempImageSource,
+            imageQuality: tempImageQuality === null ? "regular" : tempImageQuality,
+            imageTopics: tempImageTopics === null ? "Fzo3zuOHN6w" : tempImageTopics,
         }, () => {
             // 设置颜色主题
             this.setState({
@@ -188,10 +165,10 @@ class App extends React.Component {
                 let lastRequestTime: any = localStorage.getItem("lastImageRequestTime");
                 let nowTimeStamp = new Date().getTime();
                 if(lastRequestTime === null) {  // 第一次请求时 lastRequestTime 为 null，因此直接进行请求赋值 lastRequestTime
-                    this.getWallpaper(this.state.imageSource);
+                    this.getWallpaper();
                 }
                 else if(nowTimeStamp - parseInt(lastRequestTime) > 60 * 1000) {  // 必须多于一分钟才能进行新的请求
-                    this.getWallpaper(this.state.imageSource);
+                    this.getWallpaper();
                 }
                 else {  // 一分钟之内使用上一次请求结果
                     let lastImage: any = localStorage.getItem("lastImage");
@@ -199,8 +176,67 @@ class App extends React.Component {
                         lastImage = JSON.parse(lastImage);
                         this.setWallpaper(lastImage);
                     }
+                    else {
+                        message.success("获取图片失败");
+                    }
                 }
             })
+        });
+
+        // 修改各类弹窗样式
+        $("body").bind("DOMNodeInserted", () => {
+            // popover
+            let popoverEle = $(".ant-popover");
+            if (popoverEle.length && popoverEle.length > 0) {
+                $(".ant-popover-title").css("color", this.state.themeColor.componentFontColor);
+                $(".ant-popover-inner-content").css("color", this.state.themeColor.componentFontColor);
+                $(".ant-checkbox-group-item").css("color", this.state.themeColor.componentFontColor);
+                $(".ant-list-item").css("borderBlockEndColor", this.state.themeColor.componentFontColor);
+                $(".ant-list-item-meta-title").css("color", this.state.themeColor.componentFontColor);
+                $(".ant-list-item-meta-description").css("color", this.state.themeColor.componentFontColor);
+                $(".ant-empty-description").css("color", this.state.themeColor.componentFontColor);
+            }
+
+            // toolTip
+            let toolTipEle = $(".ant-tooltip");
+            if (toolTipEle.length && toolTipEle.length > 0) {
+                $(".ant-tooltip-inner").css("color", this.state.themeColor.componentFontColor);
+            }
+
+            // messgae
+            let messageEle = $(".ant-message");
+            if(messageEle.length && messageEle.length > 0) {
+                $(".ant-message-notice-content").css({"backgroundColor": this.state.themeColor.componentBackgroundColor, "color": this.state.themeColor.componentFontColor});
+                $(".ant-message-custom-content > .anticon").css("color", this.state.themeColor.componentFontColor);
+            }
+
+            // drawer
+            let drawerEle = $(".ant-drawer");
+            if (drawerEle.length && drawerEle.length > 0) {
+                $(".ant-drawer-close").css("color", this.state.themeColor.componentFontColor);
+                $(".ant-drawer-title").css("color", this.state.themeColor.componentFontColor);
+                $(".ant-form-item-label > label").css("color", this.state.themeColor.componentFontColor);
+                $(".ant-radio-wrapper").children(":last-child").css("color", this.state.themeColor.componentFontColor);
+                $(".ant-checkbox-wrapper").children(":last-child").css("color", this.state.themeColor.componentFontColor);
+                $(".ant-collapse").css("backgroundColor", this.state.themeColor.componentBackgroundColor);
+                $(".ant-collapse-header").css("color", this.state.themeColor.componentFontColor);
+                $(".ant-list-item").css("borderBlockEndColor", this.state.themeColor.componentFontColor);
+                $(".ant-list-item-meta-title").css("color", this.state.themeColor.componentFontColor);
+            }
+
+            // modal
+            let modalEle = $(".ant-modal");
+            if (modalEle.length && modalEle.length > 0) {
+                $(".ant-modal-content").css("backgroundColor", this.state.themeColor.componentBackgroundColor);
+                $(".ant-modal-title").css({"backgroundColor": this.state.themeColor.componentBackgroundColor, "color": this.state.themeColor.componentFontColor});
+                $(".ant-form-item-required").css("color", this.state.themeColor.componentFontColor);
+                $(".ant-list-item-meta-title").css("color", this.state.themeColor.componentFontColor);
+                $(".ant-list-item-meta-description").css("color", this.state.themeColor.componentFontColor);
+                $(".ant-modal-close-x").css("color", this.state.themeColor.componentFontColor);
+                $(".ant-empty-description").css("color", this.state.themeColor.componentFontColor);
+                $(".ant-tooltip-inner").css("color", this.state.themeColor.componentFontColor);
+                // $(".ant-modal-mask").css("zIndex", 1);
+            }
         });
     }
 
@@ -221,22 +257,18 @@ class App extends React.Component {
                         </Col>
                         <Col xs={24} sm={24} md={12} lg={11} xl={11} style={{textAlign: "right"}}>
                             <Space size={"small"}>
-                                {/*<DownloadComponent*/}
-                                {/*    themeColor={this.state.themeColor}*/}
-                                {/*    display={this.state.componentDisplay}*/}
-                                {/*    imageData={this.state.imageData}*/}
-                                {/*/>*/}
-                                <HtmlLinkComponent
+                                <DailyComponent
                                     themeColor={this.state.themeColor}
-                                    display={this.state.componentDisplay}
-                                    imageData={this.state.imageData}
+                                />
+                                <TodoComponent
+                                    themeColor={this.state.themeColor}
                                 />
                                 <PreferenceComponent
                                     themeColor={this.state.themeColor}
-                                    imageData={this.state.imageData}
                                     getSearchEngine={this.getSearchEngine.bind(this)}
                                     getDynamicEffect={this.getDynamicEffect.bind(this)}
-                                    getImageSource={this.getImageSource.bind(this)}
+                                    getImageQuality={this.getImageQuality.bind(this)}
+                                    getImageTopics={this.getImageTopics.bind(this)}
                                 />
                             </Space>
                         </Col>
@@ -244,11 +276,18 @@ class App extends React.Component {
                 </Header>
                 <Content id={"content"} className={"center"}>
                     <WallpaperComponent
-                        display={this.state.wallpaperComponentDisplay}
+                        display={this.state.componentDisplay}
                         imageData={this.state.imageData}
                         dynamicEffect={this.state.dynamicEffect}
+                        imageQuality={this.state.imageQuality}
                     />
-                    <SearchComponent searchEngine={this.state.searchEngine}/>
+                    <Space direction={"vertical"} align={"center"}>
+                        <ClockComponent themeColor={this.state.themeColor}/>
+                        <SearchComponent searchEngine={this.state.searchEngine}/>
+                        <Col xs={0} sm={0} md={24} lg={24} xl={24}>
+                            <CollectionComponent themeColor={this.state.themeColor}/>
+                        </Col>
+                    </Space>
                 </Content>
                 <Footer id={"footer"}>
                     <Row>
@@ -258,13 +297,7 @@ class App extends React.Component {
                                     themeColor={this.state.themeColor}
                                     display={this.state.componentDisplay}
                                     imageData={this.state.imageData}
-                                    imageSource={this.state.imageSource}
                                 />
-                                {/*<CreatTimeComponent*/}
-                                {/*    themeColor={this.state.themeColor}*/}
-                                {/*    display={this.state.componentDisplay}*/}
-                                {/*    imageData={this.state.imageData}*/}
-                                {/*/>*/}
                             </Space>
                         </Col>
                     </Row>

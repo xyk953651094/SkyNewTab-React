@@ -1,8 +1,10 @@
 import React from "react";
-import {Popover, Button} from "antd";
+import {Popover, Button, Space, Typography} from "antd";
 import {device} from "../typescripts/publicConstants";
 import {changeThemeColor, getWeatherIcon, httpRequest} from "../typescripts/publicFunctions";
 import {ThemeColorInterface} from "../typescripts/publicInterface";
+
+const {Text} = Typography;
 
 type propType = {
     themeColor: ThemeColorInterface,
@@ -116,13 +118,28 @@ class WeatherComponent extends React.Component {
 
     render(){
         const popoverContent = (
-            <div>
-                <p><i className="bi bi-moisture"></i>{" 空气湿度：" + this.state.humidity}</p>
-                <p><i className="bi bi-water"></i>{" 空气质量：" + this.state.pm25}</p>
-                <p><i className="bi bi-cloud-rain"></i>{" 降雨概率：" + this.state.rainfall}</p>
-                <p><i className="bi bi-eye"></i>{" 视线距离：" + this.state.visibility}</p>
-                <p><i className="bi bi-wind"></i>{" 风速情况：" + this.state.windInfo}</p>
-            </div>
+            <Space direction="vertical">
+                <Space>
+                    <i className="bi bi-moisture"></i>
+                    <Text style={{color: this.state.fontColor}}>{" 空气湿度：" + this.state.humidity}</Text>
+                </Space>
+                <Space>
+                    <i className="bi bi-water"></i>
+                    <Text style={{color: this.state.fontColor}}>{" 空气质量：" + this.state.pm25}</Text>
+                </Space>
+                <Space>
+                    <i className="bi bi-cloud-rain"></i>
+                    <Text style={{color: this.state.fontColor}}>{" 降雨概率：" + this.state.rainfall}</Text>
+                </Space>
+                <Space>
+                    <i className="bi bi-eye"></i>
+                    <Text style={{color: this.state.fontColor}}>{" 视线距离：" + this.state.visibility}</Text>
+                </Space>
+                <Space>
+                    <i className="bi bi-wind"></i>
+                    <Text style={{color: this.state.fontColor}}>{" 风速情况：" + this.state.windInfo}</Text>
+                </Space>
+            </Space>
         );
 
         return (

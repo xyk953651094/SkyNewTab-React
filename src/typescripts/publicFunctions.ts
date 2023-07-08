@@ -56,6 +56,7 @@ export function getTimeDetails(param: Date) {
         showDate2: year + "." + month + "." + day,
         showDate3: year + month + day,
         showDate4: year + "年" + month + "月" + day + "日",
+        showDate5: year + "-" + month + "-" + day,
         showTime: hour + ":" + minute,
         showLocaleDate: "农历" + localeDate.split(" ")[0] + "日"
     };
@@ -243,7 +244,7 @@ export function getDevice() {
 }
 
 // 过渡动画
-export function changeThemeColor(element: string, backgroundColor: string, fontColor: string, time: number = 1000) {
+export function changeThemeColor(element: string, backgroundColor: string, fontColor: string, time: number = 500) {
     $(element).animate({
         backgroundColor: backgroundColor,
         color: fontColor,
