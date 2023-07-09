@@ -15,7 +15,7 @@ type propType = {
 type stateType = {
     backgroundColor: string,
     fontColor: string,
-    displayAddModal: boolean,
+    displayModal: boolean,
     checkboxOptions: any,
     todoSize: number,
     todoMaxSize: number,
@@ -33,7 +33,7 @@ class TodoComponent extends React.Component {
         this.state = {
             backgroundColor: "",
             fontColor: "",
-            displayAddModal: false,
+            displayModal: false,
             checkboxOptions: [],
             todoSize: 0,
             todoMaxSize: 5,
@@ -41,7 +41,7 @@ class TodoComponent extends React.Component {
         };
     }
 
-    removeAllTodos() {
+    removeAllBtnOnClick() {
         let tempTodos = localStorage.getItem("todos");
         if(tempTodos){
             localStorage.removeItem("todos");
@@ -52,7 +52,7 @@ class TodoComponent extends React.Component {
         }
     }
 
-    showAddModal() {
+    showAddModalBtnOnClick() {
         let todos = [];
         let tempTodos = localStorage.getItem("todos");
         if(tempTodos){
@@ -61,7 +61,7 @@ class TodoComponent extends React.Component {
         if(todos.length < this.state.todoMaxSize) {
             // $("#todoInput").val("");
             this.setState({
-                displayAddModal: true,
+                displayModal: true,
                 priority: 0,
             })
         }
@@ -70,7 +70,7 @@ class TodoComponent extends React.Component {
         }
     }
 
-    handleAddModalOk() {
+    modalOkBtnOnClick() {
         let todoContent = $("#todoInput").val();
         if(todoContent && todoContent.length > 0) {
             let todos = [];
@@ -84,7 +84,7 @@ class TodoComponent extends React.Component {
                 localStorage.setItem("todos", JSON.stringify(todos));
 
                 this.setState({
-                    displayAddModal: false,
+                    displayModal: false,
                     checkboxOptions: todos,
                     todoSize: todos.length
                 });
@@ -99,9 +99,9 @@ class TodoComponent extends React.Component {
         }
     }
 
-    handleAddModalCancel() {
+    modalCancelBtnOnClick() {
         this.setState({
-            displayAddModal: false
+            displayModal: false
         })
     }
 
@@ -167,9 +167,9 @@ class TodoComponent extends React.Component {
                 </Col>
                 <Col span={12} style={{textAlign: "right"}}>
                     <Button type="text" shape="circle" icon={<PlusOutlined />}
-                            style={{color: this.state.fontColor}} onClick={this.showAddModal.bind(this)} />
+                            style={{color: this.state.fontColor}} onClick={this.showAddModalBtnOnClick.bind(this)} />
                     <Button type="text" shape="circle" icon={<DeleteOutlined />}
-                            style={{color: this.state.fontColor}} onClick={this.removeAllTodos.bind(this)} />
+                            style={{color: this.state.fontColor}} onClick={this.removeAllBtnOnClick.bind(this)} />
                 </Col>
             </Row>
         );
@@ -186,13 +186,12 @@ class TodoComponent extends React.Component {
                 <Popover title={popoverTitle} content={popoverContent} color={this.state.backgroundColor} overlayStyle={{width: "300px"}}>
                     <Badge size="small" count={this.state.checkboxOptions.length}>
                         <Button shape="circle" icon={<CheckSquareOutlined />} size={"large"}
-                                // onClick={this.handleClick.bind(this)}
                                 id={"todoBtn"}
                                 className={"componentTheme zIndexHigh"}
                         />
                     </Badge>
                 </Popover>
-                <Modal title={"添加待办事项 " + this.state.todoSize + " / " + this.state.todoMaxSize} open={this.state.displayAddModal} onOk={this.handleAddModalOk.bind(this)} onCancel={this.handleAddModalCancel.bind(this)}
+                <Modal title={"添加待办事项 " + this.state.todoSize + " / " + this.state.todoMaxSize} open={this.state.displayModal} onOk={this.modalOkBtnOnClick.bind(this)} onCancel={this.modalCancelBtnOnClick.bind(this)}
                        destroyOnClose={true}
                        maskStyle={{backdropFilter: "blur(10px)"}}
                 >

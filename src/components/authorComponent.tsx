@@ -53,6 +53,10 @@ class AuthorComponent extends React.Component {
         };
     }
 
+    authorBtnOnClick() {
+        window.open(this.state.authorLink);
+    }
+
     componentWillReceiveProps(nextProps: any, prevProps: any) {
         if (nextProps.themeColor !== prevProps.themeColor) {
             this.setState({
@@ -137,6 +141,7 @@ class AuthorComponent extends React.Component {
                 <Button shape="round" icon={<CameraOutlined/>} size={"large"}
                         id={"authorBtn"}
                         className={"componentTheme zIndexHigh"}
+                        onClick={this.authorBtnOnClick.bind(this)}
                         style={{
                             display: this.props.display,
                         }}

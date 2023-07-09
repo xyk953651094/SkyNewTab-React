@@ -138,7 +138,7 @@ class App extends React.Component {
                     tempThis.setWallpaper(lastImage);
                 }
                 else {
-                    message.success("获取图片失败");
+                    message.error("获取图片失败");
                 }
             })
             .finally(function(){});
@@ -177,7 +177,7 @@ class App extends React.Component {
                         this.setWallpaper(lastImage);
                     }
                     else {
-                        message.success("获取图片失败");
+                        message.error("获取图片失败");
                     }
                 }
             })
@@ -249,9 +249,11 @@ class App extends React.Component {
                             <Space size={"small"}>
                                 <GreetComponent
                                     themeColor={this.state.themeColor}
+                                    searchEngine={this.state.searchEngine}
                                 />
                                 <WeatherComponent
                                     themeColor={this.state.themeColor}
+                                    searchEngine={this.state.searchEngine}
                                 />
                             </Space>
                         </Col>

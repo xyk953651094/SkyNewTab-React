@@ -41,7 +41,7 @@ class CollectionComponent extends React.Component {
     }
 
     // 添加导航弹窗
-    showAddModal() {
+    showAddModalBtnOnClick() {
         let collections = [];
         let tempCollections = localStorage.getItem("collections");
         if(tempCollections){
@@ -59,7 +59,7 @@ class CollectionComponent extends React.Component {
         }
     }
 
-    handleAddModalOk() {
+    addModalOkBtnOnClick() {
         let webName = $("#webNameInput").val();
         let webUrl = $("#webUrlInput").val();
         if(webName && webUrl && webName.length > 0 && webUrl.length > 0) {
@@ -90,14 +90,14 @@ class CollectionComponent extends React.Component {
         }
     }
 
-    handleAddModalCancel() {
+    addModalCancelBtnOnClick() {
         this.setState({
             displayAddModal: false
         })
     }
 
     // 编辑导航弹窗
-    showEditModal() {
+    showEditModalBtnOnClick() {
         let collections = [];
         let tempCollections = localStorage.getItem("collections");
         if(tempCollections){
@@ -109,19 +109,19 @@ class CollectionComponent extends React.Component {
         })
     }
 
-    handleEditModalOk() {
+    editModalOkBtnOnClick() {
         this.setState({
             displayEditModal: false
         })
     }
 
-    handleEditModalCancel() {
+    editModalCancelBtnOnClick() {
         this.setState({
             displayEditModal: false
         })
     }
 
-    handleRemoveCollection(item: any) {
+    removeBtnOnClick(item: any) {
         let collections = [];
         let tempCollections = localStorage.getItem("collections");
         if(tempCollections){
@@ -172,7 +172,7 @@ class CollectionComponent extends React.Component {
     render() {
         return (
             <Col span={24} className={"center zIndexHigh"}>
-                <Space id="buttonGroup">
+                <Space>
                     {
                         this.state.collectionData.map((item: any) => {
                             return (
@@ -188,11 +188,11 @@ class CollectionComponent extends React.Component {
                     }
 
                     <Button type="primary" shape="circle" className="componentTheme" style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}}
-                            icon={<PlusOutlined />} onClick={this.showAddModal.bind(this)}/>
+                            icon={<PlusOutlined />} onClick={this.showAddModalBtnOnClick.bind(this)}/>
                     <Button type="primary" shape="circle" className="componentTheme" style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}}
-                            icon={<EditOutlined />} onClick={this.showEditModal.bind(this)}/>
+                            icon={<EditOutlined />} onClick={this.showEditModalBtnOnClick.bind(this)}/>
                     <Modal title={"添加链接 " + this.state.collectionSize + " / " + this.state.collectionMaxSize}
-                           open={this.state.displayAddModal} onOk={this.handleAddModalOk.bind(this)} onCancel={this.handleAddModalCancel.bind(this)}
+                           open={this.state.displayAddModal} onOk={this.addModalOkBtnOnClick.bind(this)} onCancel={this.addModalCancelBtnOnClick.bind(this)}
                            destroyOnClose={true}
                            maskStyle={{backdropFilter: "blur(10px)"}}
                     >
@@ -206,7 +206,7 @@ class CollectionComponent extends React.Component {
                         </Form>
                     </Modal>
                     <Modal title={"编辑链接 " + this.state.collectionSize + " / " + this.state.collectionMaxSize}
-                           open={this.state.displayEditModal} onOk={this.handleEditModalOk.bind(this)} onCancel={this.handleEditModalCancel.bind(this)}
+                           open={this.state.displayEditModal} onOk={this.editModalOkBtnOnClick.bind(this)} onCancel={this.editModalCancelBtnOnClick.bind(this)}
                            maskStyle={{backdropFilter: "blur(10px)"}}
                     >
                         <List
@@ -215,7 +215,7 @@ class CollectionComponent extends React.Component {
                             dataSource={this.state.collectionData}
                             renderItem={(item: any) => (
                                 <List.Item actions={[
-                                    <Button type="text" icon={<DeleteOutlined />} onClick={this.handleRemoveCollection.bind(this, item)} style={{color: this.state.fontColor}}>
+                                    <Button type="text" icon={<DeleteOutlined />} onClick={this.removeBtnOnClick.bind(this, item)} style={{color: this.state.fontColor}}>
                                         删除
                                     </Button>
                                 ]}>

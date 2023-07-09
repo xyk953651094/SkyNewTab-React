@@ -59,7 +59,7 @@ class PreferenceComponent extends React.Component {
         };
     }
 
-    drawerOnShow() {
+    showDrawerBtnOnClick() {
         this.setState({
             displayDrawer: true,
         })
@@ -111,7 +111,7 @@ class PreferenceComponent extends React.Component {
     }
 
     // 重置设置
-    handleClearStorageButtonClick() {
+    clearStorageBtnOnClick() {
         localStorage.clear();
         message.success("已重置所有内容");
         window.location.reload();
@@ -160,7 +160,7 @@ class PreferenceComponent extends React.Component {
             <>
                 <Tooltip title={"菜单栏"} placement="bottomRight" color={this.state.backgroundColor}>
                     <Button shape="circle" icon={<MoreOutlined />} size={"large"}
-                            onClick={this.drawerOnShow.bind(this)}
+                            onClick={this.showDrawerBtnOnClick.bind(this)}
                             id={"preferenceBtn"}
                             className={"componentTheme zIndexHigh"}
                             style={{
@@ -246,7 +246,7 @@ class PreferenceComponent extends React.Component {
                                         </Checkbox.Group>
                                     </Form.Item>
                                     <Form.Item name="clearStorageButton" label="其他设置">
-                                        <Button type="text" shape="round" icon={<RedoOutlined />} onClick={this.handleClearStorageButtonClick.bind(this)} style={{color: this.state.fontColor}}>
+                                        <Button type="text" shape="round" icon={<RedoOutlined />} onClick={this.clearStorageBtnOnClick.bind(this)} style={{color: this.state.fontColor}}>
                                             重置设置
                                         </Button>
                                     </Form.Item>

@@ -13,6 +13,7 @@ const {Text} = Typography;
 
 type propType = {
     themeColor: ThemeColorInterface,
+    searchEngine: "bing" | "baidu" | "google"
 }
 
 type stateType = {
@@ -21,6 +22,7 @@ type stateType = {
     greetIcon: string,
     greetContent: string,
     holidayContent: string,
+    searchEngineUrl: string,
     calendar: string,
     suit: string,
     avoid: string,
@@ -40,10 +42,15 @@ class GreetComponent extends React.Component {
             greetIcon: getGreetIcon(),
             greetContent: getGreetContent(),
             holidayContent: "暂无信息",
+            searchEngineUrl: "https://www.bing.com/search?q=",
             calendar: getTimeDetails(new Date()).showDate4 + " " + getTimeDetails(new Date()).showWeek,
             suit: "暂无信息",
             avoid: "暂无信息",
         };
+    }
+
+    greetBtnOnClick() {
+        window.open(this.state.searchEngineUrl + "日历", "_blank",);
     }
 
     // 请求完成后处理步骤
@@ -124,6 +131,27 @@ class GreetComponent extends React.Component {
                 changeThemeColor("#greetBtn", this.state.backgroundColor, this.state.fontColor);
             });
         }
+
+        if (nextProps.searchEngine !== prevProps.searchEngine) {
+            let tempSearchEngineUrl: string;
+            switch (nextProps.searchEngine) {
+                case "bing":
+                    tempSearchEngineUrl = "https://www.bing.com/search?q=";
+                    break;
+                case "baidu":
+                    tempSearchEngineUrl = "https://www.baidu.com/s?wd=";
+                    break;
+                case "google":
+                    tempSearchEngineUrl = "https://www.google.com/search?q=";
+                    break;
+                default:
+                    tempSearchEngineUrl = "https://www.bing.com/search?q=";
+                    break;
+            }
+            this.setState({
+                searchEngineUrl: tempSearchEngineUrl,
+            })
+        }
     }
 
     render() {
@@ -147,7 +175,7 @@ class GreetComponent extends React.Component {
                 <Button shape="round" icon={<i className={this.state.greetIcon}> </i>} size={"large"}
                         id={"greetBtn"}
                         className={"componentTheme zIndexHigh"}
-                        style={{}}
+                        onClick={this.greetBtnOnClick.bind(this)}
                 >
                     {this.state.greetContent  + "｜" + this.state.holidayContent}
                 </Button>

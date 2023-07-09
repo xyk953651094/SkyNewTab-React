@@ -1,6 +1,5 @@
 import React from "react";
 import {Popover, Button, Space, Typography} from "antd";
-import {device} from "../typescripts/publicConstants";
 import {changeThemeColor, getWeatherIcon, httpRequest} from "../typescripts/publicFunctions";
 import {ThemeColorInterface} from "../typescripts/publicInterface";
 
@@ -8,14 +7,15 @@ const {Text} = Typography;
 
 type propType = {
     themeColor: ThemeColorInterface,
+    searchEngine: "bing" | "baidu" | "google"
 }
 
 type stateType = {
     backgroundColor: string,
     fontColor: string,
-    display: "none" | "block",
     weatherIcon: string,
     weatherInfo: string,
+    searchEngineUrl: string,
     region: string;
     humidity: string;
     pm25: string;
@@ -35,9 +35,9 @@ class WeatherComponent extends React.Component {
         this.state = {
             backgroundColor: "",
             fontColor: "",
-            display: "block",
             weatherIcon: "",
             weatherInfo: "暂无信息",
+            searchEngineUrl: "https://www.bing.com/search?q=",
             region: "暂无信息",
             humidity: "暂无信息",
             pm25: "暂无信息",
@@ -45,6 +45,10 @@ class WeatherComponent extends React.Component {
             visibility: "暂无信息",
             windInfo: "暂无信息",
         };
+    }
+
+    weatherBtnOnClick() {
+        window.open(this.state.searchEngineUrl + "天气", "_blank",);
     }
 
     setWeather(data: any) {
@@ -80,27 +84,20 @@ class WeatherComponent extends React.Component {
     }
 
     componentDidMount() {
-        if (device === "iPhone" || device === "Android") {
-            this.setState({
-                display: "none",
-            })
+        // 防抖节流
+        let lastRequestTime: any = localStorage.getItem("lastWeatherRequestTime");
+        let nowTimeStamp = new Date().getTime();
+        if(lastRequestTime === null) {  // 第一次请求时 lastRequestTime 为 null，因此直接进行请求赋值 lastRequestTime
+            this.getWeather();
         }
-        else {
-            // 防抖节流
-            let lastRequestTime: any = localStorage.getItem("lastWeatherRequestTime");
-            let nowTimeStamp = new Date().getTime();
-            if(lastRequestTime === null) {  // 第一次请求时 lastRequestTime 为 null，因此直接进行请求赋值 lastRequestTime
-                this.getWeather();
-            }
-            else if(nowTimeStamp - parseInt(lastRequestTime) > 60 * 60 * 1000) {  // 必须多于一小时才能进行新的请求
-                this.getWeather();
-            }
-            else {  // 一小时之内使用上一次请求结果
-                let lastWeather: any = localStorage.getItem("lastWeather");
-                if (lastWeather) {
-                    lastWeather = JSON.parse(lastWeather);
-                    this.setWeather(lastWeather);
-                }
+        else if(nowTimeStamp - parseInt(lastRequestTime) > 60 * 60 * 1000) {  // 必须多于一小时才能进行新的请求
+            this.getWeather();
+        }
+        else {  // 一小时之内使用上一次请求结果
+            let lastWeather: any = localStorage.getItem("lastWeather");
+            if (lastWeather) {
+                lastWeather = JSON.parse(lastWeather);
+                this.setWeather(lastWeather);
             }
         }
     }
@@ -113,6 +110,27 @@ class WeatherComponent extends React.Component {
             }, ()=>{
                 changeThemeColor("#weatherBtn", this.state.backgroundColor, this.state.fontColor);
             });
+        }
+
+        if (nextProps.searchEngine !== prevProps.searchEngine) {
+            let tempSearchEngineUrl: string;
+            switch (nextProps.searchEngine) {
+                case "bing":
+                    tempSearchEngineUrl = "https://www.bing.com/search?q=";
+                    break;
+                case "baidu":
+                    tempSearchEngineUrl = "https://www.baidu.com/s?wd=";
+                    break;
+                case "google":
+                    tempSearchEngineUrl = "https://www.google.com/search?q=";
+                    break;
+                default:
+                    tempSearchEngineUrl = "https://www.bing.com/search?q=";
+                    break;
+            }
+            this.setState({
+                searchEngineUrl: tempSearchEngineUrl,
+            })
         }
     }
 
@@ -147,9 +165,7 @@ class WeatherComponent extends React.Component {
                 <Button shape="round" icon={<i className={this.state.weatherIcon}> </i>} size={"large"}
                         id={"weatherBtn"}
                         className={"componentTheme zIndexHigh"}
-                        style={{
-                            display: this.state.display,
-                        }}
+                        onClick={this.weatherBtnOnClick.bind(this)}
                 >
                     {this.state.weatherInfo}
                 </Button>

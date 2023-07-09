@@ -15,7 +15,7 @@ type propType = {
 type stateType = {
     backgroundColor: string,
     fontColor: string,
-    displayAddModal: boolean,
+    displayModal: boolean,
     listItems: any,
     dailySize: number,
     dailyMaxSize: number,
@@ -33,7 +33,7 @@ class DailyComponent extends React.Component {
         this.state = {
             backgroundColor: "",
             fontColor: "",
-            displayAddModal: false,
+            displayModal: false,
             listItems: [],
             dailySize: 0,
             dailyMaxSize: 5,
@@ -41,7 +41,7 @@ class DailyComponent extends React.Component {
         };
     }
 
-    removeAllDaily() {
+    removeAllBtnOnClick() {
         let tempDaily = localStorage.getItem("daily");
         if(tempDaily){
             localStorage.removeItem("daily");
@@ -52,7 +52,7 @@ class DailyComponent extends React.Component {
         }
     }
 
-    removeDaily(item: any) {
+    removeBtnOnClick(item: any) {
         let daily = [];
         let tempDaily = localStorage.getItem("daily");
         if(tempDaily){
@@ -76,7 +76,7 @@ class DailyComponent extends React.Component {
         }
     }
 
-    showAddModal() {
+    showAddModalBtnOnClick() {
         let daily = [];
         let tempDaily = localStorage.getItem("daily");
         if(tempDaily){
@@ -85,7 +85,7 @@ class DailyComponent extends React.Component {
         if(daily.length < this.state.dailyMaxSize) {
             // $("#dailyInput").val("");
             this.setState({
-                displayAddModal: true,
+                displayModal: true,
                 selectedTimeStamp: 0
             })
         }
@@ -94,7 +94,7 @@ class DailyComponent extends React.Component {
         }
     }
 
-    handleAddModalOk() {
+    modalOkBtnOnClick() {
         let title = $("#dailyInput").val();
 
         if(title && title.length > 0 && this.state.selectedTimeStamp !== 0) {
@@ -123,7 +123,7 @@ class DailyComponent extends React.Component {
                 localStorage.setItem("daily", JSON.stringify(daily));
 
                 this.setState({
-                    displayAddModal: false,
+                    displayModal: false,
                     listItems: daily,
                     dailySize: daily.length
                 });
@@ -138,9 +138,9 @@ class DailyComponent extends React.Component {
         }
     }
 
-    handleAddModalCancel() {
+    modalCancelBtnOnClick() {
         this.setState({
-            displayAddModal: false
+            displayModal: false
         })
     }
 
@@ -182,9 +182,9 @@ class DailyComponent extends React.Component {
                 </Col>
                 <Col span={12} style={{textAlign: "right"}}>
                     <Button type="text" shape="circle" icon={<PlusOutlined />}
-                            style={{color: this.state.fontColor}} onClick={this.showAddModal.bind(this)} />
+                            style={{color: this.state.fontColor}} onClick={this.showAddModalBtnOnClick.bind(this)} />
                     <Button type="text" shape="circle" icon={<DeleteOutlined />}
-                            style={{color: this.state.fontColor}} onClick={this.removeAllDaily.bind(this)} />
+                            style={{color: this.state.fontColor}} onClick={this.removeAllBtnOnClick.bind(this)} />
                 </Col>
             </Row>
         );
@@ -195,7 +195,7 @@ class DailyComponent extends React.Component {
                 renderItem={(item: any) => (
                     <List.Item
                         actions={[
-                            <Button type="text" shape="circle" icon={<CloseOutlined />} onClick={this.removeDaily.bind(this, item)} style={{color: this.state.fontColor}}/>
+                            <Button type="text" shape="circle" icon={<CloseOutlined />} onClick={this.removeBtnOnClick.bind(this, item)} style={{color: this.state.fontColor}}/>
                         ]}
                     >
                         <List.Item.Meta
@@ -218,7 +218,7 @@ class DailyComponent extends React.Component {
                         />
                     </Badge>
                 </Popover>
-                <Modal title={"添加倒数日 " + this.state.dailySize + " / " + this.state.dailyMaxSize} open={this.state.displayAddModal} onOk={this.handleAddModalOk.bind(this)} onCancel={this.handleAddModalCancel.bind(this)}
+                <Modal title={"添加倒数日 " + this.state.dailySize + " / " + this.state.dailyMaxSize} open={this.state.displayModal} onOk={this.modalOkBtnOnClick.bind(this)} onCancel={this.modalCancelBtnOnClick.bind(this)}
                        destroyOnClose={true}
                        maskStyle={{backdropFilter: "blur(10px)"}}
                 >
