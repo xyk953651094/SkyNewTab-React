@@ -20,3 +20,16 @@
 * 下载本页面提供的文件进行安装
 
 ## 效果展示
+<img width="1440" alt="截屏2023-07-11 15 15 59" src="https://github.com/xyk953651094/SkyNewTab-React/assets/28004442/fd262e40-29cb-4fcb-86d4-406c6573d559">
+
+<img width="1440" alt="截屏2023-07-11 15 16 25" src="https://github.com/xyk953651094/SkyNewTab-React/assets/28004442/e91ab503-8cc3-407d-ade3-87a51d9943a5">
+
+<img width="1440" alt="截屏2023-07-11 15 19 22" src="https://github.com/xyk953651094/SkyNewTab-React/assets/28004442/10ff414f-787c-4869-8d58-b495dc6b35cc">
+
+<img width="1440" alt="截屏2023-07-11 15 17 45" src="https://github.com/xyk953651094/SkyNewTab-React/assets/28004442/22a45d85-b831-4be7-ad3a-78ad81fee185">
+
+<img width="1440" alt="截屏2023-07-11 15 19 44" src="https://github.com/xyk953651094/SkyNewTab-React/assets/28004442/230df980-fa06-4f71-944a-1bfd813046c2">
+
+<img width="1440" alt="截屏2023-07-11 15 20 12" src="https://github.com/xyk953651094/SkyNewTab-React/assets/28004442/e289dd6e-4f30-471b-a57b-414ade0aae09">
+
+
