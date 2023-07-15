@@ -23,7 +23,7 @@
 * 下载本页面提供的文件进行安装
 
 ## 效果展示
-### Chromium, Firefox
+### Chromium & Firefox
 <img width="1440" alt="截屏2023-07-11 15 15 59" src="https://github.com/xyk953651094/SkyNewTab-React/assets/28004442/fd262e40-29cb-4fcb-86d4-406c6573d559">
 
 <img width="1440" alt="截屏2023-07-11 15 16 25" src="https://github.com/xyk953651094/SkyNewTab-React/assets/28004442/e91ab503-8cc3-407d-ade3-87a51d9943a5">
