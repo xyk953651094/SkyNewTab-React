@@ -11,18 +11,15 @@ import {
     Radio,
     Checkbox,
     message,
-    Typography,
     Space,
     Avatar
 } from "antd";
 import type {RadioChangeEvent} from "antd";
-import {MoreOutlined, RedoOutlined, SettingOutlined, GithubOutlined, LinkOutlined} from "@ant-design/icons";
+import {MoreOutlined, DeleteOutlined, SettingOutlined, GithubOutlined, LikeOutlined, LinkOutlined} from "@ant-design/icons";
 import type {CheckboxValueType} from "antd/es/checkbox/Group";
 import {changeThemeColor} from "../typescripts/publicFunctions";
 import {PreferenceInterface, ThemeColorInterface} from "../typescripts/publicInterface";
 import {defaultFormInitialValues, device} from "../typescripts/publicConstants";
-
-const {Link} = Typography;
 
 type propType = {
     themeColor: ThemeColorInterface,
@@ -180,9 +177,14 @@ class PreferenceComponent extends React.Component {
                     // maskStyle={{backgroundColor: this.state.backgroundColor, opacity: 0.45}}
                     maskStyle={{backdropFilter: "blur(10px)"}}
                     footer={
-                        <Button type="text" shape="round" icon={<GithubOutlined />} href="https://github.com/xyk953651094" target="_blank" style={{color: this.state.fontColor}}>
-                            作者主页
-                        </Button>
+                        <Space>
+                            <Button type="text" shape="round" icon={<GithubOutlined />} href="https://github.com/xyk953651094" target="_blank" style={{color: this.state.fontColor}}>
+                                主页
+                            </Button>
+                            <Button type="text" shape="round" icon={<LikeOutlined />} href="https://afdian.net/a/xyk953651094" target="_blank" style={{color: this.state.fontColor}}>
+                                捐赠
+                            </Button>
+                        </Space>
                     }
                     footerStyle={{backgroundColor: this.state.backgroundColor, borderTopColor: this.state.fontColor, textAlign: "center"}}
                 >
@@ -246,8 +248,8 @@ class PreferenceComponent extends React.Component {
                                         </Checkbox.Group>
                                     </Form.Item>
                                     <Form.Item name="clearStorageButton" label="其他设置">
-                                        <Button type="text" shape="round" icon={<RedoOutlined />} onClick={this.clearStorageBtnOnClick.bind(this)} style={{color: this.state.fontColor}}>
-                                            重置设置
+                                        <Button type="text" shape="round" icon={<DeleteOutlined />} onClick={this.clearStorageBtnOnClick.bind(this)} style={{color: this.state.fontColor}}>
+                                            清理缓存
                                         </Button>
                                     </Form.Item>
                                 </Form>
