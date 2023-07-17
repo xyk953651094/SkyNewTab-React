@@ -11,11 +11,11 @@ const root = ReactDOM.createRoot(
     document.getElementById("root") as HTMLElement
 );
 root.render(
-    <React.StrictMode>
+    // <React.StrictMode>
         <ConfigProvider locale={zhCN}>
             <App/>
         </ConfigProvider>
-    </React.StrictMode>
+    // </React.StrictMode>
 
     // <PopupComponent/>
 )

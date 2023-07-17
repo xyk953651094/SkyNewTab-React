@@ -1,9 +1,18 @@
-.ant-image {
+.ant-image:has(.backgroundImage) {
   position: fixed;
   top: -1%;
   left: -1%;
 }
 
 .backgroundImage {
+  object-fit: cover;
+}
+
+.blurHashCanvas {
+  position: fixed;
+  top: -1%;
+  left: -1%;
+  width: 102%;
+  height: 102%;
   object-fit: cover;
 }

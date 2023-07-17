@@ -2,7 +2,9 @@ import React from "react";
 import "../stylesheets/wallpaperComponent.scss"
 import "../stylesheets/publicStyles.scss"
 import {Image} from "antd";
-import {imageDynamicEffect} from "../typescripts/publicFunctions";
+import {decode} from "blurhash"
+import {imageDynamicEffect, isEmptyString} from "../typescripts/publicFunctions";
+const $ = require("jquery");
 
 type propType = {
     display: "none" | "block",
@@ -14,6 +16,7 @@ type propType = {
 type stateType = {
     imageLink: string,
     loadImageLink: string,
+    blurHashCode: string
 }
 
 interface WallpaperComponent {
@@ -27,6 +30,7 @@ class WallpaperComponent extends React.Component {
         this.state = {
             imageLink: "",
             loadImageLink: "",
+            blurHashCode: ""
         };
     }
 
@@ -83,11 +87,29 @@ class WallpaperComponent extends React.Component {
                     break;
                 default:
                     this.setState({
-                        imageLink: this.props.imageData.urls.regular,
-                        loadImageLink: this.props.imageData.urls.small,
+                        imageLink: nextProps.imageData.urls.regular,
+                        loadImageLink: nextProps.imageData.urls.small,
                     });
                     break;
             }
+
+            this.setState({
+                blurHashCode: nextProps.imageData.blur_hash
+            }, ()=> {
+                if (!isEmptyString(this.state.blurHashCode)) {
+                    const blurHashCanvas = document.getElementById("blurHashCanvas") as HTMLCanvasElement | null;
+                    if(blurHashCanvas instanceof HTMLCanvasElement) {
+                        let blurHashImage = decode(this.state.blurHashCode, window.innerWidth, window.innerHeight);
+                        let ctx = blurHashCanvas.getContext("2d");
+                        if(ctx) {
+                            const imageData = new ImageData(blurHashImage, window.innerWidth, window.innerHeight);
+                            ctx.putImageData(imageData, 0, 0);
+                        }
+
+                        blurHashCanvas.className = "blurHashCanvas zIndexLow wallpaperFadeIn";
+                    }
+                }
+            });
         }
     }
 
@@ -103,14 +125,7 @@ class WallpaperComponent extends React.Component {
                 src={this.state.imageLink}
                 style={{display: this.props.display}}
                 placeholder={
-                    <Image
-                        width="102%"
-                        height="102%"
-                        className={"backgroundImage zIndexLow"}
-                        preview={false}
-                        src={this.state.loadImageLink}
-                        style={{filter: "blur(5px)"}}
-                    />
+                    <canvas id="blurHashCanvas" className={"blurHashCanvas zIndexLow"}></canvas>
                 }
             />
         );
