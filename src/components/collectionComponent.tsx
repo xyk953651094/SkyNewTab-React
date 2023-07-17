@@ -194,7 +194,7 @@ class CollectionComponent extends React.Component {
                     <Modal title={"添加链接 " + this.state.collectionSize + " / " + this.state.collectionMaxSize}
                            open={this.state.displayAddModal} onOk={this.addModalOkBtnOnClick.bind(this)} onCancel={this.addModalCancelBtnOnClick.bind(this)}
                            destroyOnClose={true}
-                           maskStyle={{backdropFilter: "blur(10px)"}}
+                           maskStyle={{backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)"}}
                     >
                         <Form>
                             <Form.Item label="网页名称" name="webName" rules={[{ required: true, message: "网页名称不能为空"}]}>
@@ -207,7 +207,7 @@ class CollectionComponent extends React.Component {
                     </Modal>
                     <Modal title={"编辑链接 " + this.state.collectionSize + " / " + this.state.collectionMaxSize}
                            open={this.state.displayEditModal} onOk={this.editModalOkBtnOnClick.bind(this)} onCancel={this.editModalCancelBtnOnClick.bind(this)}
-                           maskStyle={{backdropFilter: "blur(10px)"}}
+                           maskStyle={{backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)"}}
                     >
                         <List
                             itemLayout="horizontal"

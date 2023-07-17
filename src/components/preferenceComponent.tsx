@@ -15,7 +15,15 @@ import {
     Avatar
 } from "antd";
 import type {RadioChangeEvent} from "antd";
-import {MoreOutlined, DeleteOutlined, SettingOutlined, GithubOutlined, LikeOutlined, LinkOutlined} from "@ant-design/icons";
+import {
+    MoreOutlined,
+    DeleteOutlined,
+    SettingOutlined,
+    GithubOutlined,
+    GiftOutlined,
+    LinkOutlined,
+    NotificationOutlined
+} from "@ant-design/icons";
 import type {CheckboxValueType} from "antd/es/checkbox/Group";
 import {changeThemeColor} from "../typescripts/publicFunctions";
 import {PreferenceInterface, ThemeColorInterface} from "../typescripts/publicInterface";
@@ -175,13 +183,16 @@ class PreferenceComponent extends React.Component {
                     headerStyle={{color: this.state.fontColor, borderBottomColor: this.state.fontColor}}
                     drawerStyle={{backgroundColor: this.state.backgroundColor}}
                     // maskStyle={{backgroundColor: this.state.backgroundColor, opacity: 0.45}}
-                    maskStyle={{backdropFilter: "blur(10px)"}}
+                    maskStyle={{backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)"}}
                     footer={
                         <Space>
                             <Button type="text" shape="round" icon={<GithubOutlined />} href="https://github.com/xyk953651094" target="_blank" style={{color: this.state.fontColor}}>
                                 主页
                             </Button>
-                            <Button type="text" shape="round" icon={<LikeOutlined />} href="https://afdian.net/a/xyk953651094" target="_blank" style={{color: this.state.fontColor}}>
+                            <Button type="text" shape="round" icon={<NotificationOutlined />} href="https://xyk953651094.blogspot.com" target="_blank" style={{color: this.state.fontColor}}>
+                                博客
+                            </Button>
+                            <Button type="text" shape="round" icon={<GiftOutlined />} href="https://afdian.net/a/xyk953651094" target="_blank" style={{color: this.state.fontColor}}>
                                 捐赠
                             </Button>
                         </Space>

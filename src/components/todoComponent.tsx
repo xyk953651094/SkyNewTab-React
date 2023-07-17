@@ -193,7 +193,7 @@ class TodoComponent extends React.Component {
                 </Popover>
                 <Modal title={"添加待办事项 " + this.state.todoSize + " / " + this.state.todoMaxSize} open={this.state.displayModal} onOk={this.modalOkBtnOnClick.bind(this)} onCancel={this.modalCancelBtnOnClick.bind(this)}
                        destroyOnClose={true}
-                       maskStyle={{backdropFilter: "blur(10px)"}}
+                       maskStyle={{backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)"}}
                 >
                     <Form>
                         <Form.Item label="待办内容" name="todoInput" rules={[{ required: true, message: "待办内容不能为空"}]}>
