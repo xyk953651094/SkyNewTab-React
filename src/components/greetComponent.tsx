@@ -103,7 +103,7 @@ class GreetComponent extends React.Component {
         if(lastRequestTime === null) {  // 第一次请求时 lastRequestTime 为 null，因此直接进行请求赋值 lastRequestTime
             this.getHoliday();
         }
-        else if(nowTimeStamp - parseInt(lastRequestTime) > 60 * 60 * 1000) {  // 必须多于一小时才能进行新的请求
+        else if(nowTimeStamp - parseInt(lastRequestTime) > 4 * 60 * 60 * 1000) {  // 必须多于四小时才能进行新的请求
             this.getHoliday();
         }
         else {  // 一小时之内使用上一次请求结果
@@ -119,7 +119,7 @@ class GreetComponent extends React.Component {
                 greetIcon: getGreetIcon(),
                 greetContent: getGreetContent(),
             })
-        }, 60 * 1000);
+        }, 60 * 60 * 1000);
     }
 
     componentWillReceiveProps(nextProps: any, prevProps: any) {

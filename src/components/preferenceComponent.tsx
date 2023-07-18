@@ -22,7 +22,7 @@ import {
     GithubOutlined,
     GiftOutlined,
     LinkOutlined,
-    NotificationOutlined
+    MessageOutlined
 } from "@ant-design/icons";
 import type {CheckboxValueType} from "antd/es/checkbox/Group";
 import {changeThemeColor} from "../typescripts/publicFunctions";
@@ -189,7 +189,7 @@ class PreferenceComponent extends React.Component {
                             <Button type="text" shape="round" icon={<GithubOutlined />} href="https://github.com/xyk953651094" target="_blank" style={{color: this.state.fontColor}}>
                                 主页
                             </Button>
-                            <Button type="text" shape="round" icon={<NotificationOutlined />} href="https://xyk953651094.blogspot.com" target="_blank" style={{color: this.state.fontColor}}>
+                            <Button type="text" shape="round" icon={<MessageOutlined />} href="https://xyk953651094.blogspot.com" target="_blank" style={{color: this.state.fontColor}}>
                                 博客
                             </Button>
                             <Button type="text" shape="round" icon={<GiftOutlined />} href="https://afdian.net/a/xyk953651094" target="_blank" style={{color: this.state.fontColor}}>

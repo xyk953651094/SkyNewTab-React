@@ -1,16 +1,18 @@
 import React from "react";
-import "./stylesheets/publicStyles.scss"
 
 import GreetComponent from "./components/greetComponent";
 import WeatherComponent from "./components/weatherComponent";
+import DailyComponent from "./components/dailyComponent";
 import TodoComponent from "./components/todoComponent";
 import PreferenceComponent from "./components/preferenceComponent";
 import WallpaperComponent from "./components/wallpaperComponent";
+import ClockComponent from "./components/clockComponent";
 import SearchComponent from "./components/searchComponent";
 import CollectionComponent from "./components/collectionComponent";
 import AuthorComponent from "./components/authorComponent"
 
 import {Layout, Row, Col, Space, message} from "antd";
+import "./stylesheets/publicStyles.scss"
 import {clientId, device} from "./typescripts/publicConstants";
 import {
     setColorTheme,
@@ -20,8 +22,7 @@ import {
     changeThemeColor
 } from "./typescripts/publicFunctions";
 import {ThemeColorInterface} from "./typescripts/publicInterface";
-import ClockComponent from "./components/clockComponent";
-import DailyComponent from "./components/dailyComponent";
+
 const {Header, Content, Footer} = Layout;
 const $ = require("jquery");
 

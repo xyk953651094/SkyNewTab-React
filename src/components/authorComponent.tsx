@@ -54,7 +54,12 @@ class AuthorComponent extends React.Component {
     }
 
     authorBtnOnClick() {
-        window.open(this.state.authorLink);
+        if(!isEmptyString(this.state.authorLink)) {
+            window.open(this.state.authorLink);
+        }
+        else {
+            message.error("暂无链接")
+        }
     }
 
     componentWillReceiveProps(nextProps: any, prevProps: any) {
