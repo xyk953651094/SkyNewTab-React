@@ -4,6 +4,13 @@
   left: -1%;
 }
 
+// Firefox 暂不支持 has
+.ant-image {
+  position: fixed;
+  top: -1%;
+  left: -1%;
+}
+
 .backgroundImage {
   object-fit: cover;
 }
