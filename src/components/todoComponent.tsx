@@ -1,8 +1,8 @@
 import React from "react";
-import {Popover, Col, Badge, Typography, Button, Checkbox, message, Row, Form, Input, Rate, Modal} from "antd";
+import {Popover, Col, Space, Badge, Typography, Button, Checkbox, message, Row, Form, Input, Rate, Modal} from "antd";
 import type { CheckboxValueType } from 'antd/es/checkbox/Group';
 import {CheckSquareOutlined, DeleteOutlined, PlusOutlined} from "@ant-design/icons";
-import {changeThemeColor} from "../typescripts/publicFunctions";
+import {changeThemeColor, getFontColor} from "../typescripts/publicFunctions";
 import {ThemeColorInterface} from "../typescripts/publicInterface";
 
 const {Text} = Typography;
@@ -13,6 +13,7 @@ type propType = {
 }
 
 type stateType = {
+    hoverColor: string,
     backgroundColor: string,
     fontColor: string,
     displayModal: boolean,
@@ -31,6 +32,7 @@ class TodoComponent extends React.Component {
     constructor(props: any) {
         super(props);
         this.state = {
+            hoverColor: "",
             backgroundColor: "",
             fontColor: "",
             displayModal: false,
@@ -39,6 +41,16 @@ class TodoComponent extends React.Component {
             todoMaxSize: 5,
             priority: 0
         };
+    }
+
+    btnMouseOver(e: any) {
+        e.currentTarget.style.backgroundColor = this.state.hoverColor;
+        e.currentTarget.style.color = getFontColor(this.state.hoverColor);
+    }
+
+    btnMouseOut(e:any) {
+        e.currentTarget.style.backgroundColor = "transparent";
+        e.currentTarget.style.color = this.state.fontColor;
     }
 
     removeAllBtnOnClick() {
@@ -151,6 +163,7 @@ class TodoComponent extends React.Component {
     componentWillReceiveProps(nextProps: any, prevProps: any) {
         if (nextProps.themeColor !== prevProps.themeColor) {
             this.setState({
+                hoverColor: nextProps.themeColor.themeColor,
                 backgroundColor: nextProps.themeColor.componentBackgroundColor,
                 fontColor: nextProps.themeColor.componentFontColor,
             }, ()=>{
@@ -166,10 +179,12 @@ class TodoComponent extends React.Component {
                     <Text style={{color: this.state.fontColor}}>{"待办 " + this.state.todoSize + " / " + this.state.todoMaxSize}</Text>
                 </Col>
                 <Col span={12} style={{textAlign: "right"}}>
-                    <Button type="text" shape="circle" icon={<PlusOutlined />}
-                            style={{color: this.state.fontColor}} onClick={this.showAddModalBtnOnClick.bind(this)} />
-                    <Button type="text" shape="circle" icon={<DeleteOutlined />}
-                            style={{color: this.state.fontColor}} onClick={this.removeAllBtnOnClick.bind(this)} />
+                    <Space>
+                        <Button type="text" shape="circle" icon={<PlusOutlined />} onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
+                                style={{color: this.state.fontColor}} onClick={this.showAddModalBtnOnClick.bind(this)} />
+                        <Button type="text" shape="circle" icon={<DeleteOutlined />} onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
+                                style={{color: this.state.fontColor}} onClick={this.removeAllBtnOnClick.bind(this)} />
+                    </Space>
                 </Col>
             </Row>
         );

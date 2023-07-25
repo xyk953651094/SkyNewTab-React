@@ -25,7 +25,7 @@ import {
     MessageOutlined
 } from "@ant-design/icons";
 import type {CheckboxValueType} from "antd/es/checkbox/Group";
-import {changeThemeColor} from "../typescripts/publicFunctions";
+import {changeThemeColor, getFontColor} from "../typescripts/publicFunctions";
 import {PreferenceInterface, ThemeColorInterface} from "../typescripts/publicInterface";
 import {defaultFormInitialValues, device} from "../typescripts/publicConstants";
 
@@ -38,6 +38,7 @@ type propType = {
 }
 
 type stateType = {
+    hoverColor: string,
     backgroundColor: string,
     fontColor: string,
     displayDrawer: boolean,
@@ -55,6 +56,7 @@ class PreferenceComponent extends React.Component {
     constructor(props: any) {
         super(props);
         this.state = {
+            hoverColor: "",
             backgroundColor: "",
             fontColor: "",
             displayDrawer: false,
@@ -62,6 +64,16 @@ class PreferenceComponent extends React.Component {
             holidayData: "",
             formInitialValues: defaultFormInitialValues
         };
+    }
+
+    btnMouseOver(e: any) {
+        e.currentTarget.style.backgroundColor = this.state.hoverColor;
+        e.currentTarget.style.color = getFontColor(this.state.hoverColor);
+    }
+
+    btnMouseOut(e:any) {
+        e.currentTarget.style.backgroundColor = "transparent";
+        e.currentTarget.style.color = this.state.fontColor;
     }
 
     showDrawerBtnOnClick() {
@@ -152,6 +164,7 @@ class PreferenceComponent extends React.Component {
     componentWillReceiveProps(nextProps: any, prevProps: any) {
         if (nextProps.themeColor !== prevProps.themeColor) {
             this.setState({
+                hoverColor: nextProps.themeColor.themeColor,
                 backgroundColor: nextProps.themeColor.componentBackgroundColor,
                 fontColor: nextProps.themeColor.componentFontColor,
             }, ()=>{
@@ -186,13 +199,13 @@ class PreferenceComponent extends React.Component {
                     maskStyle={{backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)"}}
                     footer={
                         <Space>
-                            <Button type="text" shape="round" icon={<GithubOutlined />} href="https://github.com/xyk953651094" target="_blank" style={{color: this.state.fontColor}}>
+                            <Button type="text" shape="round" icon={<GithubOutlined />} href="https://github.com/xyk953651094" target="_blank" onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)} style={{color: this.state.fontColor}}>
                                 主页
                             </Button>
-                            <Button type="text" shape="round" icon={<MessageOutlined />} href="https://xyk953651094.blogspot.com" target="_blank" style={{color: this.state.fontColor}}>
+                            <Button type="text" shape="round" icon={<MessageOutlined />} href="https://xyk953651094.blogspot.com" target="_blank" onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)} style={{color: this.state.fontColor}}>
                                 博客
                             </Button>
-                            <Button type="text" shape="round" icon={<GiftOutlined />} href="https://afdian.net/a/xyk953651094" target="_blank" style={{color: this.state.fontColor}}>
+                            <Button type="text" shape="round" icon={<GiftOutlined />} href="https://afdian.net/a/xyk953651094" target="_blank" onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)} style={{color: this.state.fontColor}}>
                                 捐赠
                             </Button>
                         </Space>
@@ -259,7 +272,7 @@ class PreferenceComponent extends React.Component {
                                         </Checkbox.Group>
                                     </Form.Item>
                                     <Form.Item name="clearStorageButton" label="其他设置">
-                                        <Button type="text" shape="round" icon={<DeleteOutlined />} onClick={this.clearStorageBtnOnClick.bind(this)} style={{color: this.state.fontColor}}>
+                                        <Button type="text" shape="round" icon={<DeleteOutlined />} onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)} onClick={this.clearStorageBtnOnClick.bind(this)} style={{color: this.state.fontColor}}>
                                             清理缓存
                                         </Button>
                                     </Form.Item>
@@ -276,19 +289,19 @@ class PreferenceComponent extends React.Component {
                                     <List.Item>
                                         <Space>
                                             <Avatar size={"small"} shape={"square"} src={"https://unsplash.com/favicon.ico"} />
-                                            <Button type="text" shape="round" href="https://unsplash.com/" target="_blank"  style={{color: this.state.fontColor}}>Unsplash.com</Button>
+                                            <Button type="text" shape="round" href="https://unsplash.com/" target="_blank" onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)} style={{color: this.state.fontColor}}>Unsplash.com</Button>
                                         </Space>
                                     </List.Item>
                                     <List.Item>
                                         <Space>
                                             <Avatar size={"small"} shape={"square"} src={"https://www.pexels.com/favicon.ico"} />
-                                            <Button type="text" shape="round" href="https://www.pexels.com/" target="_blank"  style={{color: this.state.fontColor}}>Pexels.com</Button>
+                                            <Button type="text" shape="round" href="https://www.pexels.com/" target="_blank" onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)} style={{color: this.state.fontColor}}>Pexels.com</Button>
                                         </Space>
                                     </List.Item>
                                     <List.Item>
                                         <Space>
                                             <Avatar size={"small"} shape={"square"} src={"https://pixabay.com/favicon.ico"} />
-                                            <Button type="text" shape="round" href="https://pixabay.com/" target="_blank"  style={{color: this.state.fontColor}}>Pixabay.com</Button>
+                                            <Button type="text" shape="round" href="https://pixabay.com/" target="_blank" onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)} style={{color: this.state.fontColor}}>Pixabay.com</Button>
                                         </Space>
                                     </List.Item>
                                 </List>

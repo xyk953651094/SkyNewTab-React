@@ -2,7 +2,7 @@ import React from "react";
 import {Space, Image, Button, message} from "antd";
 import {UserOutlined, EnvironmentOutlined, InfoCircleOutlined} from "@ant-design/icons";
 import "../stylesheets/popupComponent.scss"
-import {isEmptyString} from "../typescripts/publicFunctions";
+import {getFontColor, isEmptyString} from "../typescripts/publicFunctions";
 
 type propType = {
     imageData: any,
@@ -16,6 +16,7 @@ type stateType = {
     imagePreviewUrl: string,
     imageLocation: string,
     imageDescription: string,
+    hoverColor: string,
     fontColor: string,
 }
 
@@ -34,8 +35,19 @@ class PopupImageComponent extends React.Component {
             imagePreviewUrl: "",
             imageLocation: "暂无信息",
             imageDescription: "暂无信息",
+            hoverColor: "#000000",
             fontColor: "#000000"
         }
+    }
+
+    btnMouseOver(e: any) {
+        e.currentTarget.style.backgroundColor = this.state.hoverColor;
+        e.currentTarget.style.color = getFontColor(this.state.hoverColor);
+    }
+
+    btnMouseOut(e:any) {
+        e.currentTarget.style.backgroundColor = "transparent";
+        e.currentTarget.style.color = this.state.fontColor;
     }
 
     authorBtnOnClick() {
@@ -65,6 +77,7 @@ class PopupImageComponent extends React.Component {
                 imagePreviewUrl: nextProps.imageData.urls.thumb,
                 imageLocation: isEmptyString(nextProps.imageData.location.name)? "暂无信息" : nextProps.imageData.location.name,
                 imageDescription: isEmptyString(nextProps.imageData.alt_description)? "暂无信息" : nextProps.imageData.alt_description,
+                hoverColor: nextProps.imageData.color
             })
         }
 
@@ -86,13 +99,13 @@ class PopupImageComponent extends React.Component {
                     style={{borderRadius: "10px"}}
                 />
                 <Space direction={"vertical"}>
-                    <Button type="text" shape="round" icon={<UserOutlined />} onClick={this.authorBtnOnClick.bind(this)} style={{color: this.state.fontColor}}>
+                    <Button type="text" shape="round" icon={<UserOutlined />} onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)} onClick={this.authorBtnOnClick.bind(this)} style={{color: this.state.fontColor}}>
                         {this.state.authorName}
                     </Button>
-                    <Button type="text" shape="round" icon={<EnvironmentOutlined />} onClick={this.imageBtnOnClick.bind(this)} style={{color: this.state.fontColor}}>
+                    <Button type="text" shape="round" icon={<EnvironmentOutlined />} onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)} onClick={this.imageBtnOnClick.bind(this)} style={{color: this.state.fontColor}}>
                         {this.state.imageLocation}
                     </Button>
-                    <Button type="text" shape="round" icon={<InfoCircleOutlined />} onClick={this.imageBtnOnClick.bind(this)} style={{color: this.state.fontColor}}>
+                    <Button type="text" shape="round" icon={<InfoCircleOutlined />} onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)} onClick={this.imageBtnOnClick.bind(this)} style={{color: this.state.fontColor}}>
                         {this.state.imageDescription}
                     </Button>
                 </Space>

@@ -16,7 +16,7 @@ import "./stylesheets/publicStyles.scss"
 import {clientId, device} from "./typescripts/publicConstants";
 import {
     setColorTheme,
-    getComponentBackgroundColor,
+    getReverseColor,
     getFontColor,
     httpRequest,
     changeThemeColor
@@ -50,6 +50,7 @@ class App extends React.Component {
         this.state = {
             componentDisplay: "none",
             themeColor: {
+                "themeColor": "",
                 "componentBackgroundColor": "",
                 "componentFontColor": "",
             },
@@ -99,10 +100,11 @@ class App extends React.Component {
                 let bodyFontColor = getFontColor(bodyBackgroundColor);
                 changeThemeColor("body", bodyBackgroundColor, bodyFontColor);
 
-                let componentBackgroundColor = getComponentBackgroundColor(data.color);
+                let componentBackgroundColor = getReverseColor(data.color);
                 let componentFontColor = getFontColor(componentBackgroundColor);
                 this.setState({
                     themeColor: {
+                        "themeColor": data.color,
                         "componentBackgroundColor": componentBackgroundColor,
                         "componentFontColor": componentFontColor,
                     },

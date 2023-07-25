@@ -2,7 +2,7 @@ import React from "react";
 import {Button, Popover, Typography, message, Space, Divider, List, Avatar} from "antd";
 import {CameraOutlined, LinkOutlined} from "@ant-design/icons";
 import {unsplashUrl} from "../typescripts/publicConstants";
-import {changeThemeColor, isEmptyString} from "../typescripts/publicFunctions";
+import {changeThemeColor, getFontColor, isEmptyString} from "../typescripts/publicFunctions";
 import {ThemeColorInterface} from "../typescripts/publicInterface";
 import "../stylesheets/publicStyles.scss"
 
@@ -15,6 +15,7 @@ type propType = {
 }
 
 type stateType = {
+    hoverColor: string,
     backgroundColor: string,
     fontColor: string,
     authorName: string,
@@ -38,6 +39,7 @@ class AuthorComponent extends React.Component {
     constructor(props: any) {
         super(props);
         this.state = {
+            hoverColor: "",
             backgroundColor: "",
             fontColor: "",
             authorName: "暂无信息",
@@ -53,6 +55,16 @@ class AuthorComponent extends React.Component {
         };
     }
 
+    btnMouseOver(e: any) {
+        e.currentTarget.style.backgroundColor = this.state.hoverColor;
+        e.currentTarget.style.color = getFontColor(this.state.hoverColor);
+    }
+
+    btnMouseOut(e:any) {
+        e.currentTarget.style.backgroundColor = "transparent";
+        e.currentTarget.style.color = this.state.fontColor;
+    }
+
     authorBtnOnClick() {
         if(!isEmptyString(this.state.authorLink)) {
             window.open(this.state.authorLink);
@@ -62,9 +74,26 @@ class AuthorComponent extends React.Component {
         }
     }
 
+    gotoUser() {
+        if (!isEmptyString(this.state.authorLink)) {
+            window.open(this.state.authorLink + unsplashUrl);
+        } else {
+            message.error("无跳转链接");
+        }
+    }
+
+    gotoImage() {
+        if (!isEmptyString(this.state.imageLink)) {
+            window.open(this.state.imageLink + unsplashUrl);
+        } else {
+            message.error("无跳转链接");
+        }
+    }
+
     componentWillReceiveProps(nextProps: any, prevProps: any) {
         if (nextProps.themeColor !== prevProps.themeColor) {
             this.setState({
+                hoverColor: nextProps.themeColor.themeColor,
                 backgroundColor: nextProps.themeColor.componentBackgroundColor,
                 fontColor: nextProps.themeColor.componentFontColor,
             });
@@ -88,26 +117,10 @@ class AuthorComponent extends React.Component {
         }
     }
 
-    gotoUser() {
-        if (!isEmptyString(this.state.authorLink)) {
-            window.open(this.state.authorLink + unsplashUrl);
-        } else {
-            message.error("无跳转链接");
-        }
-    }
-
-    gotoImage() {
-        if (!isEmptyString(this.state.imageLink)) {
-            window.open(this.state.imageLink + unsplashUrl);
-        } else {
-            message.error("无跳转链接");
-        }
-    }
-
     render() {
         const popoverContent = (
             <List>
-                <List.Item actions={[<Button type="text" shape="circle" icon={<LinkOutlined />} onClick={this.gotoUser.bind(this)} style={{color: this.state.fontColor}}/>]}>
+                <List.Item actions={[<Button type="text" shape="circle" icon={<LinkOutlined />} onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)} onClick={this.gotoUser.bind(this)} style={{color: this.state.fontColor}}/>]}>
                     <List.Item.Meta
                         avatar={<Avatar size="large" src={this.state.authorIconUrl} alt={"作者"}/>}
                         title={this.state.authorName}
@@ -131,7 +144,7 @@ class AuthorComponent extends React.Component {
                         }
                     />
                 </List.Item>
-                <List.Item actions={[<Button type="text" shape="circle" icon={<LinkOutlined />} onClick={this.gotoImage.bind(this)} style={{color: this.state.fontColor}}/>]}>
+                <List.Item actions={[<Button type="text" shape="circle" icon={<LinkOutlined />} onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)} onClick={this.gotoImage.bind(this)} style={{color: this.state.fontColor}}/>]}>
                     <List.Item.Meta
                         avatar={<Avatar size="large" shape={"square"} src={this.state.imagePreviewUrl} alt={"信息"}/>}
                         title={this.state.imageLocation}

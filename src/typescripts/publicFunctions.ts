@@ -157,6 +157,7 @@ export function setColorTheme() {
     body.style.backgroundColor = theme[randomNum].bodyBackgroundColor;    // 设置body背景颜色
 
     let returnValue: ThemeColorInterface = {
+        "themeColor": theme[randomNum].bodyBackgroundColor,
         "componentBackgroundColor": theme[randomNum].componentBackgroundColor,
         "componentFontColor": getFontColor(theme[randomNum].componentBackgroundColor),
     }
@@ -164,7 +165,7 @@ export function setColorTheme() {
 }
 
 // 根据图片背景颜色获取元素反色效果
-export function getComponentBackgroundColor(color: string) {
+export function getReverseColor(color: string) {
     color = "0x" + color.replace("#", '');
     let newColor = "000000" + (0xFFFFFF - parseInt(color)).toString(16);
     return "#" + newColor.substring(newColor.length-6, newColor.length);

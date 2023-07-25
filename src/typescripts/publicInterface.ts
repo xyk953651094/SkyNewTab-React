@@ -6,6 +6,7 @@ export interface PreferenceInterface {
 }
 
 export interface ThemeColorInterface {
+    "themeColor": string,
     "componentBackgroundColor": string,
     "componentFontColor": string,
 }

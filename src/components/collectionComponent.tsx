@@ -2,6 +2,7 @@ import React from "react";
 import {Col, Space, Button, Tooltip, Modal, Form, Input, List, Avatar, message} from "antd";
 import {PlusOutlined, EditOutlined, DeleteOutlined} from "@ant-design/icons";
 import {ThemeColorInterface} from "../typescripts/publicInterface";
+import {getFontColor} from "../typescripts/publicFunctions";
 
 const $ = require("jquery");
 
@@ -10,6 +11,7 @@ type propType = {
 }
 
 type stateType = {
+    hoverColor: string,
     backgroundColor: string,
     fontColor: string,
     collections: any,
@@ -29,6 +31,7 @@ class CollectionComponent extends React.Component {
     constructor(props: any) {
         super(props);
         this.state = {
+            hoverColor: "",
             backgroundColor: "",
             fontColor: "",
             collections: [],
@@ -38,6 +41,16 @@ class CollectionComponent extends React.Component {
             collectionSize: 0,
             collectionMaxSize: 5
         };
+    }
+
+    btnMouseOver(e: any) {
+        e.currentTarget.style.backgroundColor = this.state.hoverColor;
+        e.currentTarget.style.color = getFontColor(this.state.hoverColor);
+    }
+
+    btnMouseOut(e:any) {
+        e.currentTarget.style.backgroundColor = "transparent";
+        e.currentTarget.style.color = this.state.fontColor;
     }
 
     // 添加导航弹窗
@@ -163,6 +176,7 @@ class CollectionComponent extends React.Component {
     componentWillReceiveProps(nextProps: any, prevProps: any) {
         if (nextProps.themeColor !== prevProps.themeColor) {
             this.setState({
+                hoverColor: nextProps.themeColor.themeColor,
                 backgroundColor: nextProps.themeColor.componentBackgroundColor,
                 fontColor: nextProps.themeColor.componentFontColor,
             });
@@ -215,7 +229,7 @@ class CollectionComponent extends React.Component {
                             dataSource={this.state.collectionData}
                             renderItem={(item: any) => (
                                 <List.Item actions={[
-                                    <Button type="text" icon={<DeleteOutlined />} onClick={this.removeBtnOnClick.bind(this, item)} style={{color: this.state.fontColor}}>
+                                    <Button type="text" shape={"round"} icon={<DeleteOutlined />} onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)} onClick={this.removeBtnOnClick.bind(this, item)} style={{color: this.state.fontColor}}>
                                         删除
                                     </Button>
                                 ]}>
