@@ -247,8 +247,8 @@ class App extends React.Component {
         return (
             <Layout>
                 <Header id={"header"} className={"zIndexMiddle"}>
-                    <Row>
-                        <Col xs={0} sm={0} md={12} lg={{span: 11, offset: 1}} xl={{span: 11, offset: 1}}>
+                    <Row justify="center">
+                        <Col xs={0} sm={0} md={10} lg={10} xl={10} xxl={10}>
                             <Space size={"small"}>
                                 <GreetComponent
                                     themeColor={this.state.themeColor}
@@ -260,7 +260,7 @@ class App extends React.Component {
                                 />
                             </Space>
                         </Col>
-                        <Col xs={24} sm={24} md={12} lg={11} xl={11} style={{textAlign: "right"}}>
+                        <Col xs={24} sm={24} md={10} lg={10} xl={10} xxl={10} style={{textAlign: "right"}}>
                             <Space size={"small"}>
                                 <DailyComponent
                                     themeColor={this.state.themeColor}
@@ -295,8 +295,8 @@ class App extends React.Component {
                     </Space>
                 </Content>
                 <Footer id={"footer"}>
-                    <Row>
-                        <Col xs={0} sm={0} md={24} lg={23} xl={23} style={{textAlign: "right"}}>
+                    <Row justify="center">
+                        <Col xs={0} sm={0} md={20} lg={20} xl={20} style={{textAlign: "right"}}>
                             <Space size={"small"} align={"end"}>
                                 <AuthorComponent
                                     themeColor={this.state.themeColor}

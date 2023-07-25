@@ -1,10 +1,11 @@
 import React from "react";
-import {Row, Typography, Space} from "antd";
+import {Row, Col, Typography, Space} from "antd";
 import "../stylesheets/clockComponent.scss"
 import {getTimeDetails} from "../typescripts/publicFunctions";
 import {ThemeColorInterface} from "../typescripts/publicInterface";
 
 const {Text} = Typography;
+const $ = require("jquery");
 
 type propType = {
     themeColor: ThemeColorInterface,
@@ -35,6 +36,18 @@ class ClockComponent extends React.Component {
         };
     }
 
+    btnMouseOver(e: any) {
+        e.currentTarget.style.backgroundColor = this.state.backgroundColor;
+        $(".clockText").css("color", this.state.fontColor);
+        $(".dateText").css("color", this.state.fontColor);
+    }
+
+    btnMouseOut(e:any) {
+        e.currentTarget.style.backgroundColor = "transparent";
+        $(".clockText").css("color", this.state.backgroundColor);
+        $(".dateText").css("color", this.state.backgroundColor);
+    }
+
     componentDidMount() {
         setInterval(() => {
             let timeDetails = getTimeDetails(new Date());
@@ -57,20 +70,22 @@ class ClockComponent extends React.Component {
 
     render() {
         return (
-            <Row>
-                <Space  align="center" size="small" id={"clock"} className={"zIndexHigh"}>
-                    <Text className={"clockText"} style={{color: this.state.backgroundColor}}>
-                        {this.state.currentTime}
-                    </Text>
-                    <Space align="center" size="small" direction="vertical">
-                        <Text className={"dateText"} style={{color: this.state.backgroundColor}}>
-                            {this.state.currentWeek}
+            <Row justify={"center"}>
+                <Col span={24} className={"zIndexHigh"} style={{padding: "5px", borderRadius: "10px"}} onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
+                    <Space align="center" size="small" id={"clock"}>
+                        <Text className={"clockText"} style={{color: this.state.backgroundColor}}>
+                            {this.state.currentTime}
                         </Text>
-                        <Text className={"dateText"} style={{color: this.state.backgroundColor}}>
-                            {this.state.currentDate}
-                        </Text>
+                        <Space align="center" size="small" direction="vertical">
+                            <Text className={"dateText"} style={{color: this.state.backgroundColor}}>
+                                {this.state.currentWeek}
+                            </Text>
+                            <Text className={"dateText"} style={{color: this.state.backgroundColor}}>
+                                {this.state.currentDate}
+                            </Text>
+                        </Space>
                     </Space>
-                </Space>
+                </Col>
             </Row>
         );
     }

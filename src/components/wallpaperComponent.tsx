@@ -124,9 +124,9 @@ class WallpaperComponent extends React.Component {
                 preview={false}
                 src={this.state.imageLink}
                 style={{display: this.props.display}}
-                placeholder={
-                    <canvas id="blurHashCanvas" className={"blurHashCanvas zIndexLow"}></canvas>
-                }
+                // placeholder={
+                //     <canvas id="blurHashCanvas" className={"blurHashCanvas zIndexLow"}></canvas>
+                // }
             />
         );
     }

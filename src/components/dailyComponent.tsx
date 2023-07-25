@@ -195,7 +195,7 @@ class DailyComponent extends React.Component {
                 </Col>
                 <Col span={12} style={{textAlign: "right"}}>
                     <Space>
-                        <Button type="text" shape="circle" size={"small"} icon={<PlusOutlined />}  onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
+                        <Button type="text" shape="circle" size={"small"} icon={<PlusOutlined />} onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
                                 style={{color: this.state.fontColor}} onClick={this.showAddModalBtnOnClick.bind(this)} />
                         <Button type="text" shape="circle" size={"small"} icon={<DeleteOutlined />} onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
                                 style={{color: this.state.fontColor}} onClick={this.removeAllBtnOnClick.bind(this)} />
