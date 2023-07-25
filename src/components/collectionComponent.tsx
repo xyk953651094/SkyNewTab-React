@@ -205,7 +205,7 @@ class CollectionComponent extends React.Component {
                             icon={<PlusOutlined />} onClick={this.showAddModalBtnOnClick.bind(this)}/>
                     <Button type="primary" shape="circle" className="componentTheme" style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}}
                             icon={<EditOutlined />} onClick={this.showEditModalBtnOnClick.bind(this)}/>
-                    <Modal title={"添加链接 " + this.state.collectionSize + " / " + this.state.collectionMaxSize}
+                    <Modal title={"添加链接 " + this.state.collectionSize + " / " + this.state.collectionMaxSize} closeIcon={false}
                            open={this.state.displayAddModal} onOk={this.addModalOkBtnOnClick.bind(this)} onCancel={this.addModalCancelBtnOnClick.bind(this)}
                            destroyOnClose={true}
                            maskStyle={{backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)"}}
@@ -219,7 +219,7 @@ class CollectionComponent extends React.Component {
                             </Form.Item>
                         </Form>
                     </Modal>
-                    <Modal title={"编辑链接 " + this.state.collectionSize + " / " + this.state.collectionMaxSize}
+                    <Modal title={"编辑链接 " + this.state.collectionSize + " / " + this.state.collectionMaxSize} closeIcon={false}
                            open={this.state.displayEditModal} onOk={this.editModalOkBtnOnClick.bind(this)} onCancel={this.editModalCancelBtnOnClick.bind(this)}
                            maskStyle={{backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)"}}
                     >

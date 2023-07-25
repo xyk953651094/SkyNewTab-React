@@ -193,6 +193,7 @@ class PreferenceComponent extends React.Component {
                     placement={this.state.drawerPosition}
                     onClose={this.drawerOnClose.bind(this)}
                     open={this.state.displayDrawer}
+                    closeIcon={false}
                     headerStyle={{color: this.state.fontColor, borderBottomColor: this.state.fontColor}}
                     drawerStyle={{backgroundColor: this.state.backgroundColor}}
                     // maskStyle={{backgroundColor: this.state.backgroundColor, opacity: 0.45}}

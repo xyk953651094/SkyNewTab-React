@@ -180,9 +180,9 @@ class TodoComponent extends React.Component {
                 </Col>
                 <Col span={12} style={{textAlign: "right"}}>
                     <Space>
-                        <Button type="text" shape="circle" icon={<PlusOutlined />} onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
+                        <Button type="text" shape="circle" size={"small"} icon={<PlusOutlined />} onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
                                 style={{color: this.state.fontColor}} onClick={this.showAddModalBtnOnClick.bind(this)} />
-                        <Button type="text" shape="circle" icon={<DeleteOutlined />} onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
+                        <Button type="text" shape="circle" size={"small"} icon={<DeleteOutlined />} onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
                                 style={{color: this.state.fontColor}} onClick={this.removeAllBtnOnClick.bind(this)} />
                     </Space>
                 </Col>
@@ -206,7 +206,8 @@ class TodoComponent extends React.Component {
                         />
                     </Badge>
                 </Popover>
-                <Modal title={"添加待办事项 " + this.state.todoSize + " / " + this.state.todoMaxSize} open={this.state.displayModal} onOk={this.modalOkBtnOnClick.bind(this)} onCancel={this.modalCancelBtnOnClick.bind(this)}
+                <Modal title={"添加待办事项 " + this.state.todoSize + " / " + this.state.todoMaxSize} closeIcon={false}
+                       open={this.state.displayModal} onOk={this.modalOkBtnOnClick.bind(this)} onCancel={this.modalCancelBtnOnClick.bind(this)}
                        destroyOnClose={true}
                        maskStyle={{backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)"}}
                 >
