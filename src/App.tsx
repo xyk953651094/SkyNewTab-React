@@ -238,7 +238,10 @@ class App extends React.Component {
                 // $(".ant-modal-close-x").css("color", this.state.themeColor.componentFontColor);
                 $(".ant-empty-description").css("color", this.state.themeColor.componentFontColor);
                 $(".ant-tooltip-inner").css("color", this.state.themeColor.componentFontColor);
-                // $(".ant-modal-mask").css("zIndex", 1);
+                $(".ant-modal-footer > .ant-btn").addClass("ant-btn-round");
+                // $(".ant-modal-footer > .ant-btn").addClass("ant-btn-round ant-btn-text");
+                // $(".ant-modal-footer").children(":first-child").removeClass("ant-btn-default");
+                // $(".ant-modal-footer").children(":last-child").removeClass("ant-btn-primary");
             }
         });
     }

@@ -94,7 +94,7 @@ class SearchComponent extends React.Component {
                 />
 
                 <Input
-                    className={"searchInput zIndexHigh"}
+                    className={"searchInput componentTheme zIndexHigh"}
                     prefix={<Avatar size="small" src={this.state.searchEngineIconUrl} />}
                     suffix={<SearchOutlined />}
                     placeholder="按下 Enter 键搜索"

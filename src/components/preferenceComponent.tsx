@@ -286,26 +286,20 @@ class PreferenceComponent extends React.Component {
                                   headStyle={{backgroundColor: this.state.backgroundColor, color: this.state.fontColor, borderBottom: "2px solid " + this.state.fontColor}}
                                   bodyStyle={{backgroundColor: this.state.backgroundColor}}
                             >
-                                <List size="small">
-                                    <List.Item>
-                                        <Space>
-                                            <Avatar size={"small"} shape={"square"} src={"https://unsplash.com/favicon.ico"} />
-                                            <Button type="text" shape="round" href="https://unsplash.com/" target="_blank" onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)} style={{color: this.state.fontColor}}>Unsplash.com</Button>
-                                        </Space>
-                                    </List.Item>
-                                    <List.Item>
-                                        <Space>
-                                            <Avatar size={"small"} shape={"square"} src={"https://www.pexels.com/favicon.ico"} />
-                                            <Button type="text" shape="round" href="https://www.pexels.com/" target="_blank" onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)} style={{color: this.state.fontColor}}>Pexels.com</Button>
-                                        </Space>
-                                    </List.Item>
-                                    <List.Item>
-                                        <Space>
-                                            <Avatar size={"small"} shape={"square"} src={"https://pixabay.com/favicon.ico"} />
-                                            <Button type="text" shape="round" href="https://pixabay.com/" target="_blank" onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)} style={{color: this.state.fontColor}}>Pixabay.com</Button>
-                                        </Space>
-                                    </List.Item>
-                                </List>
+                                <Space direction={"vertical"}>
+                                    <Button type="text" shape="round" href="https://unsplash.com/" target="_blank" onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)} style={{color: this.state.fontColor}}>
+                                        <Avatar size={16} shape={"square"} src={"https://unsplash.com/favicon.ico"} />
+                                        &nbsp;&nbsp;Unsplash.com
+                                    </Button>
+                                    <Button type="text" shape="round" href="https://www.pexels.com/" target="_blank" onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)} style={{color: this.state.fontColor}}>
+                                        <Avatar size={16} shape={"square"} src={"https://www.pexels.com/favicon.ico"} />
+                                        &nbsp;&nbsp;Pexels.com
+                                    </Button>
+                                    <Button type="text" shape="round" href="https://pixabay.com/" target="_blank" onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)} style={{color: this.state.fontColor}}>
+                                        <Avatar size={16} shape={"square"} src={"https://pixabay.com/favicon.ico"} />
+                                        &nbsp;&nbsp;Pixabay.com
+                                    </Button>
+                                </Space>
                             </Card>
                         </Col>
                     </Row>

@@ -1,5 +1,5 @@
 import React from "react";
-import {Col, Space, Button, Tooltip, Modal, Form, Input, List, Avatar, message} from "antd";
+import {Row, Col, Space, Button, Tooltip, Modal, Form, Input, List, Avatar, message} from "antd";
 import {PlusOutlined, EditOutlined, DeleteOutlined} from "@ant-design/icons";
 import {ThemeColorInterface} from "../typescripts/publicInterface";
 import {getFontColor} from "../typescripts/publicFunctions";
@@ -160,6 +160,18 @@ class CollectionComponent extends React.Component {
         }
     }
 
+    removeAllBtnOnClick() {
+        let tempCollections = localStorage.getItem("collections");
+        if(tempCollections){
+            localStorage.removeItem("collections");
+
+            this.setState({
+                collectionData: [],
+                collectionSize: 0,
+            })
+        }
+    }
+
     componentDidMount() {
         let collections = [];
         let tempCollections = localStorage.getItem("collections");
@@ -169,6 +181,8 @@ class CollectionComponent extends React.Component {
             this.setState({
                 collectionData: collections,
                 collectionSize: collections.length
+            }, ()=> {
+                message.success("删除成功");
             })
         }
     }
@@ -205,7 +219,9 @@ class CollectionComponent extends React.Component {
                             icon={<PlusOutlined />} onClick={this.showAddModalBtnOnClick.bind(this)}/>
                     <Button type="primary" shape="circle" className="componentTheme" style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}}
                             icon={<EditOutlined />} onClick={this.showEditModalBtnOnClick.bind(this)}/>
-                    <Modal title={"添加链接 " + this.state.collectionSize + " / " + this.state.collectionMaxSize} closeIcon={false}
+                    <Button type="primary" shape="circle" className="componentTheme" style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}}
+                            icon={<DeleteOutlined />} onClick={this.removeAllBtnOnClick.bind(this)}/>
+                    <Modal title={"添加链接 " + this.state.collectionSize + " / " + this.state.collectionMaxSize} closeIcon={false} centered
                            open={this.state.displayAddModal} onOk={this.addModalOkBtnOnClick.bind(this)} onCancel={this.addModalCancelBtnOnClick.bind(this)}
                            destroyOnClose={true}
                            maskStyle={{backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)"}}
@@ -219,7 +235,7 @@ class CollectionComponent extends React.Component {
                             </Form.Item>
                         </Form>
                     </Modal>
-                    <Modal title={"编辑链接 " + this.state.collectionSize + " / " + this.state.collectionMaxSize} closeIcon={false}
+                    <Modal title={"编辑链接 " + this.state.collectionSize + " / " + this.state.collectionMaxSize} closeIcon={false} centered
                            open={this.state.displayEditModal} onOk={this.editModalOkBtnOnClick.bind(this)} onCancel={this.editModalCancelBtnOnClick.bind(this)}
                            maskStyle={{backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)"}}
                     >
@@ -227,6 +243,13 @@ class CollectionComponent extends React.Component {
                             itemLayout="horizontal"
                             size="small"
                             dataSource={this.state.collectionData}
+                            header={
+                                <Row justify={"end"}>
+                                    <Button type="text" shape={"round"} icon={<DeleteOutlined />} onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)} onClick={this.removeAllBtnOnClick.bind(this)} style={{color: this.state.fontColor}}>
+                                        全部删除
+                                    </Button>
+                                </Row>
+                            }
                             renderItem={(item: any) => (
                                 <List.Item actions={[
                                     <Button type="text" shape={"round"} icon={<DeleteOutlined />} onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)} onClick={this.removeBtnOnClick.bind(this, item)} style={{color: this.state.fontColor}}>
