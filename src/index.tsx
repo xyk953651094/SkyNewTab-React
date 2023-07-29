@@ -5,16 +5,14 @@ import App from "./App";
 import {ConfigProvider} from "antd";
 import zhCN from "antd/es/locale/zh_CN"
 
-import PopupComponent from "./components/popupComponent"
-
 const root = ReactDOM.createRoot(
     document.getElementById("root") as HTMLElement
 );
 root.render(
     // <React.StrictMode>
-        <ConfigProvider locale={zhCN}>
-            <App/>
-        </ConfigProvider>
+    <ConfigProvider locale={zhCN}>
+        <App/>
+    </ConfigProvider>
     // </React.StrictMode>
 
     // <PopupComponent/>

@@ -1,6 +1,6 @@
 import React from "react";
-import {Space, Image, Button, message} from "antd";
-import {UserOutlined, EnvironmentOutlined, InfoCircleOutlined} from "@ant-design/icons";
+import {Button, Image, message, Space} from "antd";
+import {EnvironmentOutlined, InfoCircleOutlined, UserOutlined} from "@ant-design/icons";
 import "../stylesheets/popupComponent.scss"
 import {getFontColor, isEmptyString} from "../typescripts/publicFunctions";
 
@@ -45,25 +45,23 @@ class PopupImageComponent extends React.Component {
         e.currentTarget.style.color = getFontColor(this.state.hoverColor);
     }
 
-    btnMouseOut(e:any) {
+    btnMouseOut(e: any) {
         e.currentTarget.style.backgroundColor = "transparent";
         e.currentTarget.style.color = this.state.fontColor;
     }
 
     authorBtnOnClick() {
-        if(!isEmptyString(this.state.authorLink)) {
+        if (!isEmptyString(this.state.authorLink)) {
             window.open(this.state.authorLink);
-        }
-        else {
+        } else {
             message.error("暂无链接")
         }
     }
 
     imageBtnOnClick() {
-        if(!isEmptyString(this.state.imageLink)) {
+        if (!isEmptyString(this.state.imageLink)) {
             window.open(this.state.imageLink);
-        }
-        else {
+        } else {
             message.error("暂无链接")
         }
     }
@@ -75,8 +73,8 @@ class PopupImageComponent extends React.Component {
                 authorLink: nextProps.imageData.user.links.html,
                 imageLink: nextProps.imageData.links.html,
                 imagePreviewUrl: nextProps.imageData.urls.thumb,
-                imageLocation: isEmptyString(nextProps.imageData.location.name)? "暂无信息" : nextProps.imageData.location.name,
-                imageDescription: isEmptyString(nextProps.imageData.alt_description)? "暂无信息" : nextProps.imageData.alt_description,
+                imageLocation: isEmptyString(nextProps.imageData.location.name) ? "暂无信息" : nextProps.imageData.location.name,
+                imageDescription: isEmptyString(nextProps.imageData.alt_description) ? "暂无信息" : nextProps.imageData.alt_description,
                 hoverColor: nextProps.imageData.color
             })
         }
@@ -99,13 +97,19 @@ class PopupImageComponent extends React.Component {
                     style={{borderRadius: "10px"}}
                 />
                 <Space direction={"vertical"}>
-                    <Button type="text" shape="round" icon={<UserOutlined />} onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)} onClick={this.authorBtnOnClick.bind(this)} style={{color: this.state.fontColor}}>
+                    <Button type="text" shape="round" icon={<UserOutlined/>} onMouseOver={this.btnMouseOver.bind(this)}
+                            onMouseOut={this.btnMouseOut.bind(this)} onClick={this.authorBtnOnClick.bind(this)}
+                            style={{color: this.state.fontColor}}>
                         {this.state.authorName}
                     </Button>
-                    <Button type="text" shape="round" icon={<EnvironmentOutlined />} onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)} onClick={this.imageBtnOnClick.bind(this)} style={{color: this.state.fontColor}}>
+                    <Button type="text" shape="round" icon={<EnvironmentOutlined/>}
+                            onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
+                            onClick={this.imageBtnOnClick.bind(this)} style={{color: this.state.fontColor}}>
                         {this.state.imageLocation}
                     </Button>
-                    <Button type="text" shape="round" icon={<InfoCircleOutlined />} onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)} onClick={this.imageBtnOnClick.bind(this)} style={{color: this.state.fontColor}}>
+                    <Button type="text" shape="round" icon={<InfoCircleOutlined/>}
+                            onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
+                            onClick={this.imageBtnOnClick.bind(this)} style={{color: this.state.fontColor}}>
                         {this.state.imageDescription}
                     </Button>
                 </Space>

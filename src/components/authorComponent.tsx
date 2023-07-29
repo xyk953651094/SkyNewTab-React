@@ -1,12 +1,12 @@
 import React from "react";
-import {Button, Popover, Typography, message, Space, Divider, List, Avatar} from "antd";
-import {CameraOutlined, LinkOutlined} from "@ant-design/icons";
+import {Avatar, Button, Divider, List, message, Popover, Space, Typography} from "antd";
+import {CameraOutlined, EnvironmentOutlined, InfoCircleOutlined, LinkOutlined, UserOutlined} from "@ant-design/icons";
 import {unsplashUrl} from "../typescripts/publicConstants";
 import {changeThemeColor, getFontColor, isEmptyString} from "../typescripts/publicFunctions";
 import {ThemeColorInterface} from "../typescripts/publicInterface";
 import "../stylesheets/publicStyles.scss"
 
-const { Text } = Typography;
+const {Text} = Typography;
 
 type propType = {
     themeColor: ThemeColorInterface,
@@ -60,16 +60,15 @@ class AuthorComponent extends React.Component {
         e.currentTarget.style.color = getFontColor(this.state.hoverColor);
     }
 
-    btnMouseOut(e:any) {
+    btnMouseOut(e: any) {
         e.currentTarget.style.backgroundColor = "transparent";
         e.currentTarget.style.color = this.state.fontColor;
     }
 
     authorBtnOnClick() {
-        if(!isEmptyString(this.state.authorLink)) {
+        if (!isEmptyString(this.state.authorLink)) {
             window.open(this.state.authorLink);
-        }
-        else {
+        } else {
             message.error("暂无链接")
         }
     }
@@ -109,9 +108,9 @@ class AuthorComponent extends React.Component {
                 authorPhotos: nextProps.imageData.user.total_photos,
                 imageLink: nextProps.imageData.links.html,
                 imagePreviewUrl: nextProps.imageData.urls.thumb,
-                imageLocation: isEmptyString(nextProps.imageData.location.name)? "暂无信息" : nextProps.imageData.location.name,
-                imageDescription: isEmptyString(nextProps.imageData.alt_description)? "暂无信息" : nextProps.imageData.alt_description,
-            }, ()=>{
+                imageLocation: isEmptyString(nextProps.imageData.location.name) ? "暂无信息" : nextProps.imageData.location.name,
+                imageDescription: isEmptyString(nextProps.imageData.alt_description) ? "暂无信息" : nextProps.imageData.alt_description,
+            }, () => {
                 changeThemeColor("#authorBtn", this.state.backgroundColor, this.state.fontColor);
             })
         }
@@ -120,15 +119,24 @@ class AuthorComponent extends React.Component {
     render() {
         const popoverContent = (
             <List>
-                <List.Item actions={[<Button type="text" shape="circle" icon={<LinkOutlined />} onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)} onClick={this.gotoUser.bind(this)} style={{color: this.state.fontColor}}/>]}>
+                <List.Item actions={[<Button type="text" shape="circle" icon={<LinkOutlined/>}
+                                             onMouseOver={this.btnMouseOver.bind(this)}
+                                             onMouseOut={this.btnMouseOut.bind(this)} onClick={this.gotoUser.bind(this)}
+                                             style={{color: this.state.fontColor}}/>]}>
                     <List.Item.Meta
                         avatar={<Avatar size="large" src={this.state.authorIconUrl} alt={"作者"}/>}
-                        title={this.state.authorName}
+                        title={
+                            <Space>
+                                <UserOutlined/>
+                                <Text style={{color: this.state.fontColor}}>{" " + this.state.authorName}</Text>
+                            </Space>
+                        }
                         description={
                             <Space>
                                 <Space>
                                     <i className="bi bi-collection"></i>
-                                    <Text style={{color: this.state.fontColor}}>{" " + this.state.authorCollections}</Text>
+                                    <Text
+                                        style={{color: this.state.fontColor}}>{" " + this.state.authorCollections}</Text>
                                 </Space>
                                 <Divider type="vertical" style={{borderColor: this.state.fontColor}}/>
                                 <Space>
@@ -144,18 +152,33 @@ class AuthorComponent extends React.Component {
                         }
                     />
                 </List.Item>
-                <List.Item actions={[<Button type="text" shape="circle" icon={<LinkOutlined />} onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)} onClick={this.gotoImage.bind(this)} style={{color: this.state.fontColor}}/>]}>
+                <List.Item actions={[<Button type="text" shape="circle" icon={<LinkOutlined/>}
+                                             onMouseOver={this.btnMouseOver.bind(this)}
+                                             onMouseOut={this.btnMouseOut.bind(this)}
+                                             onClick={this.gotoImage.bind(this)}
+                                             style={{color: this.state.fontColor}}/>]}>
                     <List.Item.Meta
                         avatar={<Avatar size="large" shape={"square"} src={this.state.imagePreviewUrl} alt={"信息"}/>}
-                        title={this.state.imageLocation}
-                        description={this.state.imageDescription}
+                        title={
+                            <Space>
+                                <EnvironmentOutlined/>
+                                <Text style={{color: this.state.fontColor}}>{" " + this.state.imageLocation}</Text>
+                            </Space>
+                        }
+                        description={
+                            <Space>
+                                <InfoCircleOutlined/>
+                                <Text style={{color: this.state.fontColor}}>{" " + this.state.imageDescription}</Text>
+                            </Space>
+                        }
                     />
                 </List.Item>
             </List>
         );
 
         return (
-            <Popover title={"图片信息"} content={popoverContent} placement="topRight" color={this.state.backgroundColor} overlayStyle={{width: "500px"}}>
+            <Popover title={"图片信息"} content={popoverContent} placement="topRight" color={this.state.backgroundColor}
+                     overlayStyle={{width: "500px"}}>
                 <Button shape="round" icon={<CameraOutlined/>} size={"large"}
                         id={"authorBtn"}
                         className={"componentTheme zIndexHigh"}

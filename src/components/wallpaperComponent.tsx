@@ -4,7 +4,6 @@ import "../stylesheets/publicStyles.scss"
 import {Image} from "antd";
 import {decode} from "blurhash"
 import {imageDynamicEffect, isEmptyString} from "../typescripts/publicFunctions";
-const $ = require("jquery");
 
 type propType = {
     display: "none" | "block",
@@ -41,7 +40,7 @@ class WallpaperComponent extends React.Component {
         let backgroundImage: HTMLElement = backgroundImageDiv.children[0];
 
         if (nextProps.display !== prevProps.display) {
-            if(nextProps.display === "block") {
+            if (nextProps.display === "block") {
                 if (backgroundImage instanceof HTMLElement) {
                     backgroundImage.onload = () => {
                         // 设置动态效果
@@ -60,13 +59,13 @@ class WallpaperComponent extends React.Component {
         }
 
         // 鼠标移动效果
-        if(nextProps.dynamicEffect !== this.props.dynamicEffect) {
+        if (nextProps.dynamicEffect !== this.props.dynamicEffect) {
             imageDynamicEffect(backgroundImage, nextProps.dynamicEffect);
         }
 
         // 图片质量
         if (nextProps.imageData !== prevProps.imageData && nextProps.imageData) {
-            switch (this.props.imageQuality){
+            switch (this.props.imageQuality) {
                 case "full":
                     this.setState({
                         imageLink: nextProps.imageData.urls.full,
@@ -95,13 +94,13 @@ class WallpaperComponent extends React.Component {
 
             this.setState({
                 blurHashCode: nextProps.imageData.blur_hash
-            }, ()=> {
+            }, () => {
                 if (!isEmptyString(this.state.blurHashCode)) {
                     const blurHashCanvas = document.getElementById("blurHashCanvas") as HTMLCanvasElement | null;
-                    if(blurHashCanvas instanceof HTMLCanvasElement) {
+                    if (blurHashCanvas instanceof HTMLCanvasElement) {
                         let blurHashImage = decode(this.state.blurHashCode, window.innerWidth, window.innerHeight);
                         let ctx = blurHashCanvas.getContext("2d");
-                        if(ctx) {
+                        if (ctx) {
                             const imageData = new ImageData(blurHashImage, window.innerWidth, window.innerHeight);
                             ctx.putImageData(imageData, 0, 0);
                         }
@@ -124,9 +123,9 @@ class WallpaperComponent extends React.Component {
                 preview={false}
                 src={this.state.imageLink}
                 style={{display: this.props.display}}
-                // placeholder={
-                //     <canvas id="blurHashCanvas" className={"blurHashCanvas zIndexLow"}></canvas>
-                // }
+                placeholder={
+                    <canvas id="blurHashCanvas" className={"blurHashCanvas zIndexLow"}></canvas>
+                }
             />
         );
     }

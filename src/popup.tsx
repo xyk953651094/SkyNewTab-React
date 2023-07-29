@@ -7,5 +7,5 @@ const popupRoot = ReactDOM.createRoot(
     document.getElementById("popupRoot") as HTMLElement
 );
 popupRoot.render(
-    <PopupComponent />
+    <PopupComponent/>
 );

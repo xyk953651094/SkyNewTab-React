@@ -11,15 +11,15 @@ import SearchComponent from "./components/searchComponent";
 import CollectionComponent from "./components/collectionComponent";
 import AuthorComponent from "./components/authorComponent"
 
-import {Layout, Row, Col, Space, message} from "antd";
+import {Col, Layout, message, Row, Space} from "antd";
 import "./stylesheets/publicStyles.scss"
 import {clientId, device} from "./typescripts/publicConstants";
 import {
-    setColorTheme,
-    getReverseColor,
+    changeThemeColor,
     getFontColor,
+    getReverseColor,
     httpRequest,
-    changeThemeColor
+    setColorTheme
 } from "./typescripts/publicFunctions";
 import {ThemeColorInterface} from "./typescripts/publicInterface";
 
@@ -126,12 +126,12 @@ class App extends React.Component {
         };
 
         httpRequest(headers, url, data, "GET")
-            .then(function(resultData: any){
+            .then(function (resultData: any) {
                 localStorage.setItem("lastImageRequestTime", String(new Date().getTime()));  // 保存请求时间，防抖节流
                 localStorage.setItem("lastImage", JSON.stringify(resultData));                // 保存请求结果，防抖节流
                 tempThis.setWallpaper(resultData);
             })
-            .catch(function(){
+            .catch(function () {
                 // 请求失败也更新请求时间，防止超时后无信息可显示
                 localStorage.setItem("lastImageRequestTime", String(new Date().getTime()));  // 保存请求时间，防抖节流
                 // 获取图片失败时显示上次图片
@@ -139,12 +139,12 @@ class App extends React.Component {
                 if (lastImage) {
                     lastImage = JSON.parse(lastImage);
                     tempThis.setWallpaper(lastImage);
-                }
-                else {
+                } else {
                     message.error("获取图片失败");
                 }
             })
-            .finally(function(){});
+            .finally(function () {
+            });
     }
 
     componentDidMount() {
@@ -167,19 +167,16 @@ class App extends React.Component {
                 // 设置背景图片，防抖节流
                 let lastRequestTime: any = localStorage.getItem("lastImageRequestTime");
                 let nowTimeStamp = new Date().getTime();
-                if(lastRequestTime === null) {  // 第一次请求时 lastRequestTime 为 null，因此直接进行请求赋值 lastRequestTime
+                if (lastRequestTime === null) {  // 第一次请求时 lastRequestTime 为 null，因此直接进行请求赋值 lastRequestTime
                     this.getWallpaper();
-                }
-                else if(nowTimeStamp - parseInt(lastRequestTime) > 60 * 1000) {  // 必须多于一分钟才能进行新的请求
+                } else if (nowTimeStamp - parseInt(lastRequestTime) > 60 * 1000) {  // 必须多于一分钟才能进行新的请求
                     this.getWallpaper();
-                }
-                else {  // 一分钟之内使用上一次请求结果
+                } else {  // 一分钟之内使用上一次请求结果
                     let lastImage: any = localStorage.getItem("lastImage");
                     if (lastImage) {
                         lastImage = JSON.parse(lastImage);
                         this.setWallpaper(lastImage);
-                    }
-                    else {
+                    } else {
                         message.error("获取图片失败");
                     }
                 }
@@ -208,8 +205,11 @@ class App extends React.Component {
 
             // messgae
             let messageEle = $(".ant-message");
-            if(messageEle.length && messageEle.length > 0) {
-                $(".ant-message-notice-content").css({"backgroundColor": this.state.themeColor.componentBackgroundColor, "color": this.state.themeColor.componentFontColor});
+            if (messageEle.length && messageEle.length > 0) {
+                $(".ant-message-notice-content").css({
+                    "backgroundColor": this.state.themeColor.componentBackgroundColor,
+                    "color": this.state.themeColor.componentFontColor
+                });
                 $(".ant-message-custom-content > .anticon").css("color", this.state.themeColor.componentFontColor);
             }
 
@@ -231,17 +231,27 @@ class App extends React.Component {
             let modalEle = $(".ant-modal");
             if (modalEle.length && modalEle.length > 0) {
                 $(".ant-modal-content").css("backgroundColor", this.state.themeColor.componentBackgroundColor);
-                $(".ant-modal-title").css({"backgroundColor": this.state.themeColor.componentBackgroundColor, "color": this.state.themeColor.componentFontColor});
+                $(".ant-modal-title").css({
+                    "backgroundColor": this.state.themeColor.componentBackgroundColor,
+                    "color": this.state.themeColor.componentFontColor
+                });
                 $(".ant-form-item-required").css("color", this.state.themeColor.componentFontColor);
                 $(".ant-list-item-meta-title").css("color", this.state.themeColor.componentFontColor);
                 $(".ant-list-item-meta-description").css("color", this.state.themeColor.componentFontColor);
                 // $(".ant-modal-close-x").css("color", this.state.themeColor.componentFontColor);
                 $(".ant-empty-description").css("color", this.state.themeColor.componentFontColor);
                 $(".ant-tooltip-inner").css("color", this.state.themeColor.componentFontColor);
-                $(".ant-modal-footer > .ant-btn").addClass("ant-btn-round");
-                // $(".ant-modal-footer > .ant-btn").addClass("ant-btn-round ant-btn-text");
-                // $(".ant-modal-footer").children(":first-child").removeClass("ant-btn-default");
-                // $(".ant-modal-footer").children(":last-child").removeClass("ant-btn-primary");
+                $(".ant-modal-footer > .ant-btn").css("color", this.state.themeColor.componentFontColor);
+                $(".ant-modal-footer > .ant-btn").addClass("ant-btn-round ant-btn-text").removeClass("ant-btn-default ant-btn-primary");
+                $(".ant-modal-footer > .ant-btn").on("mouseover", (e: any) => {
+                    e.currentTarget.style.backgroundColor = this.state.themeColor.themeColor;
+                    e.currentTarget.style.color = getFontColor(this.state.themeColor.themeColor);
+                });
+                $(".ant-modal-footer > .ant-btn").on("mouseout", (e: any) => {
+                    e.currentTarget.style.backgroundColor = "transparent";
+                    e.currentTarget.style.color = this.state.themeColor.componentFontColor;
+                });
+
             }
         });
     }

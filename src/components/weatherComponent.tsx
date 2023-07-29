@@ -1,5 +1,5 @@
 import React from "react";
-import {Popover, Button, Space, Typography} from "antd";
+import {Button, Popover, Space, Typography} from "antd";
 import {changeThemeColor, getWeatherIcon, httpRequest} from "../typescripts/publicFunctions";
 import {ThemeColorInterface} from "../typescripts/publicInterface";
 
@@ -54,7 +54,7 @@ class WeatherComponent extends React.Component {
     setWeather(data: any) {
         this.setState({
             weatherIcon: getWeatherIcon(data.weatherData.weather),
-            weatherInfo: data.weatherData.weather  + "｜" + data.weatherData.temperature + "°C",
+            weatherInfo: data.weatherData.weather + "｜" + data.weatherData.temperature + "°C",
             region: data.region.replace("|", " · "),
             humidity: data.weatherData.humidity,
             pm25: data.weatherData.pm25,
@@ -70,14 +70,14 @@ class WeatherComponent extends React.Component {
         let url = "https://v2.jinrishici.com/info";
         let data = {};
         httpRequest(headers, url, data, "GET")
-            .then(function(resultData: any){
+            .then(function (resultData: any) {
                 localStorage.setItem("lastWeatherRequestTime", String(new Date().getTime()));  // 保存请求时间，防抖节流
                 if (resultData.status === "success" && resultData.data.weatherData !== null) {
                     localStorage.setItem("lastWeather", JSON.stringify(resultData.data));      // 保存请求结果，防抖节流
                     tempThis.setWeather(resultData.data);
                 }
             })
-            .catch(function(){
+            .catch(function () {
                 // 请求失败也更新请求时间，防止超时后无信息可显示
                 localStorage.setItem("lastWeatherRequestTime", String(new Date().getTime()));  // 保存请求时间，防抖节流
             });
@@ -87,13 +87,11 @@ class WeatherComponent extends React.Component {
         // 防抖节流
         let lastRequestTime: any = localStorage.getItem("lastWeatherRequestTime");
         let nowTimeStamp = new Date().getTime();
-        if(lastRequestTime === null) {  // 第一次请求时 lastRequestTime 为 null，因此直接进行请求赋值 lastRequestTime
+        if (lastRequestTime === null) {  // 第一次请求时 lastRequestTime 为 null，因此直接进行请求赋值 lastRequestTime
             this.getWeather();
-        }
-        else if(nowTimeStamp - parseInt(lastRequestTime) > 60 * 60 * 1000) {  // 必须多于一小时才能进行新的请求
+        } else if (nowTimeStamp - parseInt(lastRequestTime) > 60 * 60 * 1000) {  // 必须多于一小时才能进行新的请求
             this.getWeather();
-        }
-        else {  // 一小时之内使用上一次请求结果
+        } else {  // 一小时之内使用上一次请求结果
             let lastWeather: any = localStorage.getItem("lastWeather");
             if (lastWeather) {
                 lastWeather = JSON.parse(lastWeather);
@@ -107,7 +105,7 @@ class WeatherComponent extends React.Component {
             this.setState({
                 backgroundColor: nextProps.themeColor.componentBackgroundColor,
                 fontColor: nextProps.themeColor.componentFontColor,
-            }, ()=>{
+            }, () => {
                 changeThemeColor("#weatherBtn", this.state.backgroundColor, this.state.fontColor);
             });
         }
@@ -134,7 +132,7 @@ class WeatherComponent extends React.Component {
         }
     }
 
-    render(){
+    render() {
         const popoverContent = (
             <Space direction="vertical">
                 <Space>

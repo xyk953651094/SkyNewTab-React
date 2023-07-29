@@ -1,5 +1,5 @@
 import React from "react";
-import {Row, Col, Typography, Space} from "antd";
+import {Col, Row, Space, Typography} from "antd";
 import "../stylesheets/clockComponent.scss"
 import {getTimeDetails} from "../typescripts/publicFunctions";
 import {ThemeColorInterface} from "../typescripts/publicInterface";
@@ -42,7 +42,7 @@ class ClockComponent extends React.Component {
         $(".dateText").css("color", this.state.fontColor);
     }
 
-    btnMouseOut(e:any) {
+    btnMouseOut(e: any) {
         e.currentTarget.style.backgroundColor = "transparent";
         $(".clockText").css("color", this.state.backgroundColor);
         $(".dateText").css("color", this.state.backgroundColor);
@@ -71,7 +71,8 @@ class ClockComponent extends React.Component {
     render() {
         return (
             <Row justify={"center"}>
-                <Col span={24} className={"zIndexHigh"} style={{padding: "5px", borderRadius: "10px"}} onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
+                <Col span={24} className={"zIndexHigh"} style={{padding: "5px", borderRadius: "10px"}}
+                     onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
                     <Space align="center" size="small" id={"clock"}>
                         <Text className={"clockText"} style={{color: this.state.backgroundColor}}>
                             {this.state.currentTime}
