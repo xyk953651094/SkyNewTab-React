@@ -1,6 +1,6 @@
 import React from "react";
 import {Avatar, Button, Col, Form, Input, List, message, Modal, Row, Space, Tooltip, Typography} from "antd";
-import {DeleteOutlined, EditOutlined, CompassOutlined, LinkOutlined, PlusOutlined} from "@ant-design/icons";
+import {DeleteOutlined, CloseOutlined, EditOutlined, CompassOutlined, LinkOutlined, PlusOutlined} from "@ant-design/icons";
 import {ThemeColorInterface} from "../typescripts/publicInterface";
 import {getFontColor} from "../typescripts/publicFunctions";
 
@@ -270,12 +270,11 @@ class CollectionComponent extends React.Component {
                             }
                             renderItem={(item: any) => (
                                 <List.Item actions={[
-                                    <Button type="text" shape={"round"} icon={<DeleteOutlined/>}
+                                    <Button type="text" shape={"circle"} icon={<CloseOutlined/>}
                                             onMouseOver={this.btnMouseOver.bind(this)}
                                             onMouseOut={this.btnMouseOut.bind(this)}
                                             onClick={this.removeBtnOnClick.bind(this, item)}
                                             style={{color: this.state.fontColor}}>
-                                        删除
                                     </Button>
                                 ]}>
                                     <List.Item.Meta

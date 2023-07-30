@@ -1,7 +1,22 @@
 import React from "react";
 import type {DatePickerProps} from 'antd';
-import {Badge, Button, Col, DatePicker, Form, Input, List, message, Modal, Popover, Row, Space, Typography} from "antd";
-import {CalendarOutlined, CloseOutlined, DeleteOutlined, PlusOutlined} from "@ant-design/icons";
+import {
+    Badge,
+    Button,
+    Col,
+    DatePicker,
+    Divider,
+    Form,
+    Input,
+    List,
+    message,
+    Modal,
+    Popover,
+    Row,
+    Space,
+    Typography
+} from "antd";
+import {CalendarOutlined, CloseOutlined, DeleteOutlined, PlusOutlined, ClockCircleOutlined} from "@ant-design/icons";
 import {changeThemeColor, getFontColor, getTimeDetails} from "../typescripts/publicFunctions";
 import {ThemeColorInterface} from "../typescripts/publicInterface";
 
@@ -128,7 +143,7 @@ class DailyComponent extends React.Component {
                     status = "not expired";
                 }
 
-                daily.push({"title": title, "description": description, "status": status, "timeStamp": Date.now()});
+                daily.push({"title": title, "description": description, "status": status, "selectedTimeStamp": this.state.selectedTimeStamp,   "timeStamp": Date.now()});
                 localStorage.setItem("daily", JSON.stringify(daily));
 
                 this.setState({
@@ -216,8 +231,7 @@ class DailyComponent extends React.Component {
                     >
                         <List.Item.Meta
                             title={item.title}
-                            description={item.description}
-                            // description={<Text style={{color: (item.status === "expired"? "red":"blue")}}>{item.description}</Text>}
+                            description={getTimeDetails(new Date(item.selectedTimeStamp)).showDate5 + " " + item.description}
                         />
                     </List.Item>
                 )}

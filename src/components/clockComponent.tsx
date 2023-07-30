@@ -38,12 +38,14 @@ class ClockComponent extends React.Component {
 
     btnMouseOver(e: any) {
         e.currentTarget.style.backgroundColor = this.state.backgroundColor;
+        e.currentTarget.classList.add("componentTheme");
         $(".clockText").css("color", this.state.fontColor);
         $(".dateText").css("color", this.state.fontColor);
     }
 
     btnMouseOut(e: any) {
         e.currentTarget.style.backgroundColor = "transparent";
+        e.currentTarget.classList.remove("componentTheme");
         $(".clockText").css("color", this.state.backgroundColor);
         $(".dateText").css("color", this.state.backgroundColor);
     }
