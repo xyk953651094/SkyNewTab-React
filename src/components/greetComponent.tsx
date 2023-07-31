@@ -1,11 +1,12 @@
 import React from "react";
-import {Popover, Button, Space, Typography} from "antd";
+import {Button, Popover, Space, Typography} from "antd";
 import {CheckCircleOutlined, CloseCircleOutlined} from "@ant-design/icons";
 import {
-    getTimeDetails,
+    changeThemeColor,
     getGreetContent,
     getGreetIcon,
-    httpRequest, changeThemeColor
+    getTimeDetails,
+    httpRequest
 } from "../typescripts/publicFunctions";
 import {ThemeColorInterface} from "../typescripts/publicInterface";
 
@@ -13,6 +14,7 @@ const {Text} = Typography;
 
 type propType = {
     themeColor: ThemeColorInterface,
+    searchEngine: "bing" | "baidu" | "google"
 }
 
 type stateType = {
@@ -21,6 +23,7 @@ type stateType = {
     greetIcon: string,
     greetContent: string,
     holidayContent: string,
+    searchEngineUrl: string,
     calendar: string,
     suit: string,
     avoid: string,
@@ -40,10 +43,15 @@ class GreetComponent extends React.Component {
             greetIcon: getGreetIcon(),
             greetContent: getGreetContent(),
             holidayContent: "暂无信息",
+            searchEngineUrl: "https://www.bing.com/search?q=",
             calendar: getTimeDetails(new Date()).showDate4 + " " + getTimeDetails(new Date()).showWeek,
             suit: "暂无信息",
             avoid: "暂无信息",
         };
+    }
+
+    greetBtnOnClick() {
+        window.open(this.state.searchEngineUrl + "日历", "_blank",);
     }
 
     // 请求完成后处理步骤
@@ -52,7 +60,7 @@ class GreetComponent extends React.Component {
         if (data.solarTerms.indexOf("后") === -1) {
             holidayContent = "今日" + holidayContent;
         }
-        if (data.typeDes !== "休息日" && data.typeDes !== "工作日"){
+        if (data.typeDes !== "休息日" && data.typeDes !== "工作日") {
             holidayContent = holidayContent + " · " + data.typeDes;
         }
 
@@ -76,14 +84,14 @@ class GreetComponent extends React.Component {
             "app_secret": "RVlRVjZTYXVqeHB3WCtQUG5lM0h0UT09",
         };
         httpRequest(headers, url, data, "GET")
-            .then(function(resultData: any){
+            .then(function (resultData: any) {
                 localStorage.setItem("lastHolidayRequestTime", String(new Date().getTime()));  // 保存请求时间，防抖节流
                 if (resultData.code === 1) {
                     localStorage.setItem("lastHoliday", JSON.stringify(resultData.data));      // 保存请求结果，防抖节流
                     tempThis.setHoliday(resultData.data);
                 }
             })
-            .catch(function(){
+            .catch(function () {
                 // 请求失败也更新请求时间，防止超时后无信息可显示
                 localStorage.setItem("lastHolidayRequestTime", String(new Date().getTime()));  // 保存请求时间，防抖节流
             });
@@ -93,13 +101,11 @@ class GreetComponent extends React.Component {
         // 防抖节流
         let lastRequestTime: any = localStorage.getItem("lastHolidayRequestTime");
         let nowTimeStamp = new Date().getTime();
-        if(lastRequestTime === null) {  // 第一次请求时 lastRequestTime 为 null，因此直接进行请求赋值 lastRequestTime
+        if (lastRequestTime === null) {  // 第一次请求时 lastRequestTime 为 null，因此直接进行请求赋值 lastRequestTime
             this.getHoliday();
-        }
-        else if(nowTimeStamp - parseInt(lastRequestTime) > 60 * 60 * 1000) {  // 必须多于一小时才能进行新的请求
+        } else if (nowTimeStamp - parseInt(lastRequestTime) > 4 * 60 * 60 * 1000) {  // 必须多于四小时才能进行新的请求
             this.getHoliday();
-        }
-        else {  // 一小时之内使用上一次请求结果
+        } else {  // 一小时之内使用上一次请求结果
             let lastHoliday: any = localStorage.getItem("lastHoliday");
             if (lastHoliday) {
                 lastHoliday = JSON.parse(lastHoliday);
@@ -112,7 +118,7 @@ class GreetComponent extends React.Component {
                 greetIcon: getGreetIcon(),
                 greetContent: getGreetContent(),
             })
-        }, 60 * 1000);
+        }, 60 * 60 * 1000);
     }
 
     componentWillReceiveProps(nextProps: any, prevProps: any) {
@@ -120,9 +126,30 @@ class GreetComponent extends React.Component {
             this.setState({
                 backgroundColor: nextProps.themeColor.componentBackgroundColor,
                 fontColor: nextProps.themeColor.componentFontColor,
-            }, ()=>{
+            }, () => {
                 changeThemeColor("#greetBtn", this.state.backgroundColor, this.state.fontColor);
             });
+        }
+
+        if (nextProps.searchEngine !== prevProps.searchEngine) {
+            let tempSearchEngineUrl: string;
+            switch (nextProps.searchEngine) {
+                case "bing":
+                    tempSearchEngineUrl = "https://www.bing.com/search?q=";
+                    break;
+                case "baidu":
+                    tempSearchEngineUrl = "https://www.baidu.com/s?wd=";
+                    break;
+                case "google":
+                    tempSearchEngineUrl = "https://www.google.com/search?q=";
+                    break;
+                default:
+                    tempSearchEngineUrl = "https://www.bing.com/search?q=";
+                    break;
+            }
+            this.setState({
+                searchEngineUrl: tempSearchEngineUrl,
+            })
         }
     }
 
@@ -130,16 +157,16 @@ class GreetComponent extends React.Component {
         const popoverContent = (
             <Space direction="vertical">
                 <Space>
-                    <CheckCircleOutlined />
+                    <CheckCircleOutlined/>
                     <Text style={{color: this.state.fontColor}}>{" 宜：" + this.state.suit}</Text>
                 </Space>
                 <Space>
-                    <CloseCircleOutlined />
+                    <CloseCircleOutlined/>
                     <Text style={{color: this.state.fontColor}}>{" 忌：" + this.state.avoid}</Text>
                 </Space>
             </Space>
         );
-        
+
         return (
             <Popover
                 title={this.state.calendar}
@@ -147,9 +174,9 @@ class GreetComponent extends React.Component {
                 <Button shape="round" icon={<i className={this.state.greetIcon}> </i>} size={"large"}
                         id={"greetBtn"}
                         className={"componentTheme zIndexHigh"}
-                        style={{}}
+                        onClick={this.greetBtnOnClick.bind(this)}
                 >
-                    {this.state.greetContent  + "｜" + this.state.holidayContent}
+                    {this.state.greetContent + "｜" + this.state.holidayContent}
                 </Button>
             </Popover>
         );

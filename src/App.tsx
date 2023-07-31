@@ -1,27 +1,28 @@
 import React from "react";
-import "./stylesheets/publicStyles.scss"
 
 import GreetComponent from "./components/greetComponent";
 import WeatherComponent from "./components/weatherComponent";
+import DailyComponent from "./components/dailyComponent";
 import TodoComponent from "./components/todoComponent";
 import PreferenceComponent from "./components/preferenceComponent";
 import WallpaperComponent from "./components/wallpaperComponent";
+import ClockComponent from "./components/clockComponent";
 import SearchComponent from "./components/searchComponent";
 import CollectionComponent from "./components/collectionComponent";
 import AuthorComponent from "./components/authorComponent"
 
-import {Layout, Row, Col, Space, message} from "antd";
+import {Col, Layout, message, Row, Space} from "antd";
+import "./stylesheets/publicStyles.scss"
 import {clientId, device} from "./typescripts/publicConstants";
 import {
-    setColorTheme,
-    getComponentBackgroundColor,
+    changeThemeColor,
     getFontColor,
+    getReverseColor,
     httpRequest,
-    changeThemeColor
+    setColorTheme
 } from "./typescripts/publicFunctions";
 import {ThemeColorInterface} from "./typescripts/publicInterface";
-import ClockComponent from "./components/clockComponent";
-import DailyComponent from "./components/dailyComponent";
+
 const {Header, Content, Footer} = Layout;
 const $ = require("jquery");
 
@@ -49,6 +50,7 @@ class App extends React.Component {
         this.state = {
             componentDisplay: "none",
             themeColor: {
+                "themeColor": "",
                 "componentBackgroundColor": "",
                 "componentFontColor": "",
             },
@@ -98,10 +100,11 @@ class App extends React.Component {
                 let bodyFontColor = getFontColor(bodyBackgroundColor);
                 changeThemeColor("body", bodyBackgroundColor, bodyFontColor);
 
-                let componentBackgroundColor = getComponentBackgroundColor(data.color);
+                let componentBackgroundColor = getReverseColor(data.color);
                 let componentFontColor = getFontColor(componentBackgroundColor);
                 this.setState({
                     themeColor: {
+                        "themeColor": data.color,
                         "componentBackgroundColor": componentBackgroundColor,
                         "componentFontColor": componentFontColor,
                     },
@@ -123,12 +126,12 @@ class App extends React.Component {
         };
 
         httpRequest(headers, url, data, "GET")
-            .then(function(resultData: any){
+            .then(function (resultData: any) {
                 localStorage.setItem("lastImageRequestTime", String(new Date().getTime()));  // 保存请求时间，防抖节流
                 localStorage.setItem("lastImage", JSON.stringify(resultData));                // 保存请求结果，防抖节流
                 tempThis.setWallpaper(resultData);
             })
-            .catch(function(){
+            .catch(function () {
                 // 请求失败也更新请求时间，防止超时后无信息可显示
                 localStorage.setItem("lastImageRequestTime", String(new Date().getTime()));  // 保存请求时间，防抖节流
                 // 获取图片失败时显示上次图片
@@ -136,12 +139,12 @@ class App extends React.Component {
                 if (lastImage) {
                     lastImage = JSON.parse(lastImage);
                     tempThis.setWallpaper(lastImage);
-                }
-                else {
-                    message.success("获取图片失败");
+                } else {
+                    message.error("获取图片失败");
                 }
             })
-            .finally(function(){});
+            .finally(function () {
+            });
     }
 
     componentDidMount() {
@@ -164,20 +167,17 @@ class App extends React.Component {
                 // 设置背景图片，防抖节流
                 let lastRequestTime: any = localStorage.getItem("lastImageRequestTime");
                 let nowTimeStamp = new Date().getTime();
-                if(lastRequestTime === null) {  // 第一次请求时 lastRequestTime 为 null，因此直接进行请求赋值 lastRequestTime
+                if (lastRequestTime === null) {  // 第一次请求时 lastRequestTime 为 null，因此直接进行请求赋值 lastRequestTime
                     this.getWallpaper();
-                }
-                else if(nowTimeStamp - parseInt(lastRequestTime) > 60 * 1000) {  // 必须多于一分钟才能进行新的请求
+                } else if (nowTimeStamp - parseInt(lastRequestTime) > 60 * 1000) {  // 必须多于一分钟才能进行新的请求
                     this.getWallpaper();
-                }
-                else {  // 一分钟之内使用上一次请求结果
+                } else {  // 一分钟之内使用上一次请求结果
                     let lastImage: any = localStorage.getItem("lastImage");
                     if (lastImage) {
                         lastImage = JSON.parse(lastImage);
                         this.setWallpaper(lastImage);
-                    }
-                    else {
-                        message.success("获取图片失败");
+                    } else {
+                        message.error("获取图片失败");
                     }
                 }
             })
@@ -205,8 +205,11 @@ class App extends React.Component {
 
             // messgae
             let messageEle = $(".ant-message");
-            if(messageEle.length && messageEle.length > 0) {
-                $(".ant-message-notice-content").css({"backgroundColor": this.state.themeColor.componentBackgroundColor, "color": this.state.themeColor.componentFontColor});
+            if (messageEle.length && messageEle.length > 0) {
+                $(".ant-message-notice-content").css({
+                    "backgroundColor": this.state.themeColor.componentBackgroundColor,
+                    "color": this.state.themeColor.componentFontColor
+                });
                 $(".ant-message-custom-content > .anticon").css("color", this.state.themeColor.componentFontColor);
             }
 
@@ -228,14 +231,27 @@ class App extends React.Component {
             let modalEle = $(".ant-modal");
             if (modalEle.length && modalEle.length > 0) {
                 $(".ant-modal-content").css("backgroundColor", this.state.themeColor.componentBackgroundColor);
-                $(".ant-modal-title").css({"backgroundColor": this.state.themeColor.componentBackgroundColor, "color": this.state.themeColor.componentFontColor});
+                $(".ant-modal-title").css({
+                    "backgroundColor": this.state.themeColor.componentBackgroundColor,
+                    "color": this.state.themeColor.componentFontColor
+                });
                 $(".ant-form-item-required").css("color", this.state.themeColor.componentFontColor);
                 $(".ant-list-item-meta-title").css("color", this.state.themeColor.componentFontColor);
                 $(".ant-list-item-meta-description").css("color", this.state.themeColor.componentFontColor);
-                $(".ant-modal-close-x").css("color", this.state.themeColor.componentFontColor);
+                // $(".ant-modal-close-x").css("color", this.state.themeColor.componentFontColor);
                 $(".ant-empty-description").css("color", this.state.themeColor.componentFontColor);
                 $(".ant-tooltip-inner").css("color", this.state.themeColor.componentFontColor);
-                // $(".ant-modal-mask").css("zIndex", 1);
+                $(".ant-modal-footer > .ant-btn").css("color", this.state.themeColor.componentFontColor);
+                $(".ant-modal-footer > .ant-btn").addClass("ant-btn-round ant-btn-text").removeClass("ant-btn-default ant-btn-primary");
+                $(".ant-modal-footer > .ant-btn").on("mouseover", (e: any) => {
+                    e.currentTarget.style.backgroundColor = this.state.themeColor.themeColor;
+                    e.currentTarget.style.color = getFontColor(this.state.themeColor.themeColor);
+                });
+                $(".ant-modal-footer > .ant-btn").on("mouseout", (e: any) => {
+                    e.currentTarget.style.backgroundColor = "transparent";
+                    e.currentTarget.style.color = this.state.themeColor.componentFontColor;
+                });
+
             }
         });
     }
@@ -244,18 +260,20 @@ class App extends React.Component {
         return (
             <Layout>
                 <Header id={"header"} className={"zIndexMiddle"}>
-                    <Row>
-                        <Col xs={0} sm={0} md={12} lg={{span: 11, offset: 1}} xl={{span: 11, offset: 1}}>
+                    <Row justify="center">
+                        <Col xs={0} sm={0} md={10} lg={10} xl={10} xxl={10}>
                             <Space size={"small"}>
                                 <GreetComponent
                                     themeColor={this.state.themeColor}
+                                    searchEngine={this.state.searchEngine}
                                 />
                                 <WeatherComponent
                                     themeColor={this.state.themeColor}
+                                    searchEngine={this.state.searchEngine}
                                 />
                             </Space>
                         </Col>
-                        <Col xs={24} sm={24} md={12} lg={11} xl={11} style={{textAlign: "right"}}>
+                        <Col xs={24} sm={24} md={10} lg={10} xl={10} xxl={10} style={{textAlign: "right"}}>
                             <Space size={"small"}>
                                 <DailyComponent
                                     themeColor={this.state.themeColor}
@@ -290,8 +308,8 @@ class App extends React.Component {
                     </Space>
                 </Content>
                 <Footer id={"footer"}>
-                    <Row>
-                        <Col xs={0} sm={0} md={24} lg={23} xl={23} style={{textAlign: "right"}}>
+                    <Row justify="center">
+                        <Col xs={0} sm={0} md={20} lg={20} xl={20} style={{textAlign: "right"}}>
                             <Space size={"small"} align={"end"}>
                                 <AuthorComponent
                                     themeColor={this.state.themeColor}

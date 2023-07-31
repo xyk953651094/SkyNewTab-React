@@ -1,8 +1,10 @@
 import React from "react";
-import {Col, Space, Button, Tooltip, Modal, Form, Input, List, Avatar, message} from "antd";
-import {PlusOutlined, EditOutlined, DeleteOutlined} from "@ant-design/icons";
+import {Avatar, Button, Col, Form, Input, List, message, Modal, Row, Space, Tooltip, Typography} from "antd";
+import {DeleteOutlined, CloseOutlined, EditOutlined, CompassOutlined, LinkOutlined, PlusOutlined} from "@ant-design/icons";
 import {ThemeColorInterface} from "../typescripts/publicInterface";
+import {getFontColor} from "../typescripts/publicFunctions";
 
+const {Text} = Typography;
 const $ = require("jquery");
 
 type propType = {
@@ -10,6 +12,7 @@ type propType = {
 }
 
 type stateType = {
+    hoverColor: string,
     backgroundColor: string,
     fontColor: string,
     collections: any,
@@ -29,6 +32,7 @@ class CollectionComponent extends React.Component {
     constructor(props: any) {
         super(props);
         this.state = {
+            hoverColor: "",
             backgroundColor: "",
             fontColor: "",
             collections: [],
@@ -40,36 +44,45 @@ class CollectionComponent extends React.Component {
         };
     }
 
+    btnMouseOver(e: any) {
+        e.currentTarget.style.backgroundColor = this.state.hoverColor;
+        e.currentTarget.style.color = getFontColor(this.state.hoverColor);
+    }
+
+    btnMouseOut(e: any) {
+        e.currentTarget.style.backgroundColor = "transparent";
+        e.currentTarget.style.color = this.state.fontColor;
+    }
+
     // 添加导航弹窗
-    showAddModal() {
+    showAddModalBtnOnClick() {
         let collections = [];
         let tempCollections = localStorage.getItem("collections");
-        if(tempCollections){
+        if (tempCollections) {
             collections = JSON.parse(tempCollections);
         }
-        if(collections.length < this.state.collectionMaxSize) {
+        if (collections.length < this.state.collectionMaxSize) {
             // $("#webNameInput").val("");
             // $("#webUrlInput").val("");
             this.setState({
                 displayAddModal: true
             })
-        }
-        else {
+        } else {
             message.error("链接数量最多为" + this.state.collectionMaxSize + "个");
         }
     }
 
-    handleAddModalOk() {
+    addModalOkBtnOnClick() {
         let webName = $("#webNameInput").val();
         let webUrl = $("#webUrlInput").val();
-        if(webName && webUrl && webName.length > 0 && webUrl.length > 0) {
+        if (webName && webUrl && webName.length > 0 && webUrl.length > 0) {
             let collections = [];
             let tempCollections = localStorage.getItem("collections");
-            if(tempCollections){
+            if (tempCollections) {
                 collections = JSON.parse(tempCollections);
             }
-            if(collections.length < this.state.collectionMaxSize) {
-                collections.push({"webName": webName, "webUrl": webUrl, "timeStamp": Date.now ()});
+            if (collections.length < this.state.collectionMaxSize) {
+                collections.push({"webName": webName, "webUrl": webUrl, "timeStamp": Date.now()});
                 localStorage.setItem("collections", JSON.stringify(collections));
 
                 this.setState({
@@ -80,27 +93,25 @@ class CollectionComponent extends React.Component {
                 message.success("添加成功");
 
                 // this.forceUpdate(); // 强制更新组件
-            }
-            else {
+            } else {
                 message.error("链接数量最多为" + this.state.collectionMaxSize + "个");
             }
-        }
-        else {
+        } else {
             message.error("网页名称或网页地址不能为空");
         }
     }
 
-    handleAddModalCancel() {
+    addModalCancelBtnOnClick() {
         this.setState({
             displayAddModal: false
         })
     }
 
     // 编辑导航弹窗
-    showEditModal() {
+    showEditModalBtnOnClick() {
         let collections = [];
         let tempCollections = localStorage.getItem("collections");
-        if(tempCollections){
+        if (tempCollections) {
             collections = JSON.parse(tempCollections);
         }
         this.setState({
@@ -109,31 +120,31 @@ class CollectionComponent extends React.Component {
         })
     }
 
-    handleEditModalOk() {
+    editModalOkBtnOnClick() {
         this.setState({
             displayEditModal: false
         })
     }
 
-    handleEditModalCancel() {
+    editModalCancelBtnOnClick() {
         this.setState({
             displayEditModal: false
         })
     }
 
-    handleRemoveCollection(item: any) {
+    removeBtnOnClick(item: any) {
         let collections = [];
         let tempCollections = localStorage.getItem("collections");
-        if(tempCollections){
+        if (tempCollections) {
             collections = JSON.parse(tempCollections);
             let index = -1;
-            for(let i = 0; i < collections.length; i++) {
+            for (let i = 0; i < collections.length; i++) {
                 if (item.timeStamp === collections[i].timeStamp) {
                     index = i;
                     break;
                 }
             }
-            if(index !== -1) {
+            if (index !== -1) {
                 collections.splice(index, 1);
             }
             localStorage.setItem("collections", JSON.stringify(collections));
@@ -147,10 +158,24 @@ class CollectionComponent extends React.Component {
         }
     }
 
+    removeAllBtnOnClick() {
+        let tempCollections = localStorage.getItem("collections");
+        if (tempCollections) {
+            localStorage.removeItem("collections");
+
+            this.setState({
+                collectionData: [],
+                collectionSize: 0,
+            }, () => {
+                message.success("删除成功");
+            })
+        }
+    }
+
     componentDidMount() {
         let collections = [];
         let tempCollections = localStorage.getItem("collections");
-        if(tempCollections){
+        if (tempCollections) {
             collections = JSON.parse(tempCollections);
 
             this.setState({
@@ -163,6 +188,7 @@ class CollectionComponent extends React.Component {
     componentWillReceiveProps(nextProps: any, prevProps: any) {
         if (nextProps.themeColor !== prevProps.themeColor) {
             this.setState({
+                hoverColor: nextProps.themeColor.themeColor,
                 backgroundColor: nextProps.themeColor.componentBackgroundColor,
                 fontColor: nextProps.themeColor.componentFontColor,
             });
@@ -172,14 +198,20 @@ class CollectionComponent extends React.Component {
     render() {
         return (
             <Col span={24} className={"center zIndexHigh"}>
-                <Space id="buttonGroup">
+                <Space>
                     {
                         this.state.collectionData.map((item: any) => {
                             return (
-                                <Tooltip title={item.webUrl} key={item.timeStamp} placement="bottom" color={this.state.backgroundColor}>
+                                <Tooltip title={item.webUrl} key={item.timeStamp} placement="bottom"
+                                         color={this.state.backgroundColor}>
                                     <Button type="primary" shape="round" className="componentTheme" key={item.timeStamp}
-                                            onClick={() => {window.open(item.webUrl)}}
-                                            style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}}>
+                                            onClick={() => {
+                                                window.open(item.webUrl)
+                                            }}
+                                            style={{
+                                                color: this.state.fontColor,
+                                                backgroundColor: this.state.backgroundColor
+                                            }}>
                                         {item.webName}
                                     </Button>
                                 </Tooltip>
@@ -187,42 +219,78 @@ class CollectionComponent extends React.Component {
                         })
                     }
 
-                    <Button type="primary" shape="circle" className="componentTheme" style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}}
-                            icon={<PlusOutlined />} onClick={this.showAddModal.bind(this)}/>
-                    <Button type="primary" shape="circle" className="componentTheme" style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}}
-                            icon={<EditOutlined />} onClick={this.showEditModal.bind(this)}/>
+                    <Button type="primary" shape="circle" className="componentTheme"
+                            style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}}
+                            icon={<PlusOutlined/>} onClick={this.showAddModalBtnOnClick.bind(this)}/>
+                    <Button type="primary" shape="circle" className="componentTheme"
+                            style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}}
+                            icon={<EditOutlined/>} onClick={this.showEditModalBtnOnClick.bind(this)}/>
+                    <Button type="primary" shape="circle" className="componentTheme"
+                            style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}}
+                            icon={<DeleteOutlined/>} onClick={this.removeAllBtnOnClick.bind(this)}/>
                     <Modal title={"添加链接 " + this.state.collectionSize + " / " + this.state.collectionMaxSize}
-                           open={this.state.displayAddModal} onOk={this.handleAddModalOk.bind(this)} onCancel={this.handleAddModalCancel.bind(this)}
+                           closeIcon={false} centered
+                           open={this.state.displayAddModal} onOk={this.addModalOkBtnOnClick.bind(this)}
+                           onCancel={this.addModalCancelBtnOnClick.bind(this)}
                            destroyOnClose={true}
-                           maskStyle={{backdropFilter: "blur(10px)"}}
+                           maskStyle={{backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)"}}
                     >
                         <Form>
-                            <Form.Item label="网页名称" name="webName" rules={[{ required: true, message: "网页名称不能为空"}]}>
-                                <Input placeholder="请输入网页名称" id="webNameInput" maxLength={5} allowClear showCount/>
+                            <Form.Item label="网页名称" name="webName"
+                                       rules={[{required: true, message: "网页名称不能为空"}]}>
+                                <Input placeholder="请输入网页名称" id="webNameInput" maxLength={5} allowClear
+                                       showCount/>
                             </Form.Item>
-                            <Form.Item label="网页地址" name="webNameUrl" rules={[{ required: true, message: "网页地址不能为空"}]}>
+                            <Form.Item label="网页地址" name="webNameUrl"
+                                       rules={[{required: true, message: "网页地址不能为空"}]}>
                                 <Input placeholder="请输入网页地址" id="webUrlInput" allowClear/>
                             </Form.Item>
                         </Form>
                     </Modal>
                     <Modal title={"编辑链接 " + this.state.collectionSize + " / " + this.state.collectionMaxSize}
-                           open={this.state.displayEditModal} onOk={this.handleEditModalOk.bind(this)} onCancel={this.handleEditModalCancel.bind(this)}
-                           maskStyle={{backdropFilter: "blur(10px)"}}
+                           closeIcon={false} centered
+                           open={this.state.displayEditModal} onOk={this.editModalOkBtnOnClick.bind(this)}
+                           onCancel={this.editModalCancelBtnOnClick.bind(this)}
+                           maskStyle={{backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)"}}
                     >
                         <List
                             itemLayout="horizontal"
                             size="small"
                             dataSource={this.state.collectionData}
+                            header={
+                                <Row justify={"end"}>
+                                    <Button type="text" shape={"round"} icon={<DeleteOutlined/>}
+                                            onMouseOver={this.btnMouseOver.bind(this)}
+                                            onMouseOut={this.btnMouseOut.bind(this)}
+                                            onClick={this.removeAllBtnOnClick.bind(this)}
+                                            style={{color: this.state.fontColor}}>
+                                        全部删除
+                                    </Button>
+                                </Row>
+                            }
                             renderItem={(item: any) => (
                                 <List.Item actions={[
-                                    <Button type="text" icon={<DeleteOutlined />} onClick={this.handleRemoveCollection.bind(this, item)} style={{color: this.state.fontColor}}>
-                                        删除
+                                    <Button type="text" shape={"circle"} icon={<CloseOutlined/>}
+                                            onMouseOver={this.btnMouseOver.bind(this)}
+                                            onMouseOut={this.btnMouseOut.bind(this)}
+                                            onClick={this.removeBtnOnClick.bind(this, item)}
+                                            style={{color: this.state.fontColor}}>
                                     </Button>
                                 ]}>
                                     <List.Item.Meta
-                                        avatar={<Avatar src={item.webUrl + "/favicon.ico"} />}
-                                        title={item.webName}
-                                        description={item.webUrl}
+                                        avatar={<Avatar src={item.webUrl + "/favicon.ico"}/>}
+                                        title={
+                                            <Space>
+                                                <CompassOutlined />
+                                                <Text style={{color: this.state.fontColor}}>{" " + item.webName}</Text>
+                                            </Space>
+                                        }
+                                        description={
+                                            <Space>
+                                                <LinkOutlined/>
+                                                <Text style={{color: this.state.fontColor}}>{" " + item.webUrl}</Text>
+                                            </Space>
+                                        }
                                     />
                                 </List.Item>
                             )}

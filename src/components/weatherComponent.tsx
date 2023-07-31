@@ -1,6 +1,5 @@
 import React from "react";
-import {Popover, Button, Space, Typography} from "antd";
-import {device} from "../typescripts/publicConstants";
+import {Button, Popover, Space, Typography} from "antd";
 import {changeThemeColor, getWeatherIcon, httpRequest} from "../typescripts/publicFunctions";
 import {ThemeColorInterface} from "../typescripts/publicInterface";
 
@@ -8,14 +7,15 @@ const {Text} = Typography;
 
 type propType = {
     themeColor: ThemeColorInterface,
+    searchEngine: "bing" | "baidu" | "google"
 }
 
 type stateType = {
     backgroundColor: string,
     fontColor: string,
-    display: "none" | "block",
     weatherIcon: string,
     weatherInfo: string,
+    searchEngineUrl: string,
     region: string;
     humidity: string;
     pm25: string;
@@ -35,9 +35,9 @@ class WeatherComponent extends React.Component {
         this.state = {
             backgroundColor: "",
             fontColor: "",
-            display: "block",
             weatherIcon: "",
             weatherInfo: "暂无信息",
+            searchEngineUrl: "https://www.bing.com/search?q=",
             region: "暂无信息",
             humidity: "暂无信息",
             pm25: "暂无信息",
@@ -47,10 +47,14 @@ class WeatherComponent extends React.Component {
         };
     }
 
+    weatherBtnOnClick() {
+        window.open(this.state.searchEngineUrl + "天气", "_blank",);
+    }
+
     setWeather(data: any) {
         this.setState({
             weatherIcon: getWeatherIcon(data.weatherData.weather),
-            weatherInfo: data.weatherData.weather  + "｜" + data.weatherData.temperature + "°C",
+            weatherInfo: data.weatherData.weather + "｜" + data.weatherData.temperature + "°C",
             region: data.region.replace("|", " · "),
             humidity: data.weatherData.humidity,
             pm25: data.weatherData.pm25,
@@ -66,41 +70,32 @@ class WeatherComponent extends React.Component {
         let url = "https://v2.jinrishici.com/info";
         let data = {};
         httpRequest(headers, url, data, "GET")
-            .then(function(resultData: any){
+            .then(function (resultData: any) {
                 localStorage.setItem("lastWeatherRequestTime", String(new Date().getTime()));  // 保存请求时间，防抖节流
                 if (resultData.status === "success" && resultData.data.weatherData !== null) {
                     localStorage.setItem("lastWeather", JSON.stringify(resultData.data));      // 保存请求结果，防抖节流
                     tempThis.setWeather(resultData.data);
                 }
             })
-            .catch(function(){
+            .catch(function () {
                 // 请求失败也更新请求时间，防止超时后无信息可显示
                 localStorage.setItem("lastWeatherRequestTime", String(new Date().getTime()));  // 保存请求时间，防抖节流
             });
     }
 
     componentDidMount() {
-        if (device === "iPhone" || device === "Android") {
-            this.setState({
-                display: "none",
-            })
-        }
-        else {
-            // 防抖节流
-            let lastRequestTime: any = localStorage.getItem("lastWeatherRequestTime");
-            let nowTimeStamp = new Date().getTime();
-            if(lastRequestTime === null) {  // 第一次请求时 lastRequestTime 为 null，因此直接进行请求赋值 lastRequestTime
-                this.getWeather();
-            }
-            else if(nowTimeStamp - parseInt(lastRequestTime) > 60 * 60 * 1000) {  // 必须多于一小时才能进行新的请求
-                this.getWeather();
-            }
-            else {  // 一小时之内使用上一次请求结果
-                let lastWeather: any = localStorage.getItem("lastWeather");
-                if (lastWeather) {
-                    lastWeather = JSON.parse(lastWeather);
-                    this.setWeather(lastWeather);
-                }
+        // 防抖节流
+        let lastRequestTime: any = localStorage.getItem("lastWeatherRequestTime");
+        let nowTimeStamp = new Date().getTime();
+        if (lastRequestTime === null) {  // 第一次请求时 lastRequestTime 为 null，因此直接进行请求赋值 lastRequestTime
+            this.getWeather();
+        } else if (nowTimeStamp - parseInt(lastRequestTime) > 60 * 60 * 1000) {  // 必须多于一小时才能进行新的请求
+            this.getWeather();
+        } else {  // 一小时之内使用上一次请求结果
+            let lastWeather: any = localStorage.getItem("lastWeather");
+            if (lastWeather) {
+                lastWeather = JSON.parse(lastWeather);
+                this.setWeather(lastWeather);
             }
         }
     }
@@ -110,13 +105,34 @@ class WeatherComponent extends React.Component {
             this.setState({
                 backgroundColor: nextProps.themeColor.componentBackgroundColor,
                 fontColor: nextProps.themeColor.componentFontColor,
-            }, ()=>{
+            }, () => {
                 changeThemeColor("#weatherBtn", this.state.backgroundColor, this.state.fontColor);
             });
         }
+
+        if (nextProps.searchEngine !== prevProps.searchEngine) {
+            let tempSearchEngineUrl: string;
+            switch (nextProps.searchEngine) {
+                case "bing":
+                    tempSearchEngineUrl = "https://www.bing.com/search?q=";
+                    break;
+                case "baidu":
+                    tempSearchEngineUrl = "https://www.baidu.com/s?wd=";
+                    break;
+                case "google":
+                    tempSearchEngineUrl = "https://www.google.com/search?q=";
+                    break;
+                default:
+                    tempSearchEngineUrl = "https://www.bing.com/search?q=";
+                    break;
+            }
+            this.setState({
+                searchEngineUrl: tempSearchEngineUrl,
+            })
+        }
     }
 
-    render(){
+    render() {
         const popoverContent = (
             <Space direction="vertical">
                 <Space>
@@ -147,9 +163,7 @@ class WeatherComponent extends React.Component {
                 <Button shape="round" icon={<i className={this.state.weatherIcon}> </i>} size={"large"}
                         id={"weatherBtn"}
                         className={"componentTheme zIndexHigh"}
-                        style={{
-                            display: this.state.display,
-                        }}
+                        onClick={this.weatherBtnOnClick.bind(this)}
                 >
                     {this.state.weatherInfo}
                 </Button>

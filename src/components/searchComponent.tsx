@@ -1,11 +1,9 @@
 import React from "react";
 import "../stylesheets/searchComponent.scss"
 import "../stylesheets/publicStyles.scss"
-import {Input, Col, Space, Select, Avatar} from "antd";
-import { SearchOutlined } from "@ant-design/icons";
+import {Avatar, Col, Input} from "antd";
+import {SearchOutlined} from "@ant-design/icons";
 import {fadeIn, fadeOut} from "../typescripts/publicFunctions";
-
-const { Search } = Input;
 
 type propType = {
     searchEngine: "bing" | "baidu" | "google"
@@ -69,7 +67,7 @@ class SearchComponent extends React.Component {
 
     onFocus() {
         fadeIn("#mask", 300);
-        if(this.state.maskDisplay !=="block"){
+        if (this.state.maskDisplay !== "block") {
             this.setState({
                 maskDisplay: "block"
             })
@@ -84,19 +82,19 @@ class SearchComponent extends React.Component {
         window.location.href = this.state.searchEngineUrl + e.target.value;
     }
 
-    render(){
+    render() {
         return (
             <Col span={24} className={"center"}>
                 <div
                     id={"mask"}
                     className={"mask zIndexMiddle"}
-                    style={{display:this.state.maskDisplay}}
+                    style={{display: this.state.maskDisplay}}
                 />
 
                 <Input
-                    className={"searchInput zIndexHigh"}
-                    prefix={<Avatar size="small" src={this.state.searchEngineIconUrl} />}
-                    suffix={<SearchOutlined />}
+                    className={"searchInput componentTheme zIndexHigh"}
+                    prefix={<Avatar size="small" src={this.state.searchEngineIconUrl}/>}
+                    suffix={<SearchOutlined/>}
                     placeholder="按下 Enter 键搜索"
                     onFocus={this.onFocus.bind(this)}
                     onBlur={this.onBlur.bind(this)}

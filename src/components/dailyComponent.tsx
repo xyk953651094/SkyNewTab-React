@@ -1,11 +1,26 @@
 import React from "react";
-import {Popover, Col, Badge, Typography, Button, DatePicker, List, message, Row, Form, Input, Modal} from "antd";
-import type { DatePickerProps } from 'antd';
-import {CalendarOutlined, PlusOutlined, DeleteOutlined, CloseOutlined} from "@ant-design/icons";
-import {changeThemeColor, getTimeDetails} from "../typescripts/publicFunctions";
+import type {DatePickerProps} from 'antd';
+import {
+    Badge,
+    Button,
+    Col,
+    DatePicker,
+    Divider,
+    Form,
+    Input,
+    List,
+    message,
+    Modal,
+    Popover,
+    Row,
+    Space,
+    Typography
+} from "antd";
+import {CalendarOutlined, CloseOutlined, DeleteOutlined, PlusOutlined, ClockCircleOutlined} from "@ant-design/icons";
+import {changeThemeColor, getFontColor, getTimeDetails} from "../typescripts/publicFunctions";
 import {ThemeColorInterface} from "../typescripts/publicInterface";
 
-const { Text } = Typography;
+const {Text} = Typography;
 const $ = require("jquery");
 
 type propType = {
@@ -13,9 +28,10 @@ type propType = {
 }
 
 type stateType = {
+    hoverColor: string,
     backgroundColor: string,
     fontColor: string,
-    displayAddModal: boolean,
+    displayModal: boolean,
     listItems: any,
     dailySize: number,
     dailyMaxSize: number,
@@ -31,9 +47,10 @@ class DailyComponent extends React.Component {
     constructor(props: any) {
         super(props);
         this.state = {
+            hoverColor: "",
             backgroundColor: "",
             fontColor: "",
-            displayAddModal: false,
+            displayModal: false,
             listItems: [],
             dailySize: 0,
             dailyMaxSize: 5,
@@ -41,9 +58,19 @@ class DailyComponent extends React.Component {
         };
     }
 
-    removeAllDaily() {
+    btnMouseOver(e: any) {
+        e.currentTarget.style.backgroundColor = this.state.hoverColor;
+        e.currentTarget.style.color = getFontColor(this.state.hoverColor);
+    }
+
+    btnMouseOut(e: any) {
+        e.currentTarget.style.backgroundColor = "transparent";
+        e.currentTarget.style.color = this.state.fontColor;
+    }
+
+    removeAllBtnOnClick() {
         let tempDaily = localStorage.getItem("daily");
-        if(tempDaily){
+        if (tempDaily) {
             localStorage.removeItem("daily");
             this.setState({
                 listItems: [],
@@ -52,19 +79,19 @@ class DailyComponent extends React.Component {
         }
     }
 
-    removeDaily(item: any) {
+    removeBtnOnClick(item: any) {
         let daily = [];
         let tempDaily = localStorage.getItem("daily");
-        if(tempDaily){
+        if (tempDaily) {
             daily = JSON.parse(tempDaily);
             let index = -1;
-            for(let i = 0; i < daily.length; i++) {
+            for (let i = 0; i < daily.length; i++) {
                 if (item.timeStamp === daily[i].timeStamp) {
                     index = i;
                     break;
                 }
             }
-            if(index !== -1) {
+            if (index !== -1) {
                 daily.splice(index, 1);
             }
             localStorage.setItem("daily", JSON.stringify(daily));
@@ -76,71 +103,66 @@ class DailyComponent extends React.Component {
         }
     }
 
-    showAddModal() {
+    showAddModalBtnOnClick() {
         let daily = [];
         let tempDaily = localStorage.getItem("daily");
-        if(tempDaily){
+        if (tempDaily) {
             daily = JSON.parse(tempDaily);
         }
-        if(daily.length < this.state.dailyMaxSize) {
+        if (daily.length < this.state.dailyMaxSize) {
             // $("#dailyInput").val("");
             this.setState({
-                displayAddModal: true,
+                displayModal: true,
                 selectedTimeStamp: 0
             })
-        }
-        else {
+        } else {
             message.error("倒数日数量最多为" + this.state.dailyMaxSize + "个");
         }
     }
 
-    handleAddModalOk() {
+    modalOkBtnOnClick() {
         let title = $("#dailyInput").val();
 
-        if(title && title.length > 0 && this.state.selectedTimeStamp !== 0) {
+        if (title && title.length > 0 && this.state.selectedTimeStamp !== 0) {
             let daily = [];
             let tempDaily = localStorage.getItem("daily");
-            if(tempDaily){
+            if (tempDaily) {
                 daily = JSON.parse(tempDaily);
             }
-            if(daily.length < this.state.dailyMaxSize) {
+            if (daily.length < this.state.dailyMaxSize) {
                 let todayTimeStamp = new Date(getTimeDetails(new Date()).showDate5).getTime();
                 let description, status;
                 if (todayTimeStamp - this.state.selectedTimeStamp > 0) {
                     description = "已过 " + ((todayTimeStamp - this.state.selectedTimeStamp) / 86400000) + " 天";
                     status = "expired";
-                }
-                else if (todayTimeStamp - this.state.selectedTimeStamp === 0) {
+                } else if (todayTimeStamp - this.state.selectedTimeStamp === 0) {
                     description = "就是今天";
                     status = "today";
-                }
-                else {
+                } else {
                     description = "还剩 " + ((this.state.selectedTimeStamp - todayTimeStamp) / 86400000) + " 天";
                     status = "not expired";
                 }
 
-                daily.push({"title": title, "description": description, "status": status, "timeStamp": Date.now()});
+                daily.push({"title": title, "description": description, "status": status, "selectedTimeStamp": this.state.selectedTimeStamp,   "timeStamp": Date.now()});
                 localStorage.setItem("daily", JSON.stringify(daily));
 
                 this.setState({
-                    displayAddModal: false,
+                    displayModal: false,
                     listItems: daily,
                     dailySize: daily.length
                 });
                 message.success("添加成功");
-            }
-            else {
+            } else {
                 message.error("倒数日数量最多为" + this.state.dailyMaxSize + "个");
             }
-        }
-        else {
+        } else {
             message.error("倒数日内容不能为空");
         }
     }
 
-    handleAddModalCancel() {
+    modalCancelBtnOnClick() {
         this.setState({
-            displayAddModal: false
+            displayModal: false
         })
     }
 
@@ -153,7 +175,7 @@ class DailyComponent extends React.Component {
     componentDidMount() {
         let daily = [];
         let tempDaily = localStorage.getItem("daily");
-        if(tempDaily){
+        if (tempDaily) {
             daily = JSON.parse(tempDaily);
         }
 
@@ -166,9 +188,10 @@ class DailyComponent extends React.Component {
     componentWillReceiveProps(nextProps: any, prevProps: any) {
         if (nextProps.themeColor !== prevProps.themeColor) {
             this.setState({
+                hoverColor: nextProps.themeColor.themeColor,
                 backgroundColor: nextProps.themeColor.componentBackgroundColor,
                 fontColor: nextProps.themeColor.componentFontColor,
-            }, ()=>{
+            }, () => {
                 changeThemeColor("#dailyBtn", this.state.backgroundColor, this.state.fontColor);
             });
         }
@@ -178,13 +201,18 @@ class DailyComponent extends React.Component {
         const popoverTitle = (
             <Row>
                 <Col span={12} style={{display: "flex", alignItems: "center"}}>
-                    <Text style={{color: this.state.fontColor}}>{"倒数日 " + this.state.dailySize + " / " + this.state.dailyMaxSize}</Text>
+                    <Text
+                        style={{color: this.state.fontColor}}>{"倒数日 " + this.state.dailySize + " / " + this.state.dailyMaxSize}</Text>
                 </Col>
                 <Col span={12} style={{textAlign: "right"}}>
-                    <Button type="text" shape="circle" icon={<PlusOutlined />}
-                            style={{color: this.state.fontColor}} onClick={this.showAddModal.bind(this)} />
-                    <Button type="text" shape="circle" icon={<DeleteOutlined />}
-                            style={{color: this.state.fontColor}} onClick={this.removeAllDaily.bind(this)} />
+                    <Space>
+                        <Button type="text" shape="circle" size={"small"} icon={<PlusOutlined/>}
+                                onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
+                                style={{color: this.state.fontColor}} onClick={this.showAddModalBtnOnClick.bind(this)}/>
+                        <Button type="text" shape="circle" size={"small"} icon={<DeleteOutlined/>}
+                                onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
+                                style={{color: this.state.fontColor}} onClick={this.removeAllBtnOnClick.bind(this)}/>
+                    </Space>
                 </Col>
             </Row>
         );
@@ -195,13 +223,15 @@ class DailyComponent extends React.Component {
                 renderItem={(item: any) => (
                     <List.Item
                         actions={[
-                            <Button type="text" shape="circle" icon={<CloseOutlined />} onClick={this.removeDaily.bind(this, item)} style={{color: this.state.fontColor}}/>
+                            <Button type="text" shape="circle" size={"small"} icon={<CloseOutlined/>}
+                                    onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
+                                    onClick={this.removeBtnOnClick.bind(this, item)}
+                                    style={{color: this.state.fontColor}}/>
                         ]}
                     >
                         <List.Item.Meta
                             title={item.title}
-                            description={item.description}
-                            // description={<Text style={{color: (item.status === "expired"? "red":"blue")}}>{item.description}</Text>}
+                            description={getTimeDetails(new Date(item.selectedTimeStamp)).showDate5 + " " + item.description}
                         />
                     </List.Item>
                 )}
@@ -210,23 +240,28 @@ class DailyComponent extends React.Component {
 
         return (
             <Row>
-                <Popover title={popoverTitle} content={popoverContent} color={this.state.backgroundColor} overlayStyle={{width: "300px"}}>
+                <Popover title={popoverTitle} content={popoverContent} color={this.state.backgroundColor}
+                         overlayStyle={{width: "300px"}}>
                     <Badge size="small" count={this.state.listItems.length}>
-                        <Button shape="circle" icon={<CalendarOutlined />} size={"large"}
+                        <Button shape="circle" icon={<CalendarOutlined/>} size={"large"}
                                 id={"dailyBtn"}
                                 className={"componentTheme zIndexHigh"}
                         />
                     </Badge>
                 </Popover>
-                <Modal title={"添加倒数日 " + this.state.dailySize + " / " + this.state.dailyMaxSize} open={this.state.displayAddModal} onOk={this.handleAddModalOk.bind(this)} onCancel={this.handleAddModalCancel.bind(this)}
+                <Modal title={"添加倒数日 " + this.state.dailySize + " / " + this.state.dailyMaxSize} closeIcon={false}
+                       centered
+                       open={this.state.displayModal} onOk={this.modalOkBtnOnClick.bind(this)}
+                       onCancel={this.modalCancelBtnOnClick.bind(this)}
                        destroyOnClose={true}
-                       maskStyle={{backdropFilter: "blur(10px)"}}
+                       maskStyle={{backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)"}}
                 >
                     <Form>
-                        <Form.Item label="标题" name="dailyInput" rules={[{ required: true, message: "标题不能为空"}]}>
+                        <Form.Item label="标题" name="dailyInput" rules={[{required: true, message: "标题不能为空"}]}>
                             <Input placeholder="请输入标题" id="dailyInput" maxLength={10} allowClear showCount/>
                         </Form.Item>
-                        <Form.Item label="日期" name="dailyDatePicker" rules={[{ required: true, message: "日期不能为空"}]}>
+                        <Form.Item label="日期" name="dailyDatePicker"
+                                   rules={[{required: true, message: "日期不能为空"}]}>
                             <DatePicker onChange={this.datePickerOnChange} id={"dailyDatePicker"}/>
                         </Form.Item>
                     </Form>

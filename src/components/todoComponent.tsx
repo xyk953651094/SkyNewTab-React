@@ -1,8 +1,8 @@
 import React from "react";
-import {Popover, Col, Badge, Typography, Button, Checkbox, message, Row, Form, Input, Rate, Modal} from "antd";
-import type { CheckboxValueType } from 'antd/es/checkbox/Group';
+import {Badge, Button, Checkbox, Col, Form, Input, message, Modal, Popover, Rate, Row, Space, Typography} from "antd";
+import type {CheckboxValueType} from 'antd/es/checkbox/Group';
 import {CheckSquareOutlined, DeleteOutlined, PlusOutlined} from "@ant-design/icons";
-import {changeThemeColor} from "../typescripts/publicFunctions";
+import {changeThemeColor, getFontColor} from "../typescripts/publicFunctions";
 import {ThemeColorInterface} from "../typescripts/publicInterface";
 
 const {Text} = Typography;
@@ -13,9 +13,10 @@ type propType = {
 }
 
 type stateType = {
+    hoverColor: string,
     backgroundColor: string,
     fontColor: string,
-    displayAddModal: boolean,
+    displayModal: boolean,
     checkboxOptions: any,
     todoSize: number,
     todoMaxSize: number,
@@ -31,19 +32,30 @@ class TodoComponent extends React.Component {
     constructor(props: any) {
         super(props);
         this.state = {
+            hoverColor: "",
             backgroundColor: "",
             fontColor: "",
-            displayAddModal: false,
+            displayModal: false,
             checkboxOptions: [],
             todoSize: 0,
             todoMaxSize: 5,
-            priority: 0
+            priority: 1
         };
     }
 
-    removeAllTodos() {
+    btnMouseOver(e: any) {
+        e.currentTarget.style.backgroundColor = this.state.hoverColor;
+        e.currentTarget.style.color = getFontColor(this.state.hoverColor);
+    }
+
+    btnMouseOut(e: any) {
+        e.currentTarget.style.backgroundColor = "transparent";
+        e.currentTarget.style.color = this.state.fontColor;
+    }
+
+    removeAllBtnOnClick() {
         let tempTodos = localStorage.getItem("todos");
-        if(tempTodos){
+        if (tempTodos) {
             localStorage.removeItem("todos");
             this.setState({
                 checkboxOptions: [],
@@ -52,72 +64,72 @@ class TodoComponent extends React.Component {
         }
     }
 
-    showAddModal() {
+    showAddModalBtnOnClick() {
         let todos = [];
         let tempTodos = localStorage.getItem("todos");
-        if(tempTodos){
+        if (tempTodos) {
             todos = JSON.parse(tempTodos);
         }
-        if(todos.length < this.state.todoMaxSize) {
+        if (todos.length < this.state.todoMaxSize) {
             // $("#todoInput").val("");
             this.setState({
-                displayAddModal: true,
-                priority: 0,
+                displayModal: true,
+                priority: 1,
             })
-        }
-        else {
+        } else {
             message.error("待办数量最多为" + this.state.todoMaxSize + "个");
         }
     }
 
-    handleAddModalOk() {
+    modalOkBtnOnClick() {
         let todoContent = $("#todoInput").val();
-        if(todoContent && todoContent.length > 0) {
+        if (todoContent && todoContent.length > 0) {
             let todos = [];
             let tempTodos = localStorage.getItem("todos");
-            if(tempTodos){
+            if (tempTodos) {
                 todos = JSON.parse(tempTodos);
             }
-            if(todos.length < this.state.todoMaxSize) {
+            if (todos.length < this.state.todoMaxSize) {
                 todoContent = todoContent + " ";
-                todos.push({"label": todoContent + "★".repeat(this.state.priority), "value": todoContent + "★".repeat(this.state.priority)});
+                todos.push({
+                    "label": todoContent + "★".repeat(this.state.priority),
+                    "value": todoContent + "★".repeat(this.state.priority)
+                });
                 localStorage.setItem("todos", JSON.stringify(todos));
 
                 this.setState({
-                    displayAddModal: false,
+                    displayModal: false,
                     checkboxOptions: todos,
                     todoSize: todos.length
                 });
                 message.success("添加成功");
-            }
-            else {
+            } else {
                 message.error("待办数量最多为" + this.state.todoMaxSize + "个");
             }
-        }
-        else {
+        } else {
             message.error("待办内容不能为空");
         }
     }
 
-    handleAddModalCancel() {
+    modalCancelBtnOnClick() {
         this.setState({
-            displayAddModal: false
+            displayModal: false
         })
     }
 
     checkboxOnChange(checkedValues: CheckboxValueType[]) {
         let todos = [];
         let tempTodos = localStorage.getItem("todos");
-        if(tempTodos){
+        if (tempTodos) {
             todos = JSON.parse(tempTodos);
             let index = -1;
-            for(let i = 0; i < todos.length; i++) {
+            for (let i = 0; i < todos.length; i++) {
                 if (checkedValues[0] === todos[i].label) {
                     index = i;
                     break;
                 }
             }
-            if(index !== -1) {
+            if (index !== -1) {
                 todos.splice(index, 1);
             }
             localStorage.setItem("todos", JSON.stringify(todos));
@@ -138,7 +150,7 @@ class TodoComponent extends React.Component {
     componentDidMount() {
         let todos = [];
         let tempTodos = localStorage.getItem("todos");
-        if(tempTodos){
+        if (tempTodos) {
             todos = JSON.parse(tempTodos);
         }
 
@@ -151,9 +163,10 @@ class TodoComponent extends React.Component {
     componentWillReceiveProps(nextProps: any, prevProps: any) {
         if (nextProps.themeColor !== prevProps.themeColor) {
             this.setState({
+                hoverColor: nextProps.themeColor.themeColor,
                 backgroundColor: nextProps.themeColor.componentBackgroundColor,
                 fontColor: nextProps.themeColor.componentFontColor,
-            }, ()=>{
+            }, () => {
                 changeThemeColor("#todoBtn", this.state.backgroundColor, this.state.fontColor);
             });
         }
@@ -163,13 +176,18 @@ class TodoComponent extends React.Component {
         const popoverTitle = (
             <Row>
                 <Col span={12} style={{display: "flex", alignItems: "center"}}>
-                    <Text style={{color: this.state.fontColor}}>{"待办 " + this.state.todoSize + " / " + this.state.todoMaxSize}</Text>
+                    <Text
+                        style={{color: this.state.fontColor}}>{"待办 " + this.state.todoSize + " / " + this.state.todoMaxSize}</Text>
                 </Col>
                 <Col span={12} style={{textAlign: "right"}}>
-                    <Button type="text" shape="circle" icon={<PlusOutlined />}
-                            style={{color: this.state.fontColor}} onClick={this.showAddModal.bind(this)} />
-                    <Button type="text" shape="circle" icon={<DeleteOutlined />}
-                            style={{color: this.state.fontColor}} onClick={this.removeAllTodos.bind(this)} />
+                    <Space>
+                        <Button type="text" shape="circle" size={"small"} icon={<PlusOutlined/>}
+                                onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
+                                style={{color: this.state.fontColor}} onClick={this.showAddModalBtnOnClick.bind(this)}/>
+                        <Button type="text" shape="circle" size={"small"} icon={<DeleteOutlined/>}
+                                onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
+                                style={{color: this.state.fontColor}} onClick={this.removeAllBtnOnClick.bind(this)}/>
+                    </Space>
                 </Col>
             </Row>
         );
@@ -183,25 +201,34 @@ class TodoComponent extends React.Component {
 
         return (
             <Row>
-                <Popover title={popoverTitle} content={popoverContent} color={this.state.backgroundColor} overlayStyle={{width: "300px"}}>
+                <Popover title={popoverTitle} content={popoverContent} color={this.state.backgroundColor}
+                         overlayStyle={{width: "300px"}}>
                     <Badge size="small" count={this.state.checkboxOptions.length}>
-                        <Button shape="circle" icon={<CheckSquareOutlined />} size={"large"}
-                                // onClick={this.handleClick.bind(this)}
+                        <Button shape="circle" icon={<CheckSquareOutlined/>} size={"large"}
                                 id={"todoBtn"}
                                 className={"componentTheme zIndexHigh"}
                         />
                     </Badge>
                 </Popover>
-                <Modal title={"添加待办事项 " + this.state.todoSize + " / " + this.state.todoMaxSize} open={this.state.displayAddModal} onOk={this.handleAddModalOk.bind(this)} onCancel={this.handleAddModalCancel.bind(this)}
+                <Modal title={"添加待办事项 " + this.state.todoSize + " / " + this.state.todoMaxSize} closeIcon={false}
+                       centered
+                       open={this.state.displayModal} onOk={this.modalOkBtnOnClick.bind(this)}
+                       onCancel={this.modalCancelBtnOnClick.bind(this)}
                        destroyOnClose={true}
-                       maskStyle={{backdropFilter: "blur(10px)"}}
+                       maskStyle={{backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)"}}
                 >
                     <Form>
-                        <Form.Item label="待办内容" name="todoInput" rules={[{ required: true, message: "待办内容不能为空"}]}>
+                        <Form.Item label="待办事项" name="todoInput"
+                                   rules={[{required: true, message: "待办事项不能为空"}]}>
                             <Input placeholder="请输入待办内容" id="todoInput" maxLength={10} allowClear showCount/>
                         </Form.Item>
-                        <Form.Item label="优先级别" name="todoRate" rules={[{ required: true, message: "优先级别不能为空"}]}>
-                            <Rate onChange={this.rateOnChange.bind(this)} style={{color: this.state.fontColor, stroke: this.state.fontColor, strokeWidth: "25px"}}/>
+                        <Form.Item label="优先级别" name="todoRate"
+                                   rules={[{required: true, message: "优先级别不能为空"}]}>
+                            <Rate defaultValue={1} onChange={this.rateOnChange.bind(this)} style={{
+                                color: this.state.hoverColor,
+                                stroke: this.state.fontColor,
+                                strokeWidth: "25px"
+                            }}/>
                         </Form.Item>
                     </Form>
                 </Modal>

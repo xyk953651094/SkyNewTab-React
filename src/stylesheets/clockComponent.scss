@@ -2,15 +2,15 @@ $clockFontSize: 60px;
 $dateFontSize: 20px;
 
 .clockText {
-  font-size: $clockFontSize;
-  height: $clockFontSize;
-  line-height: $clockFontSize;
-  //text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    font-size: $clockFontSize;
+    height: $clockFontSize;
+    line-height: $clockFontSize;
+    //text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .dateText {
-  font-size: $dateFontSize;
-  height: $dateFontSize;
-  line-height: $dateFontSize;
-  //text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    font-size: $dateFontSize;
+    height: $dateFontSize;
+    line-height: $dateFontSize;
+    //text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
