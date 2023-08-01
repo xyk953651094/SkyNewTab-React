@@ -236,13 +236,11 @@ class CollectionComponent extends React.Component {
                            maskStyle={{backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)"}}
                     >
                         <Form>
-                            <Form.Item label="网页名称" name="webName"
-                                       rules={[{required: true, message: "网页名称不能为空"}]}>
+                            <Form.Item label="网页名称" name="webName">
                                 <Input placeholder="请输入网页名称" id="webNameInput" maxLength={5} allowClear
                                        showCount/>
                             </Form.Item>
-                            <Form.Item label="网页地址" name="webNameUrl"
-                                       rules={[{required: true, message: "网页地址不能为空"}]}>
+                            <Form.Item label="网页地址" name="webNameUrl">
                                 <Input placeholder="请输入网页地址" id="webUrlInput" allowClear/>
                             </Form.Item>
                         </Form>

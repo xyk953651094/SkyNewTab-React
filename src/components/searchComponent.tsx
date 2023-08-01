@@ -41,17 +41,45 @@ class SearchComponent extends React.Component {
             let tempSearchEngineUrl: string;
             let tempSearchEngineIconUrl: string;
             switch (nextProps.searchEngine) {
-                case "bing":
-                    tempSearchEngineUrl = "https://www.bing.com/search?q=";
-                    tempSearchEngineIconUrl = "https://www.bing.com/favicon.ico";
-                    break;
                 case "baidu":
                     tempSearchEngineUrl = "https://www.baidu.com/s?wd=";
                     tempSearchEngineIconUrl = "https://www.baidu.com/favicon.ico";
                     break;
+                case "bing":
+                    tempSearchEngineUrl = "https://www.bing.com/search?q=";
+                    tempSearchEngineIconUrl = "https://www.bing.com/favicon.ico";
+                    break;
+                case "brave":
+                    tempSearchEngineUrl = "https://search.brave.com/search?q=";
+                    tempSearchEngineIconUrl = "https://cdn.search.brave.com/serp/v2/_app/immutable/assets/favicon.c09fe1a1.ico";
+                    break;
+                case "duckduckgo":
+                    tempSearchEngineUrl = "https://duckduckgo.com/?q=";
+                    tempSearchEngineIconUrl = "https://duckduckgo.com/favicon.ico";
+                    break;
+                case "ghostery":
+                    tempSearchEngineUrl = "https://ghosterysearch.com/search?q=";
+                    tempSearchEngineIconUrl = "https://ghosterysearch.com/favicon.ico";
+                    break;
                 case "google":
                     tempSearchEngineUrl = "https://www.google.com/search?q=";
                     tempSearchEngineIconUrl = "https://www.google.com/favicon.ico";
+                    break;
+                case "sogou":
+                    tempSearchEngineUrl = "https://www.sogou.com/web?query=";
+                    tempSearchEngineIconUrl = "https://www.sogou.com/favicon.ico";
+                    break;
+                case "startpage":
+                    tempSearchEngineUrl = "https://startpage.com/do/search?q=";
+                    tempSearchEngineIconUrl = "https://www.startpage.com/sp/cdn/favicons/favicon-32x32--default.png";
+                    break;
+                case "wuzhuiso":
+                    tempSearchEngineUrl = "https://www.wuzhuiso.com/s?ie=utf-8&fr=none&q=";
+                    tempSearchEngineIconUrl = "https://www.wuzhuiso.com/favicon.ico";
+                    break;
+                case "yandex":
+                    tempSearchEngineUrl = "https://yandex.com/search/?text=";
+                    tempSearchEngineIconUrl = "https://yastatic.net/s3/home-static/_/92/929b10d17990e806734f68758ec917ec.png";
                     break;
                 default:
                     tempSearchEngineUrl = "https://www.bing.com/search?q=";

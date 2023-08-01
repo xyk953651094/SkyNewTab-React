@@ -218,12 +218,10 @@ class TodoComponent extends React.Component {
                        maskStyle={{backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)"}}
                 >
                     <Form>
-                        <Form.Item label="待办事项" name="todoInput"
-                                   rules={[{required: true, message: "待办事项不能为空"}]}>
+                        <Form.Item label="待办事项" name="todoInput">
                             <Input placeholder="请输入待办内容" id="todoInput" maxLength={10} allowClear showCount/>
                         </Form.Item>
-                        <Form.Item label="优先级别" name="todoRate"
-                                   rules={[{required: true, message: "优先级别不能为空"}]}>
+                        <Form.Item label="优先级别" name="todoRate">
                             <Rate defaultValue={1} onChange={this.rateOnChange.bind(this)} style={{
                                 color: this.state.hoverColor,
                                 stroke: this.state.fontColor,

@@ -257,11 +257,10 @@ class DailyComponent extends React.Component {
                        maskStyle={{backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)"}}
                 >
                     <Form>
-                        <Form.Item label="标题" name="dailyInput" rules={[{required: true, message: "标题不能为空"}]}>
+                        <Form.Item label="标题" name="dailyInput">
                             <Input placeholder="请输入标题" id="dailyInput" maxLength={10} allowClear showCount/>
                         </Form.Item>
-                        <Form.Item label="日期" name="dailyDatePicker"
-                                   rules={[{required: true, message: "日期不能为空"}]}>
+                        <Form.Item label="日期" name="dailyDatePicker">
                             <DatePicker onChange={this.datePickerOnChange} id={"dailyDatePicker"}/>
                         </Form.Item>
                     </Form>

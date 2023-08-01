@@ -228,9 +228,18 @@ class PreferenceComponent extends React.Component {
                                     <Form.Item name="searchEngineRadio" label="搜索引擎">
                                         <Radio.Group buttonStyle={"solid"}
                                                      onChange={this.searchEngineRadioOnChange.bind(this)}>
-                                            <Radio value={"bing"}>必应</Radio>
-                                            <Radio value={"baidu"}>百度</Radio>
-                                            <Radio value={"google"}>谷歌</Radio>
+                                            <Row>
+                                                <Col span={12}><Radio value={"baidu"}>Baidu</Radio></Col>
+                                                <Col span={12}><Radio value={"bing"}>Bing</Radio></Col>
+                                                <Col span={12}><Radio value={"brave"}>Brave</Radio></Col>
+                                                <Col span={12}><Radio value={"duckduckgo"}>DuckDuckGo</Radio></Col>
+                                                <Col span={12}><Radio value={"ghostery"}>Ghostery</Radio></Col>
+                                                <Col span={12}><Radio value={"google"}>Google</Radio></Col>
+                                                <Col span={12}><Radio value={"sogou"}>Sogou</Radio></Col>
+                                                <Col span={12}><Radio value={"startpage"}>StartPage</Radio></Col>
+                                                <Col span={12}><Radio value={"wuzhuiso"}>Wuzhuiso</Radio></Col>
+                                                <Col span={12}><Radio value={"yandex"}>Yandex</Radio></Col>
+                                            </Row>
                                         </Radio.Group>
                                     </Form.Item>
                                     {/*<Form.Item name="showImageSwitch" label="显示图片（推荐开启）">*/}
