@@ -2,7 +2,7 @@ import React from "react";
 import {Button, Popover, Space, Typography} from "antd";
 import {CheckCircleOutlined, CloseCircleOutlined} from "@ant-design/icons";
 import {
-    changeThemeColor,
+    changeThemeColor, getFontColor,
     getGreetContent,
     getGreetIcon,
     getTimeDetails,
@@ -18,6 +18,7 @@ type propType = {
 }
 
 type stateType = {
+    hoverColor: string,
     backgroundColor: string,
     fontColor: string,
     greetIcon: string,
@@ -38,6 +39,7 @@ class GreetComponent extends React.Component {
     constructor(props: any) {
         super(props);
         this.state = {
+            hoverColor: "",
             backgroundColor: "",
             fontColor: "",
             greetIcon: getGreetIcon(),
@@ -48,6 +50,16 @@ class GreetComponent extends React.Component {
             suit: "暂无信息",
             avoid: "暂无信息",
         };
+    }
+
+    btnMouseOver(e: any) {
+        e.currentTarget.style.backgroundColor = this.state.hoverColor;
+        e.currentTarget.style.color = getFontColor(this.state.hoverColor);
+    }
+
+    btnMouseOut(e: any) {
+        e.currentTarget.style.backgroundColor = "transparent";
+        e.currentTarget.style.color = this.state.fontColor;
     }
 
     greetBtnOnClick() {
@@ -124,6 +136,7 @@ class GreetComponent extends React.Component {
     componentWillReceiveProps(nextProps: any, prevProps: any) {
         if (nextProps.themeColor !== prevProps.themeColor) {
             this.setState({
+                hoverColor: nextProps.themeColor.themeColor,
                 backgroundColor: nextProps.themeColor.componentBackgroundColor,
                 fontColor: nextProps.themeColor.componentFontColor,
             }, () => {
@@ -177,14 +190,23 @@ class GreetComponent extends React.Component {
     render() {
         const popoverContent = (
             <Space direction="vertical">
-                <Space>
-                    <CheckCircleOutlined/>
-                    <Text style={{color: this.state.fontColor}}>{" 宜：" + this.state.suit}</Text>
-                </Space>
-                <Space>
-                    <CloseCircleOutlined/>
-                    <Text style={{color: this.state.fontColor}}>{" 忌：" + this.state.avoid}</Text>
-                </Space>
+                <Button type="text" shape="round" icon={<CheckCircleOutlined/>} style={{color: this.state.fontColor, cursor: "default"}}
+                        onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
+                    {"宜：" + this.state.suit}
+                </Button>
+                <Button type="text" shape="round" icon={<CloseCircleOutlined/>} style={{color: this.state.fontColor, cursor: "default"}}
+                        onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
+                    {"忌：" + this.state.avoid}
+                </Button>
+
+                {/*<Space>*/}
+                {/*    <CheckCircleOutlined/>*/}
+                {/*    <Text style={{color: this.state.fontColor}}>{" 宜：" + this.state.suit}</Text>*/}
+                {/*</Space>*/}
+                {/*<Space>*/}
+                {/*    <CloseCircleOutlined/>*/}
+                {/*    <Text style={{color: this.state.fontColor}}>{" 忌：" + this.state.avoid}</Text>*/}
+                {/*</Space>*/}
             </Space>
         );
 

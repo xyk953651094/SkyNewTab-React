@@ -1,14 +1,21 @@
 import React from "react";
 import {Avatar, Button, Divider, List, message, Popover, Space, Typography} from "antd";
-import {CameraOutlined, EnvironmentOutlined, InfoCircleOutlined, LinkOutlined, UserOutlined} from "@ant-design/icons";
+import {
+    CameraOutlined,
+    EnvironmentOutlined,
+    InfoCircleOutlined,
+    LinkOutlined,
+    UserOutlined
+} from "@ant-design/icons";
 import {unsplashUrl} from "../typescripts/publicConstants";
 import {changeThemeColor, getFontColor, isEmptyString} from "../typescripts/publicFunctions";
 import {ThemeColorInterface} from "../typescripts/publicInterface";
 import "../stylesheets/publicStyles.scss"
 
 const {Text} = Typography;
+const btnMaxSize = 45;
 
-type propType = {
+    type propType = {
     themeColor: ThemeColorInterface,
     display: "none" | "block",
     imageData: any,
@@ -28,6 +35,7 @@ type stateType = {
     imagePreviewUrl: string,
     imageLocation: string,
     imageDescription: string,
+    btnMaxSize: number,
 }
 
 interface AuthorComponent {
@@ -52,6 +60,7 @@ class AuthorComponent extends React.Component {
             imagePreviewUrl: "",
             imageLocation: "暂无信息",
             imageDescription: "暂无信息",
+            btnMaxSize: 45,
         };
     }
 
@@ -126,28 +135,48 @@ class AuthorComponent extends React.Component {
                     <List.Item.Meta
                         avatar={<Avatar size="large" src={this.state.authorIconUrl} alt={"作者"}/>}
                         title={
-                            <Space>
-                                <UserOutlined/>
-                                <Text style={{color: this.state.fontColor}}>{" " + this.state.authorName}</Text>
-                            </Space>
+                            <Button type="text" shape="round" icon={<UserOutlined/>} style={{color: this.state.fontColor, cursor: "default"}}
+                                    onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
+                                {this.state.authorName.length < btnMaxSize? this.state.authorName : this.state.authorName.substring(0, btnMaxSize) + "..."}
+                            </Button>
+
+                            // <Space>
+                            //     <UserOutlined/>
+                            //     <Text style={{color: this.state.fontColor}}>{" " + this.state.authorName}</Text>
+                            // </Space>
                         }
                         description={
                             <Space>
-                                <Space>
-                                    <i className="bi bi-collection"></i>
-                                    <Text
-                                        style={{color: this.state.fontColor}}>{" " + this.state.authorCollections}</Text>
-                                </Space>
+                                <Button type="text" shape="round" icon={<i className="bi bi-collection"></i>} style={{color: this.state.fontColor, cursor: "default"}}
+                                        onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
+                                    {" " + this.state.authorCollections}
+                                </Button>
                                 <Divider type="vertical" style={{borderColor: this.state.fontColor}}/>
-                                <Space>
-                                    <i className="bi bi-heart"></i>
-                                    <Text style={{color: this.state.fontColor}}>{" " + this.state.authorLikes}</Text>
-                                </Space>
+                                <Button type="text" shape="round" icon={<i className="bi bi-heart"></i>} style={{color: this.state.fontColor, cursor: "default"}}
+                                        onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
+                                    {" " + this.state.authorLikes}
+                                </Button>
                                 <Divider type="vertical" style={{borderColor: this.state.fontColor}}/>
-                                <Space>
-                                    <i className="bi bi-images"></i>
-                                    <Text style={{color: this.state.fontColor}}>{" " + this.state.authorPhotos}</Text>
-                                </Space>
+                                <Button type="text" shape="round" icon={<i className="bi bi-images"></i>} style={{color: this.state.fontColor, cursor: "default"}}
+                                        onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
+                                    {" " + this.state.authorPhotos}
+                                </Button>
+
+                                {/*<Space>*/}
+                                {/*    <i className="bi bi-collection"></i>*/}
+                                {/*    <Text*/}
+                                {/*        style={{color: this.state.fontColor}}>{" " + this.state.authorCollections}</Text>*/}
+                                {/*</Space>*/}
+                                {/*<Divider type="vertical" style={{borderColor: this.state.fontColor}}/>*/}
+                                {/*<Space>*/}
+                                {/*    <i className="bi bi-heart"></i>*/}
+                                {/*    <Text style={{color: this.state.fontColor}}>{" " + this.state.authorLikes}</Text>*/}
+                                {/*</Space>*/}
+                                {/*<Divider type="vertical" style={{borderColor: this.state.fontColor}}/>*/}
+                                {/*<Space>*/}
+                                {/*    <i className="bi bi-images"></i>*/}
+                                {/*    <Text style={{color: this.state.fontColor}}>{" " + this.state.authorPhotos}</Text>*/}
+                                {/*</Space>*/}
                             </Space>
                         }
                     />
@@ -160,16 +189,26 @@ class AuthorComponent extends React.Component {
                     <List.Item.Meta
                         avatar={<Avatar size="large" shape={"square"} src={this.state.imagePreviewUrl} alt={"信息"}/>}
                         title={
-                            <Space>
-                                <EnvironmentOutlined/>
-                                <Text style={{color: this.state.fontColor}}>{" " + this.state.imageLocation}</Text>
-                            </Space>
+                            <Button type="text" shape="round" icon={<EnvironmentOutlined/>} style={{color: this.state.fontColor, cursor: "default"}}
+                                    onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
+                                {this.state.imageLocation.length < btnMaxSize? this.state.imageLocation : this.state.imageLocation.substring(0, btnMaxSize) + "..."}
+                            </Button>
+
+                            // <Space>
+                            //     <EnvironmentOutlined/>
+                            //     <Text style={{color: this.state.fontColor}}>{" " + this.state.imageLocation}</Text>
+                            // </Space>
                         }
                         description={
-                            <Space>
-                                <InfoCircleOutlined/>
-                                <Text style={{color: this.state.fontColor}}>{" " + this.state.imageDescription}</Text>
-                            </Space>
+                            <Button type="text" shape="round" icon={<InfoCircleOutlined/>} style={{color: this.state.fontColor, cursor: "default"}}
+                                    onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
+                                {this.state.imageDescription.length < btnMaxSize? this.state.imageDescription : this.state.imageDescription.substring(0, btnMaxSize) + "..."}
+                            </Button>
+
+                            // <Space>
+                            //     <InfoCircleOutlined/>
+                            //     <Text style={{color: this.state.fontColor}}>{" " + this.state.imageDescription}</Text>
+                            // </Space>
                         }
                     />
                 </List.Item>

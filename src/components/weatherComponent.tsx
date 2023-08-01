@@ -1,7 +1,8 @@
 import React from "react";
 import {Button, Popover, Space, Typography} from "antd";
-import {changeThemeColor, getWeatherIcon, httpRequest} from "../typescripts/publicFunctions";
+import {changeThemeColor, getFontColor, getWeatherIcon, httpRequest} from "../typescripts/publicFunctions";
 import {ThemeColorInterface} from "../typescripts/publicInterface";
+import {CheckCircleOutlined} from "@ant-design/icons";
 
 const {Text} = Typography;
 
@@ -11,6 +12,7 @@ type propType = {
 }
 
 type stateType = {
+    hoverColor: string,
     backgroundColor: string,
     fontColor: string,
     weatherIcon: string,
@@ -33,6 +35,7 @@ class WeatherComponent extends React.Component {
     constructor(props: any) {
         super(props);
         this.state = {
+            hoverColor: "",
             backgroundColor: "",
             fontColor: "",
             weatherIcon: "",
@@ -45,6 +48,16 @@ class WeatherComponent extends React.Component {
             visibility: "暂无信息",
             windInfo: "暂无信息",
         };
+    }
+
+    btnMouseOver(e: any) {
+        e.currentTarget.style.backgroundColor = this.state.hoverColor;
+        e.currentTarget.style.color = getFontColor(this.state.hoverColor);
+    }
+
+    btnMouseOut(e: any) {
+        e.currentTarget.style.backgroundColor = "transparent";
+        e.currentTarget.style.color = this.state.fontColor;
     }
 
     weatherBtnOnClick() {
@@ -103,6 +116,7 @@ class WeatherComponent extends React.Component {
     componentWillReceiveProps(nextProps: any, prevProps: any) {
         if (nextProps.themeColor !== prevProps.themeColor) {
             this.setState({
+                hoverColor: nextProps.themeColor.themeColor,
                 backgroundColor: nextProps.themeColor.componentBackgroundColor,
                 fontColor: nextProps.themeColor.componentFontColor,
             }, () => {
@@ -156,26 +170,47 @@ class WeatherComponent extends React.Component {
     render() {
         const popoverContent = (
             <Space direction="vertical">
-                <Space>
-                    <i className="bi bi-moisture"></i>
-                    <Text style={{color: this.state.fontColor}}>{" 空气湿度：" + this.state.humidity}</Text>
-                </Space>
-                <Space>
-                    <i className="bi bi-water"></i>
-                    <Text style={{color: this.state.fontColor}}>{" 空气质量：" + this.state.pm25}</Text>
-                </Space>
-                <Space>
-                    <i className="bi bi-cloud-rain"></i>
-                    <Text style={{color: this.state.fontColor}}>{" 降雨概率：" + this.state.rainfall}</Text>
-                </Space>
-                <Space>
-                    <i className="bi bi-eye"></i>
-                    <Text style={{color: this.state.fontColor}}>{" 视线距离：" + this.state.visibility}</Text>
-                </Space>
-                <Space>
-                    <i className="bi bi-wind"></i>
-                    <Text style={{color: this.state.fontColor}}>{" 风速情况：" + this.state.windInfo}</Text>
-                </Space>
+                <Button type="text" shape="round" icon={<i className="bi bi-moisture"></i>} style={{color: this.state.fontColor, cursor: "default"}}
+                        onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
+                    {" 空气湿度：" + this.state.humidity}
+                </Button>
+                <Button type="text" shape="round" icon={<i className="bi bi-water"></i>} style={{color: this.state.fontColor, cursor: "default"}}
+                        onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
+                    {" 空气质量：" + this.state.pm25}
+                </Button>
+                <Button type="text" shape="round" icon={<i className="bi bi-cloud-rain"></i>} style={{color: this.state.fontColor, cursor: "default"}}
+                        onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
+                    {" 降雨概率：" + this.state.rainfall}
+                </Button>
+                <Button type="text" shape="round" icon={<i className="bi bi-eye"></i>} style={{color: this.state.fontColor, cursor: "default"}}
+                        onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
+                    {" 视线距离：" + this.state.visibility}
+                </Button>
+                <Button type="text" shape="round" icon={<i className="bi bi-wind"></i>} style={{color: this.state.fontColor, cursor: "default"}}
+                        onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
+                    {" 风速情况：" + this.state.windInfo}
+                </Button>
+
+                {/*<Space>*/}
+                {/*    <i className="bi bi-moisture"></i>*/}
+                {/*    <Text style={{color: this.state.fontColor}}>{" 空气湿度：" + this.state.humidity}</Text>*/}
+                {/*</Space>*/}
+                {/*<Space>*/}
+                {/*    <i className="bi bi-water"></i>*/}
+                {/*    <Text style={{color: this.state.fontColor}}>{" 空气质量：" + this.state.pm25}</Text>*/}
+                {/*</Space>*/}
+                {/*<Space>*/}
+                {/*    <i className="bi bi-cloud-rain"></i>*/}
+                {/*    <Text style={{color: this.state.fontColor}}>{" 降雨概率：" + this.state.rainfall}</Text>*/}
+                {/*</Space>*/}
+                {/*<Space>*/}
+                {/*    <i className="bi bi-eye"></i>*/}
+                {/*    <Text style={{color: this.state.fontColor}}>{" 视线距离：" + this.state.visibility}</Text>*/}
+                {/*</Space>*/}
+                {/*<Space>*/}
+                {/*    <i className="bi bi-wind"></i>*/}
+                {/*    <Text style={{color: this.state.fontColor}}>{" 风速情况：" + this.state.windInfo}</Text>*/}
+                {/*</Space>*/}
             </Space>
         );
 
