@@ -1,5 +1,5 @@
 import React from "react";
-import {Badge, Button, Checkbox, Col, Form, Input, message, Modal, Popover, Rate, Row, Space, Typography} from "antd";
+import {Badge, Button, Checkbox, Empty, Col, Form, Input, message, Modal, Popover, Rate, Row, Space, Typography} from "antd";
 import type {CheckboxValueType} from 'antd/es/checkbox/Group';
 import {CheckSquareOutlined, DeleteOutlined, PlusOutlined} from "@ant-design/icons";
 import {changeThemeColor, getFontColor} from "../typescripts/publicFunctions";
@@ -177,7 +177,7 @@ class TodoComponent extends React.Component {
             <Row>
                 <Col span={12} style={{display: "flex", alignItems: "center"}}>
                     <Text
-                        style={{color: this.state.fontColor}}>{"待办 " + this.state.todoSize + " / " + this.state.todoMaxSize}</Text>
+                        style={{color: this.state.fontColor}}>{"待办事项 " + this.state.todoSize + " / " + this.state.todoMaxSize}</Text>
                 </Col>
                 <Col span={12} style={{textAlign: "right"}}>
                     <Space>
@@ -193,10 +193,14 @@ class TodoComponent extends React.Component {
         );
 
         const popoverContent = (
-            <Checkbox.Group
-                options={this.state.checkboxOptions}
-                onChange={this.checkboxOnChange.bind(this)}
-            />
+            <Row justify="center">
+                <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} style={{display: this.state.checkboxOptions.length === 0? "block" : "none"}}/>
+                <Col span={24}>
+                    <Checkbox.Group
+                        options={this.state.checkboxOptions}
+                        onChange={this.checkboxOnChange.bind(this)}/>
+                </Col>
+            </Row>
         );
 
         return (

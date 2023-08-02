@@ -4,6 +4,7 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import App from "./App";
 import {ConfigProvider} from "antd";
 import zhCN from "antd/es/locale/zh_CN"
+// import PopupComponent from "./components/popupComponent";
 
 const root = ReactDOM.createRoot(
     document.getElementById("root") as HTMLElement

@@ -216,7 +216,7 @@ class AuthorComponent extends React.Component {
         );
 
         return (
-            <Popover title={"图片信息"} content={popoverContent} placement="topRight" color={this.state.backgroundColor}
+            <Popover title={"摄影师与图片信息"} content={popoverContent} placement="topRight" color={this.state.backgroundColor}
                      overlayStyle={{width: "500px"}}>
                 <Button shape="round" icon={<CameraOutlined/>} size={"large"}
                         id={"authorBtn"}
