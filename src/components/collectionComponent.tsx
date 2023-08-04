@@ -1,6 +1,6 @@
 import React from "react";
 import {Avatar, Button, Col, Form, Input, List, message, Modal, Row, Space, Tooltip, Typography} from "antd";
-import {DeleteOutlined, CloseOutlined, EditOutlined, CompassOutlined, LinkOutlined, PlusOutlined} from "@ant-design/icons";
+import {DeleteOutlined, EditOutlined, CompassOutlined, LinkOutlined, PlusOutlined} from "@ant-design/icons";
 import {ThemeColorInterface} from "../typescripts/publicInterface";
 import {getFontColor} from "../typescripts/publicFunctions";
 
@@ -245,7 +245,24 @@ class CollectionComponent extends React.Component {
                             </Form.Item>
                         </Form>
                     </Modal>
-                    <Modal title={"编辑链接 " + this.state.collectionSize + " / " + this.state.collectionMaxSize}
+                    <Modal title={
+                        <Row align={"middle"}>
+                            <Col span={12}>
+                                <Text style={{color: this.state.fontColor}}>
+                                    {"编辑链接 " + this.state.collectionSize + " / " + this.state.collectionMaxSize}
+                                </Text>
+                            </Col>
+                            <Col span={12} style={{textAlign: "right"}}>
+                                <Button type="text" shape={"round"} icon={<DeleteOutlined/>}
+                                        onMouseOver={this.btnMouseOver.bind(this)}
+                                        onMouseOut={this.btnMouseOut.bind(this)}
+                                        onClick={this.removeAllBtnOnClick.bind(this)}
+                                        style={{color: this.state.fontColor}}>
+                                    全部删除
+                                </Button>
+                            </Col>
+                        </Row>
+                    }
                            closeIcon={false} centered
                            open={this.state.displayEditModal} onOk={this.editModalOkBtnOnClick.bind(this)}
                            onCancel={this.editModalCancelBtnOnClick.bind(this)}
@@ -255,20 +272,9 @@ class CollectionComponent extends React.Component {
                             itemLayout="horizontal"
                             size="small"
                             dataSource={this.state.collectionData}
-                            header={
-                                <Row justify={"end"}>
-                                    <Button type="text" shape={"round"} icon={<DeleteOutlined/>}
-                                            onMouseOver={this.btnMouseOver.bind(this)}
-                                            onMouseOut={this.btnMouseOut.bind(this)}
-                                            onClick={this.removeAllBtnOnClick.bind(this)}
-                                            style={{color: this.state.fontColor}}>
-                                        全部删除
-                                    </Button>
-                                </Row>
-                            }
                             renderItem={(item: any) => (
                                 <List.Item actions={[
-                                    <Button type="text" shape={"circle"} icon={<CloseOutlined/>}
+                                    <Button type="text" shape={"circle"} icon={<DeleteOutlined/>}
                                             onMouseOver={this.btnMouseOver.bind(this)}
                                             onMouseOut={this.btnMouseOut.bind(this)}
                                             onClick={this.removeBtnOnClick.bind(this, item)}
@@ -277,17 +283,9 @@ class CollectionComponent extends React.Component {
                                 ]}>
                                     <List.Item.Meta
                                         avatar={<Avatar src={item.webUrl + "/favicon.ico"}/>}
-                                        title={
-                                            <Space>
-                                                <CompassOutlined />
-                                                <Text style={{color: this.state.fontColor}}>{" " + item.webName}</Text>
-                                            </Space>
-                                        }
+                                        title={item.webName}
                                         description={
-                                            <Space>
-                                                <LinkOutlined/>
-                                                <Text style={{color: this.state.fontColor}}>{" " + item.webUrl}</Text>
-                                            </Space>
+                                            <Text style={{color: this.state.fontColor}}>{item.webUrl.length < 40? item.webUrl : item.webUrl.substring(0, 40) + "..."}</Text>
                                         }
                                     />
                                 </List.Item>

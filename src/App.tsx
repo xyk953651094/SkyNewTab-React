@@ -235,6 +235,7 @@ class App extends React.Component {
                     "backgroundColor": this.state.themeColor.componentBackgroundColor,
                     "color": this.state.themeColor.componentFontColor
                 });
+                $(".ant-list-item").css("borderBlockEndColor", this.state.themeColor.componentFontColor);
                 $(".ant-form-item-label > label").css("color", this.state.themeColor.componentFontColor);
                 $(".ant-list-item-meta-title").css("color", this.state.themeColor.componentFontColor);
                 $(".ant-list-item-meta-description").css("color", this.state.themeColor.componentFontColor);

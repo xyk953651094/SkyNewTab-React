@@ -237,7 +237,7 @@ class PreferenceComponent extends React.Component {
                                                 <Col span={12}><Radio value={"google"}>Google</Radio></Col>
                                                 <Col span={12}><Radio value={"sogou"}>Sogou</Radio></Col>
                                                 <Col span={12}><Radio value={"startpage"}>StartPage</Radio></Col>
-                                                <Col span={12}><Radio value={"wuzhuiso"}>Wuzhuiso</Radio></Col>
+                                                <Col span={12}><Radio value={"wuzhuiso"}>WuzhuiSo</Radio></Col>
                                                 <Col span={12}><Radio value={"yandex"}>Yandex</Radio></Col>
                                             </Row>
                                         </Radio.Group>

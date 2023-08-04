@@ -1,7 +1,21 @@
 import React from "react";
-import {Badge, Button, Checkbox, Empty, Col, Form, Input, message, Modal, Popover, Rate, Row, Space, Typography} from "antd";
+import {
+    Badge,
+    Button,
+    Col,
+    Form,
+    Input,
+    message,
+    Modal,
+    Popover,
+    Rate,
+    Row,
+    Space,
+    Typography,
+    List
+} from "antd";
 import type {CheckboxValueType} from 'antd/es/checkbox/Group';
-import {CheckSquareOutlined, DeleteOutlined, PlusOutlined} from "@ant-design/icons";
+import {CheckSquareOutlined, DeleteOutlined, CheckOutlined, PlusOutlined} from "@ant-design/icons";
 import {changeThemeColor, getFontColor} from "../typescripts/publicFunctions";
 import {ThemeColorInterface} from "../typescripts/publicInterface";
 
@@ -90,10 +104,10 @@ class TodoComponent extends React.Component {
                 todos = JSON.parse(tempTodos);
             }
             if (todos.length < this.state.todoMaxSize) {
-                todoContent = todoContent + " ";
                 todos.push({
-                    "label": todoContent + "★".repeat(this.state.priority),
-                    "value": todoContent + "★".repeat(this.state.priority)
+                    "title": todoContent,
+                    "priority": "★".repeat(this.state.priority),
+                    "timeStamp": Date.now()
                 });
                 localStorage.setItem("todos", JSON.stringify(todos));
 
@@ -117,14 +131,14 @@ class TodoComponent extends React.Component {
         })
     }
 
-    checkboxOnChange(checkedValues: CheckboxValueType[]) {
+    finishBtnOnClick(item: any) {
         let todos = [];
         let tempTodos = localStorage.getItem("todos");
         if (tempTodos) {
             todos = JSON.parse(tempTodos);
             let index = -1;
             for (let i = 0; i < todos.length; i++) {
-                if (checkedValues[0] === todos[i].label) {
+                if (item.timeStamp === todos[i].timeStamp) {
                     index = i;
                     break;
                 }
@@ -174,39 +188,74 @@ class TodoComponent extends React.Component {
 
     render() {
         const popoverTitle = (
-            <Row>
-                <Col span={12} style={{display: "flex", alignItems: "center"}}>
+            <Row align={"middle"}>
+                <Col span={10}>
                     <Text
                         style={{color: this.state.fontColor}}>{"待办事项 " + this.state.todoSize + " / " + this.state.todoMaxSize}</Text>
                 </Col>
-                <Col span={12} style={{textAlign: "right"}}>
+                <Col span={14} style={{textAlign: "right"}}>
                     <Space>
-                        <Button type="text" shape="circle" size={"small"} icon={<PlusOutlined/>}
+                        <Button type="text" shape="round" icon={<PlusOutlined/>}
                                 onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
-                                style={{color: this.state.fontColor}} onClick={this.showAddModalBtnOnClick.bind(this)}/>
-                        <Button type="text" shape="circle" size={"small"} icon={<DeleteOutlined/>}
+                                style={{color: this.state.fontColor}} onClick={this.showAddModalBtnOnClick.bind(this)}>
+                            {"添加待办事项"}
+                        </Button>
+                        <Button type="text" shape="round" icon={<DeleteOutlined/>}
                                 onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
-                                style={{color: this.state.fontColor}} onClick={this.removeAllBtnOnClick.bind(this)}/>
+                                style={{color: this.state.fontColor}} onClick={this.removeAllBtnOnClick.bind(this)}>
+                            {"全部删除"}
+                        </Button>
                     </Space>
                 </Col>
             </Row>
         );
 
         const popoverContent = (
-            <Row justify="center">
-                <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} style={{display: this.state.checkboxOptions.length === 0? "block" : "none"}}/>
-                <Col span={24}>
-                    <Checkbox.Group
-                        options={this.state.checkboxOptions}
-                        onChange={this.checkboxOnChange.bind(this)}/>
-                </Col>
-            </Row>
+            <List
+                dataSource={this.state.checkboxOptions}
+                renderItem={(item: any) => (
+                    <List.Item
+                        actions={[
+                            <Button type="text" shape="circle" icon={<CheckOutlined />}
+                                    onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
+                                    onClick={this.finishBtnOnClick.bind(this, item)}
+                                    style={{color: this.state.fontColor}}/>
+                        ]}
+                    >
+                        <Row justify="space-between" style={{width: "100%"}}>
+                            <Col span={12}>
+                                <Button type={"text"} shape={"round"} onMouseOver={this.btnMouseOver.bind(this)}
+                                        onMouseOut={this.btnMouseOut.bind(this)}
+                                        style={{color: this.state.fontColor, cursor: "default"}}>
+                                    {item.title}
+                                </Button>
+                            </Col>
+                            <Col span={12}>
+                                <Button type={"text"} shape={"round"} onMouseOver={this.btnMouseOver.bind(this)}
+                                        onMouseOut={this.btnMouseOut.bind(this)}
+                                        style={{color: this.state.fontColor, cursor: "default"}}>
+                                    {item.priority}
+                                </Button>
+                            </Col>
+                        </Row>
+                    </List.Item>
+                )}
+            />
+
+            // <Row>
+            //     <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} style={{display: this.state.checkboxOptions.length === 0? "block" : "none"}}/>
+            //     <Col span={24}>
+            //         <Checkbox.Group
+            //             options={this.state.checkboxOptions}
+            //             onChange={this.checkboxOnChange.bind(this)}/>
+            //     </Col>
+            // </Row>
         );
 
         return (
             <Row>
-                <Popover title={popoverTitle} content={popoverContent} color={this.state.backgroundColor}
-                         overlayStyle={{width: "300px"}}>
+                <Popover title={popoverTitle} content={popoverContent} placement="bottomRight" color={this.state.backgroundColor}
+                         overlayStyle={{width: "500px"}}>
                     <Badge size="small" count={this.state.checkboxOptions.length}>
                         <Button shape="circle" icon={<CheckSquareOutlined/>} size={"large"}
                                 id={"todoBtn"}

@@ -1,5 +1,5 @@
 import React from "react";
-import {Avatar, Button, Divider, List, message, Popover, Space, Typography} from "antd";
+import {Row, Col, Avatar, Button, Divider, List, message, Popover, Space, Typography} from "antd";
 import {
     CameraOutlined,
     EnvironmentOutlined,
@@ -13,9 +13,9 @@ import {ThemeColorInterface} from "../typescripts/publicInterface";
 import "../stylesheets/publicStyles.scss"
 
 const {Text} = Typography;
-const btnMaxSize = 45;
+const btnMaxSize = 50;
 
-    type propType = {
+type propType = {
     themeColor: ThemeColorInterface,
     display: "none" | "block",
     imageData: any,
@@ -82,7 +82,7 @@ class AuthorComponent extends React.Component {
         }
     }
 
-    gotoUser() {
+    gotoAuthorBtnOnClick() {
         if (!isEmptyString(this.state.authorLink)) {
             window.open(this.state.authorLink + unsplashUrl);
         } else {
@@ -90,7 +90,7 @@ class AuthorComponent extends React.Component {
         }
     }
 
-    gotoImage() {
+    gotoImageBtnOnClick() {
         if (!isEmptyString(this.state.imageLink)) {
             window.open(this.state.imageLink + unsplashUrl);
         } else {
@@ -126,12 +126,34 @@ class AuthorComponent extends React.Component {
     }
 
     render() {
+        const popoverTitle = (
+            <Row align={"middle"}>
+                <Col span={10}>
+                    <Text style={{color: this.state.fontColor}}>{"摄影师与图片信息"}</Text>
+                </Col>
+                <Col span={14} style={{textAlign: "right"}}>
+                    <Space>
+                        <Button type="text" shape="round" icon={<LinkOutlined/>}
+                                onMouseOver={this.btnMouseOver.bind(this)}
+                                onMouseOut={this.btnMouseOut.bind(this)} onClick={this.gotoAuthorBtnOnClick.bind(this)}
+                                style={{color: this.state.fontColor}}>
+                            {"摄影师主页"}
+                        </Button>
+                        <Button type="text" shape="round" icon={<LinkOutlined/>}
+                                onMouseOver={this.btnMouseOver.bind(this)}
+                                onMouseOut={this.btnMouseOut.bind(this)}
+                                onClick={this.gotoImageBtnOnClick.bind(this)}
+                                style={{color: this.state.fontColor}}>
+                            {"图片主页"}
+                        </Button>
+                    </Space>
+                </Col>
+            </Row>
+        );
+
         const popoverContent = (
             <List>
-                <List.Item actions={[<Button type="text" shape="circle" icon={<LinkOutlined/>}
-                                             onMouseOver={this.btnMouseOver.bind(this)}
-                                             onMouseOut={this.btnMouseOut.bind(this)} onClick={this.gotoUser.bind(this)}
-                                             style={{color: this.state.fontColor}}/>]}>
+                <List.Item>
                     <List.Item.Meta
                         avatar={<Avatar size="large" src={this.state.authorIconUrl} alt={"作者"}/>}
                         title={
@@ -139,11 +161,6 @@ class AuthorComponent extends React.Component {
                                     onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
                                 {this.state.authorName.length < btnMaxSize? this.state.authorName : this.state.authorName.substring(0, btnMaxSize) + "..."}
                             </Button>
-
-                            // <Space>
-                            //     <UserOutlined/>
-                            //     <Text style={{color: this.state.fontColor}}>{" " + this.state.authorName}</Text>
-                            // </Space>
                         }
                         description={
                             <Space>
@@ -161,31 +178,11 @@ class AuthorComponent extends React.Component {
                                         onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
                                     {" " + this.state.authorPhotos}
                                 </Button>
-
-                                {/*<Space>*/}
-                                {/*    <i className="bi bi-collection"></i>*/}
-                                {/*    <Text*/}
-                                {/*        style={{color: this.state.fontColor}}>{" " + this.state.authorCollections}</Text>*/}
-                                {/*</Space>*/}
-                                {/*<Divider type="vertical" style={{borderColor: this.state.fontColor}}/>*/}
-                                {/*<Space>*/}
-                                {/*    <i className="bi bi-heart"></i>*/}
-                                {/*    <Text style={{color: this.state.fontColor}}>{" " + this.state.authorLikes}</Text>*/}
-                                {/*</Space>*/}
-                                {/*<Divider type="vertical" style={{borderColor: this.state.fontColor}}/>*/}
-                                {/*<Space>*/}
-                                {/*    <i className="bi bi-images"></i>*/}
-                                {/*    <Text style={{color: this.state.fontColor}}>{" " + this.state.authorPhotos}</Text>*/}
-                                {/*</Space>*/}
                             </Space>
                         }
                     />
                 </List.Item>
-                <List.Item actions={[<Button type="text" shape="circle" icon={<LinkOutlined/>}
-                                             onMouseOver={this.btnMouseOver.bind(this)}
-                                             onMouseOut={this.btnMouseOut.bind(this)}
-                                             onClick={this.gotoImage.bind(this)}
-                                             style={{color: this.state.fontColor}}/>]}>
+                <List.Item>
                     <List.Item.Meta
                         avatar={<Avatar size="large" shape={"square"} src={this.state.imagePreviewUrl} alt={"信息"}/>}
                         title={
@@ -193,22 +190,12 @@ class AuthorComponent extends React.Component {
                                     onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
                                 {this.state.imageLocation.length < btnMaxSize? this.state.imageLocation : this.state.imageLocation.substring(0, btnMaxSize) + "..."}
                             </Button>
-
-                            // <Space>
-                            //     <EnvironmentOutlined/>
-                            //     <Text style={{color: this.state.fontColor}}>{" " + this.state.imageLocation}</Text>
-                            // </Space>
                         }
                         description={
                             <Button type="text" shape="round" icon={<InfoCircleOutlined/>} style={{color: this.state.fontColor, cursor: "default"}}
                                     onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
                                 {this.state.imageDescription.length < btnMaxSize? this.state.imageDescription : this.state.imageDescription.substring(0, btnMaxSize) + "..."}
                             </Button>
-
-                            // <Space>
-                            //     <InfoCircleOutlined/>
-                            //     <Text style={{color: this.state.fontColor}}>{" " + this.state.imageDescription}</Text>
-                            // </Space>
                         }
                     />
                 </List.Item>
@@ -216,7 +203,7 @@ class AuthorComponent extends React.Component {
         );
 
         return (
-            <Popover title={"摄影师与图片信息"} content={popoverContent} placement="topRight" color={this.state.backgroundColor}
+            <Popover title={popoverTitle} content={popoverContent} placement="topRight" color={this.state.backgroundColor}
                      overlayStyle={{width: "500px"}}>
                 <Button shape="round" icon={<CameraOutlined/>} size={"large"}
                         id={"authorBtn"}
