@@ -1,5 +1,8 @@
 @import "~antd/dist/reset.css";
 
+$heightRegular: 100px;
+$heightLarge: 300px;
+
 * {
     margin: 0;
     padding: 0;
@@ -15,17 +18,18 @@ html, body {
 }
 
 #header {
-    height: 100px;
-    line-height: 100px;
+    height: $heightRegular;
+    line-height: $heightRegular;
     background-color: transparent;
+    padding: 0;
 }
 
 #content {
     position: fixed;
-    top: 100px;
-    bottom: 100px;
-    left: 50px;
-    right: 50px;
+    top: $heightRegular;
+    bottom: $heightRegular;
+    left: 0;
+    right: 0;
 }
 
 #footer {
@@ -33,9 +37,9 @@ html, body {
     bottom: 0;
     width: 100%;
     background-color: transparent;
-    height: 100px;
-    line-height: 100px;
-    padding: 0 50px;
+    height: $heightRegular;
+    line-height: $heightRegular;
+    padding: 0;
 }
 
 /* z轴显示层数 */
@@ -157,14 +161,28 @@ html, body {
     /* 结尾状态 */
 }
 
-/*移动端竖屏样式*/
-@media screen and (max-width: 500px) and (orientation: portrait) {
-    #header, #footer {
-        padding: 0 15px;
+/*桌面端大屏样式*/
+@media screen and (min-width: 2000px) and (orientation: landscape) {
+    #header {
+        height: $heightLarge;
+        line-height: $heightLarge;
+        background-color: transparent;
     }
 
     #content {
-        left: 15px;
-        right: 15px;
+        position: fixed;
+        top: $heightLarge;
+        bottom: $heightLarge;
+        left: 0;
+        right: 0;
+    }
+
+    #footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        background-color: transparent;
+        height: $heightLarge;
+        line-height: $heightLarge;
     }
 }
