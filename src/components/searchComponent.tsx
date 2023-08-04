@@ -121,13 +121,13 @@ class SearchComponent extends React.Component {
 
                 <Input
                     className={"searchInput componentTheme zIndexHigh"}
-                    prefix={<Avatar size="small" src={this.state.searchEngineIconUrl} alt={"图标"}/>}
+                    prefix={<Avatar size={"small"} src={this.state.searchEngineIconUrl} alt={"图标"}/>}
                     suffix={<SearchOutlined/>}
-                    placeholder="按下 Enter 键搜索"
+                    placeholder={"按下 Enter 键搜索"}
                     onFocus={this.onFocus.bind(this)}
                     onBlur={this.onBlur.bind(this)}
                     onPressEnter={this.onPressEnter.bind(this)}
-                    size="large"
+                    size={"large"}
                     allowClear
                 />
                 {/*<Search*/}
@@ -138,7 +138,7 @@ class SearchComponent extends React.Component {
                 {/*    onBlur={this.onBlur.bind(this)}*/}
                 {/*    onPressEnter={this.onPressEnter.bind(this)}*/}
                 {/*    onSearch={this.onPressEnter.bind(this)}*/}
-                {/*    size="large"*/}
+                {/*    size={"large"}*/}
                 {/*    allowClear*/}
                 {/*/>*/}
             </Col>

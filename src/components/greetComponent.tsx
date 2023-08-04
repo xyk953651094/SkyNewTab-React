@@ -2,7 +2,8 @@ import React from "react";
 import {Button, Popover, Space, Typography} from "antd";
 import {CheckCircleOutlined, CloseCircleOutlined} from "@ant-design/icons";
 import {
-    changeThemeColor, getFontColor,
+    changeThemeColor,
+    getFontColor,
     getGreetContent,
     getGreetIcon,
     getTimeDetails,
@@ -189,32 +190,25 @@ class GreetComponent extends React.Component {
 
     render() {
         const popoverContent = (
-            <Space direction="vertical">
-                <Button type="text" shape="round" icon={<CheckCircleOutlined/>} style={{color: this.state.fontColor, cursor: "default"}}
+            <Space direction={"vertical"}>
+                <Button type={"text"} shape={"round"} icon={<CheckCircleOutlined/>}
+                        style={{color: this.state.fontColor, cursor: "default"}}
                         onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
                     {"宜：" + this.state.suit}
                 </Button>
-                <Button type="text" shape="round" icon={<CloseCircleOutlined/>} style={{color: this.state.fontColor, cursor: "default"}}
+                <Button type={"text"} shape={"round"} icon={<CloseCircleOutlined/>}
+                        style={{color: this.state.fontColor, cursor: "default"}}
                         onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
                     {"忌：" + this.state.avoid}
                 </Button>
-
-                {/*<Space>*/}
-                {/*    <CheckCircleOutlined/>*/}
-                {/*    <Text style={{color: this.state.fontColor}}>{" 宜：" + this.state.suit}</Text>*/}
-                {/*</Space>*/}
-                {/*<Space>*/}
-                {/*    <CloseCircleOutlined/>*/}
-                {/*    <Text style={{color: this.state.fontColor}}>{" 忌：" + this.state.avoid}</Text>*/}
-                {/*</Space>*/}
             </Space>
         );
 
         return (
             <Popover
                 title={this.state.calendar}
-                content={popoverContent} placement="bottomLeft" color={this.state.backgroundColor}>
-                <Button shape="round" icon={<i className={this.state.greetIcon}> </i>} size={"large"}
+                content={popoverContent} placement={"bottomLeft"} color={this.state.backgroundColor}>
+                <Button shape={"round"} icon={<i className={this.state.greetIcon}> </i>} size={"large"}
                         id={"greetBtn"}
                         className={"componentTheme zIndexHigh"}
                         onClick={this.greetBtnOnClick.bind(this)}

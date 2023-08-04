@@ -1,6 +1,6 @@
 import React from "react";
 import {Avatar, Button, Col, Form, Input, List, message, Modal, Row, Space, Tooltip, Typography} from "antd";
-import {DeleteOutlined, EditOutlined, CompassOutlined, LinkOutlined, PlusOutlined} from "@ant-design/icons";
+import {DeleteOutlined, EditOutlined, PlusOutlined} from "@ant-design/icons";
 import {ThemeColorInterface} from "../typescripts/publicInterface";
 import {getFontColor} from "../typescripts/publicFunctions";
 
@@ -202,9 +202,10 @@ class CollectionComponent extends React.Component {
                     {
                         this.state.collectionData.map((item: any) => {
                             return (
-                                <Tooltip title={item.webUrl} key={item.timeStamp} placement="bottom"
+                                <Tooltip title={item.webUrl} key={item.timeStamp} placement={"bottom"}
                                          color={this.state.backgroundColor}>
-                                    <Button type="primary" shape="round" className="componentTheme" key={item.timeStamp}
+                                    <Button type={"primary"} shape={"round"} className={"componentTheme"}
+                                            key={item.timeStamp}
                                             onClick={() => {
                                                 window.open(item.webUrl)
                                             }}
@@ -219,13 +220,13 @@ class CollectionComponent extends React.Component {
                         })
                     }
 
-                    <Button type="primary" shape="circle" className="componentTheme"
+                    <Button type={"primary"} shape={"circle"} className={"componentTheme"}
                             style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}}
                             icon={<PlusOutlined/>} onClick={this.showAddModalBtnOnClick.bind(this)}/>
-                    <Button type="primary" shape="circle" className="componentTheme"
+                    <Button type={"primary"} shape={"circle"} className={"componentTheme"}
                             style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}}
                             icon={<EditOutlined/>} onClick={this.showEditModalBtnOnClick.bind(this)}/>
-                    <Button type="primary" shape="circle" className="componentTheme"
+                    <Button type={"primary"} shape={"circle"} className={"componentTheme"}
                             style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}}
                             icon={<DeleteOutlined/>} onClick={this.removeAllBtnOnClick.bind(this)}/>
                     <Modal title={"添加链接 " + this.state.collectionSize + " / " + this.state.collectionMaxSize}
@@ -236,12 +237,12 @@ class CollectionComponent extends React.Component {
                            maskStyle={{backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)"}}
                     >
                         <Form>
-                            <Form.Item label="网页名称" name="webName">
-                                <Input placeholder="请输入网页名称" id="webNameInput" maxLength={5} allowClear
+                            <Form.Item label={"网页名称"} name={"webName"}>
+                                <Input placeholder={"请输入网页名称"} id={"webNameInput"} maxLength={5} allowClear
                                        showCount/>
                             </Form.Item>
-                            <Form.Item label="网页地址" name="webNameUrl">
-                                <Input placeholder="请输入网页地址" id="webUrlInput" allowClear/>
+                            <Form.Item label={"网页地址"} name={"webNameUrl"}>
+                                <Input placeholder={"请输入网页地址"} id={"webUrlInput"} allowClear/>
                             </Form.Item>
                         </Form>
                     </Modal>
@@ -253,7 +254,7 @@ class CollectionComponent extends React.Component {
                                 </Text>
                             </Col>
                             <Col span={12} style={{textAlign: "right"}}>
-                                <Button type="text" shape={"round"} icon={<DeleteOutlined/>}
+                                <Button type={"text"} shape={"round"} icon={<DeleteOutlined/>}
                                         onMouseOver={this.btnMouseOver.bind(this)}
                                         onMouseOut={this.btnMouseOut.bind(this)}
                                         onClick={this.removeAllBtnOnClick.bind(this)}
@@ -269,12 +270,12 @@ class CollectionComponent extends React.Component {
                            maskStyle={{backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)"}}
                     >
                         <List
-                            itemLayout="horizontal"
-                            size="small"
+                            itemLayout={"horizontal"}
+                            size={"small"}
                             dataSource={this.state.collectionData}
                             renderItem={(item: any) => (
                                 <List.Item actions={[
-                                    <Button type="text" shape={"circle"} icon={<DeleteOutlined/>}
+                                    <Button type={"text"} shape={"circle"} icon={<DeleteOutlined/>}
                                             onMouseOver={this.btnMouseOver.bind(this)}
                                             onMouseOut={this.btnMouseOut.bind(this)}
                                             onClick={this.removeBtnOnClick.bind(this, item)}
@@ -285,7 +286,8 @@ class CollectionComponent extends React.Component {
                                         avatar={<Avatar src={item.webUrl + "/favicon.ico"}/>}
                                         title={item.webName}
                                         description={
-                                            <Text style={{color: this.state.fontColor}}>{item.webUrl.length < 40? item.webUrl : item.webUrl.substring(0, 40) + "..."}</Text>
+                                            <Text
+                                                style={{color: this.state.fontColor}}>{item.webUrl.length < 40 ? item.webUrl : item.webUrl.substring(0, 40) + "..."}</Text>
                                         }
                                     />
                                 </List.Item>

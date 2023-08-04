@@ -1,20 +1,6 @@
 import React from "react";
 import type {DatePickerProps} from 'antd';
-import {
-    Badge,
-    Button,
-    Col,
-    DatePicker,
-    Form,
-    Input,
-    List,
-    message,
-    Modal,
-    Popover,
-    Row,
-    Space,
-    Typography
-} from "antd";
+import {Badge, Button, Col, DatePicker, Form, Input, List, message, Modal, Popover, Row, Space, Typography} from "antd";
 import {CalendarOutlined, DeleteOutlined, PlusOutlined} from "@ant-design/icons";
 import {changeThemeColor, getFontColor, getTimeDetails} from "../typescripts/publicFunctions";
 import {ThemeColorInterface} from "../typescripts/publicInterface";
@@ -209,12 +195,12 @@ class DailyComponent extends React.Component {
                 </Col>
                 <Col span={14} style={{textAlign: "right"}}>
                     <Space>
-                        <Button type="text" shape="round" icon={<PlusOutlined/>}
+                        <Button type={"text"} shape={"round"} icon={<PlusOutlined/>}
                                 onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
                                 style={{color: this.state.fontColor}} onClick={this.showAddModalBtnOnClick.bind(this)}>
                             {"添加倒数日"}
                         </Button>
-                        <Button type="text" shape="round" icon={<DeleteOutlined/>}
+                        <Button type={"text"} shape={"round"} icon={<DeleteOutlined/>}
                                 onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
                                 style={{color: this.state.fontColor}} onClick={this.removeAllBtnOnClick.bind(this)}>
                             {"全部删除"}
@@ -230,13 +216,13 @@ class DailyComponent extends React.Component {
                 renderItem={(item: any) => (
                     <List.Item
                         actions={[
-                            <Button type="text" shape="circle" icon={<DeleteOutlined/>}
+                            <Button type={"text"} shape={"circle"} icon={<DeleteOutlined/>}
                                     onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
                                     onClick={this.removeBtnOnClick.bind(this, item)}
                                     style={{color: this.state.fontColor}}/>
                         ]}
                     >
-                        <Row justify="space-between" style={{width: "100%"}}>
+                        <Row justify={"space-between"} style={{width: "100%"}}>
                             <Col span={10}>
                                 <Button type={"text"} shape={"round"} onMouseOver={this.btnMouseOver.bind(this)}
                                         onMouseOut={this.btnMouseOut.bind(this)}
@@ -266,10 +252,11 @@ class DailyComponent extends React.Component {
 
         return (
             <Row>
-                <Popover title={popoverTitle} content={popoverContent} placement="bottomRight" color={this.state.backgroundColor}
+                <Popover title={popoverTitle} content={popoverContent} placement={"bottomRight"}
+                         color={this.state.backgroundColor}
                          overlayStyle={{width: "550px"}}>
-                    <Badge size="small" count={this.state.listItems.length}>
-                        <Button shape="circle" icon={<CalendarOutlined/>} size={"large"}
+                    <Badge size={"small"} count={this.state.listItems.length}>
+                        <Button shape={"circle"} icon={<CalendarOutlined/>} size={"large"}
                                 id={"dailyBtn"}
                                 className={"componentTheme zIndexHigh"}
                         />
@@ -283,10 +270,10 @@ class DailyComponent extends React.Component {
                        maskStyle={{backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)"}}
                 >
                     <Form>
-                        <Form.Item label="标题" name="dailyInput">
-                            <Input placeholder="请输入标题" id="dailyInput" maxLength={10} allowClear showCount/>
+                        <Form.Item label={"标题"} name={"dailyInput"}>
+                            <Input placeholder="请输入标题" id={"dailyInput"} maxLength={10} allowClear showCount/>
                         </Form.Item>
-                        <Form.Item label="日期" name="dailyDatePicker">
+                        <Form.Item label={"日期"} name={"dailyDatePicker"}>
                             <DatePicker onChange={this.datePickerOnChange} id={"dailyDatePicker"}/>
                         </Form.Item>
                     </Form>

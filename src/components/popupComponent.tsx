@@ -67,7 +67,7 @@ class PopupComponent extends React.Component {
             <Layout className={"popupLayout"} style={{backgroundColor: this.state.backgroundColor}}>
                 <Header className={"popupHeader"}>
                     <Space align={"center"}>
-                        <Button type="text" shape="round" icon={<DashboardOutlined/>}
+                        <Button type={"text"} shape={"round"} icon={<DashboardOutlined/>}
                                 onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
                                 style={{color: this.state.fontColor, cursor: "default"}}>
                             云开新标签页的仪表盘
@@ -82,20 +82,20 @@ class PopupComponent extends React.Component {
                 </Content>
                 <Footer className={"popupFooter"}>
                     <Space align={"center"}>
-                        <Button type="text" shape="round" icon={<GithubOutlined/>}
-                                href="https://github.com/xyk953651094" target="_blank"
+                        <Button type={"text"} shape={"round"} icon={<GithubOutlined/>}
+                                href={"https://github.com/xyk953651094"} target={"_blank"}
                                 onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
                                 style={{color: this.state.fontColor}}>
                             主页
                         </Button>
-                        <Button type="text" shape="round" icon={<MessageOutlined/>}
-                                href="https://xyk953651094.blogspot.com" target="_blank"
+                        <Button type={"text"} shape={"round"} icon={<MessageOutlined/>}
+                                href={"https://xyk953651094.blogspot.com"} target={"_blank"}
                                 onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
                                 style={{color: this.state.fontColor}}>
                             博客
                         </Button>
-                        <Button type="text" shape="round" icon={<GiftOutlined/>}
-                                href="https://afdian.net/a/xyk953651094" target="_blank"
+                        <Button type={"text"} shape={"round"} icon={<GiftOutlined/>}
+                                href={"https://afdian.net/a/xyk953651094"} target={"_blank"}
                                 onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
                                 style={{color: this.state.fontColor}}>
                             捐赠

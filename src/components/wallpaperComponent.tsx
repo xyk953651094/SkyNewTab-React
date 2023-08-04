@@ -115,16 +115,16 @@ class WallpaperComponent extends React.Component {
     render() {
         return (
             <Image
-                id="backgroundImage"
-                key="1"
-                width="102%"
-                height="102%"
+                id={"backgroundImage"}
+                key={"1"}
+                width={"102%"}
+                height={"102%"}
                 className={"backgroundImage zIndexLow"}
                 preview={false}
                 src={this.state.imageLink}
                 style={{display: this.props.display}}
                 placeholder={
-                    <canvas id="blurHashCanvas" className={"blurHashCanvas zIndexLow"}></canvas>
+                    <canvas id={"blurHashCanvas"} className={"blurHashCanvas zIndexLow"}></canvas>
                 }
             />
         );

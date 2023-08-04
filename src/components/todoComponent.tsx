@@ -1,21 +1,6 @@
 import React from "react";
-import {
-    Badge,
-    Button,
-    Col,
-    Form,
-    Input,
-    message,
-    Modal,
-    Popover,
-    Rate,
-    Row,
-    Space,
-    Typography,
-    List
-} from "antd";
-import type {CheckboxValueType} from 'antd/es/checkbox/Group';
-import {CheckSquareOutlined, DeleteOutlined, CheckOutlined, PlusOutlined} from "@ant-design/icons";
+import {Badge, Button, Col, Form, Input, List, message, Modal, Popover, Rate, Row, Space, Typography} from "antd";
+import {CheckOutlined, CheckSquareOutlined, DeleteOutlined, PlusOutlined} from "@ant-design/icons";
 import {changeThemeColor, getFontColor} from "../typescripts/publicFunctions";
 import {ThemeColorInterface} from "../typescripts/publicInterface";
 
@@ -195,12 +180,12 @@ class TodoComponent extends React.Component {
                 </Col>
                 <Col span={14} style={{textAlign: "right"}}>
                     <Space>
-                        <Button type="text" shape="round" icon={<PlusOutlined/>}
+                        <Button type={"text"} shape={"round"} icon={<PlusOutlined/>}
                                 onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
                                 style={{color: this.state.fontColor}} onClick={this.showAddModalBtnOnClick.bind(this)}>
                             {"添加待办事项"}
                         </Button>
-                        <Button type="text" shape="round" icon={<DeleteOutlined/>}
+                        <Button type={"text"} shape={"round"} icon={<DeleteOutlined/>}
                                 onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
                                 style={{color: this.state.fontColor}} onClick={this.removeAllBtnOnClick.bind(this)}>
                             {"全部删除"}
@@ -216,13 +201,13 @@ class TodoComponent extends React.Component {
                 renderItem={(item: any) => (
                     <List.Item
                         actions={[
-                            <Button type="text" shape="circle" icon={<CheckOutlined />}
+                            <Button type={"text"} shape={"circle"} icon={<CheckOutlined/>}
                                     onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
                                     onClick={this.finishBtnOnClick.bind(this, item)}
                                     style={{color: this.state.fontColor}}/>
                         ]}
                     >
-                        <Row justify="space-between" style={{width: "100%"}}>
+                        <Row justify={"space-between"} style={{width: "100%"}}>
                             <Col span={12}>
                                 <Button type={"text"} shape={"round"} onMouseOver={this.btnMouseOver.bind(this)}
                                         onMouseOut={this.btnMouseOut.bind(this)}
@@ -241,23 +226,15 @@ class TodoComponent extends React.Component {
                     </List.Item>
                 )}
             />
-
-            // <Row>
-            //     <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} style={{display: this.state.checkboxOptions.length === 0? "block" : "none"}}/>
-            //     <Col span={24}>
-            //         <Checkbox.Group
-            //             options={this.state.checkboxOptions}
-            //             onChange={this.checkboxOnChange.bind(this)}/>
-            //     </Col>
-            // </Row>
         );
 
         return (
             <Row>
-                <Popover title={popoverTitle} content={popoverContent} placement="bottomRight" color={this.state.backgroundColor}
+                <Popover title={popoverTitle} content={popoverContent} placement="bottomRight"
+                         color={this.state.backgroundColor}
                          overlayStyle={{width: "500px"}}>
-                    <Badge size="small" count={this.state.checkboxOptions.length}>
-                        <Button shape="circle" icon={<CheckSquareOutlined/>} size={"large"}
+                    <Badge size={"small"} count={this.state.checkboxOptions.length}>
+                        <Button shape={"circle"} icon={<CheckSquareOutlined/>} size={"large"}
                                 id={"todoBtn"}
                                 className={"componentTheme zIndexHigh"}
                         />
@@ -271,10 +248,10 @@ class TodoComponent extends React.Component {
                        maskStyle={{backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)"}}
                 >
                     <Form>
-                        <Form.Item label="待办事项" name="todoInput">
+                        <Form.Item label={"待办事项"} name={"todoInput"}>
                             <Input placeholder="请输入待办内容" id="todoInput" maxLength={10} allowClear showCount/>
                         </Form.Item>
-                        <Form.Item label="优先级别" name="todoRate">
+                        <Form.Item label={"优先级别"} name={"todoRate"}>
                             <Rate defaultValue={1} onChange={this.rateOnChange.bind(this)} style={{
                                 color: this.state.hoverColor,
                                 stroke: this.state.fontColor,

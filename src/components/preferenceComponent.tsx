@@ -162,8 +162,8 @@ class PreferenceComponent extends React.Component {
     render() {
         return (
             <>
-                <Tooltip title={"菜单栏"} placement="bottomRight" color={this.state.backgroundColor}>
-                    <Button shape="circle" icon={<MoreOutlined/>} size={"large"}
+                <Tooltip title={"菜单栏"} placement={"bottomRight"} color={this.state.backgroundColor}>
+                    <Button shape={"circle"} icon={<MoreOutlined/>} size={"large"}
                             onClick={this.showDrawerBtnOnClick.bind(this)}
                             id={"preferenceBtn"}
                             className={"componentTheme zIndexHigh"}
@@ -186,20 +186,20 @@ class PreferenceComponent extends React.Component {
                     maskStyle={{backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)"}}
                     footer={
                         <Space>
-                            <Button type="text" shape="round" icon={<GithubOutlined/>}
-                                    href="https://github.com/xyk953651094" target="_blank"
+                            <Button type={"text"} shape={"round"} icon={<GithubOutlined/>}
+                                    href={"https://github.com/xyk953651094"} target={"_blank"}
                                     onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
                                     style={{color: this.state.fontColor}}>
                                 主页
                             </Button>
-                            <Button type="text" shape="round" icon={<MessageOutlined/>}
-                                    href="https://xyk953651094.blogspot.com" target="_blank"
+                            <Button type={"text"} shape={"round"} icon={<MessageOutlined/>}
+                                    href={"https://xyk953651094.blogspot.com"} target={"_blank"}
                                     onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
                                     style={{color: this.state.fontColor}}>
                                 博客
                             </Button>
-                            <Button type="text" shape="round" icon={<GiftOutlined/>}
-                                    href="https://afdian.net/a/xyk953651094" target="_blank"
+                            <Button type={"text"} shape={"round"} icon={<GiftOutlined/>}
+                                    href={"https://afdian.net/a/xyk953651094"} target={"_blank"}
                                     onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
                                     style={{color: this.state.fontColor}}>
                                 捐赠
@@ -225,7 +225,7 @@ class PreferenceComponent extends React.Component {
                                   bodyStyle={{backgroundColor: this.state.backgroundColor}}
                             >
                                 <Form layout={"vertical"} colon={false} initialValues={this.state.formInitialValues}>
-                                    <Form.Item name="searchEngineRadio" label="搜索引擎">
+                                    <Form.Item name={"searchEngineRadio"} label={"搜索引擎"}>
                                         <Radio.Group buttonStyle={"solid"}
                                                      onChange={this.searchEngineRadioOnChange.bind(this)}>
                                             <Row>
@@ -242,10 +242,10 @@ class PreferenceComponent extends React.Component {
                                             </Row>
                                         </Radio.Group>
                                     </Form.Item>
-                                    {/*<Form.Item name="showImageSwitch" label="显示图片（推荐开启）">*/}
+                                    {/*<Form.Item name={"showImageSwitch"} label={"显示图片（推荐开启）"}>*/}
                                     {/*    <Switch checkedChildren="已开启" unCheckedChildren="已关闭" onChange={this.showImageSwitch.bind(this)} defaultChecked={this.state.formInitialValues.showImageSwitch}/>*/}
                                     {/*</Form.Item>*/}
-                                    <Form.Item name="dynamicEffectRadio" label="图片动效（推荐视差）">
+                                    <Form.Item name={"dynamicEffectRadio"} label={"图片动效（推荐视差）"}>
                                         <Radio.Group buttonStyle={"solid"}
                                                      onChange={this.dynamicEffectRadioOnChange.bind(this)}>
                                             <Radio value={"all"}>视差</Radio>
@@ -254,7 +254,7 @@ class PreferenceComponent extends React.Component {
                                             <Radio value={"close"}>关闭</Radio>
                                         </Radio.Group>
                                     </Form.Item>
-                                    <Form.Item name="imageQualityRadio" label="图片质量（推荐标准）">
+                                    <Form.Item name={"imageQualityRadio"} label={"图片质量（推荐标准）"}>
                                         <Radio.Group buttonStyle={"solid"}
                                                      onChange={this.imageQualityRadioOnChange.bind(this)}>
                                             <Radio value={"full"}>高</Radio>
@@ -262,54 +262,54 @@ class PreferenceComponent extends React.Component {
                                             <Radio value={"small"}>低</Radio>
                                         </Radio.Group>
                                     </Form.Item>
-                                    <Form.Item name="imageTopicsCheckbox" label="图片主题（全不选与全选效果一致）">
+                                    <Form.Item name={"imageTopicsCheckbox"} label={"图片主题（全不选与全选效果一致）"}>
                                         <Checkbox.Group onChange={this.imageTopicsCheckboxOnChange.bind(this)}>
                                             <Row>
                                                 <Col span={12}><Checkbox name={"travel"}
-                                                                         value="Fzo3zuOHN6w">旅游</Checkbox></Col>
+                                                                         value={"Fzo3zuOHN6w"}>旅游</Checkbox></Col>
                                                 <Col span={12}><Checkbox name={"wallpapers"}
-                                                                         value="bo8jQKTaE0Y">壁纸</Checkbox></Col>
+                                                                         value={"bo8jQKTaE0Y"}>壁纸</Checkbox></Col>
                                                 <Col span={12}><Checkbox name={"3d-renders"}
-                                                                         value="CDwuwXJAbEw">3D渲染</Checkbox></Col>
+                                                                         value={"CDwuwXJAbEw"}>3D渲染</Checkbox></Col>
                                                 <Col span={12}><Checkbox name={"textures-patterns"}
-                                                                         value="iUIsnVtjB0Y">纹理</Checkbox></Col>
+                                                                         value={"iUIsnVtjB0Y"}>纹理</Checkbox></Col>
                                                 <Col span={12}><Checkbox name={"experimental"}
-                                                                         value="qPYsDzvJOYc">实验</Checkbox></Col>
+                                                                         value={"qPYsDzvJOYc"}>实验</Checkbox></Col>
                                                 <Col span={12}><Checkbox name={"architecture"}
-                                                                         value="rnSKDHwwYUk">建筑</Checkbox></Col>
+                                                                         value={"rnSKDHwwYUk"}>建筑</Checkbox></Col>
                                                 <Col span={12}><Checkbox name={"nature"}
-                                                                         value="6sMVjTLSkeQ">自然</Checkbox></Col>
+                                                                         value={"6sMVjTLSkeQ"}>自然</Checkbox></Col>
                                                 <Col span={12}><Checkbox name={"business-work"}
-                                                                         value="aeu6rL-j6ew">商务</Checkbox></Col>
+                                                                         value={"aeu6rL-j6ew"}>商务</Checkbox></Col>
                                                 <Col span={12}><Checkbox name={"fashion"}
-                                                                         value="S4MKLAsBB74">时尚</Checkbox></Col>
+                                                                         value={"S4MKLAsBB74"}>时尚</Checkbox></Col>
                                                 <Col span={12}><Checkbox name={"film"}
-                                                                         value="hmenvQhUmxM">电影</Checkbox></Col>
+                                                                         value={"hmenvQhUmxM"}>电影</Checkbox></Col>
                                                 <Col span={12}><Checkbox name={"food-drink"}
-                                                                         value="xjPR4hlkBGA">饮食</Checkbox></Col>
+                                                                         value={"xjPR4hlkBGA"}>饮食</Checkbox></Col>
                                                 <Col span={12}><Checkbox name={"health"}
-                                                                         value="_hb-dl4Q-4U">健康</Checkbox></Col>
+                                                                         value={"_hb-dl4Q-4U"}>健康</Checkbox></Col>
                                                 <Col span={12}><Checkbox name={"people"}
-                                                                         value="towJZFskpGg">人物</Checkbox></Col>
+                                                                         value={"towJZFskpGg"}>人物</Checkbox></Col>
                                                 <Col span={12}><Checkbox name={"interiors"}
-                                                                         value="R_Fyn-Gwtlw">精神</Checkbox></Col>
+                                                                         value={"R_Fyn-Gwtlw"}>精神</Checkbox></Col>
                                                 <Col span={12}><Checkbox name={"street-photography"}
-                                                                         value="xHxYTMHLgOc">街头</Checkbox></Col>
+                                                                         value={"xHxYTMHLgOc"}>街头</Checkbox></Col>
                                                 <Col span={12}><Checkbox name={"animals"}
-                                                                         value="Jpg6Kidl-Hk">动物</Checkbox></Col>
+                                                                         value={"Jpg6Kidl-Hk"}>动物</Checkbox></Col>
                                                 <Col span={12}><Checkbox name={"spirituality"}
-                                                                         value="_8zFHuhRhyo">灵魂</Checkbox></Col>
+                                                                         value={"_8zFHuhRhyo"}>灵魂</Checkbox></Col>
                                                 <Col span={12}><Checkbox name={"arts-culture"}
-                                                                         value="bDo48cUhwnY">文化</Checkbox></Col>
+                                                                         value={"bDo48cUhwnY"}>文化</Checkbox></Col>
                                                 <Col span={12}><Checkbox name={"history"}
-                                                                         value="dijpbw99kQQ">历史</Checkbox></Col>
+                                                                         value={"dijpbw99kQQ"}>历史</Checkbox></Col>
                                                 <Col span={12}><Checkbox name={"athletics"}
-                                                                         value="Bn-DjrcBrwo">体育</Checkbox></Col>
+                                                                         value={"Bn-DjrcBrwo"}>体育</Checkbox></Col>
                                             </Row>
                                         </Checkbox.Group>
                                     </Form.Item>
-                                    <Form.Item name="clearStorageButton" label="其他设置">
-                                        <Button type="text" shape="round" icon={<DeleteOutlined/>}
+                                    <Form.Item name={"clearStorageButton"} label={"其他设置"}>
+                                        <Button type={"text"} shape={"round"} icon={<DeleteOutlined/>}
                                                 onMouseOver={this.btnMouseOver.bind(this)}
                                                 onMouseOut={this.btnMouseOut.bind(this)}
                                                 onClick={this.clearStorageBtnOnClick.bind(this)}
@@ -332,21 +332,24 @@ class PreferenceComponent extends React.Component {
                                   bodyStyle={{backgroundColor: this.state.backgroundColor}}
                             >
                                 <Space direction={"vertical"}>
-                                    <Button type="text" shape="round" href="https://unsplash.com/" target="_blank"
+                                    <Button type={"text"} shape={"round"} href={"https://unsplash.com/"}
+                                            target={"_blank"}
                                             onMouseOver={this.btnMouseOver.bind(this)}
                                             onMouseOut={this.btnMouseOut.bind(this)}
                                             style={{color: this.state.fontColor}}>
                                         <Avatar size={16} shape={"square"} src={"https://unsplash.com/favicon.ico"}/>
                                         &nbsp;&nbsp;Unsplash.com
                                     </Button>
-                                    <Button type="text" shape="round" href="https://www.pexels.com/" target="_blank"
+                                    <Button type={"text"} shape={"round"} href={"https://www.pexels.com/"}
+                                            target={"_blank"}
                                             onMouseOver={this.btnMouseOver.bind(this)}
                                             onMouseOut={this.btnMouseOut.bind(this)}
                                             style={{color: this.state.fontColor}}>
                                         <Avatar size={16} shape={"square"} src={"https://www.pexels.com/favicon.ico"}/>
                                         &nbsp;&nbsp;Pexels.com
                                     </Button>
-                                    <Button type="text" shape="round" href="https://pixabay.com/" target="_blank"
+                                    <Button type={"text"} shape={"round"} href={"https://pixabay.com/"}
+                                            target={"_blank"}
                                             onMouseOver={this.btnMouseOver.bind(this)}
                                             onMouseOut={this.btnMouseOut.bind(this)}
                                             style={{color: this.state.fontColor}}>

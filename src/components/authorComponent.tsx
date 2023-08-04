@@ -1,12 +1,6 @@
 import React from "react";
-import {Row, Col, Avatar, Button, Divider, List, message, Popover, Space, Typography} from "antd";
-import {
-    CameraOutlined,
-    EnvironmentOutlined,
-    InfoCircleOutlined,
-    LinkOutlined,
-    UserOutlined
-} from "@ant-design/icons";
+import {Avatar, Button, Col, Divider, List, message, Popover, Row, Space, Typography} from "antd";
+import {CameraOutlined, EnvironmentOutlined, InfoCircleOutlined, LinkOutlined, UserOutlined} from "@ant-design/icons";
 import {unsplashUrl} from "../typescripts/publicConstants";
 import {changeThemeColor, getFontColor, isEmptyString} from "../typescripts/publicFunctions";
 import {ThemeColorInterface} from "../typescripts/publicInterface";
@@ -133,13 +127,13 @@ class AuthorComponent extends React.Component {
                 </Col>
                 <Col span={14} style={{textAlign: "right"}}>
                     <Space>
-                        <Button type="text" shape="round" icon={<LinkOutlined/>}
+                        <Button type={"text"} shape={"round"} icon={<LinkOutlined/>}
                                 onMouseOver={this.btnMouseOver.bind(this)}
                                 onMouseOut={this.btnMouseOut.bind(this)} onClick={this.gotoAuthorBtnOnClick.bind(this)}
                                 style={{color: this.state.fontColor}}>
                             {"摄影师主页"}
                         </Button>
-                        <Button type="text" shape="round" icon={<LinkOutlined/>}
+                        <Button type={"text"} shape={"round"} icon={<LinkOutlined/>}
                                 onMouseOver={this.btnMouseOver.bind(this)}
                                 onMouseOut={this.btnMouseOut.bind(this)}
                                 onClick={this.gotoImageBtnOnClick.bind(this)}
@@ -155,27 +149,34 @@ class AuthorComponent extends React.Component {
             <List>
                 <List.Item>
                     <List.Item.Meta
-                        avatar={<Avatar size="large" src={this.state.authorIconUrl} alt={"作者"}/>}
+                        avatar={<Avatar size={"large"} src={this.state.authorIconUrl} alt={"作者"}/>}
                         title={
-                            <Button type="text" shape="round" icon={<UserOutlined/>} style={{color: this.state.fontColor, cursor: "default"}}
+                            <Button type={"text"} shape={"round"} icon={<UserOutlined/>}
+                                    style={{color: this.state.fontColor, cursor: "default"}}
                                     onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
-                                {this.state.authorName.length < btnMaxSize? this.state.authorName : this.state.authorName.substring(0, btnMaxSize) + "..."}
+                                {this.state.authorName.length < btnMaxSize ? this.state.authorName : this.state.authorName.substring(0, btnMaxSize) + "..."}
                             </Button>
                         }
                         description={
                             <Space>
-                                <Button type="text" shape="round" icon={<i className="bi bi-collection"></i>} style={{color: this.state.fontColor, cursor: "default"}}
-                                        onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
+                                <Button type={"text"} shape={"round"} icon={<i className="bi bi-collection"></i>}
+                                        style={{color: this.state.fontColor, cursor: "default"}}
+                                        onMouseOver={this.btnMouseOver.bind(this)}
+                                        onMouseOut={this.btnMouseOut.bind(this)}>
                                     {" " + this.state.authorCollections}
                                 </Button>
                                 <Divider type="vertical" style={{borderColor: this.state.fontColor}}/>
-                                <Button type="text" shape="round" icon={<i className="bi bi-heart"></i>} style={{color: this.state.fontColor, cursor: "default"}}
-                                        onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
+                                <Button type={"text"} shape={"round"} icon={<i className="bi bi-heart"></i>}
+                                        style={{color: this.state.fontColor, cursor: "default"}}
+                                        onMouseOver={this.btnMouseOver.bind(this)}
+                                        onMouseOut={this.btnMouseOut.bind(this)}>
                                     {" " + this.state.authorLikes}
                                 </Button>
                                 <Divider type="vertical" style={{borderColor: this.state.fontColor}}/>
-                                <Button type="text" shape="round" icon={<i className="bi bi-images"></i>} style={{color: this.state.fontColor, cursor: "default"}}
-                                        onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
+                                <Button type={"text"} shape={"round"} icon={<i className="bi bi-images"></i>}
+                                        style={{color: this.state.fontColor, cursor: "default"}}
+                                        onMouseOver={this.btnMouseOver.bind(this)}
+                                        onMouseOut={this.btnMouseOut.bind(this)}>
                                     {" " + this.state.authorPhotos}
                                 </Button>
                             </Space>
@@ -184,17 +185,19 @@ class AuthorComponent extends React.Component {
                 </List.Item>
                 <List.Item>
                     <List.Item.Meta
-                        avatar={<Avatar size="large" shape={"square"} src={this.state.imagePreviewUrl} alt={"信息"}/>}
+                        avatar={<Avatar size={"large"} shape={"square"} src={this.state.imagePreviewUrl} alt={"信息"}/>}
                         title={
-                            <Button type="text" shape="round" icon={<EnvironmentOutlined/>} style={{color: this.state.fontColor, cursor: "default"}}
+                            <Button type={"text"} shape={"round"} icon={<EnvironmentOutlined/>}
+                                    style={{color: this.state.fontColor, cursor: "default"}}
                                     onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
-                                {this.state.imageLocation.length < btnMaxSize? this.state.imageLocation : this.state.imageLocation.substring(0, btnMaxSize) + "..."}
+                                {this.state.imageLocation.length < btnMaxSize ? this.state.imageLocation : this.state.imageLocation.substring(0, btnMaxSize) + "..."}
                             </Button>
                         }
                         description={
-                            <Button type="text" shape="round" icon={<InfoCircleOutlined/>} style={{color: this.state.fontColor, cursor: "default"}}
+                            <Button type={"text"} shape={"round"} icon={<InfoCircleOutlined/>}
+                                    style={{color: this.state.fontColor, cursor: "default"}}
                                     onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
-                                {this.state.imageDescription.length < btnMaxSize? this.state.imageDescription : this.state.imageDescription.substring(0, btnMaxSize) + "..."}
+                                {this.state.imageDescription.length < btnMaxSize ? this.state.imageDescription : this.state.imageDescription.substring(0, btnMaxSize) + "..."}
                             </Button>
                         }
                     />
@@ -203,9 +206,10 @@ class AuthorComponent extends React.Component {
         );
 
         return (
-            <Popover title={popoverTitle} content={popoverContent} placement="topRight" color={this.state.backgroundColor}
+            <Popover title={popoverTitle} content={popoverContent} placement={"topRight"}
+                     color={this.state.backgroundColor}
                      overlayStyle={{width: "500px"}}>
-                <Button shape="round" icon={<CameraOutlined/>} size={"large"}
+                <Button shape={"round"} icon={<CameraOutlined/>} size={"large"}
                         id={"authorBtn"}
                         className={"componentTheme zIndexHigh"}
                         onClick={this.authorBtnOnClick.bind(this)}

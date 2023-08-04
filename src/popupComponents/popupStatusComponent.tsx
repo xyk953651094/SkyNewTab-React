@@ -92,22 +92,23 @@ class PopupImageComponent extends React.Component {
     render() {
         return (
             <Space>
-                <Button type="text" shape="round" icon={<i className={this.state.greetIcon}> </i>}
+                <Button type={"text"} shape={"round"} icon={<i className={this.state.greetIcon}> </i>}
                         onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
                         style={{color: this.state.fontColor, cursor: "default"}}>
                     {this.state.greetContent}
                 </Button>
-                <Button type="text" shape="round" icon={<i className={this.state.weatherIcon}> </i>}
+                <Button type={"text"} shape={"round"} icon={<i className={this.state.weatherIcon}> </i>}
                         onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
                         style={{color: this.state.fontColor, cursor: "default"}}>
                     {this.state.weatherContent}
                 </Button>
-                <Button type="text" shape="round" icon={<CalendarOutlined/>} onMouseOver={this.btnMouseOver.bind(this)}
+                <Button type={"text"} shape={"round"} icon={<CalendarOutlined/>}
+                        onMouseOver={this.btnMouseOver.bind(this)}
                         onMouseOut={this.btnMouseOut.bind(this)}
                         style={{color: this.state.fontColor, cursor: "default"}}>
                     {"倒数日：" + this.state.dailyAmount + " 个"}
                 </Button>
-                <Button type="text" shape="round" icon={<CheckSquareOutlined/>}
+                <Button type={"text"} shape={"round"} icon={<CheckSquareOutlined/>}
                         onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
                         style={{color: this.state.fontColor, cursor: "default"}}>
                     {"待办事项：" + this.state.todoAmount + " 个"}

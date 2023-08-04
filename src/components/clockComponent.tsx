@@ -75,11 +75,11 @@ class ClockComponent extends React.Component {
             <Row justify={"center"}>
                 <Col span={24} className={"zIndexHigh"} style={{padding: "5px", borderRadius: "10px"}}
                      onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
-                    <Space align="center" size="small" id={"clock"}>
+                    <Space align={"center"} id={"clock"}>
                         <Text className={"clockText"} style={{color: this.state.backgroundColor}}>
                             {this.state.currentTime}
                         </Text>
-                        <Space align="center" size="small" direction="vertical">
+                        <Space align={"center"} direction={"vertical"}>
                             <Text className={"dateText"} style={{color: this.state.backgroundColor}}>
                                 {this.state.currentWeek}
                             </Text>
