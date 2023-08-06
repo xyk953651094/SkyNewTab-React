@@ -9,8 +9,9 @@ import {
 } from "@ant-design/icons";
 import "../stylesheets/popupComponent.scss";
 import {decode} from "blurhash"
-import {getFontColor, getSearchEngineDetail, isEmptyString} from "../typescripts/publicFunctions";
+import {getFontColor, getSearchEngineDetail, imageDynamicEffect, isEmptyString} from "../typescripts/publicFunctions";
 
+const $ = require("jquery");
 const btnMaxSize = 40;
 
 type propType = {
@@ -20,6 +21,7 @@ type propType = {
 }
 
 type stateType = {
+    displayCanvas: "none" | "block",
     authorName: string,
     authorLink: string,
     imageLink: string,
@@ -43,6 +45,7 @@ class PopupImageComponent extends React.Component {
     constructor(props: any) {
         super(props)
         this.state = {
+            displayCanvas: "none",
             authorName: "暂无信息",
             authorLink: "",
             imageLink: "",
@@ -85,7 +88,7 @@ class PopupImageComponent extends React.Component {
     }
 
     imageLocationBtnOnClick() {
-        if(this.state.imageLocation !== "暂无信息") {
+        if (this.state.imageLocation !== "暂无信息") {
             window.open(this.state.searchEngineUrl + this.state.imageLocation, "_blank");
         } else {
             message.error("无跳转链接");
@@ -93,40 +96,61 @@ class PopupImageComponent extends React.Component {
     }
 
     imageCameraBtnOnClick() {
-        if(this.state.imageCamera !== "暂无信息") {
+        if (this.state.imageCamera !== "暂无信息") {
             window.open(this.state.searchEngineUrl + this.state.imageCamera, "_blank");
         } else {
             message.error("无跳转链接");
         }
     }
 
+    componentDidMount() {
+        // @ts-ignore
+        let popupImageDiv: HTMLElement = document.getElementById("popupImage");
+        // @ts-ignore
+        let popupImage: HTMLElement = popupImageDiv.children[0];
+
+        popupImageDiv.style.display = "none";
+        if (popupImage instanceof HTMLElement) {
+            popupImage.onload = () => {
+                $("#popupCanvas").remove();
+                popupImageDiv.style.display = "block";
+                popupImageDiv.className = "wallpaperFadeIn";
+            }
+        }
+    }
+
     componentWillReceiveProps(nextProps: any, prevProps: any) {
         if (nextProps.imageData && nextProps.imageData !== prevProps.imageData) {
             this.setState({
-                authorName: nextProps.imageData.user.name,
-                authorLink: nextProps.imageData.user.links.html,
-                imageLink: nextProps.imageData.links.html,
-                imagePreviewUrl: nextProps.imageData.urls.thumb,
-                imageLocation: isEmptyString(nextProps.imageData.location.name) ? "暂无信息" : nextProps.imageData.location.name,
-                imageDescription: isEmptyString(nextProps.imageData.alt_description) ? "暂无信息" : nextProps.imageData.alt_description,
-                imageCreateTime: nextProps.imageData.created_at,
-                imageCamera: isEmptyString(nextProps.imageData.exif.name) ? "暂无信息" : nextProps.imageData.exif.name,
-                hoverColor: nextProps.imageData.color,
-                blurHashCode: nextProps.imageData.blur_hash
-            },() => {
-                if (!isEmptyString(this.state.blurHashCode)) {
-                    const popupCanvas = document.getElementById("popupCanvas") as HTMLCanvasElement | null;
-                    if (popupCanvas instanceof HTMLCanvasElement) {
-                        let blurHashImage = decode(this.state.blurHashCode, popupCanvas.width, popupCanvas.height);
-                        let ctx = popupCanvas.getContext("2d");
-                        if (ctx) {
-                            const imageData = new ImageData(blurHashImage, popupCanvas.width, popupCanvas.height);
-                            ctx.putImageData(imageData, 0, 0);
-                        }
+                    authorName: nextProps.imageData.user.name,
+                    authorLink: nextProps.imageData.user.links.html,
+                    imageLink: nextProps.imageData.links.html,
+                    imagePreviewUrl: nextProps.imageData.urls.thumb,
+                    imageLocation: isEmptyString(nextProps.imageData.location.name) ? "暂无信息" : nextProps.imageData.location.name,
+                    imageDescription: isEmptyString(nextProps.imageData.alt_description) ? "暂无信息" : nextProps.imageData.alt_description,
+                    imageCreateTime: nextProps.imageData.created_at,
+                    imageCamera: isEmptyString(nextProps.imageData.exif.name) ? "暂无信息" : nextProps.imageData.exif.name,
+                    hoverColor: nextProps.imageData.color,
+                    blurHashCode: nextProps.imageData.blur_hash
+                }, () => {
+                    if (!isEmptyString(this.state.blurHashCode)) {
+                        const popupCanvas = document.getElementById("popupCanvas") as HTMLCanvasElement | null;
+                        if (popupCanvas instanceof HTMLCanvasElement) {
+                            let blurHashImage = decode(this.state.blurHashCode, popupCanvas.width, popupCanvas.height);
+                            let ctx = popupCanvas.getContext("2d");
+                            if (ctx) {
+                                const imageData = new ImageData(blurHashImage, popupCanvas.width, popupCanvas.height);
+                                ctx.putImageData(imageData, 0, 0);
+                            }
 
-                        popupCanvas.className = "popupCanvas wallpaperFadeIn";
+                            this.setState({
+                                displayCanvas: "block",
+                            }, () => {
+                                popupCanvas.className = "popupCanvas wallpaperFadeIn";
+                            })
+                        }
                     }
-                }}
+                }
             )
         }
 
@@ -147,16 +171,15 @@ class PopupImageComponent extends React.Component {
         return (
             <Space align={"center"}>
                 <Image
+                    id={"popupImage"}
                     width={300}
                     height={180}
                     preview={false}
                     alt={"暂无图片"}
                     src={this.state.imagePreviewUrl}
                     style={{borderRadius: "10px"}}
-                    placeholder={
-                        <canvas id={"popupCanvas"} className={"popupCanvas"}></canvas>
-                    }
                 />
+                <canvas id={"popupCanvas"} className={"popupCanvas"} style={{display: this.state.displayCanvas, borderRadius: "10px"}}></canvas>
                 <Space direction={"vertical"}>
                     <Button type={"text"} shape={"round"} icon={<UserOutlined/>}
                             onMouseOver={this.btnMouseOver.bind(this)}
@@ -164,12 +187,12 @@ class PopupImageComponent extends React.Component {
                             style={{color: this.state.fontColor}}>
                         {this.state.authorName.length < btnMaxSize ? this.state.authorName : this.state.authorName.substring(0, btnMaxSize) + "..."}
                     </Button>
-                    <Button type={"text"} shape={"round"} icon={<CameraOutlined />}
+                    <Button type={"text"} shape={"round"} icon={<CameraOutlined/>}
                             onClick={this.imageCameraBtnOnClick.bind(this)} style={{color: this.state.fontColor}}
                             onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
                         {this.state.imageCamera}
                     </Button>
-                    <Button type={"text"} shape={"round"} icon={<ClockCircleOutlined />}
+                    <Button type={"text"} shape={"round"} icon={<ClockCircleOutlined/>}
                             style={{color: this.state.fontColor, cursor: "default"}}
                             onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
                         {this.state.imageCreateTime}

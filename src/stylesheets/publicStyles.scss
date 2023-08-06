@@ -55,6 +55,10 @@ html, body {
     z-index: 0;
 }
 
+.zIndexBottom {
+    z-index: -1;
+}
+
 /*水平垂直居中*/
 .center {
     display: flex;
@@ -72,18 +76,6 @@ html, body {
 }
 
 /* 淡入效果 */
-.maskFadeIn {
-    animation-name: fadeIn; /* 动画名称 */
-    animation-duration: 0.5s; /* 动画持续时间 */
-    animation-iteration-count: 1; /* 动画次数 */
-    animation-delay: 0s; /* 延迟时间 */
-    animation-fill-mode: forwards;
-    /*-webkit-animation-name: fadeIn;        !* 动画名称 *!*/
-    /*-webkit-animation-duration: 3s;        !* 动画持续时间 *!*/
-    /*-webkit-animation-iteration-count: 1;  !* 动画次数 *!*/
-    /*-webkit-animation-delay: 0s;           !* 延迟时间 *!*/
-}
-
 .wallpaperFadeIn {
     animation-name: fadeIn; /* 动画名称 */
     animation-duration: 2s; /* 持续时间 */
@@ -120,15 +112,6 @@ html, body {
         opacity: 1;
     }
     /* 结尾状态 */
-}
-
-/* 淡出效果 */
-.maskFadeOut {
-    animation-name: fadeOut; /* 动画名称 */
-    animation-duration: 0.5s; /* 动画持续时间 */
-    animation-iteration-count: 1; /* 动画次数 */
-    animation-delay: 0s; /* 延迟时间 */
-    animation-fill-mode: forwards;
 }
 
 @keyframes fadeOut {

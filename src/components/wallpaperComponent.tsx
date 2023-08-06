@@ -2,8 +2,7 @@ import React from "react";
 import "../stylesheets/wallpaperComponent.scss"
 import "../stylesheets/publicStyles.scss"
 import {Image} from "antd";
-import {decode} from "blurhash"
-import {imageDynamicEffect, isEmptyString} from "../typescripts/publicFunctions";
+import {imageDynamicEffect} from "../typescripts/publicFunctions";
 
 type propType = {
     display: "none" | "block",
@@ -15,7 +14,7 @@ type propType = {
 type stateType = {
     imageLink: string,
     loadImageLink: string,
-    blurHashCode: string
+    displayImage: "none" | "block",
 }
 
 interface WallpaperComponent {
@@ -29,8 +28,33 @@ class WallpaperComponent extends React.Component {
         this.state = {
             imageLink: "",
             loadImageLink: "",
-            blurHashCode: ""
+            displayImage: "none",
         };
+    }
+
+    componentDidMount() {
+        // @ts-ignore
+        let backgroundImageDiv: HTMLElement = document.getElementById("backgroundImage");
+        // @ts-ignore
+        let backgroundImage: HTMLElement = backgroundImageDiv.children[0];
+        if (backgroundImage instanceof HTMLElement) {
+            backgroundImage.onload = () => {
+                this.setState({
+                    displayImage: "block",
+                }, () => {
+                    // 设置动态效果
+                    backgroundImage.className = "backgroundImage zIndexLow wallpaperFadeIn";
+                    setTimeout(() => {
+                        backgroundImage.style.transform = "scale(1.05, 1.05)";
+                        backgroundImage.style.transition = "5s";
+                    }, 2000);
+                    setTimeout(() => {
+                        backgroundImageDiv.style.perspective = "500px";
+                        imageDynamicEffect(backgroundImage, this.props.dynamicEffect);
+                    }, 7000);
+                })
+            }
+        }
     }
 
     componentWillReceiveProps(nextProps: any, prevProps: any) {
@@ -38,29 +62,35 @@ class WallpaperComponent extends React.Component {
         let backgroundImageDiv: HTMLElement = document.getElementById("backgroundImage");
         // @ts-ignore
         let backgroundImage: HTMLElement = backgroundImageDiv.children[0];
-
-        if (nextProps.display !== prevProps.display) {
-            if (nextProps.display === "block") {
-                if (backgroundImage instanceof HTMLElement) {
-                    backgroundImage.onload = () => {
-                        // 设置动态效果
-                        backgroundImage.className = "backgroundImage zIndexLow wallpaperFadeIn";
-                        setTimeout(() => {
-                            backgroundImage.style.transform = "scale(1.05, 1.05)";
-                            backgroundImage.style.transition = "5s";
-                        }, 2000);
-                        setTimeout(() => {
-                            backgroundImageDiv.style.perspective = "500px";
-                            imageDynamicEffect(backgroundImage, this.props.dynamicEffect);
-                        }, 7000);
-                    }
-                }
-            }
-        }
+        //
+        // if (nextProps.display !== prevProps.display) {
+        //     if (nextProps.display === "block") {
+        //         if (backgroundImage instanceof HTMLElement) {
+        //             backgroundImage.onload = () => {
+        //                 this.setState({
+        //                     displayImage: "block",
+        //                 }, () => {
+        //                     // 设置动态效果
+        //                     backgroundImage.className = "backgroundImage zIndexLow wallpaperFadeIn";
+        //                     setTimeout(() => {
+        //                         backgroundImage.style.transform = "scale(1.05, 1.05)";
+        //                         backgroundImage.style.transition = "5s";
+        //                     }, 2000);
+        //                     setTimeout(() => {
+        //                         backgroundImageDiv.style.perspective = "500px";
+        //                         imageDynamicEffect(backgroundImage, this.props.dynamicEffect);
+        //                     }, 7000);
+        //                 })
+        //             }
+        //         }
+        //     }
+        // }
 
         // 鼠标移动效果
         if (nextProps.dynamicEffect !== this.props.dynamicEffect) {
-            imageDynamicEffect(backgroundImage, nextProps.dynamicEffect);
+            if (backgroundImage instanceof HTMLElement) {
+                imageDynamicEffect(backgroundImage, nextProps.dynamicEffect);
+            }
         }
 
         // 图片质量
@@ -91,24 +121,6 @@ class WallpaperComponent extends React.Component {
                     });
                     break;
             }
-
-            this.setState({
-                blurHashCode: nextProps.imageData.blur_hash
-            }, () => {
-                if (!isEmptyString(this.state.blurHashCode)) {
-                    const blurHashCanvas = document.getElementById("blurHashCanvas") as HTMLCanvasElement | null;
-                    if (blurHashCanvas instanceof HTMLCanvasElement) {
-                        let blurHashImage = decode(this.state.blurHashCode, window.innerWidth, window.innerHeight);
-                        let ctx = blurHashCanvas.getContext("2d");
-                        if (ctx) {
-                            const imageData = new ImageData(blurHashImage, window.innerWidth, window.innerHeight);
-                            ctx.putImageData(imageData, 0, 0);
-                        }
-
-                        blurHashCanvas.className = "blurHashCanvas zIndexLow wallpaperFadeIn";
-                    }
-                }
-            });
         }
     }
 
@@ -122,10 +134,7 @@ class WallpaperComponent extends React.Component {
                 className={"backgroundImage zIndexLow"}
                 preview={false}
                 src={this.state.imageLink}
-                style={{display: this.props.display}}
-                placeholder={
-                    <canvas id={"blurHashCanvas"} className={"blurHashCanvas zIndexLow"}></canvas>
-                }
+                style={{display: this.state.displayImage}}
             />
         );
     }

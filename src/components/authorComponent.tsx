@@ -1,8 +1,15 @@
 import React from "react";
 import {Avatar, Button, Col, Divider, List, message, Popover, Row, Space, Typography} from "antd";
-import {CameraOutlined, EnvironmentOutlined, InfoCircleOutlined, LinkOutlined, UserOutlined, ClockCircleOutlined} from "@ant-design/icons";
+import {
+    CameraOutlined,
+    ClockCircleOutlined,
+    EnvironmentOutlined,
+    InfoCircleOutlined,
+    LinkOutlined,
+    UserOutlined
+} from "@ant-design/icons";
 import {unsplashUrl} from "../typescripts/publicConstants";
-import {changeThemeColor, getFontColor, isEmptyString, getSearchEngineDetail} from "../typescripts/publicFunctions";
+import {changeThemeColor, getFontColor, getSearchEngineDetail, isEmptyString} from "../typescripts/publicFunctions";
 import {ThemeColorInterface} from "../typescripts/publicInterface";
 import "../stylesheets/publicStyles.scss"
 
@@ -90,7 +97,7 @@ class AuthorComponent extends React.Component {
     }
 
     imageLocationBtnOnClick() {
-        if(this.state.imageLocation !== "暂无信息") {
+        if (this.state.imageLocation !== "暂无信息") {
             window.open(this.state.searchEngineUrl + this.state.imageLocation, "_blank");
         } else {
             message.error("无跳转链接");
@@ -98,7 +105,7 @@ class AuthorComponent extends React.Component {
     }
 
     imageCameraBtnOnClick() {
-        if(this.state.imageCamera !== "暂无信息") {
+        if (this.state.imageCamera !== "暂无信息") {
             window.open(this.state.searchEngineUrl + this.state.imageCamera, "_blank");
         } else {
             message.error("无跳转链接");
@@ -210,25 +217,30 @@ class AuthorComponent extends React.Component {
                         title={
                             <Button type={"text"} shape={"round"} icon={<EnvironmentOutlined/>}
                                     style={{color: this.state.fontColor}}
-                                    onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)} onClick={this.imageLocationBtnOnClick.bind(this)}>
+                                    onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
+                                    onClick={this.imageLocationBtnOnClick.bind(this)}>
                                 {this.state.imageLocation.length < btnMaxSize ? this.state.imageLocation : this.state.imageLocation.substring(0, btnMaxSize) + "..."}
                             </Button>
                         }
                         description={
                             <Space direction={"vertical"}>
-                                <Button type={"text"} shape={"round"} icon={<ClockCircleOutlined />}
+                                <Button type={"text"} shape={"round"} icon={<ClockCircleOutlined/>}
                                         style={{color: this.state.fontColor, cursor: "default"}}
-                                        onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
+                                        onMouseOver={this.btnMouseOver.bind(this)}
+                                        onMouseOut={this.btnMouseOut.bind(this)}>
                                     {this.state.imageCreateTime}
                                 </Button>
-                                <Button type={"text"} shape={"round"} icon={<CameraOutlined />}
+                                <Button type={"text"} shape={"round"} icon={<CameraOutlined/>}
                                         style={{color: this.state.fontColor}}
-                                        onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)} onClick={this.imageCameraBtnOnClick.bind(this)}>
+                                        onMouseOver={this.btnMouseOver.bind(this)}
+                                        onMouseOut={this.btnMouseOut.bind(this)}
+                                        onClick={this.imageCameraBtnOnClick.bind(this)}>
                                     {this.state.imageCamera}
                                 </Button>
                                 <Button type={"text"} shape={"round"} icon={<InfoCircleOutlined/>}
                                         style={{color: this.state.fontColor, cursor: "default"}}
-                                        onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
+                                        onMouseOver={this.btnMouseOver.bind(this)}
+                                        onMouseOut={this.btnMouseOut.bind(this)}>
                                     {this.state.imageDescription.length < btnMaxSize ? this.state.imageDescription : this.state.imageDescription.substring(0, btnMaxSize) + "..."}
                                 </Button>
                             </Space>

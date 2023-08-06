@@ -17,5 +17,4 @@ root.render(
     // </React.StrictMode>
 
     // <PopupComponent/>
-)
-;
+);

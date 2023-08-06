@@ -64,6 +64,19 @@ class PopupComponent extends React.Component {
         } else {
             message.error("暂无图片信息");
         }
+
+        // 修改各类弹窗样式
+        $("body").bind("DOMNodeInserted", () => {
+            // messgae
+            let messageEle = $(".ant-message");
+            if (messageEle.length && messageEle.length > 0) {
+                $(".ant-message-notice-content").css({
+                    "backgroundColor": this.state.hoverColor,
+                    "color": getFontColor(this.state.hoverColor)
+                });
+                $(".ant-message-custom-content > .anticon").css("color", getFontColor(this.state.hoverColor));
+            }
+        })
     }
 
     render() {
@@ -81,7 +94,8 @@ class PopupComponent extends React.Component {
                 <Content className={"popupContent"}>
                     <Space direction={"vertical"}>
                         <PopupStatusComponent imageData={this.state.imageData} fontColor={this.state.fontColor}/>
-                        <PopupImageComponent imageData={this.state.imageData} fontColor={this.state.fontColor} searchEngine={this.state.searchEngine}/>
+                        <PopupImageComponent imageData={this.state.imageData} fontColor={this.state.fontColor}
+                                             searchEngine={this.state.searchEngine}/>
                     </Space>
                 </Content>
                 <Footer className={"popupFooter"}>

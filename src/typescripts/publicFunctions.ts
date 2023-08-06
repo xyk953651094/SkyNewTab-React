@@ -1,4 +1,4 @@
-import {darkThemeArray, lightThemeArray} from "./publicConstants"
+import {themeArray} from "./publicConstants"
 import "jquery-color"
 import {ThemeColorInterface} from "./publicInterface";
 
@@ -149,11 +149,7 @@ export function getWeatherIcon(weatherInfo: string) {
 
 // 请求unsplash图片前随机显示多彩颜色主题
 export function setColorTheme() {
-    let hour = new Date().getHours();
-    let theme = lightThemeArray;
-    if (18 < hour || hour < 6) {
-        theme = darkThemeArray;
-    }
+    let theme = themeArray;
     let randomNum = Math.floor(Math.random() * theme.length);
     let body = document.getElementsByTagName("body")[0];
     body.style.backgroundColor = theme[randomNum].bodyBackgroundColor;    // 设置body背景颜色
@@ -306,7 +302,7 @@ export function getSearchEngineDetail(searchEngine: string) {
 }
 
 // 过渡动画
-export function changeThemeColor(element: string, backgroundColor: string, fontColor: string, time: number = 500) {
+export function changeThemeColor(element: string, backgroundColor: string, fontColor: string, time: number = 300) {
     $(element).animate({
         backgroundColor: backgroundColor,
         color: fontColor,
