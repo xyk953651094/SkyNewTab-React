@@ -258,7 +258,7 @@ class DailyComponent extends React.Component {
                     <Badge size={"small"} count={this.state.listItems.length}>
                         <Button shape={"circle"} icon={<CalendarOutlined/>} size={"large"}
                                 id={"dailyBtn"}
-                                className={"componentTheme zIndexHigh"}
+                                className={"componentTheme zIndexHigh"} style={{cursor: "default"}}
                         />
                     </Badge>
                 </Popover>

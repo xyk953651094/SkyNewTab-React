@@ -236,7 +236,7 @@ class TodoComponent extends React.Component {
                     <Badge size={"small"} count={this.state.checkboxOptions.length}>
                         <Button shape={"circle"} icon={<CheckSquareOutlined/>} size={"large"}
                                 id={"todoBtn"}
-                                className={"componentTheme zIndexHigh"}
+                                className={"componentTheme zIndexHigh"} style={{cursor: "default"}}
                         />
                     </Badge>
                 </Popover>

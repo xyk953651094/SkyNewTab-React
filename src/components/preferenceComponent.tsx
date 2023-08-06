@@ -202,7 +202,7 @@ class PreferenceComponent extends React.Component {
                                     href={"https://afdian.net/a/xyk953651094"} target={"_blank"}
                                     onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
                                     style={{color: this.state.fontColor}}>
-                                捐赠
+                                支持
                             </Button>
                         </Space>
                     }

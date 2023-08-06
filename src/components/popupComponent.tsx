@@ -16,11 +16,12 @@ type stateType = {
     hoverColor: string,
     backgroundColor: string,
     fontColor: string,
+    searchEngine: string
 }
 
 interface PopupComponent {
     state: stateType,
-    props: propType
+    props: propType,
 }
 
 class PopupComponent extends React.Component {
@@ -30,7 +31,8 @@ class PopupComponent extends React.Component {
             imageData: null,
             hoverColor: "#000000",
             backgroundColor: "#ffffff",
-            fontColor: "#000000"
+            fontColor: "#000000",
+            searchEngine: "bing",
         }
     }
 
@@ -46,6 +48,7 @@ class PopupComponent extends React.Component {
 
     componentDidMount() {
         let imageData = localStorage.getItem("lastImage");
+        let tempSearchEngine = localStorage.getItem("searchEngine");
         if (imageData) {
             let tempImageData = JSON.parse(imageData);
 
@@ -53,7 +56,8 @@ class PopupComponent extends React.Component {
                 imageData: tempImageData,
                 hoverColor: tempImageData.color,
                 backgroundColor: getReverseColor(tempImageData.color),
-                fontColor: getFontColor(getReverseColor(tempImageData.color))
+                fontColor: getFontColor(getReverseColor(tempImageData.color)),
+                searchEngine: tempSearchEngine === null ? "bing" : tempSearchEngine,
             }, () => {
                 $("body").css({"backgroundColor": this.state.backgroundColor});
             });
@@ -77,7 +81,7 @@ class PopupComponent extends React.Component {
                 <Content className={"popupContent"}>
                     <Space direction={"vertical"}>
                         <PopupStatusComponent imageData={this.state.imageData} fontColor={this.state.fontColor}/>
-                        <PopupImageComponent imageData={this.state.imageData} fontColor={this.state.fontColor}/>
+                        <PopupImageComponent imageData={this.state.imageData} fontColor={this.state.fontColor} searchEngine={this.state.searchEngine}/>
                     </Space>
                 </Content>
                 <Footer className={"popupFooter"}>
@@ -98,7 +102,7 @@ class PopupComponent extends React.Component {
                                 href={"https://afdian.net/a/xyk953651094"} target={"_blank"}
                                 onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
                                 style={{color: this.state.fontColor}}>
-                            捐赠
+                            支持
                         </Button>
                     </Space>
                 </Footer>

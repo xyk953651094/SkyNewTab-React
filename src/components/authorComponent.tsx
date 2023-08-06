@@ -1,8 +1,8 @@
 import React from "react";
 import {Avatar, Button, Col, Divider, List, message, Popover, Row, Space, Typography} from "antd";
-import {CameraOutlined, EnvironmentOutlined, InfoCircleOutlined, LinkOutlined, UserOutlined} from "@ant-design/icons";
+import {CameraOutlined, EnvironmentOutlined, InfoCircleOutlined, LinkOutlined, UserOutlined, ClockCircleOutlined} from "@ant-design/icons";
 import {unsplashUrl} from "../typescripts/publicConstants";
-import {changeThemeColor, getFontColor, isEmptyString} from "../typescripts/publicFunctions";
+import {changeThemeColor, getFontColor, isEmptyString, getSearchEngineDetail} from "../typescripts/publicFunctions";
 import {ThemeColorInterface} from "../typescripts/publicInterface";
 import "../stylesheets/publicStyles.scss"
 
@@ -13,12 +13,14 @@ type propType = {
     themeColor: ThemeColorInterface,
     display: "none" | "block",
     imageData: any,
+    searchEngine: string
 }
 
 type stateType = {
     hoverColor: string,
     backgroundColor: string,
     fontColor: string,
+    searchEngineUrl: string,
     authorName: string,
     authorLink: string,
     authorIconUrl: string,
@@ -29,7 +31,8 @@ type stateType = {
     imagePreviewUrl: string,
     imageLocation: string,
     imageDescription: string,
-    btnMaxSize: number,
+    imageCreateTime: string,
+    imageCamera: string,
 }
 
 interface AuthorComponent {
@@ -44,6 +47,7 @@ class AuthorComponent extends React.Component {
             hoverColor: "",
             backgroundColor: "",
             fontColor: "",
+            searchEngineUrl: "https://www.bing.com/search?q=",
             authorName: "暂无信息",
             authorLink: "",
             authorIconUrl: "",
@@ -54,7 +58,8 @@ class AuthorComponent extends React.Component {
             imagePreviewUrl: "",
             imageLocation: "暂无信息",
             imageDescription: "暂无信息",
-            btnMaxSize: 45,
+            imageCreateTime: "暂无信息",
+            imageCamera: "暂无信息",
         };
     }
 
@@ -68,15 +73,7 @@ class AuthorComponent extends React.Component {
         e.currentTarget.style.color = this.state.fontColor;
     }
 
-    authorBtnOnClick() {
-        if (!isEmptyString(this.state.authorLink)) {
-            window.open(this.state.authorLink);
-        } else {
-            message.error("暂无链接")
-        }
-    }
-
-    gotoAuthorBtnOnClick() {
+    authorLinkBtnOnClick() {
         if (!isEmptyString(this.state.authorLink)) {
             window.open(this.state.authorLink + unsplashUrl);
         } else {
@@ -84,9 +81,25 @@ class AuthorComponent extends React.Component {
         }
     }
 
-    gotoImageBtnOnClick() {
+    imageLinkBtnOnClick() {
         if (!isEmptyString(this.state.imageLink)) {
             window.open(this.state.imageLink + unsplashUrl);
+        } else {
+            message.error("无跳转链接");
+        }
+    }
+
+    imageLocationBtnOnClick() {
+        if(this.state.imageLocation !== "暂无信息") {
+            window.open(this.state.searchEngineUrl + this.state.imageLocation, "_blank");
+        } else {
+            message.error("无跳转链接");
+        }
+    }
+
+    imageCameraBtnOnClick() {
+        if(this.state.imageCamera !== "暂无信息") {
+            window.open(this.state.searchEngineUrl + this.state.imageCamera, "_blank");
         } else {
             message.error("无跳转链接");
         }
@@ -113,9 +126,17 @@ class AuthorComponent extends React.Component {
                 imagePreviewUrl: nextProps.imageData.urls.thumb,
                 imageLocation: isEmptyString(nextProps.imageData.location.name) ? "暂无信息" : nextProps.imageData.location.name,
                 imageDescription: isEmptyString(nextProps.imageData.alt_description) ? "暂无信息" : nextProps.imageData.alt_description,
+                imageCreateTime: nextProps.imageData.created_at,
+                imageCamera: isEmptyString(nextProps.imageData.exif.name) ? "暂无信息" : nextProps.imageData.exif.name,
             }, () => {
                 changeThemeColor("#authorBtn", this.state.backgroundColor, this.state.fontColor);
             })
+        }
+
+        if (nextProps.searchEngine !== prevProps.searchEngine) {
+            this.setState({
+                searchEngineUrl: getSearchEngineDetail(nextProps.searchEngine).searchEngineUrl,
+            });
         }
     }
 
@@ -129,14 +150,14 @@ class AuthorComponent extends React.Component {
                     <Space>
                         <Button type={"text"} shape={"round"} icon={<LinkOutlined/>}
                                 onMouseOver={this.btnMouseOver.bind(this)}
-                                onMouseOut={this.btnMouseOut.bind(this)} onClick={this.gotoAuthorBtnOnClick.bind(this)}
+                                onMouseOut={this.btnMouseOut.bind(this)} onClick={this.authorLinkBtnOnClick.bind(this)}
                                 style={{color: this.state.fontColor}}>
                             {"摄影师主页"}
                         </Button>
                         <Button type={"text"} shape={"round"} icon={<LinkOutlined/>}
                                 onMouseOver={this.btnMouseOver.bind(this)}
                                 onMouseOut={this.btnMouseOut.bind(this)}
-                                onClick={this.gotoImageBtnOnClick.bind(this)}
+                                onClick={this.imageLinkBtnOnClick.bind(this)}
                                 style={{color: this.state.fontColor}}>
                             {"图片主页"}
                         </Button>
@@ -188,17 +209,29 @@ class AuthorComponent extends React.Component {
                         avatar={<Avatar size={"large"} shape={"square"} src={this.state.imagePreviewUrl} alt={"信息"}/>}
                         title={
                             <Button type={"text"} shape={"round"} icon={<EnvironmentOutlined/>}
-                                    style={{color: this.state.fontColor, cursor: "default"}}
-                                    onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
+                                    style={{color: this.state.fontColor}}
+                                    onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)} onClick={this.imageLocationBtnOnClick.bind(this)}>
                                 {this.state.imageLocation.length < btnMaxSize ? this.state.imageLocation : this.state.imageLocation.substring(0, btnMaxSize) + "..."}
                             </Button>
                         }
                         description={
-                            <Button type={"text"} shape={"round"} icon={<InfoCircleOutlined/>}
-                                    style={{color: this.state.fontColor, cursor: "default"}}
-                                    onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
-                                {this.state.imageDescription.length < btnMaxSize ? this.state.imageDescription : this.state.imageDescription.substring(0, btnMaxSize) + "..."}
-                            </Button>
+                            <Space direction={"vertical"}>
+                                <Button type={"text"} shape={"round"} icon={<ClockCircleOutlined />}
+                                        style={{color: this.state.fontColor, cursor: "default"}}
+                                        onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
+                                    {this.state.imageCreateTime}
+                                </Button>
+                                <Button type={"text"} shape={"round"} icon={<CameraOutlined />}
+                                        style={{color: this.state.fontColor}}
+                                        onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)} onClick={this.imageCameraBtnOnClick.bind(this)}>
+                                    {this.state.imageCamera}
+                                </Button>
+                                <Button type={"text"} shape={"round"} icon={<InfoCircleOutlined/>}
+                                        style={{color: this.state.fontColor, cursor: "default"}}
+                                        onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
+                                    {this.state.imageDescription.length < btnMaxSize ? this.state.imageDescription : this.state.imageDescription.substring(0, btnMaxSize) + "..."}
+                                </Button>
+                            </Space>
                         }
                     />
                 </List.Item>
@@ -212,7 +245,7 @@ class AuthorComponent extends React.Component {
                 <Button shape={"round"} icon={<CameraOutlined/>} size={"large"}
                         id={"authorBtn"}
                         className={"componentTheme zIndexHigh"}
-                        onClick={this.authorBtnOnClick.bind(this)}
+                        onClick={this.authorLinkBtnOnClick.bind(this)}
                         style={{
                             display: this.props.display,
                         }}

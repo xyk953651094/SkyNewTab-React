@@ -33,7 +33,7 @@ type stateType = {
     themeColor: ThemeColorInterface,
     imageData: any,
 
-    searchEngine: "bing" | "baidu" | "google",
+    searchEngine: string,
     dynamicEffect: "all" | "rotate" | "translate" | "close",
     imageQuality: "full" | "regular" | "small",
     imageTopics: string,
@@ -316,6 +316,7 @@ class App extends React.Component {
                                     themeColor={this.state.themeColor}
                                     display={this.state.componentDisplay}
                                     imageData={this.state.imageData}
+                                    searchEngine={this.state.searchEngine}
                                 />
                             </Space>
                         </Col>

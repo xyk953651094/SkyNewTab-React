@@ -1,13 +1,19 @@
 import React from "react";
 import {Button, Popover, Space, Typography} from "antd";
-import {changeThemeColor, getFontColor, getWeatherIcon, httpRequest} from "../typescripts/publicFunctions";
+import {
+    changeThemeColor,
+    getFontColor,
+    getSearchEngineDetail,
+    getWeatherIcon,
+    httpRequest
+} from "../typescripts/publicFunctions";
 import {ThemeColorInterface} from "../typescripts/publicInterface";
 
 const {Text} = Typography;
 
 type propType = {
     themeColor: ThemeColorInterface,
-    searchEngine: "bing" | "baidu" | "google"
+    searchEngine: string
 }
 
 type stateType = {
@@ -124,45 +130,9 @@ class WeatherComponent extends React.Component {
         }
 
         if (nextProps.searchEngine !== prevProps.searchEngine) {
-            let tempSearchEngineUrl: string;
-            switch (nextProps.searchEngine) {
-                case "baidu":
-                    tempSearchEngineUrl = "https://www.baidu.com/s?wd=";
-                    break;
-                case "bing":
-                    tempSearchEngineUrl = "https://www.bing.com/search?q=";
-                    break;
-                case "brave":
-                    tempSearchEngineUrl = "https://search.brave.com/search?q=";
-                    break;
-                case "duckduckgo":
-                    tempSearchEngineUrl = "https://duckduckgo.com/?q=";
-                    break;
-                case "ghostery":
-                    tempSearchEngineUrl = "https://ghosterysearch.com/search?q=";
-                    break;
-                case "google":
-                    tempSearchEngineUrl = "https://www.google.com/search?q=";
-                    break;
-                case "sogou":
-                    tempSearchEngineUrl = "https://www.sogou.com/web?query=";
-                    break;
-                case "startpage":
-                    tempSearchEngineUrl = "https://startpage.com/do/search?q=";
-                    break;
-                case "wuzhuiso":
-                    tempSearchEngineUrl = "https://www.wuzhuiso.com/s?ie=utf-8&fr=none&q=";
-                    break;
-                case "yandex":
-                    tempSearchEngineUrl = "https://yandex.com/search/?text=";
-                    break;
-                default:
-                    tempSearchEngineUrl = "https://www.bing.com/search?q=";
-                    break;
-            }
             this.setState({
-                searchEngineUrl: tempSearchEngineUrl,
-            })
+                searchEngineUrl: getSearchEngineDetail(nextProps.searchEngine).searchEngineUrl,
+            });
         }
     }
 
