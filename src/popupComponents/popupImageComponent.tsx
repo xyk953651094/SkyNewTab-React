@@ -9,7 +9,7 @@ import {
 } from "@ant-design/icons";
 import "../stylesheets/popupComponent.scss";
 import {decode} from "blurhash"
-import {getFontColor, getSearchEngineDetail, imageDynamicEffect, isEmptyString} from "../typescripts/publicFunctions";
+import {getFontColor, getSearchEngineDetail, isEmptyString} from "../typescripts/publicFunctions";
 
 const $ = require("jquery");
 const btnMaxSize = 40;
@@ -179,7 +179,8 @@ class PopupImageComponent extends React.Component {
                     src={this.state.imagePreviewUrl}
                     style={{borderRadius: "10px"}}
                 />
-                <canvas id={"popupCanvas"} className={"popupCanvas"} style={{display: this.state.displayCanvas, borderRadius: "10px"}}></canvas>
+                <canvas id={"popupCanvas"} className={"popupCanvas"}
+                        style={{display: this.state.displayCanvas, borderRadius: "10px"}}></canvas>
                 <Space direction={"vertical"}>
                     <Button type={"text"} shape={"round"} icon={<UserOutlined/>}
                             onMouseOver={this.btnMouseOver.bind(this)}
