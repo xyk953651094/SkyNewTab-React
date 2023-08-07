@@ -39,55 +39,33 @@ class WallpaperComponent extends React.Component {
         let backgroundImage: HTMLElement = backgroundImageDiv.children[0];
         if (backgroundImage instanceof HTMLElement) {
             backgroundImage.onload = () => {
+                backgroundImage.style.width = "102%";
                 this.setState({
                     displayImage: "block",
                 }, () => {
                     // 设置动态效果
-                    backgroundImage.className = "backgroundImage zIndexLow wallpaperFadeIn";
+                    backgroundImage.classList.add("wallpaperFadeIn");
                     setTimeout(() => {
                         backgroundImage.style.transform = "scale(1.05, 1.05)";
                         backgroundImage.style.transition = "5s";
+
+                        setTimeout(() => {
+                            backgroundImageDiv.style.perspective = "500px";
+                            imageDynamicEffect(backgroundImage, this.props.dynamicEffect);
+                        }, 5000);
                     }, 2000);
-                    setTimeout(() => {
-                        backgroundImageDiv.style.perspective = "500px";
-                        imageDynamicEffect(backgroundImage, this.props.dynamicEffect);
-                    }, 7000);
                 })
             }
         }
     }
 
     componentWillReceiveProps(nextProps: any, prevProps: any) {
-        // @ts-ignore
-        let backgroundImageDiv: HTMLElement = document.getElementById("backgroundImage");
-        // @ts-ignore
-        let backgroundImage: HTMLElement = backgroundImageDiv.children[0];
-        //
-        // if (nextProps.display !== prevProps.display) {
-        //     if (nextProps.display === "block") {
-        //         if (backgroundImage instanceof HTMLElement) {
-        //             backgroundImage.onload = () => {
-        //                 this.setState({
-        //                     displayImage: "block",
-        //                 }, () => {
-        //                     // 设置动态效果
-        //                     backgroundImage.className = "backgroundImage zIndexLow wallpaperFadeIn";
-        //                     setTimeout(() => {
-        //                         backgroundImage.style.transform = "scale(1.05, 1.05)";
-        //                         backgroundImage.style.transition = "5s";
-        //                     }, 2000);
-        //                     setTimeout(() => {
-        //                         backgroundImageDiv.style.perspective = "500px";
-        //                         imageDynamicEffect(backgroundImage, this.props.dynamicEffect);
-        //                     }, 7000);
-        //                 })
-        //             }
-        //         }
-        //     }
-        // }
-
         // 鼠标移动效果
-        if (nextProps.dynamicEffect !== this.props.dynamicEffect) {
+        if (nextProps.dynamicEffect !== this.props.dynamicEffect && this.props.dynamicEffect) {
+            // @ts-ignore
+            let backgroundImageDiv: HTMLElement = document.getElementById("backgroundImage");
+            // @ts-ignore
+            let backgroundImage: HTMLElement = backgroundImageDiv.children[0];
             if (backgroundImage instanceof HTMLElement) {
                 imageDynamicEffect(backgroundImage, nextProps.dynamicEffect);
             }
@@ -128,7 +106,7 @@ class WallpaperComponent extends React.Component {
         return (
             <Image
                 id={"backgroundImage"}
-                key={"1"}
+                // key={"1"}
                 width={"102%"}
                 height={"102%"}
                 className={"backgroundImage zIndexLow"}

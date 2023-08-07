@@ -228,7 +228,7 @@ export function imageDynamicEffect(element: HTMLElement, effectType: string) {
                 break;
             }
             case "close": {
-                element.style.transform = "scale(1.05)";
+                element.style.transform = "scale(1.05, 1.05)";
                 break;
             }
         }
