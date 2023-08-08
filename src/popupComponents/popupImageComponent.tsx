@@ -125,7 +125,7 @@ class PopupImageComponent extends React.Component {
                     authorName: nextProps.imageData.user.name,
                     authorLink: nextProps.imageData.user.links.html,
                     imageLink: nextProps.imageData.links.html,
-                    imagePreviewUrl: nextProps.imageData.urls.thumb,
+                    imagePreviewUrl: nextProps.imageData.urls.regular,
                     imageLocation: isEmptyString(nextProps.imageData.location.name) ? "暂无信息" : nextProps.imageData.location.name,
                     imageDescription: isEmptyString(nextProps.imageData.alt_description) ? "暂无信息" : nextProps.imageData.alt_description,
                     imageCreateTime: nextProps.imageData.created_at,

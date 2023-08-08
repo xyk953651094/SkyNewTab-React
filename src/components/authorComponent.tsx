@@ -14,7 +14,7 @@ import {ThemeColorInterface} from "../typescripts/publicInterface";
 import "../stylesheets/publicStyles.scss"
 
 const {Text} = Typography;
-const btnMaxSize = 50;
+const btnMaxSize = 65;
 
 type propType = {
     themeColor: ThemeColorInterface,
@@ -125,7 +125,7 @@ class AuthorComponent extends React.Component {
             this.setState({
                 authorName: nextProps.imageData.user.name,
                 authorLink: nextProps.imageData.user.links.html,
-                authorIconUrl: nextProps.imageData.user.profile_image.small,
+                authorIconUrl: nextProps.imageData.user.profile_image.large,
                 authorCollections: nextProps.imageData.user.total_collections,
                 authorLikes: nextProps.imageData.user.total_likes,
                 authorPhotos: nextProps.imageData.user.total_photos,
@@ -176,60 +176,42 @@ class AuthorComponent extends React.Component {
         const popoverContent = (
             <List>
                 <List.Item>
-                    <List.Item.Meta
-                        avatar={<Avatar size={"large"} src={this.state.authorIconUrl} alt={"作者"}/>}
-                        title={
+                    <Space align={"center"}>
+                        <Avatar size={64} src={this.state.authorIconUrl} alt={"作者"}/>
+                        <Space direction={"vertical"}>
                             <Button type={"text"} shape={"round"} icon={<UserOutlined/>}
                                     style={{color: this.state.fontColor, cursor: "default"}}
                                     onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
                                 {this.state.authorName.length < btnMaxSize ? this.state.authorName : this.state.authorName.substring(0, btnMaxSize) + "..."}
                             </Button>
-                        }
-                        description={
-                            <Space>
+                            <Space split={<Divider type="vertical" style={{borderColor: this.state.fontColor}}/>}>
                                 <Button type={"text"} shape={"round"} icon={<i className="bi bi-collection"></i>}
                                         style={{color: this.state.fontColor, cursor: "default"}}
                                         onMouseOver={this.btnMouseOver.bind(this)}
                                         onMouseOut={this.btnMouseOut.bind(this)}>
-                                    {" " + this.state.authorCollections}
+                                    {" " + this.state.authorCollections + "个合集"}
                                 </Button>
-                                <Divider type="vertical" style={{borderColor: this.state.fontColor}}/>
                                 <Button type={"text"} shape={"round"} icon={<i className="bi bi-heart"></i>}
                                         style={{color: this.state.fontColor, cursor: "default"}}
                                         onMouseOver={this.btnMouseOver.bind(this)}
                                         onMouseOut={this.btnMouseOut.bind(this)}>
-                                    {" " + this.state.authorLikes}
+                                    {" " + this.state.authorLikes + "个点赞"}
                                 </Button>
-                                <Divider type="vertical" style={{borderColor: this.state.fontColor}}/>
                                 <Button type={"text"} shape={"round"} icon={<i className="bi bi-images"></i>}
                                         style={{color: this.state.fontColor, cursor: "default"}}
                                         onMouseOver={this.btnMouseOver.bind(this)}
                                         onMouseOut={this.btnMouseOut.bind(this)}>
-                                    {" " + this.state.authorPhotos}
+                                    {" " + this.state.authorPhotos + "张照片"}
                                 </Button>
                             </Space>
-                        }
-                    />
+                        </Space>
+                    </Space>
                 </List.Item>
                 <List.Item>
-                    <List.Item.Meta
-                        avatar={<Avatar size={"large"} shape={"square"} src={this.state.imagePreviewUrl} alt={"信息"}/>}
-                        title={
-                            <Button type={"text"} shape={"round"} icon={<EnvironmentOutlined/>}
-                                    style={{color: this.state.fontColor}}
-                                    onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
-                                    onClick={this.imageLocationBtnOnClick.bind(this)}>
-                                {this.state.imageLocation.length < btnMaxSize ? this.state.imageLocation : this.state.imageLocation.substring(0, btnMaxSize) + "..."}
-                            </Button>
-                        }
-                        description={
+                    <Space direction={"vertical"}>
+                        <Space>
+                            <Avatar size={64} shape={"square"} src={this.state.imagePreviewUrl} alt={"信息"}/>
                             <Space direction={"vertical"}>
-                                <Button type={"text"} shape={"round"} icon={<ClockCircleOutlined/>}
-                                        style={{color: this.state.fontColor, cursor: "default"}}
-                                        onMouseOver={this.btnMouseOver.bind(this)}
-                                        onMouseOut={this.btnMouseOut.bind(this)}>
-                                    {this.state.imageCreateTime}
-                                </Button>
                                 <Button type={"text"} shape={"round"} icon={<CameraOutlined/>}
                                         style={{color: this.state.fontColor}}
                                         onMouseOver={this.btnMouseOver.bind(this)}
@@ -237,15 +219,28 @@ class AuthorComponent extends React.Component {
                                         onClick={this.imageCameraBtnOnClick.bind(this)}>
                                     {this.state.imageCamera}
                                 </Button>
-                                <Button type={"text"} shape={"round"} icon={<InfoCircleOutlined/>}
+                                <Button type={"text"} shape={"round"} icon={<ClockCircleOutlined/>}
                                         style={{color: this.state.fontColor, cursor: "default"}}
                                         onMouseOver={this.btnMouseOver.bind(this)}
                                         onMouseOut={this.btnMouseOut.bind(this)}>
-                                    {this.state.imageDescription.length < btnMaxSize ? this.state.imageDescription : this.state.imageDescription.substring(0, btnMaxSize) + "..."}
+                                    {this.state.imageCreateTime}
                                 </Button>
                             </Space>
-                        }
-                    />
+                        </Space>
+                        <Button type={"text"} shape={"round"} icon={<EnvironmentOutlined/>}
+                                style={{color: this.state.fontColor}}
+                                onMouseOver={this.btnMouseOver.bind(this)}
+                                onMouseOut={this.btnMouseOut.bind(this)}
+                                onClick={this.imageLocationBtnOnClick.bind(this)}>
+                            {this.state.imageLocation.length < btnMaxSize ? this.state.imageLocation : this.state.imageLocation.substring(0, btnMaxSize) + "..."}
+                        </Button>
+                        <Button type={"text"} shape={"round"} icon={<InfoCircleOutlined/>}
+                                style={{color: this.state.fontColor, cursor: "default"}}
+                                onMouseOver={this.btnMouseOver.bind(this)}
+                                onMouseOut={this.btnMouseOut.bind(this)}>
+                            {this.state.imageDescription.length < btnMaxSize ? this.state.imageDescription : this.state.imageDescription.substring(0, btnMaxSize) + "..."}
+                        </Button>
+                    </Space>
                 </List.Item>
             </List>
         );
@@ -253,7 +248,7 @@ class AuthorComponent extends React.Component {
         return (
             <Popover title={popoverTitle} content={popoverContent} placement={"topRight"}
                      color={this.state.backgroundColor}
-                     overlayStyle={{width: "500px"}}>
+                     overlayStyle={{minWidth: "550px"}}>
                 <Button shape={"round"} icon={<CameraOutlined/>} size={"large"}
                         id={"authorBtn"}
                         className={"componentTheme zIndexHigh"}

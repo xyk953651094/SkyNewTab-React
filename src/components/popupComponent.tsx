@@ -1,5 +1,5 @@
 import React from "react";
-import {Button, Layout, message, Space} from "antd";
+import {Button, Layout, List, message, Space} from "antd";
 import {DashboardOutlined, GiftOutlined, GithubOutlined, MessageOutlined} from "@ant-design/icons";
 import "../stylesheets/popupComponent.scss"
 import {getFontColor, getReverseColor} from "../typescripts/publicFunctions";
@@ -76,6 +76,8 @@ class PopupComponent extends React.Component {
                 });
                 $(".ant-message-custom-content > .anticon").css("color", getFontColor(this.state.hoverColor));
             }
+
+            // $(".ant-list-item").css("borderBlockEndColor", this.state.fontColor);
         })
     }
 
@@ -92,11 +94,15 @@ class PopupComponent extends React.Component {
                     </Space>
                 </Header>
                 <Content className={"popupContent"}>
-                    <Space direction={"vertical"}>
-                        <PopupStatusComponent imageData={this.state.imageData} fontColor={this.state.fontColor}/>
-                        <PopupImageComponent imageData={this.state.imageData} fontColor={this.state.fontColor}
-                                             searchEngine={this.state.searchEngine}/>
-                    </Space>
+                    <List>
+                        <List.Item style={{borderBlockEndColor: this.state.fontColor}}>
+                            <PopupStatusComponent imageData={this.state.imageData} fontColor={this.state.fontColor}/>
+                        </List.Item>
+                        <List.Item>
+                            <PopupImageComponent imageData={this.state.imageData} fontColor={this.state.fontColor}
+                                                 searchEngine={this.state.searchEngine}/>
+                        </List.Item>
+                    </List>
                 </Content>
                 <Footer className={"popupFooter"}>
                     <Space align={"center"}>

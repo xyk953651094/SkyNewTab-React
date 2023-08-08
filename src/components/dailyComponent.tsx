@@ -230,18 +230,11 @@ class DailyComponent extends React.Component {
                                     {item.title}
                                 </Button>
                             </Col>
-                            <Col span={8} style={{textAlign: "center"}}>
+                            <Col span={14}>
                                 <Button type={"text"} shape={"round"} onMouseOver={this.btnMouseOver.bind(this)}
                                         onMouseOut={this.btnMouseOut.bind(this)}
                                         style={{color: this.state.fontColor, cursor: "default"}}>
-                                    {getTimeDetails(new Date(item.selectedTimeStamp)).showDate5}
-                                </Button>
-                            </Col>
-                            <Col span={6} style={{textAlign: "right"}}>
-                                <Button type={"text"} shape={"round"} onMouseOver={this.btnMouseOver.bind(this)}
-                                        onMouseOut={this.btnMouseOut.bind(this)}
-                                        style={{color: this.state.fontColor, cursor: "default"}}>
-                                    {this.getDailyDescription(item.selectedTimeStamp)}
+                                    {getTimeDetails(new Date(item.selectedTimeStamp)).showDate4 + "｜" + this.getDailyDescription(item.selectedTimeStamp)}
                                 </Button>
                             </Col>
                         </Row>
@@ -254,7 +247,7 @@ class DailyComponent extends React.Component {
             <Row>
                 <Popover title={popoverTitle} content={popoverContent} placement={"bottomRight"}
                          color={this.state.backgroundColor}
-                         overlayStyle={{width: "550px"}}>
+                         overlayStyle={{minWidth: "550px"}}>
                     <Badge size={"small"} count={this.state.listItems.length}>
                         <Button shape={"circle"} icon={<CalendarOutlined/>} size={"large"}
                                 id={"dailyBtn"}

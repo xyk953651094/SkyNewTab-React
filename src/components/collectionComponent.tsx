@@ -1,5 +1,5 @@
 import React from "react";
-import {Avatar, Button, Col, Form, Input, List, message, Modal, Row, Space, Tooltip, Typography} from "antd";
+import {Button, Col, Form, Input, List, message, Modal, Row, Space, Tooltip, Typography} from "antd";
 import {DeleteOutlined, EditOutlined, PlusOutlined} from "@ant-design/icons";
 import {ThemeColorInterface} from "../typescripts/publicInterface";
 import {getFontColor} from "../typescripts/publicFunctions";
@@ -282,14 +282,24 @@ class CollectionComponent extends React.Component {
                                             style={{color: this.state.fontColor}}>
                                     </Button>
                                 ]}>
-                                    <List.Item.Meta
-                                        avatar={<Avatar src={item.webUrl + "/favicon.ico"}/>}
-                                        title={item.webName}
-                                        description={
-                                            <Text
-                                                style={{color: this.state.fontColor}}>{item.webUrl.length < 40 ? item.webUrl : item.webUrl.substring(0, 40) + "..."}</Text>
-                                        }
-                                    />
+                                    <Row justify={"space-between"} style={{width: "100%"}}>
+                                        <Col span={8}>
+                                            <Button type={"text"} shape={"round"}
+                                                    onMouseOver={this.btnMouseOver.bind(this)}
+                                                    onMouseOut={this.btnMouseOut.bind(this)}
+                                                    style={{color: this.state.fontColor, cursor: "default"}}>
+                                                {item.webName}
+                                            </Button>
+                                        </Col>
+                                        <Col span={16}>
+                                            <Button type={"text"} shape={"round"}
+                                                    onMouseOver={this.btnMouseOver.bind(this)}
+                                                    onMouseOut={this.btnMouseOut.bind(this)}
+                                                    style={{color: this.state.fontColor, cursor: "default"}}>
+                                                {item.webUrl.length < 30 ? item.webUrl : item.webUrl.substring(0, 30) + "..."}
+                                            </Button>
+                                        </Col>
+                                    </Row>
                                 </List.Item>
                             )}
                         />

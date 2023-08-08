@@ -219,7 +219,7 @@ class TodoComponent extends React.Component {
                                 <Button type={"text"} shape={"round"} onMouseOver={this.btnMouseOver.bind(this)}
                                         onMouseOut={this.btnMouseOut.bind(this)}
                                         style={{color: this.state.fontColor, cursor: "default"}}>
-                                    {item.priority}
+                                    {"优先级：" + item.priority}
                                 </Button>
                             </Col>
                         </Row>
@@ -232,7 +232,7 @@ class TodoComponent extends React.Component {
             <Row>
                 <Popover title={popoverTitle} content={popoverContent} placement="bottomRight"
                          color={this.state.backgroundColor}
-                         overlayStyle={{width: "500px"}}>
+                         overlayStyle={{width: "550px"}}>
                     <Badge size={"small"} count={this.state.checkboxOptions.length}>
                         <Button shape={"circle"} icon={<CheckSquareOutlined/>} size={"large"}
                                 id={"todoBtn"}
