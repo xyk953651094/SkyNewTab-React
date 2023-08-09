@@ -1,6 +1,6 @@
 import React from "react";
 import type {RadioChangeEvent} from "antd";
-import {Avatar, Button, Card, Checkbox, Col, Drawer, Form, message, Radio, Row, Space, Tooltip} from "antd";
+import {Avatar, Button, Card, Checkbox, Col, Drawer, Form, message, Radio, Switch, Row, Space, Tooltip} from "antd";
 import {
     DeleteOutlined,
     GiftOutlined,
@@ -21,6 +21,7 @@ type propType = {
     getDynamicEffect: any,
     getImageQuality: any,
     getImageTopics: any,
+    getSimpleMode: any,
 }
 
 type stateType = {
@@ -85,15 +86,16 @@ class PreferenceComponent extends React.Component {
     dynamicEffectRadioOnChange(event: RadioChangeEvent) {
         this.props.getDynamicEffect(event.target.value);
         localStorage.setItem("dynamicEffect", event.target.value);
-        message.success("已更新显示效果");
+        message.success("已更换显示效果，一秒后刷新页面");
+        this.refreshWindow();
     }
 
     // 图片质量
     imageQualityRadioOnChange(event: RadioChangeEvent) {
         this.props.getImageQuality(event.target.value);
         localStorage.setItem("imageQuality", event.target.value);
-        message.success("已更新图片质量");
-        window.location.reload();
+        message.success("已更换图片质量，一秒后刷新页面");
+        this.refreshWindow();
     }
 
     // 图片主题
@@ -107,17 +109,35 @@ class PreferenceComponent extends React.Component {
         }
         this.props.getImageTopics(value);
         localStorage.setItem("imageTopics", value);
-        message.success("调整成功，新的主题将在下次加载时生效");
+        message.success("已更换图片主题，下次加载时生效");
         if (checkedValues.length === 0) {
             message.info("全不选与全选的效果一样");
+        }
+    }
+
+    // 简洁模式
+    simpleModeSwitchOnChange(checked: boolean) {
+        this.props.getSimpleMode(checked);
+        localStorage.setItem("simpleMode", checked.toString());
+        if(checked) {
+            message.success("已开启简洁模式");
+        }
+        else {
+            message.success("已关闭简洁模式");
         }
     }
 
     // 重置设置
     clearStorageBtnOnClick() {
         localStorage.clear();
-        message.success("已重置所有内容");
-        window.location.reload();
+        message.success("已重置所有内容，1秒后刷新页面");
+        this.refreshWindow();
+    }
+
+    refreshWindow(){
+        setTimeout(() => {
+            window.location.reload();
+        }, 1000);
     }
 
     componentDidMount() {
@@ -129,6 +149,7 @@ class PreferenceComponent extends React.Component {
         if (tempImageTopicsCheckbox !== null) {
             tempImageTopicsCheckbox = tempImageTopicsCheckbox.split(",");
         }
+        let tempSimpleModeSwitch = localStorage.getItem("simpleMode");
 
         this.setState({
             formInitialValues: {
@@ -136,6 +157,7 @@ class PreferenceComponent extends React.Component {
                 "dynamicEffectRadio": tempDynamicEffectRadio === null ? "all" : tempDynamicEffectRadio,
                 "imageQualityRadio": tempImageQualityRadio === null ? "regular" : tempImageQualityRadio,
                 "imageTopicsCheckbox": tempImageTopicsCheckbox === null ? ["Fzo3zuOHN6w"] : tempImageTopicsCheckbox,
+                "simpleModeSwitch": tempSimpleModeSwitch === null ? false : JSON.parse(tempSimpleModeSwitch),
             }
         })
 
@@ -307,13 +329,16 @@ class PreferenceComponent extends React.Component {
                                             </Row>
                                         </Checkbox.Group>
                                     </Form.Item>
-                                    <Form.Item name={"clearStorageButton"} label={"其他设置"}>
+                                    <Form.Item name={"simpleModeSwitch"} label={"简洁模式"} valuePropName={"checked"}>
+                                        <Switch checkedChildren="已开启" unCheckedChildren="已关闭" onChange={this.simpleModeSwitchOnChange.bind(this)}/>
+                                    </Form.Item>
+                                    <Form.Item name={"clearStorageButton"} label={"危险设置"}>
                                         <Button type={"text"} shape={"round"} icon={<DeleteOutlined/>}
                                                 onMouseOver={this.btnMouseOver.bind(this)}
                                                 onMouseOut={this.btnMouseOut.bind(this)}
                                                 onClick={this.clearStorageBtnOnClick.bind(this)}
                                                 style={{color: this.state.fontColor}}>
-                                            清理缓存
+                                            清空并重置所有内容
                                         </Button>
                                     </Form.Item>
                                 </Form>

@@ -37,6 +37,7 @@ type stateType = {
     dynamicEffect: "all" | "rotate" | "translate" | "close",
     imageQuality: "full" | "regular" | "small",
     imageTopics: string,
+    simpleMode: boolean,
 }
 
 interface App {
@@ -60,6 +61,7 @@ class App extends React.Component {
             dynamicEffect: "all",
             imageQuality: "regular",
             imageTopics: "Fzo3zuOHN6w",
+            simpleMode: false,
         }
     }
 
@@ -85,6 +87,12 @@ class App extends React.Component {
     getImageTopics(imageTopics: string) {
         this.setState({
             imageTopics: imageTopics
+        })
+    }
+
+    getSimpleMode(simpleMode: boolean) {
+        this.setState({
+            simpleMode: simpleMode
         })
     }
 
@@ -153,12 +161,14 @@ class App extends React.Component {
         let tempDynamicEffect = localStorage.getItem("dynamicEffect");
         let tempImageQuality = localStorage.getItem("imageQuality");
         let tempImageTopics = localStorage.getItem("imageTopics");
+        let tempSimpleMode = localStorage.getItem("simpleMode");
 
         this.setState({
             searchEngine: tempSearchEngine === null ? "bing" : tempSearchEngine,
             dynamicEffect: tempDynamicEffect === null ? "all" : tempDynamicEffect,
             imageQuality: tempImageQuality === null ? "regular" : tempImageQuality,
             imageTopics: tempImageTopics === null ? "Fzo3zuOHN6w" : tempImageTopics,
+            simpleMode: tempSimpleMode === null ? false : JSON.parse(tempSimpleMode),
         }, () => {
             // 设置颜色主题
             this.setState({
@@ -191,7 +201,7 @@ class App extends React.Component {
                 $(".ant-popover-title").css("color", this.state.themeColor.componentFontColor);
                 $(".ant-popover-inner-content").css("color", this.state.themeColor.componentFontColor);
                 $(".ant-checkbox-group-item").css("color", this.state.themeColor.componentFontColor);
-                $(".ant-list-item").css("borderBlockEndColor", this.state.themeColor.componentFontColor);
+                $(".ant-list-item").css({"borderBlockEndColor": this.state.themeColor.componentFontColor, "padding": "8px, 0"});
                 $(".ant-list-item-meta-title").css("color", this.state.themeColor.componentFontColor);
                 $(".ant-list-item-meta-description").css("color", this.state.themeColor.componentFontColor);
                 $(".ant-empty-description").css("color", this.state.themeColor.componentFontColor);
@@ -235,7 +245,7 @@ class App extends React.Component {
                     "backgroundColor": this.state.themeColor.componentBackgroundColor,
                     "color": this.state.themeColor.componentFontColor
                 });
-                $(".ant-list-item").css("borderBlockEndColor", this.state.themeColor.componentFontColor);
+                $(".ant-list-item").css({"borderBlockEndColor": this.state.themeColor.componentFontColor, "padding": "8px, 0"});
                 $(".ant-form-item-label > label").css("color", this.state.themeColor.componentFontColor);
                 $(".ant-list-item-meta-title").css("color", this.state.themeColor.componentFontColor);
                 $(".ant-list-item-meta-description").css("color", this.state.themeColor.componentFontColor);
@@ -278,9 +288,11 @@ class App extends React.Component {
                             <Space size={"small"}>
                                 <DailyComponent
                                     themeColor={this.state.themeColor}
+                                    simpleMode={this.state.simpleMode}
                                 />
                                 <TodoComponent
                                     themeColor={this.state.themeColor}
+                                    simpleMode={this.state.simpleMode}
                                 />
                                 <PreferenceComponent
                                     themeColor={this.state.themeColor}
@@ -288,6 +300,7 @@ class App extends React.Component {
                                     getDynamicEffect={this.getDynamicEffect.bind(this)}
                                     getImageQuality={this.getImageQuality.bind(this)}
                                     getImageTopics={this.getImageTopics.bind(this)}
+                                    getSimpleMode={this.getSimpleMode.bind(this)}
                                 />
                             </Space>
                         </Col>
@@ -304,7 +317,10 @@ class App extends React.Component {
                         <ClockComponent themeColor={this.state.themeColor}/>
                         <SearchComponent searchEngine={this.state.searchEngine}/>
                         <Col xs={0} sm={0} md={24} lg={24} xl={24}>
-                            <CollectionComponent themeColor={this.state.themeColor}/>
+                            <CollectionComponent
+                                themeColor={this.state.themeColor}
+                                simpleMode={this.state.simpleMode}
+                            />
                         </Col>
                     </Space>
                 </Content>

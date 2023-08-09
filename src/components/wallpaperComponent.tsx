@@ -61,15 +61,15 @@ class WallpaperComponent extends React.Component {
 
     componentWillReceiveProps(nextProps: any, prevProps: any) {
         // 鼠标移动效果
-        if (nextProps.dynamicEffect !== this.props.dynamicEffect && this.props.dynamicEffect) {
-            // @ts-ignore
-            let backgroundImageDiv: HTMLElement = document.getElementById("backgroundImage");
-            // @ts-ignore
-            let backgroundImage: HTMLElement = backgroundImageDiv.children[0];
-            if (backgroundImage instanceof HTMLElement) {
-                imageDynamicEffect(backgroundImage, nextProps.dynamicEffect);
-            }
-        }
+        // if (nextProps.dynamicEffect !== this.props.dynamicEffect && this.props.dynamicEffect) {
+        //     // @ts-ignore
+        //     let backgroundImageDiv: HTMLElement = document.getElementById("backgroundImage");
+        //     // @ts-ignore
+        //     let backgroundImage: HTMLElement = backgroundImageDiv.children[0];
+        //     if (backgroundImage instanceof HTMLElement) {
+        //         imageDynamicEffect(backgroundImage, nextProps.dynamicEffect);
+        //     }
+        // }
 
         // 图片质量
         if (nextProps.imageData !== prevProps.imageData && nextProps.imageData) {

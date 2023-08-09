@@ -10,9 +10,11 @@ const $ = require("jquery");
 
 type propType = {
     themeColor: ThemeColorInterface,
+    simpleMode: boolean
 }
 
 type stateType = {
+    display: "block" | "none",
     hoverColor: string,
     backgroundColor: string,
     fontColor: string,
@@ -32,6 +34,7 @@ class DailyComponent extends React.Component {
     constructor(props: any) {
         super(props);
         this.state = {
+            display: "block",
             hoverColor: "",
             backgroundColor: "",
             fontColor: "",
@@ -184,6 +187,12 @@ class DailyComponent extends React.Component {
                 changeThemeColor("#dailyBtn", this.state.backgroundColor, this.state.fontColor);
             });
         }
+
+        if (nextProps.simpleMode !== prevProps.simpleMode) {
+            this.setState({
+                display: nextProps.simpleMode? "none" : "block"
+            })
+        }
     }
 
     render() {
@@ -222,7 +231,7 @@ class DailyComponent extends React.Component {
                                     style={{color: this.state.fontColor}}/>
                         ]}
                     >
-                        <Row justify={"space-between"} style={{width: "100%"}}>
+                        <Row style={{width: "100%"}}>
                             <Col span={10}>
                                 <Button type={"text"} shape={"round"} onMouseOver={this.btnMouseOver.bind(this)}
                                         onMouseOut={this.btnMouseOut.bind(this)}
@@ -251,7 +260,7 @@ class DailyComponent extends React.Component {
                     <Badge size={"small"} count={this.state.listItems.length}>
                         <Button shape={"circle"} icon={<CalendarOutlined/>} size={"large"}
                                 id={"dailyBtn"}
-                                className={"componentTheme zIndexHigh"} style={{cursor: "default"}}
+                                className={"componentTheme zIndexHigh"} style={{cursor: "default", display: this.state.display}}
                         />
                     </Badge>
                 </Popover>

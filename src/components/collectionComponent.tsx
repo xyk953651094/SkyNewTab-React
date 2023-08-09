@@ -9,9 +9,11 @@ const $ = require("jquery");
 
 type propType = {
     themeColor: ThemeColorInterface,
+    simpleMode: boolean
 }
 
 type stateType = {
+    display: "block" | "none",
     hoverColor: string,
     backgroundColor: string,
     fontColor: string,
@@ -32,6 +34,7 @@ class CollectionComponent extends React.Component {
     constructor(props: any) {
         super(props);
         this.state = {
+            display: "block",
             hoverColor: "",
             backgroundColor: "",
             fontColor: "",
@@ -193,11 +196,17 @@ class CollectionComponent extends React.Component {
                 fontColor: nextProps.themeColor.componentFontColor,
             });
         }
+
+        if (nextProps.simpleMode !== prevProps.simpleMode) {
+            this.setState({
+                display: nextProps.simpleMode? "none" : "block"
+            })
+        }
     }
 
     render() {
         return (
-            <Col span={24} className={"center zIndexHigh"}>
+            <Col span={24} className={"center zIndexHigh"} style={{display: this.state.display}}>
                 <Space>
                     {
                         this.state.collectionData.map((item: any) => {
@@ -270,8 +279,6 @@ class CollectionComponent extends React.Component {
                            maskStyle={{backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)"}}
                     >
                         <List
-                            itemLayout={"horizontal"}
-                            size={"small"}
                             dataSource={this.state.collectionData}
                             renderItem={(item: any) => (
                                 <List.Item actions={[

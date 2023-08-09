@@ -45,6 +45,7 @@ export let defaultFormInitialValues: PreferenceInterface = {
     "dynamicEffectRadio": "all",
     "imageQualityRadio": "regular",
     "imageTopicsCheckbox": "Fzo3zuOHN6w",
+    "simpleModeSwitch": false,
 }
 
 // 常用变量

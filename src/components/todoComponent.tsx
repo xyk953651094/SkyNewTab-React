@@ -9,9 +9,11 @@ const $ = require("jquery");
 
 type propType = {
     themeColor: ThemeColorInterface,
+    simpleMode: boolean
 }
 
 type stateType = {
+    display: "block" | "none",
     hoverColor: string,
     backgroundColor: string,
     fontColor: string,
@@ -31,6 +33,7 @@ class TodoComponent extends React.Component {
     constructor(props: any) {
         super(props);
         this.state = {
+            display: "block",
             hoverColor: "",
             backgroundColor: "",
             fontColor: "",
@@ -169,6 +172,12 @@ class TodoComponent extends React.Component {
                 changeThemeColor("#todoBtn", this.state.backgroundColor, this.state.fontColor);
             });
         }
+
+        if (nextProps.simpleMode !== prevProps.simpleMode) {
+            this.setState({
+                display: nextProps.simpleMode? "none" : "block"
+            })
+        }
     }
 
     render() {
@@ -207,15 +216,15 @@ class TodoComponent extends React.Component {
                                     style={{color: this.state.fontColor}}/>
                         ]}
                     >
-                        <Row justify={"space-between"} style={{width: "100%"}}>
-                            <Col span={12}>
+                        <Row style={{width: "100%"}}>
+                            <Col span={10}>
                                 <Button type={"text"} shape={"round"} onMouseOver={this.btnMouseOver.bind(this)}
                                         onMouseOut={this.btnMouseOut.bind(this)}
                                         style={{color: this.state.fontColor, cursor: "default"}}>
                                     {item.title}
                                 </Button>
                             </Col>
-                            <Col span={12}>
+                            <Col span={14}>
                                 <Button type={"text"} shape={"round"} onMouseOver={this.btnMouseOver.bind(this)}
                                         onMouseOut={this.btnMouseOut.bind(this)}
                                         style={{color: this.state.fontColor, cursor: "default"}}>
@@ -236,7 +245,7 @@ class TodoComponent extends React.Component {
                     <Badge size={"small"} count={this.state.checkboxOptions.length}>
                         <Button shape={"circle"} icon={<CheckSquareOutlined/>} size={"large"}
                                 id={"todoBtn"}
-                                className={"componentTheme zIndexHigh"} style={{cursor: "default"}}
+                                className={"componentTheme zIndexHigh"} style={{cursor: "default", display: this.state.display}}
                         />
                     </Badge>
                 </Popover>
