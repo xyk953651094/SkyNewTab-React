@@ -2,11 +2,11 @@ import React from "react";
 import "../stylesheets/wallpaperComponent.scss"
 import "../stylesheets/publicStyles.scss"
 import {Image, message} from "antd";
-import {httpRequest, imageDynamicEffect} from "../typescripts/publicFunctions";
+import {changeThemeColor, httpRequest, imageDynamicEffect} from "../typescripts/publicFunctions";
 import {clientId, device} from "../typescripts/publicConstants";
 
 type propType = {
-    display: "none" | "block",
+    noImageMode: boolean,
     getImageData: any,
     dynamicEffect: "all" | "rotate" | "translate" | "close",
     imageQuality: "full" | "regular" | "small",
@@ -14,10 +14,10 @@ type propType = {
 }
 
 type stateType = {
+    display: "none" | "block",
     imageData: any,
     imageLink: string,
     loadImageLink: string,
-    displayImage: "none" | "block",
 }
 
 interface WallpaperComponent {
@@ -32,7 +32,7 @@ class WallpaperComponent extends React.Component {
             imageData: null,
             imageLink: "",
             loadImageLink: "",
-            displayImage: "none",
+            display: "none",
         };
     }
 
@@ -41,6 +41,32 @@ class WallpaperComponent extends React.Component {
             imageData: imageData,
         }, () => {
             this.props.getImageData(imageData);
+            switch (this.props.imageQuality) {
+                case "full":
+                    this.setState({
+                        imageLink: this.state.imageData.urls.full,
+                        loadImageLink: this.state.imageData.urls.small,
+                    });
+                    break;
+                case "regular":
+                    this.setState({
+                        imageLink: this.state.imageData.urls.regular,
+                        loadImageLink: this.state.imageData.urls.small,
+                    });
+                    break;
+                case "small":
+                    this.setState({
+                        imageLink: this.state.imageData.urls.regular,
+                        loadImageLink: this.state.imageData.urls.small,
+                    });
+                    break;
+                default:
+                    this.setState({
+                        imageLink: this.state.imageData.urls.regular,
+                        loadImageLink: this.state.imageData.urls.small,
+                    });
+                    break;
+            }
         })
     }
 
@@ -78,27 +104,26 @@ class WallpaperComponent extends React.Component {
     }
 
     componentDidMount() {
-        // 防抖节流
-        let lastRequestTime: any = localStorage.getItem("lastImageRequestTime");
-        let nowTimeStamp = new Date().getTime();
-        if (lastRequestTime === null) {  // 第一次请求时 lastRequestTime 为 null，因此直接进行请求赋值 lastRequestTime
-            this.getWallpaper();
-        } else if (nowTimeStamp - parseInt(lastRequestTime) > 0) {  // 必须多于一分钟才能进行新的请求
-            this.getWallpaper();
-        } else {  // 一分钟之内使用上一次请求结果
-            let lastImage: any = localStorage.getItem("lastImage");
-            if (lastImage) {
-                lastImage = JSON.parse(lastImage);
-                this.setWallpaper(lastImage);
-            } else {
-                message.error("获取图片失败");
+        let tempNoImageMode = localStorage.getItem("noImageMode");
+        let noImageMode = tempNoImageMode === null ? false : JSON.parse(tempNoImageMode);
+        if(!noImageMode) {
+            // 防抖节流
+            let lastRequestTime: any = localStorage.getItem("lastImageRequestTime");
+            let nowTimeStamp = new Date().getTime();
+            if (lastRequestTime === null) {  // 第一次请求时 lastRequestTime 为 null，因此直接进行请求赋值 lastRequestTime
+                this.getWallpaper();
+            } else if (nowTimeStamp - parseInt(lastRequestTime) > 0) {  // 必须多于一分钟才能进行新的请求
+                this.getWallpaper();
+            } else {  // 一分钟之内使用上一次请求结果
+                let lastImage: any = localStorage.getItem("lastImage");
+                if (lastImage) {
+                    lastImage = JSON.parse(lastImage);
+                    this.setWallpaper(lastImage);
+                } else {
+                    message.error("获取图片失败");
+                }
             }
-        }
-    }
-
-    componentWillReceiveProps(nextProps: any, prevProps: any) {
-        // 鼠标移动效果
-        if (nextProps.dynamicEffect !== this.props.dynamicEffect && this.props.dynamicEffect) {
+            // 图片动画
             // @ts-ignore
             let backgroundImageDiv: HTMLElement = document.getElementById("backgroundImage");
             // @ts-ignore
@@ -107,7 +132,7 @@ class WallpaperComponent extends React.Component {
                 backgroundImage.onload = () => {
                     backgroundImage.style.width = "102%";
                     this.setState({
-                        displayImage: "block",
+                        display: "block",
                     }, () => {
                         // 设置动态效果
                         backgroundImage.classList.add("wallpaperFadeIn");
@@ -124,36 +149,6 @@ class WallpaperComponent extends React.Component {
                 }
             }
         }
-
-        // 图片质量
-        if (nextProps.imageQuality !== prevProps.imageQuality && this.state.imageData) {
-            switch (nextProps.imageQuality) {
-                case "full":
-                    this.setState({
-                        imageLink: this.state.imageData.urls.full,
-                        loadImageLink: this.state.imageData.urls.small,
-                    });
-                    break;
-                case "regular":
-                    this.setState({
-                        imageLink: this.state.imageData.urls.regular,
-                        loadImageLink: this.state.imageData.urls.small,
-                    });
-                    break;
-                case "small":
-                    this.setState({
-                        imageLink: this.state.imageData.urls.regular,
-                        loadImageLink: this.state.imageData.urls.small,
-                    });
-                    break;
-                default:
-                    this.setState({
-                        imageLink: this.state.imageData.urls.regular,
-                        loadImageLink: this.state.imageData.urls.small,
-                    });
-                    break;
-            }
-        }
     }
 
     render() {
@@ -166,7 +161,7 @@ class WallpaperComponent extends React.Component {
                 className={"backgroundImage zIndexLow"}
                 preview={false}
                 src={this.state.imageLink}
-                style={{display: this.state.displayImage}}
+                style={{display: this.state.display}}
             />
         );
     }

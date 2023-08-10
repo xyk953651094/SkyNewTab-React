@@ -3,7 +3,8 @@ export interface PreferenceInterface {
     "dynamicEffectRadio": "all" | "rotate" | "translate" | "close",
     "imageQualityRadio": "full" | "regular" | "small",
     "imageTopicsCheckbox": string,
-    "simpleModeSwitch": boolean
+    "simpleModeSwitch": boolean,
+    "noImageModeSwitch": boolean
 }
 
 export interface ThemeColorInterface {

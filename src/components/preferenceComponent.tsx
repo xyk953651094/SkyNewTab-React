@@ -22,6 +22,7 @@ type propType = {
     getImageQuality: any,
     getImageTopics: any,
     getSimpleMode: any,
+    getNoImageMode: any,
 }
 
 type stateType = {
@@ -127,6 +128,20 @@ class PreferenceComponent extends React.Component {
         }
     }
 
+    // 无图模式
+    noImageModeSwitchOnChange(checked: boolean) {
+        this.props.getNoImageMode(checked);
+        localStorage.setItem("noImageMode", checked.toString());
+        if(checked) {
+            message.success("已开启无图模式，1秒后刷新页面");
+        }
+        else {
+            message.success("已关闭无图模式，1秒后刷新页面");
+
+        }
+        this.refreshWindow();
+    }
+
     // 重置设置
     clearStorageBtnOnClick() {
         localStorage.clear();
@@ -150,6 +165,7 @@ class PreferenceComponent extends React.Component {
             tempImageTopicsCheckbox = tempImageTopicsCheckbox.split(",");
         }
         let tempSimpleModeSwitch = localStorage.getItem("simpleMode");
+        let tempNoImageModeSwitch = localStorage.getItem("noImageMode");
 
         this.setState({
             formInitialValues: {
@@ -158,6 +174,7 @@ class PreferenceComponent extends React.Component {
                 "imageQualityRadio": tempImageQualityRadio === null ? "regular" : tempImageQualityRadio,
                 "imageTopicsCheckbox": tempImageTopicsCheckbox === null ? ["Fzo3zuOHN6w"] : tempImageTopicsCheckbox,
                 "simpleModeSwitch": tempSimpleModeSwitch === null ? false : JSON.parse(tempSimpleModeSwitch),
+                "noImageModeSwitch": tempNoImageModeSwitch === null ? false : JSON.parse(tempNoImageModeSwitch),
             }
         })
 
@@ -329,9 +346,18 @@ class PreferenceComponent extends React.Component {
                                             </Row>
                                         </Checkbox.Group>
                                     </Form.Item>
-                                    <Form.Item name={"simpleModeSwitch"} label={"简洁模式"} valuePropName={"checked"}>
-                                        <Switch checkedChildren="已开启" unCheckedChildren="已关闭" onChange={this.simpleModeSwitchOnChange.bind(this)}/>
-                                    </Form.Item>
+                                    <Row>
+                                        <Col span={12}>
+                                            <Form.Item name={"simpleModeSwitch"} label={"简洁模式"} valuePropName={"checked"}>
+                                                <Switch checkedChildren="已开启" unCheckedChildren="已关闭" onChange={this.simpleModeSwitchOnChange.bind(this)}/>
+                                            </Form.Item>
+                                        </Col>
+                                        <Col span={12}>
+                                            <Form.Item name={"noImageModeSwitch"} label={"无图模式"} valuePropName={"checked"}>
+                                                <Switch checkedChildren="已开启" unCheckedChildren="已关闭" onChange={this.noImageModeSwitchOnChange.bind(this)}/>
+                                            </Form.Item>
+                                        </Col>
+                                    </Row>
                                     <Form.Item name={"clearStorageButton"} label={"危险设置"}>
                                         <Button type={"text"} shape={"round"} icon={<DeleteOutlined/>}
                                                 onMouseOver={this.btnMouseOver.bind(this)}

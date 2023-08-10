@@ -46,6 +46,7 @@ export let defaultFormInitialValues: PreferenceInterface = {
     "imageQualityRadio": "regular",
     "imageTopicsCheckbox": "Fzo3zuOHN6w",
     "simpleModeSwitch": false,
+    "noImageModeSwitch": false,
 }
 
 // 常用变量

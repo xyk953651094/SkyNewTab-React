@@ -11,14 +11,12 @@ import SearchComponent from "./components/searchComponent";
 import CollectionComponent from "./components/collectionComponent";
 import AuthorComponent from "./components/authorComponent"
 
-import {Col, Layout, message, Row, Space} from "antd";
+import {Col, Layout, Row, Space} from "antd";
 import "./stylesheets/publicStyles.scss"
-import {clientId, device} from "./typescripts/publicConstants";
 import {
     changeThemeColor,
     getFontColor,
     getReverseColor,
-    httpRequest,
     setColorTheme
 } from "./typescripts/publicFunctions";
 import {ThemeColorInterface} from "./typescripts/publicInterface";
@@ -38,6 +36,7 @@ type stateType = {
     imageQuality: "full" | "regular" | "small",
     imageTopics: string,
     simpleMode: boolean,
+    noImageMode: boolean
 }
 
 interface App {
@@ -62,6 +61,7 @@ class App extends React.Component {
             imageQuality: "regular",
             imageTopics: "Fzo3zuOHN6w",
             simpleMode: false,
+            noImageMode: false
         }
     }
 
@@ -119,6 +119,12 @@ class App extends React.Component {
         })
     }
 
+    getNoImageMode(noImageMode: boolean) {
+        this.setState({
+            noImageMode: noImageMode
+        })
+    }
+
     componentDidMount() {
         // 加载偏好设置
         let tempSearchEngine = localStorage.getItem("searchEngine");
@@ -126,6 +132,8 @@ class App extends React.Component {
         let tempImageQuality = localStorage.getItem("imageQuality");
         let tempImageTopics = localStorage.getItem("imageTopics");
         let tempSimpleMode = localStorage.getItem("simpleMode");
+        let tempNoImageMode = localStorage.getItem("noImageMode");
+
 
         this.setState({
             searchEngine: tempSearchEngine === null ? "bing" : tempSearchEngine,
@@ -133,6 +141,7 @@ class App extends React.Component {
             imageQuality: tempImageQuality === null ? "regular" : tempImageQuality,
             imageTopics: tempImageTopics === null ? "Fzo3zuOHN6w" : tempImageTopics,
             simpleMode: tempSimpleMode === null ? false : JSON.parse(tempSimpleMode),
+            noImageMode: tempNoImageMode === null ? false : JSON.parse(tempNoImageMode),
         }, () => {
             // 设置颜色主题
             this.setState({
@@ -248,6 +257,7 @@ class App extends React.Component {
                                     getImageQuality={this.getImageQuality.bind(this)}
                                     getImageTopics={this.getImageTopics.bind(this)}
                                     getSimpleMode={this.getSimpleMode.bind(this)}
+                                    getNoImageMode={this.getNoImageMode.bind(this)}
                                 />
                             </Space>
                         </Col>
@@ -255,7 +265,7 @@ class App extends React.Component {
                 </Header>
                 <Content id={"content"} className={"center"}>
                     <WallpaperComponent
-                        display={this.state.componentDisplay}
+                        noImageMode={this.state.noImageMode}
                         getImageData={this.getImageData.bind(this)}
                         dynamicEffect={this.state.dynamicEffect}
                         imageQuality={this.state.imageQuality}
