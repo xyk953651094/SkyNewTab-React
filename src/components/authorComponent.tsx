@@ -10,7 +10,7 @@ import {
 } from "@ant-design/icons";
 import {unsplashUrl} from "../typescripts/publicConstants";
 import {changeThemeColor, getFontColor, getSearchEngineDetail, isEmptyString} from "../typescripts/publicFunctions";
-import {ThemeColorInterface} from "../typescripts/publicInterface";
+import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
 import "../stylesheets/publicStyles.scss"
 
 const {Text} = Typography;
@@ -20,10 +20,11 @@ type propType = {
     themeColor: ThemeColorInterface,
     display: "none" | "block",
     imageData: any,
-    searchEngine: string
+    preferenceData: PreferenceDataInterface,
 }
 
 type stateType = {
+    display: "none" | "block",
     hoverColor: string,
     backgroundColor: string,
     fontColor: string,
@@ -51,6 +52,7 @@ class AuthorComponent extends React.Component {
     constructor(props: any) {
         super(props);
         this.state = {
+            display: "block",
             hoverColor: "",
             backgroundColor: "",
             fontColor: "",
@@ -144,9 +146,10 @@ class AuthorComponent extends React.Component {
             })
         }
 
-        if (nextProps.searchEngine !== prevProps.searchEngine) {
+        if (nextProps.preferenceData !== prevProps.preferenceData) {
             this.setState({
-                searchEngineUrl: getSearchEngineDetail(nextProps.searchEngine).searchEngineUrl,
+                display: nextProps.preferenceData.noImageMode ? "none" : "block",
+                searchEngineUrl: getSearchEngineDetail(nextProps.preferenceData.searchEngine).searchEngineUrl,
             });
         }
     }

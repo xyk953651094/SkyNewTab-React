@@ -2,14 +2,14 @@ import React from "react";
 import {Badge, Button, Col, Form, Input, List, message, Modal, Popover, Rate, Row, Space, Typography} from "antd";
 import {CheckOutlined, CheckSquareOutlined, DeleteOutlined, PlusOutlined} from "@ant-design/icons";
 import {changeThemeColor, getFontColor} from "../typescripts/publicFunctions";
-import {ThemeColorInterface} from "../typescripts/publicInterface";
+import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
 
 const {Text} = Typography;
 const $ = require("jquery");
 
 type propType = {
     themeColor: ThemeColorInterface,
-    simpleMode: boolean
+    preferenceData: PreferenceDataInterface,
 }
 
 type stateType = {
@@ -173,9 +173,9 @@ class TodoComponent extends React.Component {
             });
         }
 
-        if (nextProps.simpleMode !== prevProps.simpleMode) {
+        if (nextProps.preferenceData !== prevProps.preferenceData) {
             this.setState({
-                display: nextProps.simpleMode? "none" : "block"
+                display: nextProps.preferenceData.simpleMode ? "none" : "block"
             })
         }
     }
@@ -242,7 +242,7 @@ class TodoComponent extends React.Component {
                 <Popover title={popoverTitle} content={popoverContent} placement="bottomRight"
                          color={this.state.backgroundColor}
                          overlayStyle={{width: "550px"}}>
-                    <Badge size={"small"} count={this.state.checkboxOptions.length}>
+                    <Badge size={"small"} count={this.state.checkboxOptions.length} style={{display: this.state.display}}>
                         <Button shape={"circle"} icon={<CheckSquareOutlined/>} size={"large"}
                                 id={"todoBtn"}
                                 className={"componentTheme zIndexHigh"} style={{cursor: "default", display: this.state.display}}

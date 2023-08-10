@@ -19,7 +19,8 @@ import {
     getReverseColor,
     setColorTheme
 } from "./typescripts/publicFunctions";
-import {ThemeColorInterface} from "./typescripts/publicInterface";
+import {PreferenceDataInterface, ThemeColorInterface} from "./typescripts/publicInterface";
+import {defaultPreferenceData} from "./typescripts/publicConstants";
 
 const {Header, Content, Footer} = Layout;
 const $ = require("jquery");
@@ -31,12 +32,7 @@ type stateType = {
     themeColor: ThemeColorInterface,
 
     imageData: any,
-    searchEngine: string,
-    dynamicEffect: "all" | "rotate" | "translate" | "close",
-    imageQuality: "full" | "regular" | "small",
-    imageTopics: string,
-    simpleMode: boolean,
-    noImageMode: boolean
+    preferenceData: PreferenceDataInterface
 }
 
 interface App {
@@ -56,12 +52,7 @@ class App extends React.Component {
             },
 
             imageData: null,
-            searchEngine: "bing",
-            dynamicEffect: "all",
-            imageQuality: "regular",
-            imageTopics: "Fzo3zuOHN6w",
-            simpleMode: false,
-            noImageMode: false
+            preferenceData: defaultPreferenceData
         }
     }
 
@@ -89,65 +80,26 @@ class App extends React.Component {
         })
     }
 
-    getSearchEngine(searchEngine: string) {
+    getPreferenceData(value: PreferenceDataInterface) {
         this.setState({
-            searchEngine: searchEngine
-        })
-    }
-
-    getDynamicEffect(dynamicEffect: "close" | "translate" | "rotate" | "all") {
-        this.setState({
-            dynamicEffect: dynamicEffect,
-        })
-    }
-
-    getImageQuality(imageQuality: "full" | "regular" | "small") {
-        this.setState({
-            imageQuality: imageQuality,
-        })
-    }
-
-    getImageTopics(imageTopics: string) {
-        this.setState({
-            imageTopics: imageTopics
-        })
-    }
-
-    getSimpleMode(simpleMode: boolean) {
-        this.setState({
-            simpleMode: simpleMode
-        })
-    }
-
-    getNoImageMode(noImageMode: boolean) {
-        this.setState({
-            noImageMode: noImageMode
+            preferenceData: value
         })
     }
 
     componentDidMount() {
         // 加载偏好设置
-        let tempSearchEngine = localStorage.getItem("searchEngine");
-        let tempDynamicEffect = localStorage.getItem("dynamicEffect");
-        let tempImageQuality = localStorage.getItem("imageQuality");
-        let tempImageTopics = localStorage.getItem("imageTopics");
-        let tempSimpleMode = localStorage.getItem("simpleMode");
-        let tempNoImageMode = localStorage.getItem("noImageMode");
-
-
+        let tempPreferenceData = localStorage.getItem("preferenceData");
+        if(tempPreferenceData === null) {
+            localStorage.setItem("preferenceData", JSON.stringify(defaultPreferenceData));
+        }
         this.setState({
-            searchEngine: tempSearchEngine === null ? "bing" : tempSearchEngine,
-            dynamicEffect: tempDynamicEffect === null ? "all" : tempDynamicEffect,
-            imageQuality: tempImageQuality === null ? "regular" : tempImageQuality,
-            imageTopics: tempImageTopics === null ? "Fzo3zuOHN6w" : tempImageTopics,
-            simpleMode: tempSimpleMode === null ? false : JSON.parse(tempSimpleMode),
-            noImageMode: tempNoImageMode === null ? false : JSON.parse(tempNoImageMode),
+            preferenceData: tempPreferenceData === null ? defaultPreferenceData : JSON.parse(tempPreferenceData)
         }, () => {
             // 设置颜色主题
             this.setState({
                 themeColor: setColorTheme()
             })
-        });
+        })
 
         // 修改各类弹窗样式
         $("body").bind("DOMNodeInserted", () => {
@@ -232,11 +184,11 @@ class App extends React.Component {
                             <Space size={"small"}>
                                 <GreetComponent
                                     themeColor={this.state.themeColor}
-                                    searchEngine={this.state.searchEngine}
+                                    preferenceData={this.state.preferenceData}
                                 />
                                 <WeatherComponent
                                     themeColor={this.state.themeColor}
-                                    searchEngine={this.state.searchEngine}
+                                    preferenceData={this.state.preferenceData}
                                 />
                             </Space>
                         </Col>
@@ -244,20 +196,15 @@ class App extends React.Component {
                             <Space size={"small"}>
                                 <DailyComponent
                                     themeColor={this.state.themeColor}
-                                    simpleMode={this.state.simpleMode}
+                                    preferenceData={this.state.preferenceData}
                                 />
                                 <TodoComponent
                                     themeColor={this.state.themeColor}
-                                    simpleMode={this.state.simpleMode}
+                                    preferenceData={this.state.preferenceData}
                                 />
                                 <PreferenceComponent
                                     themeColor={this.state.themeColor}
-                                    getSearchEngine={this.getSearchEngine.bind(this)}
-                                    getDynamicEffect={this.getDynamicEffect.bind(this)}
-                                    getImageQuality={this.getImageQuality.bind(this)}
-                                    getImageTopics={this.getImageTopics.bind(this)}
-                                    getSimpleMode={this.getSimpleMode.bind(this)}
-                                    getNoImageMode={this.getNoImageMode.bind(this)}
+                                    getPreferenceData={this.getPreferenceData.bind(this)}
                                 />
                             </Space>
                         </Col>
@@ -265,19 +212,16 @@ class App extends React.Component {
                 </Header>
                 <Content id={"content"} className={"center"}>
                     <WallpaperComponent
-                        noImageMode={this.state.noImageMode}
                         getImageData={this.getImageData.bind(this)}
-                        dynamicEffect={this.state.dynamicEffect}
-                        imageQuality={this.state.imageQuality}
-                        imageTopics={this.state.imageTopics}
+                        preferenceData={this.state.preferenceData}
                     />
                     <Space direction={"vertical"} align={"center"}>
                         <ClockComponent themeColor={this.state.themeColor}/>
-                        <SearchComponent searchEngine={this.state.searchEngine}/>
+                        <SearchComponent preferenceData={this.state.preferenceData}/>
                         <Col xs={0} sm={0} md={24} lg={24} xl={24}>
                             <CollectionComponent
                                 themeColor={this.state.themeColor}
-                                simpleMode={this.state.simpleMode}
+                                preferenceData={this.state.preferenceData}
                             />
                         </Col>
                     </Space>
@@ -290,7 +234,7 @@ class App extends React.Component {
                                     themeColor={this.state.themeColor}
                                     display={this.state.componentDisplay}
                                     imageData={this.state.imageData}
-                                    searchEngine={this.state.searchEngine}
+                                    preferenceData={this.state.preferenceData}
                                 />
                             </Space>
                         </Col>

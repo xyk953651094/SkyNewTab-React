@@ -4,9 +4,10 @@ import "../stylesheets/publicStyles.scss"
 import {Avatar, Col, Input} from "antd";
 import {SearchOutlined} from "@ant-design/icons";
 import {fadeIn, fadeOut, getSearchEngineDetail} from "../typescripts/publicFunctions";
+import {PreferenceDataInterface} from "../typescripts/publicInterface";
 
 type propType = {
-    searchEngine: string
+    preferenceData: PreferenceDataInterface,
 }
 
 type stateType = {
@@ -37,10 +38,10 @@ class SearchComponent extends React.Component {
     }
 
     componentWillReceiveProps(nextProps: any, prevProps: any) {
-        if (nextProps.searchEngine !== prevProps.searchEngine) {
+        if (nextProps.preferenceData !== prevProps.preferenceData) {
             this.setState({
-                searchEngineUrl: getSearchEngineDetail(nextProps.searchEngine).searchEngineUrl,
-                searchEngineIconUrl: getSearchEngineDetail(nextProps.searchEngine).searchEngineIconUrl
+                searchEngineUrl: getSearchEngineDetail(nextProps.preferenceData.searchEngine).searchEngineUrl,
+                searchEngineIconUrl: getSearchEngineDetail(nextProps.preferenceData.searchEngine).searchEngineIconUrl
             });
         }
     }

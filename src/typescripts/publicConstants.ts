@@ -1,4 +1,4 @@
-import {PreferenceInterface} from './publicInterface'
+import {PreferenceDataInterface} from './publicInterface'
 import {getDevice} from "./publicFunctions";
 
 export let themeArray = [
@@ -40,13 +40,13 @@ export let themeArray = [
     {"bodyBackgroundColor": "#FFE7B6", "componentBackgroundColor": "#50543B"},
 ];
 
-export let defaultFormInitialValues: PreferenceInterface = {
-    "searchEngineRadio": "bing",
-    "dynamicEffectRadio": "all",
-    "imageQualityRadio": "regular",
-    "imageTopicsCheckbox": "Fzo3zuOHN6w",
-    "simpleModeSwitch": false,
-    "noImageModeSwitch": false,
+export let defaultPreferenceData: PreferenceDataInterface = {
+    searchEngine: "bing",
+    dynamicEffect: "all",
+    imageQuality: "regular",
+    imageTopics: ["bo8jQKTaE0Y"],
+    simpleMode: false,
+    noImageMode: false,
 }
 
 // 常用变量

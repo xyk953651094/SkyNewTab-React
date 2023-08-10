@@ -1,6 +1,6 @@
 import React from "react";
 import type {RadioChangeEvent} from "antd";
-import {Avatar, Button, Card, Checkbox, Col, Drawer, Form, message, Radio, Switch, Row, Space, Tooltip} from "antd";
+import {Avatar, Button, Card, Checkbox, Col, Drawer, Form, message, Radio, Row, Space, Switch, Tooltip} from "antd";
 import {
     DeleteOutlined,
     GiftOutlined,
@@ -12,17 +12,12 @@ import {
 } from "@ant-design/icons";
 import type {CheckboxValueType} from "antd/es/checkbox/Group";
 import {changeThemeColor, getFontColor} from "../typescripts/publicFunctions";
-import {PreferenceInterface, ThemeColorInterface} from "../typescripts/publicInterface";
-import {defaultFormInitialValues, device} from "../typescripts/publicConstants";
+import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
+import {defaultPreferenceData, device} from "../typescripts/publicConstants";
 
 type propType = {
     themeColor: ThemeColorInterface,
-    getSearchEngine: any,
-    getDynamicEffect: any,
-    getImageQuality: any,
-    getImageTopics: any,
-    getSimpleMode: any,
-    getNoImageMode: any,
+    getPreferenceData: any,
 }
 
 type stateType = {
@@ -32,7 +27,7 @@ type stateType = {
     displayDrawer: boolean,
     drawerPosition: "right" | "bottom",
     holidayData: any,
-    formInitialValues: PreferenceInterface
+    preferenceData: PreferenceDataInterface
 }
 
 interface PreferenceComponent {
@@ -50,7 +45,7 @@ class PreferenceComponent extends React.Component {
             displayDrawer: false,
             drawerPosition: "right",
             holidayData: "",
-            formInitialValues: defaultFormInitialValues
+            preferenceData: defaultPreferenceData
         };
     }
 
@@ -78,68 +73,85 @@ class PreferenceComponent extends React.Component {
 
     // 搜索引擎
     searchEngineRadioOnChange(event: RadioChangeEvent) {
-        this.props.getSearchEngine(event.target.value);
-        localStorage.setItem("searchEngine", event.target.value);
-        message.success("已更换搜索引擎");
+        this.setState({
+            preferenceData: this.setPreferenceData({searchEngine: event.target.value}),
+        }, () => {
+            this.props.getPreferenceData(this.state.preferenceData);
+            localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
+            message.success("已更换搜索引擎");
+        })
     }
 
     // 图片动效
     dynamicEffectRadioOnChange(event: RadioChangeEvent) {
-        this.props.getDynamicEffect(event.target.value);
-        localStorage.setItem("dynamicEffect", event.target.value);
-        message.success("已更换显示效果，一秒后刷新页面");
-        this.refreshWindow();
+        this.setState({
+            preferenceData: this.setPreferenceData({dynamicEffect: event.target.value}),
+        }, () => {
+            this.props.getPreferenceData(this.state.preferenceData);
+            localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
+            message.success("已更换显示效果，一秒后刷新页面");
+            this.refreshWindow();
+        })
     }
 
     // 图片质量
     imageQualityRadioOnChange(event: RadioChangeEvent) {
-        this.props.getImageQuality(event.target.value);
-        localStorage.setItem("imageQuality", event.target.value);
-        message.success("已更换图片质量，一秒后刷新页面");
-        this.refreshWindow();
+        this.setState({
+            preferenceData: this.setPreferenceData({imageQuality: event.target.value}),
+        }, () => {
+            this.props.getPreferenceData(this.state.preferenceData);
+            localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
+            message.success("已更换图片质量，一秒后刷新页面");
+            this.refreshWindow();
+        })
     }
 
     // 图片主题
     imageTopicsCheckboxOnChange(checkedValues: CheckboxValueType[]) {
-        let value = "";
-        for (let i = 0; i < checkedValues.length; i++) {
-            value += checkedValues[i];
-            if (i !== checkedValues.length - 1) {
-                value += ",";
+        this.setState({
+            preferenceData: this.setPreferenceData({imageTopics: checkedValues}),
+        }, () => {
+            this.props.getPreferenceData(this.state.preferenceData);
+            localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
+            message.success("已更换图片主题，下次加载时生效");
+            if (checkedValues.length === 0) {
+                message.info("全不选与全选的效果一样");
             }
-        }
-        this.props.getImageTopics(value);
-        localStorage.setItem("imageTopics", value);
-        message.success("已更换图片主题，下次加载时生效");
-        if (checkedValues.length === 0) {
-            message.info("全不选与全选的效果一样");
-        }
+        })
     }
 
     // 简洁模式
     simpleModeSwitchOnChange(checked: boolean) {
-        this.props.getSimpleMode(checked);
-        localStorage.setItem("simpleMode", checked.toString());
-        if(checked) {
-            message.success("已开启简洁模式");
-        }
-        else {
-            message.success("已关闭简洁模式");
-        }
+        this.setState({
+            preferenceData: this.setPreferenceData({simpleMode: checked}),
+        }, () => {
+            this.props.getPreferenceData(this.state.preferenceData);
+            localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
+            if(checked) {
+                message.success("已开启简洁模式");
+            }
+            else {
+                message.success("已关闭简洁模式");
+            }
+        })
     }
 
     // 无图模式
     noImageModeSwitchOnChange(checked: boolean) {
-        this.props.getNoImageMode(checked);
-        localStorage.setItem("noImageMode", checked.toString());
-        if(checked) {
-            message.success("已开启无图模式，1秒后刷新页面");
-        }
-        else {
-            message.success("已关闭无图模式，1秒后刷新页面");
+        this.setState({
+            preferenceData: this.setPreferenceData({noImageMode: checked}),
+        }, () => {
+            this.props.getPreferenceData(this.state.preferenceData);
+            localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
+            if(checked) {
+                message.success("已开启无图模式，1秒后刷新页面");
+            }
+            else {
+                message.success("已关闭无图模式，1秒后刷新页面");
 
-        }
-        this.refreshWindow();
+            }
+            this.refreshWindow();
+        })
     }
 
     // 重置设置
@@ -147,6 +159,10 @@ class PreferenceComponent extends React.Component {
         localStorage.clear();
         message.success("已重置所有内容，1秒后刷新页面");
         this.refreshWindow();
+    }
+
+    setPreferenceData(data: Object) {
+        return Object.assign({}, this.state.preferenceData, data);
     }
 
     refreshWindow(){
@@ -157,25 +173,12 @@ class PreferenceComponent extends React.Component {
 
     componentDidMount() {
         // 初始化偏好设置
-        let tempSearchEngineRadio: string | null = localStorage.getItem("searchEngine");
-        let tempDynamicEffectRadio: string | null = localStorage.getItem("dynamicEffect");
-        let tempImageQualityRadio: string | null = localStorage.getItem("imageQuality");
-        let tempImageTopicsCheckbox: string | string[] | null = localStorage.getItem("imageTopics");
-        if (tempImageTopicsCheckbox !== null) {
-            tempImageTopicsCheckbox = tempImageTopicsCheckbox.split(",");
+        let tempPreferenceData = localStorage.getItem("preferenceData");
+        if(tempPreferenceData === null) {
+            localStorage.setItem("preferenceData", JSON.stringify(defaultPreferenceData));
         }
-        let tempSimpleModeSwitch = localStorage.getItem("simpleMode");
-        let tempNoImageModeSwitch = localStorage.getItem("noImageMode");
-
         this.setState({
-            formInitialValues: {
-                "searchEngineRadio": tempSearchEngineRadio === null ? "bing" : tempSearchEngineRadio,
-                "dynamicEffectRadio": tempDynamicEffectRadio === null ? "all" : tempDynamicEffectRadio,
-                "imageQualityRadio": tempImageQualityRadio === null ? "regular" : tempImageQualityRadio,
-                "imageTopicsCheckbox": tempImageTopicsCheckbox === null ? ["Fzo3zuOHN6w"] : tempImageTopicsCheckbox,
-                "simpleModeSwitch": tempSimpleModeSwitch === null ? false : JSON.parse(tempSimpleModeSwitch),
-                "noImageModeSwitch": tempNoImageModeSwitch === null ? false : JSON.parse(tempNoImageModeSwitch),
-            }
+            preferenceData: tempPreferenceData === null ? defaultPreferenceData : JSON.parse(tempPreferenceData)
         })
 
         // 屏幕适配
@@ -263,8 +266,8 @@ class PreferenceComponent extends React.Component {
                                   }}
                                   bodyStyle={{backgroundColor: this.state.backgroundColor}}
                             >
-                                <Form layout={"vertical"} colon={false} initialValues={this.state.formInitialValues}>
-                                    <Form.Item name={"searchEngineRadio"} label={"搜索引擎"}>
+                                <Form layout={"vertical"} colon={false} initialValues={this.state.preferenceData}>
+                                    <Form.Item name={"searchEngine"} label={"搜索引擎"}>
                                         <Radio.Group buttonStyle={"solid"}
                                                      onChange={this.searchEngineRadioOnChange.bind(this)}>
                                             <Row>
@@ -281,7 +284,7 @@ class PreferenceComponent extends React.Component {
                                             </Row>
                                         </Radio.Group>
                                     </Form.Item>
-                                    <Form.Item name={"dynamicEffectRadio"} label={"图片动效（推荐视差）"}>
+                                    <Form.Item name={"dynamicEffect"} label={"图片动效（推荐视差）"}>
                                         <Radio.Group buttonStyle={"solid"}
                                                      onChange={this.dynamicEffectRadioOnChange.bind(this)}>
                                             <Row>
@@ -292,7 +295,7 @@ class PreferenceComponent extends React.Component {
                                             </Row>
                                         </Radio.Group>
                                     </Form.Item>
-                                    <Form.Item name={"imageQualityRadio"} label={"图片质量（推荐标准）"}>
+                                    <Form.Item name={"imageQuality"} label={"图片质量（推荐标准）"}>
                                         <Radio.Group buttonStyle={"solid"}
                                                      onChange={this.imageQualityRadioOnChange.bind(this)}>
                                             <Radio value={"full"}>高</Radio>
@@ -300,7 +303,7 @@ class PreferenceComponent extends React.Component {
                                             <Radio value={"small"}>低</Radio>
                                         </Radio.Group>
                                     </Form.Item>
-                                    <Form.Item name={"imageTopicsCheckbox"} label={"图片主题（全不选与全选效果一致）"}>
+                                    <Form.Item name={"imageTopics"} label={"图片主题（全不选与全选效果一致）"}>
                                         <Checkbox.Group onChange={this.imageTopicsCheckboxOnChange.bind(this)}>
                                             <Row>
                                                 <Col span={12}><Checkbox name={"travel"}
@@ -348,12 +351,12 @@ class PreferenceComponent extends React.Component {
                                     </Form.Item>
                                     <Row>
                                         <Col span={12}>
-                                            <Form.Item name={"simpleModeSwitch"} label={"简洁模式"} valuePropName={"checked"}>
+                                            <Form.Item name={"simpleMode"} label={"简洁模式"} valuePropName={"checked"}>
                                                 <Switch checkedChildren="已开启" unCheckedChildren="已关闭" onChange={this.simpleModeSwitchOnChange.bind(this)}/>
                                             </Form.Item>
                                         </Col>
                                         <Col span={12}>
-                                            <Form.Item name={"noImageModeSwitch"} label={"无图模式"} valuePropName={"checked"}>
+                                            <Form.Item name={"noImageMode"} label={"无图模式"} valuePropName={"checked"}>
                                                 <Switch checkedChildren="已开启" unCheckedChildren="已关闭" onChange={this.noImageModeSwitchOnChange.bind(this)}/>
                                             </Form.Item>
                                         </Col>

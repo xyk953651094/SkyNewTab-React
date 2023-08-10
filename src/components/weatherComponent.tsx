@@ -1,5 +1,5 @@
 import React from "react";
-import {Button, Popover, Space, Typography} from "antd";
+import {Button, Popover, Space} from "antd";
 import {
     changeThemeColor,
     getFontColor,
@@ -7,13 +7,11 @@ import {
     getWeatherIcon,
     httpRequest
 } from "../typescripts/publicFunctions";
-import {ThemeColorInterface} from "../typescripts/publicInterface";
-
-const {Text} = Typography;
+import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
 
 type propType = {
     themeColor: ThemeColorInterface,
-    searchEngine: string
+    preferenceData: PreferenceDataInterface,
 }
 
 type stateType = {
@@ -129,9 +127,9 @@ class WeatherComponent extends React.Component {
             });
         }
 
-        if (nextProps.searchEngine !== prevProps.searchEngine) {
+        if (nextProps.preferenceData !== prevProps.preferenceData) {
             this.setState({
-                searchEngineUrl: getSearchEngineDetail(nextProps.searchEngine).searchEngineUrl,
+                searchEngineUrl: getSearchEngineDetail(nextProps.preferenceData.searchEngine).searchEngineUrl,
             });
         }
     }

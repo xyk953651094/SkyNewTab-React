@@ -1,7 +1,7 @@
 import React from "react";
 import {Button, Col, Form, Input, List, message, Modal, Row, Space, Tooltip, Typography} from "antd";
 import {DeleteOutlined, EditOutlined, PlusOutlined} from "@ant-design/icons";
-import {ThemeColorInterface} from "../typescripts/publicInterface";
+import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
 import {getFontColor} from "../typescripts/publicFunctions";
 
 const {Text} = Typography;
@@ -9,7 +9,7 @@ const $ = require("jquery");
 
 type propType = {
     themeColor: ThemeColorInterface,
-    simpleMode: boolean
+    preferenceData: PreferenceDataInterface,
 }
 
 type stateType = {
@@ -197,9 +197,9 @@ class CollectionComponent extends React.Component {
             });
         }
 
-        if (nextProps.simpleMode !== prevProps.simpleMode) {
+        if (nextProps.preferenceData !== prevProps.preferenceData) {
             this.setState({
-                display: nextProps.simpleMode? "none" : "block"
+                display: nextProps.preferenceData.simpleMode ? "none" : "block"
             })
         }
     }

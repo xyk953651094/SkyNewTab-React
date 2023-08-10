@@ -2,15 +2,13 @@ import React from "react";
 import "../stylesheets/wallpaperComponent.scss"
 import "../stylesheets/publicStyles.scss"
 import {Image, message} from "antd";
-import {changeThemeColor, httpRequest, imageDynamicEffect} from "../typescripts/publicFunctions";
+import {httpRequest, imageDynamicEffect} from "../typescripts/publicFunctions";
 import {clientId, device} from "../typescripts/publicConstants";
+import {PreferenceDataInterface} from "../typescripts/publicInterface";
 
 type propType = {
-    noImageMode: boolean,
     getImageData: any,
-    dynamicEffect: "all" | "rotate" | "translate" | "close",
-    imageQuality: "full" | "regular" | "small",
-    imageTopics: string
+    preferenceData: PreferenceDataInterface,
 }
 
 type stateType = {
@@ -41,7 +39,7 @@ class WallpaperComponent extends React.Component {
             imageData: imageData,
         }, () => {
             this.props.getImageData(imageData);
-            switch (this.props.imageQuality) {
+            switch (this.props.preferenceData.imageQuality) {
                 case "full":
                     this.setState({
                         imageLink: this.state.imageData.urls.full,
@@ -71,13 +69,22 @@ class WallpaperComponent extends React.Component {
     }
 
     getWallpaper() {
+        let tempImageTopics = "";
+        for (let i = 0; i < this.props.preferenceData.imageTopics.length; i++) {
+            tempImageTopics += this.props.preferenceData.imageTopics[i];
+            if (i !== this.props.preferenceData.imageTopics.length - 1) {
+                tempImageTopics += ",";
+            }
+        }
+        console.log(tempImageTopics);
+
         let tempThis = this;
         let headers = {};
         let url = "https://api.unsplash.com/photos/random?";
         let data = {
             "client_id": clientId,
             "orientation": (device === "iPhone" || device === "Android") ? "portrait" : "landscape",
-            "topics": this.props.imageTopics,
+            "topics": tempImageTopics,
             "content_filter": "high",
         };
 
@@ -104,8 +111,12 @@ class WallpaperComponent extends React.Component {
     }
 
     componentDidMount() {
-        let tempNoImageMode = localStorage.getItem("noImageMode");
-        let noImageMode = tempNoImageMode === null ? false : JSON.parse(tempNoImageMode);
+        let preferenceData = localStorage.getItem("preferenceData");
+        let noImageMode = false;
+        if (preferenceData) {
+            noImageMode = JSON.parse(preferenceData).noImageMode;
+        }
+
         if(!noImageMode) {
             // 防抖节流
             let lastRequestTime: any = localStorage.getItem("lastImageRequestTime");
@@ -123,6 +134,7 @@ class WallpaperComponent extends React.Component {
                     message.error("获取图片失败");
                 }
             }
+
             // 图片动画
             // @ts-ignore
             let backgroundImageDiv: HTMLElement = document.getElementById("backgroundImage");
@@ -142,7 +154,7 @@ class WallpaperComponent extends React.Component {
 
                             setTimeout(() => {
                                 backgroundImageDiv.style.perspective = "500px";
-                                imageDynamicEffect(backgroundImage, this.props.dynamicEffect);
+                                imageDynamicEffect(backgroundImage, this.props.preferenceData.dynamicEffect);
                             }, 5000);
                         }, 2000);
                     })

@@ -3,14 +3,14 @@ import type {DatePickerProps} from 'antd';
 import {Badge, Button, Col, DatePicker, Form, Input, List, message, Modal, Popover, Row, Space, Typography} from "antd";
 import {CalendarOutlined, DeleteOutlined, PlusOutlined} from "@ant-design/icons";
 import {changeThemeColor, getFontColor, getTimeDetails} from "../typescripts/publicFunctions";
-import {ThemeColorInterface} from "../typescripts/publicInterface";
+import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
 
 const {Text} = Typography;
 const $ = require("jquery");
 
 type propType = {
     themeColor: ThemeColorInterface,
-    simpleMode: boolean
+    preferenceData: PreferenceDataInterface,
 }
 
 type stateType = {
@@ -188,9 +188,9 @@ class DailyComponent extends React.Component {
             });
         }
 
-        if (nextProps.simpleMode !== prevProps.simpleMode) {
+        if (nextProps.preferenceData !== prevProps.preferenceData) {
             this.setState({
-                display: nextProps.simpleMode? "none" : "block"
+                display: nextProps.preferenceData.simpleMode ? "none" : "block"
             })
         }
     }
@@ -257,7 +257,7 @@ class DailyComponent extends React.Component {
                 <Popover title={popoverTitle} content={popoverContent} placement={"bottomRight"}
                          color={this.state.backgroundColor}
                          overlayStyle={{minWidth: "550px"}}>
-                    <Badge size={"small"} count={this.state.listItems.length}>
+                    <Badge size={"small"} count={this.state.listItems.length} style={{display: this.state.display}}>
                         <Button shape={"circle"} icon={<CalendarOutlined/>} size={"large"}
                                 id={"dailyBtn"}
                                 className={"componentTheme zIndexHigh"} style={{cursor: "default", display: this.state.display}}
