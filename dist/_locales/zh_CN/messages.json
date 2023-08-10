@@ -1,0 +1,50 @@
+{
+    "extensionName": {
+        "message": "云开新标签页",
+        "description": "extension_name"
+    },
+    "extensionDescription": {
+        "message": "替换浏览器默认新标签页",
+        "description": "extension_description"
+    },
+    "extensionDefaultTitle": {
+        "message": "云开新标签页",
+        "description": "extension_default_title"
+    },
+    "greetMorning": {
+        "message": "朝霞满",
+        "description": "greetMorning"
+    },
+    "greetNoon": {
+        "message": "正当午",
+        "description": "greetNoon"
+    },
+    "greetAfternoon": {
+        "message": "斜阳下",
+        "description": "greetAfternoon"
+    },
+    "greetEvening": {
+        "message": "日暮里",
+        "description": "greetEvening"
+    },
+    "greetNight": {
+        "message": "见星辰",
+        "description": "greetNight"
+    },
+    "greetDawn": {
+        "message": "又一宿",
+        "description": "greetDawn"
+    },
+    "getImageError": {
+        "message": "错误：获取图片信息失败，请稍后再试",
+        "description": "getImageError"
+    },
+    "gotoImage": {
+        "message": "前往图片主页",
+        "description": "gotoImage"
+    },
+    "searchPlaceholder": {
+        "message": "按下 Enter 键搜索",
+        "description": "searchPlaceholder"
+    }
+}

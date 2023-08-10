@@ -1,0 +1,65 @@
+{
+  "name": "sky_new_tab_react",
+  "version": "1.5.0",
+  "private": true,
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^14.4.3",
+    "@types/jest": "^28.1.8",
+    "@types/node": "^18.16.19",
+    "@types/react": "^18.2.14",
+    "@types/react-dom": "^18.2.6",
+    "antd": "^5.7.3",
+    "blurhash": "^2.0.5",
+    "bootstrap-icons": "^1.10.5",
+    "clean-webpack-plugin": "^4.0.0",
+    "copy-webpack-plugin": "^11.0.0",
+    "css-loader": "^6.8.1",
+    "css-select": "^5.1.0",
+    "file-loader": "^6.2.0",
+    "html-loader": "^4.2.0",
+    "html-webpack-plugin": "^5.5.3",
+    "jquery": "^3.7.0",
+    "jquery-color": "^2.2.0",
+    "jquery-ui": "^1.13.2",
+    "node-sass": "^7.0.3",
+    "nth-check": "^2.1.1",
+    "rc-queue-anim": "^2.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "^5.0.1",
+    "sass-loader": "^13.3.2",
+    "style-loader": "^3.3.3",
+    "ts-loader": "^9.4.4",
+    "typescript": "^4.9.5",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "test": "react-scripts test",
+    "build": "react-scripts build",
+    "eject": "react-scripts eject",
+    "webpack": "webpack"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "webpack-cli": "^5.1.4"
+  }
+}
