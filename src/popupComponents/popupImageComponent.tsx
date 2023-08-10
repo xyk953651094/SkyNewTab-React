@@ -10,6 +10,7 @@ import {
 import "../stylesheets/popupComponent.scss";
 import {decode} from "blurhash"
 import {getFontColor, getSearchEngineDetail, isEmptyString} from "../typescripts/publicFunctions";
+import {PreferenceDataInterface} from "../typescripts/publicInterface";
 
 const $ = require("jquery");
 const btnMaxSize = 40;
@@ -17,7 +18,7 @@ const btnMaxSize = 40;
 type propType = {
     imageData: any,
     fontColor: string,
-    searchEngine: string
+    preferenceData: PreferenceDataInterface,
 }
 
 type stateType = {
@@ -160,9 +161,9 @@ class PopupImageComponent extends React.Component {
             });
         }
 
-        if (nextProps.searchEngine !== prevProps.searchEngine) {
+        if (nextProps.preferenceData !== prevProps.preferenceData) {
             this.setState({
-                searchEngineUrl: getSearchEngineDetail(nextProps.searchEngine).searchEngineUrl,
+                searchEngineUrl: getSearchEngineDetail(nextProps.preferenceData.searchEngine).searchEngineUrl,
             });
         }
     }

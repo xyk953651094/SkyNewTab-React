@@ -5,6 +5,8 @@ import "../stylesheets/popupComponent.scss"
 import {getFontColor, getReverseColor} from "../typescripts/publicFunctions";
 import PopupImageComponent from "../popupComponents/popupImageComponent";
 import PopupStatusComponent from "../popupComponents/popupStatusComponent";
+import {PreferenceDataInterface} from "../typescripts/publicInterface";
+import {defaultPreferenceData} from "../typescripts/publicConstants";
 
 const {Header, Content, Footer} = Layout;
 const $ = require("jquery")
@@ -16,7 +18,7 @@ type stateType = {
     hoverColor: string,
     backgroundColor: string,
     fontColor: string,
-    searchEngine: string
+    preferenceData: PreferenceDataInterface,
 }
 
 interface PopupComponent {
@@ -32,7 +34,7 @@ class PopupComponent extends React.Component {
             hoverColor: "#000000",
             backgroundColor: "#ffffff",
             fontColor: "#000000",
-            searchEngine: "bing",
+            preferenceData: defaultPreferenceData,
         }
     }
 
@@ -48,7 +50,7 @@ class PopupComponent extends React.Component {
 
     componentDidMount() {
         let imageData = localStorage.getItem("lastImage");
-        let tempSearchEngine = localStorage.getItem("searchEngine");
+        let tempPreferenceData = localStorage.getItem("preferenceData");
         if (imageData) {
             let tempImageData = JSON.parse(imageData);
 
@@ -57,7 +59,7 @@ class PopupComponent extends React.Component {
                 hoverColor: tempImageData.color,
                 backgroundColor: getReverseColor(tempImageData.color),
                 fontColor: getFontColor(getReverseColor(tempImageData.color)),
-                searchEngine: tempSearchEngine === null ? "bing" : tempSearchEngine,
+                preferenceData: tempPreferenceData === null ? defaultPreferenceData : tempPreferenceData,
             }, () => {
                 $("body").css({"backgroundColor": this.state.backgroundColor});
             });
@@ -100,7 +102,7 @@ class PopupComponent extends React.Component {
                         </List.Item>
                         <List.Item>
                             <PopupImageComponent imageData={this.state.imageData} fontColor={this.state.fontColor}
-                                                 searchEngine={this.state.searchEngine}/>
+                                                 preferenceData={this.state.preferenceData}/>
                         </List.Item>
                     </List>
                 </Content>
