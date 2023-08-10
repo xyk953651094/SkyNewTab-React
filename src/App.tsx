@@ -28,7 +28,6 @@ const $ = require("jquery");
 type propType = {}
 
 type stateType = {
-    componentDisplay: "none" | "block",
     themeColor: ThemeColorInterface,
 
     imageData: any,
@@ -44,7 +43,6 @@ class App extends React.Component {
     constructor(props: any) {
         super(props)
         this.state = {
-            componentDisplay: "none",
             themeColor: {
                 "themeColor": "",
                 "componentBackgroundColor": "",
@@ -58,7 +56,6 @@ class App extends React.Component {
 
     getImageData(imageData: any) {
         this.setState({
-            componentDisplay: "block",
             imageData: imageData
         }, () => {
             // 修改主题颜色
@@ -232,7 +229,6 @@ class App extends React.Component {
                             <Space size={"small"} align={"end"}>
                                 <AuthorComponent
                                     themeColor={this.state.themeColor}
-                                    display={this.state.componentDisplay}
                                     imageData={this.state.imageData}
                                     preferenceData={this.state.preferenceData}
                                 />

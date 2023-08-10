@@ -18,7 +18,6 @@ const btnMaxSize = 50;
 
 type propType = {
     themeColor: ThemeColorInterface,
-    display: "none" | "block",
     imageData: any,
     preferenceData: PreferenceDataInterface,
 }
@@ -263,7 +262,7 @@ class AuthorComponent extends React.Component {
                         className={"componentTheme zIndexHigh"}
                         onClick={this.authorLinkBtnOnClick.bind(this)}
                         style={{
-                            display: this.props.display,
+                            display: this.state.display,
                         }}
                 >
                     {"by " + this.state.authorName + " on Unsplash"}
