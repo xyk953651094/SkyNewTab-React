@@ -1,7 +1,7 @@
 export interface PreferenceDataInterface {
     searchEngine: "bing" | "google" | "baidu",
     dynamicEffect: "all" | "rotate" | "translate" | "close",
-    imageQuality: "full" | "regular" | "small",
+    imageQuality: "full" | "regular" | "small" | "small_s3",
     imageTopics: string[],
     simpleMode: boolean,
     noImageMode: boolean

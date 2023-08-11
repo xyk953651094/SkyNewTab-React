@@ -256,7 +256,7 @@ class PreferenceComponent extends React.Component {
                 >
                     <Row gutter={[16, 16]}>
                         <Col span={24}>
-                            <Card title={"偏好设置"} size={"small"}
+                            <Card title={"图片设置"} size={"small"}
                                   extra={<SettingOutlined style={{color: this.state.fontColor}}/>}
                                   style={{border: "1px solid " + this.state.fontColor}}
                                   headStyle={{
@@ -266,25 +266,8 @@ class PreferenceComponent extends React.Component {
                                   }}
                                   bodyStyle={{backgroundColor: this.state.backgroundColor}}
                             >
-                                <Form layout={"vertical"} colon={false} initialValues={this.state.preferenceData}>
-                                    <Form.Item name={"searchEngine"} label={"搜索引擎"}>
-                                        <Radio.Group buttonStyle={"solid"}
-                                                     onChange={this.searchEngineRadioOnChange.bind(this)}>
-                                            <Row>
-                                                <Col span={12}><Radio value={"baidu"}>Baidu</Radio></Col>
-                                                <Col span={12}><Radio value={"bing"}>Bing</Radio></Col>
-                                                <Col span={12}><Radio value={"brave"}>Brave</Radio></Col>
-                                                <Col span={12}><Radio value={"duckduckgo"}>DuckDuckGo</Radio></Col>
-                                                <Col span={12}><Radio value={"ghostery"}>Ghostery</Radio></Col>
-                                                <Col span={12}><Radio value={"google"}>Google</Radio></Col>
-                                                <Col span={12}><Radio value={"sogou"}>Sogou</Radio></Col>
-                                                <Col span={12}><Radio value={"startpage"}>StartPage</Radio></Col>
-                                                <Col span={12}><Radio value={"wuzhuiso"}>WuzhuiSo</Radio></Col>
-                                                <Col span={12}><Radio value={"yandex"}>Yandex</Radio></Col>
-                                            </Row>
-                                        </Radio.Group>
-                                    </Form.Item>
-                                    <Form.Item name={"dynamicEffect"} label={"图片动效（推荐视差）"}>
+                                <Form colon={false} initialValues={this.state.preferenceData}>
+                                    <Form.Item name={"dynamicEffect"} label={"图片动效"}>
                                         <Radio.Group buttonStyle={"solid"}
                                                      onChange={this.dynamicEffectRadioOnChange.bind(this)}>
                                             <Row>
@@ -295,15 +278,18 @@ class PreferenceComponent extends React.Component {
                                             </Row>
                                         </Radio.Group>
                                     </Form.Item>
-                                    <Form.Item name={"imageQuality"} label={"图片质量（推荐标准）"}>
+                                    <Form.Item name={"imageQuality"} label={"图片质量"}>
                                         <Radio.Group buttonStyle={"solid"}
                                                      onChange={this.imageQualityRadioOnChange.bind(this)}>
-                                            <Radio value={"full"}>高</Radio>
-                                            <Radio value={"regular"}>标准</Radio>
-                                            <Radio value={"small"}>低</Radio>
+                                            <Row>
+                                                <Col span={12}><Radio value={"full"}>最高</Radio></Col>
+                                                <Col span={12}><Radio value={"regular"}>标准</Radio></Col>
+                                                <Col span={12}><Radio value={"small"}>较低</Radio></Col>
+                                                <Col span={12}><Radio value={"small_s3"}>最低</Radio></Col>
+                                            </Row>
                                         </Radio.Group>
                                     </Form.Item>
-                                    <Form.Item name={"imageTopics"} label={"图片主题（全不选与全选效果一致）"}>
+                                    <Form.Item name={"imageTopics"} label={"图片主题"}>
                                         <Checkbox.Group onChange={this.imageTopicsCheckboxOnChange.bind(this)}>
                                             <Row>
                                                 <Col span={12}><Checkbox name={"travel"}
@@ -349,18 +335,38 @@ class PreferenceComponent extends React.Component {
                                             </Row>
                                         </Checkbox.Group>
                                     </Form.Item>
-                                    <Row>
-                                        <Col span={12}>
-                                            <Form.Item name={"simpleMode"} label={"简洁模式"} valuePropName={"checked"}>
-                                                <Switch checkedChildren="已开启" unCheckedChildren="已关闭" onChange={this.simpleModeSwitchOnChange.bind(this)}/>
-                                            </Form.Item>
-                                        </Col>
-                                        <Col span={12}>
-                                            <Form.Item name={"noImageMode"} label={"无图模式"} valuePropName={"checked"}>
-                                                <Switch checkedChildren="已开启" unCheckedChildren="已关闭" onChange={this.noImageModeSwitchOnChange.bind(this)}/>
-                                            </Form.Item>
-                                        </Col>
-                                    </Row>
+                                </Form>
+                            </Card>
+                        </Col>
+                        <Col span={24}>
+                            <Card title={"功能设置"} size={"small"}
+                                  extra={<SettingOutlined style={{color: this.state.fontColor}}/>}
+                                  style={{border: "1px solid " + this.state.fontColor}}
+                                  headStyle={{
+                                      backgroundColor: this.state.backgroundColor,
+                                      color: this.state.fontColor,
+                                      borderBottom: "2px solid " + this.state.fontColor
+                                  }}
+                                  bodyStyle={{backgroundColor: this.state.backgroundColor}}
+                            >
+                                <Form colon={false} initialValues={this.state.preferenceData}>
+                                    <Form.Item name={"searchEngine"} label={"搜索引擎"}>
+                                        <Radio.Group buttonStyle={"solid"}
+                                                     onChange={this.searchEngineRadioOnChange.bind(this)}>
+                                            <Row>
+                                                <Col span={12}><Radio value={"baidu"}>Baidu</Radio></Col>
+                                                <Col span={12}><Radio value={"bing"}>Bing</Radio></Col>
+                                                <Col span={12}><Radio value={"google"}>Google</Radio></Col>
+                                                <Col span={12}><Radio value={"yandex"}>Yandex</Radio></Col>
+                                            </Row>
+                                        </Radio.Group>
+                                    </Form.Item>
+                                    <Form.Item name={"simpleMode"} label={"简洁模式"} valuePropName={"checked"}>
+                                        <Switch checkedChildren="已开启" unCheckedChildren="已关闭" onChange={this.simpleModeSwitchOnChange.bind(this)}/>
+                                    </Form.Item>
+                                    <Form.Item name={"noImageMode"} label={"无图模式"} valuePropName={"checked"}>
+                                        <Switch checkedChildren="已开启" unCheckedChildren="已关闭" onChange={this.noImageModeSwitchOnChange.bind(this)}/>
+                                    </Form.Item>
                                     <Form.Item name={"clearStorageButton"} label={"危险设置"}>
                                         <Button type={"text"} shape={"round"} icon={<DeleteOutlined/>}
                                                 onMouseOver={this.btnMouseOver.bind(this)}

@@ -261,33 +261,9 @@ export function getSearchEngineDetail(searchEngine: string) {
             searchEngineUrl = "https://www.bing.com/search?q=";
             searchEngineIconUrl = "https://www.bing.com/favicon.ico";
             break;
-        case "brave":
-            searchEngineUrl = "https://search.brave.com/search?q=";
-            searchEngineIconUrl = "https://cdn.search.brave.com/serp/v2/_app/immutable/assets/favicon.c09fe1a1.ico";
-            break;
-        case "duckduckgo":
-            searchEngineUrl = "https://duckduckgo.com/?q=";
-            searchEngineIconUrl = "https://duckduckgo.com/favicon.ico";
-            break;
-        case "ghostery":
-            searchEngineUrl = "https://ghosterysearch.com/search?q=";
-            searchEngineIconUrl = "https://ghosterysearch.com/favicon.ico";
-            break;
         case "google":
             searchEngineUrl = "https://www.google.com/search?q=";
             searchEngineIconUrl = "https://www.google.com/favicon.ico";
-            break;
-        case "sogou":
-            searchEngineUrl = "https://www.sogou.com/web?query=";
-            searchEngineIconUrl = "https://www.sogou.com/favicon.ico";
-            break;
-        case "startpage":
-            searchEngineUrl = "https://startpage.com/do/search?q=";
-            searchEngineIconUrl = "https://www.startpage.com/sp/cdn/favicons/favicon-32x32--default.png";
-            break;
-        case "wuzhuiso":
-            searchEngineUrl = "https://www.wuzhuiso.com/s?ie=utf-8&fr=none&q=";
-            searchEngineIconUrl = "https://www.wuzhuiso.com/favicon.ico";
             break;
         case "yandex":
             searchEngineUrl = "https://yandex.com/search/?text=";

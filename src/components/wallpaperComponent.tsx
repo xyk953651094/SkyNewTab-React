@@ -15,7 +15,6 @@ type stateType = {
     display: "none" | "block",
     imageData: any,
     imageLink: string,
-    loadImageLink: string,
 }
 
 interface WallpaperComponent {
@@ -29,7 +28,6 @@ class WallpaperComponent extends React.Component {
         this.state = {
             imageData: null,
             imageLink: "",
-            loadImageLink: "",
             display: "none",
         };
     }
@@ -43,25 +41,26 @@ class WallpaperComponent extends React.Component {
                 case "full":
                     this.setState({
                         imageLink: this.state.imageData.urls.full,
-                        loadImageLink: this.state.imageData.urls.small,
                     });
                     break;
                 case "regular":
                     this.setState({
                         imageLink: this.state.imageData.urls.regular,
-                        loadImageLink: this.state.imageData.urls.small,
                     });
                     break;
                 case "small":
                     this.setState({
-                        imageLink: this.state.imageData.urls.regular,
-                        loadImageLink: this.state.imageData.urls.small,
+                        imageLink: this.state.imageData.urls.small,
+                    });
+                    break;
+                case "small_s3":
+                    this.setState({
+                        imageLink: this.state.imageData.urls.small_s3,
                     });
                     break;
                 default:
                     this.setState({
                         imageLink: this.state.imageData.urls.regular,
-                        loadImageLink: this.state.imageData.urls.small,
                     });
                     break;
             }

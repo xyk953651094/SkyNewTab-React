@@ -14,7 +14,7 @@ import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publi
 import "../stylesheets/publicStyles.scss"
 
 const {Text} = Typography;
-const btnMaxSize = 50;
+const btnMaxSize = 55;
 
 type propType = {
     themeColor: ThemeColorInterface,
@@ -135,7 +135,7 @@ class AuthorComponent extends React.Component {
                 authorLikes: nextProps.imageData.user.total_likes,
                 authorPhotos: nextProps.imageData.user.total_photos,
                 imageLink: nextProps.imageData.links.html,
-                imagePreviewUrl: nextProps.imageData.urls.thumb,
+                imagePreviewUrl: nextProps.imageData.urls.regular,
                 imageLocation: isEmptyString(nextProps.imageData.location.name) ? "暂无信息" : nextProps.imageData.location.name,
                 imageDescription: isEmptyString(nextProps.imageData.alt_description) ? "暂无信息" : nextProps.imageData.alt_description,
                 imageCreateTime: this.getCreateTime(nextProps.imageData.created_at),
@@ -214,25 +214,10 @@ class AuthorComponent extends React.Component {
                     </Space>
                 </List.Item>
                 <List.Item>
-                    <Space>
-                        <Avatar size={64} shape={"square"} src={this.state.imagePreviewUrl} alt={"信息"}/>
-                        <Space direction={"vertical"}>
-                            <Space wrap>
-                                <Button type={"text"} shape={"round"} icon={<ClockCircleOutlined/>}
-                                        style={{color: this.state.fontColor, cursor: "default"}}
-                                        onMouseOver={this.btnMouseOver.bind(this)}
-                                        onMouseOut={this.btnMouseOut.bind(this)}>
-                                    {this.state.imageCreateTime}
-                                </Button>
-                                <Button type={"text"} shape={"round"} icon={<CameraOutlined/>}
-                                        style={{color: this.state.fontColor}}
-                                        onMouseOver={this.btnMouseOver.bind(this)}
-                                        onMouseOut={this.btnMouseOut.bind(this)}
-                                        onClick={this.imageCameraBtnOnClick.bind(this)}>
-                                    {this.state.imageCamera}
-                                </Button>
-                            </Space>
-                            <Space wrap>
+                    <Space direction={"vertical"}>
+                        <Space>
+                            <Avatar size={64} shape={"square"} src={this.state.imagePreviewUrl} alt={"信息"}/>
+                            <Space direction={"vertical"}>
                                 <Button type={"text"} shape={"round"} icon={<EnvironmentOutlined/>}
                                         style={{color: this.state.fontColor}}
                                         onMouseOver={this.btnMouseOver.bind(this)}
@@ -246,6 +231,21 @@ class AuthorComponent extends React.Component {
                                         onMouseOut={this.btnMouseOut.bind(this)}>
                                     {this.state.imageDescription.length < btnMaxSize ? this.state.imageDescription : this.state.imageDescription.substring(0, btnMaxSize) + "..."}
                                 </Button>
+                                <Space>
+                                    <Button type={"text"} shape={"round"} icon={<ClockCircleOutlined/>}
+                                            style={{color: this.state.fontColor, cursor: "default"}}
+                                            onMouseOver={this.btnMouseOver.bind(this)}
+                                            onMouseOut={this.btnMouseOut.bind(this)}>
+                                        {this.state.imageCreateTime}
+                                    </Button>
+                                    <Button type={"text"} shape={"round"} icon={<CameraOutlined/>}
+                                            style={{color: this.state.fontColor}}
+                                            onMouseOver={this.btnMouseOver.bind(this)}
+                                            onMouseOut={this.btnMouseOut.bind(this)}
+                                            onClick={this.imageCameraBtnOnClick.bind(this)}>
+                                        {this.state.imageCamera}
+                                    </Button>
+                                </Space>
                             </Space>
                         </Space>
                     </Space>

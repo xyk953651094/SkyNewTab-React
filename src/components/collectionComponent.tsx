@@ -228,16 +228,21 @@ class CollectionComponent extends React.Component {
                             )
                         })
                     }
-
-                    <Button type={"primary"} shape={"circle"} className={"componentTheme"}
-                            style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}}
-                            icon={<PlusOutlined/>} onClick={this.showAddModalBtnOnClick.bind(this)}/>
-                    <Button type={"primary"} shape={"circle"} className={"componentTheme"}
-                            style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}}
-                            icon={<EditOutlined/>} onClick={this.showEditModalBtnOnClick.bind(this)}/>
-                    <Button type={"primary"} shape={"circle"} className={"componentTheme"}
-                            style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}}
-                            icon={<DeleteOutlined/>} onClick={this.removeAllBtnOnClick.bind(this)}/>
+                    <Tooltip title={"添加链接"} placement={"bottom"} color={this.state.backgroundColor}>
+                        <Button type={"primary"} shape={"circle"} className={"componentTheme"}
+                                style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}}
+                                icon={<PlusOutlined/>} onClick={this.showAddModalBtnOnClick.bind(this)}/>
+                    </Tooltip>
+                    <Tooltip title={"编辑链接"} placement={"bottom"} color={this.state.backgroundColor}>
+                        <Button type={"primary"} shape={"circle"} className={"componentTheme"}
+                                style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}}
+                                icon={<EditOutlined/>} onClick={this.showEditModalBtnOnClick.bind(this)}/>
+                    </Tooltip>
+                    <Tooltip title={"全部删除"} placement={"bottom"} color={this.state.backgroundColor}>
+                        <Button type={"primary"} shape={"circle"} className={"componentTheme"}
+                                style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}}
+                                icon={<DeleteOutlined/>} onClick={this.removeAllBtnOnClick.bind(this)}/>
+                    </Tooltip>
                     <Modal title={"添加链接 " + this.state.collectionSize + " / " + this.state.collectionMaxSize}
                            closeIcon={false} centered
                            open={this.state.displayAddModal} onOk={this.addModalOkBtnOnClick.bind(this)}
