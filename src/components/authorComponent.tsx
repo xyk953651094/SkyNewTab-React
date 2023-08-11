@@ -163,7 +163,8 @@ class AuthorComponent extends React.Component {
                     <Space>
                         <Button type={"text"} shape={"round"} icon={<LinkOutlined/>}
                                 onMouseOver={this.btnMouseOver.bind(this)}
-                                onMouseOut={this.btnMouseOut.bind(this)} onClick={this.authorLinkBtnOnClick.bind(this)}
+                                onMouseOut={this.btnMouseOut.bind(this)}
+                                onClick={this.authorLinkBtnOnClick.bind(this)}
                                 style={{color: this.state.fontColor}}>
                             {"摄影师主页"}
                         </Button>
@@ -186,8 +187,9 @@ class AuthorComponent extends React.Component {
                         <Avatar size={64} src={this.state.authorIconUrl} alt={"作者"}/>
                         <Space direction={"vertical"}>
                             <Button type={"text"} shape={"round"} icon={<UserOutlined/>}
-                                    style={{color: this.state.fontColor, cursor: "default"}}
-                                    onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
+                                    style={{color: this.state.fontColor}}
+                                    onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
+                                    onClick={this.authorLinkBtnOnClick.bind(this)}>
                                 {this.state.authorName.length < btnMaxSize ? this.state.authorName : this.state.authorName.substring(0, btnMaxSize) + "..."}
                             </Button>
                             <Space split={<Divider type={"vertical"} style={{borderColor: this.state.fontColor}}/>}>
