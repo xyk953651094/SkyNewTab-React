@@ -1,5 +1,5 @@
 import React from "react";
-import {Button, Space} from "antd";
+import {Button, Divider, Space} from "antd";
 import {CalendarOutlined, CheckSquareOutlined} from "@ant-design/icons";
 import "../stylesheets/popupComponent.scss"
 import {getFontColor, getGreetContent, getGreetIcon, getWeatherIcon,} from "../typescripts/publicFunctions";
@@ -81,9 +81,9 @@ class PopupImageComponent extends React.Component {
         let tempTodos = localStorage.getItem("todos");
 
         this.setState({
-            greetContent: tempGreet ? getGreetContent() + "｜" + this.setHoliday(JSON.parse(tempGreet)) : "暂无信息",
+            greetContent: tempGreet ? getGreetContent() + " · " + this.setHoliday(JSON.parse(tempGreet)) : "暂无信息",
             weatherIcon: tempWeather ? getWeatherIcon(JSON.parse(tempWeather).weatherData.weather) : "",
-            weatherContent: tempWeather ? JSON.parse(tempWeather).weatherData.weather + "｜" + JSON.parse(tempWeather).weatherData.temperature + "°C" : "暂无信息",
+            weatherContent: tempWeather ? JSON.parse(tempWeather).weatherData.weather + " · " + JSON.parse(tempWeather).weatherData.temperature + "°C" : "暂无信息",
             dailyAmount: tempDaily ? JSON.parse(tempDaily).length : 0,
             todoAmount: tempTodos ? JSON.parse(tempTodos).length : 0,
         })
@@ -91,7 +91,7 @@ class PopupImageComponent extends React.Component {
 
     render() {
         return (
-            <Space>
+            <Space split={<Divider type={"vertical"} style={{borderColor: this.state.fontColor}}/>}>
                 <Button type={"text"} shape={"round"} icon={<i className={this.state.greetIcon}> </i>}
                         onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
                         style={{color: this.state.fontColor, cursor: "default"}}>

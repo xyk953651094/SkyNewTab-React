@@ -1,5 +1,5 @@
 import React from "react";
-import {Button, Image, message, Space} from "antd";
+import {Button, Divider, Image, message, Space} from "antd";
 import {
     CameraOutlined,
     ClockCircleOutlined,
@@ -13,7 +13,7 @@ import {getFontColor, getSearchEngineDetail, isEmptyString} from "../typescripts
 import {PreferenceDataInterface} from "../typescripts/publicInterface";
 
 const $ = require("jquery");
-const btnMaxSize = 40;
+const btnMaxSize = 45;
 
 type propType = {
     imageData: any,
@@ -104,6 +104,10 @@ class PopupImageComponent extends React.Component {
         }
     }
 
+    getCreateTime(createTime: string) {
+        return createTime.substring(0, createTime.indexOf("T"));
+    }
+
     componentDidMount() {
         // @ts-ignore
         let popupImageDiv: HTMLElement = document.getElementById("popupImage");
@@ -129,7 +133,7 @@ class PopupImageComponent extends React.Component {
                     imagePreviewUrl: nextProps.imageData.urls.regular,
                     imageLocation: isEmptyString(nextProps.imageData.location.name) ? "暂无信息" : nextProps.imageData.location.name,
                     imageDescription: isEmptyString(nextProps.imageData.alt_description) ? "暂无信息" : nextProps.imageData.alt_description,
-                    imageCreateTime: nextProps.imageData.created_at,
+                    imageCreateTime: this.getCreateTime(nextProps.imageData.created_at),
                     imageCamera: isEmptyString(nextProps.imageData.exif.name) ? "暂无信息" : nextProps.imageData.exif.name,
                     hoverColor: nextProps.imageData.color,
                     blurHashCode: nextProps.imageData.blur_hash
@@ -173,8 +177,8 @@ class PopupImageComponent extends React.Component {
             <Space align={"center"}>
                 <Image
                     id={"popupImage"}
-                    width={300}
-                    height={180}
+                    width={250}
+                    height={150}
                     preview={false}
                     alt={"暂无图片"}
                     src={this.state.imagePreviewUrl}
@@ -189,16 +193,6 @@ class PopupImageComponent extends React.Component {
                             style={{color: this.state.fontColor}}>
                         {this.state.authorName.length < btnMaxSize ? this.state.authorName : this.state.authorName.substring(0, btnMaxSize) + "..."}
                     </Button>
-                    <Button type={"text"} shape={"round"} icon={<CameraOutlined/>}
-                            onClick={this.imageCameraBtnOnClick.bind(this)} style={{color: this.state.fontColor}}
-                            onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
-                        {this.state.imageCamera}
-                    </Button>
-                    <Button type={"text"} shape={"round"} icon={<ClockCircleOutlined/>}
-                            style={{color: this.state.fontColor, cursor: "default"}}
-                            onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
-                        {this.state.imageCreateTime}
-                    </Button>
                     <Button type={"text"} shape={"round"} icon={<EnvironmentOutlined/>}
                             onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
                             onClick={this.imageLocationBtnOnClick.bind(this)} style={{color: this.state.fontColor}}>
@@ -209,6 +203,18 @@ class PopupImageComponent extends React.Component {
                             onClick={this.imageLinkBtnOnClick.bind(this)} style={{color: this.state.fontColor}}>
                         {this.state.imageDescription.length < btnMaxSize ? this.state.imageDescription : this.state.imageDescription.substring(0, btnMaxSize) + "..."}
                     </Button>
+                    <Space split={<Divider type={"vertical"} style={{borderColor: this.state.fontColor}}/>}>
+                        <Button type={"text"} shape={"round"} icon={<ClockCircleOutlined/>}
+                                style={{color: this.state.fontColor, cursor: "default"}}
+                                onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
+                            {this.state.imageCreateTime}
+                        </Button>
+                        <Button type={"text"} shape={"round"} icon={<CameraOutlined/>}
+                                onClick={this.imageCameraBtnOnClick.bind(this)} style={{color: this.state.fontColor}}
+                                onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
+                            {this.state.imageCamera}
+                        </Button>
+                    </Space>
                 </Space>
             </Space>
         );

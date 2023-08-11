@@ -241,7 +241,7 @@ class TodoComponent extends React.Component {
             <Row>
                 <Popover title={popoverTitle} content={popoverContent} placement="bottomRight"
                          color={this.state.backgroundColor}
-                         overlayStyle={{width: "550px"}}>
+                         overlayStyle={{width: "600px"}}>
                     <Badge size={"small"} count={this.state.checkboxOptions.length} style={{display: this.state.display}}>
                         <Button shape={"circle"} icon={<CheckSquareOutlined/>} size={"large"}
                                 id={"todoBtn"}

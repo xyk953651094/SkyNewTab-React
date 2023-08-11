@@ -14,7 +14,7 @@ import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publi
 import "../stylesheets/publicStyles.scss"
 
 const {Text} = Typography;
-const btnMaxSize = 55;
+const btnMaxSize = 60;
 
 type propType = {
     themeColor: ThemeColorInterface,
@@ -190,7 +190,7 @@ class AuthorComponent extends React.Component {
                                     onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
                                 {this.state.authorName.length < btnMaxSize ? this.state.authorName : this.state.authorName.substring(0, btnMaxSize) + "..."}
                             </Button>
-                            <Space>
+                            <Space split={<Divider type={"vertical"} style={{borderColor: this.state.fontColor}}/>}>
                                 <Button type={"text"} shape={"round"} icon={<i className="bi bi-collection"></i>}
                                         style={{color: this.state.fontColor, cursor: "default"}}
                                         onMouseOver={this.btnMouseOver.bind(this)}
@@ -231,7 +231,7 @@ class AuthorComponent extends React.Component {
                                         onMouseOut={this.btnMouseOut.bind(this)}>
                                     {this.state.imageDescription.length < btnMaxSize ? this.state.imageDescription : this.state.imageDescription.substring(0, btnMaxSize) + "..."}
                                 </Button>
-                                <Space>
+                                <Space split={<Divider type={"vertical"} style={{borderColor: this.state.fontColor}}/>}>
                                     <Button type={"text"} shape={"round"} icon={<ClockCircleOutlined/>}
                                             style={{color: this.state.fontColor, cursor: "default"}}
                                             onMouseOver={this.btnMouseOver.bind(this)}
@@ -256,7 +256,7 @@ class AuthorComponent extends React.Component {
         return (
             <Popover title={popoverTitle} content={popoverContent} placement={"topRight"}
                      color={this.state.backgroundColor}
-                     overlayStyle={{width: "550px"}}>
+                     overlayStyle={{width: "600px"}}>
                 <Button shape={"round"} icon={<CameraOutlined/>} size={"large"}
                         id={"authorBtn"}
                         className={"componentTheme zIndexHigh"}
