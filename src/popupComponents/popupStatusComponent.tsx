@@ -1,5 +1,5 @@
 import React from "react";
-import {Button, Divider, Space} from "antd";
+import {Button, Space} from "antd";
 import {CalendarOutlined, CheckSquareOutlined} from "@ant-design/icons";
 import "../stylesheets/popupComponent.scss"
 import {getFontColor, getGreetContent, getGreetIcon, getWeatherIcon,} from "../typescripts/publicFunctions";
@@ -91,7 +91,7 @@ class PopupImageComponent extends React.Component {
 
     render() {
         return (
-            <Space split={<Divider type={"vertical"} style={{borderColor: this.state.fontColor}}/>}>
+            <Space>
                 <Button type={"text"} shape={"round"} icon={<i className={this.state.greetIcon}> </i>}
                         onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
                         style={{color: this.state.fontColor, cursor: "default"}}>

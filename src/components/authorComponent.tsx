@@ -1,5 +1,5 @@
 import React from "react";
-import {Avatar, Button, Col, Divider, List, message, Popover, Row, Space, Typography} from "antd";
+import {Avatar, Button, Col, List, message, Popover, Row, Space, Typography} from "antd";
 import {
     CameraOutlined,
     ClockCircleOutlined,
@@ -14,7 +14,7 @@ import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publi
 import "../stylesheets/publicStyles.scss"
 
 const {Text} = Typography;
-const btnMaxSize = 60;
+const btnMaxSize = 50;
 
 type propType = {
     themeColor: ThemeColorInterface,
@@ -192,7 +192,7 @@ class AuthorComponent extends React.Component {
                                     onClick={this.authorLinkBtnOnClick.bind(this)}>
                                 {this.state.authorName.length < btnMaxSize ? this.state.authorName : this.state.authorName.substring(0, btnMaxSize) + "..."}
                             </Button>
-                            <Space split={<Divider type={"vertical"} style={{borderColor: this.state.fontColor}}/>}>
+                            <Space>
                                 <Button type={"text"} shape={"round"} icon={<i className="bi bi-collection"></i>}
                                         style={{color: this.state.fontColor, cursor: "default"}}
                                         onMouseOver={this.btnMouseOver.bind(this)}
@@ -233,7 +233,7 @@ class AuthorComponent extends React.Component {
                                         onMouseOut={this.btnMouseOut.bind(this)}>
                                     {this.state.imageDescription.length < btnMaxSize ? this.state.imageDescription : this.state.imageDescription.substring(0, btnMaxSize) + "..."}
                                 </Button>
-                                <Space split={<Divider type={"vertical"} style={{borderColor: this.state.fontColor}}/>}>
+                                <Space>
                                     <Button type={"text"} shape={"round"} icon={<ClockCircleOutlined/>}
                                             style={{color: this.state.fontColor, cursor: "default"}}
                                             onMouseOver={this.btnMouseOver.bind(this)}
@@ -258,7 +258,7 @@ class AuthorComponent extends React.Component {
         return (
             <Popover title={popoverTitle} content={popoverContent} placement={"topRight"}
                      color={this.state.backgroundColor}
-                     overlayStyle={{width: "600px"}}>
+                     overlayStyle={{width: "550px"}}>
                 <Button shape={"round"} icon={<CameraOutlined/>} size={"large"}
                         id={"authorBtn"}
                         className={"componentTheme zIndexHigh"}

@@ -1,5 +1,5 @@
 import React from "react";
-import {Button, Divider, Image, message, Space} from "antd";
+import {Button, Image, message, Space} from "antd";
 import {
     CameraOutlined,
     ClockCircleOutlined,
@@ -13,7 +13,7 @@ import {getFontColor, getSearchEngineDetail, isEmptyString} from "../typescripts
 import {PreferenceDataInterface} from "../typescripts/publicInterface";
 
 const $ = require("jquery");
-const btnMaxSize = 45;
+const btnMaxSize = 35;
 
 type propType = {
     imageData: any,
@@ -203,7 +203,7 @@ class PopupImageComponent extends React.Component {
                             onClick={this.imageLinkBtnOnClick.bind(this)} style={{color: this.state.fontColor}}>
                         {this.state.imageDescription.length < btnMaxSize ? this.state.imageDescription : this.state.imageDescription.substring(0, btnMaxSize) + "..."}
                     </Button>
-                    <Space split={<Divider type={"vertical"} style={{borderColor: this.state.fontColor}}/>}>
+                    <Space>
                         <Button type={"text"} shape={"round"} icon={<ClockCircleOutlined/>}
                                 style={{color: this.state.fontColor, cursor: "default"}}
                                 onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
