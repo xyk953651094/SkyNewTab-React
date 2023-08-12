@@ -210,7 +210,6 @@ class App extends React.Component {
                 <Content id={"content"} className={"center"}>
                     <WallpaperComponent
                         getImageData={this.getImageData.bind(this)}
-                        preferenceData={this.state.preferenceData}
                     />
                     <Space direction={"vertical"} align={"center"}>
                         <ClockComponent themeColor={this.state.themeColor}/>

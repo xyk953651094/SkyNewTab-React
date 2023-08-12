@@ -6,13 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="修复已知问题">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/mainPage.bundle.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/mainPage.bundle.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/popup.bundle.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/popup.bundle.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/authorComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/authorComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/dailyComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dailyComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/todoComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/todoComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/popupComponents/popupImageComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/popupComponents/popupImageComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/clockComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/clockComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/wallpaperComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/wallpaperComponent.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/popupComponents/popupStatusComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/popupComponents/popupStatusComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/typescripts/publicFunctions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/typescripts/publicFunctions.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -185,7 +183,7 @@
       <workItem from="1691675410540" duration="1972000" />
       <workItem from="1691719540209" duration="177000" />
       <workItem from="1691719731346" duration="6160000" />
-      <workItem from="1691808389289" duration="1464000" />
+      <workItem from="1691808389289" duration="4389000" />
     </task>
     <task id="LOCAL-00001" summary="优化抽屉蒙版的显示效果&#10;优化代码质量">
       <created>1683952184207</created>
@@ -305,14 +303,6 @@
       <option name="presentableId" value="LOCAL-00017" />
       <option name="project" value="LOCAL" />
       <updated>1687402693401</updated>
-    </task>
-    <task id="LOCAL-00026" summary="新增popup功能&#10;修复部分问题">
-      <option name="closed" value="true" />
-      <created>1689584906690</created>
-      <option name="number" value="00026" />
-      <option name="presentableId" value="LOCAL-00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1689584906690</updated>
     </task>
     <task id="LOCAL-00027" summary="新增blurhash模块，图片加载更自然&#10;修复部分问题">
       <option name="closed" value="true" />
@@ -562,7 +552,15 @@
       <option name="project" value="LOCAL" />
       <updated>1691754229361</updated>
     </task>
-    <option name="localTasksCounter" value="58" />
+    <task id="LOCAL-00058" summary="修复已知问题">
+      <option name="closed" value="true" />
+      <created>1691810700861</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1691810700862</updated>
+    </task>
+    <option name="localTasksCounter" value="59" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

@@ -1,7 +1,7 @@
 import React from "react";
 import {Col, Row, Space, Typography} from "antd";
 import "../stylesheets/clockComponent.scss"
-import {getTimeDetails} from "../typescripts/publicFunctions";
+import {changeBackgroundColor, changeFontColor, getTimeDetails} from "../typescripts/publicFunctions";
 import {ThemeColorInterface} from "../typescripts/publicInterface";
 
 const {Text} = Typography;
@@ -37,17 +37,28 @@ class ClockComponent extends React.Component {
     }
 
     btnMouseOver(e: any) {
-        e.currentTarget.style.backgroundColor = this.state.backgroundColor;
-        e.currentTarget.classList.add("componentTheme");
-        $(".clockText").css("color", this.state.fontColor);
-        $(".dateText").css("color", this.state.fontColor);
+        setTimeout(() => {
+            e.currentTarget.classList.add("componentTheme");
+        }, 300);
+        changeBackgroundColor(e.currentTarget, this.state.backgroundColor);
+        changeFontColor(".clockText, .dateText", this.state.fontColor);
+
+        // e.currentTarget.style.backgroundColor = this.state.backgroundColor;
+        // e.currentTarget.classList.add("componentTheme");
+        // $(".clockText").css("color", this.state.fontColor);
+        // $(".dateText").css("color", this.state.fontColor);
     }
 
     btnMouseOut(e: any) {
-        e.currentTarget.style.backgroundColor = "transparent";
-        e.currentTarget.classList.remove("componentTheme");
-        $(".clockText").css("color", this.state.backgroundColor);
-        $(".dateText").css("color", this.state.backgroundColor);
+        setTimeout(() => {
+            e.currentTarget.classList.remove("componentTheme");
+        }, 300);
+        changeBackgroundColor(e.currentTarget, "transparent");
+        changeFontColor(".clockText, .dateText", this.state.backgroundColor);
+
+        // e.currentTarget.style.backgroundColor = "transparent";
+        // $(".clockText").css("color", this.state.backgroundColor);
+        // $(".dateText").css("color", this.state.backgroundColor);
     }
 
     componentDidMount() {

@@ -3,18 +3,18 @@ import "../stylesheets/wallpaperComponent.scss"
 import "../stylesheets/publicStyles.scss"
 import {Image, message} from "antd";
 import {httpRequest, imageDynamicEffect} from "../typescripts/publicFunctions";
-import {clientId, device} from "../typescripts/publicConstants";
+import {clientId, defaultPreferenceData, device} from "../typescripts/publicConstants";
 import {PreferenceDataInterface} from "../typescripts/publicInterface";
 
 type propType = {
     getImageData: any,
-    preferenceData: PreferenceDataInterface,
 }
 
 type stateType = {
-    display: "none" | "block",
     imageData: any,
+    preferenceData: PreferenceDataInterface,
     imageLink: string,
+    display: "none" | "block",
 }
 
 interface WallpaperComponent {
@@ -27,6 +27,7 @@ class WallpaperComponent extends React.Component {
         super(props);
         this.state = {
             imageData: null,
+            preferenceData: defaultPreferenceData,
             imageLink: "",
             display: "none",
         };
@@ -37,7 +38,7 @@ class WallpaperComponent extends React.Component {
             imageData: imageData,
         }, () => {
             this.props.getImageData(imageData);
-            switch (this.props.preferenceData.imageQuality) {
+            switch (this.state.preferenceData.imageQuality) {
                 case "full":
                     this.setState({
                         imageLink: this.state.imageData.urls.full,
@@ -69,13 +70,12 @@ class WallpaperComponent extends React.Component {
 
     getWallpaper() {
         let tempImageTopics = "";
-        for (let i = 0; i < this.props.preferenceData.imageTopics.length; i++) {
-            tempImageTopics += this.props.preferenceData.imageTopics[i];
-            if (i !== this.props.preferenceData.imageTopics.length - 1) {
+        for (let i = 0; i < this.state.preferenceData.imageTopics.length; i++) {
+            tempImageTopics += this.state.preferenceData.imageTopics[i];
+            if (i !== this.state.preferenceData.imageTopics.length - 1) {
                 tempImageTopics += ",";
             }
         }
-        console.log(tempImageTopics);
 
         let tempThis = this;
         let headers = {};
@@ -110,10 +110,14 @@ class WallpaperComponent extends React.Component {
     }
 
     componentDidMount() {
-        let preferenceData = localStorage.getItem("preferenceData");
+        let tempPreferenceData = localStorage.getItem("preferenceData");
         let noImageMode = false;
-        if (preferenceData) {
-            noImageMode = JSON.parse(preferenceData).noImageMode;
+        if (tempPreferenceData) {
+            this.setState({
+                preferenceData: JSON.parse(tempPreferenceData)
+            }, () => {
+                noImageMode = this.state.preferenceData.noImageMode;
+            })
         }
 
         if(!noImageMode) {
@@ -153,7 +157,7 @@ class WallpaperComponent extends React.Component {
 
                             setTimeout(() => {
                                 backgroundImageDiv.style.perspective = "500px";
-                                imageDynamicEffect(backgroundImage, this.props.preferenceData.dynamicEffect);
+                                imageDynamicEffect(backgroundImage, this.state.preferenceData.dynamicEffect);
                             }, 5000);
                         }, 2000);
                     })
