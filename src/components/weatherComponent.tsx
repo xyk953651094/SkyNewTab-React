@@ -1,5 +1,5 @@
 import React from "react";
-import {Button, Popover, Space} from "antd";
+import {Button, Col, Popover, List, Row, Space, Typography} from "antd";
 import {
     changeThemeColor,
     getFontColor,
@@ -8,6 +8,9 @@ import {
     httpRequest
 } from "../typescripts/publicFunctions";
 import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
+import {InfoCircleOutlined} from "@ant-design/icons";
+
+const {Text} = Typography;
 
 type propType = {
     themeColor: ThemeColorInterface,
@@ -21,7 +24,7 @@ type stateType = {
     weatherIcon: string,
     weatherInfo: string,
     searchEngineUrl: string,
-    region: string;
+    address: string;
     humidity: string;
     pm25: string;
     rainfall: string;
@@ -44,7 +47,7 @@ class WeatherComponent extends React.Component {
             weatherIcon: "",
             weatherInfo: "暂无信息",
             searchEngineUrl: "https://www.bing.com/search?q=",
-            region: "暂无信息",
+            address: "暂无信息",
             humidity: "暂无信息",
             pm25: "暂无信息",
             rainfall: "暂无信息",
@@ -63,7 +66,7 @@ class WeatherComponent extends React.Component {
         e.currentTarget.style.color = this.state.fontColor;
     }
 
-    weatherBtnOnClick() {
+    infoBtnOnClick() {
         window.open(this.state.searchEngineUrl + "天气", "_blank",);
     }
 
@@ -71,7 +74,7 @@ class WeatherComponent extends React.Component {
         this.setState({
             weatherIcon: getWeatherIcon(data.weatherData.weather),
             weatherInfo: data.weatherData.weather + "｜" + data.weatherData.temperature + "°C",
-            region: data.region.replace("|", " · "),
+            address: data.region.replace("|", " · "),
             humidity: data.weatherData.humidity,
             pm25: data.weatherData.pm25,
             rainfall: data.weatherData.rainfall + "%",
@@ -135,42 +138,72 @@ class WeatherComponent extends React.Component {
     }
 
     render() {
+        const popoverTitle = (
+            <Row align={"middle"}>
+                <Col span={10}>
+                    <Text style={{color: this.state.fontColor}}>{"天气信息"}</Text>
+                </Col>
+                <Col span={14} style={{textAlign: "right"}}>
+                    <Space>
+                        <Button type={"text"} shape={"round"} icon={<InfoCircleOutlined />}
+                                onMouseOver={this.btnMouseOver.bind(this)}
+                                onMouseOut={this.btnMouseOut.bind(this)}
+                                onClick={this.infoBtnOnClick.bind(this)}
+                                style={{color: this.state.fontColor}}>
+                            {"更多信息"}
+                        </Button>
+                    </Space>
+                </Col>
+            </Row>
+        );
+
         const popoverContent = (
-            <Space direction={"vertical"}>
-                <Button type={"text"} shape={"round"} icon={<i className="bi bi-moisture"></i>}
-                        style={{color: this.state.fontColor, cursor: "default"}}
-                        onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
-                    {" 空气湿度：" + this.state.humidity}
-                </Button>
-                <Button type={"text"} shape={"round"} icon={<i className="bi bi-water"></i>}
-                        style={{color: this.state.fontColor, cursor: "default"}}
-                        onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
-                    {" 空气质量：" + this.state.pm25}
-                </Button>
-                <Button type={"text"} shape={"round"} icon={<i className="bi bi-cloud-rain"></i>}
-                        style={{color: this.state.fontColor, cursor: "default"}}
-                        onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
-                    {" 降雨概率：" + this.state.rainfall}
-                </Button>
-                <Button type={"text"} shape={"round"} icon={<i className="bi bi-eye"></i>}
-                        style={{color: this.state.fontColor, cursor: "default"}}
-                        onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
-                    {" 视线距离：" + this.state.visibility}
-                </Button>
-                <Button type={"text"} shape={"round"} icon={<i className="bi bi-wind"></i>}
-                        style={{color: this.state.fontColor, cursor: "default"}}
-                        onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
-                    {" 风速情况：" + this.state.windInfo}
-                </Button>
-            </Space>
+            <List>
+                <List.Item>
+                    <Space direction={"vertical"}>
+                        <Button type={"text"} shape={"round"} icon={<i className="bi bi-geo-alt"></i>}
+                                style={{color: this.state.fontColor, cursor: "default"}}
+                                onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
+                            {" 地理位置：" + this.state.address}
+                        </Button>
+                        <Button type={"text"} shape={"round"} icon={<i className="bi bi-moisture"></i>}
+                                style={{color: this.state.fontColor, cursor: "default"}}
+                                onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
+                            {" 空气湿度：" + this.state.humidity}
+                        </Button>
+                        <Button type={"text"} shape={"round"} icon={<i className="bi bi-water"></i>}
+                                style={{color: this.state.fontColor, cursor: "default"}}
+                                onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
+                            {" 空气质量：" + this.state.pm25}
+                        </Button>
+                        <Button type={"text"} shape={"round"} icon={<i className="bi bi-cloud-rain"></i>}
+                                style={{color: this.state.fontColor, cursor: "default"}}
+                                onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
+                            {" 降雨概率：" + this.state.rainfall}
+                        </Button>
+                        <Button type={"text"} shape={"round"} icon={<i className="bi bi-eye"></i>}
+                                style={{color: this.state.fontColor, cursor: "default"}}
+                                onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
+                            {" 视线距离：" + this.state.visibility}
+                        </Button>
+                        <Button type={"text"} shape={"round"} icon={<i className="bi bi-wind"></i>}
+                                style={{color: this.state.fontColor, cursor: "default"}}
+                                onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
+                            {" 风速情况：" + this.state.windInfo}
+                        </Button>
+                    </Space>
+                </List.Item>
+            </List>
         );
 
         return (
-            <Popover title={this.state.region} content={popoverContent} color={this.state.backgroundColor}>
+            <Popover title={popoverTitle} content={popoverContent} color={this.state.backgroundColor}>
                 <Button shape={"round"} icon={<i className={this.state.weatherIcon}> </i>} size={"large"}
                         id={"weatherBtn"}
                         className={"componentTheme zIndexHigh"}
-                        onClick={this.weatherBtnOnClick.bind(this)}
+                        style={{
+                            cursor: "default",
+                        }}
                 >
                     {this.state.weatherInfo}
                 </Button>
