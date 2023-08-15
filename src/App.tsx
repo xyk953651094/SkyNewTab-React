@@ -212,7 +212,7 @@ class App extends React.Component {
                         getImageData={this.getImageData.bind(this)}
                     />
                     <Space direction={"vertical"} align={"center"}>
-                        <ClockComponent themeColor={this.state.themeColor}/>
+                        <ClockComponent themeColor={this.state.themeColor} preferenceData={this.state.preferenceData}/>
                         <SearchComponent preferenceData={this.state.preferenceData}/>
                         <Col xs={0} sm={0} md={24} lg={24} xl={24}>
                             <CollectionComponent

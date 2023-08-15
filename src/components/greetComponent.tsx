@@ -20,6 +20,7 @@ type propType = {
 }
 
 type stateType = {
+    display: "none" | "block",
     hoverColor: string,
     backgroundColor: string,
     fontColor: string,
@@ -41,6 +42,7 @@ class GreetComponent extends React.Component {
     constructor(props: any) {
         super(props);
         this.state = {
+            display: "block",
             hoverColor: "",
             backgroundColor: "",
             fontColor: "",
@@ -116,27 +118,29 @@ class GreetComponent extends React.Component {
     }
 
     componentDidMount() {
-        // 防抖节流
-        let lastRequestTime: any = localStorage.getItem("lastHolidayRequestTime");
-        let nowTimeStamp = new Date().getTime();
-        if (lastRequestTime === null) {  // 第一次请求时 lastRequestTime 为 null，因此直接进行请求赋值 lastRequestTime
-            this.getHoliday();
-        } else if (nowTimeStamp - parseInt(lastRequestTime) > 4 * 60 * 60 * 1000) {  // 必须多于四小时才能进行新的请求
-            this.getHoliday();
-        } else {  // 一小时之内使用上一次请求结果
-            let lastHoliday: any = localStorage.getItem("lastHoliday");
-            if (lastHoliday) {
-                lastHoliday = JSON.parse(lastHoliday);
-                this.setHoliday(lastHoliday);
+        if(!this.props.preferenceData.simpleMode) {
+            // 防抖节流
+            let lastRequestTime: any = localStorage.getItem("lastHolidayRequestTime");
+            let nowTimeStamp = new Date().getTime();
+            if (lastRequestTime === null) {  // 第一次请求时 lastRequestTime 为 null，因此直接进行请求赋值 lastRequestTime
+                this.getHoliday();
+            } else if (nowTimeStamp - parseInt(lastRequestTime) > 4 * 60 * 60 * 1000) {  // 必须多于四小时才能进行新的请求
+                this.getHoliday();
+            } else {  // 一小时之内使用上一次请求结果
+                let lastHoliday: any = localStorage.getItem("lastHoliday");
+                if (lastHoliday) {
+                    lastHoliday = JSON.parse(lastHoliday);
+                    this.setHoliday(lastHoliday);
+                }
             }
-        }
 
-        setInterval(() => {
-            this.setState({
-                greetIcon: getGreetIcon(),
-                greetContent: getGreetContent(),
-            })
-        }, 60 * 60 * 1000);
+            setInterval(() => {
+                this.setState({
+                    greetIcon: getGreetIcon(),
+                    greetContent: getGreetContent(),
+                })
+            }, 60 * 60 * 1000);
+        }
     }
 
     componentWillReceiveProps(nextProps: any, prevProps: any) {
@@ -152,6 +156,7 @@ class GreetComponent extends React.Component {
 
         if (nextProps.preferenceData !== prevProps.preferenceData) {
             this.setState({
+                display: nextProps.preferenceData.simpleMode ? "none" : "block",
                 searchEngineUrl: getSearchEngineDetail(nextProps.preferenceData.searchEngine).searchEngineUrl,
             });
         }
@@ -211,12 +216,15 @@ class GreetComponent extends React.Component {
         return (
             <Popover
                 title={popoverTitle}
-                content={popoverContent} placement={"bottomLeft"} color={this.state.backgroundColor}>
+                content={popoverContent} placement={"bottomLeft"} color={this.state.backgroundColor}
+                overlayStyle={{minWidth: "500px"}}
+            >
                 <Button shape={"round"} icon={<i className={this.state.greetIcon}> </i>} size={"large"}
                         id={"greetBtn"}
                         className={"componentTheme zIndexHigh"}
                         style={{
                             cursor: "default",
+                            display: this.state.display
                         }}
                 >
                     {this.state.greetContent + "｜" + this.state.holidayContent}

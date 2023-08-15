@@ -199,8 +199,9 @@ class DailyComponent extends React.Component {
         const popoverTitle = (
             <Row align={"middle"}>
                 <Col span={10}>
-                    <Text
-                        style={{color: this.state.fontColor}}>{"倒数日 " + this.state.dailySize + " / " + this.state.dailyMaxSize}</Text>
+                    <Text style={{color: this.state.fontColor}}>
+                        {"倒数日 " + this.state.dailySize + " / " + this.state.dailyMaxSize}
+                    </Text>
                 </Col>
                 <Col span={14} style={{textAlign: "right"}}>
                     <Space>
@@ -256,7 +257,7 @@ class DailyComponent extends React.Component {
             <Row>
                 <Popover title={popoverTitle} content={popoverContent} placement={"bottomRight"}
                          color={this.state.backgroundColor}
-                         overlayStyle={{minWidth: "550px"}}>
+                         overlayStyle={{width: "550px"}}>
                     <Badge size={"small"} count={this.state.listItems.length} style={{display: this.state.display}}>
                         <Button shape={"circle"} icon={<CalendarOutlined/>} size={"large"}
                                 id={"dailyBtn"}

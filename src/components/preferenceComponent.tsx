@@ -380,7 +380,7 @@ class PreferenceComponent extends React.Component {
                             </Card>
                         </Col>
                         <Col span={24}>
-                            <Card title={"网站推荐"} size={"small"}
+                            <Card title={"友情链接"} size={"small"}
                                   extra={<LinkOutlined style={{color: this.state.fontColor}}/>}
                                   style={{border: "1px solid " + this.state.fontColor}}
                                   headStyle={{

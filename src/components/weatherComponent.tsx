@@ -18,6 +18,7 @@ type propType = {
 }
 
 type stateType = {
+    display: "none" | "block",
     hoverColor: string,
     backgroundColor: string,
     fontColor: string,
@@ -41,6 +42,7 @@ class WeatherComponent extends React.Component {
     constructor(props: any) {
         super(props);
         this.state = {
+            display: "block",
             hoverColor: "",
             backgroundColor: "",
             fontColor: "",
@@ -103,18 +105,20 @@ class WeatherComponent extends React.Component {
     }
 
     componentDidMount() {
-        // 防抖节流
-        let lastRequestTime: any = localStorage.getItem("lastWeatherRequestTime");
-        let nowTimeStamp = new Date().getTime();
-        if (lastRequestTime === null) {  // 第一次请求时 lastRequestTime 为 null，因此直接进行请求赋值 lastRequestTime
-            this.getWeather();
-        } else if (nowTimeStamp - parseInt(lastRequestTime) > 60 * 60 * 1000) {  // 必须多于一小时才能进行新的请求
-            this.getWeather();
-        } else {  // 一小时之内使用上一次请求结果
-            let lastWeather: any = localStorage.getItem("lastWeather");
-            if (lastWeather) {
-                lastWeather = JSON.parse(lastWeather);
-                this.setWeather(lastWeather);
+        if(!this.props.preferenceData.simpleMode) {
+            // 防抖节流
+            let lastRequestTime: any = localStorage.getItem("lastWeatherRequestTime");
+            let nowTimeStamp = new Date().getTime();
+            if (lastRequestTime === null) {  // 第一次请求时 lastRequestTime 为 null，因此直接进行请求赋值 lastRequestTime
+                this.getWeather();
+            } else if (nowTimeStamp - parseInt(lastRequestTime) > 60 * 60 * 1000) {  // 必须多于一小时才能进行新的请求
+                this.getWeather();
+            } else {  // 一小时之内使用上一次请求结果
+                let lastWeather: any = localStorage.getItem("lastWeather");
+                if (lastWeather) {
+                    lastWeather = JSON.parse(lastWeather);
+                    this.setWeather(lastWeather);
+                }
             }
         }
     }
@@ -132,6 +136,7 @@ class WeatherComponent extends React.Component {
 
         if (nextProps.preferenceData !== prevProps.preferenceData) {
             this.setState({
+                display: nextProps.preferenceData.simpleMode ? "none" : "block",
                 searchEngineUrl: getSearchEngineDetail(nextProps.preferenceData.searchEngine).searchEngineUrl,
             });
         }
@@ -197,12 +202,15 @@ class WeatherComponent extends React.Component {
         );
 
         return (
-            <Popover title={popoverTitle} content={popoverContent} color={this.state.backgroundColor}>
+            <Popover title={popoverTitle} content={popoverContent} color={this.state.backgroundColor}
+                     overlayStyle={{width: "250px"}}
+            >
                 <Button shape={"round"} icon={<i className={this.state.weatherIcon}> </i>} size={"large"}
                         id={"weatherBtn"}
                         className={"componentTheme zIndexHigh"}
                         style={{
                             cursor: "default",
+                            display: this.state.display
                         }}
                 >
                     {this.state.weatherInfo}

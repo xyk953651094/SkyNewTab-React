@@ -115,9 +115,8 @@ class WallpaperComponent extends React.Component {
         if (tempPreferenceData) {
             this.setState({
                 preferenceData: JSON.parse(tempPreferenceData)
-            }, () => {
-                noImageMode = this.state.preferenceData.noImageMode;
-            })
+            });
+            noImageMode = JSON.parse(tempPreferenceData).noImageMode;
         }
 
         if(!noImageMode) {

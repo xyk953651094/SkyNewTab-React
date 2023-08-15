@@ -4,10 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="修复已知问题">
+    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="优化视觉效果">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/mainPage.bundle.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/mainPage.bundle.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/popup.bundle.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/popup.bundle.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/clockComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/clockComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/dailyComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dailyComponent.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/greetComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/greetComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/preferenceComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/preferenceComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/wallpaperComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/wallpaperComponent.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/weatherComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/weatherComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stylesheets/clockComponent.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/stylesheets/clockComponent.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -182,7 +190,9 @@
       <workItem from="1691719731346" duration="6160000" />
       <workItem from="1691808389289" duration="4428000" />
       <workItem from="1691915418373" duration="598000" />
-      <workItem from="1691927036822" duration="1368000" />
+      <workItem from="1691927036822" duration="1420000" />
+      <workItem from="1691934699051" duration="48000" />
+      <workItem from="1692099510398" duration="4514000" />
     </task>
     <task id="LOCAL-00001" summary="优化抽屉蒙版的显示效果&#10;优化代码质量">
       <created>1683952184207</created>
@@ -302,14 +312,6 @@
       <option name="presentableId" value="LOCAL-00017" />
       <option name="project" value="LOCAL" />
       <updated>1687402693401</updated>
-    </task>
-    <task id="LOCAL-00028" summary="新增 popup 弹窗&#10;修复部分问题">
-      <option name="closed" value="true" />
-      <created>1689672242234</created>
-      <option name="number" value="00028" />
-      <option name="presentableId" value="LOCAL-00028" />
-      <option name="project" value="LOCAL" />
-      <updated>1689672242234</updated>
     </task>
     <task id="LOCAL-00029" summary="修复 Firefox 图片错位问题">
       <option name="closed" value="true" />
@@ -559,7 +561,15 @@
       <option name="project" value="LOCAL" />
       <updated>1691847740441</updated>
     </task>
-    <option name="localTasksCounter" value="60" />
+    <task id="LOCAL-00060" summary="优化视觉效果">
+      <option name="closed" value="true" />
+      <created>1691928538423</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1691928538423</updated>
+    </task>
+    <option name="localTasksCounter" value="61" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -600,8 +610,8 @@
     <MESSAGE value="新增无图模式" />
     <MESSAGE value="优化代码结构" />
     <MESSAGE value="修复已知问题&#10;优化视觉效果" />
-    <MESSAGE value="优化视觉效果" />
     <MESSAGE value="修复已知问题" />
-    <option name="LAST_COMMIT_MESSAGE" value="修复已知问题" />
+    <MESSAGE value="优化视觉效果" />
+    <option name="LAST_COMMIT_MESSAGE" value="优化视觉效果" />
   </component>
 </project>
