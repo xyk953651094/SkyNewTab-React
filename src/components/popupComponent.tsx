@@ -59,7 +59,7 @@ class PopupComponent extends React.Component {
                 hoverColor: tempImageData.color,
                 backgroundColor: getReverseColor(tempImageData.color),
                 fontColor: getFontColor(getReverseColor(tempImageData.color)),
-                preferenceData: tempPreferenceData === null ? defaultPreferenceData : tempPreferenceData,
+                preferenceData: tempPreferenceData === null ? defaultPreferenceData : JSON.parse(tempPreferenceData),
             }, () => {
                 $("body").css({"backgroundColor": this.state.backgroundColor});
             });
@@ -97,8 +97,9 @@ class PopupComponent extends React.Component {
                 </Header>
                 <Content className={"popupContent"}>
                     <List>
-                        <List.Item style={{borderBlockEndColor: this.state.fontColor, textAlign: "center"}}>
-                            <PopupStatusComponent imageData={this.state.imageData} fontColor={this.state.fontColor}/>
+                        <List.Item style={{borderBlockEndColor: this.state.fontColor}}>
+                            <PopupStatusComponent imageData={this.state.imageData} fontColor={this.state.fontColor}
+                                                  preferenceData={this.state.preferenceData}/>
                         </List.Item>
                         <List.Item>
                             <PopupImageComponent imageData={this.state.imageData} fontColor={this.state.fontColor}

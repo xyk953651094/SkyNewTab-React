@@ -1,6 +1,6 @@
 import React from "react";
 import {Button, Col, Form, Input, List, message, Modal, Row, Space, Tooltip, Typography} from "antd";
-import {DeleteOutlined, EditOutlined, PlusOutlined} from "@ant-design/icons";
+import {DeleteOutlined, EditOutlined, PlusOutlined, PushpinOutlined, LinkOutlined} from "@ant-design/icons";
 import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
 import {getFontColor} from "../typescripts/publicFunctions";
 
@@ -294,9 +294,9 @@ class CollectionComponent extends React.Component {
                                             style={{color: this.state.fontColor}}>
                                     </Button>
                                 ]}>
-                                    <Row justify={"space-between"} style={{width: "100%"}}>
+                                    <Row style={{width: "100%"}}>
                                         <Col span={8}>
-                                            <Button type={"text"} shape={"round"}
+                                            <Button type={"text"} shape={"round"} icon={<PushpinOutlined />}
                                                     onMouseOver={this.btnMouseOver.bind(this)}
                                                     onMouseOut={this.btnMouseOut.bind(this)}
                                                     style={{color: this.state.fontColor, cursor: "default"}}>
@@ -304,7 +304,7 @@ class CollectionComponent extends React.Component {
                                             </Button>
                                         </Col>
                                         <Col span={16}>
-                                            <Button type={"text"} shape={"round"}
+                                            <Button type={"text"} shape={"round"} icon={<LinkOutlined />}
                                                     onMouseOver={this.btnMouseOver.bind(this)}
                                                     onMouseOut={this.btnMouseOut.bind(this)}
                                                     style={{color: this.state.fontColor, cursor: "default"}}>

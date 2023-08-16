@@ -1,12 +1,20 @@
 import React from "react";
 import {Button, Space} from "antd";
-import {CalendarOutlined, CheckSquareOutlined} from "@ant-design/icons";
+import {CalendarOutlined, CameraOutlined, CheckSquareOutlined} from "@ant-design/icons";
 import "../stylesheets/popupComponent.scss"
-import {getFontColor, getGreetContent, getGreetIcon, getWeatherIcon,} from "../typescripts/publicFunctions";
+import {
+    getFontColor,
+    getGreetContent,
+    getGreetIcon,
+    getSearchEngineDetail,
+    getWeatherIcon,
+} from "../typescripts/publicFunctions";
+import {PreferenceDataInterface} from "../typescripts/publicInterface";
 
 type propType = {
-    imageData: string
-    fontColor: any
+    imageData: string,
+    fontColor: any,
+    preferenceData: PreferenceDataInterface,
 }
 
 type stateType = {
@@ -18,6 +26,8 @@ type stateType = {
     todoAmount: number,
     hoverColor: string,
     fontColor: string,
+    searchEngineUrl: string,
+    simpleMode: boolean,
 }
 
 interface PopupImageComponent {
@@ -37,6 +47,8 @@ class PopupImageComponent extends React.Component {
             todoAmount: 0,
             hoverColor: "#000000",
             fontColor: "#000000",
+            searchEngineUrl: "https://www.bing.com/search?q=",
+            simpleMode: false,
         }
     }
 
@@ -48,6 +60,14 @@ class PopupImageComponent extends React.Component {
     btnMouseOut(e: any) {
         e.currentTarget.style.backgroundColor = "transparent";
         e.currentTarget.style.color = this.state.fontColor;
+    }
+
+    greetBtnOnClick() {
+        window.open(this.state.searchEngineUrl + "万年历", "_blank");
+    }
+
+    weatherBtnOnClick() {
+        window.open(this.state.searchEngineUrl + "天气", "_blank",);
     }
 
     setHoliday(data: any) {
@@ -67,9 +87,17 @@ class PopupImageComponent extends React.Component {
                 hoverColor: nextProps.imageData.color,
             });
         }
+
         if (nextProps.fontColor !== prevProps.fontColor) {
             this.setState({
                 fontColor: nextProps.fontColor,
+            });
+        }
+
+        if (nextProps.preferenceData !== prevProps.preferenceData) {
+            this.setState({
+                searchEngineUrl: getSearchEngineDetail(nextProps.preferenceData.searchEngine).searchEngineUrl,
+                simpleMode: nextProps.preferenceData.simpleMode
             });
         }
     }
@@ -91,29 +119,38 @@ class PopupImageComponent extends React.Component {
 
     render() {
         return (
-            <Space>
-                <Button type={"text"} shape={"round"} icon={<i className={this.state.greetIcon}> </i>}
+            <>
+                <Space style={{display: this.state.simpleMode ? "none" : "inline-flex"}}>
+                    <Button type={"text"} shape={"round"} icon={<i className={this.state.greetIcon}> </i>}
+                            onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
+                            onClick={this.greetBtnOnClick.bind(this)}
+                            style={{color: this.state.fontColor}}>
+                        {this.state.greetContent}
+                    </Button>
+                    <Button type={"text"} shape={"round"} icon={<i className={this.state.weatherIcon}> </i>}
+                            onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
+                            onClick={this.weatherBtnOnClick.bind(this)}
+                            style={{color: this.state.fontColor}}>
+                        {this.state.weatherContent}
+                    </Button>
+                    <Button type={"text"} shape={"round"} icon={<CalendarOutlined/>}
+                            onMouseOver={this.btnMouseOver.bind(this)}
+                            onMouseOut={this.btnMouseOut.bind(this)}
+                            style={{color: this.state.fontColor, cursor: "default"}}>
+                        {"倒数日：" + this.state.dailyAmount + " 个"}
+                    </Button>
+                    <Button type={"text"} shape={"round"} icon={<CheckSquareOutlined/>}
+                            onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
+                            style={{color: this.state.fontColor, cursor: "default"}}>
+                        {"待办事项：" + this.state.todoAmount + " 个"}
+                    </Button>
+                </Space>
+                <Button type={"text"} shape={"round"} icon={<CameraOutlined/>}
                         onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
-                        style={{color: this.state.fontColor, cursor: "default"}}>
-                    {this.state.greetContent}
+                        style={{color: this.state.fontColor, cursor: "default", display: this.state.simpleMode ? "inline-block" : "none"}}>
+                    {"已开启简洁模式"}
                 </Button>
-                <Button type={"text"} shape={"round"} icon={<i className={this.state.weatherIcon}> </i>}
-                        onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
-                        style={{color: this.state.fontColor, cursor: "default"}}>
-                    {this.state.weatherContent}
-                </Button>
-                <Button type={"text"} shape={"round"} icon={<CalendarOutlined/>}
-                        onMouseOver={this.btnMouseOver.bind(this)}
-                        onMouseOut={this.btnMouseOut.bind(this)}
-                        style={{color: this.state.fontColor, cursor: "default"}}>
-                    {"倒数日：" + this.state.dailyAmount + " 个"}
-                </Button>
-                <Button type={"text"} shape={"round"} icon={<CheckSquareOutlined/>}
-                        onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
-                        style={{color: this.state.fontColor, cursor: "default"}}>
-                    {"待办事项：" + this.state.todoAmount + " 个"}
-                </Button>
-            </Space>
+            </>
         );
     }
 }

@@ -87,8 +87,10 @@ class WallpaperComponent extends React.Component {
             "content_filter": "high",
         };
 
+        message.info("正在获取图片");
         httpRequest(headers, url, data, "GET")
             .then(function (resultData: any) {
+                message.info("正在加载图片");
                 localStorage.setItem("lastImageRequestTime", String(new Date().getTime()));  // 保存请求时间，防抖节流
                 localStorage.setItem("lastImage", JSON.stringify(resultData));                // 保存请求结果，防抖节流
                 tempThis.setWallpaper(resultData);
@@ -148,6 +150,8 @@ class WallpaperComponent extends React.Component {
                     this.setState({
                         display: "block",
                     }, () => {
+                        message.success("图片加载成功");
+
                         // 设置动态效果
                         backgroundImage.classList.add("wallpaperFadeIn");
                         setTimeout(() => {

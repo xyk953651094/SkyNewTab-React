@@ -41,9 +41,13 @@ class ClockComponent extends React.Component {
 
     btnMouseOver(e: any) {
         if(!this.state.noImageMode) {
-            changeBackgroundColor(e.currentTarget, this.state.backgroundColor, 150);
-            changeFontColor(".clockText, .dateText", this.state.fontColor, 150);
-            e.currentTarget.classList.add("componentTheme");
+            new Promise((resolve) => {
+                changeBackgroundColor(e.currentTarget, this.state.backgroundColor, 150);
+                changeFontColor(".clockText, .dateText", this.state.fontColor, 150);
+                resolve("success");
+            }).then(() => {
+                e.currentTarget.classList.add("componentTheme");
+            })
         }
     }
 

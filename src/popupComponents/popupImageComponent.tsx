@@ -35,6 +35,7 @@ type stateType = {
     fontColor: string,
     blurHashCode: string,
     searchEngineUrl: string,
+    noImageMode: boolean,
 }
 
 interface PopupImageComponent {
@@ -59,6 +60,7 @@ class PopupImageComponent extends React.Component {
             fontColor: "#000000",
             blurHashCode: "",
             searchEngineUrl: "https://www.bing.com/search?q=",
+            noImageMode: false,
         }
     }
 
@@ -168,55 +170,63 @@ class PopupImageComponent extends React.Component {
         if (nextProps.preferenceData !== prevProps.preferenceData) {
             this.setState({
                 searchEngineUrl: getSearchEngineDetail(nextProps.preferenceData.searchEngine).searchEngineUrl,
+                noImageMode: nextProps.preferenceData.noImageMode
             });
         }
     }
 
     render() {
         return (
-            <Space align={"center"}>
-                <Image
-                    id={"popupImage"}
-                    width={250}
-                    height={150}
-                    preview={false}
-                    alt={"暂无图片"}
-                    src={this.state.imagePreviewUrl}
-                    style={{borderRadius: "10px"}}
-                />
-                <canvas id={"popupCanvas"} className={"popupCanvas"}
-                        style={{display: this.state.displayCanvas, borderRadius: "10px"}}></canvas>
-                <Space direction={"vertical"}>
-                    <Button type={"text"} shape={"round"} icon={<UserOutlined/>}
-                            onMouseOver={this.btnMouseOver.bind(this)}
-                            onMouseOut={this.btnMouseOut.bind(this)} onClick={this.authorLinkBtnOnClick.bind(this)}
-                            style={{color: this.state.fontColor}}>
-                        {this.state.authorName.length < btnMaxSize ? this.state.authorName : this.state.authorName.substring(0, btnMaxSize) + "..."}
-                    </Button>
-                    <Button type={"text"} shape={"round"} icon={<EnvironmentOutlined/>}
-                            onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
-                            onClick={this.imageLocationBtnOnClick.bind(this)} style={{color: this.state.fontColor}}>
-                        {this.state.imageLocation.length < btnMaxSize ? this.state.imageLocation : this.state.imageLocation.substring(0, btnMaxSize) + "..."}
-                    </Button>
-                    <Button type={"text"} shape={"round"} icon={<InfoCircleOutlined/>}
-                            onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
-                            onClick={this.imageLinkBtnOnClick.bind(this)} style={{color: this.state.fontColor}}>
-                        {this.state.imageDescription.length < btnMaxSize ? this.state.imageDescription : this.state.imageDescription.substring(0, btnMaxSize) + "..."}
-                    </Button>
-                    <Space>
-                        <Button type={"text"} shape={"round"} icon={<ClockCircleOutlined/>}
-                                style={{color: this.state.fontColor, cursor: "default"}}
-                                onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
-                            {this.state.imageCreateTime}
+            <>
+                <Space align={"center"} style={{display: this.state.noImageMode ? "none" : "inline-flex"}}>
+                    <Image
+                        id={"popupImage"}
+                        width={250}
+                        height={150}
+                        preview={false}
+                        alt={"暂无图片"}
+                        src={this.state.imagePreviewUrl}
+                        style={{borderRadius: "10px"}}
+                    />
+                    <canvas id={"popupCanvas"} className={"popupCanvas"}
+                            style={{display: this.state.displayCanvas, borderRadius: "10px"}}></canvas>
+                    <Space direction={"vertical"}>
+                        <Button type={"text"} shape={"round"} icon={<UserOutlined/>}
+                                onMouseOver={this.btnMouseOver.bind(this)}
+                                onMouseOut={this.btnMouseOut.bind(this)} onClick={this.authorLinkBtnOnClick.bind(this)}
+                                style={{color: this.state.fontColor}}>
+                            {this.state.authorName.length < btnMaxSize ? this.state.authorName : this.state.authorName.substring(0, btnMaxSize) + "..."}
                         </Button>
-                        <Button type={"text"} shape={"round"} icon={<CameraOutlined/>}
-                                onClick={this.imageCameraBtnOnClick.bind(this)} style={{color: this.state.fontColor}}
-                                onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
-                            {this.state.imageCamera}
+                        <Button type={"text"} shape={"round"} icon={<EnvironmentOutlined/>}
+                                onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
+                                onClick={this.imageLocationBtnOnClick.bind(this)} style={{color: this.state.fontColor}}>
+                            {this.state.imageLocation.length < btnMaxSize ? this.state.imageLocation : this.state.imageLocation.substring(0, btnMaxSize) + "..."}
                         </Button>
+                        <Button type={"text"} shape={"round"} icon={<InfoCircleOutlined/>}
+                                onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
+                                onClick={this.imageLinkBtnOnClick.bind(this)} style={{color: this.state.fontColor}}>
+                            {this.state.imageDescription.length < btnMaxSize ? this.state.imageDescription : this.state.imageDescription.substring(0, btnMaxSize) + "..."}
+                        </Button>
+                        <Space>
+                            <Button type={"text"} shape={"round"} icon={<ClockCircleOutlined/>}
+                                    style={{color: this.state.fontColor, cursor: "default"}}
+                                    onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
+                                {this.state.imageCreateTime}
+                            </Button>
+                            <Button type={"text"} shape={"round"} icon={<CameraOutlined/>}
+                                    onClick={this.imageCameraBtnOnClick.bind(this)} style={{color: this.state.fontColor}}
+                                    onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
+                                {this.state.imageCamera}
+                            </Button>
+                        </Space>
                     </Space>
                 </Space>
-            </Space>
+                <Button type={"text"} shape={"round"} icon={<CameraOutlined/>}
+                        onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
+                        style={{color: this.state.fontColor, cursor: "default", display: this.state.noImageMode ? "inline-block" : "none"}}>
+                    {"已开启无图模式"}
+                </Button>
+            </>
         );
     }
 }

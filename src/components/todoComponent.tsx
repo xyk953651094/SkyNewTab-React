@@ -1,6 +1,6 @@
 import React from "react";
-import {Badge, Button, Col, Form, Input, List, message, Modal, Popover, Rate, Row, Space, Typography} from "antd";
-import {CheckOutlined, CheckSquareOutlined, DeleteOutlined, PlusOutlined} from "@ant-design/icons";
+import {Badge, Button, Col, Form, Input, List, message, Modal, Popover, Select, Rate, Row, Space, Typography} from "antd";
+import {CheckOutlined, CheckSquareOutlined, PlusOutlined, TagOutlined} from "@ant-design/icons";
 import {changeThemeColor, getFontColor} from "../typescripts/publicFunctions";
 import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
 
@@ -21,7 +21,8 @@ type stateType = {
     checkboxOptions: any,
     todoSize: number,
     todoMaxSize: number,
-    priority: number
+    tag: string,
+    priority: string,
 }
 
 interface TodoComponent {
@@ -41,7 +42,8 @@ class TodoComponent extends React.Component {
             checkboxOptions: [],
             todoSize: 0,
             todoMaxSize: 5,
-            priority: 1
+            tag: "工作",
+            priority: "★",
         };
     }
 
@@ -55,7 +57,7 @@ class TodoComponent extends React.Component {
         e.currentTarget.style.color = this.state.fontColor;
     }
 
-    removeAllBtnOnClick() {
+    finishAllBtnOnClick() {
         let tempTodos = localStorage.getItem("todos");
         if (tempTodos) {
             localStorage.removeItem("todos");
@@ -76,7 +78,8 @@ class TodoComponent extends React.Component {
             // $("#todoInput").val("");
             this.setState({
                 displayModal: true,
-                priority: 1,
+                tag: "工作",
+                priority: "★",
             })
         } else {
             message.error("待办数量最多为" + this.state.todoMaxSize + "个");
@@ -94,7 +97,8 @@ class TodoComponent extends React.Component {
             if (todos.length < this.state.todoMaxSize) {
                 todos.push({
                     "title": todoContent,
-                    "priority": "★".repeat(this.state.priority),
+                    "tag": this.state.tag,
+                    "priority": this.state.priority,
                     "timeStamp": Date.now()
                 });
                 localStorage.setItem("todos", JSON.stringify(todos));
@@ -109,7 +113,7 @@ class TodoComponent extends React.Component {
                 message.error("待办数量最多为" + this.state.todoMaxSize + "个");
             }
         } else {
-            message.error("待办内容不能为空");
+            message.error("表单不能为空");
         }
     }
 
@@ -143,9 +147,27 @@ class TodoComponent extends React.Component {
         }
     }
 
+    selectOnChange(value: string) {
+        let tempTag = "工作";
+        switch (value) {
+            case "work":
+                tempTag = "工作";
+                break;
+            case "life":
+                tempTag = "生活";
+                break;
+            default:
+                tempTag = "工作";
+                break;
+        }
+        this.setState({
+            tag: tempTag
+        })
+    }
+
     rateOnChange(value: number) {
         this.setState({
-            priority: value
+            priority: "★".repeat(value)
         })
     }
 
@@ -194,10 +216,10 @@ class TodoComponent extends React.Component {
                                 style={{color: this.state.fontColor}} onClick={this.showAddModalBtnOnClick.bind(this)}>
                             {"添加待办事项"}
                         </Button>
-                        <Button type={"text"} shape={"round"} icon={<DeleteOutlined/>}
+                        <Button type={"text"} shape={"round"} icon={<CheckOutlined/>}
                                 onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
-                                style={{color: this.state.fontColor}} onClick={this.removeAllBtnOnClick.bind(this)}>
-                            {"全部删除"}
+                                style={{color: this.state.fontColor}} onClick={this.finishAllBtnOnClick.bind(this)}>
+                            {"全部完成"}
                         </Button>
                     </Space>
                 </Col>
@@ -217,18 +239,19 @@ class TodoComponent extends React.Component {
                         ]}
                     >
                         <Row style={{width: "100%"}}>
-                            <Col span={10}>
-                                <Button type={"text"} shape={"round"} onMouseOver={this.btnMouseOver.bind(this)}
+                            <Col span={12}>
+                                <Button type={"text"} shape={"round"} icon={<CheckSquareOutlined/>} onMouseOver={this.btnMouseOver.bind(this)}
                                         onMouseOut={this.btnMouseOut.bind(this)}
                                         style={{color: this.state.fontColor, cursor: "default"}}>
                                     {item.title}
                                 </Button>
                             </Col>
-                            <Col span={14}>
-                                <Button type={"text"} shape={"round"} onMouseOver={this.btnMouseOver.bind(this)}
+                            <Col span={12}>
+                                <Button type={"text"} shape={"round"} icon={<TagOutlined />}
+                                        onMouseOver={this.btnMouseOver.bind(this)}
                                         onMouseOut={this.btnMouseOut.bind(this)}
                                         style={{color: this.state.fontColor, cursor: "default"}}>
-                                    {"优先级：" + item.priority}
+                                    {item.tag + "｜" + item.priority}
                                 </Button>
                             </Col>
                         </Row>
@@ -259,6 +282,16 @@ class TodoComponent extends React.Component {
                     <Form>
                         <Form.Item label={"待办事项"} name={"todoInput"}>
                             <Input placeholder="请输入待办内容" id="todoInput" maxLength={10} allowClear showCount/>
+                        </Form.Item>
+                        <Form.Item label={"标签分类"} name={"todoSelect"}>
+                            <Select
+                                defaultValue="work"
+                                onChange={this.selectOnChange.bind(this)}
+                                options={[
+                                    { value: 'work', label: '工作' },
+                                    { value: 'life', label: '生活' },
+                                ]}
+                            />
                         </Form.Item>
                         <Form.Item label={"优先级别"} name={"todoRate"}>
                             <Rate defaultValue={1} onChange={this.rateOnChange.bind(this)} style={{

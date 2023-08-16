@@ -100,16 +100,18 @@ class App extends React.Component {
 
         // 修改各类弹窗样式
         $("body").bind("DOMNodeInserted", () => {
+            // 通用
+            $(".ant-list-item").css({"borderBlockEndColor": this.state.themeColor.componentFontColor, "padding": "10px, 0"});
+            $(".ant-list-item-meta-title").css("color", this.state.themeColor.componentFontColor);
+            $(".ant-list-item-meta-description").css("color", this.state.themeColor.componentFontColor);
+            $(".ant-list-item-action").css("marginInlineStart", "0");
+            $(".ant-empty-description").css("color", this.state.themeColor.componentFontColor);
+
             // popover
             let popoverEle = $(".ant-popover");
             if (popoverEle.length && popoverEle.length > 0) {
                 $(".ant-popover-title").css("color", this.state.themeColor.componentFontColor);
                 $(".ant-popover-inner-content").css("color", this.state.themeColor.componentFontColor);
-                $(".ant-checkbox-group-item").css("color", this.state.themeColor.componentFontColor);
-                $(".ant-list-item").css({"borderBlockEndColor": this.state.themeColor.componentFontColor, "padding": "8px, 0"});
-                $(".ant-list-item-meta-title").css("color", this.state.themeColor.componentFontColor);
-                $(".ant-list-item-meta-description").css("color", this.state.themeColor.componentFontColor);
-                $(".ant-empty-description").css("color", this.state.themeColor.componentFontColor);
             }
 
             // toolTip
@@ -138,8 +140,6 @@ class App extends React.Component {
                 $(".ant-checkbox-wrapper").children(":last-child").css("color", this.state.themeColor.componentFontColor);
                 $(".ant-collapse").css("backgroundColor", this.state.themeColor.componentBackgroundColor);
                 $(".ant-collapse-header").css("color", this.state.themeColor.componentFontColor);
-                $(".ant-list-item").css("borderBlockEndColor", this.state.themeColor.componentFontColor);
-                $(".ant-list-item-meta-title").css("color", this.state.themeColor.componentFontColor);
             }
 
             // modal
@@ -150,13 +150,7 @@ class App extends React.Component {
                     "backgroundColor": this.state.themeColor.componentBackgroundColor,
                     "color": this.state.themeColor.componentFontColor
                 });
-                $(".ant-list-item").css({"borderBlockEndColor": this.state.themeColor.componentFontColor, "padding": "8px, 0"});
                 $(".ant-form-item-label > label").css("color", this.state.themeColor.componentFontColor);
-                $(".ant-list-item-meta-title").css("color", this.state.themeColor.componentFontColor);
-                $(".ant-list-item-meta-description").css("color", this.state.themeColor.componentFontColor);
-                // $(".ant-modal-close-x").css("color", this.state.themeColor.componentFontColor);
-                $(".ant-empty-description").css("color", this.state.themeColor.componentFontColor);
-                $(".ant-tooltip-inner").css("color", this.state.themeColor.componentFontColor);
                 $(".ant-modal-footer > .ant-btn").css("color", this.state.themeColor.componentFontColor);
                 $(".ant-modal-footer > .ant-btn").addClass("ant-btn-round ant-btn-text").removeClass("ant-btn-default ant-btn-primary");
                 $(".ant-modal-footer > .ant-btn").on("mouseover", (e: any) => {
@@ -167,7 +161,6 @@ class App extends React.Component {
                     e.currentTarget.style.backgroundColor = "transparent";
                     e.currentTarget.style.color = this.state.themeColor.componentFontColor;
                 });
-
             }
         });
     }

@@ -1,7 +1,7 @@
 import React from "react";
 import type {DatePickerProps} from 'antd';
 import {Badge, Button, Col, DatePicker, Form, Input, List, message, Modal, Popover, Row, Space, Typography} from "antd";
-import {CalendarOutlined, DeleteOutlined, PlusOutlined} from "@ant-design/icons";
+import {CalendarOutlined, DeleteOutlined, PlusOutlined, ClockCircleOutlined} from "@ant-design/icons";
 import {changeThemeColor, getFontColor, getTimeDetails} from "../typescripts/publicFunctions";
 import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
 
@@ -110,7 +110,6 @@ class DailyComponent extends React.Component {
 
     modalOkBtnOnClick() {
         let title = $("#dailyInput").val();
-
         if (title && title.length > 0 && this.state.selectedTimeStamp !== 0) {
             let daily = [];
             let tempDaily = localStorage.getItem("daily");
@@ -135,7 +134,7 @@ class DailyComponent extends React.Component {
                 message.error("倒数日数量最多为" + this.state.dailyMaxSize + "个");
             }
         } else {
-            message.error("倒数日内容不能为空");
+            message.error("表单不能为空");
         }
     }
 
@@ -159,9 +158,16 @@ class DailyComponent extends React.Component {
     }
 
     datePickerOnChange: DatePickerProps['onChange'] = (date, dateString) => {
-        this.setState({
-            selectedTimeStamp: new Date(dateString).getTime()
-        })
+        if(dateString) {
+            this.setState({
+                selectedTimeStamp: new Date(dateString).getTime()
+            })
+        }
+        else {
+            this.setState({
+                selectedTimeStamp: 0
+            })
+        }
     };
 
     componentDidMount() {
@@ -234,14 +240,16 @@ class DailyComponent extends React.Component {
                     >
                         <Row style={{width: "100%"}}>
                             <Col span={10}>
-                                <Button type={"text"} shape={"round"} onMouseOver={this.btnMouseOver.bind(this)}
+                                <Button type={"text"} shape={"round"} icon={<CalendarOutlined/>}
+                                        onMouseOver={this.btnMouseOver.bind(this)}
                                         onMouseOut={this.btnMouseOut.bind(this)}
                                         style={{color: this.state.fontColor, cursor: "default"}}>
                                     {item.title}
                                 </Button>
                             </Col>
                             <Col span={14}>
-                                <Button type={"text"} shape={"round"} onMouseOver={this.btnMouseOver.bind(this)}
+                                <Button type={"text"} shape={"round"} icon={<ClockCircleOutlined />}
+                                        onMouseOver={this.btnMouseOver.bind(this)}
                                         onMouseOut={this.btnMouseOut.bind(this)}
                                         style={{color: this.state.fontColor, cursor: "default"}}>
                                     {getTimeDetails(new Date(item.selectedTimeStamp)).showDate4 + "｜" + this.getDailyDescription(item.selectedTimeStamp)}
@@ -273,11 +281,11 @@ class DailyComponent extends React.Component {
                        maskStyle={{backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)"}}
                 >
                     <Form>
-                        <Form.Item label={"标题"} name={"dailyInput"}>
+                        <Form.Item label={"倒数标题"} name={"dailyInput"}>
                             <Input placeholder="请输入标题" id={"dailyInput"} maxLength={10} allowClear showCount/>
                         </Form.Item>
-                        <Form.Item label={"日期"} name={"dailyDatePicker"}>
-                            <DatePicker onChange={this.datePickerOnChange} id={"dailyDatePicker"}/>
+                        <Form.Item label={"倒数日期"} name={"dailyDatePicker"}>
+                            <DatePicker onChange={this.datePickerOnChange} id={"dailyDatePicker"} allowClear={false}/>
                         </Form.Item>
                     </Form>
                 </Modal>
