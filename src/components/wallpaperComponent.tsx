@@ -2,7 +2,7 @@ import React from "react";
 import "../stylesheets/wallpaperComponent.scss"
 import "../stylesheets/publicStyles.scss"
 import {Image, message} from "antd";
-import {httpRequest, imageDynamicEffect} from "../typescripts/publicFunctions";
+import {httpRequest, imageDynamicEffect, isEmptyString} from "../typescripts/publicFunctions";
 import {clientId, defaultPreferenceData, device} from "../typescripts/publicConstants";
 import {PreferenceDataInterface} from "../typescripts/publicInterface";
 
@@ -76,6 +76,7 @@ class WallpaperComponent extends React.Component {
                 tempImageTopics += ",";
             }
         }
+        let imageQuery = this.state.preferenceData.customTopic;
 
         let tempThis = this;
         let headers = {};
@@ -83,7 +84,8 @@ class WallpaperComponent extends React.Component {
         let data = {
             "client_id": clientId,
             "orientation": (device === "iPhone" || device === "Android") ? "portrait" : "landscape",
-            "topics": tempImageTopics,
+            "topics": isEmptyString(imageQuery) ? tempImageTopics : "",
+            "query": imageQuery,
             "content_filter": "high",
         };
 
@@ -113,60 +115,62 @@ class WallpaperComponent extends React.Component {
 
     componentDidMount() {
         let tempPreferenceData = localStorage.getItem("preferenceData");
-        let noImageMode = false;
-        if (tempPreferenceData) {
-            this.setState({
-                preferenceData: JSON.parse(tempPreferenceData)
-            });
-            noImageMode = JSON.parse(tempPreferenceData).noImageMode;
+        if(tempPreferenceData === null) {
+            localStorage.setItem("preferenceData", JSON.stringify(defaultPreferenceData));
         }
 
-        if(!noImageMode) {
-            // 防抖节流
-            let lastRequestTime: any = localStorage.getItem("lastImageRequestTime");
-            let nowTimeStamp = new Date().getTime();
-            if (lastRequestTime === null) {  // 第一次请求时 lastRequestTime 为 null，因此直接进行请求赋值 lastRequestTime
-                this.getWallpaper();
-            } else if (nowTimeStamp - parseInt(lastRequestTime) > 0) {  // 必须多于一分钟才能进行新的请求
-                this.getWallpaper();
-            } else {  // 一分钟之内使用上一次请求结果
-                let lastImage: any = localStorage.getItem("lastImage");
-                if (lastImage) {
-                    lastImage = JSON.parse(lastImage);
-                    this.setWallpaper(lastImage);
-                } else {
-                    message.error("获取图片失败");
+        this.setState({
+            preferenceData: tempPreferenceData === null ? defaultPreferenceData : JSON.parse(tempPreferenceData),
+        }, () => {
+            let noImageMode = this.state.preferenceData.noImageMode;
+
+            if(!noImageMode) {
+                // 防抖节流
+                let lastRequestTime: any = localStorage.getItem("lastImageRequestTime");
+                let nowTimeStamp = new Date().getTime();
+                if (lastRequestTime === null) {  // 第一次请求时 lastRequestTime 为 null，因此直接进行请求赋值 lastRequestTime
+                    this.getWallpaper();
+                } else if (nowTimeStamp - parseInt(lastRequestTime) > 0) {  // 必须多于一分钟才能进行新的请求
+                    this.getWallpaper();
+                } else {  // 一分钟之内使用上一次请求结果
+                    let lastImage: any = localStorage.getItem("lastImage");
+                    if (lastImage) {
+                        lastImage = JSON.parse(lastImage);
+                        this.setWallpaper(lastImage);
+                    } else {
+                        message.error("获取图片失败");
+                    }
                 }
-            }
 
-            // 图片动画
-            // @ts-ignore
-            let backgroundImageDiv: HTMLElement = document.getElementById("backgroundImage");
-            // @ts-ignore
-            let backgroundImage: HTMLElement = backgroundImageDiv.children[0];
-            if (backgroundImage instanceof HTMLElement) {
-                backgroundImage.onload = () => {
-                    backgroundImage.style.width = "102%";
-                    this.setState({
-                        display: "block",
-                    }, () => {
-                        message.success("图片加载成功");
+                // 图片动画
+                // @ts-ignore
+                let backgroundImageDiv: HTMLElement = document.getElementById("backgroundImage");
+                // @ts-ignore
+                let backgroundImage: HTMLElement = backgroundImageDiv.children[0];
+                if (backgroundImage instanceof HTMLElement) {
+                    backgroundImage.onload = () => {
+                        backgroundImage.style.width = "102%";
+                        this.setState({
+                            display: "block",
+                        }, () => {
+                            message.success("图片加载成功");
 
-                        // 设置动态效果
-                        backgroundImage.classList.add("wallpaperFadeIn");
-                        setTimeout(() => {
-                            backgroundImage.style.transform = "scale(1.05, 1.05)";
-                            backgroundImage.style.transition = "5s";
-
+                            // 设置动态效果
+                            backgroundImage.classList.add("wallpaperFadeIn");
                             setTimeout(() => {
-                                backgroundImageDiv.style.perspective = "500px";
-                                imageDynamicEffect(backgroundImage, this.state.preferenceData.dynamicEffect);
-                            }, 5000);
-                        }, 2000);
-                    })
+                                backgroundImage.style.transform = "scale(1.05, 1.05)";
+                                backgroundImage.style.transition = "5s";
+
+                                setTimeout(() => {
+                                    backgroundImageDiv.style.perspective = "500px";
+                                    imageDynamicEffect(backgroundImage, this.state.preferenceData.dynamicEffect);
+                                }, 5000);
+                            }, 2000);
+                        })
+                    }
                 }
             }
-        }
+        });
     }
 
     render() {

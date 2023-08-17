@@ -1,6 +1,6 @@
 import React from "react";
 import type {RadioChangeEvent} from "antd";
-import {Avatar, Button, Card, Checkbox, Col, Drawer, Form, message, Radio, Row, Space, Switch, Tooltip} from "antd";
+import {Avatar, Button, Card, Checkbox, Input, Col, Drawer, Form, message, Radio, Row, Space, Switch, Tooltip, Typography} from "antd";
 import {
     DeleteOutlined,
     GiftOutlined,
@@ -11,9 +11,11 @@ import {
     SettingOutlined
 } from "@ant-design/icons";
 import type {CheckboxValueType} from "antd/es/checkbox/Group";
-import {changeThemeColor, getFontColor} from "../typescripts/publicFunctions";
+import {changeThemeColor, getFontColor, isEmptyString} from "../typescripts/publicFunctions";
 import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
 import {defaultPreferenceData, device} from "../typescripts/publicConstants";
+
+const {Text} = Typography;
 
 type propType = {
     themeColor: ThemeColorInterface,
@@ -27,7 +29,8 @@ type stateType = {
     displayDrawer: boolean,
     drawerPosition: "right" | "bottom",
     holidayData: any,
-    preferenceData: PreferenceDataInterface
+    preferenceData: PreferenceDataInterface,
+    disableImageTopic: boolean
 }
 
 interface PreferenceComponent {
@@ -45,7 +48,8 @@ class PreferenceComponent extends React.Component {
             displayDrawer: false,
             drawerPosition: "right",
             holidayData: "",
-            preferenceData: defaultPreferenceData
+            preferenceData: defaultPreferenceData,
+            disableImageTopic: false
         };
     }
 
@@ -120,6 +124,18 @@ class PreferenceComponent extends React.Component {
         })
     }
 
+    // 自定义主题
+    customTopicInputOnChange(event: any) {
+        this.setState({
+            preferenceData: this.setPreferenceData({customTopic: event.target.value}),
+            disableImageTopic: !isEmptyString(event.target.value)
+        }, () => {
+            this.props.getPreferenceData(this.state.preferenceData);
+            localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
+            message.success("已更换自定义主题，下次加载时生效");
+        })
+    }
+
     // 简洁模式
     simpleModeSwitchOnChange(checked: boolean) {
         this.setState({
@@ -178,7 +194,11 @@ class PreferenceComponent extends React.Component {
             localStorage.setItem("preferenceData", JSON.stringify(defaultPreferenceData));
         }
         this.setState({
-            preferenceData: tempPreferenceData === null ? defaultPreferenceData : JSON.parse(tempPreferenceData)
+            preferenceData: tempPreferenceData === null ? defaultPreferenceData : JSON.parse(tempPreferenceData),
+        }, () => {
+            this.setState({
+                disableImageTopic: !isEmptyString(this.state.preferenceData.customTopic)
+            })
         })
 
         // 屏幕适配
@@ -290,7 +310,7 @@ class PreferenceComponent extends React.Component {
                                         </Radio.Group>
                                     </Form.Item>
                                     <Form.Item name={"imageTopics"} label={"图片主题"}>
-                                        <Checkbox.Group onChange={this.imageTopicsCheckboxOnChange.bind(this)}>
+                                        <Checkbox.Group disabled={this.state.disableImageTopic} onChange={this.imageTopicsCheckboxOnChange.bind(this)}>
                                             <Row>
                                                 <Col span={12}><Checkbox name={"travel"}
                                                                          value={"Fzo3zuOHN6w"}>旅游</Checkbox></Col>
@@ -334,6 +354,17 @@ class PreferenceComponent extends React.Component {
                                                                          value={"Bn-DjrcBrwo"}>体育</Checkbox></Col>
                                             </Row>
                                         </Checkbox.Group>
+                                    </Form.Item>
+                                    <Form.Item name={"customTopic"} label={"其他主题"}
+                                               extra={
+                                                    <Space direction={"vertical"}>
+                                                        <Text style={{color: this.state.fontColor}}>按下回车生效，英文结果最准确</Text>
+                                                        <Text style={{color: this.state.fontColor}}>其它主题不为空时将禁用图片主题</Text>
+                                                    </Space>
+                                               }
+                                    >
+                                        <Input onPressEnter={this.customTopicInputOnChange.bind(this)}
+                                            placeholder="输入后按下 Enter 键生效" allowClear />
                                     </Form.Item>
                                 </Form>
                             </Card>
