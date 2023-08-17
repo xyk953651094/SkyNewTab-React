@@ -1,19 +1,14 @@
 import React from "react";
 import type {RadioChangeEvent} from "antd";
-import {Avatar, Button, Card, Checkbox, Input, Col, Drawer, Form, message, Radio, Row, Space, Switch, Tooltip, Typography} from "antd";
-import {
-    DeleteOutlined,
-    GiftOutlined,
-    GithubOutlined,
-    LinkOutlined,
-    MessageOutlined,
-    MoreOutlined,
-    SettingOutlined
-} from "@ant-design/icons";
+import {Button, Card, Checkbox, Input, Col, Drawer, Form, message, Radio, Row, Space, Switch, Tooltip, Typography} from "antd";
+import {DeleteOutlined, MoreOutlined, SettingOutlined} from "@ant-design/icons";
 import type {CheckboxValueType} from "antd/es/checkbox/Group";
 import {changeThemeColor, getFontColor, isEmptyString} from "../typescripts/publicFunctions";
 import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
 import {defaultPreferenceData, device} from "../typescripts/publicConstants";
+import PreferenceLinkComponent from "../preferenceComponents/preferenceLinkComponent";
+import PreferenceFooterComponent from "../preferenceComponents/preferenceFooterComponent";
+import PreferenceEmailComponent from "../preferenceComponents/preferenceEmailComponent";
 
 const {Text} = Typography;
 
@@ -247,26 +242,10 @@ class PreferenceComponent extends React.Component {
                     // maskStyle={{backgroundColor: this.state.backgroundColor, opacity: 0.45}}
                     maskStyle={{backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)"}}
                     footer={
-                        <Space>
-                            <Button type={"text"} shape={"round"} icon={<GithubOutlined/>}
-                                    href={"https://github.com/xyk953651094"} target={"_blank"}
-                                    onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
-                                    style={{color: this.state.fontColor}}>
-                                主页
-                            </Button>
-                            <Button type={"text"} shape={"round"} icon={<MessageOutlined/>}
-                                    href={"https://xyk953651094.blogspot.com"} target={"_blank"}
-                                    onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
-                                    style={{color: this.state.fontColor}}>
-                                博客
-                            </Button>
-                            <Button type={"text"} shape={"round"} icon={<GiftOutlined/>}
-                                    href={"https://afdian.net/a/xyk953651094"} target={"_blank"}
-                                    onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
-                                    style={{color: this.state.fontColor}}>
-                                支持
-                            </Button>
-                        </Space>
+                        <PreferenceFooterComponent
+                            hoverColor={this.state.hoverColor}
+                            backgroundColor={this.state.backgroundColor}
+                            fontColor={this.state.fontColor}/>
                     }
                     footerStyle={{
                         backgroundColor: this.state.backgroundColor,
@@ -411,43 +390,16 @@ class PreferenceComponent extends React.Component {
                             </Card>
                         </Col>
                         <Col span={24}>
-                            <Card title={"友情链接"} size={"small"}
-                                  extra={<LinkOutlined style={{color: this.state.fontColor}}/>}
-                                  style={{border: "1px solid " + this.state.fontColor}}
-                                  headStyle={{
-                                      backgroundColor: this.state.backgroundColor,
-                                      color: this.state.fontColor,
-                                      borderBottom: "2px solid " + this.state.fontColor
-                                  }}
-                                  bodyStyle={{backgroundColor: this.state.backgroundColor}}
-                            >
-                                <Space direction={"vertical"}>
-                                    <Button type={"text"} shape={"round"} href={"https://unsplash.com/"}
-                                            target={"_blank"}
-                                            onMouseOver={this.btnMouseOver.bind(this)}
-                                            onMouseOut={this.btnMouseOut.bind(this)}
-                                            style={{color: this.state.fontColor}}>
-                                        <Avatar size={16} shape={"square"} src={"https://unsplash.com/favicon.ico"}/>
-                                        &nbsp;&nbsp;Unsplash.com
-                                    </Button>
-                                    <Button type={"text"} shape={"round"} href={"https://www.pexels.com/"}
-                                            target={"_blank"}
-                                            onMouseOver={this.btnMouseOver.bind(this)}
-                                            onMouseOut={this.btnMouseOut.bind(this)}
-                                            style={{color: this.state.fontColor}}>
-                                        <Avatar size={16} shape={"square"} src={"https://www.pexels.com/favicon.ico"}/>
-                                        &nbsp;&nbsp;Pexels.com
-                                    </Button>
-                                    <Button type={"text"} shape={"round"} href={"https://pixabay.com/"}
-                                            target={"_blank"}
-                                            onMouseOver={this.btnMouseOver.bind(this)}
-                                            onMouseOut={this.btnMouseOut.bind(this)}
-                                            style={{color: this.state.fontColor}}>
-                                        <Avatar size={16} shape={"square"} src={"https://pixabay.com/favicon.ico"}/>
-                                        &nbsp;&nbsp;Pixabay.com
-                                    </Button>
-                                </Space>
-                            </Card>
+                            <PreferenceEmailComponent
+                                hoverColor={this.state.hoverColor}
+                                backgroundColor={this.state.backgroundColor}
+                                fontColor={this.state.fontColor}/>
+                        </Col>
+                        <Col span={24}>
+                            <PreferenceLinkComponent
+                                hoverColor={this.state.hoverColor}
+                                backgroundColor={this.state.backgroundColor}
+                                fontColor={this.state.fontColor}/>
                         </Col>
                     </Row>
                 </Drawer>

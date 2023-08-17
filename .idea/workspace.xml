@@ -4,10 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="优化视觉效果&#10;修复已知问题">
+    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="新增自定义主题&#10;优化视觉效果">
+      <change afterPath="$PROJECT_DIR$/src/preferenceComponents/preferenceEmailComponent.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/preferenceComponents/preferenceFooterComponent.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/preferenceComponents/preferenceLinkComponent.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/authorComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/authorComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/preferenceComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/preferenceComponent.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,8 +21,8 @@
       <list>
         <option value="CSS File" />
         <option value="HTML File" />
-        <option value="TypeScript JSX File" />
         <option value="SCSS File" />
+        <option value="TypeScript JSX File" />
       </list>
     </option>
   </component>
@@ -186,7 +188,7 @@
       <workItem from="1691934699051" duration="48000" />
       <workItem from="1692099510398" duration="4559000" />
       <workItem from="1692148973742" duration="11027000" />
-      <workItem from="1692240279471" duration="352000" />
+      <workItem from="1692240279471" duration="8454000" />
     </task>
     <task id="LOCAL-00001" summary="优化抽屉蒙版的显示效果&#10;优化代码质量">
       <created>1683952184207</created>
@@ -306,22 +308,6 @@
       <option name="presentableId" value="LOCAL-00017" />
       <option name="project" value="LOCAL" />
       <updated>1687402693401</updated>
-    </task>
-    <task id="LOCAL-00031" summary="优化部分显示效果">
-      <option name="closed" value="true" />
-      <created>1690270955572</created>
-      <option name="number" value="00031" />
-      <option name="presentableId" value="LOCAL-00031" />
-      <option name="project" value="LOCAL" />
-      <updated>1690270955572</updated>
-    </task>
-    <task id="LOCAL-00032" summary="优化时钟显示效果&#10;优化高分辨率屏幕显示效果">
-      <option name="closed" value="true" />
-      <created>1690296008116</created>
-      <option name="number" value="00032" />
-      <option name="presentableId" value="LOCAL-00032" />
-      <option name="project" value="LOCAL" />
-      <updated>1690296008116</updated>
     </task>
     <task id="LOCAL-00033" summary="优化部分显示效果">
       <option name="closed" value="true" />
@@ -563,7 +549,23 @@
       <option name="project" value="LOCAL" />
       <updated>1692186190751</updated>
     </task>
-    <option name="localTasksCounter" value="63" />
+    <task id="LOCAL-00063" summary="新增自定义主题&#10;优化视觉效果">
+      <option name="closed" value="true" />
+      <created>1692240735236</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1692240735236</updated>
+    </task>
+    <task id="LOCAL-00064" summary="新增自定义主题&#10;优化视觉效果">
+      <option name="closed" value="true" />
+      <created>1692245705210</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1692245705210</updated>
+    </task>
+    <option name="localTasksCounter" value="65" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -581,7 +583,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="优化部分显示效果&#10;完善部分功能" />
     <MESSAGE value="移除 Pexels 图片来源&#10;优化部分功能" />
     <MESSAGE value="新增自定义图片主题功能&#10;优化部分功能" />
     <MESSAGE value="优化部分功能&#10;优化代码质量" />
@@ -606,6 +607,7 @@
     <MESSAGE value="修复已知问题" />
     <MESSAGE value="优化视觉效果" />
     <MESSAGE value="优化视觉效果&#10;修复已知问题" />
-    <option name="LAST_COMMIT_MESSAGE" value="优化视觉效果&#10;修复已知问题" />
+    <MESSAGE value="新增自定义主题&#10;优化视觉效果" />
+    <option name="LAST_COMMIT_MESSAGE" value="新增自定义主题&#10;优化视觉效果" />
   </component>
 </project>
