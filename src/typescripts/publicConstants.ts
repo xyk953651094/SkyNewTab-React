@@ -1,42 +1,9 @@
-import {PreferenceInterface} from './publicInterface'
+import {PreferenceDataInterface} from './publicInterface'
 import {getDevice} from "./publicFunctions";
 
-export let lightThemeArray = [
-    // Material Design配色
-    {"bodyBackgroundColor": "#FCE4EC", "componentBackgroundColor": "#E91E63"},
-    {"bodyBackgroundColor": "#E91E63", "componentBackgroundColor": "#FCE4EC"},
-    {"bodyBackgroundColor": "#F3E5F5", "componentBackgroundColor": "#9C27B0"},
-    {"bodyBackgroundColor": "#EDE7F6", "componentBackgroundColor": "#673AB7"},
-    {"bodyBackgroundColor": "#673AB7", "componentBackgroundColor": "#EDE7F6"},
-    {"bodyBackgroundColor": "#E8EAF6", "componentBackgroundColor": "#3F51B5"},
-    {"bodyBackgroundColor": "#E3F2FD", "componentBackgroundColor": "#2196F3"},
-    {"bodyBackgroundColor": "#2196F3", "componentBackgroundColor": "#E3F2FD"},
-    {"bodyBackgroundColor": "#E1F5FE", "componentBackgroundColor": "#03A9F4"},
-    {"bodyBackgroundColor": "#03A9F4", "componentBackgroundColor": "#E1F5FE"},
-    {"bodyBackgroundColor": "#00BCD4", "componentBackgroundColor": "#E0F7FA"},
-    {"bodyBackgroundColor": "#009688", "componentBackgroundColor": "#E0F2F1"},
-    {"bodyBackgroundColor": "#E8F5E9", "componentBackgroundColor": "#4CAF50"},
-    {"bodyBackgroundColor": "#4CAF50", "componentBackgroundColor": "#E8F5E9"},
-    {"bodyBackgroundColor": "#8BC34A", "componentBackgroundColor": "#F1F8E9"},
-    {"bodyBackgroundColor": "#F9FBE7", "componentBackgroundColor": "#CDDC39"},
-    {"bodyBackgroundColor": "#CDDC39", "componentBackgroundColor": "#F9FBE7"},
-    {"bodyBackgroundColor": "#FFFDE7", "componentBackgroundColor": "#FFEB3B"},
-    {"bodyBackgroundColor": "#FFF8E1", "componentBackgroundColor": "#FFC107"},
-    {"bodyBackgroundColor": "#FFC107", "componentBackgroundColor": "#FFF8E1"},
-    {"bodyBackgroundColor": "#FFF3E0", "componentBackgroundColor": "#FF9800"},
-    {"bodyBackgroundColor": "#FF9800", "componentBackgroundColor": "#FFF3E0"},
-    {"bodyBackgroundColor": "#FF5722", "componentBackgroundColor": "#FBE9E7"},
-    {"bodyBackgroundColor": "#EFEBE9", "componentBackgroundColor": "#795548"},
-    {"bodyBackgroundColor": "#795548", "componentBackgroundColor": "#EFEBE9"},
-    {"bodyBackgroundColor": "#ECEFF1", "componentBackgroundColor": "#607D8B"},
-    {"bodyBackgroundColor": "#607D8B", "componentBackgroundColor": "#ECEFF1"},
-    {"bodyBackgroundColor": "#FAFAFA", "componentBackgroundColor": "#9E9E9E"},
-    {"bodyBackgroundColor": "#9E9E9E", "componentBackgroundColor": "#FAFAFA"},
-
-    // 高级配色
+export let themeArray = [
     {"bodyBackgroundColor": "#FAEFDE", "componentBackgroundColor": "#E42D44"},
     {"bodyBackgroundColor": "#E42D44", "componentBackgroundColor": "#FAEFDE"},
-    {"bodyBackgroundColor": "#7BAD5F", "componentBackgroundColor": "#F2EAE0"},
     {"bodyBackgroundColor": "#E5D7AD", "componentBackgroundColor": "#614F4D"},
     {"bodyBackgroundColor": "#614F4D", "componentBackgroundColor": "#E5D7AD"},
     {"bodyBackgroundColor": "#5B3663", "componentBackgroundColor": "#FFD800"},
@@ -73,57 +40,14 @@ export let lightThemeArray = [
     {"bodyBackgroundColor": "#FFE7B6", "componentBackgroundColor": "#50543B"},
 ];
 
-export let darkThemeArray = [
-    // Material Design配色
-    {"bodyBackgroundColor": "#9C27B0", "componentBackgroundColor": "#F3E5F5"},
-    {"bodyBackgroundColor": "#673AB7", "componentBackgroundColor": "#EDE7F6"},
-    {"bodyBackgroundColor": "#3F51B5", "componentBackgroundColor": "#E8EAF6"},
-    {"bodyBackgroundColor": "#2196F3", "componentBackgroundColor": "#E3F2FD"},
-    {"bodyBackgroundColor": "#03A9F4", "componentBackgroundColor": "#E1F5FE"},
-    {"bodyBackgroundColor": "#00BCD4", "componentBackgroundColor": "#E0F7FA"},
-    {"bodyBackgroundColor": "#009688", "componentBackgroundColor": "#E0F2F1"},
-    {"bodyBackgroundColor": "#4CAF50", "componentBackgroundColor": "#E8F5E9"},
-    {"bodyBackgroundColor": "#8BC34A", "componentBackgroundColor": "#F1F8E9"},
-    {"bodyBackgroundColor": "#795548", "componentBackgroundColor": "#EFEBE9"},
-    {"bodyBackgroundColor": "#607D8B", "componentBackgroundColor": "#ECEFF1"},
-    {"bodyBackgroundColor": "#9E9E9E", "componentBackgroundColor": "#FAFAFA"},
-
-    // 高级配色
-    {"bodyBackgroundColor": "#7BAD5F", "componentBackgroundColor": "#F2EAE0"},
-    {"bodyBackgroundColor": "#614F4D", "componentBackgroundColor": "#E5D7AD"},
-    {"bodyBackgroundColor": "#5B3663", "componentBackgroundColor": "#FFD800"},
-    {"bodyBackgroundColor": "#343130", "componentBackgroundColor": "#FF7900"},
-    {"bodyBackgroundColor": "#EDB04C", "componentBackgroundColor": "#8A3C48"},
-    {"bodyBackgroundColor": "#8A3C48", "componentBackgroundColor": "#EDB04C"},
-    {"bodyBackgroundColor": "#A0C198", "componentBackgroundColor": "#535E4B"},
-    {"bodyBackgroundColor": "#535E4B", "componentBackgroundColor": "#A0C198"},
-    {"bodyBackgroundColor": "#CFA33E", "componentBackgroundColor": "#262424"},
-    {"bodyBackgroundColor": "#262424", "componentBackgroundColor": "#CFA33E"},
-    {"bodyBackgroundColor": "#36527D", "componentBackgroundColor": "#D23538"},
-    {"bodyBackgroundColor": "#8D587E", "componentBackgroundColor": "#F7F2ED"},
-
-    {"bodyBackgroundColor": "#4C3C36", "componentBackgroundColor": "#7CAC67"},
-    {"bodyBackgroundColor": "#7CAC67", "componentBackgroundColor": "#4C3C36"},
-    {"bodyBackgroundColor": "#013372", "componentBackgroundColor": "#C9AB70"},
-    {"bodyBackgroundColor": "#C9AB70", "componentBackgroundColor": "#013372"},
-    {"bodyBackgroundColor": "#362228", "componentBackgroundColor": "#F4EEE6"},
-    {"bodyBackgroundColor": "#C92C35", "componentBackgroundColor": "#044091"},
-    {"bodyBackgroundColor": "#044091", "componentBackgroundColor": "#C92C35"},
-    {"bodyBackgroundColor": "#A2DDB8", "componentBackgroundColor": "#F6F2EB"},
-    {"bodyBackgroundColor": "#7F8284", "componentBackgroundColor": "#FFCE56"},
-    {"bodyBackgroundColor": "#6D8158", "componentBackgroundColor": "#245776"},
-    {"bodyBackgroundColor": "#245776", "componentBackgroundColor": "#6D8158"},
-    {"bodyBackgroundColor": "#CEBECE", "componentBackgroundColor": "#EFF2FA"},
-    {"bodyBackgroundColor": "#DCB28C", "componentBackgroundColor": "#474361"},
-    {"bodyBackgroundColor": "#474361", "componentBackgroundColor": "#DCB28C"},
-    {"bodyBackgroundColor": "#50543B", "componentBackgroundColor": "#FFE7B6"},
-];
-
-export let defaultFormInitialValues: PreferenceInterface = {
-    "searchEngineRadio": "bing",
-    "dynamicEffectRadio": "all",
-    "imageQualityRadio": "regular",
-    "imageTopicsCheckbox": "Fzo3zuOHN6w",
+export let defaultPreferenceData: PreferenceDataInterface = {
+    searchEngine: "bing",
+    dynamicEffect: "all",
+    imageQuality: "regular",
+    imageTopics: ["bo8jQKTaE0Y"],
+    customTopic: "",
+    simpleMode: false,
+    noImageMode: false,
 }
 
 // 常用变量

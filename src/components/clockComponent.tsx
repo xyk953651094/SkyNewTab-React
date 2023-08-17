@@ -1,17 +1,19 @@
 import React from "react";
 import {Col, Row, Space, Typography} from "antd";
 import "../stylesheets/clockComponent.scss"
-import {getTimeDetails} from "../typescripts/publicFunctions";
-import {ThemeColorInterface} from "../typescripts/publicInterface";
+import {changeBackgroundColor, changeFontColor, getTimeDetails} from "../typescripts/publicFunctions";
+import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
 
 const {Text} = Typography;
 const $ = require("jquery");
 
 type propType = {
     themeColor: ThemeColorInterface,
+    preferenceData: PreferenceDataInterface,
 }
 
 type stateType = {
+    noImageMode: boolean,
     backgroundColor: string,
     fontColor: string,
     currentTime: string,
@@ -28,6 +30,7 @@ class ClockComponent extends React.Component {
     constructor(props: any) {
         super(props);
         this.state = {
+            noImageMode: false,
             backgroundColor: "",
             fontColor: "",
             currentTime: getTimeDetails(new Date()).showTime,
@@ -37,17 +40,23 @@ class ClockComponent extends React.Component {
     }
 
     btnMouseOver(e: any) {
-        e.currentTarget.style.backgroundColor = this.state.backgroundColor;
-        e.currentTarget.classList.add("componentTheme");
-        $(".clockText").css("color", this.state.fontColor);
-        $(".dateText").css("color", this.state.fontColor);
+        if (!this.state.noImageMode) {
+            new Promise((resolve) => {
+                changeBackgroundColor(e.currentTarget, this.state.backgroundColor, 150);
+                changeFontColor(".clockText, .dateText", this.state.fontColor, 150);
+                resolve("success");
+            }).then(() => {
+                e.currentTarget.classList.add("componentTheme");
+            })
+        }
     }
 
     btnMouseOut(e: any) {
-        e.currentTarget.style.backgroundColor = "transparent";
-        e.currentTarget.classList.remove("componentTheme");
-        $(".clockText").css("color", this.state.backgroundColor);
-        $(".dateText").css("color", this.state.backgroundColor);
+        if (!this.state.noImageMode) {
+            e.currentTarget.classList.remove("componentTheme");
+            changeBackgroundColor(e.currentTarget, "transparent", 150);
+            changeFontColor(".clockText, .dateText", this.state.backgroundColor, 150);
+        }
     }
 
     componentDidMount() {
@@ -68,18 +77,24 @@ class ClockComponent extends React.Component {
                 fontColor: nextProps.themeColor.componentFontColor,
             });
         }
+
+        if (nextProps.preferenceData !== prevProps.preferenceData) {
+            this.setState({
+                noImageMode: nextProps.preferenceData.noImageMode
+            })
+        }
     }
 
     render() {
         return (
             <Row justify={"center"}>
-                <Col span={24} className={"zIndexHigh"} style={{padding: "5px", borderRadius: "10px"}}
+                <Col span={24} className={"zIndexHigh"} style={{padding: "5px 10px", borderRadius: "10px"}}
                      onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
-                    <Space align="center" size="small" id={"clock"}>
+                    <Space align={"center"} id={"clock"}>
                         <Text className={"clockText"} style={{color: this.state.backgroundColor}}>
                             {this.state.currentTime}
                         </Text>
-                        <Space align="center" size="small" direction="vertical">
+                        <Space align={"center"} direction={"vertical"}>
                             <Text className={"dateText"} style={{color: this.state.backgroundColor}}>
                                 {this.state.currentWeek}
                             </Text>

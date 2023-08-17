@@ -1,23 +1,41 @@
 import React from "react";
 import {Button, Image, message, Space} from "antd";
-import {EnvironmentOutlined, InfoCircleOutlined, UserOutlined} from "@ant-design/icons";
-import "../stylesheets/popupComponent.scss"
-import {getFontColor, isEmptyString} from "../typescripts/publicFunctions";
+import {
+    CameraOutlined,
+    ClockCircleOutlined,
+    EnvironmentOutlined,
+    InfoCircleOutlined,
+    UserOutlined
+} from "@ant-design/icons";
+import "../stylesheets/popupComponent.scss";
+import {decode} from "blurhash"
+import {getFontColor, getSearchEngineDetail, isEmptyString} from "../typescripts/publicFunctions";
+import {PreferenceDataInterface} from "../typescripts/publicInterface";
+
+const $ = require("jquery");
+const btnMaxSize = 35;
 
 type propType = {
     imageData: any,
-    fontColor: string
+    fontColor: string,
+    preferenceData: PreferenceDataInterface,
 }
 
 type stateType = {
+    displayCanvas: "none" | "block",
     authorName: string,
     authorLink: string,
     imageLink: string,
     imagePreviewUrl: string,
     imageLocation: string,
     imageDescription: string,
+    imageCreateTime: string,
+    imageCamera: string,
     hoverColor: string,
     fontColor: string,
+    blurHashCode: string,
+    searchEngineUrl: string,
+    noImageMode: boolean,
 }
 
 interface PopupImageComponent {
@@ -29,14 +47,20 @@ class PopupImageComponent extends React.Component {
     constructor(props: any) {
         super(props)
         this.state = {
+            displayCanvas: "none",
             authorName: "暂无信息",
             authorLink: "",
             imageLink: "",
             imagePreviewUrl: "",
             imageLocation: "暂无信息",
             imageDescription: "暂无信息",
+            imageCreateTime: "暂无信息",
+            imageCamera: "暂无信息",
             hoverColor: "#000000",
-            fontColor: "#000000"
+            fontColor: "#000000",
+            blurHashCode: "",
+            searchEngineUrl: "https://www.bing.com/search?q=",
+            noImageMode: false,
         }
     }
 
@@ -50,7 +74,7 @@ class PopupImageComponent extends React.Component {
         e.currentTarget.style.color = this.state.fontColor;
     }
 
-    authorBtnOnClick() {
+    authorLinkBtnOnClick() {
         if (!isEmptyString(this.state.authorLink)) {
             window.open(this.state.authorLink);
         } else {
@@ -58,7 +82,7 @@ class PopupImageComponent extends React.Component {
         }
     }
 
-    imageBtnOnClick() {
+    imageLinkBtnOnClick() {
         if (!isEmptyString(this.state.imageLink)) {
             window.open(this.state.imageLink);
         } else {
@@ -66,17 +90,75 @@ class PopupImageComponent extends React.Component {
         }
     }
 
+    imageLocationBtnOnClick() {
+        if (this.state.imageLocation !== "暂无信息") {
+            window.open(this.state.searchEngineUrl + this.state.imageLocation, "_blank");
+        } else {
+            message.error("无跳转链接");
+        }
+    }
+
+    imageCameraBtnOnClick() {
+        if (this.state.imageCamera !== "暂无信息") {
+            window.open(this.state.searchEngineUrl + this.state.imageCamera, "_blank");
+        } else {
+            message.error("无跳转链接");
+        }
+    }
+
+    getCreateTime(createTime: string) {
+        return createTime.substring(0, createTime.indexOf("T"));
+    }
+
+    componentDidMount() {
+        // @ts-ignore
+        let popupImageDiv: HTMLElement = document.getElementById("popupImage");
+        // @ts-ignore
+        let popupImage: HTMLElement = popupImageDiv.children[0];
+
+        popupImageDiv.style.display = "none";
+        if (popupImage instanceof HTMLElement) {
+            popupImage.onload = () => {
+                $("#popupCanvas").remove();
+                popupImageDiv.style.display = "block";
+                popupImageDiv.className = "wallpaperFadeIn";
+            }
+        }
+    }
+
     componentWillReceiveProps(nextProps: any, prevProps: any) {
         if (nextProps.imageData && nextProps.imageData !== prevProps.imageData) {
             this.setState({
-                authorName: nextProps.imageData.user.name,
-                authorLink: nextProps.imageData.user.links.html,
-                imageLink: nextProps.imageData.links.html,
-                imagePreviewUrl: nextProps.imageData.urls.thumb,
-                imageLocation: isEmptyString(nextProps.imageData.location.name) ? "暂无信息" : nextProps.imageData.location.name,
-                imageDescription: isEmptyString(nextProps.imageData.alt_description) ? "暂无信息" : nextProps.imageData.alt_description,
-                hoverColor: nextProps.imageData.color
-            })
+                    authorName: nextProps.imageData.user.name,
+                    authorLink: nextProps.imageData.user.links.html,
+                    imageLink: nextProps.imageData.links.html,
+                    imagePreviewUrl: nextProps.imageData.urls.regular,
+                    imageLocation: isEmptyString(nextProps.imageData.location.name) ? "暂无信息" : nextProps.imageData.location.name,
+                    imageDescription: isEmptyString(nextProps.imageData.alt_description) ? "暂无信息" : nextProps.imageData.alt_description,
+                    imageCreateTime: this.getCreateTime(nextProps.imageData.created_at),
+                    imageCamera: isEmptyString(nextProps.imageData.exif.name) ? "暂无信息" : nextProps.imageData.exif.name,
+                    hoverColor: nextProps.imageData.color,
+                    blurHashCode: nextProps.imageData.blur_hash
+                }, () => {
+                    if (!isEmptyString(this.state.blurHashCode)) {
+                        const popupCanvas = document.getElementById("popupCanvas") as HTMLCanvasElement | null;
+                        if (popupCanvas instanceof HTMLCanvasElement) {
+                            let blurHashImage = decode(this.state.blurHashCode, popupCanvas.width, popupCanvas.height);
+                            let ctx = popupCanvas.getContext("2d");
+                            if (ctx) {
+                                const imageData = new ImageData(blurHashImage, popupCanvas.width, popupCanvas.height);
+                                ctx.putImageData(imageData, 0, 0);
+                            }
+
+                            this.setState({
+                                displayCanvas: "block",
+                            }, () => {
+                                popupCanvas.className = "popupCanvas wallpaperFadeIn";
+                            })
+                        }
+                    }
+                }
+            )
         }
 
         if (nextProps.fontColor !== prevProps.fontColor) {
@@ -84,36 +166,68 @@ class PopupImageComponent extends React.Component {
                 fontColor: nextProps.fontColor,
             });
         }
+
+        if (nextProps.preferenceData !== prevProps.preferenceData) {
+            this.setState({
+                searchEngineUrl: getSearchEngineDetail(nextProps.preferenceData.searchEngine).searchEngineUrl,
+                noImageMode: nextProps.preferenceData.noImageMode
+            });
+        }
     }
 
     render() {
         return (
-            <Space>
-                <Image
-                    width={200}
-                    preview={false}
-                    alt={"暂无图片"}
-                    src={this.state.imagePreviewUrl}
-                    style={{borderRadius: "10px"}}
-                />
-                <Space direction={"vertical"}>
-                    <Button type="text" shape="round" icon={<UserOutlined/>} onMouseOver={this.btnMouseOver.bind(this)}
-                            onMouseOut={this.btnMouseOut.bind(this)} onClick={this.authorBtnOnClick.bind(this)}
-                            style={{color: this.state.fontColor}}>
-                        {this.state.authorName}
-                    </Button>
-                    <Button type="text" shape="round" icon={<EnvironmentOutlined/>}
-                            onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
-                            onClick={this.imageBtnOnClick.bind(this)} style={{color: this.state.fontColor}}>
-                        {this.state.imageLocation}
-                    </Button>
-                    <Button type="text" shape="round" icon={<InfoCircleOutlined/>}
-                            onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
-                            onClick={this.imageBtnOnClick.bind(this)} style={{color: this.state.fontColor}}>
-                        {this.state.imageDescription}
-                    </Button>
+            <>
+                <Space align={"center"} style={{display: this.state.noImageMode ? "none" : "inline-flex"}}>
+                    <Image
+                        id={"popupImage"}
+                        width={250}
+                        height={150}
+                        preview={false}
+                        alt={"暂无图片"}
+                        src={this.state.imagePreviewUrl}
+                        style={{borderRadius: "10px"}}
+                    />
+                    <canvas id={"popupCanvas"} className={"popupCanvas"}
+                            style={{display: this.state.displayCanvas, borderRadius: "10px"}}></canvas>
+                    <Space direction={"vertical"}>
+                        <Button type={"text"} shape={"round"} icon={<UserOutlined/>}
+                                onMouseOver={this.btnMouseOver.bind(this)}
+                                onMouseOut={this.btnMouseOut.bind(this)} onClick={this.authorLinkBtnOnClick.bind(this)}
+                                style={{color: this.state.fontColor}}>
+                            {this.state.authorName.length < btnMaxSize ? this.state.authorName : this.state.authorName.substring(0, btnMaxSize) + "..."}
+                        </Button>
+                        <Button type={"text"} shape={"round"} icon={<EnvironmentOutlined/>}
+                                onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
+                                onClick={this.imageLocationBtnOnClick.bind(this)} style={{color: this.state.fontColor}}>
+                            {this.state.imageLocation.length < btnMaxSize ? this.state.imageLocation : this.state.imageLocation.substring(0, btnMaxSize) + "..."}
+                        </Button>
+                        <Button type={"text"} shape={"round"} icon={<InfoCircleOutlined/>}
+                                onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
+                                onClick={this.imageLinkBtnOnClick.bind(this)} style={{color: this.state.fontColor}}>
+                            {this.state.imageDescription.length < btnMaxSize ? this.state.imageDescription : this.state.imageDescription.substring(0, btnMaxSize) + "..."}
+                        </Button>
+                        <Space>
+                            <Button type={"text"} shape={"round"} icon={<ClockCircleOutlined/>}
+                                    style={{color: this.state.fontColor, cursor: "default"}}
+                                    onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
+                                {this.state.imageCreateTime}
+                            </Button>
+                            <Button type={"text"} shape={"round"} icon={<CameraOutlined/>}
+                                    onClick={this.imageCameraBtnOnClick.bind(this)}
+                                    style={{color: this.state.fontColor}}
+                                    onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
+                                {this.state.imageCamera}
+                            </Button>
+                        </Space>
+                    </Space>
                 </Space>
-            </Space>
+                <Button type={"text"} shape={"round"} icon={<CameraOutlined/>}
+                        onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
+                        style={{color: this.state.fontColor, cursor: "default", display: this.state.noImageMode ? "inline-block" : "none"}}>
+                    {"已开启无图模式"}
+                </Button>
+            </>
         );
     }
 }

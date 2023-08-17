@@ -1,23 +1,33 @@
 import React from "react";
-import {Button, Popover, Space, Typography} from "antd";
-import {CheckCircleOutlined, CloseCircleOutlined} from "@ant-design/icons";
+import {Button, Col, List, Popover, Row, Space, Typography} from "antd";
+import {
+    CalendarOutlined,
+    CheckCircleOutlined,
+    CloseCircleOutlined,
+    HistoryOutlined,
+    InfoCircleOutlined
+} from "@ant-design/icons";
 import {
     changeThemeColor,
+    getFontColor,
     getGreetContent,
     getGreetIcon,
+    getSearchEngineDetail,
     getTimeDetails,
     httpRequest
 } from "../typescripts/publicFunctions";
-import {ThemeColorInterface} from "../typescripts/publicInterface";
+import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
 
 const {Text} = Typography;
 
 type propType = {
     themeColor: ThemeColorInterface,
-    searchEngine: "bing" | "baidu" | "google"
+    preferenceData: PreferenceDataInterface,
 }
 
 type stateType = {
+    display: "none" | "block",
+    hoverColor: string,
     backgroundColor: string,
     fontColor: string,
     greetIcon: string,
@@ -38,6 +48,8 @@ class GreetComponent extends React.Component {
     constructor(props: any) {
         super(props);
         this.state = {
+            display: "block",
+            hoverColor: "",
             backgroundColor: "",
             fontColor: "",
             greetIcon: getGreetIcon(),
@@ -50,8 +62,22 @@ class GreetComponent extends React.Component {
         };
     }
 
-    greetBtnOnClick() {
-        window.open(this.state.searchEngineUrl + "日历", "_blank",);
+    btnMouseOver(e: any) {
+        e.currentTarget.style.backgroundColor = this.state.hoverColor;
+        e.currentTarget.style.color = getFontColor(this.state.hoverColor);
+    }
+
+    btnMouseOut(e: any) {
+        e.currentTarget.style.backgroundColor = "transparent";
+        e.currentTarget.style.color = this.state.fontColor;
+    }
+
+    infoBtnOnClick() {
+        window.open(this.state.searchEngineUrl + "万年历", "_blank");
+    }
+
+    historyBtnOnClick() {
+        window.open(this.state.searchEngineUrl + "历史上的今天", "_blank",);
     }
 
     // 请求完成后处理步骤
@@ -68,7 +94,7 @@ class GreetComponent extends React.Component {
         this.setState({
             holidayContent: holidayContent,
             calendar: timeDetails.showDate4 + " " + timeDetails.showWeek + "｜" +
-                data.yearTips + data.chineseZodiac + "年｜" + data.lunarCalendar,
+                data.yearTips + data.chineseZodiac + "年｜" + data.lunarCalendar + "｜" + data.constellation,
             suit: data.suit.replace(/\./g, " · "),
             avoid: data.avoid.replace(/\./g, " · "),
         });
@@ -98,32 +124,35 @@ class GreetComponent extends React.Component {
     }
 
     componentDidMount() {
-        // 防抖节流
-        let lastRequestTime: any = localStorage.getItem("lastHolidayRequestTime");
-        let nowTimeStamp = new Date().getTime();
-        if (lastRequestTime === null) {  // 第一次请求时 lastRequestTime 为 null，因此直接进行请求赋值 lastRequestTime
-            this.getHoliday();
-        } else if (nowTimeStamp - parseInt(lastRequestTime) > 4 * 60 * 60 * 1000) {  // 必须多于四小时才能进行新的请求
-            this.getHoliday();
-        } else {  // 一小时之内使用上一次请求结果
-            let lastHoliday: any = localStorage.getItem("lastHoliday");
-            if (lastHoliday) {
-                lastHoliday = JSON.parse(lastHoliday);
-                this.setHoliday(lastHoliday);
+        if (!this.props.preferenceData.simpleMode) {
+            // 防抖节流
+            let lastRequestTime: any = localStorage.getItem("lastHolidayRequestTime");
+            let nowTimeStamp = new Date().getTime();
+            if (lastRequestTime === null) {  // 第一次请求时 lastRequestTime 为 null，因此直接进行请求赋值 lastRequestTime
+                this.getHoliday();
+            } else if (nowTimeStamp - parseInt(lastRequestTime) > 4 * 60 * 60 * 1000) {  // 必须多于四小时才能进行新的请求
+                this.getHoliday();
+            } else {  // 一小时之内使用上一次请求结果
+                let lastHoliday: any = localStorage.getItem("lastHoliday");
+                if (lastHoliday) {
+                    lastHoliday = JSON.parse(lastHoliday);
+                    this.setHoliday(lastHoliday);
+                }
             }
-        }
 
-        setInterval(() => {
-            this.setState({
-                greetIcon: getGreetIcon(),
-                greetContent: getGreetContent(),
-            })
-        }, 60 * 60 * 1000);
+            setInterval(() => {
+                this.setState({
+                    greetIcon: getGreetIcon(),
+                    greetContent: getGreetContent(),
+                })
+            }, 60 * 60 * 1000);
+        }
     }
 
     componentWillReceiveProps(nextProps: any, prevProps: any) {
         if (nextProps.themeColor !== prevProps.themeColor) {
             this.setState({
+                hoverColor: nextProps.themeColor.themeColor,
                 backgroundColor: nextProps.themeColor.componentBackgroundColor,
                 fontColor: nextProps.themeColor.componentFontColor,
             }, () => {
@@ -131,50 +160,78 @@ class GreetComponent extends React.Component {
             });
         }
 
-        if (nextProps.searchEngine !== prevProps.searchEngine) {
-            let tempSearchEngineUrl: string;
-            switch (nextProps.searchEngine) {
-                case "bing":
-                    tempSearchEngineUrl = "https://www.bing.com/search?q=";
-                    break;
-                case "baidu":
-                    tempSearchEngineUrl = "https://www.baidu.com/s?wd=";
-                    break;
-                case "google":
-                    tempSearchEngineUrl = "https://www.google.com/search?q=";
-                    break;
-                default:
-                    tempSearchEngineUrl = "https://www.bing.com/search?q=";
-                    break;
-            }
+        if (nextProps.preferenceData !== prevProps.preferenceData) {
             this.setState({
-                searchEngineUrl: tempSearchEngineUrl,
-            })
+                display: nextProps.preferenceData.simpleMode ? "none" : "block",
+                searchEngineUrl: getSearchEngineDetail(nextProps.preferenceData.searchEngine).searchEngineUrl,
+            });
         }
     }
 
     render() {
+        const popoverTitle = (
+            <Row align={"middle"}>
+                <Col span={10}>
+                    <Text style={{color: this.state.fontColor}}>{"万年历"}</Text>
+                </Col>
+                <Col span={14} style={{textAlign: "right"}}>
+                    <Space>
+                        <Button type={"text"} shape={"round"} icon={<HistoryOutlined/>}
+                                onMouseOver={this.btnMouseOver.bind(this)}
+                                onMouseOut={this.btnMouseOut.bind(this)}
+                                onClick={this.historyBtnOnClick.bind(this)}
+                                style={{color: this.state.fontColor}}>
+                            {"历史上的今天"}
+                        </Button>
+                        <Button type={"text"} shape={"round"} icon={<InfoCircleOutlined/>}
+                                onMouseOver={this.btnMouseOver.bind(this)}
+                                onMouseOut={this.btnMouseOut.bind(this)}
+                                onClick={this.infoBtnOnClick.bind(this)}
+                                style={{color: this.state.fontColor}}>
+                            {"更多信息"}
+                        </Button>
+                    </Space>
+                </Col>
+            </Row>
+        );
+
         const popoverContent = (
-            <Space direction="vertical">
-                <Space>
-                    <CheckCircleOutlined/>
-                    <Text style={{color: this.state.fontColor}}>{" 宜：" + this.state.suit}</Text>
-                </Space>
-                <Space>
-                    <CloseCircleOutlined/>
-                    <Text style={{color: this.state.fontColor}}>{" 忌：" + this.state.avoid}</Text>
-                </Space>
-            </Space>
+            <List>
+                <List.Item>
+                    <Space direction={"vertical"}>
+                        <Button type={"text"} shape={"round"} icon={<CalendarOutlined/>}
+                                style={{color: this.state.fontColor, cursor: "default"}}
+                                onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
+                            {this.state.calendar}
+                        </Button>
+                        <Button type={"text"} shape={"round"} icon={<CheckCircleOutlined/>}
+                                style={{color: this.state.fontColor, cursor: "default"}}
+                                onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
+                            {"宜：" + this.state.suit}
+                        </Button>
+                        <Button type={"text"} shape={"round"} icon={<CloseCircleOutlined/>}
+                                style={{color: this.state.fontColor, cursor: "default"}}
+                                onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
+                            {"忌：" + this.state.avoid}
+                        </Button>
+                    </Space>
+                </List.Item>
+            </List>
         );
 
         return (
             <Popover
-                title={this.state.calendar}
-                content={popoverContent} placement="topLeft" color={this.state.backgroundColor}>
-                <Button shape="round" icon={<i className={this.state.greetIcon}> </i>} size={"large"}
+                title={popoverTitle}
+                content={popoverContent} placement={"bottomLeft"} color={this.state.backgroundColor}
+                overlayStyle={{minWidth: "500px"}}
+            >
+                <Button shape={"round"} icon={<i className={this.state.greetIcon}> </i>} size={"large"}
                         id={"greetBtn"}
                         className={"componentTheme zIndexHigh"}
-                        onClick={this.greetBtnOnClick.bind(this)}
+                        style={{
+                            cursor: "default",
+                            display: this.state.display
+                        }}
                 >
                     {this.state.greetContent + "｜" + this.state.holidayContent}
                 </Button>

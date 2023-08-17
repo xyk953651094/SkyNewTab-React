@@ -1,12 +1,15 @@
-export interface PreferenceInterface {
-    "searchEngineRadio": "bing" | "google" | "baidu",
-    "dynamicEffectRadio": "all" | "rotate" | "translate" | "close",
-    "imageQualityRadio": "full" | "regular" | "small",
-    "imageTopicsCheckbox": string
+export interface PreferenceDataInterface {
+    searchEngine: "bing" | "google" | "baidu",
+    dynamicEffect: "all" | "rotate" | "translate" | "close",
+    imageQuality: "full" | "regular" | "small" | "small_s3",
+    imageTopics: string[],
+    customTopic: string,
+    simpleMode: boolean,
+    noImageMode: boolean
 }
 
 export interface ThemeColorInterface {
-    "themeColor": string,
-    "componentBackgroundColor": string,
-    "componentFontColor": string,
+    themeColor: string,
+    componentBackgroundColor: string,
+    componentFontColor: string,
 }

@@ -1,4 +1,4 @@
-import {darkThemeArray, lightThemeArray} from "./publicConstants"
+import {themeArray} from "./publicConstants"
 import "jquery-color"
 import {ThemeColorInterface} from "./publicInterface";
 
@@ -149,11 +149,7 @@ export function getWeatherIcon(weatherInfo: string) {
 
 // 请求unsplash图片前随机显示多彩颜色主题
 export function setColorTheme() {
-    let hour = new Date().getHours();
-    let theme = lightThemeArray;
-    if (18 < hour || hour < 6) {
-        theme = darkThemeArray;
-    }
+    let theme = themeArray;
     let randomNum = Math.floor(Math.random() * theme.length);
     let body = document.getElementsByTagName("body")[0];
     body.style.backgroundColor = theme[randomNum].bodyBackgroundColor;    // 设置body背景颜色
@@ -232,7 +228,7 @@ export function imageDynamicEffect(element: HTMLElement, effectType: string) {
                 break;
             }
             case "close": {
-                element.style.transform = "scale(1.05)";
+                element.style.transform = "scale(1.05, 1.05)";
                 break;
             }
         }
@@ -253,10 +249,50 @@ export function getDevice() {
     }
 }
 
+export function getSearchEngineDetail(searchEngine: string) {
+    let searchEngineUrl: string;
+    let searchEngineIconUrl: string;
+    switch (searchEngine) {
+        case "baidu":
+            searchEngineUrl = "https://www.baidu.com/s?wd=";
+            searchEngineIconUrl = "https://www.baidu.com/favicon.ico";
+            break;
+        case "bing":
+            searchEngineUrl = "https://www.bing.com/search?q=";
+            searchEngineIconUrl = "https://www.bing.com/favicon.ico";
+            break;
+        case "google":
+            searchEngineUrl = "https://www.google.com/search?q=";
+            searchEngineIconUrl = "https://www.google.com/favicon.ico";
+            break;
+        case "yandex":
+            searchEngineUrl = "https://yandex.com/search/?text=";
+            searchEngineIconUrl = "https://yastatic.net/s3/home-static/_/92/929b10d17990e806734f68758ec917ec.png";
+            break;
+        default:
+            searchEngineUrl = "https://www.bing.com/search?q=";
+            searchEngineIconUrl = "https://www.bing.com/favicon.ico";
+            break;
+    }
+    return {"searchEngineUrl": searchEngineUrl, "searchEngineIconUrl": searchEngineIconUrl};
+}
+
 // 过渡动画
-export function changeThemeColor(element: string, backgroundColor: string, fontColor: string, time: number = 500) {
+export function changeThemeColor(element: string, backgroundColor: string, fontColor: string, time: number = 300) {
     $(element).animate({
         backgroundColor: backgroundColor,
+        color: fontColor,
+    }, {queue: false, duration: time});
+}
+
+export function changeBackgroundColor(element: string, backgroundColor: string, time = 300) {
+    $(element).animate({
+        backgroundColor: backgroundColor,
+    }, {queue: false, duration: time});
+}
+
+export function changeFontColor(element: string, fontColor: string, time = 300) {
+    $(element).animate({
         color: fontColor,
     }, {queue: false, duration: time});
 }
