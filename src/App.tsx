@@ -31,7 +31,8 @@ type stateType = {
     themeColor: ThemeColorInterface,
 
     imageData: any,
-    preferenceData: PreferenceDataInterface
+    preferenceData: PreferenceDataInterface,
+    componentDisplay: "none" | "block",
 }
 
 interface App {
@@ -50,13 +51,15 @@ class App extends React.Component {
             },
 
             imageData: null,
-            preferenceData: defaultPreferenceData
+            preferenceData: defaultPreferenceData,
+            componentDisplay: "none"
         }
     }
 
     getImageData(imageData: any) {
         this.setState({
-            imageData: imageData
+            imageData: imageData,
+            componentDisplay: "block"
         }, () => {
             // 修改主题颜色
             if (imageData.color !== null) {
@@ -220,6 +223,7 @@ class App extends React.Component {
                         <Col xs={0} sm={0} md={20} lg={20} xl={20} style={{textAlign: "right"}}>
                             <Space size={"small"} align={"end"}>
                                 <AuthorComponent
+                                    display={this.state.componentDisplay}
                                     themeColor={this.state.themeColor}
                                     imageData={this.state.imageData}
                                     preferenceData={this.state.preferenceData}

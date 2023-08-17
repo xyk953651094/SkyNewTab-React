@@ -17,6 +17,7 @@ const {Text} = Typography;
 const btnMaxSize = 50;
 
 type propType = {
+    display: "none" | "block",
     themeColor: ThemeColorInterface,
     imageData: any,
     preferenceData: PreferenceDataInterface,
@@ -147,7 +148,7 @@ class AuthorComponent extends React.Component {
 
         if (nextProps.preferenceData !== prevProps.preferenceData) {
             this.setState({
-                display: nextProps.preferenceData.noImageMode ? "none" : "block",
+                // display: nextProps.preferenceData.noImageMode ? "none" : "block",
                 searchEngineUrl: getSearchEngineDetail(nextProps.preferenceData.searchEngine).searchEngineUrl,
             });
         }
@@ -264,10 +265,10 @@ class AuthorComponent extends React.Component {
                         className={"componentTheme zIndexHigh"}
                         onClick={this.authorLinkBtnOnClick.bind(this)}
                         style={{
-                            display: this.state.display,
+                            display: this.props.display,
                         }}
                 >
-                    {"by " + this.state.authorName + " on Unsplash"}
+                    {"由 Unsplash 的 " + this.state.authorName + " 拍摄"}
                 </Button>
             </Popover>
         );
