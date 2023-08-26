@@ -5,6 +5,7 @@ import "../stylesheets/popupComponent.scss"
 import {getFontColor, getReverseColor} from "../typescripts/publicFunctions";
 import PopupImageComponent from "../popupComponents/popupImageComponent";
 import PopupStatusComponent from "../popupComponents/popupStatusComponent";
+import PopupFooterComponent from "../popupComponents/popupFooterComponent";
 import {PreferenceDataInterface} from "../typescripts/publicInterface";
 import {defaultPreferenceData} from "../typescripts/publicConstants";
 
@@ -108,26 +109,9 @@ class PopupComponent extends React.Component {
                     </List>
                 </Content>
                 <Footer className={"popupFooter"}>
-                    <Space align={"center"}>
-                        <Button type={"text"} shape={"round"} icon={<GithubOutlined/>}
-                                href={"https://github.com/xyk953651094"} target={"_blank"}
-                                onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
-                                style={{color: this.state.fontColor}}>
-                            主页
-                        </Button>
-                        <Button type={"text"} shape={"round"} icon={<MessageOutlined/>}
-                                href={"https://xyk953651094.blogspot.com"} target={"_blank"}
-                                onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
-                                style={{color: this.state.fontColor}}>
-                            博客
-                        </Button>
-                        <Button type={"text"} shape={"round"} icon={<GiftOutlined/>}
-                                href={"https://afdian.net/a/xyk953651094"} target={"_blank"}
-                                onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
-                                style={{color: this.state.fontColor}}>
-                            支持
-                        </Button>
-                    </Space>
+                    <PopupFooterComponent  hoverColor={this.state.hoverColor}
+                                           backgroundColor={this.state.backgroundColor}
+                                           fontColor={this.state.fontColor}/>
                 </Footer>
             </Layout>
         );
