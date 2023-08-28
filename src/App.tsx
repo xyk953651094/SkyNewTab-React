@@ -118,7 +118,7 @@ class App extends React.Component {
                 $(".ant-tooltip-inner").css("color", this.state.themeColor.componentFontColor);
             }
 
-            // messgae
+            // message
             let messageEle = $(".ant-message");
             if (messageEle.length && messageEle.length > 0) {
                 $(".ant-message-notice-content").css({
@@ -169,7 +169,7 @@ class App extends React.Component {
                 <Header id={"header"} className={"zIndexMiddle"}>
                     <Row justify="center">
                         <Col xs={0} sm={0} md={10} lg={10} xl={10} xxl={10}>
-                            <Space size={"small"}>
+                            <Space>
                                 <GreetComponent
                                     themeColor={this.state.themeColor}
                                     preferenceData={this.state.preferenceData}
@@ -181,7 +181,7 @@ class App extends React.Component {
                             </Space>
                         </Col>
                         <Col xs={22} sm={22} md={10} lg={10} xl={10} xxl={10} style={{textAlign: "right"}}>
-                            <Space size={"small"}>
+                            <Space>
                                 <DailyComponent
                                     themeColor={this.state.themeColor}
                                     preferenceData={this.state.preferenceData}
@@ -198,7 +198,7 @@ class App extends React.Component {
                         </Col>
                     </Row>
                 </Header>
-                <Content id={"content"} className={"center"}>
+                <Content id={"content"} className={"alignCenter"}>
                     <WallpaperComponent
                         getImageData={this.getImageData.bind(this)}
                     />
@@ -216,7 +216,7 @@ class App extends React.Component {
                 <Footer id={"footer"}>
                     <Row justify="center">
                         <Col xs={0} sm={0} md={20} lg={20} xl={20} style={{textAlign: "right"}}>
-                            <Space size={"small"} align={"end"}>
+                            <Space align={"end"}>
                                 <AuthorComponent
                                     display={this.state.componentDisplay}
                                     themeColor={this.state.themeColor}

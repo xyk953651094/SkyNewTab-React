@@ -65,7 +65,7 @@ class SearchComponent extends React.Component {
 
     render() {
         return (
-            <Col span={24} className={"center"}>
+            <Col span={24} className={"alignCenter"}>
                 <div
                     id={"mask"}
                     className={"mask zIndexMiddle"}

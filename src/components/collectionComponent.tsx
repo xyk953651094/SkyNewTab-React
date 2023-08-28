@@ -206,7 +206,7 @@ class CollectionComponent extends React.Component {
 
     render() {
         return (
-            <Col span={24} className={"center zIndexHigh"} style={{display: this.state.display}}>
+            <Col span={24} className={"alignCenter zIndexHigh"} style={{display: this.state.display}}>
                 <Space>
                     {
                         this.state.collectionData.map((item: any) => {

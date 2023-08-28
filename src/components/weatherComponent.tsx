@@ -25,7 +25,7 @@ type stateType = {
     weatherIcon: string,
     weatherInfo: string,
     searchEngineUrl: string,
-    address: string;
+    location: string;
     humidity: string;
     pm25: string;
     rainfall: string;
@@ -49,7 +49,7 @@ class WeatherComponent extends React.Component {
             weatherIcon: "",
             weatherInfo: "暂无信息",
             searchEngineUrl: "https://www.bing.com/search?q=",
-            address: "暂无信息",
+            location: "暂无信息",
             humidity: "暂无信息",
             pm25: "暂无信息",
             rainfall: "暂无信息",
@@ -76,7 +76,7 @@ class WeatherComponent extends React.Component {
         this.setState({
             weatherIcon: getWeatherIcon(data.weatherData.weather),
             weatherInfo: data.weatherData.weather + "｜" + data.weatherData.temperature + "°C",
-            address: data.region.replace("|", " · "),
+            location: data.region.replace("|", " · "),
             humidity: data.weatherData.humidity,
             pm25: data.weatherData.pm25,
             rainfall: data.weatherData.rainfall + "%",
@@ -169,7 +169,7 @@ class WeatherComponent extends React.Component {
                         <Button type={"text"} shape={"round"} icon={<i className="bi bi-geo-alt"></i>}
                                 style={{color: this.state.fontColor, cursor: "default"}}
                                 onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
-                            {" 地理位置：" + this.state.address}
+                            {" 地理位置：" + this.state.location}
                         </Button>
                         <Button type={"text"} shape={"round"} icon={<i className="bi bi-moisture"></i>}
                                 style={{color: this.state.fontColor, cursor: "default"}}
@@ -203,7 +203,7 @@ class WeatherComponent extends React.Component {
 
         return (
             <Popover title={popoverTitle} content={popoverContent} color={this.state.backgroundColor}
-                     overlayStyle={{width: "250px"}}
+                     placement="bottomLeft" overlayStyle={{width: "250px"}}
             >
                 <Button shape={"round"} icon={<i className={this.state.weatherIcon}> </i>} size={"large"}
                         id={"weatherBtn"}

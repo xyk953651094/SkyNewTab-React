@@ -5,15 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="修复已知问题">
-      <change afterPath="$PROJECT_DIR$/src/popupComponents/popupFooterComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/dist/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/popup.bundle.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/popup.bundle.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/collectionComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/collectionComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/dailyComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dailyComponent.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/popupComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/popupComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/extensionFiles/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/extensionFiles/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/preferenceComponents/preferenceFooterComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/preferenceComponents/preferenceFooterComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stylesheets/popupComponent.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/stylesheets/popupComponent.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/searchComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/searchComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/todoComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/todoComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/weatherComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/weatherComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stylesheets/publicStyles.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/stylesheets/publicStyles.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -197,7 +198,16 @@
       <workItem from="1692268318197" duration="1095000" />
       <workItem from="1692278948318" duration="438000" />
       <workItem from="1692796917112" duration="3833000" />
-      <workItem from="1693050240854" duration="1588000" />
+      <workItem from="1693050240854" duration="4477000" />
+      <workItem from="1693100819300" duration="361000" />
+      <workItem from="1693102166520" duration="28000" />
+      <workItem from="1693103098359" duration="1538000" />
+      <workItem from="1693105969462" duration="71000" />
+      <workItem from="1693129219110" duration="449000" />
+      <workItem from="1693130167445" duration="12000" />
+      <workItem from="1693130224388" duration="4000" />
+      <workItem from="1693139109781" duration="57000" />
+      <workItem from="1693224402661" duration="5131000" />
     </task>
     <task id="LOCAL-00001" summary="优化抽屉蒙版的显示效果&#10;优化代码质量">
       <created>1683952184207</created>
@@ -317,14 +327,6 @@
       <option name="presentableId" value="LOCAL-00017" />
       <option name="project" value="LOCAL" />
       <updated>1687402693401</updated>
-    </task>
-    <task id="LOCAL-00041" summary="优化大屏显示效果">
-      <option name="closed" value="true" />
-      <created>1691120932574</created>
-      <option name="number" value="00041" />
-      <option name="presentableId" value="LOCAL-00041" />
-      <option name="project" value="LOCAL" />
-      <updated>1691120932574</updated>
     </task>
     <task id="LOCAL-00042" summary="popup 图片加载新增 blurhash 效果">
       <option name="closed" value="true" />
@@ -574,7 +576,15 @@
       <option name="project" value="LOCAL" />
       <updated>1692268766737</updated>
     </task>
-    <option name="localTasksCounter" value="73" />
+    <task id="LOCAL-00073" summary="修复已知问题">
+      <option name="closed" value="true" />
+      <created>1693052157781</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1693052157781</updated>
+    </task>
+    <option name="localTasksCounter" value="74" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

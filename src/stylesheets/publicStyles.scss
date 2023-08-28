@@ -56,10 +56,11 @@ html, body {
 }
 
 /*水平垂直居中*/
-.center {
+.alignCenter {
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
 }
 
 /*毛玻璃效果*/

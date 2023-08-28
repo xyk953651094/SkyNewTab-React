@@ -70,7 +70,7 @@ class PopupComponent extends React.Component {
 
         // 修改各类弹窗样式
         $("body").bind("DOMNodeInserted", () => {
-            // messgae
+            // message
             let messageEle = $(".ant-message");
             if (messageEle.length && messageEle.length > 0) {
                 $(".ant-message-notice-content").css({
