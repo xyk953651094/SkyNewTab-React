@@ -30,4 +30,13 @@ body {
     width: 250px;
     height: 150px;
     object-fit: cover;
+    border-radius: 10px;
+}
+
+/*水平垂直居中*/
+.alignCenter {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    text-align: center !important;
 }

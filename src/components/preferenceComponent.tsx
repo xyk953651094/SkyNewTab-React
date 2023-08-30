@@ -154,10 +154,11 @@ class PreferenceComponent extends React.Component {
             this.props.getPreferenceData(this.state.preferenceData);
             localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
             if (checked) {
-                message.success("已开启简洁模式");
+                message.success("已开启简洁模式，一秒后刷新页面");
             } else {
-                message.success("已关闭简洁模式");
+                message.success("已关闭简洁模式，一秒后刷新页面");
             }
+            this.refreshWindow();
         })
     }
 
@@ -169,9 +170,9 @@ class PreferenceComponent extends React.Component {
             this.props.getPreferenceData(this.state.preferenceData);
             localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
             if (checked) {
-                message.success("已开启无图模式，1秒后刷新页面");
+                message.success("已开启无图模式，一秒后刷新页面");
             } else {
-                message.success("已关闭无图模式，1秒后刷新页面");
+                message.success("已关闭无图模式，一秒后刷新页面");
 
             }
             this.refreshWindow();
@@ -181,7 +182,7 @@ class PreferenceComponent extends React.Component {
     // 重置设置
     clearStorageBtnOnClick() {
         localStorage.clear();
-        message.success("已重置所有内容，1秒后刷新页面");
+        message.success("已重置所有内容，一秒后刷新页面");
         this.refreshWindow();
     }
 

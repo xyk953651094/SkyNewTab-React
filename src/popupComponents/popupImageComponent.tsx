@@ -189,8 +189,8 @@ class PopupImageComponent extends React.Component {
                         style={{borderRadius: "10px"}}
                     />
                     <canvas id={"popupCanvas"} className={"popupCanvas"}
-                            style={{display: this.state.displayCanvas, borderRadius: "10px"}}></canvas>
-                    <Space direction={"vertical"}>
+                            style={{display: this.state.displayCanvas}}></canvas>
+                    <Space direction={"vertical"} align="start">
                         <Button type={"text"} shape={"round"} icon={<UserOutlined/>}
                                 onMouseOver={this.btnMouseOver.bind(this)}
                                 onMouseOut={this.btnMouseOut.bind(this)} onClick={this.authorLinkBtnOnClick.bind(this)}

@@ -98,11 +98,11 @@ class PopupComponent extends React.Component {
                 </Header>
                 <Content className={"popupContent"}>
                     <List>
-                        <List.Item style={{borderBlockEndColor: this.state.fontColor}}>
+                        <List.Item className={"alignCenter"} style={{borderBlockEndColor: this.state.fontColor}}>
                             <PopupStatusComponent imageData={this.state.imageData} fontColor={this.state.fontColor}
                                                   preferenceData={this.state.preferenceData}/>
                         </List.Item>
-                        <List.Item>
+                        <List.Item className={"alignCenter"}>
                             <PopupImageComponent imageData={this.state.imageData} fontColor={this.state.fontColor}
                                                  preferenceData={this.state.preferenceData}/>
                         </List.Item>
