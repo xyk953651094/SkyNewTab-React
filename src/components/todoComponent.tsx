@@ -271,7 +271,7 @@ class TodoComponent extends React.Component {
                             className={"componentTheme zIndexHigh"}
                             style={{cursor: "default", display: this.state.display}}
                     >
-                        {"待办事项（" + this.state.listItems.length + "）"}
+                        {this.state.todoSize + " 个待办事项"}
                     </Button>
                 </Popover>
                 <Modal title={"添加待办事项 " + this.state.todoSize + " / " + this.state.todoMaxSize} closeIcon={false}

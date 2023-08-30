@@ -225,7 +225,7 @@ class GreetComponent extends React.Component {
                 content={popoverContent} placement={"bottomLeft"} color={this.state.backgroundColor}
                 overlayStyle={{minWidth: "500px"}}
             >
-                <Button shape={"round"} icon={<i className={this.state.greetIcon}> </i>} size={"large"}
+                <Button shape={"round"} icon={<i className={this.state.greetIcon}></i>} size={"large"}
                         id={"greetBtn"}
                         className={"componentTheme zIndexHigh"}
                         style={{

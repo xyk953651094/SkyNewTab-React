@@ -1,6 +1,6 @@
 import React from "react";
 import {Button, Space} from "antd";
-import {CalendarOutlined, CameraOutlined, CheckSquareOutlined} from "@ant-design/icons";
+import {CalendarOutlined, InfoCircleOutlined, CheckSquareOutlined} from "@ant-design/icons";
 import "../stylesheets/popupComponent.scss"
 import {
     getFontColor,
@@ -22,8 +22,8 @@ type stateType = {
     greetContent: string,
     weatherIcon: string,
     weatherContent: string,
-    dailyAmount: number,
-    todoAmount: number,
+    dailySize: number,
+    todoSize: number,
     hoverColor: string,
     fontColor: string,
     searchEngineUrl: string,
@@ -43,8 +43,8 @@ class PopupImageComponent extends React.Component {
             greetContent: getGreetContent(),
             weatherIcon: "",
             weatherContent: "暂无信息",
-            dailyAmount: 0,
-            todoAmount: 0,
+            dailySize: 0,
+            todoSize: 0,
             hoverColor: "#000000",
             fontColor: "#000000",
             searchEngineUrl: "https://www.bing.com/search?q=",
@@ -112,8 +112,8 @@ class PopupImageComponent extends React.Component {
             greetContent: tempGreet ? getGreetContent() + "｜" + this.setHoliday(JSON.parse(tempGreet)) : "暂无信息",
             weatherIcon: tempWeather ? getWeatherIcon(JSON.parse(tempWeather).weatherData.weather) : "",
             weatherContent: tempWeather ? JSON.parse(tempWeather).weatherData.weather + "｜" + JSON.parse(tempWeather).weatherData.temperature + "°C" : "暂无信息",
-            dailyAmount: tempDaily ? JSON.parse(tempDaily).length : 0,
-            todoAmount: tempTodos ? JSON.parse(tempTodos).length : 0,
+            dailySize: tempDaily ? JSON.parse(tempDaily).length : 0,
+            todoSize: tempTodos ? JSON.parse(tempTodos).length : 0,
         })
     }
 
@@ -137,15 +137,15 @@ class PopupImageComponent extends React.Component {
                             onMouseOver={this.btnMouseOver.bind(this)}
                             onMouseOut={this.btnMouseOut.bind(this)}
                             style={{color: this.state.fontColor, cursor: "default"}}>
-                        {"倒数日：" + this.state.dailyAmount + " 个"}
+                        {this.state.dailySize + " 个倒数日"}
                     </Button>
                     <Button type={"text"} shape={"round"} icon={<CheckSquareOutlined/>}
                             onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
                             style={{color: this.state.fontColor, cursor: "default"}}>
-                        {"待办事项：" + this.state.todoAmount + " 个"}
+                        {this.state.todoSize + " 个待办事项"}
                     </Button>
                 </Space>
-                <Button type={"text"} shape={"round"} icon={<CameraOutlined/>}
+                <Button type={"text"} shape={"round"} icon={<InfoCircleOutlined/>}
                         onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
                         style={{color: this.state.fontColor, cursor: "default", display: this.state.simpleMode ? "inline-block" : "none"}}>
                     {"已开启简洁模式"}

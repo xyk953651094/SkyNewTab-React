@@ -270,7 +270,7 @@ class DailyComponent extends React.Component {
                             className={"componentTheme zIndexHigh"}
                             style={{cursor: "default", display: this.state.display}}
                     >
-                        {"倒数日（" + this.state.listItems.length + "）"}
+                        {this.state.dailySize + " 个倒数日"}
                     </Button>
                 </Popover>
                 <Modal title={"添加倒数日 " + this.state.dailySize + " / " + this.state.dailyMaxSize} closeIcon={false}

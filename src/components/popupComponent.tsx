@@ -1,6 +1,6 @@
 import React from "react";
 import {Button, Layout, List, message, Space} from "antd";
-import {DashboardOutlined, GiftOutlined, GithubOutlined, MessageOutlined} from "@ant-design/icons";
+import {DashboardOutlined} from "@ant-design/icons";
 import "../stylesheets/popupComponent.scss"
 import {getFontColor, getReverseColor} from "../typescripts/publicFunctions";
 import PopupImageComponent from "../popupComponents/popupImageComponent";

@@ -1,6 +1,5 @@
 import React from "react";
 import {Button, Card, Col, Row} from "antd";
-import "../stylesheets/clockComponent.scss"
 import {ExclamationCircleOutlined, InfoCircleOutlined, SendOutlined} from "@ant-design/icons";
 import {getFontColor} from "../typescripts/publicFunctions";
 

@@ -205,7 +205,7 @@ class WeatherComponent extends React.Component {
             <Popover title={popoverTitle} content={popoverContent} color={this.state.backgroundColor}
                      placement="bottomLeft" overlayStyle={{width: "250px"}}
             >
-                <Button shape={"round"} icon={<i className={this.state.weatherIcon}> </i>} size={"large"}
+                <Button shape={"round"} icon={<i className={this.state.weatherIcon}></i>} size={"large"}
                         id={"weatherBtn"}
                         className={"componentTheme zIndexHigh"}
                         style={{

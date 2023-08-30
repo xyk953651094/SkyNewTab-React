@@ -1,6 +1,5 @@
 import React from "react";
 import {Avatar, Button, Card, Col, Row} from "antd";
-import "../stylesheets/clockComponent.scss"
 import {LinkOutlined} from "@ant-design/icons";
 import {getFontColor} from "../typescripts/publicFunctions";
 
