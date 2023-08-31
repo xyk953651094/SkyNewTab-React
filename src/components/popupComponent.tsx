@@ -89,26 +89,34 @@ class PopupComponent extends React.Component {
         return (
             <Layout className={"popupLayout"} style={{backgroundColor: this.state.backgroundColor}}>
                 <Header className={"popupHeader"}>
-                    <PopupHeaderComponent hoverColor={this.state.hoverColor}
-                                          backgroundColor={this.state.backgroundColor}
-                                          fontColor={this.state.fontColor}/>
+                    <PopupHeaderComponent
+                        hoverColor={this.state.hoverColor}
+                        fontColor={this.state.fontColor}
+                    />
                 </Header>
                 <Content className={"popupContent"}>
                     <List>
                         <List.Item className={"alignCenter"} style={{borderBlockEndColor: this.state.fontColor}}>
-                            <PopupStatusComponent imageData={this.state.imageData} fontColor={this.state.fontColor}
-                                                  preferenceData={this.state.preferenceData}/>
+                            <PopupStatusComponent
+                                imageData={this.state.imageData}
+                                fontColor={this.state.fontColor}
+                                preferenceData={this.state.preferenceData}
+                            />
                         </List.Item>
                         <List.Item className={"alignCenter"}>
-                            <PopupImageComponent imageData={this.state.imageData} fontColor={this.state.fontColor}
-                                                 preferenceData={this.state.preferenceData}/>
+                            <PopupImageComponent
+                                imageData={this.state.imageData}
+                                fontColor={this.state.fontColor}
+                                preferenceData={this.state.preferenceData}
+                            />
                         </List.Item>
                     </List>
                 </Content>
                 <Footer className={"popupFooter"}>
-                    <PopupFooterComponent  hoverColor={this.state.hoverColor}
-                                           backgroundColor={this.state.backgroundColor}
-                                           fontColor={this.state.fontColor}/>
+                    <PopupFooterComponent
+                        hoverColor={this.state.hoverColor}
+                        fontColor={this.state.fontColor}
+                    />
                 </Footer>
             </Layout>
         );

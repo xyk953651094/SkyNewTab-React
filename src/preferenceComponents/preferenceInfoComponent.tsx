@@ -1,6 +1,6 @@
 import React from "react";
-import {Avatar, Button, Card, Col, Row, Space} from "antd";
-import {InfoCircleOutlined} from "@ant-design/icons";
+import {Button, Card, Space} from "antd";
+import {AppstoreOutlined, CalendarOutlined, CloudOutlined, FileImageOutlined} from "@ant-design/icons";
 import {getFontColor} from "../typescripts/publicFunctions";
 
 type propType = {
@@ -35,7 +35,7 @@ class PreferenceInfoComponent extends React.Component {
     render() {
         return (
             <Card title={"产品信息"} size={"small"}
-                  extra={<InfoCircleOutlined style={{color: this.props.fontColor}}/>}
+                  extra={<AppstoreOutlined style={{color: this.props.fontColor}}/>}
                   style={{border: "1px solid " + this.props.fontColor}}
                   headStyle={{
                       backgroundColor: this.props.backgroundColor,
@@ -45,23 +45,23 @@ class PreferenceInfoComponent extends React.Component {
                   bodyStyle={{backgroundColor: this.props.backgroundColor}}
             >
                 <Space direction={"vertical"}>
-                    <Button type={"text"} shape={"round"} icon={<InfoCircleOutlined/>}
-                            href={"https://www.mxnzp.com"} target={"_blank"}
+                    <Button type={"text"} shape={"round"} icon={<CalendarOutlined />}
+                            href={"https://www.mxnzp.com/"} target={"_blank"}
                             onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
                             className={"poemFont"} style={{color: this.props.fontColor}}>
                         {"节气来源：https://www.mxnzp.com"}
                     </Button>
-                    <Button type={"text"} shape={"round"} icon={<InfoCircleOutlined/>}
-                            href={"https://www.jinrishici.com"} target={"_blank"}
+                    <Button type={"text"} shape={"round"} icon={<CloudOutlined />}
+                            href={"https://www.jinrishici.com/"} target={"_blank"}
                             onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
                             className={"poemFont"} style={{color: this.props.fontColor}}>
                         {"天气来源：https://www.jinrishici.com"}
                     </Button>
-                    <Button type={"text"} shape={"round"} icon={<InfoCircleOutlined/>}
-                            href={"https://www.jinrishici.com"} target={"_blank"}
+                    <Button type={"text"} shape={"round"} icon={<FileImageOutlined />}
+                            href={"https://unsplash.com/"} target={"_blank"}
                             onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
                             className={"poemFont"} style={{color: this.props.fontColor}}>
-                        {"诗词来源：https://www.jinrishici.com"}
+                        {"图片来源：https://unsplash.com"}
                     </Button>
                 </Space>
             </Card>

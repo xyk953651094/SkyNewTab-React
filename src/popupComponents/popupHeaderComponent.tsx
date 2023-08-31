@@ -5,7 +5,6 @@ import {getFontColor} from "../typescripts/publicFunctions";
 
 type propType = {
     hoverColor: string,
-    backgroundColor: string,
     fontColor: string,
 }
 
