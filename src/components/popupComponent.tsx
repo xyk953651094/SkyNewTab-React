@@ -8,6 +8,7 @@ import PopupStatusComponent from "../popupComponents/popupStatusComponent";
 import PopupFooterComponent from "../popupComponents/popupFooterComponent";
 import {PreferenceDataInterface} from "../typescripts/publicInterface";
 import {defaultPreferenceData} from "../typescripts/publicConstants";
+import PopupHeaderComponent from "../popupComponents/popupHeaderComponent";
 
 const {Header, Content, Footer} = Layout;
 const $ = require("jquery")
@@ -88,13 +89,9 @@ class PopupComponent extends React.Component {
         return (
             <Layout className={"popupLayout"} style={{backgroundColor: this.state.backgroundColor}}>
                 <Header className={"popupHeader"}>
-                    <Space align={"center"}>
-                        <Button type={"text"} shape={"round"} icon={<DashboardOutlined/>}
-                                onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
-                                style={{color: this.state.fontColor, cursor: "default"}}>
-                            云开新标签页的仪表盘
-                        </Button>
-                    </Space>
+                    <PopupHeaderComponent hoverColor={this.state.hoverColor}
+                                          backgroundColor={this.state.backgroundColor}
+                                          fontColor={this.state.fontColor}/>
                 </Header>
                 <Content className={"popupContent"}>
                     <List>

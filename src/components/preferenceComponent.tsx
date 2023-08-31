@@ -24,6 +24,7 @@ import {defaultPreferenceData, device} from "../typescripts/publicConstants";
 import PreferenceLinkComponent from "../preferenceComponents/preferenceLinkComponent";
 import PreferenceFooterComponent from "../preferenceComponents/preferenceFooterComponent";
 import PreferenceEmailComponent from "../preferenceComponents/preferenceEmailComponent";
+import PreferenceInfoComponent from "../preferenceComponents/preferenceInfoComponent";
 
 const {Text} = Typography;
 
@@ -253,7 +254,6 @@ class PreferenceComponent extends React.Component {
                     closeIcon={false}
                     headerStyle={{color: this.state.fontColor, borderBottomColor: this.state.fontColor}}
                     drawerStyle={{backgroundColor: this.state.backgroundColor}}
-                    // maskStyle={{backgroundColor: this.state.backgroundColor, opacity: 0.45}}
                     maskStyle={{backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)"}}
                     footer={
                         <PreferenceFooterComponent
@@ -267,160 +267,156 @@ class PreferenceComponent extends React.Component {
                         textAlign: "center"
                     }}
                 >
-                    <Row gutter={[16, 16]}>
-                        <Col span={24}>
-                            <Card title={"图片设置"} size={"small"}
-                                  extra={<SettingOutlined style={{color: this.state.fontColor}}/>}
-                                  style={{border: "1px solid " + this.state.fontColor}}
-                                  headStyle={{
-                                      backgroundColor: this.state.backgroundColor,
-                                      color: this.state.fontColor,
-                                      borderBottom: "2px solid " + this.state.fontColor
-                                  }}
-                                  bodyStyle={{backgroundColor: this.state.backgroundColor}}
-                            >
-                                <Form colon={false} initialValues={this.state.preferenceData}>
-                                    <Form.Item name={"dynamicEffect"} label={"图片动效"}>
-                                        <Radio.Group buttonStyle={"solid"}
-                                                     onChange={this.dynamicEffectRadioOnChange.bind(this)}>
-                                            <Row>
-                                                <Col span={12}><Radio value={"all"}>视差</Radio></Col>
-                                                <Col span={12}><Radio value={"translate"}>平移</Radio></Col>
-                                                <Col span={12}><Radio value={"rotate"}>旋转</Radio></Col>
-                                                <Col span={12}><Radio value={"close"}>关闭</Radio></Col>
-                                            </Row>
-                                        </Radio.Group>
-                                    </Form.Item>
-                                    <Form.Item name={"imageQuality"} label={"图片质量"}>
-                                        <Radio.Group buttonStyle={"solid"}
-                                                     onChange={this.imageQualityRadioOnChange.bind(this)}>
-                                            <Row>
-                                                <Col span={12}><Radio value={"full"}>最高</Radio></Col>
-                                                <Col span={12}><Radio value={"regular"}>标准</Radio></Col>
-                                                <Col span={12}><Radio value={"small"}>较低</Radio></Col>
-                                                <Col span={12}><Radio value={"small_s3"}>最低</Radio></Col>
-                                            </Row>
-                                        </Radio.Group>
-                                    </Form.Item>
-                                    <Form.Item name={"imageTopics"} label={"图片主题"}>
-                                        <Checkbox.Group disabled={this.state.disableImageTopic}
-                                                        onChange={this.imageTopicsCheckboxOnChange.bind(this)}>
-                                            <Row>
-                                                <Col span={12}><Checkbox name={"travel"}
-                                                                         value={"Fzo3zuOHN6w"}>旅游</Checkbox></Col>
-                                                <Col span={12}><Checkbox name={"wallpapers"}
-                                                                         value={"bo8jQKTaE0Y"}>壁纸</Checkbox></Col>
-                                                <Col span={12}><Checkbox name={"3d-renders"}
-                                                                         value={"CDwuwXJAbEw"}>3D渲染</Checkbox></Col>
-                                                <Col span={12}><Checkbox name={"textures-patterns"}
-                                                                         value={"iUIsnVtjB0Y"}>纹理</Checkbox></Col>
-                                                <Col span={12}><Checkbox name={"experimental"}
-                                                                         value={"qPYsDzvJOYc"}>实验</Checkbox></Col>
-                                                <Col span={12}><Checkbox name={"architecture"}
-                                                                         value={"rnSKDHwwYUk"}>建筑</Checkbox></Col>
-                                                <Col span={12}><Checkbox name={"nature"}
-                                                                         value={"6sMVjTLSkeQ"}>自然</Checkbox></Col>
-                                                <Col span={12}><Checkbox name={"business-work"}
-                                                                         value={"aeu6rL-j6ew"}>商务</Checkbox></Col>
-                                                <Col span={12}><Checkbox name={"fashion"}
-                                                                         value={"S4MKLAsBB74"}>时尚</Checkbox></Col>
-                                                <Col span={12}><Checkbox name={"film"}
-                                                                         value={"hmenvQhUmxM"}>电影</Checkbox></Col>
-                                                <Col span={12}><Checkbox name={"food-drink"}
-                                                                         value={"xjPR4hlkBGA"}>饮食</Checkbox></Col>
-                                                <Col span={12}><Checkbox name={"health"}
-                                                                         value={"_hb-dl4Q-4U"}>健康</Checkbox></Col>
-                                                <Col span={12}><Checkbox name={"people"}
-                                                                         value={"towJZFskpGg"}>人物</Checkbox></Col>
-                                                <Col span={12}><Checkbox name={"interiors"}
-                                                                         value={"R_Fyn-Gwtlw"}>精神</Checkbox></Col>
-                                                <Col span={12}><Checkbox name={"street-photography"}
-                                                                         value={"xHxYTMHLgOc"}>街头</Checkbox></Col>
-                                                <Col span={12}><Checkbox name={"animals"}
-                                                                         value={"Jpg6Kidl-Hk"}>动物</Checkbox></Col>
-                                                <Col span={12}><Checkbox name={"spirituality"}
-                                                                         value={"_8zFHuhRhyo"}>灵魂</Checkbox></Col>
-                                                <Col span={12}><Checkbox name={"arts-culture"}
-                                                                         value={"bDo48cUhwnY"}>文化</Checkbox></Col>
-                                                <Col span={12}><Checkbox name={"history"}
-                                                                         value={"dijpbw99kQQ"}>历史</Checkbox></Col>
-                                                <Col span={12}><Checkbox name={"athletics"}
-                                                                         value={"Bn-DjrcBrwo"}>体育</Checkbox></Col>
-                                            </Row>
-                                        </Checkbox.Group>
-                                    </Form.Item>
-                                    <Form.Item name={"customTopic"} label={"其他主题"}
-                                               extra={
-                                                   <Space direction={"vertical"}>
-                                                       <Text
-                                                           style={{color: this.state.fontColor}}>按下回车生效，英文结果最准确</Text>
-                                                       <Text
-                                                           style={{color: this.state.fontColor}}>其它主题不为空时将禁用图片主题</Text>
-                                                   </Space>
-                                               }
-                                    >
-                                        <Input onPressEnter={this.customTopicInputOnChange.bind(this)}
-                                               placeholder="输入后按下 Enter 键生效" allowClear/>
-                                    </Form.Item>
-                                </Form>
-                            </Card>
-                        </Col>
-                        <Col span={24}>
-                            <Card title={"功能设置"} size={"small"}
-                                  extra={<SettingOutlined style={{color: this.state.fontColor}}/>}
-                                  style={{border: "1px solid " + this.state.fontColor}}
-                                  headStyle={{
-                                      backgroundColor: this.state.backgroundColor,
-                                      color: this.state.fontColor,
-                                      borderBottom: "2px solid " + this.state.fontColor
-                                  }}
-                                  bodyStyle={{backgroundColor: this.state.backgroundColor}}
-                            >
-                                <Form colon={false} initialValues={this.state.preferenceData}>
-                                    <Form.Item name={"searchEngine"} label={"搜索引擎"}>
-                                        <Radio.Group buttonStyle={"solid"}
-                                                     onChange={this.searchEngineRadioOnChange.bind(this)}>
-                                            <Row>
-                                                <Col span={12}><Radio value={"baidu"}>Baidu</Radio></Col>
-                                                <Col span={12}><Radio value={"bing"}>Bing</Radio></Col>
-                                                <Col span={12}><Radio value={"google"}>Google</Radio></Col>
-                                                <Col span={12}><Radio value={"yandex"}>Yandex</Radio></Col>
-                                            </Row>
-                                        </Radio.Group>
-                                    </Form.Item>
-                                    <Form.Item name={"simpleMode"} label={"简洁模式"} valuePropName={"checked"}>
-                                        <Switch checkedChildren="已开启" unCheckedChildren="已关闭"
-                                                onChange={this.simpleModeSwitchOnChange.bind(this)}/>
-                                    </Form.Item>
-                                    <Form.Item name={"noImageMode"} label={"无图模式"} valuePropName={"checked"}>
-                                        <Switch checkedChildren="已开启" unCheckedChildren="已关闭"
-                                                onChange={this.noImageModeSwitchOnChange.bind(this)}/>
-                                    </Form.Item>
-                                    <Form.Item name={"clearStorageButton"} label={"危险设置"}>
-                                        <Button type={"text"} shape={"round"} icon={<DeleteOutlined/>}
-                                                onMouseOver={this.btnMouseOver.bind(this)}
-                                                onMouseOut={this.btnMouseOut.bind(this)}
-                                                onClick={this.clearStorageBtnOnClick.bind(this)}
-                                                style={{color: this.state.fontColor}}>
-                                            清空并重置所有内容
-                                        </Button>
-                                    </Form.Item>
-                                </Form>
-                            </Card>
-                        </Col>
-                        <Col span={24}>
-                            <PreferenceEmailComponent
-                                hoverColor={this.state.hoverColor}
-                                backgroundColor={this.state.backgroundColor}
-                                fontColor={this.state.fontColor}/>
-                        </Col>
-                        <Col span={24}>
-                            <PreferenceLinkComponent
-                                hoverColor={this.state.hoverColor}
-                                backgroundColor={this.state.backgroundColor}
-                                fontColor={this.state.fontColor}/>
-                        </Col>
-                    </Row>
+                    <Space direction={"vertical"} size={"large"}>
+                        <Card title={"图片设置"} size={"small"}
+                              extra={<SettingOutlined style={{color: this.state.fontColor}}/>}
+                              style={{border: "1px solid " + this.state.fontColor}}
+                              headStyle={{
+                                  backgroundColor: this.state.backgroundColor,
+                                  color: this.state.fontColor,
+                                  borderBottom: "2px solid " + this.state.fontColor
+                              }}
+                              bodyStyle={{backgroundColor: this.state.backgroundColor}}
+                        >
+                            <Form colon={false} initialValues={this.state.preferenceData}>
+                                <Form.Item name={"dynamicEffect"} label={"图片动效"}>
+                                    <Radio.Group buttonStyle={"solid"}
+                                                 onChange={this.dynamicEffectRadioOnChange.bind(this)}>
+                                        <Row>
+                                            <Col span={12}><Radio value={"all"}>视差</Radio></Col>
+                                            <Col span={12}><Radio value={"translate"}>平移</Radio></Col>
+                                            <Col span={12}><Radio value={"rotate"}>旋转</Radio></Col>
+                                            <Col span={12}><Radio value={"close"}>关闭</Radio></Col>
+                                        </Row>
+                                    </Radio.Group>
+                                </Form.Item>
+                                <Form.Item name={"imageQuality"} label={"图片质量"}>
+                                    <Radio.Group buttonStyle={"solid"}
+                                                 onChange={this.imageQualityRadioOnChange.bind(this)}>
+                                        <Row>
+                                            <Col span={12}><Radio value={"full"}>最高</Radio></Col>
+                                            <Col span={12}><Radio value={"regular"}>标准</Radio></Col>
+                                            <Col span={12}><Radio value={"small"}>较低</Radio></Col>
+                                            <Col span={12}><Radio value={"small_s3"}>最低</Radio></Col>
+                                        </Row>
+                                    </Radio.Group>
+                                </Form.Item>
+                                <Form.Item name={"imageTopics"} label={"图片主题"}>
+                                    <Checkbox.Group disabled={this.state.disableImageTopic}
+                                                    onChange={this.imageTopicsCheckboxOnChange.bind(this)}>
+                                        <Row>
+                                            <Col span={12}><Checkbox name={"travel"}
+                                                                     value={"Fzo3zuOHN6w"}>旅游</Checkbox></Col>
+                                            <Col span={12}><Checkbox name={"wallpapers"}
+                                                                     value={"bo8jQKTaE0Y"}>壁纸</Checkbox></Col>
+                                            <Col span={12}><Checkbox name={"3d-renders"}
+                                                                     value={"CDwuwXJAbEw"}>3D渲染</Checkbox></Col>
+                                            <Col span={12}><Checkbox name={"textures-patterns"}
+                                                                     value={"iUIsnVtjB0Y"}>纹理</Checkbox></Col>
+                                            <Col span={12}><Checkbox name={"experimental"}
+                                                                     value={"qPYsDzvJOYc"}>实验</Checkbox></Col>
+                                            <Col span={12}><Checkbox name={"architecture"}
+                                                                     value={"rnSKDHwwYUk"}>建筑</Checkbox></Col>
+                                            <Col span={12}><Checkbox name={"nature"}
+                                                                     value={"6sMVjTLSkeQ"}>自然</Checkbox></Col>
+                                            <Col span={12}><Checkbox name={"business-work"}
+                                                                     value={"aeu6rL-j6ew"}>商务</Checkbox></Col>
+                                            <Col span={12}><Checkbox name={"fashion"}
+                                                                     value={"S4MKLAsBB74"}>时尚</Checkbox></Col>
+                                            <Col span={12}><Checkbox name={"film"}
+                                                                     value={"hmenvQhUmxM"}>电影</Checkbox></Col>
+                                            <Col span={12}><Checkbox name={"food-drink"}
+                                                                     value={"xjPR4hlkBGA"}>饮食</Checkbox></Col>
+                                            <Col span={12}><Checkbox name={"health"}
+                                                                     value={"_hb-dl4Q-4U"}>健康</Checkbox></Col>
+                                            <Col span={12}><Checkbox name={"people"}
+                                                                     value={"towJZFskpGg"}>人物</Checkbox></Col>
+                                            <Col span={12}><Checkbox name={"interiors"}
+                                                                     value={"R_Fyn-Gwtlw"}>精神</Checkbox></Col>
+                                            <Col span={12}><Checkbox name={"street-photography"}
+                                                                     value={"xHxYTMHLgOc"}>街头</Checkbox></Col>
+                                            <Col span={12}><Checkbox name={"animals"}
+                                                                     value={"Jpg6Kidl-Hk"}>动物</Checkbox></Col>
+                                            <Col span={12}><Checkbox name={"spirituality"}
+                                                                     value={"_8zFHuhRhyo"}>灵魂</Checkbox></Col>
+                                            <Col span={12}><Checkbox name={"arts-culture"}
+                                                                     value={"bDo48cUhwnY"}>文化</Checkbox></Col>
+                                            <Col span={12}><Checkbox name={"history"}
+                                                                     value={"dijpbw99kQQ"}>历史</Checkbox></Col>
+                                            <Col span={12}><Checkbox name={"athletics"}
+                                                                     value={"Bn-DjrcBrwo"}>体育</Checkbox></Col>
+                                        </Row>
+                                    </Checkbox.Group>
+                                </Form.Item>
+                                <Form.Item name={"customTopic"} label={"其他主题"}
+                                           extra={
+                                               <Space direction={"vertical"}>
+                                                   <Text
+                                                       style={{color: this.state.fontColor}}>按下回车生效，英文结果最准确</Text>
+                                                   <Text
+                                                       style={{color: this.state.fontColor}}>其它主题不为空时将禁用图片主题</Text>
+                                               </Space>
+                                           }
+                                >
+                                    <Input onPressEnter={this.customTopicInputOnChange.bind(this)}
+                                           placeholder="输入后按下 Enter 键生效" allowClear/>
+                                </Form.Item>
+                            </Form>
+                        </Card>
+                        <Card title={"功能设置"} size={"small"}
+                              extra={<SettingOutlined style={{color: this.state.fontColor}}/>}
+                              style={{border: "1px solid " + this.state.fontColor}}
+                              headStyle={{
+                                  backgroundColor: this.state.backgroundColor,
+                                  color: this.state.fontColor,
+                                  borderBottom: "2px solid " + this.state.fontColor
+                              }}
+                              bodyStyle={{backgroundColor: this.state.backgroundColor}}
+                        >
+                            <Form colon={false} initialValues={this.state.preferenceData}>
+                                <Form.Item name={"searchEngine"} label={"搜索引擎"}>
+                                    <Radio.Group buttonStyle={"solid"}
+                                                 onChange={this.searchEngineRadioOnChange.bind(this)}>
+                                        <Row>
+                                            <Col span={12}><Radio value={"baidu"}>Baidu</Radio></Col>
+                                            <Col span={12}><Radio value={"bing"}>Bing</Radio></Col>
+                                            <Col span={12}><Radio value={"google"}>Google</Radio></Col>
+                                            <Col span={12}><Radio value={"yandex"}>Yandex</Radio></Col>
+                                        </Row>
+                                    </Radio.Group>
+                                </Form.Item>
+                                <Form.Item name={"simpleMode"} label={"简洁模式"} valuePropName={"checked"}>
+                                    <Switch checkedChildren="已开启" unCheckedChildren="已关闭"
+                                            onChange={this.simpleModeSwitchOnChange.bind(this)}/>
+                                </Form.Item>
+                                <Form.Item name={"noImageMode"} label={"无图模式"} valuePropName={"checked"}>
+                                    <Switch checkedChildren="已开启" unCheckedChildren="已关闭"
+                                            onChange={this.noImageModeSwitchOnChange.bind(this)}/>
+                                </Form.Item>
+                                <Form.Item name={"clearStorageButton"} label={"危险设置"}>
+                                    <Button type={"text"} shape={"round"} icon={<DeleteOutlined/>}
+                                            onMouseOver={this.btnMouseOver.bind(this)}
+                                            onMouseOut={this.btnMouseOut.bind(this)}
+                                            onClick={this.clearStorageBtnOnClick.bind(this)}
+                                            style={{color: this.state.fontColor}}>
+                                        清空并重置所有内容
+                                    </Button>
+                                </Form.Item>
+                            </Form>
+                        </Card>
+                        <PreferenceLinkComponent
+                            hoverColor={this.state.hoverColor}
+                            backgroundColor={this.state.backgroundColor}
+                            fontColor={this.state.fontColor}/>
+                        <PreferenceInfoComponent
+                            hoverColor={this.state.hoverColor}
+                            backgroundColor={this.state.backgroundColor}
+                            fontColor={this.state.fontColor}/>
+                        <PreferenceEmailComponent
+                            hoverColor={this.state.hoverColor}
+                            backgroundColor={this.state.backgroundColor}
+                            fontColor={this.state.fontColor}/>
+                    </Space>
                 </Drawer>
             </>
         );
