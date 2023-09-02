@@ -1,7 +1,7 @@
 # 云开新标签页 based on React
 ## 声明
 * 博客：https://xyk953651094.blogspot.com
-* 捐赠：https://afdian.net/a/xyk953651094
+* 支持：https://afdian.net/a/xyk953651094
 * 图片由第三方网站提供，图片内容不代表作者任何观点。  
 * 本作品由作者个人出于学习目的开发，由于成本原因，难以保证不同型号设备下的最终品质，后续尽量完善。
 * <img width="40" src="https://resources.jetbrains.com/storage/products/company/brand/logos/WebStorm_icon.png" alt="WebStorm logo.">
@@ -14,6 +14,11 @@
 * 节气来源：https://www.mxnzp.com  
 * 天气来源：https://www.jinrishici.com
 * 图片来源：https://unsplash.com
+
+## V1.7.0 更新内容
+* 优化代码质量
+* 修复已知问题
+* 优化视觉效果
 
 ## 安装
 * [Chrome 网上应用商店](https://chrome.google.com/webstore/detail/mhnihmooegnonhmnapjlnbponpnclfcb)
