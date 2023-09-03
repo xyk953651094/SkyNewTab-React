@@ -153,6 +153,9 @@ class TodoComponent extends React.Component {
             case "work":
                 tempTag = "工作";
                 break;
+            case "study":
+                tempTag = "学习";
+                break;
             case "life":
                 tempTag = "生活";
                 break;
@@ -291,6 +294,7 @@ class TodoComponent extends React.Component {
                                 onChange={this.selectOnChange.bind(this)}
                                 options={[
                                     {value: 'work', label: '工作'},
+                                    {value: 'study', label: '学习'},
                                     {value: 'life', label: '生活'},
                                 ]}
                             />

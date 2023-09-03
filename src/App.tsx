@@ -180,7 +180,7 @@ class App extends React.Component {
                                 />
                             </Space>
                         </Col>
-                        <Col xs={22} sm={22} md={10} lg={10} xl={10} xxl={10} style={{textAlign: "right"}}>
+                        <Col xs={0} sm={0} md={10} lg={10} xl={10} xxl={10} style={{textAlign: "right"}}>
                             <Space>
                                 <DailyComponent
                                     themeColor={this.state.themeColor}
@@ -195,6 +195,12 @@ class App extends React.Component {
                                     getPreferenceData={this.getPreferenceData.bind(this)}
                                 />
                             </Space>
+                        </Col>
+                        <Col xs={22} sm={22} md={0} lg={0} xl={0} xxl={0} style={{textAlign: "right"}}>
+                            <PreferenceComponent
+                                themeColor={this.state.themeColor}
+                                getPreferenceData={this.getPreferenceData.bind(this)}
+                            />
                         </Col>
                     </Row>
                 </Header>

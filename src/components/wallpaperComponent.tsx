@@ -115,6 +115,7 @@ class WallpaperComponent extends React.Component {
 
     componentDidMount() {
         let tempPreferenceData = localStorage.getItem("preferenceData");
+
         if (tempPreferenceData === null) {
             localStorage.setItem("preferenceData", JSON.stringify(defaultPreferenceData));
         }

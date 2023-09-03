@@ -3,7 +3,7 @@ import {Button, Card, Col, Form, message, Radio, RadioChangeEvent, Row, Switch} 
 import {DeleteOutlined, SettingOutlined} from "@ant-design/icons";
 import {getFontColor} from "../typescripts/publicFunctions";
 import {PreferenceDataInterface} from "../typescripts/publicInterface";
-import {defaultPreferenceData} from "../typescripts/publicConstants";
+import {defaultPreferenceData, device} from "../typescripts/publicConstants";
 
 type propType = {
     hoverColor: string,
@@ -14,6 +14,7 @@ type propType = {
 
 type stateType = {
     preferenceData: PreferenceDataInterface,
+    disableSwitch: boolean
 }
 
 interface PreferenceFunctionComponent {
@@ -26,6 +27,7 @@ class PreferenceFunctionComponent extends React.Component {
         super(props);
         this.state = {
             preferenceData: defaultPreferenceData,
+            disableSwitch: false
         };
     }
 
@@ -109,6 +111,20 @@ class PreferenceFunctionComponent extends React.Component {
         this.setState({
             preferenceData: tempPreferenceData === null ? defaultPreferenceData : JSON.parse(tempPreferenceData),
         });
+
+        // // 竖屏强制开启简洁模式
+        // if(device === "Android" || device === "iPhone") {
+        //     this.setState({
+        //         disableSwitch: true
+        //     }, () => {
+        //         this.setState({
+        //             preferenceData: this.setPreferenceData({simpleMode: true}),
+        //         }, () => {
+        //             this.props.getPreferenceData(this.state.preferenceData);
+        //             localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
+        //         })
+        //     })
+        // }
     }
 
     render() {
@@ -136,7 +152,7 @@ class PreferenceFunctionComponent extends React.Component {
                         </Radio.Group>
                     </Form.Item>
                     <Form.Item name={"simpleMode"} label={"简洁模式"} valuePropName={"checked"}>
-                        <Switch checkedChildren="已开启" unCheckedChildren="已关闭"
+                        <Switch checkedChildren="已开启" unCheckedChildren="已关闭" disabled={this.state.disableSwitch}
                                 onChange={this.simpleModeSwitchOnChange.bind(this)}/>
                     </Form.Item>
                     <Form.Item name={"noImageMode"} label={"无图模式"} valuePropName={"checked"}>

@@ -1,5 +1,5 @@
 import React from "react";
-import {Button, Col, List, Popover, Row, Space, Typography} from "antd";
+import {Button, Col, List, message, Popover, Row, Space, Typography} from "antd";
 import {
     changeThemeColor,
     getFontColor,
@@ -8,7 +8,7 @@ import {
     httpRequest
 } from "../typescripts/publicFunctions";
 import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
-import {InfoCircleOutlined} from "@ant-design/icons";
+import {EnvironmentOutlined, InfoCircleOutlined, BulbOutlined} from "@ant-design/icons";
 
 const {Text} = Typography;
 
@@ -25,12 +25,14 @@ type stateType = {
     weatherIcon: string,
     weatherInfo: string,
     searchEngineUrl: string,
-    location: string;
-    humidity: string;
-    pm25: string;
-    rainfall: string;
-    visibility: string;
-    windInfo: string;
+    location: string,
+    humidity: string,
+    pm25: string,
+    rainfall: string,
+    visibility: string,
+    windInfo: string,
+    temperatureSuggest: string,
+    airSuggest: string
 }
 
 interface WeatherComponent {
@@ -55,6 +57,8 @@ class WeatherComponent extends React.Component {
             rainfall: "暂无信息",
             visibility: "暂无信息",
             windInfo: "暂无信息",
+            temperatureSuggest: "暂无信息",
+            airSuggest: "暂无信息"
         };
     }
 
@@ -68,8 +72,41 @@ class WeatherComponent extends React.Component {
         e.currentTarget.style.color = this.state.fontColor;
     }
 
+    locationBtnOnClick() {
+        if(this.state.location !== "暂无信息") {
+            window.open(this.state.searchEngineUrl + this.state.location, "_blank");
+        }
+        else {
+            message.error("无跳转链接");
+        }
+    }
+
     infoBtnOnClick() {
-        window.open(this.state.searchEngineUrl + "天气", "_blank",);
+        window.open(this.state.searchEngineUrl + "天气", "_blank");
+    }
+    
+    getTemperatureSuggest(temperature: number) {
+        if (temperature > 30) {
+            return "温度炎热，注意避暑"
+        }
+        else if(temperature < 10) {
+            return "温度寒冷，注意防寒"
+        }
+        else {
+            return "温度宜人，适合外出"
+        }
+    }
+
+    getAirSuggest(pm25: number) {
+        if (pm25 > 200) {
+            return " · 空气较差，不宜外出"
+        }
+        else if(pm25 < 100) {
+            return " · 空气良好，适合外出"
+        }
+        else {
+            return ""
+        }
     }
 
     setWeather(data: any) {
@@ -82,6 +119,8 @@ class WeatherComponent extends React.Component {
             rainfall: data.weatherData.rainfall + "%",
             visibility: data.weatherData.visibility,
             windInfo: data.weatherData.windDirection + data.weatherData.windPower + "级",
+            temperatureSuggest: this.getTemperatureSuggest(parseInt(data.weatherData.temperature)),
+            airSuggest: this.getAirSuggest(parseInt(data.weatherData.pm25))
         });
     }
 
@@ -145,11 +184,18 @@ class WeatherComponent extends React.Component {
     render() {
         const popoverTitle = (
             <Row align={"middle"}>
-                <Col span={10}>
+                <Col span={6}>
                     <Text style={{color: this.state.fontColor}}>{"天气信息"}</Text>
                 </Col>
-                <Col span={14} style={{textAlign: "right"}}>
+                <Col span={18} style={{textAlign: "right"}}>
                     <Space>
+                        <Button type={"text"} shape={"round"} icon={<EnvironmentOutlined />}
+                                onMouseOver={this.btnMouseOver.bind(this)}
+                                onMouseOut={this.btnMouseOut.bind(this)}
+                                onClick={this.locationBtnOnClick.bind(this)}
+                                style={{color: this.state.fontColor}}>
+                            {this.state.location}
+                        </Button>
                         <Button type={"text"} shape={"round"} icon={<InfoCircleOutlined/>}
                                 onMouseOver={this.btnMouseOver.bind(this)}
                                 onMouseOut={this.btnMouseOut.bind(this)}
@@ -165,12 +211,14 @@ class WeatherComponent extends React.Component {
         const popoverContent = (
             <List>
                 <List.Item>
+                    <Button type={"text"} shape={"round"} icon={<BulbOutlined />}
+                            style={{color: this.state.fontColor, cursor: "default"}}
+                            onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
+                        {this.state.temperatureSuggest + this.state.airSuggest}
+                    </Button>
+                </List.Item>
+                <List.Item>
                     <Space direction={"vertical"}>
-                        <Button type={"text"} shape={"round"} icon={<i className="bi bi-geo-alt"></i>}
-                                style={{color: this.state.fontColor, cursor: "default"}}
-                                onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
-                            {" 地理位置：" + this.state.location}
-                        </Button>
                         <Button type={"text"} shape={"round"} icon={<i className="bi bi-moisture"></i>}
                                 style={{color: this.state.fontColor, cursor: "default"}}
                                 onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
@@ -203,7 +251,7 @@ class WeatherComponent extends React.Component {
 
         return (
             <Popover title={popoverTitle} content={popoverContent} color={this.state.backgroundColor}
-                     placement="bottomLeft" overlayStyle={{width: "250px"}}
+                     placement="bottomLeft" overlayStyle={{minWidth: "250px"}}
             >
                 <Button shape={"round"} icon={<i className={this.state.weatherIcon}></i>} size={"large"}
                         id={"weatherBtn"}

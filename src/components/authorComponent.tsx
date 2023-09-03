@@ -263,9 +263,9 @@ class AuthorComponent extends React.Component {
                 <Button shape={"round"} icon={<CameraOutlined/>} size={"large"}
                         id={"authorBtn"}
                         className={"componentTheme zIndexHigh"}
-                        onClick={this.authorLinkBtnOnClick.bind(this)}
                         style={{
                             display: this.props.display,
+                            cursor: "default"
                         }}
                 >
                     {"由 Unsplash 的 " + this.state.authorName + " 拍摄"}
