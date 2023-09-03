@@ -15,7 +15,8 @@
 * 天气来源：https://www.jinrishici.com
 * 图片来源：https://unsplash.com
 
-## V1.7.0 更新内容
+## 最近更新
+* 新增产品信息
 * 优化代码质量
 * 修复已知问题
 * 优化视觉效果
