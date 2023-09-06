@@ -31,8 +31,7 @@ type stateType = {
     rainfall: string,
     visibility: string,
     windInfo: string,
-    temperatureSuggest: string,
-    airSuggest: string
+    suggest: string,
 }
 
 interface WeatherComponent {
@@ -57,8 +56,7 @@ class WeatherComponent extends React.Component {
             rainfall: "暂无信息",
             visibility: "暂无信息",
             windInfo: "暂无信息",
-            temperatureSuggest: "暂无信息",
-            airSuggest: "暂无信息"
+            suggest: "暂无信息",
         };
     }
 
@@ -84,28 +82,39 @@ class WeatherComponent extends React.Component {
     infoBtnOnClick() {
         window.open(this.state.searchEngineUrl + "天气", "_blank");
     }
-    
-    getTemperatureSuggest(temperature: number) {
+
+    getSuggest(temperature: number, pm25: number) {
+        let tempTemperature = "";
+        let tempPm25 = "";
+
         if (temperature > 30) {
-            return "温度炎热，注意避暑"
+            tempTemperature = "温度炎热，注意避暑"
         }
         else if(temperature < 10) {
-            return "温度寒冷，注意防寒"
+            tempTemperature = "温度寒冷，注意防寒"
         }
-        else {
-            return "温度宜人，适合外出"
-        }
-    }
 
-    getAirSuggest(pm25: number) {
         if (pm25 > 200) {
-            return " · 空气较差，不宜外出"
+            tempPm25 = "空气较差，不宜外出"
         }
         else if(pm25 < 100) {
-            return " · 空气良好，适合外出"
+            tempPm25 = "空气良好，适合外出"
+        }
+
+        if(tempTemperature.length === 0 && tempPm25.length === 0) {
+            return "";
+        }
+        else if (tempTemperature.length !== 0 && tempPm25.length === 0) {
+            return tempTemperature;
+        }
+        else if (tempTemperature.length !== 0 && tempPm25.length !== 0) {
+            return tempTemperature + " · " + tempPm25;
+        }
+        else if (tempTemperature.length === 0 && tempPm25.length !== 0) {
+            return tempPm25;
         }
         else {
-            return ""
+            return "";
         }
     }
 
@@ -119,8 +128,7 @@ class WeatherComponent extends React.Component {
             rainfall: data.weatherData.rainfall + "%",
             visibility: data.weatherData.visibility,
             windInfo: data.weatherData.windDirection + data.weatherData.windPower + "级",
-            temperatureSuggest: this.getTemperatureSuggest(parseInt(data.weatherData.temperature)),
-            airSuggest: this.getAirSuggest(parseInt(data.weatherData.pm25))
+            suggest: this.getSuggest(parseInt(data.weatherData.temperature), parseInt(data.weatherData.pm25)),
         });
     }
 
@@ -210,11 +218,11 @@ class WeatherComponent extends React.Component {
 
         const popoverContent = (
             <List>
-                <List.Item>
+                <List.Item style={{display: this.state.suggest.length === 0 ? "none" : "block"}}>
                     <Button type={"text"} shape={"round"} icon={<BulbOutlined />}
                             style={{color: this.state.fontColor, cursor: "default"}}
                             onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
-                        {this.state.temperatureSuggest + this.state.airSuggest}
+                        {this.state.suggest}
                     </Button>
                 </List.Item>
                 <List.Item>
