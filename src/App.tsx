@@ -9,7 +9,8 @@ import WallpaperComponent from "./components/wallpaperComponent";
 import ClockComponent from "./components/clockComponent";
 import SearchComponent from "./components/searchComponent";
 import CollectionComponent from "./components/collectionComponent";
-import AuthorComponent from "./components/authorComponent"
+import AuthorComponent from "./components/authorComponent";
+import AuthorLiteComponent from "./components/authorLiteComponent"
 
 import {Col, Layout, Row, Space} from "antd";
 import "./stylesheets/publicStyles.scss"
@@ -197,10 +198,18 @@ class App extends React.Component {
                             </Space>
                         </Col>
                         <Col xs={22} sm={22} md={0} lg={0} xl={0} xxl={0} style={{textAlign: "right"}}>
-                            <PreferenceComponent
-                                themeColor={this.state.themeColor}
-                                getPreferenceData={this.getPreferenceData.bind(this)}
-                            />
+                            <Space align={"center"}>
+                                <AuthorLiteComponent
+                                    display={this.state.componentDisplay}
+                                    themeColor={this.state.themeColor}
+                                    imageData={this.state.imageData}
+                                    preferenceData={this.state.preferenceData}
+                                />
+                                <PreferenceComponent
+                                    themeColor={this.state.themeColor}
+                                    getPreferenceData={this.getPreferenceData.bind(this)}
+                                />
+                            </Space>
                         </Col>
                     </Row>
                 </Header>
@@ -222,7 +231,7 @@ class App extends React.Component {
                 <Footer id={"footer"}>
                     <Row justify="center">
                         <Col xs={0} sm={0} md={20} lg={20} xl={20} style={{textAlign: "right"}}>
-                            <Space align={"end"}>
+                            <Space align={"center"}>
                                 <AuthorComponent
                                     display={this.state.componentDisplay}
                                     themeColor={this.state.themeColor}

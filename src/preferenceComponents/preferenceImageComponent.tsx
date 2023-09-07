@@ -1,12 +1,13 @@
 import React from "react";
-import {Card, Checkbox, Col, Form, Input, message, Radio, RadioChangeEvent, Row, Space, Typography} from "antd";
-import {SettingOutlined} from "@ant-design/icons";
+import {Button, Card, Checkbox, Col, Form, Input, message, Radio, RadioChangeEvent, Row, Space, Typography} from "antd";
+import {CheckOutlined, DeleteOutlined, SettingOutlined} from "@ant-design/icons";
 import {getFontColor, isEmptyString} from "../typescripts/publicFunctions";
 import {defaultPreferenceData} from "../typescripts/publicConstants";
 import {CheckboxValueType} from "antd/es/checkbox/Group";
 import {PreferenceDataInterface} from "../typescripts/publicInterface";
 
 const {Text} = Typography;
+const $ = require("jquery");
 
 type propType = {
     hoverColor: string,
@@ -83,14 +84,28 @@ class PreferenceImageComponent extends React.Component {
     }
 
     // 自定义主题
-    customTopicInputOnChange(event: any) {
+    submitCustomTopicBtnOnClick() {
+        let inputValue = $("#customTopicInput").val();
         this.setState({
-            preferenceData: this.setPreferenceData({customTopic: event.target.value}),
-            disableImageTopic: !isEmptyString(event.target.value)
+            preferenceData: this.setPreferenceData({customTopic: inputValue}),
+            disableImageTopic: !isEmptyString(inputValue)
         }, () => {
             this.props.getPreferenceData(this.state.preferenceData);
             localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
-            message.success("已更换自定义主题，下次加载时生效");
+            message.success("已修改自选主题，一秒后刷新页面");
+            this.refreshWindow();
+        })
+    }
+
+    clearCustomTopicBtnOnClick() {
+        this.setState({
+            preferenceData: this.setPreferenceData({customTopic: ""}),
+            disableImageTopic: false
+        }, () => {
+            this.props.getPreferenceData(this.state.preferenceData);
+            localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
+            message.success("已清空自选主题，一秒后刷新页面");
+            this.refreshWindow();
         })
     }
 
@@ -132,7 +147,7 @@ class PreferenceImageComponent extends React.Component {
                   bodyStyle={{backgroundColor: this.props.backgroundColor}}
             >
                 <Form colon={false} initialValues={this.state.preferenceData}>
-                    <Form.Item name={"dynamicEffect"} label={"图片动效"}>
+                    <Form.Item name={"dynamicEffect"} label={"鼠标互动"}>
                         <Radio.Group buttonStyle={"solid"}
                                      onChange={this.dynamicEffectRadioOnChange.bind(this)}>
                             <Row>
@@ -201,18 +216,30 @@ class PreferenceImageComponent extends React.Component {
                             </Row>
                         </Checkbox.Group>
                     </Form.Item>
-                    <Form.Item name={"customTopic"} label={"其他主题"}
-                               extra={
-                                   <Space direction={"vertical"}>
-                                       <Text
-                                           style={{color: this.props.fontColor}}>按下回车生效，英文结果最准确</Text>
-                                       <Text
-                                           style={{color: this.props.fontColor}}>其它主题不为空时将禁用图片主题</Text>
-                                   </Space>
-                               }
-                    >
-                        <Input onPressEnter={this.customTopicInputOnChange.bind(this)}
-                               placeholder="输入后按下 Enter 键生效" allowClear/>
+                    <Form.Item label={"自选主题"}>
+                        <Space direction={"vertical"}>
+                            <Form.Item name={"customTopic"} noStyle>
+                                <Input id={"customTopicInput"} placeholder="输入后按确认生效" allowClear/>
+                            </Form.Item>
+                            <Space>
+                                <Button type={"text"} shape={"round"} icon={<CheckOutlined />}
+                                        onMouseOver={this.btnMouseOver.bind(this)}
+                                        onMouseOut={this.btnMouseOut.bind(this)}
+                                        onClick={this.submitCustomTopicBtnOnClick.bind(this)}
+                                        style={{color: this.props.fontColor}}>
+                                    {"确认"}
+                                </Button>
+                                <Button type={"text"} shape={"round"} icon={<DeleteOutlined />}
+                                        onMouseOver={this.btnMouseOver.bind(this)}
+                                        onMouseOut={this.btnMouseOut.bind(this)}
+                                        onClick={this.clearCustomTopicBtnOnClick.bind(this)}
+                                        style={{color: this.props.fontColor}}>
+                                    {"清空"}
+                                </Button>
+                            </Space>
+                            <Text style={{color: this.props.fontColor}}>英文结果最准确</Text>
+                            <Text style={{color: this.props.fontColor}}>其它主题不为空时将禁用图片主题</Text>
+                        </Space>
                     </Form.Item>
                 </Form>
             </Card>

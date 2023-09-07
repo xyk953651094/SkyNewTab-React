@@ -121,7 +121,7 @@ class PopupImageComponent extends React.Component {
             popupImage.onload = () => {
                 $("#popupCanvas").remove();
                 popupImageDiv.style.display = "block";
-                popupImageDiv.className = "wallpaperFadeIn";
+                popupImageDiv.className = "imageFadeIn";
             }
         }
     }
@@ -153,7 +153,7 @@ class PopupImageComponent extends React.Component {
                             this.setState({
                                 displayCanvas: "block",
                             }, () => {
-                                popupCanvas.className = "popupCanvas wallpaperFadeIn";
+                                popupCanvas.className = "popupCanvas imageFadeIn";
                             })
                         }
                     }

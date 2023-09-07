@@ -5,6 +5,9 @@ import {Image, message} from "antd";
 import {httpRequest, imageDynamicEffect, isEmptyString} from "../typescripts/publicFunctions";
 import {clientId, defaultPreferenceData, device} from "../typescripts/publicConstants";
 import {PreferenceDataInterface} from "../typescripts/publicInterface";
+import {decode} from "blurhash";
+
+const $ = require("jquery");
 
 type propType = {
     getImageData: any,
@@ -15,6 +18,7 @@ type stateType = {
     preferenceData: PreferenceDataInterface,
     imageLink: string,
     display: "none" | "block",
+    displayCanvas: "none" | "block",
 }
 
 interface WallpaperComponent {
@@ -30,6 +34,7 @@ class WallpaperComponent extends React.Component {
             preferenceData: defaultPreferenceData,
             imageLink: "",
             display: "none",
+            displayCanvas: "none",
         };
     }
 
@@ -64,6 +69,25 @@ class WallpaperComponent extends React.Component {
                         imageLink: this.state.imageData.urls.regular,
                     });
                     break;
+            }
+
+            // blurHash
+            if (!isEmptyString(imageData.blur_hash)) {
+                const backgroundCanvas = document.getElementById("backgroundCanvas") as HTMLCanvasElement | null;
+                if (backgroundCanvas instanceof HTMLCanvasElement) {
+                    let blurHashImage = decode(imageData.blur_hash, backgroundCanvas.width, backgroundCanvas.height);
+                    let ctx = backgroundCanvas.getContext("2d");
+                    if (ctx) {
+                        const imageData = new ImageData(blurHashImage, backgroundCanvas.width, backgroundCanvas.height);
+                        ctx.putImageData(imageData, 0, 0);
+                    }
+
+                    this.setState({
+                        displayCanvas: "block",
+                    }, () => {
+                        backgroundCanvas.className = "backgroundCanvas wallpaperFadeIn";
+                    })
+                }
             }
         })
     }
@@ -104,6 +128,7 @@ class WallpaperComponent extends React.Component {
                 let lastImage: any = localStorage.getItem("lastImage");
                 if (lastImage) {
                     lastImage = JSON.parse(lastImage);
+                    message.error("获取图片失败，加载历史图片");
                     tempThis.setWallpaper(lastImage);
                 } else {
                     message.error("获取图片失败");
@@ -131,7 +156,7 @@ class WallpaperComponent extends React.Component {
                 let nowTimeStamp = new Date().getTime();
                 if (lastRequestTime === null) {  // 第一次请求时 lastRequestTime 为 null，因此直接进行请求赋值 lastRequestTime
                     this.getWallpaper();
-                } else if (nowTimeStamp - parseInt(lastRequestTime) > 0) {  // 必须多于一分钟才能进行新的请求
+                } else if (nowTimeStamp - parseInt(lastRequestTime) > 60 * 1000) {  // 必须多于一分钟才能进行新的请求
                     this.getWallpaper();
                 } else {  // 一分钟之内使用上一次请求结果
                     let lastImage: any = localStorage.getItem("lastImage");
@@ -154,6 +179,9 @@ class WallpaperComponent extends React.Component {
                         this.setState({
                             display: "block",
                         }, () => {
+                            // $("#backgroundCanvas").remove();
+                            $("#backgroundCanvas").removeClass("wallpaperFadeIn");
+                            $("#backgroundCanvas").addClass("wallpaperFadeOut");
                             message.success("图片加载成功");
 
                             // 设置动态效果
@@ -176,16 +204,19 @@ class WallpaperComponent extends React.Component {
 
     render() {
         return (
-            <Image
-                id={"backgroundImage"}
-                // key={"1"}
-                width={"102%"}
-                height={"102%"}
-                className={"backgroundImage zIndexLow"}
-                preview={false}
-                src={this.state.imageLink}
-                style={{display: this.state.display}}
-            />
+            <>
+                <Image
+                    id={"backgroundImage"}
+                    // key={"1"}
+                    width={"102%"}
+                    height={"102%"}
+                    className={"backgroundImage zIndexLow"}
+                    preview={false}
+                    src={this.state.imageLink}
+                    style={{display: this.state.display}}
+                />
+                <canvas id="backgroundCanvas" style={{display: this.state.displayCanvas}} className={"backgroundCanvas"}/>
+            </>
         );
     }
 }

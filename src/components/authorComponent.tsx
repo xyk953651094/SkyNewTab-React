@@ -24,7 +24,6 @@ type propType = {
 }
 
 type stateType = {
-    display: "none" | "block",
     hoverColor: string,
     backgroundColor: string,
     fontColor: string,
@@ -52,7 +51,6 @@ class AuthorComponent extends React.Component {
     constructor(props: any) {
         super(props);
         this.state = {
-            display: "block",
             hoverColor: "",
             backgroundColor: "",
             fontColor: "",
@@ -148,7 +146,6 @@ class AuthorComponent extends React.Component {
 
         if (nextProps.preferenceData !== prevProps.preferenceData) {
             this.setState({
-                // display: nextProps.preferenceData.noImageMode ? "none" : "block",
                 searchEngineUrl: getSearchEngineDetail(nextProps.preferenceData.searchEngine).searchEngineUrl,
             });
         }
