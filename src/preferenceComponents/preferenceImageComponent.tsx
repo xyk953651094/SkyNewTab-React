@@ -252,7 +252,7 @@ class PreferenceImageComponent extends React.Component {
                     </Form.Item>
                     <Form.Item label={"提示信息"}>
                         <Paragraph>
-                            <ol>
+                            <ol style={{color: this.props.fontColor}}>
                                 <Space direction={"vertical"}>
                                     <li>刷新后的新主题可能不会立即生效</li>
                                     <li>图片主题全不选与全选的效果一致</li>
