@@ -9,7 +9,7 @@ import {decode} from "blurhash";
 
 const $ = require("jquery");
 
-type propType = {
+    type propType = {
     getImageData: any,
 }
 
@@ -116,7 +116,7 @@ class WallpaperComponent extends React.Component {
         message.info("正在获取图片");
         httpRequest(headers, url, data, "GET")
             .then(function (resultData: any) {
-                message.info("正在加载图片");
+                message.loading("正在加载图片", 0);
                 localStorage.setItem("lastImageRequestTime", String(new Date().getTime()));  // 保存请求时间，防抖节流
                 localStorage.setItem("lastImage", JSON.stringify(resultData));                // 保存请求结果，防抖节流
                 tempThis.setWallpaper(resultData);
@@ -128,7 +128,7 @@ class WallpaperComponent extends React.Component {
                 let lastImage: any = localStorage.getItem("lastImage");
                 if (lastImage) {
                     lastImage = JSON.parse(lastImage);
-                    message.error("获取图片失败，加载历史图片");
+                    message.error("获取图片失败，加载历史图片", 0);
                     tempThis.setWallpaper(lastImage);
                 } else {
                     message.error("获取图片失败");
@@ -182,6 +182,7 @@ class WallpaperComponent extends React.Component {
                             // $("#backgroundCanvas").remove();
                             $("#backgroundCanvas").removeClass("wallpaperFadeIn");
                             $("#backgroundCanvas").addClass("wallpaperFadeOut");
+                            message.destroy();
                             message.success("图片加载成功");
 
                             // 设置动态效果

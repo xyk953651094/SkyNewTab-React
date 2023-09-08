@@ -169,7 +169,7 @@ class App extends React.Component {
             <Layout>
                 <Header id={"header"} className={"zIndexMiddle"}>
                     <Row justify="center">
-                        <Col xs={0} sm={0} md={10} lg={10} xl={10} xxl={10}>
+                        <Col xs={0} sm={0} md={0} lg={10} xl={10} xxl={10}>
                             <Space>
                                 <GreetComponent
                                     themeColor={this.state.themeColor}
@@ -181,7 +181,7 @@ class App extends React.Component {
                                 />
                             </Space>
                         </Col>
-                        <Col xs={0} sm={0} md={10} lg={10} xl={10} xxl={10} style={{textAlign: "right"}}>
+                        <Col xs={0} sm={0} md={0} lg={10} xl={10} xxl={10} style={{textAlign: "right"}}>
                             <Space>
                                 <DailyComponent
                                     themeColor={this.state.themeColor}
@@ -197,7 +197,7 @@ class App extends React.Component {
                                 />
                             </Space>
                         </Col>
-                        <Col xs={22} sm={22} md={0} lg={0} xl={0} xxl={0} style={{textAlign: "right"}}>
+                        <Col xs={22} sm={22} md={22} lg={0} xl={0} xxl={0} style={{textAlign: "right"}}>
                             <Space align={"center"}>
                                 <AuthorLiteComponent
                                     display={this.state.componentDisplay}
@@ -220,7 +220,7 @@ class App extends React.Component {
                     <Space direction={"vertical"} align={"center"}>
                         <ClockComponent themeColor={this.state.themeColor} preferenceData={this.state.preferenceData}/>
                         <SearchComponent preferenceData={this.state.preferenceData}/>
-                        <Col xs={0} sm={0} md={24} lg={24} xl={24}>
+                        <Col xs={0} sm={0} md={0} lg={24} xl={24}>
                             <CollectionComponent
                                 themeColor={this.state.themeColor}
                                 preferenceData={this.state.preferenceData}
@@ -230,7 +230,7 @@ class App extends React.Component {
                 </Content>
                 <Footer id={"footer"}>
                     <Row justify="center">
-                        <Col xs={0} sm={0} md={20} lg={20} xl={20} style={{textAlign: "right"}}>
+                        <Col xs={0} sm={0} md={0} lg={20} xl={20} style={{textAlign: "right"}}>
                             <Space align={"center"}>
                                 <AuthorComponent
                                     display={this.state.componentDisplay}

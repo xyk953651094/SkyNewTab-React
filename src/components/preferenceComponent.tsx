@@ -100,7 +100,7 @@ class PreferenceComponent extends React.Component {
                 <Drawer
                     title={"菜单栏"}
                     size={"default"}
-                    width={360}
+                    width={380}
                     height={500}
                     placement={this.state.drawerPosition}
                     onClose={this.drawerOnClose.bind(this)}

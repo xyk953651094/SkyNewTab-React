@@ -4,18 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="修复已知问题">
-      <change afterPath="$PROJECT_DIR$/src/components/authorLiteComponent.tsx" afterDir="false" />
+    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="优化视觉效果">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/authorComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/authorComponent.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/preferenceComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/preferenceComponent.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/wallpaperComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/wallpaperComponent.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/popupComponents/popupImageComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/popupComponents/popupImageComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/preferenceComponents/preferenceFunctionComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/preferenceComponents/preferenceFunctionComponent.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/preferenceComponents/preferenceImageComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/preferenceComponents/preferenceImageComponent.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/stylesheets/popupComponent.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/stylesheets/popupComponent.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stylesheets/publicStyles.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/stylesheets/publicStyles.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stylesheets/wallpaperComponent.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/stylesheets/wallpaperComponent.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -220,7 +217,11 @@
       <workItem from="1693892114317" duration="1716000" />
       <workItem from="1693997254894" duration="123000" />
       <workItem from="1694005960720" duration="2061000" />
-      <workItem from="1694084326049" duration="8325000" />
+      <workItem from="1694084326049" duration="8451000" />
+      <workItem from="1694094759162" duration="431000" />
+      <workItem from="1694138609774" duration="673000" />
+      <workItem from="1694141397074" duration="503000" />
+      <workItem from="1694172076148" duration="3835000" />
     </task>
     <task id="LOCAL-00001" summary="优化抽屉蒙版的显示效果&#10;优化代码质量">
       <created>1683952184207</created>
@@ -340,14 +341,6 @@
       <option name="presentableId" value="LOCAL-00017" />
       <option name="project" value="LOCAL" />
       <updated>1687402693401</updated>
-    </task>
-    <task id="LOCAL-00049" summary="新增简洁模式">
-      <option name="closed" value="true" />
-      <created>1691635747515</created>
-      <option name="number" value="00049" />
-      <option name="presentableId" value="LOCAL-00049" />
-      <option name="project" value="LOCAL" />
-      <updated>1691635747515</updated>
     </task>
     <task id="LOCAL-00050" summary="优化代码结构">
       <option name="closed" value="true" />
@@ -597,7 +590,15 @@
       <option name="project" value="LOCAL" />
       <updated>1693997349102</updated>
     </task>
-    <option name="localTasksCounter" value="81" />
+    <task id="LOCAL-00081" summary="优化视觉效果">
+      <option name="closed" value="true" />
+      <created>1694093824172</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1694093824172</updated>
+    </task>
+    <option name="localTasksCounter" value="82" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -636,10 +637,10 @@
     <MESSAGE value="优化视觉效果&#10;修复已知问题" />
     <MESSAGE value="新增自定义主题&#10;优化视觉效果" />
     <MESSAGE value="新增联系作者&#10;优化视觉效果" />
-    <MESSAGE value="优化视觉效果" />
     <MESSAGE value="修复部分问题" />
     <MESSAGE value="优化代码结构" />
     <MESSAGE value="修复已知问题" />
-    <option name="LAST_COMMIT_MESSAGE" value="修复已知问题" />
+    <MESSAGE value="优化视觉效果" />
+    <option name="LAST_COMMIT_MESSAGE" value="优化视觉效果" />
   </component>
 </project>

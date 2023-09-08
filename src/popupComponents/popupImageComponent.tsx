@@ -119,7 +119,9 @@ class PopupImageComponent extends React.Component {
         popupImageDiv.style.display = "none";
         if (popupImage instanceof HTMLElement) {
             popupImage.onload = () => {
-                $("#popupCanvas").remove();
+                // $("#popupCanvas").remove();
+                $("#popupCanvas").removeClass("imageFadeIn");
+                $("#popupCanvas").addClass("imageFadeOut");
                 popupImageDiv.style.display = "block";
                 popupImageDiv.className = "imageFadeIn";
             }
