@@ -8,18 +8,15 @@
 * [JetBrains Open Source Support](https://jb.gg/OpenSourceSupport "跳转至 JetBrains Open Source Support")
 
 ## 简介
-* 适用于Chrome、Edge、Firefox、Safari 的新标签页插件。  
+* 适用于 Chrome、Edge、Firefox、Safari 的新标签页插件。  
 * 基于 Html + Typescript + Sass + React + Webpack + Ant Design + Bootstrap Icon。   
 * 支持语言：中文。  
 * 节气来源：https://www.mxnzp.com  
 * 天气来源：https://www.jinrishici.com
 * 图片来源：https://unsplash.com
 
-## 最近更新
-* 新增产品信息
-* 优化代码质量
-* 修复已知问题
-* 优化视觉效果
+## 更新
+* 请前往Github Relise 或 https://xyk953651094.blogspot.com 查看最近更新内容
 
 ## 安装
 * [Chrome 网上应用商店](https://chrome.google.com/webstore/detail/mhnihmooegnonhmnapjlnbponpnclfcb)
