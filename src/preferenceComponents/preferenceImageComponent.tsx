@@ -100,29 +100,13 @@ class PreferenceImageComponent extends React.Component {
     // 自定义主题
     submitCustomTopicBtnOnClick() {
         let inputValue = $("#customTopicInput").val();
-        if (!isEmptyString(inputValue)) {
-            this.setState({
-                preferenceData: this.setPreferenceData({customTopic: inputValue}),
-                disableImageTopic: !isEmptyString(inputValue)
-            }, () => {
-                this.props.getPreferenceData(this.state.preferenceData);
-                localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
-                message.success("已修改自定主题，一秒后刷新页面");
-                this.refreshWindow();
-            })
-        } else {
-            message.error("请输入自定主题");
-        }
-    }
-
-    clearCustomTopicBtnOnClick() {
         this.setState({
-            preferenceData: this.setPreferenceData({customTopic: ""}),
-            disableImageTopic: false
+            preferenceData: this.setPreferenceData({customTopic: inputValue}),
+            disableImageTopic: !isEmptyString(inputValue)
         }, () => {
             this.props.getPreferenceData(this.state.preferenceData);
             localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
-            message.success("已清空自定主题，一秒后刷新页面");
+            message.success("已修改自定主题，一秒后刷新页面");
             this.refreshWindow();
         })
     }
@@ -235,26 +219,17 @@ class PreferenceImageComponent extends React.Component {
                         </Checkbox.Group>
                     </Form.Item>
                     <Form.Item label={"自定主题"}>
-                        <Space direction={"vertical"}>
+                        <Space>
                             <Form.Item name={"customTopic"} noStyle>
                                 <Input id={"customTopicInput"} placeholder="使用英文搜索最准确" allowClear/>
                             </Form.Item>
-                            <Space>
-                                <Button type={"text"} shape={"round"} icon={<CheckOutlined/>}
-                                        onMouseOver={this.btnMouseOver.bind(this)}
-                                        onMouseOut={this.btnMouseOut.bind(this)}
-                                        onClick={this.submitCustomTopicBtnOnClick.bind(this)}
-                                        style={{color: this.props.fontColor}}>
-                                    {"确认"}
-                                </Button>
-                                <Button type={"text"} shape={"round"} icon={<DeleteOutlined/>}
-                                        onMouseOver={this.btnMouseOver.bind(this)}
-                                        onMouseOut={this.btnMouseOut.bind(this)}
-                                        onClick={this.clearCustomTopicBtnOnClick.bind(this)}
-                                        style={{color: this.props.fontColor}}>
-                                    {"清空"}
-                                </Button>
-                            </Space>
+                            <Button type={"text"} shape={"round"} icon={<CheckOutlined/>}
+                                    onMouseOver={this.btnMouseOver.bind(this)}
+                                    onMouseOut={this.btnMouseOut.bind(this)}
+                                    onClick={this.submitCustomTopicBtnOnClick.bind(this)}
+                                    style={{color: this.props.fontColor}}>
+                                {"确认"}
+                            </Button>
                         </Space>
                     </Form.Item>
                     {/*<Form.Item label={"提示信息"}>*/}
