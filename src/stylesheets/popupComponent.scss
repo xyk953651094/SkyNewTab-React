@@ -25,7 +25,16 @@ body {
     text-align: center;
 }
 
+.popupImageDiv {
+    position: relative;
+    width: 250px;
+    height: 150px;
+}
+
 .popupCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 250px;
     height: 150px;
     object-fit: cover;

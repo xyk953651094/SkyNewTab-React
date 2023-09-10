@@ -181,17 +181,19 @@ class PopupImageComponent extends React.Component {
         return (
             <>
                 <Space align={"center"} style={{display: this.state.noImageMode ? "none" : "inline-flex"}}>
-                    <Image
-                        id={"popupImage"}
-                        width={250}
-                        height={150}
-                        preview={false}
-                        alt={"暂无图片"}
-                        src={this.state.imagePreviewUrl}
-                        style={{borderRadius: "10px"}}
-                    />
-                    <canvas id={"popupCanvas"} className={"popupCanvas"}
-                            style={{display: this.state.displayCanvas}}></canvas>
+                    <div className="popupImageDiv">
+                        <Image
+                            id={"popupImage"}
+                            width={250}
+                            height={150}
+                            preview={false}
+                            alt={"暂无图片"}
+                            src={this.state.imagePreviewUrl}
+                            style={{borderRadius: "10px"}}
+                        />
+                        <canvas id={"popupCanvas"} className={"popupCanvas"}
+                                style={{display: this.state.displayCanvas}}></canvas>
+                    </div>
                     <Space direction={"vertical"} align="start">
                         <Button type={"text"} shape={"round"} icon={<UserOutlined/>}
                                 onMouseOver={this.btnMouseOver.bind(this)}

@@ -111,7 +111,7 @@ class App extends React.Component {
             $(".ant-list-item-action").css("marginInlineStart", "0");
             $(".ant-empty-description").css("color", this.state.themeColor.componentFontColor);
             $(".ant-alert").css("padding", "10px");
-            $(".ant-typography p").css("margin-bottom", "0");
+            $("div.ant-typography").css("margin-bottom", "0");
             $("ol").css("margin-bottom", "0");
 
             // popover
