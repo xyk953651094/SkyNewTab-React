@@ -98,7 +98,6 @@ class DailyComponent extends React.Component {
             daily = JSON.parse(tempDaily);
         }
         if (daily.length < this.state.dailyMaxSize) {
-            // $("#dailyInput").val("");
             this.setState({
                 displayModal: true,
                 selectedTimeStamp: 0

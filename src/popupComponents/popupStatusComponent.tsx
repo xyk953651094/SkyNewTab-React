@@ -1,6 +1,6 @@
 import React from "react";
 import {Button, Space} from "antd";
-import {CalendarOutlined, InfoCircleOutlined, CheckSquareOutlined} from "@ant-design/icons";
+import {CalendarOutlined, CheckSquareOutlined, InfoCircleOutlined} from "@ant-design/icons";
 import "../stylesheets/popupComponent.scss"
 import {
     getFontColor,
@@ -147,7 +147,11 @@ class PopupImageComponent extends React.Component {
                 </Space>
                 <Button type={"text"} shape={"round"} icon={<InfoCircleOutlined/>}
                         onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
-                        style={{color: this.state.fontColor, cursor: "default", display: this.state.simpleMode ? "inline-block" : "none"}}>
+                        style={{
+                            color: this.state.fontColor,
+                            cursor: "default",
+                            display: this.state.simpleMode ? "inline-block" : "none"
+                        }}>
                     {"已开启简洁模式"}
                 </Button>
             </>

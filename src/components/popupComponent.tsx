@@ -1,6 +1,5 @@
 import React from "react";
-import {Button, Layout, List, message, Space} from "antd";
-import {DashboardOutlined} from "@ant-design/icons";
+import {Layout, List, message} from "antd";
 import "../stylesheets/popupComponent.scss"
 import {getFontColor, getReverseColor} from "../typescripts/publicFunctions";
 import PopupImageComponent from "../popupComponents/popupImageComponent";
@@ -80,8 +79,6 @@ class PopupComponent extends React.Component {
                 });
                 $(".ant-message-custom-content > .anticon").css("color", getFontColor(this.state.hoverColor));
             }
-
-            // $(".ant-list-item").css("borderBlockEndColor", this.state.fontColor);
         })
     }
 

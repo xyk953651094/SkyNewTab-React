@@ -1,12 +1,26 @@
 import React from "react";
-import {Button, Card, Checkbox, Col, Form, Input, message, Radio, RadioChangeEvent, Row, Space, Typography} from "antd";
+import {
+    Alert,
+    Button,
+    Card,
+    Checkbox,
+    Col,
+    Form,
+    Input,
+    message,
+    Radio,
+    RadioChangeEvent,
+    Row,
+    Space,
+    Typography
+} from "antd";
 import {CheckOutlined, DeleteOutlined, SettingOutlined} from "@ant-design/icons";
 import {getFontColor, isEmptyString} from "../typescripts/publicFunctions";
 import {defaultPreferenceData} from "../typescripts/publicConstants";
 import {CheckboxValueType} from "antd/es/checkbox/Group";
 import {PreferenceDataInterface} from "../typescripts/publicInterface";
 
-const { Paragraph} = Typography;
+const {Paragraph} = Typography;
 const $ = require("jquery");
 
 type propType = {
@@ -96,28 +110,21 @@ class PreferenceImageComponent extends React.Component {
                 message.success("已修改自定主题，一秒后刷新页面");
                 this.refreshWindow();
             })
-        }
-        else {
+        } else {
             message.error("请输入自定主题");
         }
     }
 
     clearCustomTopicBtnOnClick() {
-        let inputValue = $("#customTopicInput").val();
-        if (!isEmptyString(inputValue)) {
-            this.setState({
-                preferenceData: this.setPreferenceData({customTopic: ""}),
-                disableImageTopic: false
-            }, () => {
-                this.props.getPreferenceData(this.state.preferenceData);
-                localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
-                message.success("已清空自定主题，一秒后刷新页面");
-                this.refreshWindow();
-            })
-        }
-        else {
-            message.error("自定主题已经为空");
-        }
+        this.setState({
+            preferenceData: this.setPreferenceData({customTopic: ""}),
+            disableImageTopic: false
+        }, () => {
+            this.props.getPreferenceData(this.state.preferenceData);
+            localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
+            message.success("已清空自定主题，一秒后刷新页面");
+            this.refreshWindow();
+        })
     }
 
     refreshWindow() {
@@ -189,7 +196,7 @@ class PreferenceImageComponent extends React.Component {
                                 <Col span={12}><Checkbox name={"wallpapers"}
                                                          value={"bo8jQKTaE0Y"}>壁纸</Checkbox></Col>
                                 <Col span={12}><Checkbox name={"3d-renders"}
-                                                         value={"CDwuwXJAbEw"}>3D渲染</Checkbox></Col>
+                                                         value={"CDwuwXJAbEw"}>三维</Checkbox></Col>
                                 <Col span={12}><Checkbox name={"textures-patterns"}
                                                          value={"iUIsnVtjB0Y"}>纹理</Checkbox></Col>
                                 <Col span={12}><Checkbox name={"experimental"}
@@ -230,17 +237,17 @@ class PreferenceImageComponent extends React.Component {
                     <Form.Item label={"自定主题"}>
                         <Space direction={"vertical"}>
                             <Form.Item name={"customTopic"} noStyle>
-                                <Input id={"customTopicInput"} placeholder="英文结果最准确" allowClear/>
+                                <Input id={"customTopicInput"} placeholder="使用英文搜索最准确" allowClear/>
                             </Form.Item>
                             <Space>
-                                <Button type={"text"} shape={"round"} icon={<CheckOutlined />}
+                                <Button type={"text"} shape={"round"} icon={<CheckOutlined/>}
                                         onMouseOver={this.btnMouseOver.bind(this)}
                                         onMouseOut={this.btnMouseOut.bind(this)}
                                         onClick={this.submitCustomTopicBtnOnClick.bind(this)}
                                         style={{color: this.props.fontColor}}>
                                     {"确认"}
                                 </Button>
-                                <Button type={"text"} shape={"round"} icon={<DeleteOutlined />}
+                                <Button type={"text"} shape={"round"} icon={<DeleteOutlined/>}
                                         onMouseOver={this.btnMouseOver.bind(this)}
                                         onMouseOut={this.btnMouseOut.bind(this)}
                                         onClick={this.clearCustomTopicBtnOnClick.bind(this)}
@@ -250,17 +257,32 @@ class PreferenceImageComponent extends React.Component {
                             </Space>
                         </Space>
                     </Form.Item>
-                    <Form.Item label={"提示信息"}>
-                        <Paragraph>
-                            <ol style={{color: this.props.fontColor}}>
-                                <Space direction={"vertical"}>
-                                    <li>刷新后的新主题可能不会立即生效</li>
-                                    <li>图片主题全不选与全选的效果一致</li>
-                                    <li>自定主题不为空时将禁用图片主题</li>
-                                </Space>
-                            </ol>
-                        </Paragraph>
-                    </Form.Item>
+                    {/*<Form.Item label={"提示信息"}>*/}
+                    {/*    <Paragraph>*/}
+                    {/*        <ol style={{color: this.props.fontColor}}>*/}
+                    {/*            <Space direction={"vertical"}>*/}
+                    {/*                <li>刷新后的新主题可能不会立即生效</li>*/}
+                    {/*                <li>图片主题全不选与全选的效果一致</li>*/}
+                    {/*                <li>自定主题不为空时将禁用图片主题</li>*/}
+                    {/*            </Space>*/}
+                    {/*        </ol>*/}
+                    {/*    </Paragraph>*/}
+                    {/*</Form.Item>*/}
+                    <Alert
+                        message="提示信息"
+                        description={
+                            <Paragraph>
+                                <ol>
+                                    <Space direction={"vertical"}>
+                                        <li>新的主题刷新的可能不会立即生效</li>
+                                        <li>图片主题全不选与全选的效果一致</li>
+                                        <li>自定主题不为空时将禁用图片主题</li>
+                                    </Space>
+                                </ol>
+                            </Paragraph>
+                        }
+                        type="info"
+                    />
                 </Form>
             </Card>
         );

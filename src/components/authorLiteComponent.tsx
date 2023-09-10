@@ -2,7 +2,7 @@ import React from "react";
 import {Button, message} from "antd";
 import {LinkOutlined} from "@ant-design/icons";
 import {unsplashUrl} from "../typescripts/publicConstants";
-import {changeThemeColor, getFontColor, getSearchEngineDetail, isEmptyString} from "../typescripts/publicFunctions";
+import {changeThemeColor, getSearchEngineDetail, isEmptyString} from "../typescripts/publicFunctions";
 import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
 import "../stylesheets/publicStyles.scss"
 
@@ -69,7 +69,7 @@ class AuthorLiteComponent extends React.Component {
 
     render() {
         return (
-            <Button shape={"circle"} icon={<LinkOutlined />} size={"large"}
+            <Button shape={"circle"} icon={<LinkOutlined/>} size={"large"}
                     id={"authorLiteBtn"} onClick={this.authorLiteOnClick.bind(this)}
                     className={"componentTheme zIndexHigh"}
                     style={{

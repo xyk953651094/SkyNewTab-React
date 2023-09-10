@@ -91,20 +91,28 @@ class App extends React.Component {
         this.setState({
             preferenceData: tempPreferenceData === null ? defaultPreferenceData : JSON.parse(tempPreferenceData)
         }, () => {
-            // 设置颜色主题
-            this.setState({
-                themeColor: setColorTheme()
-            })
+            // 未加载图片前随机设置颜色主题
+            if (this.state.themeColor.themeColor === "") {
+                this.setState({
+                    themeColor: setColorTheme()
+                })
+            }
         })
 
         // 修改各类弹窗样式
         $("body").bind("DOMNodeInserted", () => {
             // 通用
-            $(".ant-list-item").css({"borderBlockEndColor": this.state.themeColor.componentFontColor, "padding": "10px, 0"});
+            $(".ant-list-item").css({
+                "borderBlockEndColor": this.state.themeColor.componentFontColor,
+                "padding": "10px, 0"
+            });
             $(".ant-list-item-meta-title").css("color", this.state.themeColor.componentFontColor);
             $(".ant-list-item-meta-description").css("color", this.state.themeColor.componentFontColor);
             $(".ant-list-item-action").css("marginInlineStart", "0");
             $(".ant-empty-description").css("color", this.state.themeColor.componentFontColor);
+            $(".ant-alert").css("padding", "10px");
+            $(".ant-typography p").css("margin-bottom", "0");
+            $("ol").css("margin-bottom", "0");
 
             // popover
             let popoverEle = $(".ant-popover");

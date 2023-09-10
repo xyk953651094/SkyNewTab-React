@@ -1,7 +1,9 @@
 import React from "react";
-import {Button, Card, Space} from "antd";
+import {Button, Card, Space, Typography} from "antd";
 import {AppstoreOutlined, CalendarOutlined, CloudOutlined, FileImageOutlined} from "@ant-design/icons";
 import {getFontColor} from "../typescripts/publicFunctions";
+
+const {Paragraph} = Typography;
 
 type propType = {
     hoverColor: string,
@@ -45,24 +47,29 @@ class PreferenceInfoComponent extends React.Component {
                   bodyStyle={{backgroundColor: this.props.backgroundColor}}
             >
                 <Space direction={"vertical"}>
-                    <Button type={"text"} shape={"round"} icon={<CalendarOutlined />}
+                    <Button type={"text"} shape={"round"} icon={<CalendarOutlined/>}
                             href={"https://www.mxnzp.com/"} target={"_blank"}
                             onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
                             className={"poemFont"} style={{color: this.props.fontColor}}>
                         {"节气来源：https://www.mxnzp.com"}
                     </Button>
-                    <Button type={"text"} shape={"round"} icon={<CloudOutlined />}
+                    <Button type={"text"} shape={"round"} icon={<CloudOutlined/>}
                             href={"https://www.jinrishici.com/"} target={"_blank"}
                             onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
                             className={"poemFont"} style={{color: this.props.fontColor}}>
                         {"天气来源：https://www.jinrishici.com"}
                     </Button>
-                    <Button type={"text"} shape={"round"} icon={<FileImageOutlined />}
+                    <Button type={"text"} shape={"round"} icon={<FileImageOutlined/>}
                             href={"https://unsplash.com/"} target={"_blank"}
                             onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
                             className={"poemFont"} style={{color: this.props.fontColor}}>
                         {"图片来源：https://unsplash.com"}
                     </Button>
+                    {/*<Alert*/}
+                    {/*    message="免责声明"*/}
+                    {/*    description="本产品的所有数据源自第三方接口，内容不受作者本人控制，不代表作者本人的观点与立场"*/}
+                    {/*    type="info"*/}
+                    {/*/>*/}
                 </Space>
             </Card>
         );

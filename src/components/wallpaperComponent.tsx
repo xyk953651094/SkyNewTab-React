@@ -9,7 +9,7 @@ import {decode} from "blurhash";
 
 const $ = require("jquery");
 
-    type propType = {
+type propType = {
     getImageData: any,
 }
 
@@ -113,15 +113,17 @@ class WallpaperComponent extends React.Component {
             "content_filter": "high",
         };
 
-        message.info("正在获取图片");
+        message.loading("正在获取图片", 0);
         httpRequest(headers, url, data, "GET")
             .then(function (resultData: any) {
+                message.destroy();
                 message.loading("正在加载图片", 0);
                 localStorage.setItem("lastImageRequestTime", String(new Date().getTime()));  // 保存请求时间，防抖节流
                 localStorage.setItem("lastImage", JSON.stringify(resultData));                // 保存请求结果，防抖节流
                 tempThis.setWallpaper(resultData);
             })
             .catch(function () {
+                message.destroy();
                 // 请求失败也更新请求时间，防止超时后无信息可显示
                 localStorage.setItem("lastImageRequestTime", String(new Date().getTime()));  // 保存请求时间，防抖节流
                 // 获取图片失败时显示上次图片
@@ -216,7 +218,8 @@ class WallpaperComponent extends React.Component {
                     src={this.state.imageLink}
                     style={{display: this.state.display}}
                 />
-                <canvas id="backgroundCanvas" style={{display: this.state.displayCanvas}} className={"backgroundCanvas"}/>
+                <canvas id="backgroundCanvas" style={{display: this.state.displayCanvas}}
+                        className={"backgroundCanvas"}/>
             </>
         );
     }

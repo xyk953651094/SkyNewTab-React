@@ -226,7 +226,11 @@ class PopupImageComponent extends React.Component {
                 </Space>
                 <Button type={"text"} shape={"round"} icon={<CameraOutlined/>}
                         onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
-                        style={{color: this.state.fontColor, cursor: "default", display: this.state.noImageMode ? "inline-block" : "none"}}>
+                        style={{
+                            color: this.state.fontColor,
+                            cursor: "default",
+                            display: this.state.noImageMode ? "inline-block" : "none"
+                        }}>
                     {"已开启无图模式"}
                 </Button>
             </>

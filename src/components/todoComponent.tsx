@@ -75,7 +75,6 @@ class TodoComponent extends React.Component {
             todos = JSON.parse(tempTodos);
         }
         if (todos.length < this.state.todoMaxSize) {
-            // $("#todoInput").val("");
             this.setState({
                 displayModal: true,
                 tag: "工作",

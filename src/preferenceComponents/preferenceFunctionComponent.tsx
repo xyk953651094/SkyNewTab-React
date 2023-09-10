@@ -1,11 +1,11 @@
 import React from "react";
-import {Button, Card, Col, Form, message, Radio, RadioChangeEvent, Row, Space, Switch, Typography} from "antd";
+import {Alert, Button, Card, Col, Form, message, Radio, RadioChangeEvent, Row, Switch, Typography} from "antd";
 import {DeleteOutlined, SettingOutlined} from "@ant-design/icons";
 import {getFontColor} from "../typescripts/publicFunctions";
 import {PreferenceDataInterface} from "../typescripts/publicInterface";
 import {defaultPreferenceData} from "../typescripts/publicConstants";
 
-const { Paragraph} = Typography;
+const {Paragraph} = Typography;
 
 type propType = {
     hoverColor: string,
@@ -113,20 +113,6 @@ class PreferenceFunctionComponent extends React.Component {
         this.setState({
             preferenceData: tempPreferenceData === null ? defaultPreferenceData : JSON.parse(tempPreferenceData),
         });
-
-        // // 竖屏强制开启简洁模式
-        // if(device === "Android" || device === "iPhone") {
-        //     this.setState({
-        //         disableSwitch: true
-        //     }, () => {
-        //         this.setState({
-        //             preferenceData: this.setPreferenceData({simpleMode: true}),
-        //         }, () => {
-        //             this.props.getPreferenceData(this.state.preferenceData);
-        //             localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
-        //         })
-        //     })
-        // }
     }
 
     render() {
@@ -170,15 +156,20 @@ class PreferenceFunctionComponent extends React.Component {
                             清空并重置所有内容
                         </Button>
                     </Form.Item>
-                    <Form.Item label={"提示信息"}>
-                        <Paragraph>
-                            <ol style={{color: this.props.fontColor}}>
-                                <Space direction={"vertical"}>
-                                    <li>清空并重置所有内容将删除所有缓存，插件出现问题时可尝试此按钮</li>
-                                </Space>
-                            </ol>
-                        </Paragraph>
-                    </Form.Item>
+                    {/*<Form.Item label={"提示信息"}>*/}
+                    {/*    <Paragraph>*/}
+                    {/*        <ol style={{color: this.props.fontColor}}>*/}
+                    {/*            <Space direction={"vertical"}>*/}
+                    {/*                <li>清空并重置所有内容将删除所有缓存，插件出现问题时可尝试此按钮</li>*/}
+                    {/*            </Space>*/}
+                    {/*        </ol>*/}
+                    {/*    </Paragraph>*/}
+                    {/*</Form.Item>*/}
+                    <Alert
+                        message="警告信息"
+                        description="清空并重置所有内容将删除所有缓存，插件出现问题时可尝试此按钮"
+                        type="warning"
+                    />
                 </Form>
             </Card>
         );

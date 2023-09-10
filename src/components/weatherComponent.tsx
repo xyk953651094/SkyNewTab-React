@@ -8,7 +8,7 @@ import {
     httpRequest
 } from "../typescripts/publicFunctions";
 import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
-import {EnvironmentOutlined, InfoCircleOutlined, BulbOutlined} from "@ant-design/icons";
+import {EnvironmentOutlined, InfoCircleOutlined} from "@ant-design/icons";
 
 const {Text} = Typography;
 
@@ -31,7 +31,6 @@ type stateType = {
     rainfall: string,
     visibility: string,
     windInfo: string,
-    suggest: string,
 }
 
 interface WeatherComponent {
@@ -56,7 +55,6 @@ class WeatherComponent extends React.Component {
             rainfall: "暂无信息",
             visibility: "暂无信息",
             windInfo: "暂无信息",
-            suggest: "暂无信息",
         };
     }
 
@@ -71,51 +69,15 @@ class WeatherComponent extends React.Component {
     }
 
     locationBtnOnClick() {
-        if(this.state.location !== "暂无信息") {
+        if (this.state.location !== "暂无信息") {
             window.open(this.state.searchEngineUrl + this.state.location, "_blank");
-        }
-        else {
+        } else {
             message.error("无跳转链接");
         }
     }
 
     infoBtnOnClick() {
         window.open(this.state.searchEngineUrl + "天气", "_blank");
-    }
-
-    getSuggest(temperature: number, pm25: number) {
-        let tempTemperature = "";
-        let tempPm25 = "";
-
-        if (temperature > 30) {
-            tempTemperature = "温度炎热，注意避暑"
-        }
-        else if(temperature < 10) {
-            tempTemperature = "温度寒冷，注意防寒"
-        }
-
-        if (pm25 > 200) {
-            tempPm25 = "空气较差，不宜外出"
-        }
-        else if(pm25 < 100) {
-            tempPm25 = "空气良好，适合外出"
-        }
-
-        if(tempTemperature.length === 0 && tempPm25.length === 0) {
-            return "";
-        }
-        else if (tempTemperature.length !== 0 && tempPm25.length === 0) {
-            return tempTemperature;
-        }
-        else if (tempTemperature.length !== 0 && tempPm25.length !== 0) {
-            return tempTemperature + " · " + tempPm25;
-        }
-        else if (tempTemperature.length === 0 && tempPm25.length !== 0) {
-            return tempPm25;
-        }
-        else {
-            return "";
-        }
     }
 
     setWeather(data: any) {
@@ -128,7 +90,6 @@ class WeatherComponent extends React.Component {
             rainfall: data.weatherData.rainfall + "%",
             visibility: data.weatherData.visibility,
             windInfo: data.weatherData.windDirection + data.weatherData.windPower + "级",
-            suggest: this.getSuggest(parseInt(data.weatherData.temperature), parseInt(data.weatherData.pm25)),
         });
     }
 
@@ -197,7 +158,7 @@ class WeatherComponent extends React.Component {
                 </Col>
                 <Col span={18} style={{textAlign: "right"}}>
                     <Space>
-                        <Button type={"text"} shape={"round"} icon={<EnvironmentOutlined />}
+                        <Button type={"text"} shape={"round"} icon={<EnvironmentOutlined/>}
                                 onMouseOver={this.btnMouseOver.bind(this)}
                                 onMouseOut={this.btnMouseOut.bind(this)}
                                 onClick={this.locationBtnOnClick.bind(this)}
@@ -218,13 +179,6 @@ class WeatherComponent extends React.Component {
 
         const popoverContent = (
             <List>
-                <List.Item style={{display: this.state.suggest.length === 0 ? "none" : "block"}}>
-                    <Button type={"text"} shape={"round"} icon={<BulbOutlined />}
-                            style={{color: this.state.fontColor, cursor: "default"}}
-                            onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
-                        {this.state.suggest}
-                    </Button>
-                </List.Item>
                 <List.Item>
                     <Space direction={"vertical"}>
                         <Button type={"text"} shape={"round"} icon={<i className="bi bi-moisture"></i>}
@@ -259,7 +213,7 @@ class WeatherComponent extends React.Component {
 
         return (
             <Popover title={popoverTitle} content={popoverContent} color={this.state.backgroundColor}
-                     placement="bottomLeft" overlayStyle={{minWidth: "250px"}}
+                     placement="bottomLeft" overlayStyle={{minWidth: "350px"}}
             >
                 <Button shape={"round"} icon={<i className={this.state.weatherIcon}></i>} size={"large"}
                         id={"weatherBtn"}

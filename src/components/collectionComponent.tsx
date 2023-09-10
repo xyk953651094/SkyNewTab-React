@@ -65,8 +65,6 @@ class CollectionComponent extends React.Component {
             collections = JSON.parse(tempCollections);
         }
         if (collections.length < this.state.collectionMaxSize) {
-            // $("#webNameInput").val("");
-            // $("#webUrlInput").val("");
             this.setState({
                 displayAddModal: true
             })
@@ -94,8 +92,6 @@ class CollectionComponent extends React.Component {
                     collectionSize: collections.length
                 });
                 message.success("添加成功");
-
-                // this.forceUpdate(); // 强制更新组件
             } else {
                 message.error("链接数量最多为" + this.state.collectionMaxSize + "个");
             }
@@ -156,8 +152,6 @@ class CollectionComponent extends React.Component {
                 collectionData: collections,
                 collectionSize: collections.length
             })
-
-            // this.forceUpdate(); // 强制更新组件
         }
     }
 
