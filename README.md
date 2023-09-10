@@ -34,9 +34,9 @@
 
 <img width="1440" alt="截屏2023-09-10 20 42 01" src="https://github.com/xyk953651094/SkyNewTab-React/assets/28004442/459b0933-94bb-4f47-9181-b4a571f3c310">
 
-<img width="1440" alt="截屏2023-09-10 20 45 31" src="https://github.com/xyk953651094/SkyNewTab-React/assets/28004442/81fcf780-90c1-4ce6-850e-fb411b6f89d0">
-
 <img width="1440" alt="截屏2023-09-10 20 45 09" src="https://github.com/xyk953651094/SkyNewTab-React/assets/28004442/159fe4c9-08fb-4935-b1dd-d05744c67a00">
+
+<img width="1440" alt="截屏2023-09-10 20 45 31" src="https://github.com/xyk953651094/SkyNewTab-React/assets/28004442/81fcf780-90c1-4ce6-850e-fb411b6f89d0">
 
 <img width="1440" alt="截屏2023-09-10 20 50 08" src="https://github.com/xyk953651094/SkyNewTab-React/assets/28004442/81ab75f4-86b7-4cfd-969c-463519b30357">
 
