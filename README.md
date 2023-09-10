@@ -11,7 +11,7 @@
 * 适用于 Chrome、Edge、Firefox、Safari 的新标签页插件。  
 * 基于 Html + Typescript + Sass + React + Webpack + Ant Design + Bootstrap Icon
 * 支持语言：中文
-* 节气来源：https://www.mxnzp.com  
+* 节气来源：https://www.mxnzp.com
 * 天气来源：https://www.jinrishici.com
 * 图片来源：https://unsplash.com
 
@@ -23,18 +23,24 @@
 * 下载 Releases 页面提供的文件进行安装
 
 ## 效果展示
-### Chromium & Firefox
-<img width="1440" alt="截屏2023-07-11 15 15 59" src="https://github.com/xyk953651094/SkyNewTab-React/assets/28004442/fd262e40-29cb-4fcb-86d4-406c6573d559">
+### Chromium & Firefox & Safari for Mac
+<img width="1440" alt="截屏2023-09-10 20 40 10" src="https://github.com/xyk953651094/SkyNewTab-React/assets/28004442/3f4ea3f9-d974-47cc-8ffb-004ed5b267f4">
 
-<img width="1440" alt="截屏2023-07-11 15 16 25" src="https://github.com/xyk953651094/SkyNewTab-React/assets/28004442/e91ab503-8cc3-407d-ade3-87a51d9943a5">
+<img width="1440" alt="截屏2023-09-10 20 47 05" src="https://github.com/xyk953651094/SkyNewTab-React/assets/28004442/b5b4b651-4407-40f8-83ac-436fdf6addef">
 
-<img width="1440" alt="截屏2023-07-11 15 19 22" src="https://github.com/xyk953651094/SkyNewTab-React/assets/28004442/10ff414f-787c-4869-8d58-b495dc6b35cc">
+<img width="1440" alt="截屏2023-09-10 20 41 11" src="https://github.com/xyk953651094/SkyNewTab-React/assets/28004442/d9a03d46-2f0e-4a7d-82ac-783aa31e80ee">
 
-<img width="1440" alt="截屏2023-07-11 15 17 45" src="https://github.com/xyk953651094/SkyNewTab-React/assets/28004442/22a45d85-b831-4be7-ad3a-78ad81fee185">
+<img width="1440" alt="截屏2023-09-10 20 41 41" src="https://github.com/xyk953651094/SkyNewTab-React/assets/28004442/12b57c36-ff9a-486d-b50e-b48244719f12">
 
-<img width="1440" alt="截屏2023-07-11 15 19 44" src="https://github.com/xyk953651094/SkyNewTab-React/assets/28004442/230df980-fa06-4f71-944a-1bfd813046c2">
+<img width="1440" alt="截屏2023-09-10 20 42 01" src="https://github.com/xyk953651094/SkyNewTab-React/assets/28004442/459b0933-94bb-4f47-9181-b4a571f3c310">
 
-<img width="1440" alt="截屏2023-07-11 15 20 12" src="https://github.com/xyk953651094/SkyNewTab-React/assets/28004442/e289dd6e-4f30-471b-a57b-414ade0aae09">
+<img width="1440" alt="截屏2023-09-10 20 45 31" src="https://github.com/xyk953651094/SkyNewTab-React/assets/28004442/81fcf780-90c1-4ce6-850e-fb411b6f89d0">
+
+<img width="1440" alt="截屏2023-09-10 20 45 09" src="https://github.com/xyk953651094/SkyNewTab-React/assets/28004442/159fe4c9-08fb-4935-b1dd-d05744c67a00">
+
+<img width="1440" alt="截屏2023-09-10 20 50 08" src="https://github.com/xyk953651094/SkyNewTab-React/assets/28004442/81ab75f4-86b7-4cfd-969c-463519b30357">
+
+<img width="1440" alt="截屏2023-09-10 20 51 11" src="https://github.com/xyk953651094/SkyNewTab-React/assets/28004442/4329f2ad-1010-4c42-b8d5-0760e9c9b5dd">
 
 ### Safari for iPhone
 <img width="400" alt="截屏 2023-07-15 11 14 40" src="https://github.com/xyk953651094/SkyNewTab-React/assets/28004442/b559c4a4-e715-486b-bf72-d5b26cb62ee5">
@@ -45,9 +51,3 @@
 <img alt="截屏 2023-07-15 11 13 20" src="https://github.com/xyk953651094/SkyNewTab-React/assets/28004442/72bc0f76-0264-4e19-845d-826581d931b0">
 
 <img alt="截屏 2023-07-15 11 13 20" src="https://github.com/xyk953651094/SkyNewTab-React/assets/28004442/ee6e1aef-611f-4553-8c5c-008854d1929f">
-
-### Safari for Mac
-<img width="1440" alt="截屏2023-07-16 18 48 14" src="https://github.com/xyk953651094/SkyNewTab-React/assets/28004442/2f78d940-d3a3-4798-bd0f-52a42808ae86">
-
-<img width="1440" alt="截屏2023-07-16 18 50 30" src="https://github.com/xyk953651094/SkyNewTab-React/assets/28004442/0014b169-82c4-432e-8fb0-15c2ceb12f7e">
-
