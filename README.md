@@ -43,11 +43,11 @@
 <img width="1440" alt="截屏2023-09-10 20 51 11" src="https://github.com/xyk953651094/SkyNewTab-React/assets/28004442/4329f2ad-1010-4c42-b8d5-0760e9c9b5dd">
 
 ### Safari for iPhone
-<img width="400" alt="截屏 2023-07-15 11 14 40" src="https://github.com/xyk953651094/SkyNewTab-React/assets/28004442/b559c4a4-e715-486b-bf72-d5b26cb62ee5">
+<img width="300" alt="IMG_5792561EB323-1" src="https://github.com/xyk953651094/SkyNewTab-React/assets/28004442/293658c9-6072-4418-9b21-3b2ae1ef4a53">
 
-<img width="400" alt="截屏 2023-07-15 11 13 20" src="https://github.com/xyk953651094/SkyNewTab-React/assets/28004442/3f4edb1a-62d6-442d-8c68-e0b2c309a1a3">
+<img width="300" alt="IMG_6442D2F43545-1" src="https://github.com/xyk953651094/SkyNewTab-React/assets/28004442/2973f70d-e31c-45f9-846b-12f9850de429">
 
 ### Safari for iPad
-<img alt="截屏 2023-07-15 11 13 20" src="https://github.com/xyk953651094/SkyNewTab-React/assets/28004442/72bc0f76-0264-4e19-845d-826581d931b0">
+![IMG_67FEECFA8DEF-1](https://github.com/xyk953651094/SkyNewTab-React/assets/28004442/80ff21d0-4d2e-4f7e-b8ff-ad4ea7b3e41e)
 
-<img alt="截屏 2023-07-15 11 13 20" src="https://github.com/xyk953651094/SkyNewTab-React/assets/28004442/ee6e1aef-611f-4553-8c5c-008854d1929f">
+![IMG_0033](https://github.com/xyk953651094/SkyNewTab-React/assets/28004442/64583e09-b7af-4ad9-8c1e-c102a25f23e4)
