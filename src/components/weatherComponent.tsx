@@ -89,7 +89,7 @@ class WeatherComponent extends React.Component {
             pm25: data.weatherData.pm25,
             rainfall: data.weatherData.rainfall + "%",
             visibility: data.weatherData.visibility,
-            windInfo: data.weatherData.windDirection + data.weatherData.windPower + "级",
+            windInfo: data.weatherData.windDirection + " " + data.weatherData.windPower + " 级",
         });
     }
 
