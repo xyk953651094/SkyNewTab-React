@@ -163,10 +163,11 @@ class WallpaperComponent extends React.Component {
                 } else {  // 一分钟之内使用上一次请求结果
                     let lastImage: any = localStorage.getItem("lastImage");
                     if (lastImage) {
+                        message.info("正在加载历史图片");
                         lastImage = JSON.parse(lastImage);
                         this.setWallpaper(lastImage);
                     } else {
-                        message.error("获取图片失败");
+                        message.error("加载历史图片失败");
                     }
                 }
 

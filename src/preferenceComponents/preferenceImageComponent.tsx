@@ -14,7 +14,7 @@ import {
     Space,
     Typography
 } from "antd";
-import {CheckOutlined, DeleteOutlined, SettingOutlined} from "@ant-design/icons";
+import {CheckOutlined, StopOutlined, SettingOutlined} from "@ant-design/icons";
 import {getFontColor, isEmptyString} from "../typescripts/publicFunctions";
 import {defaultPreferenceData} from "../typescripts/publicConstants";
 import {CheckboxValueType} from "antd/es/checkbox/Group";
@@ -107,6 +107,18 @@ class PreferenceImageComponent extends React.Component {
             this.props.getPreferenceData(this.state.preferenceData);
             localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
             message.success("已修改自定主题，一秒后刷新页面");
+            this.refreshWindow();
+        })
+    }
+
+    clearCustomTopicBtnOnClick() {
+        this.setState({
+            preferenceData: this.setPreferenceData({customTopic: ""}),
+            disableImageTopic: false
+        }, () => {
+            this.props.getPreferenceData(this.state.preferenceData);
+            localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
+            message.success("已禁用自定主题，一秒后刷新页面");
             this.refreshWindow();
         })
     }
@@ -221,28 +233,22 @@ class PreferenceImageComponent extends React.Component {
                     <Form.Item label={"自定主题"}>
                         <Space>
                             <Form.Item name={"customTopic"} noStyle>
-                                <Input id={"customTopicInput"} placeholder="使用英文搜索最准确" allowClear/>
+                                <Input id={"customTopicInput"} placeholder="英文搜索最准确" allowClear/>
                             </Form.Item>
-                            <Button type={"text"} shape={"round"} icon={<CheckOutlined/>}
+                            <Button type={"text"} shape={"circle"} icon={<CheckOutlined/>}
                                     onMouseOver={this.btnMouseOver.bind(this)}
                                     onMouseOut={this.btnMouseOut.bind(this)}
                                     onClick={this.submitCustomTopicBtnOnClick.bind(this)}
                                     style={{color: this.props.fontColor}}>
-                                {"确认"}
+                            </Button>
+                            <Button type={"text"} shape={"circle"} icon={<StopOutlined />}
+                                    onMouseOver={this.btnMouseOver.bind(this)}
+                                    onMouseOut={this.btnMouseOut.bind(this)}
+                                    onClick={this.clearCustomTopicBtnOnClick.bind(this)}
+                                    style={{color: this.props.fontColor}}>
                             </Button>
                         </Space>
                     </Form.Item>
-                    {/*<Form.Item label={"提示信息"}>*/}
-                    {/*    <Paragraph>*/}
-                    {/*        <ol style={{color: this.props.fontColor}}>*/}
-                    {/*            <Space direction={"vertical"}>*/}
-                    {/*                <li>刷新后的新主题可能不会立即生效</li>*/}
-                    {/*                <li>图片主题全不选与全选的效果一致</li>*/}
-                    {/*                <li>自定主题不为空时将禁用图片主题</li>*/}
-                    {/*            </Space>*/}
-                    {/*        </ol>*/}
-                    {/*    </Paragraph>*/}
-                    {/*</Form.Item>*/}
                     <Alert
                         message="提示信息"
                         description={
@@ -252,11 +258,13 @@ class PreferenceImageComponent extends React.Component {
                                         <li>新的主题刷新的可能不会立即生效</li>
                                         <li>图片主题全不选与全选的效果一致</li>
                                         <li>自定主题不为空时将禁用图片主题</li>
+                                        <li>只有禁用自定主题图片主题才生效</li>
                                     </Space>
                                 </ol>
                             </Paragraph>
                         }
                         type="info"
+                        style={{display: this.state.preferenceData.displayAlert ? "block" : "none"}}
                     />
                 </Form>
             </Card>

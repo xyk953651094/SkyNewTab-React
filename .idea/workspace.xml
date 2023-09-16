@@ -6,7 +6,19 @@
   <component name="ChangeListManager">
     <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="优化视觉效果">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/preferenceComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/preferenceComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/wallpaperComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/wallpaperComponent.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/weatherComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/weatherComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/extensionFiles/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/extensionFiles/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/popupComponents/popupFooterComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/popupComponents/popupFooterComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/preferenceComponents/preferenceEmailComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/preferenceComponents/preferenceEmailComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/preferenceComponents/preferenceFooterComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/preferenceComponents/preferenceFooterComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/preferenceComponents/preferenceFunctionComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/preferenceComponents/preferenceFunctionComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/preferenceComponents/preferenceImageComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/preferenceComponents/preferenceImageComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stylesheets/publicStyles.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/stylesheets/publicStyles.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/typescripts/publicConstants.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/typescripts/publicConstants.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/typescripts/publicInterface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/typescripts/publicInterface.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -222,7 +234,17 @@
       <workItem from="1694341387840" duration="746000" />
       <workItem from="1694348593108" duration="205000" />
       <workItem from="1694412033483" duration="289000" />
-      <workItem from="1694430660778" duration="813000" />
+      <workItem from="1694430660778" duration="865000" />
+      <workItem from="1694437549144" duration="731000" />
+      <workItem from="1694438724249" duration="281000" />
+      <workItem from="1694439199958" duration="571000" />
+      <workItem from="1694697382136" duration="2118000" />
+      <workItem from="1694767886991" duration="52000" />
+      <workItem from="1694768419067" duration="250000" />
+      <workItem from="1694769681843" duration="301000" />
+      <workItem from="1694774974772" duration="767000" />
+      <workItem from="1694776692245" duration="60000" />
+      <workItem from="1694776854167" duration="1090000" />
     </task>
     <task id="LOCAL-00001" summary="优化抽屉蒙版的显示效果&#10;优化代码质量">
       <created>1683952184207</created>
@@ -342,14 +364,6 @@
       <option name="presentableId" value="LOCAL-00017" />
       <option name="project" value="LOCAL" />
       <updated>1687402693401</updated>
-    </task>
-    <task id="LOCAL-00054" summary="修复已知问题">
-      <option name="closed" value="true" />
-      <created>1691663479041</created>
-      <option name="number" value="00054" />
-      <option name="presentableId" value="LOCAL-00054" />
-      <option name="project" value="LOCAL" />
-      <updated>1691663479041</updated>
     </task>
     <task id="LOCAL-00055" summary="修复已知问题&#10;优化视觉效果">
       <option name="closed" value="true" />
@@ -599,7 +613,15 @@
       <option name="project" value="LOCAL" />
       <updated>1694348688020</updated>
     </task>
-    <option name="localTasksCounter" value="86" />
+    <task id="LOCAL-00086" summary="优化视觉效果">
+      <option name="closed" value="true" />
+      <created>1694432065705</created>
+      <option name="number" value="00086" />
+      <option name="presentableId" value="LOCAL-00086" />
+      <option name="project" value="LOCAL" />
+      <updated>1694432065706</updated>
+    </task>
+    <option name="localTasksCounter" value="87" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

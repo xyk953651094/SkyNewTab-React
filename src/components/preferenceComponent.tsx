@@ -1,6 +1,6 @@
 import React from "react";
 import {Button, Drawer, Space, Tooltip} from "antd";
-import {MoreOutlined} from "@ant-design/icons";
+import {MenuOutlined} from "@ant-design/icons";
 import {changeThemeColor, getFontColor} from "../typescripts/publicFunctions";
 import {ThemeColorInterface} from "../typescripts/publicInterface";
 import {device} from "../typescripts/publicConstants";
@@ -88,7 +88,7 @@ class PreferenceComponent extends React.Component {
         return (
             <>
                 <Tooltip title={"菜单栏"} placement={"bottomRight"} color={this.state.backgroundColor}>
-                    <Button shape={"circle"} icon={<MoreOutlined/>} size={"large"}
+                    <Button shape={"circle"} icon={<MenuOutlined />} size={"large"}
                             onClick={this.showDrawerBtnOnClick.bind(this)}
                             id={"preferenceBtn"}
                             className={"componentTheme zIndexHigh"}

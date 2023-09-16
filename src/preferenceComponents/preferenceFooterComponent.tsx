@@ -1,6 +1,6 @@
 import React from "react";
 import {Button, Space} from "antd";
-import {GiftOutlined, GithubOutlined, MessageOutlined} from "@ant-design/icons";
+import {GiftOutlined, GithubOutlined, NotificationOutlined} from "@ant-design/icons";
 import {getFontColor} from "../typescripts/publicFunctions";
 
 type propType = {
@@ -40,7 +40,7 @@ class PreferenceFooterComponent extends React.Component {
                         style={{color: this.props.fontColor}}>
                     主页
                 </Button>
-                <Button type={"text"} shape={"round"} icon={<MessageOutlined/>}
+                <Button type={"text"} shape={"round"} icon={<NotificationOutlined />}
                         href={"https://xyk953651094.blogspot.com"} target={"_blank"}
                         onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
                         style={{color: this.props.fontColor}}>

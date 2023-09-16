@@ -87,6 +87,22 @@ class PreferenceFunctionComponent extends React.Component {
         })
     }
 
+    displayAlertSwitchOnChange(checked: boolean) {
+        this.setState({
+            preferenceData: this.setPreferenceData({displayAlert: checked}),
+        }, () => {
+            this.props.getPreferenceData(this.state.preferenceData);
+            localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
+            if (checked) {
+                message.success("已显示提示信息，一秒后刷新页面");
+            } else {
+                message.success("已隐藏提示信息，一秒后刷新页面");
+
+            }
+            this.refreshWindow();
+        })
+    }
+
     // 重置设置
     clearStorageBtnOnClick() {
         localStorage.clear();
@@ -147,6 +163,10 @@ class PreferenceFunctionComponent extends React.Component {
                         <Switch checkedChildren="已开启" unCheckedChildren="已关闭"
                                 onChange={this.noImageModeSwitchOnChange.bind(this)}/>
                     </Form.Item>
+                    <Form.Item name={"displayAlert"} label={"提示信息"} valuePropName={"checked"}>
+                        <Switch checkedChildren="已显示" unCheckedChildren="已隐藏"
+                                onChange={this.displayAlertSwitchOnChange.bind(this)}/>
+                    </Form.Item>
                     <Form.Item name={"clearStorageButton"} label={"危险设置"}>
                         <Button type={"text"} shape={"round"} icon={<DeleteOutlined/>}
                                 onMouseOver={this.btnMouseOver.bind(this)}
@@ -156,19 +176,11 @@ class PreferenceFunctionComponent extends React.Component {
                             清空并重置所有内容
                         </Button>
                     </Form.Item>
-                    {/*<Form.Item label={"提示信息"}>*/}
-                    {/*    <Paragraph>*/}
-                    {/*        <ol style={{color: this.props.fontColor}}>*/}
-                    {/*            <Space direction={"vertical"}>*/}
-                    {/*                <li>清空并重置所有内容将删除所有缓存，插件出现问题时可尝试此按钮</li>*/}
-                    {/*            </Space>*/}
-                    {/*        </ol>*/}
-                    {/*    </Paragraph>*/}
-                    {/*</Form.Item>*/}
                     <Alert
                         message="警告信息"
-                        description="清空并重置所有内容将删除所有缓存，插件出现问题时可尝试此按钮"
+                        description="清空并重置所有内容将删除所有缓存并恢复初始状态，插件出现问题时可尝试此按钮"
                         type="warning"
+                        style={{display: this.state.preferenceData.displayAlert ? "block" : "none"}}
                     />
                 </Form>
             </Card>

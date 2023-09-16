@@ -1,6 +1,6 @@
 import React from "react";
 import {Button, Card, Col, Row} from "antd";
-import {ExclamationCircleOutlined, InfoCircleOutlined, SendOutlined} from "@ant-design/icons";
+import {ExclamationCircleOutlined, InfoCircleOutlined, MailOutlined} from "@ant-design/icons";
 import {getFontColor} from "../typescripts/publicFunctions";
 
 type propType = {
@@ -35,7 +35,7 @@ class PreferenceLinkComponent extends React.Component {
     render() {
         return (
             <Card title={"联系作者"} size={"small"}
-                  extra={<SendOutlined style={{color: this.props.fontColor}}/>}
+                  extra={<MailOutlined style={{color: this.props.fontColor}}/>}
                   style={{border: "1px solid " + this.props.fontColor}}
                   headStyle={{
                       backgroundColor: this.props.backgroundColor,
