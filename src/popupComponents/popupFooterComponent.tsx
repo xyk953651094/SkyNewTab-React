@@ -10,12 +10,12 @@ type propType = {
 
 type stateType = {}
 
-interface PreferenceFooterComponent {
+interface PopupFooterComponent {
     state: stateType,
     props: propType
 }
 
-class PreferenceFooterComponent extends React.Component {
+class PopupFooterComponent extends React.Component {
     constructor(props: any) {
         super(props);
         this.state = {};
@@ -40,7 +40,7 @@ class PreferenceFooterComponent extends React.Component {
                         style={{color: this.props.fontColor}}>
                     主页
                 </Button>
-                <Button type={"text"} shape={"round"} icon={<NotificationOutlined />}
+                <Button type={"text"} shape={"round"} icon={<NotificationOutlined/>}
                         href={"https://xyk953651094.blogspot.com"} target={"_blank"}
                         onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
                         style={{color: this.props.fontColor}}>
@@ -57,4 +57,4 @@ class PreferenceFooterComponent extends React.Component {
     }
 }
 
-export default PreferenceFooterComponent;
+export default PopupFooterComponent;

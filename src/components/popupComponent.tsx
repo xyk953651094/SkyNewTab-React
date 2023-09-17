@@ -1,12 +1,13 @@
 import React from "react";
-import {Button, Layout, List, message, Space} from "antd";
-import {DashboardOutlined, GiftOutlined, GithubOutlined, MessageOutlined} from "@ant-design/icons";
+import {Layout, List, message} from "antd";
 import "../stylesheets/popupComponent.scss"
 import {getFontColor, getReverseColor} from "../typescripts/publicFunctions";
 import PopupImageComponent from "../popupComponents/popupImageComponent";
 import PopupStatusComponent from "../popupComponents/popupStatusComponent";
+import PopupFooterComponent from "../popupComponents/popupFooterComponent";
 import {PreferenceDataInterface} from "../typescripts/publicInterface";
 import {defaultPreferenceData} from "../typescripts/publicConstants";
+import PopupHeaderComponent from "../popupComponents/popupHeaderComponent";
 
 const {Header, Content, Footer} = Layout;
 const $ = require("jquery")
@@ -69,7 +70,7 @@ class PopupComponent extends React.Component {
 
         // 修改各类弹窗样式
         $("body").bind("DOMNodeInserted", () => {
-            // messgae
+            // message
             let messageEle = $(".ant-message");
             if (messageEle.length && messageEle.length > 0) {
                 $(".ant-message-notice-content").css({
@@ -78,8 +79,6 @@ class PopupComponent extends React.Component {
                 });
                 $(".ant-message-custom-content > .anticon").css("color", getFontColor(this.state.hoverColor));
             }
-
-            // $(".ant-list-item").css("borderBlockEndColor", this.state.fontColor);
         })
     }
 
@@ -87,47 +86,34 @@ class PopupComponent extends React.Component {
         return (
             <Layout className={"popupLayout"} style={{backgroundColor: this.state.backgroundColor}}>
                 <Header className={"popupHeader"}>
-                    <Space align={"center"}>
-                        <Button type={"text"} shape={"round"} icon={<DashboardOutlined/>}
-                                onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
-                                style={{color: this.state.fontColor, cursor: "default"}}>
-                            云开新标签页的仪表盘
-                        </Button>
-                    </Space>
+                    <PopupHeaderComponent
+                        hoverColor={this.state.hoverColor}
+                        fontColor={this.state.fontColor}
+                    />
                 </Header>
                 <Content className={"popupContent"}>
                     <List>
-                        <List.Item style={{borderBlockEndColor: this.state.fontColor}}>
-                            <PopupStatusComponent imageData={this.state.imageData} fontColor={this.state.fontColor}
-                                                  preferenceData={this.state.preferenceData}/>
+                        <List.Item className={"alignCenter"} style={{borderBlockEndColor: this.state.fontColor}}>
+                            <PopupStatusComponent
+                                imageData={this.state.imageData}
+                                fontColor={this.state.fontColor}
+                                preferenceData={this.state.preferenceData}
+                            />
                         </List.Item>
-                        <List.Item>
-                            <PopupImageComponent imageData={this.state.imageData} fontColor={this.state.fontColor}
-                                                 preferenceData={this.state.preferenceData}/>
+                        <List.Item className={"alignCenter"}>
+                            <PopupImageComponent
+                                imageData={this.state.imageData}
+                                fontColor={this.state.fontColor}
+                                preferenceData={this.state.preferenceData}
+                            />
                         </List.Item>
                     </List>
                 </Content>
                 <Footer className={"popupFooter"}>
-                    <Space align={"center"}>
-                        <Button type={"text"} shape={"round"} icon={<GithubOutlined/>}
-                                href={"https://github.com/xyk953651094"} target={"_blank"}
-                                onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
-                                style={{color: this.state.fontColor}}>
-                            主页
-                        </Button>
-                        <Button type={"text"} shape={"round"} icon={<MessageOutlined/>}
-                                href={"https://xyk953651094.blogspot.com"} target={"_blank"}
-                                onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
-                                style={{color: this.state.fontColor}}>
-                            博客
-                        </Button>
-                        <Button type={"text"} shape={"round"} icon={<GiftOutlined/>}
-                                href={"https://afdian.net/a/xyk953651094"} target={"_blank"}
-                                onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
-                                style={{color: this.state.fontColor}}>
-                            支持
-                        </Button>
-                    </Space>
+                    <PopupFooterComponent
+                        hoverColor={this.state.hoverColor}
+                        fontColor={this.state.fontColor}
+                    />
                 </Footer>
             </Layout>
         );

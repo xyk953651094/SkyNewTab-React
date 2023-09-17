@@ -14,9 +14,7 @@ root.render(
     // <React.StrictMode>
     <ConfigProvider locale={zhCN}>
         <App/>
+        {/*<PopupComponent/>*/}
     </ConfigProvider>
-    // <PopupComponent/>
     // </React.StrictMode>
-
-
 );
