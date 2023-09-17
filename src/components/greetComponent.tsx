@@ -5,7 +5,8 @@ import {
     CheckCircleOutlined,
     CloseCircleOutlined,
     HistoryOutlined,
-    InfoCircleOutlined
+    InfoCircleOutlined,
+    StarOutlined
 } from "@ant-design/icons";
 import {
     changeThemeColor,
@@ -19,6 +20,7 @@ import {
 import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
 
 const {Text} = Typography;
+const btnMaxSize = 80;
 
 type propType = {
     themeColor: ThemeColorInterface,
@@ -72,12 +74,16 @@ class GreetComponent extends React.Component {
         e.currentTarget.style.color = this.state.fontColor;
     }
 
-    infoBtnOnClick() {
-        window.open(this.state.searchEngineUrl + "万年历", "_blank");
+    constellationBtnOnClick() {
+        window.open(this.state.searchEngineUrl + "星座运势", "_blank");
     }
 
     historyBtnOnClick() {
-        window.open(this.state.searchEngineUrl + "历史上的今天", "_blank",);
+        window.open(this.state.searchEngineUrl + "历史上的今天", "_blank");
+    }
+
+    infoBtnOnClick() {
+        window.open(this.state.searchEngineUrl + "万年历", "_blank");
     }
 
     // 请求完成后处理步骤
@@ -171,11 +177,18 @@ class GreetComponent extends React.Component {
     render() {
         const popoverTitle = (
             <Row align={"middle"}>
-                <Col span={10}>
+                <Col span={6}>
                     <Text style={{color: this.state.fontColor}}>{"万年历"}</Text>
                 </Col>
-                <Col span={14} style={{textAlign: "right"}}>
+                <Col span={18} style={{textAlign: "right"}}>
                     <Space>
+                        <Button type={"text"} shape={"round"} icon={<StarOutlined/>}
+                                onMouseOver={this.btnMouseOver.bind(this)}
+                                onMouseOut={this.btnMouseOut.bind(this)}
+                                onClick={this.constellationBtnOnClick.bind(this)}
+                                style={{color: this.state.fontColor}}>
+                            {"星座运势"}
+                        </Button>
                         <Button type={"text"} shape={"round"} icon={<HistoryOutlined/>}
                                 onMouseOver={this.btnMouseOver.bind(this)}
                                 onMouseOut={this.btnMouseOut.bind(this)}
@@ -207,12 +220,12 @@ class GreetComponent extends React.Component {
                         <Button type={"text"} shape={"round"} icon={<CheckCircleOutlined/>}
                                 style={{color: this.state.fontColor, cursor: "default"}}
                                 onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
-                            {"宜：" + this.state.suit}
+                            {"宜：" + (this.state.suit.length < btnMaxSize) ? this.state.suit : this.state.suit.substring(0, btnMaxSize) + "..."}
                         </Button>
                         <Button type={"text"} shape={"round"} icon={<CloseCircleOutlined/>}
                                 style={{color: this.state.fontColor, cursor: "default"}}
                                 onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
-                            {"忌：" + this.state.avoid}
+                            {"忌：" + (this.state.avoid.length < btnMaxSize) ? this.state.avoid : this.state.avoid.substring(0, btnMaxSize) + "..."}
                         </Button>
                     </Space>
                 </List.Item>
@@ -223,9 +236,9 @@ class GreetComponent extends React.Component {
             <Popover
                 title={popoverTitle}
                 content={popoverContent} placement={"bottomLeft"} color={this.state.backgroundColor}
-                overlayStyle={{minWidth: "500px"}}
+                overlayStyle={{minWidth: "550px"}}
             >
-                <Button shape={"round"} icon={<i className={this.state.greetIcon}> </i>} size={"large"}
+                <Button shape={"round"} icon={<i className={this.state.greetIcon}></i>} size={"large"}
                         id={"greetBtn"}
                         className={"componentTheme zIndexHigh"}
                         style={{

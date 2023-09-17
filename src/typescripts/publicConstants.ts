@@ -45,9 +45,10 @@ export let defaultPreferenceData: PreferenceDataInterface = {
     dynamicEffect: "all",
     imageQuality: "regular",
     imageTopics: ["bo8jQKTaE0Y"],
-    customTopic: "",
+    customTopic: "China",
     simpleMode: false,
     noImageMode: false,
+    displayAlert: true,
 }
 
 // 常用变量

@@ -119,9 +119,11 @@ class PopupImageComponent extends React.Component {
         popupImageDiv.style.display = "none";
         if (popupImage instanceof HTMLElement) {
             popupImage.onload = () => {
-                $("#popupCanvas").remove();
+                // $("#popupCanvas").remove();
+                $("#popupCanvas").removeClass("imageFadeIn");
+                $("#popupCanvas").addClass("imageFadeOut");
                 popupImageDiv.style.display = "block";
-                popupImageDiv.className = "wallpaperFadeIn";
+                popupImageDiv.className = "imageFadeIn";
             }
         }
     }
@@ -153,7 +155,7 @@ class PopupImageComponent extends React.Component {
                             this.setState({
                                 displayCanvas: "block",
                             }, () => {
-                                popupCanvas.className = "popupCanvas wallpaperFadeIn";
+                                popupCanvas.className = "popupCanvas imageFadeIn";
                             })
                         }
                     }
@@ -179,18 +181,20 @@ class PopupImageComponent extends React.Component {
         return (
             <>
                 <Space align={"center"} style={{display: this.state.noImageMode ? "none" : "inline-flex"}}>
-                    <Image
-                        id={"popupImage"}
-                        width={250}
-                        height={150}
-                        preview={false}
-                        alt={"暂无图片"}
-                        src={this.state.imagePreviewUrl}
-                        style={{borderRadius: "10px"}}
-                    />
-                    <canvas id={"popupCanvas"} className={"popupCanvas"}
-                            style={{display: this.state.displayCanvas, borderRadius: "10px"}}></canvas>
-                    <Space direction={"vertical"}>
+                    <div className="popupImageDiv">
+                        <Image
+                            id={"popupImage"}
+                            width={250}
+                            height={150}
+                            preview={false}
+                            alt={"暂无图片"}
+                            src={this.state.imagePreviewUrl}
+                            style={{borderRadius: "10px"}}
+                        />
+                        <canvas id={"popupCanvas"} className={"popupCanvas"}
+                                style={{display: this.state.displayCanvas}}></canvas>
+                    </div>
+                    <Space direction={"vertical"} align="start">
                         <Button type={"text"} shape={"round"} icon={<UserOutlined/>}
                                 onMouseOver={this.btnMouseOver.bind(this)}
                                 onMouseOut={this.btnMouseOut.bind(this)} onClick={this.authorLinkBtnOnClick.bind(this)}
@@ -224,7 +228,11 @@ class PopupImageComponent extends React.Component {
                 </Space>
                 <Button type={"text"} shape={"round"} icon={<CameraOutlined/>}
                         onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
-                        style={{color: this.state.fontColor, cursor: "default", display: this.state.noImageMode ? "inline-block" : "none"}}>
+                        style={{
+                            color: this.state.fontColor,
+                            cursor: "default",
+                            display: this.state.noImageMode ? "inline-block" : "none"
+                        }}>
                     {"已开启无图模式"}
                 </Button>
             </>

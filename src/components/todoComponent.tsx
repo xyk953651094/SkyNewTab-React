@@ -1,20 +1,5 @@
 import React from "react";
-import {
-    Badge,
-    Button,
-    Col,
-    Form,
-    Input,
-    List,
-    message,
-    Modal,
-    Popover,
-    Rate,
-    Row,
-    Select,
-    Space,
-    Typography
-} from "antd";
+import {Button, Col, Form, Input, List, message, Modal, Popover, Rate, Row, Select, Space, Typography} from "antd";
 import {CheckOutlined, CheckSquareOutlined, PlusOutlined, TagOutlined} from "@ant-design/icons";
 import {changeThemeColor, getFontColor} from "../typescripts/publicFunctions";
 import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
@@ -33,7 +18,7 @@ type stateType = {
     backgroundColor: string,
     fontColor: string,
     displayModal: boolean,
-    checkboxOptions: any,
+    listItems: any,
     todoSize: number,
     todoMaxSize: number,
     tag: string,
@@ -54,7 +39,7 @@ class TodoComponent extends React.Component {
             backgroundColor: "",
             fontColor: "",
             displayModal: false,
-            checkboxOptions: [],
+            listItems: [],
             todoSize: 0,
             todoMaxSize: 5,
             tag: "工作",
@@ -77,7 +62,7 @@ class TodoComponent extends React.Component {
         if (tempTodos) {
             localStorage.removeItem("todos");
             this.setState({
-                checkboxOptions: [],
+                listItems: [],
                 todoSize: 0
             })
         }
@@ -90,7 +75,6 @@ class TodoComponent extends React.Component {
             todos = JSON.parse(tempTodos);
         }
         if (todos.length < this.state.todoMaxSize) {
-            // $("#todoInput").val("");
             this.setState({
                 displayModal: true,
                 tag: "工作",
@@ -120,7 +104,7 @@ class TodoComponent extends React.Component {
 
                 this.setState({
                     displayModal: false,
-                    checkboxOptions: todos,
+                    listItems: todos,
                     todoSize: todos.length
                 });
                 message.success("添加成功");
@@ -156,7 +140,7 @@ class TodoComponent extends React.Component {
             localStorage.setItem("todos", JSON.stringify(todos));
 
             this.setState({
-                checkboxOptions: todos,
+                listItems: todos,
                 todoSize: todos.length
             })
         }
@@ -167,6 +151,9 @@ class TodoComponent extends React.Component {
         switch (value) {
             case "work":
                 tempTag = "工作";
+                break;
+            case "study":
+                tempTag = "学习";
                 break;
             case "life":
                 tempTag = "生活";
@@ -194,7 +181,7 @@ class TodoComponent extends React.Component {
         }
 
         this.setState({
-            checkboxOptions: todos,
+            listItems: todos,
             todoSize: todos.length
         })
     }
@@ -243,7 +230,7 @@ class TodoComponent extends React.Component {
 
         const popoverContent = (
             <List
-                dataSource={this.state.checkboxOptions}
+                dataSource={this.state.listItems}
                 renderItem={(item: any) => (
                     <List.Item
                         actions={[
@@ -281,14 +268,13 @@ class TodoComponent extends React.Component {
                 <Popover title={popoverTitle} content={popoverContent} placement="bottomRight"
                          color={this.state.backgroundColor}
                          overlayStyle={{width: "550px"}}>
-                    <Badge size={"small"} count={this.state.checkboxOptions.length}
-                           style={{display: this.state.display}}>
-                        <Button shape={"circle"} icon={<CheckSquareOutlined/>} size={"large"}
-                                id={"todoBtn"}
-                                className={"componentTheme zIndexHigh"}
-                                style={{cursor: "default", display: this.state.display}}
-                        />
-                    </Badge>
+                    <Button shape={"round"} icon={<CheckSquareOutlined/>} size={"large"}
+                            id={"todoBtn"}
+                            className={"componentTheme zIndexHigh"}
+                            style={{cursor: "default", display: this.state.display}}
+                    >
+                        {this.state.todoSize + " 个待办事项"}
+                    </Button>
                 </Popover>
                 <Modal title={"添加待办事项 " + this.state.todoSize + " / " + this.state.todoMaxSize} closeIcon={false}
                        centered
@@ -307,6 +293,7 @@ class TodoComponent extends React.Component {
                                 onChange={this.selectOnChange.bind(this)}
                                 options={[
                                     {value: 'work', label: '工作'},
+                                    {value: 'study', label: '学习'},
                                     {value: 'life', label: '生活'},
                                 ]}
                             />

@@ -5,7 +5,8 @@ export interface PreferenceDataInterface {
     imageTopics: string[],
     customTopic: string,
     simpleMode: boolean,
-    noImageMode: boolean
+    noImageMode: boolean,
+    displayAlert: boolean,
 }
 
 export interface ThemeColorInterface {

@@ -9,7 +9,8 @@ import WallpaperComponent from "./components/wallpaperComponent";
 import ClockComponent from "./components/clockComponent";
 import SearchComponent from "./components/searchComponent";
 import CollectionComponent from "./components/collectionComponent";
-import AuthorComponent from "./components/authorComponent"
+import AuthorComponent from "./components/authorComponent";
+import AuthorLiteComponent from "./components/authorLiteComponent"
 
 import {Col, Layout, Row, Space} from "antd";
 import "./stylesheets/publicStyles.scss"
@@ -90,20 +91,28 @@ class App extends React.Component {
         this.setState({
             preferenceData: tempPreferenceData === null ? defaultPreferenceData : JSON.parse(tempPreferenceData)
         }, () => {
-            // 设置颜色主题
-            this.setState({
-                themeColor: setColorTheme()
-            })
+            // 未加载图片前随机设置颜色主题
+            if (this.state.themeColor.themeColor === "") {
+                this.setState({
+                    themeColor: setColorTheme()
+                })
+            }
         })
 
         // 修改各类弹窗样式
         $("body").bind("DOMNodeInserted", () => {
             // 通用
-            $(".ant-list-item").css({"borderBlockEndColor": this.state.themeColor.componentFontColor, "padding": "10px, 0"});
+            $(".ant-list-item").css({
+                "borderBlockEndColor": this.state.themeColor.componentFontColor,
+                "padding": "10px, 0"
+            });
             $(".ant-list-item-meta-title").css("color", this.state.themeColor.componentFontColor);
             $(".ant-list-item-meta-description").css("color", this.state.themeColor.componentFontColor);
             $(".ant-list-item-action").css("marginInlineStart", "0");
             $(".ant-empty-description").css("color", this.state.themeColor.componentFontColor);
+            $(".ant-alert").css("padding", "10px");
+            $("div.ant-typography").css("margin-bottom", "0");
+            $("ol").css("margin-bottom", "0");
 
             // popover
             let popoverEle = $(".ant-popover");
@@ -118,7 +127,7 @@ class App extends React.Component {
                 $(".ant-tooltip-inner").css("color", this.state.themeColor.componentFontColor);
             }
 
-            // messgae
+            // message
             let messageEle = $(".ant-message");
             if (messageEle.length && messageEle.length > 0) {
                 $(".ant-message-notice-content").css({
@@ -168,8 +177,8 @@ class App extends React.Component {
             <Layout>
                 <Header id={"header"} className={"zIndexMiddle"}>
                     <Row justify="center">
-                        <Col xs={0} sm={0} md={10} lg={10} xl={10} xxl={10}>
-                            <Space size={"small"}>
+                        <Col xs={0} sm={0} md={0} lg={10} xl={10} xxl={10}>
+                            <Space>
                                 <GreetComponent
                                     themeColor={this.state.themeColor}
                                     preferenceData={this.state.preferenceData}
@@ -180,8 +189,8 @@ class App extends React.Component {
                                 />
                             </Space>
                         </Col>
-                        <Col xs={22} sm={22} md={10} lg={10} xl={10} xxl={10} style={{textAlign: "right"}}>
-                            <Space size={"small"}>
+                        <Col xs={0} sm={0} md={0} lg={10} xl={10} xxl={10} style={{textAlign: "right"}}>
+                            <Space>
                                 <DailyComponent
                                     themeColor={this.state.themeColor}
                                     preferenceData={this.state.preferenceData}
@@ -196,16 +205,30 @@ class App extends React.Component {
                                 />
                             </Space>
                         </Col>
+                        <Col xs={22} sm={22} md={22} lg={0} xl={0} xxl={0} style={{textAlign: "right"}}>
+                            <Space align={"center"}>
+                                <AuthorLiteComponent
+                                    display={this.state.componentDisplay}
+                                    themeColor={this.state.themeColor}
+                                    imageData={this.state.imageData}
+                                    preferenceData={this.state.preferenceData}
+                                />
+                                <PreferenceComponent
+                                    themeColor={this.state.themeColor}
+                                    getPreferenceData={this.getPreferenceData.bind(this)}
+                                />
+                            </Space>
+                        </Col>
                     </Row>
                 </Header>
-                <Content id={"content"} className={"center"}>
+                <Content id={"content"} className={"alignCenter"}>
                     <WallpaperComponent
                         getImageData={this.getImageData.bind(this)}
                     />
                     <Space direction={"vertical"} align={"center"}>
                         <ClockComponent themeColor={this.state.themeColor} preferenceData={this.state.preferenceData}/>
                         <SearchComponent preferenceData={this.state.preferenceData}/>
-                        <Col xs={0} sm={0} md={24} lg={24} xl={24}>
+                        <Col xs={0} sm={0} md={0} lg={24} xl={24}>
                             <CollectionComponent
                                 themeColor={this.state.themeColor}
                                 preferenceData={this.state.preferenceData}
@@ -215,8 +238,8 @@ class App extends React.Component {
                 </Content>
                 <Footer id={"footer"}>
                     <Row justify="center">
-                        <Col xs={0} sm={0} md={20} lg={20} xl={20} style={{textAlign: "right"}}>
-                            <Space size={"small"} align={"end"}>
+                        <Col xs={0} sm={0} md={0} lg={20} xl={20} style={{textAlign: "right"}}>
+                            <Space align={"center"}>
                                 <AuthorComponent
                                     display={this.state.componentDisplay}
                                     themeColor={this.state.themeColor}

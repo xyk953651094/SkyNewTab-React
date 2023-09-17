@@ -1,6 +1,6 @@
 import React from "react";
 import type {DatePickerProps} from 'antd';
-import {Badge, Button, Col, DatePicker, Form, Input, List, message, Modal, Popover, Row, Space, Typography} from "antd";
+import {Button, Col, DatePicker, Form, Input, List, message, Modal, Popover, Row, Space, Typography} from "antd";
 import {CalendarOutlined, ClockCircleOutlined, DeleteOutlined, PlusOutlined} from "@ant-design/icons";
 import {changeThemeColor, getFontColor, getTimeDetails} from "../typescripts/publicFunctions";
 import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
@@ -98,7 +98,6 @@ class DailyComponent extends React.Component {
             daily = JSON.parse(tempDaily);
         }
         if (daily.length < this.state.dailyMaxSize) {
-            // $("#dailyInput").val("");
             this.setState({
                 displayModal: true,
                 selectedTimeStamp: 0
@@ -265,13 +264,13 @@ class DailyComponent extends React.Component {
                 <Popover title={popoverTitle} content={popoverContent} placement={"bottomRight"}
                          color={this.state.backgroundColor}
                          overlayStyle={{width: "550px"}}>
-                    <Badge size={"small"} count={this.state.listItems.length} style={{display: this.state.display}}>
-                        <Button shape={"circle"} icon={<CalendarOutlined/>} size={"large"}
-                                id={"dailyBtn"}
-                                className={"componentTheme zIndexHigh"}
-                                style={{cursor: "default", display: this.state.display}}
-                        />
-                    </Badge>
+                    <Button shape={"round"} icon={<CalendarOutlined/>} size={"large"}
+                            id={"dailyBtn"}
+                            className={"componentTheme zIndexHigh"}
+                            style={{cursor: "default", display: this.state.display}}
+                    >
+                        {this.state.dailySize + " 个倒数日"}
+                    </Button>
                 </Popover>
                 <Modal title={"添加倒数日 " + this.state.dailySize + " / " + this.state.dailyMaxSize} closeIcon={false}
                        centered

@@ -1,3 +1,7 @@
+body {
+    width: max-content;
+}
+
 .popupLayout {
     background: transparent;
 }
@@ -21,8 +25,106 @@
     text-align: center;
 }
 
+.popupImageDiv {
+    position: relative;
+    width: 250px;
+    height: 150px;
+}
+
 .popupCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 250px;
     height: 150px;
     object-fit: cover;
+    border-radius: 10px;
+}
+
+/*水平垂直居中*/
+.alignCenter {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    text-align: center !important;
+}
+
+/* 淡入效果 */
+.imageFadeIn {
+    animation-name: fadeIn; /* 动画名称 */
+    animation-duration: 2s; /* 持续时间 */
+    animation-iteration-count: 1; /* 动画次数 */
+    animation-delay: 0s; /* 延迟时间 */
+    animation-fill-mode: forwards;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    /* 初始状态 */
+    50% {
+        opacity: 1;
+    }
+    /* 中间状态 */
+    100% {
+        opacity: 1;
+    }
+    /* 结尾状态 */
+}
+
+@-webkit-keyframes fadeIn { /* Safari and Chrome */
+    0% {
+        opacity: 0;
+    }
+    /* 初始状态 */
+    50% {
+        opacity: 1;
+    }
+    /* 中间状态 */
+    100% {
+        opacity: 1;
+    }
+    /* 结尾状态 */
+}
+
+/* 淡出效果 */
+.imageFadeOut {
+    animation-name: fadeOut; /* 动画名称 */
+    animation-duration: 2s; /* 持续时间 */
+    animation-iteration-count: 1; /* 动画次数 */
+    animation-delay: 0s; /* 延迟时间 */
+    animation-fill-mode: forwards;
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    /* 初始状态 */
+    50% {
+        opacity: 0;
+    }
+    /* 中间状态 */
+    100% {
+        opacity: 0;
+        display: none;
+    }
+    /* 结尾状态 */
+}
+
+@-webkit-keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    /* 初始状态 */
+    50% {
+        opacity: 0;
+    }
+    /* 中间状态 */
+    100% {
+        opacity: 0;
+        display: none;
+    }
+    /* 结尾状态 */
 }
