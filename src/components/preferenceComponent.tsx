@@ -10,6 +10,7 @@ import PreferenceEmailComponent from "../preferenceComponents/preferenceEmailCom
 import PreferenceInfoComponent from "../preferenceComponents/preferenceInfoComponent";
 import PreferenceImageComponent from "../preferenceComponents/preferenceImageComponent";
 import PreferenceFunctionComponent from "../preferenceComponents/preferenceFunctionComponent";
+import PreferenceHeaderComponent from "../preferenceComponents/preferenceHeaderComponent";
 
 type propType = {
     themeColor: ThemeColorInterface,
@@ -98,7 +99,6 @@ class PreferenceComponent extends React.Component {
                     />
                 </Tooltip>
                 <Drawer
-                    title={"菜单栏"}
                     size={"default"}
                     width={380}
                     height={500}
@@ -109,6 +109,10 @@ class PreferenceComponent extends React.Component {
                     headerStyle={{color: this.state.fontColor, borderBottomColor: this.state.fontColor}}
                     drawerStyle={{backgroundColor: this.state.backgroundColor}}
                     maskStyle={{backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)"}}
+                    title={<PreferenceHeaderComponent
+                        hoverColor={this.state.hoverColor}
+                        fontColor={this.state.fontColor}/>
+                    }
                     footer={
                         <PreferenceFooterComponent
                             hoverColor={this.state.hoverColor}

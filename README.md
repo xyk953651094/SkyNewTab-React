@@ -1,19 +1,17 @@
 # 云开新标签页 based on React
-## 声明
-* 博客：https://xyk953651094.blogspot.com
-* 支持：https://afdian.net/a/xyk953651094
-* 图片由第三方网站提供，图片内容不代表作者任何观点
-* 本作品由作者个人出于学习目的开发，由于成本原因，难以保证不同型号设备下的最终品质，后续尽量完善
-* <img width="40" src="https://resources.jetbrains.com/storage/products/company/brand/logos/WebStorm_icon.png" alt="WebStorm logo.">
-* [JetBrains Open Source Support](https://jb.gg/OpenSourceSupport "跳转至 JetBrains Open Source Support")
-
 ## 简介
 * 适用于 Chrome、Edge、Firefox、Safari 的新标签页插件。  
 * 基于 Html + Typescript + Sass + React + Webpack + Ant Design + Bootstrap Icon
 * 支持语言：中文
 * 节气来源：https://www.mxnzp.com
 * 天气来源：https://www.jinrishici.com
-* 图片来源：https://unsplash.com
+* 图片来源：https://unsplash.com（图片中的内容不代表作者任何观点）
+* 开发支持：[JetBrains Open Source Support](https://jb.gg/OpenSourceSupport "跳转至 JetBrains Open Source Support")
+* <img width="40" src="https://resources.jetbrains.com/storage/products/company/brand/logos/WebStorm_icon.png" alt="WebStorm logo.">
+* 使用须知：本作品由作者个人出于学习目的开发，由于成本原因，难以保证不同型号设备下的最终品质，后续尽量完善
+
+## 更新
+* 请前往 Releases 页面查看
 
 ## 安装
 * [Chrome 网上应用商店](https://chrome.google.com/webstore/detail/mhnihmooegnonhmnapjlnbponpnclfcb)
@@ -23,7 +21,11 @@
 * 下载 Releases 页面提供的文件进行安装
 * 注意：由于 Edge 的插件审核周期过长（一般超过7天），因此 Edge 更新时间一般晚于 Chrome 和 Firefox
 
-## 效果展示
+## 链接
+* 博客：https://xyk953651094.blogspot.com
+* 支持：https://afdian.net/a/xyk953651094
+
+## 展示
 ### Chromium & Firefox & Safari for Mac
 <img width="1440" alt="截屏2023-09-10 20 40 10" src="https://github.com/xyk953651094/SkyNewTab-React/assets/28004442/3f4ea3f9-d974-47cc-8ffb-004ed5b267f4">
 

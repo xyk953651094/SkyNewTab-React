@@ -1,6 +1,6 @@
 import React from "react";
 import {Button, Space} from "antd";
-import {GiftOutlined, GithubOutlined, NotificationOutlined} from "@ant-design/icons";
+import {GiftOutlined, GithubOutlined, GitlabOutlined, NotificationOutlined} from "@ant-design/icons";
 import {getFontColor} from "../typescripts/publicFunctions";
 
 type propType = {
@@ -38,7 +38,13 @@ class PopupFooterComponent extends React.Component {
                         href={"https://github.com/xyk953651094"} target={"_blank"}
                         onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
                         style={{color: this.props.fontColor}}>
-                    主页
+                    GitHub
+                </Button>
+                <Button type={"text"} shape={"round"} icon={<GitlabOutlined />}
+                        href={"https://gitlab.com/xyk953651094"} target={"_blank"}
+                        onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
+                        style={{color: this.props.fontColor}}>
+                    GitLab
                 </Button>
                 <Button type={"text"} shape={"round"} icon={<NotificationOutlined/>}
                         href={"https://xyk953651094.blogspot.com"} target={"_blank"}
