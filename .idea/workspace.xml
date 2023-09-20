@@ -4,13 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="移动项目">
-      <change afterPath="$PROJECT_DIR$/src/preferenceComponents/preferenceHeaderComponent.tsx" afterDir="false" />
+    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="优化视觉效果">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/preferenceComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/preferenceComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/popupComponents/popupFooterComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/popupComponents/popupFooterComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/preferenceComponents/preferenceFooterComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/preferenceComponents/preferenceFooterComponent.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -246,6 +242,9 @@
       <workItem from="1695011783561" duration="698000" />
       <workItem from="1695038987300" duration="3975000" />
       <workItem from="1695091417890" duration="1310000" />
+      <workItem from="1695110007742" duration="478000" />
+      <workItem from="1695187539413" duration="96000" />
+      <workItem from="1695187727699" duration="610000" />
     </task>
     <task id="LOCAL-00001" summary="优化抽屉蒙版的显示效果&#10;优化代码质量">
       <created>1683952184207</created>
@@ -365,14 +364,6 @@
       <option name="presentableId" value="LOCAL-00017" />
       <option name="project" value="LOCAL" />
       <updated>1687402693401</updated>
-    </task>
-    <task id="LOCAL-00057" summary="修复已知问题">
-      <option name="closed" value="true" />
-      <created>1691754229361</created>
-      <option name="number" value="00057" />
-      <option name="presentableId" value="LOCAL-00057" />
-      <option name="project" value="LOCAL" />
-      <updated>1691754229361</updated>
     </task>
     <task id="LOCAL-00058" summary="修复已知问题">
       <option name="closed" value="true" />
@@ -622,7 +613,15 @@
       <option name="project" value="LOCAL" />
       <updated>1695011888571</updated>
     </task>
-    <option name="localTasksCounter" value="89" />
+    <task id="LOCAL-00089" summary="优化视觉效果">
+      <option name="closed" value="true" />
+      <created>1695110225100</created>
+      <option name="number" value="00089" />
+      <option name="presentableId" value="LOCAL-00089" />
+      <option name="project" value="LOCAL" />
+      <updated>1695110225101</updated>
+    </task>
+    <option name="localTasksCounter" value="90" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -663,8 +662,8 @@
     <MESSAGE value="修复部分问题" />
     <MESSAGE value="优化代码结构" />
     <MESSAGE value="修复已知问题" />
-    <MESSAGE value="优化视觉效果" />
     <MESSAGE value="移动项目" />
-    <option name="LAST_COMMIT_MESSAGE" value="移动项目" />
+    <MESSAGE value="优化视觉效果" />
+    <option name="LAST_COMMIT_MESSAGE" value="优化视觉效果" />
   </component>
 </project>
