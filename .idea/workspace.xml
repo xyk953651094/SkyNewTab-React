@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="优化视觉效果">
+    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="优化产品文档">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/preferenceComponents/preferenceImageComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/preferenceComponents/preferenceImageComponent.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -244,7 +244,9 @@
       <workItem from="1695091417890" duration="1310000" />
       <workItem from="1695110007742" duration="478000" />
       <workItem from="1695187539413" duration="96000" />
-      <workItem from="1695187727699" duration="610000" />
+      <workItem from="1695187727699" duration="788000" />
+      <workItem from="1695203402114" duration="1316000" />
+      <workItem from="1695274971667" duration="56000" />
     </task>
     <task id="LOCAL-00001" summary="优化抽屉蒙版的显示效果&#10;优化代码质量">
       <created>1683952184207</created>
@@ -364,14 +366,6 @@
       <option name="presentableId" value="LOCAL-00017" />
       <option name="project" value="LOCAL" />
       <updated>1687402693401</updated>
-    </task>
-    <task id="LOCAL-00058" summary="修复已知问题">
-      <option name="closed" value="true" />
-      <created>1691810700861</created>
-      <option name="number" value="00058" />
-      <option name="presentableId" value="LOCAL-00058" />
-      <option name="project" value="LOCAL" />
-      <updated>1691810700862</updated>
     </task>
     <task id="LOCAL-00059" summary="修复已知问题">
       <option name="closed" value="true" />
@@ -621,7 +615,15 @@
       <option name="project" value="LOCAL" />
       <updated>1695110225101</updated>
     </task>
-    <option name="localTasksCounter" value="90" />
+    <task id="LOCAL-00090" summary="优化产品文档">
+      <option name="closed" value="true" />
+      <created>1695189513682</created>
+      <option name="number" value="00090" />
+      <option name="presentableId" value="LOCAL-00090" />
+      <option name="project" value="LOCAL" />
+      <updated>1695189513683</updated>
+    </task>
+    <option name="localTasksCounter" value="91" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -639,7 +641,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="适配 Safari&#10;修复部分问题" />
     <MESSAGE value="新增popup功能&#10;修复部分问题" />
     <MESSAGE value="新增blurhash模块，图片加载更自然&#10;修复部分问题" />
     <MESSAGE value="新增 popup 弹窗&#10;修复部分问题" />
@@ -664,6 +665,7 @@
     <MESSAGE value="修复已知问题" />
     <MESSAGE value="移动项目" />
     <MESSAGE value="优化视觉效果" />
-    <option name="LAST_COMMIT_MESSAGE" value="优化视觉效果" />
+    <MESSAGE value="优化产品文档" />
+    <option name="LAST_COMMIT_MESSAGE" value="优化产品文档" />
   </component>
 </project>
