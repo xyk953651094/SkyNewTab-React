@@ -256,8 +256,8 @@ class PreferenceImageComponent extends React.Component {
                                 <ol>
                                     <Space direction={"vertical"}>
                                         <li>新的主题刷新后可能不会立即生效</li>
-                                        <li>图片主题全不选与全选的效果一致</li>
-                                        <li>自定主题不为空时将禁用图片主题</li>
+                                        <li>图片主题全不选的效果与全选一致</li>
+                                        <li>使用自定主题时不能使用图片主题</li>
                                         <li>禁用自定主题时才能使用图片主题</li>
                                     </Space>
                                 </ol>

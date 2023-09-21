@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="优化产品文档">
+    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="优化视觉效果">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/preferenceComponents/preferenceImageComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/preferenceComponents/preferenceImageComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/typescripts/publicConstants.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/typescripts/publicConstants.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -247,6 +248,8 @@
       <workItem from="1695187727699" duration="788000" />
       <workItem from="1695203402114" duration="1316000" />
       <workItem from="1695274971667" duration="56000" />
+      <workItem from="1695275553059" duration="523000" />
+      <workItem from="1695293892724" duration="1128000" />
     </task>
     <task id="LOCAL-00001" summary="优化抽屉蒙版的显示效果&#10;优化代码质量">
       <created>1683952184207</created>
@@ -366,14 +369,6 @@
       <option name="presentableId" value="LOCAL-00017" />
       <option name="project" value="LOCAL" />
       <updated>1687402693401</updated>
-    </task>
-    <task id="LOCAL-00059" summary="修复已知问题">
-      <option name="closed" value="true" />
-      <created>1691847740441</created>
-      <option name="number" value="00059" />
-      <option name="presentableId" value="LOCAL-00059" />
-      <option name="project" value="LOCAL" />
-      <updated>1691847740441</updated>
     </task>
     <task id="LOCAL-00060" summary="优化视觉效果">
       <option name="closed" value="true" />
@@ -623,7 +618,15 @@
       <option name="project" value="LOCAL" />
       <updated>1695189513683</updated>
     </task>
-    <option name="localTasksCounter" value="91" />
+    <task id="LOCAL-00091" summary="优化视觉效果">
+      <option name="closed" value="true" />
+      <created>1695275582240</created>
+      <option name="number" value="00091" />
+      <option name="presentableId" value="LOCAL-00091" />
+      <option name="project" value="LOCAL" />
+      <updated>1695275582240</updated>
+    </task>
+    <option name="localTasksCounter" value="92" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -664,8 +667,8 @@
     <MESSAGE value="优化代码结构" />
     <MESSAGE value="修复已知问题" />
     <MESSAGE value="移动项目" />
-    <MESSAGE value="优化视觉效果" />
     <MESSAGE value="优化产品文档" />
-    <option name="LAST_COMMIT_MESSAGE" value="优化产品文档" />
+    <MESSAGE value="优化视觉效果" />
+    <option name="LAST_COMMIT_MESSAGE" value="优化视觉效果" />
   </component>
 </project>
