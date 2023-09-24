@@ -70,23 +70,6 @@ class PreferenceFunctionComponent extends React.Component {
         })
     }
 
-    // 无图模式
-    noImageModeSwitchOnChange(checked: boolean) {
-        this.setState({
-            preferenceData: this.setPreferenceData({noImageMode: checked}),
-        }, () => {
-            this.props.getPreferenceData(this.state.preferenceData);
-            localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
-            if (checked) {
-                message.success("已开启无图模式，一秒后刷新页面");
-            } else {
-                message.success("已关闭无图模式，一秒后刷新页面");
-
-            }
-            this.refreshWindow();
-        })
-    }
-
     displayAlertSwitchOnChange(checked: boolean) {
         this.setState({
             preferenceData: this.setPreferenceData({displayAlert: checked}),
@@ -158,10 +141,6 @@ class PreferenceFunctionComponent extends React.Component {
                     <Form.Item name={"simpleMode"} label={"简洁模式"} valuePropName={"checked"}>
                         <Switch checkedChildren="已开启" unCheckedChildren="已关闭" disabled={this.state.disableSwitch}
                                 onChange={this.simpleModeSwitchOnChange.bind(this)}/>
-                    </Form.Item>
-                    <Form.Item name={"noImageMode"} label={"无图模式"} valuePropName={"checked"}>
-                        <Switch checkedChildren="已开启" unCheckedChildren="已关闭"
-                                onChange={this.noImageModeSwitchOnChange.bind(this)}/>
                     </Form.Item>
                     <Form.Item name={"displayAlert"} label={"提示信息"} valuePropName={"checked"}>
                         <Switch checkedChildren="已显示" unCheckedChildren="已隐藏"

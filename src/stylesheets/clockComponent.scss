@@ -5,10 +5,12 @@ $dateFontSize: 20px;
     font-size: $clockFontSize;
     height: $clockFontSize;
     line-height: $clockFontSize;
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .dateText {
     font-size: $dateFontSize;
     height: $dateFontSize;
     line-height: $dateFontSize;
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }

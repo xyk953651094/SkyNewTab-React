@@ -11,7 +11,7 @@ import {
     Radio,
     RadioChangeEvent,
     Row,
-    Space,
+    Space, Switch,
     Typography
 } from "antd";
 import {CheckOutlined, StopOutlined, SettingOutlined} from "@ant-design/icons";
@@ -123,6 +123,39 @@ class PreferenceImageComponent extends React.Component {
         })
     }
 
+    nightModeSwitchOnChange(checked: boolean) {
+        this.setState({
+            preferenceData: this.setPreferenceData({nightMode: checked}),
+        }, () => {
+            this.props.getPreferenceData(this.state.preferenceData);
+            localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
+            if (checked) {
+                message.success("已降低背景亮度，一秒后刷新页面");
+            } else {
+                message.success("已恢复背景亮度，一秒后刷新页面");
+
+            }
+            this.refreshWindow();
+        })
+    }
+
+    // 无图模式
+    noImageModeSwitchOnChange(checked: boolean) {
+        this.setState({
+            preferenceData: this.setPreferenceData({noImageMode: checked}),
+        }, () => {
+            this.props.getPreferenceData(this.state.preferenceData);
+            localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
+            if (checked) {
+                message.success("已开启无图模式，一秒后刷新页面");
+            } else {
+                message.success("已关闭无图模式，一秒后刷新页面");
+
+            }
+            this.refreshWindow();
+        })
+    }
+
     refreshWindow() {
         setTimeout(() => {
             window.location.reload();
@@ -150,7 +183,7 @@ class PreferenceImageComponent extends React.Component {
 
     render() {
         return (
-            <Card title={"图片设置"} size={"small"}
+            <Card title={"背景设置"} size={"small"}
                   extra={<SettingOutlined style={{color: this.props.fontColor}}/>}
                   style={{border: "1px solid " + this.props.fontColor}}
                   headStyle={{
@@ -248,6 +281,14 @@ class PreferenceImageComponent extends React.Component {
                                     style={{color: this.props.fontColor}}>
                             </Button>
                         </Space>
+                    </Form.Item>
+                    <Form.Item name={"nightMode"} label={"降低亮度"} valuePropName={"checked"}>
+                        <Switch checkedChildren="已开启" unCheckedChildren="已关闭"
+                                onChange={this.nightModeSwitchOnChange.bind(this)}/>
+                    </Form.Item>
+                    <Form.Item name={"noImageMode"} label={"无图模式"} valuePropName={"checked"}>
+                        <Switch checkedChildren="已开启" unCheckedChildren="已关闭"
+                                onChange={this.noImageModeSwitchOnChange.bind(this)}/>
                     </Form.Item>
                     <Alert
                         message="提示信息"

@@ -12,7 +12,7 @@ type propType = {
 
 type stateType = {
     searchValue: string
-    maskDisplay: "none" | "block"
+    displayMask: "none" | "block"
     searchEngineUrl: string,
     searchEngineIconUrl: string,
 }
@@ -27,7 +27,7 @@ class SearchComponent extends React.Component {
         super(props);
         this.state = {
             searchValue: "",
-            maskDisplay: "none",
+            displayMask: "none",
             searchEngineUrl: "https://www.bing.com/search?q=",
             searchEngineIconUrl: "https://www.bing.com/favicon.ico"
         };
@@ -41,22 +41,22 @@ class SearchComponent extends React.Component {
         if (nextProps.preferenceData !== prevProps.preferenceData) {
             this.setState({
                 searchEngineUrl: getSearchEngineDetail(nextProps.preferenceData.searchEngine).searchEngineUrl,
-                searchEngineIconUrl: getSearchEngineDetail(nextProps.preferenceData.searchEngine).searchEngineIconUrl
+                searchEngineIconUrl: getSearchEngineDetail(nextProps.preferenceData.searchEngine).searchEngineIconUrl,
             });
         }
     }
 
     onFocus() {
-        fadeIn("#mask", 300);
-        if (this.state.maskDisplay !== "block") {
+        fadeIn("#searchMask", 300);
+        if (this.state.displayMask !== "block") {
             this.setState({
-                maskDisplay: "block"
+                displayMask: "block"
             })
         }
     }
 
     onBlur() {
-        fadeOut("#mask", 300);
+        fadeOut("#searchMask", 300);
     }
 
     onPressEnter(e: any) {
@@ -67,9 +67,9 @@ class SearchComponent extends React.Component {
         return (
             <Col span={24} className={"alignCenter"}>
                 <div
-                    id={"mask"}
-                    className={"mask zIndexMiddle"}
-                    style={{display: this.state.maskDisplay}}
+                    id={"searchMask"}
+                    className={"searchMask zIndexMiddle"}
+                    style={{display: this.state.displayMask}}
                 />
 
                 <Input

@@ -28,6 +28,15 @@
     object-fit: cover;
 }
 
+.backgroundMask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
 /* 淡入效果 */
 .wallpaperFadeIn {
     animation-name: fadeIn; /* 动画名称 */

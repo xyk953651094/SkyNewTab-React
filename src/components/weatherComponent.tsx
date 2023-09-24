@@ -153,18 +153,11 @@ class WeatherComponent extends React.Component {
     render() {
         const popoverTitle = (
             <Row align={"middle"}>
-                <Col span={6}>
+                <Col span={10}>
                     <Text style={{color: this.state.fontColor}}>{"天气信息"}</Text>
                 </Col>
-                <Col span={18} style={{textAlign: "right"}}>
+                <Col span={14} style={{textAlign: "right"}}>
                     <Space>
-                        <Button type={"text"} shape={"round"} icon={<EnvironmentOutlined/>}
-                                onMouseOver={this.btnMouseOver.bind(this)}
-                                onMouseOut={this.btnMouseOut.bind(this)}
-                                onClick={this.locationBtnOnClick.bind(this)}
-                                style={{color: this.state.fontColor}}>
-                            {this.state.location}
-                        </Button>
                         <Button type={"text"} shape={"round"} icon={<InfoCircleOutlined/>}
                                 onMouseOver={this.btnMouseOver.bind(this)}
                                 onMouseOut={this.btnMouseOut.bind(this)}
@@ -181,6 +174,24 @@ class WeatherComponent extends React.Component {
             <List>
                 <List.Item>
                     <Space direction={"vertical"}>
+                        <Row gutter={8}>
+                            <Col span={12}>
+                                <Button type={"text"} shape={"round"} icon={<EnvironmentOutlined/>}
+                                        onMouseOver={this.btnMouseOver.bind(this)}
+                                        onMouseOut={this.btnMouseOut.bind(this)}
+                                        onClick={this.locationBtnOnClick.bind(this)}
+                                        style={{color: this.state.fontColor}}>
+                                    {" 地理位置：" + this.state.location}
+                                </Button>
+                            </Col>
+                            <Col span={12}>
+                                <Button type={"text"} shape={"round"} icon={<i className="bi bi-wind"></i>}
+                                        style={{color: this.state.fontColor, cursor: "default"}}
+                                        onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
+                                    {" 风速情况：" + this.state.windInfo}
+                                </Button>
+                            </Col>
+                        </Row>
                         <Row gutter={8}>
                             <Col span={12}>
                                 <Button type={"text"} shape={"round"} icon={<i className="bi bi-moisture"></i>}
@@ -213,13 +224,6 @@ class WeatherComponent extends React.Component {
                                 </Button>
                             </Col>
                         </Row>
-                        <Row>
-                            <Button type={"text"} shape={"round"} icon={<i className="bi bi-wind"></i>}
-                                    style={{color: this.state.fontColor, cursor: "default"}}
-                                    onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
-                                {" 风速情况：" + this.state.windInfo}
-                            </Button>
-                        </Row>
                     </Space>
                 </List.Item>
             </List>
@@ -227,7 +231,7 @@ class WeatherComponent extends React.Component {
 
         return (
             <Popover title={popoverTitle} content={popoverContent} color={this.state.backgroundColor}
-                     placement="bottomLeft" overlayStyle={{minWidth: "350px"}}
+                     placement="bottomLeft" overlayStyle={{minWidth: "400px"}}
             >
                 <Button shape={"round"} icon={<i className={this.state.weatherIcon}></i>} size={"large"}
                         id={"weatherBtn"}
