@@ -2,10 +2,12 @@ import React from "react";
 import {Button, Space} from "antd";
 import {DashboardOutlined} from "@ant-design/icons";
 import {getFontColor} from "../typescripts/publicFunctions";
+import {PreferenceDataInterface} from "../typescripts/publicInterface";
 
 type propType = {
     hoverColor: string,
     fontColor: string,
+    preferenceData: PreferenceDataInterface,
 }
 
 type stateType = {}
@@ -34,7 +36,7 @@ class PopupHeaderComponent extends React.Component {
     render() {
         return (
             <Space align={"center"}>
-                <Button type={"text"} shape={"round"} icon={<DashboardOutlined/>}
+                <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<DashboardOutlined/>}
                         onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
                         style={{color: this.props.fontColor, cursor: "default"}}>
                     云开新标签页的仪表盘

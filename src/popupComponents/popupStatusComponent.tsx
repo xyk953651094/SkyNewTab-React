@@ -121,31 +121,31 @@ class PopupImageComponent extends React.Component {
         return (
             <>
                 <Space style={{display: this.state.simpleMode ? "none" : "inline-flex"}}>
-                    <Button type={"text"} shape={"round"} icon={<i className={this.state.greetIcon}> </i>}
+                    <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<i className={this.state.greetIcon}> </i>}
                             onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
                             onClick={this.greetBtnOnClick.bind(this)}
                             style={{color: this.state.fontColor}}>
                         {this.state.greetContent}
                     </Button>
-                    <Button type={"text"} shape={"round"} icon={<i className={this.state.weatherIcon}> </i>}
+                    <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<i className={this.state.weatherIcon}> </i>}
                             onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
                             onClick={this.weatherBtnOnClick.bind(this)}
                             style={{color: this.state.fontColor}}>
                         {this.state.weatherContent}
                     </Button>
-                    <Button type={"text"} shape={"round"} icon={<CalendarOutlined/>}
+                    <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<CalendarOutlined/>}
                             onMouseOver={this.btnMouseOver.bind(this)}
                             onMouseOut={this.btnMouseOut.bind(this)}
                             style={{color: this.state.fontColor, cursor: "default"}}>
                         {this.state.dailySize + " 个倒数日"}
                     </Button>
-                    <Button type={"text"} shape={"round"} icon={<CheckSquareOutlined/>}
+                    <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<CheckSquareOutlined/>}
                             onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
                             style={{color: this.state.fontColor, cursor: "default"}}>
                         {this.state.todoSize + " 个待办事项"}
                     </Button>
                 </Space>
-                <Button type={"text"} shape={"round"} icon={<InfoCircleOutlined/>}
+                <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<InfoCircleOutlined/>}
                         onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
                         style={{
                             color: this.state.fontColor,

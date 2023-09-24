@@ -17,6 +17,7 @@ type stateType = {
     backgroundColor: string,
     fontColor: string,
     searchEngineUrl: string,
+    buttonShape: "circle" | "default" | "round" | undefined,
     imageLink: string,
 }
 
@@ -32,6 +33,7 @@ class AuthorLiteComponent extends React.Component {
             backgroundColor: "",
             fontColor: "",
             searchEngineUrl: "https://www.bing.com/search?q=",
+            buttonShape: "round",
             imageLink: "",
         };
     }
@@ -63,13 +65,14 @@ class AuthorLiteComponent extends React.Component {
         if (nextProps.preferenceData !== prevProps.preferenceData) {
             this.setState({
                 searchEngineUrl: getSearchEngineDetail(nextProps.preferenceData.searchEngine).searchEngineUrl,
+                buttonShape: nextProps.preferenceData.buttonShape === "round" ? "circle" : "default"
             });
         }
     }
 
     render() {
         return (
-            <Button shape={"circle"} icon={<LinkOutlined/>} size={"large"}
+            <Button shape={this.state.buttonShape} icon={<LinkOutlined/>} size={"large"}
                     id={"authorLiteBtn"} onClick={this.authorLiteOnClick.bind(this)}
                     className={"componentTheme zIndexHigh"}
                     style={{

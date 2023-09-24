@@ -2,11 +2,13 @@ import React from "react";
 import {Avatar, Button, Card, Col, Row} from "antd";
 import {LinkOutlined} from "@ant-design/icons";
 import {getFontColor} from "../typescripts/publicFunctions";
+import {PreferenceDataInterface} from "../typescripts/publicInterface";
 
 type propType = {
     hoverColor: string,
     backgroundColor: string,
     fontColor: string,
+    preferenceData: PreferenceDataInterface,
 }
 
 type stateType = {}
@@ -46,7 +48,7 @@ class PreferenceLinkComponent extends React.Component {
             >
                 <Row gutter={[0, 8]}>
                     <Col span="12">
-                        <Button type={"text"} shape={"round"} href={"https://unsplash.com/"}
+                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} href={"https://unsplash.com/"}
                                 target={"_blank"}
                                 onMouseOver={this.btnMouseOver.bind(this)}
                                 onMouseOut={this.btnMouseOut.bind(this)}
@@ -56,7 +58,7 @@ class PreferenceLinkComponent extends React.Component {
                         </Button>
                     </Col>
                     <Col span="12">
-                        <Button type={"text"} shape={"round"} href={"https://www.pexels.com/"}
+                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} href={"https://www.pexels.com/"}
                                 target={"_blank"}
                                 onMouseOver={this.btnMouseOver.bind(this)}
                                 onMouseOut={this.btnMouseOut.bind(this)}
@@ -66,7 +68,7 @@ class PreferenceLinkComponent extends React.Component {
                         </Button>
                     </Col>
                     <Col span="12">
-                        <Button type={"text"} shape={"round"} href={"https://pixabay.com/"}
+                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} href={"https://pixabay.com/"}
                                 target={"_blank"}
                                 onMouseOver={this.btnMouseOver.bind(this)}
                                 onMouseOut={this.btnMouseOut.bind(this)}
@@ -76,7 +78,7 @@ class PreferenceLinkComponent extends React.Component {
                         </Button>
                     </Col>
                     <Col span="12">
-                        <Button type={"text"} shape={"round"} href={"https://www.jetbrains.com/"}
+                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} href={"https://www.jetbrains.com/"}
                                 target={"_blank"}
                                 onMouseOver={this.btnMouseOver.bind(this)}
                                 onMouseOut={this.btnMouseOut.bind(this)}

@@ -50,6 +50,7 @@ export let defaultPreferenceData: PreferenceDataInterface = {
     simpleMode: false,
     noImageMode: false,
     displayAlert: true,
+    buttonShape: "round"
 }
 
 // 常用变量

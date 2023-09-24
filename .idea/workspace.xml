@@ -4,19 +4,31 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="优化视觉效果">
+    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="新增调节亮度，优化视觉效果">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/authorComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/authorComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/authorLiteComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/authorLiteComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/clockComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/clockComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/collectionComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/collectionComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/dailyComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dailyComponent.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/greetComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/greetComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/searchComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/searchComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/wallpaperComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/wallpaperComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/popupComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/popupComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/preferenceComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/preferenceComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/todoComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/todoComponent.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/weatherComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/weatherComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/extensionFiles/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/extensionFiles/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/popupComponents/popupFooterComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/popupComponents/popupFooterComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/popupComponents/popupHeaderComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/popupComponents/popupHeaderComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/popupComponents/popupImageComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/popupComponents/popupImageComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/popupComponents/popupStatusComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/popupComponents/popupStatusComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/preferenceComponents/preferenceEmailComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/preferenceComponents/preferenceEmailComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/preferenceComponents/preferenceFooterComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/preferenceComponents/preferenceFooterComponent.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/preferenceComponents/preferenceFunctionComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/preferenceComponents/preferenceFunctionComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/preferenceComponents/preferenceHeaderComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/preferenceComponents/preferenceHeaderComponent.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/preferenceComponents/preferenceImageComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/preferenceComponents/preferenceImageComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stylesheets/clockComponent.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/stylesheets/clockComponent.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stylesheets/searchComponent.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/stylesheets/searchComponent.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stylesheets/wallpaperComponent.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/stylesheets/wallpaperComponent.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/preferenceComponents/preferenceInfoComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/preferenceComponents/preferenceInfoComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/preferenceComponents/preferenceLinkComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/preferenceComponents/preferenceLinkComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stylesheets/popupComponent.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/stylesheets/popupComponent.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/typescripts/publicConstants.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/typescripts/publicConstants.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/typescripts/publicInterface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/typescripts/publicInterface.ts" afterDir="false" />
     </list>
@@ -263,6 +275,8 @@
       <workItem from="1695293892724" duration="1561000" />
       <workItem from="1695460717196" duration="4550000" />
       <workItem from="1695476219441" duration="947000" />
+      <workItem from="1695521240495" duration="8988000" />
+      <workItem from="1695549019270" duration="32000" />
     </task>
     <task id="LOCAL-00001" summary="优化抽屉蒙版的显示效果&#10;优化代码质量">
       <created>1683952184207</created>
@@ -382,14 +396,6 @@
       <option name="presentableId" value="LOCAL-00017" />
       <option name="project" value="LOCAL" />
       <updated>1687402693401</updated>
-    </task>
-    <task id="LOCAL-00061" summary="优化视觉效果&#10;修复已知问题">
-      <option name="closed" value="true" />
-      <created>1692106996003</created>
-      <option name="number" value="00061" />
-      <option name="presentableId" value="LOCAL-00061" />
-      <option name="project" value="LOCAL" />
-      <updated>1692106996003</updated>
     </task>
     <task id="LOCAL-00062" summary="优化视觉效果&#10;修复已知问题">
       <option name="closed" value="true" />
@@ -639,7 +645,15 @@
       <option name="project" value="LOCAL" />
       <updated>1695297515974</updated>
     </task>
-    <option name="localTasksCounter" value="93" />
+    <task id="LOCAL-00093" summary="新增调节亮度，优化视觉效果">
+      <option name="closed" value="true" />
+      <created>1695521906005</created>
+      <option name="number" value="00093" />
+      <option name="presentableId" value="LOCAL-00093" />
+      <option name="project" value="LOCAL" />
+      <updated>1695521906006</updated>
+    </task>
+    <option name="localTasksCounter" value="94" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -657,7 +671,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="新增popup功能&#10;修复部分问题" />
     <MESSAGE value="新增blurhash模块，图片加载更自然&#10;修复部分问题" />
     <MESSAGE value="新增 popup 弹窗&#10;修复部分问题" />
     <MESSAGE value="修复 Firefox 图片错位问题" />
@@ -682,6 +695,7 @@
     <MESSAGE value="移动项目" />
     <MESSAGE value="优化产品文档" />
     <MESSAGE value="优化视觉效果" />
-    <option name="LAST_COMMIT_MESSAGE" value="优化视觉效果" />
+    <MESSAGE value="新增调节亮度，优化视觉效果" />
+    <option name="LAST_COMMIT_MESSAGE" value="新增调节亮度，优化视觉效果" />
   </component>
 </project>

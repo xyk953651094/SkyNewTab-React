@@ -89,6 +89,7 @@ class PopupComponent extends React.Component {
                     <PopupHeaderComponent
                         hoverColor={this.state.hoverColor}
                         fontColor={this.state.fontColor}
+                        preferenceData={this.state.preferenceData}
                     />
                 </Header>
                 <Content className={"popupContent"}>
@@ -113,6 +114,7 @@ class PopupComponent extends React.Component {
                     <PopupFooterComponent
                         hoverColor={this.state.hoverColor}
                         fontColor={this.state.fontColor}
+                        preferenceData={this.state.preferenceData}
                     />
                 </Footer>
             </Layout>

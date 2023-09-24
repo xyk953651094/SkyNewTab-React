@@ -2,6 +2,7 @@ import React from "react";
 import {Button, Card, Space, Typography} from "antd";
 import {AppstoreOutlined, CalendarOutlined, CloudOutlined, FileImageOutlined} from "@ant-design/icons";
 import {getFontColor} from "../typescripts/publicFunctions";
+import {PreferenceDataInterface} from "../typescripts/publicInterface";
 
 const {Paragraph} = Typography;
 
@@ -9,6 +10,7 @@ type propType = {
     hoverColor: string,
     backgroundColor: string,
     fontColor: string,
+    preferenceData: PreferenceDataInterface,
 }
 
 type stateType = {}
@@ -47,19 +49,19 @@ class PreferenceInfoComponent extends React.Component {
                   bodyStyle={{backgroundColor: this.props.backgroundColor}}
             >
                 <Space direction={"vertical"}>
-                    <Button type={"text"} shape={"round"} icon={<CalendarOutlined/>}
+                    <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<CalendarOutlined/>}
                             href={"https://www.mxnzp.com/"} target={"_blank"}
                             onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
                             className={"poemFont"} style={{color: this.props.fontColor}}>
                         {"节气来源：https://www.mxnzp.com"}
                     </Button>
-                    <Button type={"text"} shape={"round"} icon={<CloudOutlined/>}
+                    <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<CloudOutlined/>}
                             href={"https://www.jinrishici.com/"} target={"_blank"}
                             onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
                             className={"poemFont"} style={{color: this.props.fontColor}}>
                         {"天气来源：https://www.jinrishici.com"}
                     </Button>
-                    <Button type={"text"} shape={"round"} icon={<FileImageOutlined/>}
+                    <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<FileImageOutlined/>}
                             href={"https://unsplash.com/"} target={"_blank"}
                             onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
                             className={"poemFont"} style={{color: this.props.fontColor}}>

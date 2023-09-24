@@ -53,6 +53,18 @@ class PreferenceFunctionComponent extends React.Component {
             message.success("已更换搜索引擎");
         })
     }
+    
+    // 按钮形状
+    buttonShapeRadioOnChange(event: RadioChangeEvent) {
+        this.setState({
+            preferenceData: this.setPreferenceData({buttonShape: event.target.value}),
+        }, () => {
+            this.props.getPreferenceData(this.state.preferenceData);
+            localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
+            message.success("已更换按钮形状，一秒后刷新页面");
+            this.refreshWindow();
+        })
+    }
 
     // 简洁模式
     simpleModeSwitchOnChange(checked: boolean) {
@@ -138,6 +150,15 @@ class PreferenceFunctionComponent extends React.Component {
                             </Row>
                         </Radio.Group>
                     </Form.Item>
+                    <Form.Item name={"buttonShape"} label={"按钮形状"}>
+                        <Radio.Group buttonStyle={"solid"} style={{width: "100%"}}
+                                     onChange={this.buttonShapeRadioOnChange.bind(this)}>
+                            <Row>
+                                <Col span={12}><Radio value={"round"}>圆形</Radio></Col>
+                                <Col span={12}><Radio value={"default"}>方形</Radio></Col>
+                            </Row>
+                        </Radio.Group>
+                    </Form.Item>
                     <Form.Item name={"simpleMode"} label={"简洁模式"} valuePropName={"checked"}>
                         <Switch checkedChildren="已开启" unCheckedChildren="已关闭" disabled={this.state.disableSwitch}
                                 onChange={this.simpleModeSwitchOnChange.bind(this)}/>
@@ -147,7 +168,7 @@ class PreferenceFunctionComponent extends React.Component {
                                 onChange={this.displayAlertSwitchOnChange.bind(this)}/>
                     </Form.Item>
                     <Form.Item name={"clearStorageButton"} label={"危险设置"}>
-                        <Button type={"text"} shape={"round"} icon={<DeleteOutlined/>}
+                        <Button type={"text"} shape={this.state.preferenceData.buttonShape} icon={<DeleteOutlined/>}
                                 onMouseOver={this.btnMouseOver.bind(this)}
                                 onMouseOut={this.btnMouseOut.bind(this)}
                                 onClick={this.clearStorageBtnOnClick.bind(this)}

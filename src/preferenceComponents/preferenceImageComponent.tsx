@@ -32,6 +32,7 @@ type propType = {
 
 type stateType = {
     preferenceData: PreferenceDataInterface,
+    buttonShape: "circle" | "default" | "round" | undefined,
     disableImageTopic: boolean
 }
 
@@ -45,6 +46,7 @@ class PreferenceImageComponent extends React.Component {
         super(props);
         this.state = {
             preferenceData: defaultPreferenceData,
+            buttonShape: "round",
             disableImageTopic: false
         };
     }
@@ -176,6 +178,7 @@ class PreferenceImageComponent extends React.Component {
             preferenceData: tempPreferenceData === null ? defaultPreferenceData : JSON.parse(tempPreferenceData),
         }, () => {
             this.setState({
+                buttonShape: this.state.preferenceData.buttonShape === "round" ? "circle" : "default",
                 disableImageTopic: !isEmptyString(this.state.preferenceData.customTopic)
             })
         })
@@ -268,13 +271,13 @@ class PreferenceImageComponent extends React.Component {
                             <Form.Item name={"customTopic"} noStyle>
                                 <Input id={"customTopicInput"} placeholder="英文搜索最准确" allowClear/>
                             </Form.Item>
-                            <Button type={"text"} shape={"circle"} icon={<CheckOutlined/>}
+                            <Button type={"text"} shape={this.state.buttonShape} icon={<CheckOutlined/>}
                                     onMouseOver={this.btnMouseOver.bind(this)}
                                     onMouseOut={this.btnMouseOut.bind(this)}
                                     onClick={this.submitCustomTopicBtnOnClick.bind(this)}
                                     style={{color: this.props.fontColor}}>
                             </Button>
-                            <Button type={"text"} shape={"circle"} icon={<StopOutlined />}
+                            <Button type={"text"} shape={this.state.buttonShape} icon={<StopOutlined />}
                                     onMouseOver={this.btnMouseOver.bind(this)}
                                     onMouseOut={this.btnMouseOut.bind(this)}
                                     onClick={this.clearCustomTopicBtnOnClick.bind(this)}

@@ -189,35 +189,35 @@ class PopupImageComponent extends React.Component {
                             preview={false}
                             alt={"暂无图片"}
                             src={this.state.imagePreviewUrl}
-                            style={{borderRadius: "10px"}}
+                            style={{borderRadius: "8px"}}
                         />
                         <canvas id={"popupCanvas"} className={"popupCanvas"}
                                 style={{display: this.state.displayCanvas}}></canvas>
                     </div>
                     <Space direction={"vertical"} align="start">
-                        <Button type={"text"} shape={"round"} icon={<UserOutlined/>}
+                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<UserOutlined/>}
                                 onMouseOver={this.btnMouseOver.bind(this)}
                                 onMouseOut={this.btnMouseOut.bind(this)} onClick={this.authorLinkBtnOnClick.bind(this)}
                                 style={{color: this.state.fontColor}}>
                             {this.state.authorName.length < btnMaxSize ? this.state.authorName : this.state.authorName.substring(0, btnMaxSize) + "..."}
                         </Button>
-                        <Button type={"text"} shape={"round"} icon={<EnvironmentOutlined/>}
+                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<EnvironmentOutlined/>}
                                 onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
                                 onClick={this.imageLocationBtnOnClick.bind(this)} style={{color: this.state.fontColor}}>
                             {this.state.imageLocation.length < btnMaxSize ? this.state.imageLocation : this.state.imageLocation.substring(0, btnMaxSize) + "..."}
                         </Button>
-                        <Button type={"text"} shape={"round"} icon={<InfoCircleOutlined/>}
+                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<InfoCircleOutlined/>}
                                 onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
                                 onClick={this.imageLinkBtnOnClick.bind(this)} style={{color: this.state.fontColor}}>
                             {this.state.imageDescription.length < btnMaxSize ? this.state.imageDescription : this.state.imageDescription.substring(0, btnMaxSize) + "..."}
                         </Button>
                         <Space>
-                            <Button type={"text"} shape={"round"} icon={<ClockCircleOutlined/>}
+                            <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<ClockCircleOutlined/>}
                                     style={{color: this.state.fontColor, cursor: "default"}}
                                     onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
                                 {this.state.imageCreateTime}
                             </Button>
-                            <Button type={"text"} shape={"round"} icon={<CameraOutlined/>}
+                            <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<CameraOutlined/>}
                                     onClick={this.imageCameraBtnOnClick.bind(this)}
                                     style={{color: this.state.fontColor}}
                                     onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
@@ -226,7 +226,7 @@ class PopupImageComponent extends React.Component {
                         </Space>
                     </Space>
                 </Space>
-                <Button type={"text"} shape={"round"} icon={<CameraOutlined/>}
+                <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<CameraOutlined/>}
                         onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
                         style={{
                             color: this.state.fontColor,

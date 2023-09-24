@@ -17,6 +17,7 @@ type stateType = {
     hoverColor: string,
     backgroundColor: string,
     fontColor: string,
+    buttonShape: "circle" | "default" | "round" | undefined,
     collections: any,
     displayAddModal: boolean,
     displayEditModal: boolean,
@@ -38,6 +39,7 @@ class CollectionComponent extends React.Component {
             hoverColor: "",
             backgroundColor: "",
             fontColor: "",
+            buttonShape: "circle",
             collections: [],
             displayAddModal: false,
             displayEditModal: false,
@@ -193,7 +195,8 @@ class CollectionComponent extends React.Component {
 
         if (nextProps.preferenceData !== prevProps.preferenceData) {
             this.setState({
-                display: nextProps.preferenceData.simpleMode ? "none" : "block"
+                display: nextProps.preferenceData.simpleMode ? "none" : "block",
+                buttonShape: nextProps.preferenceData.buttonShape === "round" ? "circle" : "default"
             })
         }
     }
@@ -207,7 +210,7 @@ class CollectionComponent extends React.Component {
                             return (
                                 <Tooltip title={item.webUrl} key={item.timeStamp} placement={"bottom"}
                                          color={this.state.backgroundColor}>
-                                    <Button type={"primary"} shape={"round"} className={"componentTheme"}
+                                    <Button type={"primary"} shape={this.props.preferenceData.buttonShape} className={"componentTheme"}
                                             key={item.timeStamp}
                                             onClick={() => {
                                                 window.open(item.webUrl)
@@ -223,17 +226,17 @@ class CollectionComponent extends React.Component {
                         })
                     }
                     <Tooltip title={"添加链接"} placement={"bottom"} color={this.state.backgroundColor}>
-                        <Button type={"primary"} shape={"circle"} className={"componentTheme"}
+                        <Button type={"primary"} shape={this.state.buttonShape} className={"componentTheme"}
                                 style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}}
                                 icon={<PlusOutlined/>} onClick={this.showAddModalBtnOnClick.bind(this)}/>
                     </Tooltip>
                     <Tooltip title={"编辑链接"} placement={"bottom"} color={this.state.backgroundColor}>
-                        <Button type={"primary"} shape={"circle"} className={"componentTheme"}
+                        <Button type={"primary"} shape={this.state.buttonShape} className={"componentTheme"}
                                 style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}}
                                 icon={<EditOutlined/>} onClick={this.showEditModalBtnOnClick.bind(this)}/>
                     </Tooltip>
                     <Tooltip title={"全部删除"} placement={"bottom"} color={this.state.backgroundColor}>
-                        <Button type={"primary"} shape={"circle"} className={"componentTheme"}
+                        <Button type={"primary"} shape={this.state.buttonShape} className={"componentTheme"}
                                 style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}}
                                 icon={<DeleteOutlined/>} onClick={this.removeAllBtnOnClick.bind(this)}/>
                     </Tooltip>
@@ -262,7 +265,7 @@ class CollectionComponent extends React.Component {
                                 </Text>
                             </Col>
                             <Col span={12} style={{textAlign: "right"}}>
-                                <Button type={"text"} shape={"round"} icon={<DeleteOutlined/>}
+                                <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<DeleteOutlined/>}
                                         onMouseOver={this.btnMouseOver.bind(this)}
                                         onMouseOut={this.btnMouseOut.bind(this)}
                                         onClick={this.removeAllBtnOnClick.bind(this)}
@@ -281,7 +284,7 @@ class CollectionComponent extends React.Component {
                             dataSource={this.state.collectionData}
                             renderItem={(item: any) => (
                                 <List.Item actions={[
-                                    <Button type={"text"} shape={"circle"} icon={<DeleteOutlined/>}
+                                    <Button type={"text"} shape={this.state.buttonShape} icon={<DeleteOutlined/>}
                                             onMouseOver={this.btnMouseOver.bind(this)}
                                             onMouseOut={this.btnMouseOut.bind(this)}
                                             onClick={this.removeBtnOnClick.bind(this, item)}
@@ -290,7 +293,7 @@ class CollectionComponent extends React.Component {
                                 ]}>
                                     <Row style={{width: "100%"}}>
                                         <Col span={8}>
-                                            <Button type={"text"} shape={"round"} icon={<PushpinOutlined/>}
+                                            <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<PushpinOutlined/>}
                                                     onMouseOver={this.btnMouseOver.bind(this)}
                                                     onMouseOut={this.btnMouseOut.bind(this)}
                                                     style={{color: this.state.fontColor, cursor: "default"}}>
@@ -298,7 +301,7 @@ class CollectionComponent extends React.Component {
                                             </Button>
                                         </Col>
                                         <Col span={16}>
-                                            <Button type={"text"} shape={"round"} icon={<LinkOutlined/>}
+                                            <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<LinkOutlined/>}
                                                     onMouseOver={this.btnMouseOver.bind(this)}
                                                     onMouseOut={this.btnMouseOut.bind(this)}
                                                     style={{color: this.state.fontColor, cursor: "default"}}>

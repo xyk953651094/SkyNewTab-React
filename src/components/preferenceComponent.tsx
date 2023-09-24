@@ -2,7 +2,7 @@ import React from "react";
 import {Button, Drawer, Space, Tooltip} from "antd";
 import {MenuOutlined} from "@ant-design/icons";
 import {changeThemeColor, getFontColor} from "../typescripts/publicFunctions";
-import {ThemeColorInterface} from "../typescripts/publicInterface";
+import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
 import {device} from "../typescripts/publicConstants";
 import PreferenceLinkComponent from "../preferenceComponents/preferenceLinkComponent";
 import PreferenceFooterComponent from "../preferenceComponents/preferenceFooterComponent";
@@ -14,6 +14,7 @@ import PreferenceHeaderComponent from "../preferenceComponents/preferenceHeaderC
 
 type propType = {
     themeColor: ThemeColorInterface,
+    preferenceData: PreferenceDataInterface,
     getPreferenceData: any,
 }
 
@@ -21,6 +22,7 @@ type stateType = {
     hoverColor: string,
     backgroundColor: string,
     fontColor: string,
+    buttonShape: "circle" | "default" | "round" | undefined,
     displayDrawer: boolean,
     drawerPosition: "right" | "bottom",
 }
@@ -37,6 +39,7 @@ class PreferenceComponent extends React.Component {
             hoverColor: "",
             backgroundColor: "",
             fontColor: "",
+            buttonShape: "round",
             displayDrawer: false,
             drawerPosition: "right",
         };
@@ -83,13 +86,19 @@ class PreferenceComponent extends React.Component {
                 changeThemeColor("#preferenceBtn", this.state.backgroundColor, this.state.fontColor);
             });
         }
+
+        if (nextProps.preferenceData !== prevProps.preferenceData) {
+            this.setState({
+                buttonShape: nextProps.preferenceData.buttonShape === "round" ? "circle" : "default"
+            })
+        }
     }
 
     render() {
         return (
             <>
                 <Tooltip title={"菜单栏"} placement={"bottomRight"} color={this.state.backgroundColor}>
-                    <Button shape={"circle"} icon={<MenuOutlined style={{fontSize: "16px"}}/>} size={"large"}
+                    <Button shape={this.state.buttonShape} icon={<MenuOutlined style={{fontSize: "16px"}}/>} size={"large"}
                             onClick={this.showDrawerBtnOnClick.bind(this)}
                             id={"preferenceBtn"}
                             className={"componentTheme zIndexHigh"}
@@ -109,14 +118,17 @@ class PreferenceComponent extends React.Component {
                     headerStyle={{color: this.state.fontColor, borderBottomColor: this.state.fontColor}}
                     drawerStyle={{backgroundColor: this.state.backgroundColor}}
                     maskStyle={{backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)"}}
-                    title={<PreferenceHeaderComponent
-                        hoverColor={this.state.hoverColor}
-                        fontColor={this.state.fontColor}/>
+                    title={
+                        <PreferenceHeaderComponent
+                            hoverColor={this.state.hoverColor}
+                            fontColor={this.state.fontColor}
+                            preferenceData={this.props.preferenceData}/>
                     }
                     footer={
                         <PreferenceFooterComponent
                             hoverColor={this.state.hoverColor}
-                            fontColor={this.state.fontColor}/>
+                            fontColor={this.state.fontColor}
+                            preferenceData={this.props.preferenceData}/>
                     }
                     footerStyle={{
                         backgroundColor: this.state.backgroundColor,
@@ -138,15 +150,18 @@ class PreferenceComponent extends React.Component {
                         <PreferenceLinkComponent
                             hoverColor={this.state.hoverColor}
                             backgroundColor={this.state.backgroundColor}
-                            fontColor={this.state.fontColor}/>
+                            fontColor={this.state.fontColor}
+                            preferenceData={this.props.preferenceData}/>
                         <PreferenceInfoComponent
                             hoverColor={this.state.hoverColor}
                             backgroundColor={this.state.backgroundColor}
-                            fontColor={this.state.fontColor}/>
+                            fontColor={this.state.fontColor}
+                            preferenceData={this.props.preferenceData}/>
                         <PreferenceEmailComponent
                             hoverColor={this.state.hoverColor}
                             backgroundColor={this.state.backgroundColor}
-                            fontColor={this.state.fontColor}/>
+                            fontColor={this.state.fontColor}
+                            preferenceData={this.props.preferenceData}/>
                     </Space>
                 </Drawer>
             </>

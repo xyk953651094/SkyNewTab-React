@@ -8,6 +8,7 @@ export interface PreferenceDataInterface {
     simpleMode: boolean,
     noImageMode: boolean,
     displayAlert: boolean,
+    buttonShape: "circle" | "default" | "round" | undefined
 }
 
 export interface ThemeColorInterface {
