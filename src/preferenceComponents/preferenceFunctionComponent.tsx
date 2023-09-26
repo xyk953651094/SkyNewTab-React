@@ -1,5 +1,5 @@
 import React from "react";
-import {Alert, Button, Card, Col, Form, message, Radio, RadioChangeEvent, Row, Switch, Typography} from "antd";
+import {Alert, Button, Card, Col, Form, message, Radio, RadioChangeEvent, Row, Space, Switch, Typography} from "antd";
 import {DeleteOutlined, SettingOutlined} from "@ant-design/icons";
 import {getFontColor} from "../typescripts/publicFunctions";
 import {PreferenceDataInterface} from "../typescripts/publicInterface";
@@ -177,9 +177,18 @@ class PreferenceFunctionComponent extends React.Component {
                         </Button>
                     </Form.Item>
                     <Alert
-                        message="警告信息"
-                        description="清空并重置所有内容将删除所有缓存并恢复初始状态，插件出现问题时可尝试此按钮"
-                        type="warning"
+                        message="提示信息"
+                        description={
+                            <Paragraph>
+                                <ol>
+                                    <Space direction={"vertical"}>
+                                        <li>清空并重置所有内容将恢复插件初始状态，插件出现问题时可尝试此按钮</li>
+                                        <li>版本更新后若设置出现异常可尝试此按钮</li>
+                                    </Space>
+                                </ol>
+                            </Paragraph>
+                        }
+                        type="info"
                         style={{display: this.state.preferenceData.displayAlert ? "block" : "none"}}
                     />
                 </Form>
