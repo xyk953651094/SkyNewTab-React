@@ -42,6 +42,7 @@ class ClockComponent extends React.Component {
     btnMouseOver(e: any) {
         if (!this.state.noImageMode) {
             new Promise((resolve) => {
+                $(".clockText, .dateText").removeClass("textShadow");
                 changeBackgroundColor(e.currentTarget, this.state.backgroundColor, 150);
                 changeFontColor(".clockText, .dateText", this.state.fontColor, 150);
                 resolve("success");
@@ -53,6 +54,7 @@ class ClockComponent extends React.Component {
 
     btnMouseOut(e: any) {
         if (!this.state.noImageMode) {
+            $(".clockText, .dateText").addClass("textShadow");
             e.currentTarget.classList.remove("componentTheme");
             changeBackgroundColor(e.currentTarget, "transparent", 150);
             changeFontColor(".clockText, .dateText", this.state.backgroundColor, 150);
@@ -91,14 +93,14 @@ class ClockComponent extends React.Component {
                 <Col span={24} className={"zIndexHigh"} style={{padding: "5px 10px", borderRadius: "8px"}}
                      onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
                     <Space align={"center"} id={"clock"}>
-                        <Text className={"clockText"} style={{color: this.state.backgroundColor}}>
+                        <Text className={"textShadow clockText"} style={{color: this.state.backgroundColor}}>
                             {this.state.currentTime}
                         </Text>
                         <Space align={"center"} direction={"vertical"}>
-                            <Text className={"dateText"} style={{color: this.state.backgroundColor}}>
+                            <Text className={"textShadow dateText"} style={{color: this.state.backgroundColor}}>
                                 {this.state.currentWeek}
                             </Text>
-                            <Text className={"dateText"} style={{color: this.state.backgroundColor}}>
+                            <Text className={"textShadow dateText"} style={{color: this.state.backgroundColor}}>
                                 {this.state.currentDate}
                             </Text>
                         </Space>

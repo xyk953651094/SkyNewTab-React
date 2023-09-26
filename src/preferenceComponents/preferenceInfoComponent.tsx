@@ -1,10 +1,8 @@
 import React from "react";
-import {Button, Card, Space, Typography} from "antd";
-import {AppstoreOutlined, CalendarOutlined, CloudOutlined, FileImageOutlined} from "@ant-design/icons";
+import {Button, Card, Space} from "antd";
+import {InfoCircleOutlined, CalendarOutlined, CloudOutlined, FileImageOutlined} from "@ant-design/icons";
 import {getFontColor} from "../typescripts/publicFunctions";
 import {PreferenceDataInterface} from "../typescripts/publicInterface";
-
-const {Paragraph} = Typography;
 
 type propType = {
     hoverColor: string,
@@ -39,7 +37,7 @@ class PreferenceInfoComponent extends React.Component {
     render() {
         return (
             <Card title={"产品信息"} size={"small"}
-                  extra={<AppstoreOutlined style={{color: this.props.fontColor}}/>}
+                  extra={<InfoCircleOutlined style={{color: this.props.fontColor}}/>}
                   style={{border: "1px solid " + this.props.fontColor}}
                   headStyle={{
                       backgroundColor: this.props.backgroundColor,

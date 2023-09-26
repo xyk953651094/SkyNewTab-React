@@ -54,12 +54,6 @@ class PreferenceFooterComponent extends React.Component {
                         style={{color: this.props.fontColor}}>
                     博客
                 </Button>
-                {/*<Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<GiftOutlined/>}*/}
-                {/*        href={"https://afdian.net/a/xyk953651094"} target={"_blank"}*/}
-                {/*        onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}*/}
-                {/*        style={{color: this.props.fontColor}}>*/}
-                {/*    支持*/}
-                {/*</Button>*/}
             </Space>
         );
     }

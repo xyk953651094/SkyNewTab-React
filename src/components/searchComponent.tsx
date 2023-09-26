@@ -1,20 +1,23 @@
 import React from "react";
 import "../stylesheets/searchComponent.scss"
 import "../stylesheets/publicStyles.scss"
-import {Avatar, Col, Input} from "antd";
-import {SearchOutlined} from "@ant-design/icons";
-import {fadeIn, fadeOut, getSearchEngineDetail} from "../typescripts/publicFunctions";
-import {PreferenceDataInterface} from "../typescripts/publicInterface";
+import {Row, Col, Divider, Input, Avatar, Button} from "antd";
+import {DeleteOutlined, SearchOutlined} from "@ant-design/icons";
+import {changeThemeColor, fadeIn, fadeOut, getSearchEngineDetail} from "../typescripts/publicFunctions";
+import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
 
 type propType = {
+    themeColor: ThemeColorInterface,
     preferenceData: PreferenceDataInterface,
 }
 
 type stateType = {
+    backgroundColor: string,
+    fontColor: string,
     searchValue: string
-    displayMask: "none" | "block"
+    displayMask: "none" | "block",
+    searchEngineName: string,
     searchEngineUrl: string,
-    searchEngineIconUrl: string,
 }
 
 interface SearchComponent {
@@ -26,10 +29,12 @@ class SearchComponent extends React.Component {
     constructor(props: any) {
         super(props);
         this.state = {
+            backgroundColor: "",
+            fontColor: "",
             searchValue: "",
             displayMask: "none",
+            searchEngineName: "Bing",
             searchEngineUrl: "https://www.bing.com/search?q=",
-            searchEngineIconUrl: "https://www.bing.com/favicon.ico"
         };
     }
 
@@ -38,10 +43,20 @@ class SearchComponent extends React.Component {
     }
 
     componentWillReceiveProps(nextProps: any, prevProps: any) {
-        if (nextProps.preferenceData !== prevProps.preferenceData) {
+        if (nextProps.themeColor !== prevProps.themeColor) {
             this.setState({
-                searchEngineUrl: getSearchEngineDetail(nextProps.preferenceData.searchEngine).searchEngineUrl,
-                searchEngineIconUrl: getSearchEngineDetail(nextProps.preferenceData.searchEngine).searchEngineIconUrl,
+                backgroundColor: nextProps.themeColor.componentBackgroundColor,
+                fontColor: nextProps.themeColor.componentFontColor,
+            }, () => {
+                changeThemeColor("#searchEngineIconBtn", this.state.backgroundColor, this.state.fontColor);
+            });
+        }
+
+        if (nextProps.preferenceData !== prevProps.preferenceData) {
+            let searchEngineDetail = getSearchEngineDetail(nextProps.preferenceData.searchEngine);
+            this.setState({
+                searchEngineName: searchEngineDetail.searchEngineName,
+                searchEngineUrl: searchEngineDetail.searchEngineUrl,
             });
         }
     }
@@ -74,7 +89,15 @@ class SearchComponent extends React.Component {
 
                 <Input
                     className={"searchInput componentTheme zIndexHigh"}
-                    prefix={<Avatar size={"small"} src={this.state.searchEngineIconUrl} alt={"图标"}/>}
+                    prefix={
+                    <Row align={"middle"}>
+                        <Button type={"text"} shape={"round"} size={"small"}
+                                id={"searchEngineIconBtn"} style={{cursor: "default"}}>
+                            {this.state.searchEngineName}
+                        </Button>
+                        <Divider type="vertical" />
+                    </Row>
+                    }
                     suffix={<SearchOutlined/>}
                     placeholder={"按下 Enter 键搜索"}
                     onFocus={this.onFocus.bind(this)}
@@ -83,17 +106,6 @@ class SearchComponent extends React.Component {
                     size={"large"}
                     allowClear
                 />
-                {/*<Search*/}
-                {/*    className={"searchInput zIndexHigh"}*/}
-                {/*    prefix={<SearchOutlined />}*/}
-                {/*    placeholder="按下 Enter 键搜索"*/}
-                {/*    onFocus={this.onFocus.bind(this)}*/}
-                {/*    onBlur={this.onBlur.bind(this)}*/}
-                {/*    onPressEnter={this.onPressEnter.bind(this)}*/}
-                {/*    onSearch={this.onPressEnter.bind(this)}*/}
-                {/*    size={"large"}*/}
-                {/*    allowClear*/}
-                {/*/>*/}
             </Col>
         );
     }

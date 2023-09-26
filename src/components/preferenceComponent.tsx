@@ -11,6 +11,7 @@ import PreferenceInfoComponent from "../preferenceComponents/preferenceInfoCompo
 import PreferenceImageComponent from "../preferenceComponents/preferenceImageComponent";
 import PreferenceFunctionComponent from "../preferenceComponents/preferenceFunctionComponent";
 import PreferenceHeaderComponent from "../preferenceComponents/preferenceHeaderComponent";
+import PreferenceProductComponent from "../preferenceComponents/preferenceProductComponent";
 
 type propType = {
     themeColor: ThemeColorInterface,
@@ -147,7 +148,7 @@ class PreferenceComponent extends React.Component {
                             backgroundColor={this.state.backgroundColor}
                             fontColor={this.state.fontColor}
                             getPreferenceData={this.props.getPreferenceData}/>
-                        <PreferenceLinkComponent
+                        <PreferenceProductComponent
                             hoverColor={this.state.hoverColor}
                             backgroundColor={this.state.backgroundColor}
                             fontColor={this.state.fontColor}
@@ -158,6 +159,11 @@ class PreferenceComponent extends React.Component {
                             fontColor={this.state.fontColor}
                             preferenceData={this.props.preferenceData}/>
                         <PreferenceEmailComponent
+                            hoverColor={this.state.hoverColor}
+                            backgroundColor={this.state.backgroundColor}
+                            fontColor={this.state.fontColor}
+                            preferenceData={this.props.preferenceData}/>
+                        <PreferenceLinkComponent
                             hoverColor={this.state.hoverColor}
                             backgroundColor={this.state.backgroundColor}
                             fontColor={this.state.fontColor}

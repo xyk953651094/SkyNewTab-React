@@ -235,7 +235,7 @@ class App extends React.Component {
                     />
                     <Space direction={"vertical"} align={"center"}>
                         <ClockComponent themeColor={this.state.themeColor} preferenceData={this.state.preferenceData}/>
-                        <SearchComponent preferenceData={this.state.preferenceData}/>
+                        <SearchComponent themeColor={this.state.themeColor} preferenceData={this.state.preferenceData}/>
                         <Col xs={0} sm={0} md={0} lg={24} xl={24}>
                             <CollectionComponent
                                 themeColor={this.state.themeColor}
