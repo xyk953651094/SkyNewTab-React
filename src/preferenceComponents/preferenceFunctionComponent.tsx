@@ -1,6 +1,6 @@
 import React from "react";
 import {Alert, Button, Card, Col, Form, message, Radio, RadioChangeEvent, Row, Space, Switch, Typography} from "antd";
-import {DeleteOutlined, SettingOutlined} from "@ant-design/icons";
+import {RedoOutlined, SettingOutlined} from "@ant-design/icons";
 import {getFontColor} from "../typescripts/publicFunctions";
 import {PreferenceDataInterface} from "../typescripts/publicInterface";
 import {defaultPreferenceData} from "../typescripts/publicConstants";
@@ -142,7 +142,7 @@ class PreferenceFunctionComponent extends React.Component {
                     <Form.Item name={"searchEngine"} label={"搜索引擎"}>
                         <Radio.Group buttonStyle={"solid"}
                                      onChange={this.searchEngineRadioOnChange.bind(this)}>
-                            <Row>
+                            <Row gutter={[0, 8]}>
                                 <Col span={12}><Radio value={"baidu"}>Baidu</Radio></Col>
                                 <Col span={12}><Radio value={"bing"}>Bing</Radio></Col>
                                 <Col span={12}><Radio value={"google"}>Google</Radio></Col>
@@ -159,21 +159,27 @@ class PreferenceFunctionComponent extends React.Component {
                             </Row>
                         </Radio.Group>
                     </Form.Item>
-                    <Form.Item name={"simpleMode"} label={"简洁模式"} valuePropName={"checked"}>
-                        <Switch checkedChildren="已开启" unCheckedChildren="已关闭" disabled={this.state.disableSwitch}
-                                onChange={this.simpleModeSwitchOnChange.bind(this)}/>
-                    </Form.Item>
-                    <Form.Item name={"displayAlert"} label={"提示信息"} valuePropName={"checked"}>
-                        <Switch checkedChildren="已显示" unCheckedChildren="已隐藏"
-                                onChange={this.displayAlertSwitchOnChange.bind(this)}/>
-                    </Form.Item>
+                    <Row gutter={24}>
+                        <Col span={12}>
+                            <Form.Item name={"simpleMode"} label={"简洁模式"} valuePropName={"checked"}>
+                                <Switch checkedChildren="已开启" unCheckedChildren="已关闭" disabled={this.state.disableSwitch}
+                                        onChange={this.simpleModeSwitchOnChange.bind(this)}/>
+                            </Form.Item>
+                        </Col>
+                        <Col span={12}>
+                            <Form.Item name={"displayAlert"} label={"提示信息"} valuePropName={"checked"}>
+                                <Switch checkedChildren="已显示" unCheckedChildren="已隐藏"
+                                        onChange={this.displayAlertSwitchOnChange.bind(this)}/>
+                            </Form.Item>
+                        </Col>
+                    </Row>
                     <Form.Item name={"clearStorageButton"} label={"危险设置"}>
-                        <Button type={"text"} shape={this.state.preferenceData.buttonShape} icon={<DeleteOutlined/>}
+                        <Button type={"text"} shape={this.state.preferenceData.buttonShape} icon={<RedoOutlined />}
                                 onMouseOver={this.btnMouseOver.bind(this)}
                                 onMouseOut={this.btnMouseOut.bind(this)}
                                 onClick={this.clearStorageBtnOnClick.bind(this)}
                                 style={{color: this.props.fontColor}}>
-                            清空并重置所有内容
+                            重置插件
                         </Button>
                     </Form.Item>
                     <Alert
@@ -182,8 +188,8 @@ class PreferenceFunctionComponent extends React.Component {
                             <Paragraph>
                                 <ol>
                                     <Space direction={"vertical"}>
-                                        <li>清空并重置所有内容将恢复插件初始状态，插件出现问题时可尝试此按钮</li>
-                                        <li>版本更新后若设置出现异常可尝试此按钮</li>
+                                        <li>重置插件将清空缓存恢复初始设置</li>
+                                        <li>插件设置出现异常可尝试重置插件</li>
                                     </Space>
                                 </ol>
                             </Paragraph>

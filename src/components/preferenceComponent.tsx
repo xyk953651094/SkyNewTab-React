@@ -148,11 +148,6 @@ class PreferenceComponent extends React.Component {
                             backgroundColor={this.state.backgroundColor}
                             fontColor={this.state.fontColor}
                             getPreferenceData={this.props.getPreferenceData}/>
-                        <PreferenceProductComponent
-                            hoverColor={this.state.hoverColor}
-                            backgroundColor={this.state.backgroundColor}
-                            fontColor={this.state.fontColor}
-                            preferenceData={this.props.preferenceData}/>
                         <PreferenceInfoComponent
                             hoverColor={this.state.hoverColor}
                             backgroundColor={this.state.backgroundColor}
@@ -163,11 +158,16 @@ class PreferenceComponent extends React.Component {
                             backgroundColor={this.state.backgroundColor}
                             fontColor={this.state.fontColor}
                             preferenceData={this.props.preferenceData}/>
-                        <PreferenceLinkComponent
+                        <PreferenceProductComponent
                             hoverColor={this.state.hoverColor}
                             backgroundColor={this.state.backgroundColor}
                             fontColor={this.state.fontColor}
                             preferenceData={this.props.preferenceData}/>
+                        {/*<PreferenceLinkComponent*/}
+                        {/*    hoverColor={this.state.hoverColor}*/}
+                        {/*    backgroundColor={this.state.backgroundColor}*/}
+                        {/*    fontColor={this.state.fontColor}*/}
+                        {/*    preferenceData={this.props.preferenceData}/>*/}
                     </Space>
                 </Drawer>
             </>

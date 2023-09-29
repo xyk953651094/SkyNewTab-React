@@ -1,6 +1,6 @@
 import React from "react";
 import {Button, Card, Space} from "antd";
-import {InfoCircleOutlined, CalendarOutlined, CloudOutlined, FileImageOutlined} from "@ant-design/icons";
+import {InfoCircleOutlined, CalendarOutlined, CloudOutlined, FileImageOutlined, CodeOutlined} from "@ant-design/icons";
 import {getFontColor} from "../typescripts/publicFunctions";
 import {PreferenceDataInterface} from "../typescripts/publicInterface";
 
@@ -50,26 +50,27 @@ class PreferenceInfoComponent extends React.Component {
                     <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<CalendarOutlined/>}
                             href={"https://www.mxnzp.com/"} target={"_blank"}
                             onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
-                            className={"poemFont"} style={{color: this.props.fontColor}}>
+                            style={{color: this.props.fontColor}}>
                         {"节气来源：https://www.mxnzp.com"}
                     </Button>
                     <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<CloudOutlined/>}
                             href={"https://www.jinrishici.com/"} target={"_blank"}
                             onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
-                            className={"poemFont"} style={{color: this.props.fontColor}}>
+                            style={{color: this.props.fontColor}}>
                         {"天气来源：https://www.jinrishici.com"}
                     </Button>
                     <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<FileImageOutlined/>}
                             href={"https://unsplash.com/"} target={"_blank"}
                             onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
-                            className={"poemFont"} style={{color: this.props.fontColor}}>
+                            style={{color: this.props.fontColor}}>
                         {"图片来源：https://unsplash.com"}
                     </Button>
-                    {/*<Alert*/}
-                    {/*    message="免责声明"*/}
-                    {/*    description="本产品的所有数据源自第三方接口，内容不受作者本人控制，不代表作者本人的观点与立场"*/}
-                    {/*    type="info"*/}
-                    {/*/>*/}
+                    <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<CodeOutlined/>}
+                            href={"https://www.jetbrains.com.cn/community/opensource/#support/"} target={"_blank"}
+                            onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
+                            style={{color: this.props.fontColor}}>
+                        {"开发支持：JetBrains 免费许可证计划"}
+                    </Button>
                 </Space>
             </Card>
         );

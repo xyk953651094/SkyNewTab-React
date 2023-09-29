@@ -203,118 +203,120 @@ class CollectionComponent extends React.Component {
 
     render() {
         return (
-            <Col span={24} className={"alignCenter zIndexHigh"} style={{display: this.state.display}}>
-                <Space>
-                    {
-                        this.state.collectionData.map((item: any) => {
-                            return (
-                                <Tooltip title={item.webUrl} key={item.timeStamp} placement={"bottom"}
-                                         color={this.state.backgroundColor}>
-                                    <Button type={"primary"} shape={this.props.preferenceData.buttonShape} className={"componentTheme"}
-                                            key={item.timeStamp}
-                                            onClick={() => {
-                                                window.open(item.webUrl)
-                                            }}
-                                            style={{
-                                                color: this.state.fontColor,
-                                                backgroundColor: this.state.backgroundColor
-                                            }}>
-                                        {item.webName}
-                                    </Button>
-                                </Tooltip>
-                            )
-                        })
-                    }
-                    <Tooltip title={"添加链接"} placement={"bottom"} color={this.state.backgroundColor}>
-                        <Button type={"primary"} shape={this.state.buttonShape} className={"componentTheme"}
-                                style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}}
-                                icon={<PlusOutlined/>} onClick={this.showAddModalBtnOnClick.bind(this)}/>
-                    </Tooltip>
-                    <Tooltip title={"编辑链接"} placement={"bottom"} color={this.state.backgroundColor}>
-                        <Button type={"primary"} shape={this.state.buttonShape} className={"componentTheme"}
-                                style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}}
-                                icon={<EditOutlined/>} onClick={this.showEditModalBtnOnClick.bind(this)}/>
-                    </Tooltip>
-                    <Tooltip title={"全部删除"} placement={"bottom"} color={this.state.backgroundColor}>
-                        <Button type={"primary"} shape={this.state.buttonShape} className={"componentTheme"}
-                                style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}}
-                                icon={<DeleteOutlined/>} onClick={this.removeAllBtnOnClick.bind(this)}/>
-                    </Tooltip>
-                    <Modal title={"添加链接 " + this.state.collectionSize + " / " + this.state.collectionMaxSize}
-                           closeIcon={false} centered
-                           open={this.state.displayAddModal} onOk={this.addModalOkBtnOnClick.bind(this)}
-                           onCancel={this.addModalCancelBtnOnClick.bind(this)}
-                           destroyOnClose={true}
-                           maskStyle={{backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)"}}
-                    >
-                        <Form>
-                            <Form.Item label={"网页名称"} name={"webName"}>
-                                <Input placeholder={"请输入网页名称"} id={"webNameInput"} maxLength={5} allowClear
-                                       showCount/>
-                            </Form.Item>
-                            <Form.Item label={"网页地址"} name={"webNameUrl"}>
-                                <Input placeholder={"请输入网页地址"} id={"webUrlInput"} allowClear/>
-                            </Form.Item>
-                        </Form>
-                    </Modal>
-                    <Modal title={
-                        <Row align={"middle"}>
-                            <Col span={12}>
-                                <Text style={{color: this.state.fontColor}}>
-                                    {"编辑链接 " + this.state.collectionSize + " / " + this.state.collectionMaxSize}
-                                </Text>
-                            </Col>
-                            <Col span={12} style={{textAlign: "right"}}>
-                                <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<DeleteOutlined/>}
-                                        onMouseOver={this.btnMouseOver.bind(this)}
-                                        onMouseOut={this.btnMouseOut.bind(this)}
-                                        onClick={this.removeAllBtnOnClick.bind(this)}
-                                        style={{color: this.state.fontColor}}>
-                                    全部删除
-                                </Button>
-                            </Col>
-                        </Row>
-                    }
-                           closeIcon={false} centered
-                           open={this.state.displayEditModal} onOk={this.editModalOkBtnOnClick.bind(this)}
-                           onCancel={this.editModalCancelBtnOnClick.bind(this)}
-                           maskStyle={{backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)"}}
-                    >
-                        <List
-                            dataSource={this.state.collectionData}
-                            renderItem={(item: any) => (
-                                <List.Item actions={[
-                                    <Button type={"text"} shape={this.state.buttonShape} icon={<DeleteOutlined/>}
+            <Row style={{display: this.state.display}}>
+                <Col span={24} className={"alignCenter zIndexHigh"}>
+                    <Space>
+                        {
+                            this.state.collectionData.map((item: any) => {
+                                return (
+                                    <Tooltip title={item.webUrl} key={item.timeStamp} placement={"bottom"}
+                                             color={this.state.backgroundColor}>
+                                        <Button type={"primary"} shape={this.props.preferenceData.buttonShape} className={"componentTheme"}
+                                                key={item.timeStamp}
+                                                onClick={() => {
+                                                    window.open(item.webUrl)
+                                                }}
+                                                style={{
+                                                    color: this.state.fontColor,
+                                                    backgroundColor: this.state.backgroundColor
+                                                }}>
+                                            {item.webName}
+                                        </Button>
+                                    </Tooltip>
+                                )
+                            })
+                        }
+                        <Tooltip title={"添加链接"} placement={"bottom"} color={this.state.backgroundColor}>
+                            <Button type={"primary"} shape={this.state.buttonShape} className={"componentTheme"}
+                                    style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}}
+                                    icon={<PlusOutlined/>} onClick={this.showAddModalBtnOnClick.bind(this)}/>
+                        </Tooltip>
+                        <Tooltip title={"编辑链接"} placement={"bottom"} color={this.state.backgroundColor}>
+                            <Button type={"primary"} shape={this.state.buttonShape} className={"componentTheme"}
+                                    style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}}
+                                    icon={<EditOutlined/>} onClick={this.showEditModalBtnOnClick.bind(this)}/>
+                        </Tooltip>
+                        <Tooltip title={"全部删除"} placement={"bottom"} color={this.state.backgroundColor}>
+                            <Button type={"primary"} shape={this.state.buttonShape} className={"componentTheme"}
+                                    style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}}
+                                    icon={<DeleteOutlined/>} onClick={this.removeAllBtnOnClick.bind(this)}/>
+                        </Tooltip>
+                        <Modal title={"添加链接 " + this.state.collectionSize + " / " + this.state.collectionMaxSize}
+                               closeIcon={false} centered
+                               open={this.state.displayAddModal} onOk={this.addModalOkBtnOnClick.bind(this)}
+                               onCancel={this.addModalCancelBtnOnClick.bind(this)}
+                               destroyOnClose={true}
+                               maskStyle={{backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)"}}
+                        >
+                            <Form>
+                                <Form.Item label={"网页名称"} name={"webName"}>
+                                    <Input placeholder={"请输入网页名称"} id={"webNameInput"} maxLength={5} allowClear
+                                           showCount/>
+                                </Form.Item>
+                                <Form.Item label={"网页地址"} name={"webNameUrl"}>
+                                    <Input placeholder={"请输入网页地址"} id={"webUrlInput"} allowClear/>
+                                </Form.Item>
+                            </Form>
+                        </Modal>
+                        <Modal title={
+                            <Row align={"middle"}>
+                                <Col span={12}>
+                                    <Text style={{color: this.state.fontColor}}>
+                                        {"编辑链接 " + this.state.collectionSize + " / " + this.state.collectionMaxSize}
+                                    </Text>
+                                </Col>
+                                <Col span={12} style={{textAlign: "right"}}>
+                                    <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<DeleteOutlined/>}
                                             onMouseOver={this.btnMouseOver.bind(this)}
                                             onMouseOut={this.btnMouseOut.bind(this)}
-                                            onClick={this.removeBtnOnClick.bind(this, item)}
+                                            onClick={this.removeAllBtnOnClick.bind(this)}
                                             style={{color: this.state.fontColor}}>
+                                        全部删除
                                     </Button>
-                                ]}>
-                                    <Row style={{width: "100%"}}>
-                                        <Col span={8}>
-                                            <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<PushpinOutlined/>}
-                                                    onMouseOver={this.btnMouseOver.bind(this)}
-                                                    onMouseOut={this.btnMouseOut.bind(this)}
-                                                    style={{color: this.state.fontColor, cursor: "default"}}>
-                                                {item.webName}
-                                            </Button>
-                                        </Col>
-                                        <Col span={16}>
-                                            <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<LinkOutlined/>}
-                                                    onMouseOver={this.btnMouseOver.bind(this)}
-                                                    onMouseOut={this.btnMouseOut.bind(this)}
-                                                    style={{color: this.state.fontColor, cursor: "default"}}>
-                                                {item.webUrl.length < 30 ? item.webUrl : item.webUrl.substring(0, 30) + "..."}
-                                            </Button>
-                                        </Col>
-                                    </Row>
-                                </List.Item>
-                            )}
-                        />
-                    </Modal>
-                </Space>
-            </Col>
+                                </Col>
+                            </Row>
+                        }
+                               closeIcon={false} centered
+                               open={this.state.displayEditModal} onOk={this.editModalOkBtnOnClick.bind(this)}
+                               onCancel={this.editModalCancelBtnOnClick.bind(this)}
+                               maskStyle={{backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)"}}
+                        >
+                            <List
+                                dataSource={this.state.collectionData}
+                                renderItem={(item: any) => (
+                                    <List.Item actions={[
+                                        <Button type={"text"} shape={this.state.buttonShape} icon={<DeleteOutlined/>}
+                                                onMouseOver={this.btnMouseOver.bind(this)}
+                                                onMouseOut={this.btnMouseOut.bind(this)}
+                                                onClick={this.removeBtnOnClick.bind(this, item)}
+                                                style={{color: this.state.fontColor}}>
+                                        </Button>
+                                    ]}>
+                                        <Row style={{width: "100%"}}>
+                                            <Col span={8}>
+                                                <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<PushpinOutlined/>}
+                                                        onMouseOver={this.btnMouseOver.bind(this)}
+                                                        onMouseOut={this.btnMouseOut.bind(this)}
+                                                        style={{color: this.state.fontColor, cursor: "default"}}>
+                                                    {item.webName}
+                                                </Button>
+                                            </Col>
+                                            <Col span={16}>
+                                                <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<LinkOutlined/>}
+                                                        onMouseOver={this.btnMouseOver.bind(this)}
+                                                        onMouseOut={this.btnMouseOut.bind(this)}
+                                                        style={{color: this.state.fontColor, cursor: "default"}}>
+                                                    {item.webUrl.length < 30 ? item.webUrl : item.webUrl.substring(0, 30) + "..."}
+                                                </Button>
+                                            </Col>
+                                        </Row>
+                                    </List.Item>
+                                )}
+                            />
+                        </Modal>
+                    </Space>
+                </Col>
+            </Row>
         );
     }
 }

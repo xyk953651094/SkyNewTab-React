@@ -200,7 +200,7 @@ class PreferenceImageComponent extends React.Component {
                     <Form.Item name={"dynamicEffect"} label={"鼠标互动"}>
                         <Radio.Group buttonStyle={"solid"}
                                      onChange={this.dynamicEffectRadioOnChange.bind(this)}>
-                            <Row>
+                            <Row gutter={[0, 8]}>
                                 <Col span={12}><Radio value={"all"}>视差</Radio></Col>
                                 <Col span={12}><Radio value={"translate"}>平移</Radio></Col>
                                 <Col span={12}><Radio value={"rotate"}>旋转</Radio></Col>
@@ -211,7 +211,7 @@ class PreferenceImageComponent extends React.Component {
                     <Form.Item name={"imageQuality"} label={"图片质量"}>
                         <Radio.Group buttonStyle={"solid"}
                                      onChange={this.imageQualityRadioOnChange.bind(this)}>
-                            <Row>
+                            <Row gutter={[0, 8]}>
                                 <Col span={12}><Radio value={"full"}>最高</Radio></Col>
                                 <Col span={12}><Radio value={"regular"}>标准</Radio></Col>
                                 <Col span={12}><Radio value={"small"}>较低</Radio></Col>
@@ -222,7 +222,7 @@ class PreferenceImageComponent extends React.Component {
                     <Form.Item name={"imageTopics"} label={"图片主题"}>
                         <Checkbox.Group disabled={this.state.disableImageTopic}
                                         onChange={this.imageTopicsCheckboxOnChange.bind(this)}>
-                            <Row>
+                            <Row gutter={[0, 8]}>
                                 <Col span={12}><Checkbox name={"travel"}
                                                          value={"Fzo3zuOHN6w"}>旅游</Checkbox></Col>
                                 <Col span={12}><Checkbox name={"wallpapers"}
@@ -285,14 +285,20 @@ class PreferenceImageComponent extends React.Component {
                             </Button>
                         </Space>
                     </Form.Item>
-                    <Form.Item name={"nightMode"} label={"降低亮度"} valuePropName={"checked"}>
-                        <Switch checkedChildren="已开启" unCheckedChildren="已关闭"
-                                onChange={this.nightModeSwitchOnChange.bind(this)}/>
-                    </Form.Item>
-                    <Form.Item name={"noImageMode"} label={"无图模式"} valuePropName={"checked"}>
-                        <Switch checkedChildren="已开启" unCheckedChildren="已关闭"
-                                onChange={this.noImageModeSwitchOnChange.bind(this)}/>
-                    </Form.Item>
+                    <Row gutter={24}>
+                        <Col span={12}>
+                            <Form.Item name={"nightMode"} label={"降低亮度"} valuePropName={"checked"}>
+                                <Switch checkedChildren="已开启" unCheckedChildren="已关闭"
+                                        onChange={this.nightModeSwitchOnChange.bind(this)}/>
+                            </Form.Item>
+                        </Col>
+                        <Col span={12}>
+                            <Form.Item name={"noImageMode"} label={"无图模式"} valuePropName={"checked"}>
+                                <Switch checkedChildren="已开启" unCheckedChildren="已关闭"
+                                        onChange={this.noImageModeSwitchOnChange.bind(this)}/>
+                            </Form.Item>
+                        </Col>
+                    </Row>
                     <Alert
                         message="提示信息"
                         description={
@@ -300,7 +306,6 @@ class PreferenceImageComponent extends React.Component {
                                 <ol>
                                     <Space direction={"vertical"}>
                                         <li>新的主题刷新后可能不会立即生效</li>
-                                        <li>图片主题全不选的效果与全选一致</li>
                                         <li>使用自定主题时不能使用图片主题</li>
                                         <li>禁用自定主题时才能使用图片主题</li>
                                     </Space>
