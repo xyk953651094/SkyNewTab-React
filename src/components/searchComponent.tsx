@@ -18,6 +18,7 @@ type stateType = {
     displayMask: "none" | "block",
     searchEngineName: string,
     searchEngineUrl: string,
+    borderRadius: string,
 }
 
 interface SearchComponent {
@@ -35,6 +36,7 @@ class SearchComponent extends React.Component {
             displayMask: "none",
             searchEngineName: "Bing",
             searchEngineUrl: "https://www.bing.com/search?q=",
+            borderRadius: "20px"
         };
     }
 
@@ -57,6 +59,7 @@ class SearchComponent extends React.Component {
             this.setState({
                 searchEngineName: searchEngineDetail.searchEngineName,
                 searchEngineUrl: searchEngineDetail.searchEngineUrl,
+                borderRadius: nextProps.preferenceData.buttonShape === "round" ? "20px" : ""
             });
         }
     }
@@ -91,7 +94,7 @@ class SearchComponent extends React.Component {
                     className={"searchInput componentTheme zIndexHigh"}
                     prefix={
                     <Row align={"middle"}>
-                        <Button type={"text"} shape={"round"} size={"small"}
+                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} size={"small"}
                                 id={"searchEngineIconBtn"} style={{cursor: "default"}}>
                             {this.state.searchEngineName}
                         </Button>
@@ -105,6 +108,7 @@ class SearchComponent extends React.Component {
                     onPressEnter={this.onPressEnter.bind(this)}
                     size={"large"}
                     allowClear
+                    style={{borderRadius: this.state.borderRadius}}
                 />
             </Col>
         );

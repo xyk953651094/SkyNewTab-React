@@ -108,7 +108,7 @@ class PreferenceImageComponent extends React.Component {
         }, () => {
             this.props.getPreferenceData(this.state.preferenceData);
             localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
-            message.success("已修改自定主题，一秒后刷新页面");
+            message.success("已启用自定主题，一秒后刷新页面");
             this.refreshWindow();
         })
     }
@@ -306,7 +306,7 @@ class PreferenceImageComponent extends React.Component {
                                 <ol>
                                     <Space direction={"vertical"}>
                                         <li>新的主题刷新后可能不会立即生效</li>
-                                        <li>使用自定主题时不能使用图片主题</li>
+                                        <li>启用自定主题时不能使用图片主题</li>
                                         <li>禁用自定主题时才能使用图片主题</li>
                                     </Space>
                                 </ol>
