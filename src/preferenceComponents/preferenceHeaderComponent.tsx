@@ -1,13 +1,15 @@
 import React from "react";
-import {Row, Col, Space, Typography, Button} from "antd";
+import {Row, Col, Typography, Button} from "antd";
 import {GiftOutlined} from "@ant-design/icons";
 import {getFontColor} from "../typescripts/publicFunctions";
+import {PreferenceDataInterface} from "../typescripts/publicInterface";
 
 const {Text} = Typography;
 
 type propType = {
     hoverColor: string,
     fontColor: string,
+    preferenceData: PreferenceDataInterface,
 }
 
 type stateType = {}
@@ -40,7 +42,7 @@ class PreferenceHeaderComponent extends React.Component {
                     <Text style={{color: this.props.fontColor}}>{"菜单栏"}</Text>
                 </Col>
                 <Col span={12} style={{textAlign: "right"}}>
-                    <Button type={"text"} shape={"round"} icon={<GiftOutlined/>}
+                    <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<GiftOutlined/>}
                             href={"https://afdian.net/a/xyk953651094"} target={"_blank"}
                             onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
                             style={{color: this.props.fontColor}}>

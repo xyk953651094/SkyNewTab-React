@@ -1,12 +1,14 @@
 import React from "react";
-import {Avatar, Button, Card, Col, Row} from "antd";
-import {LinkOutlined} from "@ant-design/icons";
+import {Button, Card, Col, Row} from "antd";
+import {LinkOutlined, FileImageOutlined, CodeOutlined} from "@ant-design/icons";
 import {getFontColor} from "../typescripts/publicFunctions";
+import {PreferenceDataInterface} from "../typescripts/publicInterface";
 
 type propType = {
     hoverColor: string,
     backgroundColor: string,
     fontColor: string,
+    preferenceData: PreferenceDataInterface,
 }
 
 type stateType = {}
@@ -46,43 +48,43 @@ class PreferenceLinkComponent extends React.Component {
             >
                 <Row gutter={[0, 8]}>
                     <Col span="12">
-                        <Button type={"text"} shape={"round"} href={"https://unsplash.com/"}
-                                target={"_blank"}
+                        <Button type={"text"} shape={this.props.preferenceData.buttonShape}
+                                icon={<FileImageOutlined />}
+                                href={"https://unsplash.com/"} target={"_blank"}
                                 onMouseOver={this.btnMouseOver.bind(this)}
                                 onMouseOut={this.btnMouseOut.bind(this)}
                                 style={{color: this.props.fontColor}}>
-                            <Avatar size={16} shape={"square"} src={"https://unsplash.com/favicon.ico"}/>
-                            &nbsp;&nbsp;Unsplash
+                            Unsplash
                         </Button>
                     </Col>
                     <Col span="12">
-                        <Button type={"text"} shape={"round"} href={"https://www.pexels.com/"}
-                                target={"_blank"}
+                        <Button type={"text"} shape={this.props.preferenceData.buttonShape}
+                                icon={<FileImageOutlined />}
+                                href={"https://www.pexels.com/"} target={"_blank"}
                                 onMouseOver={this.btnMouseOver.bind(this)}
                                 onMouseOut={this.btnMouseOut.bind(this)}
                                 style={{color: this.props.fontColor}}>
-                            <Avatar size={16} shape={"square"} src={"https://www.pexels.com/favicon.ico"}/>
-                            &nbsp;&nbsp;Pexels
+                            Pexels
                         </Button>
                     </Col>
                     <Col span="12">
-                        <Button type={"text"} shape={"round"} href={"https://pixabay.com/"}
-                                target={"_blank"}
+                        <Button type={"text"} shape={this.props.preferenceData.buttonShape}
+                                icon={<FileImageOutlined />}
+                                href={"https://pixabay.com/"} target={"_blank"}
                                 onMouseOver={this.btnMouseOver.bind(this)}
                                 onMouseOut={this.btnMouseOut.bind(this)}
                                 style={{color: this.props.fontColor}}>
-                            <Avatar size={16} shape={"square"} src={"https://pixabay.com/favicon.ico"}/>
-                            &nbsp;&nbsp;Pixabay
+                            Pixabay
                         </Button>
                     </Col>
                     <Col span="12">
-                        <Button type={"text"} shape={"round"} href={"https://www.jetbrains.com/"}
-                                target={"_blank"}
+                        <Button type={"text"} shape={this.props.preferenceData.buttonShape}
+                                icon={<CodeOutlined />}
+                                href={"https://www.jetbrains.com/"} target={"_blank"}
                                 onMouseOver={this.btnMouseOver.bind(this)}
                                 onMouseOut={this.btnMouseOut.bind(this)}
                                 style={{color: this.props.fontColor}}>
-                            <Avatar size={16} shape={"square"} src={"https://www.jetbrains.com/favicon.ico"}/>
-                            &nbsp;&nbsp;JetBrains
+                            JetBrains
                         </Button>
                     </Col>
                 </Row>

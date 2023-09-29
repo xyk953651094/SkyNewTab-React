@@ -74,14 +74,6 @@ class GreetComponent extends React.Component {
         e.currentTarget.style.color = this.state.fontColor;
     }
 
-    constellationBtnOnClick() {
-        window.open(this.state.searchEngineUrl + "星座运势", "_blank");
-    }
-
-    historyBtnOnClick() {
-        window.open(this.state.searchEngineUrl + "历史上的今天", "_blank");
-    }
-
     infoBtnOnClick() {
         window.open(this.state.searchEngineUrl + "万年历", "_blank");
     }
@@ -177,33 +169,17 @@ class GreetComponent extends React.Component {
     render() {
         const popoverTitle = (
             <Row align={"middle"}>
-                <Col span={6}>
+                <Col span={10}>
                     <Text style={{color: this.state.fontColor}}>{"万年历"}</Text>
                 </Col>
-                <Col span={18} style={{textAlign: "right"}}>
-                    <Space>
-                        <Button type={"text"} shape={"round"} icon={<StarOutlined/>}
-                                onMouseOver={this.btnMouseOver.bind(this)}
-                                onMouseOut={this.btnMouseOut.bind(this)}
-                                onClick={this.constellationBtnOnClick.bind(this)}
-                                style={{color: this.state.fontColor}}>
-                            {"星座运势"}
-                        </Button>
-                        <Button type={"text"} shape={"round"} icon={<HistoryOutlined/>}
-                                onMouseOver={this.btnMouseOver.bind(this)}
-                                onMouseOut={this.btnMouseOut.bind(this)}
-                                onClick={this.historyBtnOnClick.bind(this)}
-                                style={{color: this.state.fontColor}}>
-                            {"历史上的今天"}
-                        </Button>
-                        <Button type={"text"} shape={"round"} icon={<InfoCircleOutlined/>}
+                <Col span={14} style={{textAlign: "right"}}>
+                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<InfoCircleOutlined/>}
                                 onMouseOver={this.btnMouseOver.bind(this)}
                                 onMouseOut={this.btnMouseOut.bind(this)}
                                 onClick={this.infoBtnOnClick.bind(this)}
                                 style={{color: this.state.fontColor}}>
                             {"更多信息"}
                         </Button>
-                    </Space>
                 </Col>
             </Row>
         );
@@ -212,17 +188,17 @@ class GreetComponent extends React.Component {
             <List>
                 <List.Item>
                     <Space direction={"vertical"}>
-                        <Button type={"text"} shape={"round"} icon={<CalendarOutlined/>}
+                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<CalendarOutlined/>}
                                 style={{color: this.state.fontColor, cursor: "default"}}
                                 onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
                             {this.state.calendar}
                         </Button>
-                        <Button type={"text"} shape={"round"} icon={<CheckCircleOutlined/>}
+                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<CheckCircleOutlined/>}
                                 style={{color: this.state.fontColor, cursor: "default"}}
                                 onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
                             {"宜：" + (this.state.suit.length < btnMaxSize) ? this.state.suit : this.state.suit.substring(0, btnMaxSize) + "..."}
                         </Button>
-                        <Button type={"text"} shape={"round"} icon={<CloseCircleOutlined/>}
+                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<CloseCircleOutlined/>}
                                 style={{color: this.state.fontColor, cursor: "default"}}
                                 onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
                             {"忌：" + (this.state.avoid.length < btnMaxSize) ? this.state.avoid : this.state.avoid.substring(0, btnMaxSize) + "..."}
@@ -238,7 +214,7 @@ class GreetComponent extends React.Component {
                 content={popoverContent} placement={"bottomLeft"} color={this.state.backgroundColor}
                 overlayStyle={{minWidth: "550px"}}
             >
-                <Button shape={"round"} icon={<i className={this.state.greetIcon}></i>} size={"large"}
+                <Button shape={this.props.preferenceData.buttonShape} icon={<i className={this.state.greetIcon}></i>} size={"large"}
                         id={"greetBtn"}
                         className={"componentTheme zIndexHigh"}
                         style={{

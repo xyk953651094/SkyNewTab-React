@@ -17,6 +17,7 @@ type stateType = {
     hoverColor: string,
     backgroundColor: string,
     fontColor: string,
+    buttonShape: "circle" | "default" | "round" | undefined,
     displayModal: boolean,
     listItems: any,
     todoSize: number,
@@ -38,6 +39,7 @@ class TodoComponent extends React.Component {
             hoverColor: "",
             backgroundColor: "",
             fontColor: "",
+            buttonShape: "round",
             displayModal: false,
             listItems: [],
             todoSize: 0,
@@ -199,7 +201,8 @@ class TodoComponent extends React.Component {
 
         if (nextProps.preferenceData !== prevProps.preferenceData) {
             this.setState({
-                display: nextProps.preferenceData.simpleMode ? "none" : "block"
+                display: nextProps.preferenceData.simpleMode ? "none" : "block",
+                buttonShape: nextProps.preferenceData.buttonShape === "round" ? "circle" : "default"
             })
         }
     }
@@ -213,12 +216,12 @@ class TodoComponent extends React.Component {
                 </Col>
                 <Col span={14} style={{textAlign: "right"}}>
                     <Space>
-                        <Button type={"text"} shape={"round"} icon={<PlusOutlined/>}
+                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<PlusOutlined/>}
                                 onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
                                 style={{color: this.state.fontColor}} onClick={this.showAddModalBtnOnClick.bind(this)}>
                             {"添加待办事项"}
                         </Button>
-                        <Button type={"text"} shape={"round"} icon={<CheckOutlined/>}
+                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<CheckOutlined/>}
                                 onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
                                 style={{color: this.state.fontColor}} onClick={this.finishAllBtnOnClick.bind(this)}>
                             {"全部完成"}
@@ -234,7 +237,7 @@ class TodoComponent extends React.Component {
                 renderItem={(item: any) => (
                     <List.Item
                         actions={[
-                            <Button type={"text"} shape={"circle"} icon={<CheckOutlined/>}
+                            <Button type={"text"} shape={this.state.buttonShape} icon={<CheckOutlined/>}
                                     onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
                                     onClick={this.finishBtnOnClick.bind(this, item)}
                                     style={{color: this.state.fontColor}}/>
@@ -242,7 +245,7 @@ class TodoComponent extends React.Component {
                     >
                         <Row style={{width: "100%"}}>
                             <Col span={12}>
-                                <Button type={"text"} shape={"round"} icon={<CheckSquareOutlined/>}
+                                <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<CheckSquareOutlined/>}
                                         onMouseOver={this.btnMouseOver.bind(this)}
                                         onMouseOut={this.btnMouseOut.bind(this)}
                                         style={{color: this.state.fontColor, cursor: "default"}}>
@@ -250,7 +253,7 @@ class TodoComponent extends React.Component {
                                 </Button>
                             </Col>
                             <Col span={12}>
-                                <Button type={"text"} shape={"round"} icon={<TagOutlined/>}
+                                <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<TagOutlined/>}
                                         onMouseOver={this.btnMouseOver.bind(this)}
                                         onMouseOut={this.btnMouseOut.bind(this)}
                                         style={{color: this.state.fontColor, cursor: "default"}}>
@@ -268,7 +271,7 @@ class TodoComponent extends React.Component {
                 <Popover title={popoverTitle} content={popoverContent} placement="bottomRight"
                          color={this.state.backgroundColor}
                          overlayStyle={{width: "550px"}}>
-                    <Button shape={"round"} icon={<CheckSquareOutlined/>} size={"large"}
+                    <Button shape={this.props.preferenceData.buttonShape} icon={<CheckSquareOutlined/>} size={"large"}
                             id={"todoBtn"}
                             className={"componentTheme zIndexHigh"}
                             style={{cursor: "default", display: this.state.display}}

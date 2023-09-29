@@ -4,9 +4,11 @@ export interface PreferenceDataInterface {
     imageQuality: "full" | "regular" | "small" | "small_s3",
     imageTopics: string[],
     customTopic: string,
+    nightMode: boolean,
     simpleMode: boolean,
     noImageMode: boolean,
     displayAlert: boolean,
+    buttonShape: "circle" | "default" | "round" | undefined
 }
 
 export interface ThemeColorInterface {

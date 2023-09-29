@@ -19,6 +19,7 @@ type stateType = {
     imageLink: string,
     display: "none" | "block",
     displayCanvas: "none" | "block",
+    displayMask: "none" | "block",
 }
 
 interface WallpaperComponent {
@@ -35,6 +36,7 @@ class WallpaperComponent extends React.Component {
             imageLink: "",
             display: "none",
             displayCanvas: "none",
+            displayMask: "none",
         };
     }
 
@@ -181,10 +183,9 @@ class WallpaperComponent extends React.Component {
                         backgroundImage.style.width = "102%";
                         this.setState({
                             display: "block",
+                            displayMask: this.state.preferenceData.nightMode ? "block" : "none",
                         }, () => {
-                            // $("#backgroundCanvas").remove();
-                            $("#backgroundCanvas").removeClass("wallpaperFadeIn");
-                            $("#backgroundCanvas").addClass("wallpaperFadeOut");
+                            $("#backgroundCanvas").removeClass("wallpaperFadeIn").addClass("wallpaperFadeOut");
                             message.destroy();
                             message.success("图片加载成功");
 
@@ -221,6 +222,11 @@ class WallpaperComponent extends React.Component {
                 />
                 <canvas id="backgroundCanvas" style={{display: this.state.displayCanvas}}
                         className={"backgroundCanvas"}/>
+                <div
+                    id={"backgroundMask"}
+                    className={"backgroundMask zIndexMiddle"}
+                    style={{display: this.state.displayMask}}
+                />
             </>
         );
     }

@@ -1,6 +1,6 @@
 import React from "react";
-import {Alert, Button, Card, Col, Form, message, Radio, RadioChangeEvent, Row, Switch, Typography} from "antd";
-import {DeleteOutlined, SettingOutlined} from "@ant-design/icons";
+import {Alert, Button, Card, Col, Form, message, Radio, RadioChangeEvent, Row, Space, Switch, Typography} from "antd";
+import {RedoOutlined, SettingOutlined} from "@ant-design/icons";
 import {getFontColor} from "../typescripts/publicFunctions";
 import {PreferenceDataInterface} from "../typescripts/publicInterface";
 import {defaultPreferenceData} from "../typescripts/publicConstants";
@@ -53,6 +53,18 @@ class PreferenceFunctionComponent extends React.Component {
             message.success("已更换搜索引擎");
         })
     }
+    
+    // 按钮形状
+    buttonShapeRadioOnChange(event: RadioChangeEvent) {
+        this.setState({
+            preferenceData: this.setPreferenceData({buttonShape: event.target.value}),
+        }, () => {
+            this.props.getPreferenceData(this.state.preferenceData);
+            localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
+            message.success("已更换按钮形状，一秒后刷新页面");
+            this.refreshWindow();
+        })
+    }
 
     // 简洁模式
     simpleModeSwitchOnChange(checked: boolean) {
@@ -65,23 +77,6 @@ class PreferenceFunctionComponent extends React.Component {
                 message.success("已开启简洁模式，一秒后刷新页面");
             } else {
                 message.success("已关闭简洁模式，一秒后刷新页面");
-            }
-            this.refreshWindow();
-        })
-    }
-
-    // 无图模式
-    noImageModeSwitchOnChange(checked: boolean) {
-        this.setState({
-            preferenceData: this.setPreferenceData({noImageMode: checked}),
-        }, () => {
-            this.props.getPreferenceData(this.state.preferenceData);
-            localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
-            if (checked) {
-                message.success("已开启无图模式，一秒后刷新页面");
-            } else {
-                message.success("已关闭无图模式，一秒后刷新页面");
-
             }
             this.refreshWindow();
         })
@@ -147,7 +142,7 @@ class PreferenceFunctionComponent extends React.Component {
                     <Form.Item name={"searchEngine"} label={"搜索引擎"}>
                         <Radio.Group buttonStyle={"solid"}
                                      onChange={this.searchEngineRadioOnChange.bind(this)}>
-                            <Row>
+                            <Row gutter={[0, 8]}>
                                 <Col span={12}><Radio value={"baidu"}>Baidu</Radio></Col>
                                 <Col span={12}><Radio value={"bing"}>Bing</Radio></Col>
                                 <Col span={12}><Radio value={"google"}>Google</Radio></Col>
@@ -155,31 +150,51 @@ class PreferenceFunctionComponent extends React.Component {
                             </Row>
                         </Radio.Group>
                     </Form.Item>
-                    <Form.Item name={"simpleMode"} label={"简洁模式"} valuePropName={"checked"}>
-                        <Switch checkedChildren="已开启" unCheckedChildren="已关闭" disabled={this.state.disableSwitch}
-                                onChange={this.simpleModeSwitchOnChange.bind(this)}/>
+                    <Form.Item name={"buttonShape"} label={"按钮形状"}>
+                        <Radio.Group buttonStyle={"solid"} style={{width: "100%"}}
+                                     onChange={this.buttonShapeRadioOnChange.bind(this)}>
+                            <Row>
+                                <Col span={12}><Radio value={"round"}>圆形</Radio></Col>
+                                <Col span={12}><Radio value={"default"}>方形</Radio></Col>
+                            </Row>
+                        </Radio.Group>
                     </Form.Item>
-                    <Form.Item name={"noImageMode"} label={"无图模式"} valuePropName={"checked"}>
-                        <Switch checkedChildren="已开启" unCheckedChildren="已关闭"
-                                onChange={this.noImageModeSwitchOnChange.bind(this)}/>
-                    </Form.Item>
-                    <Form.Item name={"displayAlert"} label={"提示信息"} valuePropName={"checked"}>
-                        <Switch checkedChildren="已显示" unCheckedChildren="已隐藏"
-                                onChange={this.displayAlertSwitchOnChange.bind(this)}/>
-                    </Form.Item>
+                    <Row gutter={24}>
+                        <Col span={12}>
+                            <Form.Item name={"simpleMode"} label={"简洁模式"} valuePropName={"checked"}>
+                                <Switch checkedChildren="已开启" unCheckedChildren="已关闭" disabled={this.state.disableSwitch}
+                                        onChange={this.simpleModeSwitchOnChange.bind(this)}/>
+                            </Form.Item>
+                        </Col>
+                        <Col span={12}>
+                            <Form.Item name={"displayAlert"} label={"提示信息"} valuePropName={"checked"}>
+                                <Switch checkedChildren="已显示" unCheckedChildren="已隐藏"
+                                        onChange={this.displayAlertSwitchOnChange.bind(this)}/>
+                            </Form.Item>
+                        </Col>
+                    </Row>
                     <Form.Item name={"clearStorageButton"} label={"危险设置"}>
-                        <Button type={"text"} shape={"round"} icon={<DeleteOutlined/>}
+                        <Button type={"text"} shape={this.state.preferenceData.buttonShape} icon={<RedoOutlined />}
                                 onMouseOver={this.btnMouseOver.bind(this)}
                                 onMouseOut={this.btnMouseOut.bind(this)}
                                 onClick={this.clearStorageBtnOnClick.bind(this)}
                                 style={{color: this.props.fontColor}}>
-                            清空并重置所有内容
+                            重置插件
                         </Button>
                     </Form.Item>
                     <Alert
-                        message="警告信息"
-                        description="清空并重置所有内容将删除所有缓存并恢复初始状态，插件出现问题时可尝试此按钮"
-                        type="warning"
+                        message="提示信息"
+                        description={
+                            <Paragraph>
+                                <ol>
+                                    <Space direction={"vertical"}>
+                                        <li>重置插件将清空缓存恢复初始设置</li>
+                                        <li>插件设置出现异常可尝试重置插件</li>
+                                    </Space>
+                                </ol>
+                            </Paragraph>
+                        }
+                        type="info"
                         style={{display: this.state.preferenceData.displayAlert ? "block" : "none"}}
                     />
                 </Form>

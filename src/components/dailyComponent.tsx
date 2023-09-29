@@ -18,6 +18,7 @@ type stateType = {
     hoverColor: string,
     backgroundColor: string,
     fontColor: string,
+    buttonShape: "circle" | "default" | "round" | undefined,
     displayModal: boolean,
     listItems: any,
     dailySize: number,
@@ -38,6 +39,7 @@ class DailyComponent extends React.Component {
             hoverColor: "",
             backgroundColor: "",
             fontColor: "",
+            buttonShape: "round",
             displayModal: false,
             listItems: [],
             dailySize: 0,
@@ -194,7 +196,8 @@ class DailyComponent extends React.Component {
 
         if (nextProps.preferenceData !== prevProps.preferenceData) {
             this.setState({
-                display: nextProps.preferenceData.simpleMode ? "none" : "block"
+                display: nextProps.preferenceData.simpleMode ? "none" : "block",
+                buttonShape: nextProps.preferenceData.buttonShape === "round" ? "circle" : "default"
             })
         }
     }
@@ -209,12 +212,12 @@ class DailyComponent extends React.Component {
                 </Col>
                 <Col span={14} style={{textAlign: "right"}}>
                     <Space>
-                        <Button type={"text"} shape={"round"} icon={<PlusOutlined/>}
+                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<PlusOutlined/>}
                                 onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
                                 style={{color: this.state.fontColor}} onClick={this.showAddModalBtnOnClick.bind(this)}>
                             {"添加倒数日"}
                         </Button>
-                        <Button type={"text"} shape={"round"} icon={<DeleteOutlined/>}
+                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<DeleteOutlined/>}
                                 onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
                                 style={{color: this.state.fontColor}} onClick={this.removeAllBtnOnClick.bind(this)}>
                             {"全部删除"}
@@ -230,7 +233,7 @@ class DailyComponent extends React.Component {
                 renderItem={(item: any) => (
                     <List.Item
                         actions={[
-                            <Button type={"text"} shape={"circle"} icon={<DeleteOutlined/>}
+                            <Button type={"text"} shape={this.state.buttonShape} icon={<DeleteOutlined/>}
                                     onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
                                     onClick={this.removeBtnOnClick.bind(this, item)}
                                     style={{color: this.state.fontColor}}/>
@@ -238,7 +241,7 @@ class DailyComponent extends React.Component {
                     >
                         <Row style={{width: "100%"}}>
                             <Col span={10}>
-                                <Button type={"text"} shape={"round"} icon={<CalendarOutlined/>}
+                                <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<CalendarOutlined/>}
                                         onMouseOver={this.btnMouseOver.bind(this)}
                                         onMouseOut={this.btnMouseOut.bind(this)}
                                         style={{color: this.state.fontColor, cursor: "default"}}>
@@ -246,7 +249,7 @@ class DailyComponent extends React.Component {
                                 </Button>
                             </Col>
                             <Col span={14}>
-                                <Button type={"text"} shape={"round"} icon={<ClockCircleOutlined/>}
+                                <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<ClockCircleOutlined/>}
                                         onMouseOver={this.btnMouseOver.bind(this)}
                                         onMouseOut={this.btnMouseOut.bind(this)}
                                         style={{color: this.state.fontColor, cursor: "default"}}>
@@ -264,7 +267,7 @@ class DailyComponent extends React.Component {
                 <Popover title={popoverTitle} content={popoverContent} placement={"bottomRight"}
                          color={this.state.backgroundColor}
                          overlayStyle={{width: "550px"}}>
-                    <Button shape={"round"} icon={<CalendarOutlined/>} size={"large"}
+                    <Button shape={this.props.preferenceData.buttonShape} icon={<CalendarOutlined/>} size={"large"}
                             id={"dailyBtn"}
                             className={"componentTheme zIndexHigh"}
                             style={{cursor: "default", display: this.state.display}}

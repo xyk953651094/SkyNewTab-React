@@ -11,7 +11,7 @@ import {
     Radio,
     RadioChangeEvent,
     Row,
-    Space,
+    Space, Switch,
     Typography
 } from "antd";
 import {CheckOutlined, StopOutlined, SettingOutlined} from "@ant-design/icons";
@@ -32,6 +32,7 @@ type propType = {
 
 type stateType = {
     preferenceData: PreferenceDataInterface,
+    buttonShape: "circle" | "default" | "round" | undefined,
     disableImageTopic: boolean
 }
 
@@ -45,6 +46,7 @@ class PreferenceImageComponent extends React.Component {
         super(props);
         this.state = {
             preferenceData: defaultPreferenceData,
+            buttonShape: "round",
             disableImageTopic: false
         };
     }
@@ -106,7 +108,7 @@ class PreferenceImageComponent extends React.Component {
         }, () => {
             this.props.getPreferenceData(this.state.preferenceData);
             localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
-            message.success("已修改自定主题，一秒后刷新页面");
+            message.success("已启用自定主题，一秒后刷新页面");
             this.refreshWindow();
         })
     }
@@ -119,6 +121,39 @@ class PreferenceImageComponent extends React.Component {
             this.props.getPreferenceData(this.state.preferenceData);
             localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
             message.success("已禁用自定主题，一秒后刷新页面");
+            this.refreshWindow();
+        })
+    }
+
+    nightModeSwitchOnChange(checked: boolean) {
+        this.setState({
+            preferenceData: this.setPreferenceData({nightMode: checked}),
+        }, () => {
+            this.props.getPreferenceData(this.state.preferenceData);
+            localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
+            if (checked) {
+                message.success("已降低背景亮度，一秒后刷新页面");
+            } else {
+                message.success("已恢复背景亮度，一秒后刷新页面");
+
+            }
+            this.refreshWindow();
+        })
+    }
+
+    // 无图模式
+    noImageModeSwitchOnChange(checked: boolean) {
+        this.setState({
+            preferenceData: this.setPreferenceData({noImageMode: checked}),
+        }, () => {
+            this.props.getPreferenceData(this.state.preferenceData);
+            localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
+            if (checked) {
+                message.success("已开启无图模式，一秒后刷新页面");
+            } else {
+                message.success("已关闭无图模式，一秒后刷新页面");
+
+            }
             this.refreshWindow();
         })
     }
@@ -143,6 +178,7 @@ class PreferenceImageComponent extends React.Component {
             preferenceData: tempPreferenceData === null ? defaultPreferenceData : JSON.parse(tempPreferenceData),
         }, () => {
             this.setState({
+                buttonShape: this.state.preferenceData.buttonShape === "round" ? "circle" : "default",
                 disableImageTopic: !isEmptyString(this.state.preferenceData.customTopic)
             })
         })
@@ -150,7 +186,7 @@ class PreferenceImageComponent extends React.Component {
 
     render() {
         return (
-            <Card title={"图片设置"} size={"small"}
+            <Card title={"背景设置"} size={"small"}
                   extra={<SettingOutlined style={{color: this.props.fontColor}}/>}
                   style={{border: "1px solid " + this.props.fontColor}}
                   headStyle={{
@@ -164,7 +200,7 @@ class PreferenceImageComponent extends React.Component {
                     <Form.Item name={"dynamicEffect"} label={"鼠标互动"}>
                         <Radio.Group buttonStyle={"solid"}
                                      onChange={this.dynamicEffectRadioOnChange.bind(this)}>
-                            <Row>
+                            <Row gutter={[0, 8]}>
                                 <Col span={12}><Radio value={"all"}>视差</Radio></Col>
                                 <Col span={12}><Radio value={"translate"}>平移</Radio></Col>
                                 <Col span={12}><Radio value={"rotate"}>旋转</Radio></Col>
@@ -175,7 +211,7 @@ class PreferenceImageComponent extends React.Component {
                     <Form.Item name={"imageQuality"} label={"图片质量"}>
                         <Radio.Group buttonStyle={"solid"}
                                      onChange={this.imageQualityRadioOnChange.bind(this)}>
-                            <Row>
+                            <Row gutter={[0, 8]}>
                                 <Col span={12}><Radio value={"full"}>最高</Radio></Col>
                                 <Col span={12}><Radio value={"regular"}>标准</Radio></Col>
                                 <Col span={12}><Radio value={"small"}>较低</Radio></Col>
@@ -186,7 +222,7 @@ class PreferenceImageComponent extends React.Component {
                     <Form.Item name={"imageTopics"} label={"图片主题"}>
                         <Checkbox.Group disabled={this.state.disableImageTopic}
                                         onChange={this.imageTopicsCheckboxOnChange.bind(this)}>
-                            <Row>
+                            <Row gutter={[0, 8]}>
                                 <Col span={12}><Checkbox name={"travel"}
                                                          value={"Fzo3zuOHN6w"}>旅游</Checkbox></Col>
                                 <Col span={12}><Checkbox name={"wallpapers"}
@@ -235,13 +271,13 @@ class PreferenceImageComponent extends React.Component {
                             <Form.Item name={"customTopic"} noStyle>
                                 <Input id={"customTopicInput"} placeholder="英文搜索最准确" allowClear/>
                             </Form.Item>
-                            <Button type={"text"} shape={"circle"} icon={<CheckOutlined/>}
+                            <Button type={"text"} shape={this.state.buttonShape} icon={<CheckOutlined/>}
                                     onMouseOver={this.btnMouseOver.bind(this)}
                                     onMouseOut={this.btnMouseOut.bind(this)}
                                     onClick={this.submitCustomTopicBtnOnClick.bind(this)}
                                     style={{color: this.props.fontColor}}>
                             </Button>
-                            <Button type={"text"} shape={"circle"} icon={<StopOutlined />}
+                            <Button type={"text"} shape={this.state.buttonShape} icon={<StopOutlined />}
                                     onMouseOver={this.btnMouseOver.bind(this)}
                                     onMouseOut={this.btnMouseOut.bind(this)}
                                     onClick={this.clearCustomTopicBtnOnClick.bind(this)}
@@ -249,16 +285,29 @@ class PreferenceImageComponent extends React.Component {
                             </Button>
                         </Space>
                     </Form.Item>
+                    <Row gutter={24}>
+                        <Col span={12}>
+                            <Form.Item name={"nightMode"} label={"降低亮度"} valuePropName={"checked"}>
+                                <Switch checkedChildren="已开启" unCheckedChildren="已关闭"
+                                        onChange={this.nightModeSwitchOnChange.bind(this)}/>
+                            </Form.Item>
+                        </Col>
+                        <Col span={12}>
+                            <Form.Item name={"noImageMode"} label={"无图模式"} valuePropName={"checked"}>
+                                <Switch checkedChildren="已开启" unCheckedChildren="已关闭"
+                                        onChange={this.noImageModeSwitchOnChange.bind(this)}/>
+                            </Form.Item>
+                        </Col>
+                    </Row>
                     <Alert
                         message="提示信息"
                         description={
                             <Paragraph>
                                 <ol>
                                     <Space direction={"vertical"}>
-                                        <li>新的主题刷新的可能不会立即生效</li>
-                                        <li>图片主题全不选与全选的效果一致</li>
-                                        <li>自定主题不为空时将禁用图片主题</li>
-                                        <li>只有禁用自定主题图片主题才生效</li>
+                                        <li>新的主题刷新后可能不会立即生效</li>
+                                        <li>启用自定主题时不能使用图片主题</li>
+                                        <li>禁用自定主题时才能使用图片主题</li>
                                     </Space>
                                 </ol>
                             </Paragraph>
