@@ -41,16 +41,18 @@ export let themeArray = [
 ];
 
 export let defaultPreferenceData: PreferenceDataInterface = {
-    searchEngine: "bing",
     dynamicEffect: "all",
     imageQuality: "regular",
     imageTopics: ["bo8jQKTaE0Y"],
     customTopic: "",
     nightMode: false,
-    simpleMode: false,
+    autoDarkMode: false,
     noImageMode: false,
+
+    searchEngine: "bing",
+    buttonShape: "round",
+    simpleMode: false,
     displayAlert: true,
-    buttonShape: "round"
 }
 
 // 常用变量

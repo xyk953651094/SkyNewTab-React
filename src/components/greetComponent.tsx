@@ -4,9 +4,7 @@ import {
     CalendarOutlined,
     CheckCircleOutlined,
     CloseCircleOutlined,
-    HistoryOutlined,
-    InfoCircleOutlined,
-    StarOutlined
+    InfoCircleOutlined
 } from "@ant-design/icons";
 import {
     changeThemeColor,

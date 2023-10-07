@@ -12,6 +12,7 @@ import PreferenceImageComponent from "../preferenceComponents/preferenceImageCom
 import PreferenceFunctionComponent from "../preferenceComponents/preferenceFunctionComponent";
 import PreferenceHeaderComponent from "../preferenceComponents/preferenceHeaderComponent";
 import PreferenceProductComponent from "../preferenceComponents/preferenceProductComponent";
+import PreferenceToTopComponent from "../preferenceComponents/preferenceToTopComponent";
 
 type propType = {
     themeColor: ThemeColorInterface,
@@ -137,7 +138,7 @@ class PreferenceComponent extends React.Component {
                         textAlign: "center"
                     }}
                 >
-                    <Space direction={"vertical"} size={"large"}>
+                    <Space direction={"vertical"} size={"large"} id={"drawerContent"}>
                         <PreferenceImageComponent
                             hoverColor={this.state.hoverColor}
                             backgroundColor={this.state.backgroundColor}
@@ -168,6 +169,10 @@ class PreferenceComponent extends React.Component {
                         {/*    backgroundColor={this.state.backgroundColor}*/}
                         {/*    fontColor={this.state.fontColor}*/}
                         {/*    preferenceData={this.props.preferenceData}/>*/}
+                        <PreferenceToTopComponent
+                            hoverColor={this.state.hoverColor}
+                            fontColor={this.state.fontColor}
+                            preferenceData={this.props.preferenceData}/>
                     </Space>
                 </Drawer>
             </>

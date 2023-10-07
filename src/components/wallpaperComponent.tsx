@@ -2,7 +2,7 @@ import React from "react";
 import "../stylesheets/wallpaperComponent.scss"
 import "../stylesheets/publicStyles.scss"
 import {Image, message} from "antd";
-import {httpRequest, imageDynamicEffect, isEmptyString} from "../typescripts/publicFunctions";
+import {getTimeDetails, httpRequest, imageDynamicEffect, isEmptyString} from "../typescripts/publicFunctions";
 import {clientId, defaultPreferenceData, device} from "../typescripts/publicConstants";
 import {PreferenceDataInterface} from "../typescripts/publicInterface";
 import {decode} from "blurhash";
@@ -181,9 +181,27 @@ class WallpaperComponent extends React.Component {
                 if (backgroundImage instanceof HTMLElement) {
                     backgroundImage.onload = () => {
                         backgroundImage.style.width = "102%";
+
+                        // 降低亮度与夜间模式
+                        let nightMode = this.state.preferenceData.nightMode;
+                        let autoDarkMode = this.state.preferenceData.autoDarkMode;
+                        let tempDisplayMask = "none";
+                        let currentTime = parseInt(getTimeDetails(new Date()).hour);
+                        if(currentTime > 18 || currentTime < 6) {
+                            if( !nightMode && !autoDarkMode ) {
+                                tempDisplayMask = "none";
+                            }
+                            else {
+                                tempDisplayMask = "block";
+                            }
+                        }
+                        else {
+                            tempDisplayMask = this.state.preferenceData.nightMode ? "block" : "none";
+                        }
+
                         this.setState({
                             display: "block",
-                            displayMask: this.state.preferenceData.nightMode ? "block" : "none",
+                            displayMask: tempDisplayMask,
                         }, () => {
                             $("#backgroundCanvas").removeClass("wallpaperFadeIn").addClass("wallpaperFadeOut");
                             message.destroy();

@@ -1,14 +1,16 @@
 export interface PreferenceDataInterface {
-    searchEngine: "bing" | "google" | "baidu",
     dynamicEffect: "all" | "rotate" | "translate" | "close",
     imageQuality: "full" | "regular" | "small" | "small_s3",
     imageTopics: string[],
     customTopic: string,
     nightMode: boolean,
-    simpleMode: boolean,
+    autoDarkMode: boolean,
     noImageMode: boolean,
+
+    searchEngine: "bing" | "google" | "baidu",
+    buttonShape: "circle" | "default" | "round" | undefined,
+    simpleMode: boolean,
     displayAlert: boolean,
-    buttonShape: "circle" | "default" | "round" | undefined
 }
 
 export interface ThemeColorInterface {
