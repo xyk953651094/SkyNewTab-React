@@ -1,4 +1,4 @@
-import {themeArray} from "./publicConstants"
+import {darkThemeArray, lightThemeArray} from "./publicConstants"
 import "jquery-color"
 import {ThemeColorInterface} from "./publicInterface";
 
@@ -149,15 +149,20 @@ export function getWeatherIcon(weatherInfo: string) {
 
 // 请求unsplash图片前随机显示多彩颜色主题
 export function setColorTheme() {
-    let theme = themeArray;
-    let randomNum = Math.floor(Math.random() * theme.length);
+    let currentHour = parseInt(getTimeDetails(new Date()).hour);
+    let themeArray = lightThemeArray;
+    if(currentHour > 18 || currentHour < 6) {  // 夜间显示深色背景
+        themeArray = darkThemeArray;
+    }
+
+    let randomNum = Math.floor(Math.random() * themeArray.length);
     let body = document.getElementsByTagName("body")[0];
-    body.style.backgroundColor = theme[randomNum].bodyBackgroundColor;    // 设置body背景颜色
+    body.style.backgroundColor = themeArray[randomNum].bodyBackgroundColor;    // 设置body背景颜色
 
     let returnValue: ThemeColorInterface = {
-        "themeColor": theme[randomNum].bodyBackgroundColor,
-        "componentBackgroundColor": theme[randomNum].componentBackgroundColor,
-        "componentFontColor": getFontColor(theme[randomNum].componentBackgroundColor),
+        "themeColor": themeArray[randomNum].bodyBackgroundColor,
+        "componentBackgroundColor": themeArray[randomNum].componentBackgroundColor,
+        "componentFontColor": getFontColor(themeArray[randomNum].componentBackgroundColor),
     }
     return returnValue;  // 返回各组件背景颜色
 }
