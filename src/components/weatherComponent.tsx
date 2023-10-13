@@ -8,7 +8,7 @@ import {
     httpRequest
 } from "../typescripts/publicFunctions";
 import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
-import {EnvironmentOutlined, InfoCircleOutlined} from "@ant-design/icons";
+import {EnvironmentOutlined, MoreOutlined} from "@ant-design/icons";
 
 const {Text} = Typography;
 
@@ -158,7 +158,7 @@ class WeatherComponent extends React.Component {
                 </Col>
                 <Col span={14} style={{textAlign: "right"}}>
                     <Space>
-                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<InfoCircleOutlined/>}
+                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<MoreOutlined />}
                                 onMouseOver={this.btnMouseOver.bind(this)}
                                 onMouseOut={this.btnMouseOut.bind(this)}
                                 onClick={this.infoBtnOnClick.bind(this)}

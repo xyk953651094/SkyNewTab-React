@@ -1,6 +1,6 @@
-import {darkThemeArray, lightThemeArray} from "./publicConstants"
+import {darkThemeArray, defaultPreferenceData, lightThemeArray} from "./publicConstants"
 import "jquery-color"
-import {ThemeColorInterface} from "./publicInterface";
+import {PreferenceDataInterface, ThemeColorInterface} from "./publicInterface";
 
 const $ = require("jquery");
 
@@ -286,6 +286,75 @@ export function getSearchEngineDetail(searchEngine: string) {
             break;
     }
     return {"searchEngineName": searchEngineName, "searchEngineUrl": searchEngineUrl, "searchEngineIconUrl": searchEngineIconUrl};
+}
+
+// 补全设置数据
+export function fixPreferenceData(preferenceData: PreferenceDataInterface) {
+    let isFixed = false;
+    if(!preferenceData.dynamicEffect) {
+        preferenceData.dynamicEffect = defaultPreferenceData.dynamicEffect;
+        isFixed = true;
+    }
+    if(!preferenceData.imageQuality) {
+        preferenceData.imageQuality = defaultPreferenceData.imageQuality;
+        isFixed = true;
+    }
+    if(!preferenceData.imageTopics) {
+        preferenceData.imageTopics = defaultPreferenceData.imageTopics;
+        isFixed = true;
+    }
+    if(preferenceData.customTopic === undefined || preferenceData.customTopic === null) {  // customTopic 可以为""
+        preferenceData.customTopic = defaultPreferenceData.customTopic;
+        isFixed = true;
+    }
+    if(!preferenceData.changeImageTime) {
+        preferenceData.changeImageTime = defaultPreferenceData.changeImageTime;
+        isFixed = true;
+    }
+    if(preferenceData.nightMode === undefined || preferenceData.nightMode === null) {
+        preferenceData.nightMode = defaultPreferenceData.nightMode;
+        isFixed = true;
+    }
+    if(preferenceData.autoDarkMode === undefined || preferenceData.autoDarkMode === null) {
+        preferenceData.autoDarkMode = defaultPreferenceData.autoDarkMode;
+        isFixed = true;
+    }
+    if(preferenceData.noImageMode === undefined || preferenceData.noImageMode === null) {
+        preferenceData.noImageMode = defaultPreferenceData.noImageMode;
+        isFixed = true;
+    }
+
+    if(!preferenceData.searchEngine) {
+        preferenceData.searchEngine = defaultPreferenceData.searchEngine;
+        isFixed = true;
+    }
+    if(!preferenceData.buttonShape) {
+        preferenceData.buttonShape = defaultPreferenceData.buttonShape;
+        isFixed = true;
+    }
+    if(preferenceData.simpleMode === undefined || preferenceData.simpleMode === null) {
+        preferenceData.simpleMode = defaultPreferenceData.simpleMode;
+        isFixed = true;
+    }
+    if(preferenceData.displayAlert === undefined || preferenceData.displayAlert === null) {
+        preferenceData.displayAlert = defaultPreferenceData.displayAlert;
+        isFixed = true;
+    }
+
+    if (isFixed) {
+        localStorage.setItem("preferenceData", JSON.stringify(preferenceData));  // 重新保存设置
+    }
+    return preferenceData;
+}
+
+export function getPreferenceDataStorage() {
+    let tempPreferenceData = localStorage.getItem("preferenceData");
+    if (tempPreferenceData === null) {
+        localStorage.setItem("preferenceData", JSON.stringify(defaultPreferenceData));
+        return defaultPreferenceData;
+    } else {
+        return fixPreferenceData(JSON.parse(tempPreferenceData));  // 检查是否缺少数据
+    }
 }
 
 // 过渡动画

@@ -3,6 +3,7 @@ export interface PreferenceDataInterface {
     imageQuality: "full" | "regular" | "small" | "small_s3",
     imageTopics: string[],
     customTopic: string,
+    changeImageTime: string,
     nightMode: boolean,
     autoDarkMode: boolean,
     noImageMode: boolean,

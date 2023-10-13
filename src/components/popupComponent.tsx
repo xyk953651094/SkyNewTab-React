@@ -1,12 +1,15 @@
 import React from "react";
 import {Layout, List, message} from "antd";
 import "../stylesheets/popupComponent.scss"
-import {getFontColor, getReverseColor} from "../typescripts/publicFunctions";
+import {
+    getFontColor,
+    getPreferenceDataStorage,
+    getReverseColor
+} from "../typescripts/publicFunctions";
 import PopupImageComponent from "../popupComponents/popupImageComponent";
 import PopupStatusComponent from "../popupComponents/popupStatusComponent";
 import PopupFooterComponent from "../popupComponents/popupFooterComponent";
 import {PreferenceDataInterface} from "../typescripts/publicInterface";
-import {defaultPreferenceData} from "../typescripts/publicConstants";
 import PopupHeaderComponent from "../popupComponents/popupHeaderComponent";
 
 const {Header, Content, Footer} = Layout;
@@ -35,7 +38,7 @@ class PopupComponent extends React.Component {
             hoverColor: "#000000",
             backgroundColor: "#ffffff",
             fontColor: "#000000",
-            preferenceData: defaultPreferenceData,
+            preferenceData: getPreferenceDataStorage(),
         }
     }
 
@@ -51,7 +54,7 @@ class PopupComponent extends React.Component {
 
     componentDidMount() {
         let imageData = localStorage.getItem("lastImage");
-        let tempPreferenceData = localStorage.getItem("preferenceData");
+        // let tempPreferenceData = localStorage.getItem("preferenceData");
         if (imageData) {
             let tempImageData = JSON.parse(imageData);
 
@@ -60,7 +63,7 @@ class PopupComponent extends React.Component {
                 hoverColor: tempImageData.color,
                 backgroundColor: getReverseColor(tempImageData.color),
                 fontColor: getFontColor(getReverseColor(tempImageData.color)),
-                preferenceData: tempPreferenceData === null ? defaultPreferenceData : JSON.parse(tempPreferenceData),
+                // preferenceData: getPreferenceDataStorage(),
             }, () => {
                 $("body").css({"backgroundColor": this.state.backgroundColor});
             });

@@ -1,6 +1,6 @@
 import React from "react";
 import {Button, Card, Col, Row} from "antd";
-import {ExclamationCircleOutlined, InfoCircleOutlined, MailOutlined} from "@ant-design/icons";
+import {LikeOutlined, DislikeOutlined, MailOutlined} from "@ant-design/icons";
 import {getFontColor} from "../typescripts/publicFunctions";
 import {PreferenceDataInterface} from "../typescripts/publicInterface";
 
@@ -48,7 +48,7 @@ class PreferenceLinkComponent extends React.Component {
             >
                 <Row gutter={[0, 8]}>
                     <Col span="12">
-                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<InfoCircleOutlined/>}
+                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<LikeOutlined/>}
                                 href={"mailto:xyk953651094@qq.com?&subject=云开新标签页-功能建议"} target={"_blank"}
                                 onMouseOver={this.btnMouseOver.bind(this)}
                                 onMouseOut={this.btnMouseOut.bind(this)}
@@ -57,7 +57,7 @@ class PreferenceLinkComponent extends React.Component {
                         </Button>
                     </Col>
                     <Col span="12">
-                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<ExclamationCircleOutlined/>}
+                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<DislikeOutlined/>}
                                 href={"mailto:xyk953651094@qq.com?&subject=云开新标签页-问题反馈"} target={"_blank"}
                                 onMouseOver={this.btnMouseOver.bind(this)}
                                 onMouseOut={this.btnMouseOut.bind(this)}

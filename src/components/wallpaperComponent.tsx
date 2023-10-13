@@ -2,8 +2,14 @@ import React from "react";
 import "../stylesheets/wallpaperComponent.scss"
 import "../stylesheets/publicStyles.scss"
 import {Image, message} from "antd";
-import {getTimeDetails, httpRequest, imageDynamicEffect, isEmptyString} from "../typescripts/publicFunctions";
-import {clientId, defaultPreferenceData, device} from "../typescripts/publicConstants";
+import {
+    getPreferenceDataStorage,
+    getTimeDetails,
+    httpRequest,
+    imageDynamicEffect,
+    isEmptyString
+} from "../typescripts/publicFunctions";
+import {clientId, device} from "../typescripts/publicConstants";
 import {PreferenceDataInterface} from "../typescripts/publicInterface";
 import {decode} from "blurhash";
 
@@ -32,7 +38,7 @@ class WallpaperComponent extends React.Component {
         super(props);
         this.state = {
             imageData: null,
-            preferenceData: defaultPreferenceData,
+            preferenceData: getPreferenceDataStorage(),
             imageLink: "",
             display: "none",
             displayCanvas: "none",
@@ -132,10 +138,10 @@ class WallpaperComponent extends React.Component {
                 let lastImage: any = localStorage.getItem("lastImage");
                 if (lastImage) {
                     lastImage = JSON.parse(lastImage);
-                    message.error("获取图片失败，加载历史图片", 0);
+                    message.loading("获取图片失败，加载历史图片", 0);
                     tempThis.setWallpaper(lastImage);
                 } else {
-                    message.error("获取图片失败");
+                    message.error("获取图片失败，请检查网络连接");
                 }
             })
             .finally(function () {
@@ -143,86 +149,80 @@ class WallpaperComponent extends React.Component {
     }
 
     componentDidMount() {
-        let tempPreferenceData = localStorage.getItem("preferenceData");
-
-        if (tempPreferenceData === null) {
-            localStorage.setItem("preferenceData", JSON.stringify(defaultPreferenceData));
-        }
-
-        this.setState({
-            preferenceData: tempPreferenceData === null ? defaultPreferenceData : JSON.parse(tempPreferenceData),
-        }, () => {
-            let noImageMode = this.state.preferenceData.noImageMode;
-
-            if (!noImageMode) {
-                // 防抖节流
-                let lastRequestTime: any = localStorage.getItem("lastImageRequestTime");
-                let nowTimeStamp = new Date().getTime();
-                if (lastRequestTime === null) {  // 第一次请求时 lastRequestTime 为 null，因此直接进行请求赋值 lastRequestTime
-                    this.getWallpaper();
-                } else if (nowTimeStamp - parseInt(lastRequestTime) > 60 * 1000) {  // 必须多于一分钟才能进行新的请求
-                    this.getWallpaper();
-                } else {  // 一分钟之内使用上一次请求结果
-                    let lastImage: any = localStorage.getItem("lastImage");
-                    if (lastImage) {
-                        message.info("正在加载历史图片");
-                        lastImage = JSON.parse(lastImage);
-                        this.setWallpaper(lastImage);
-                    } else {
-                        message.error("加载历史图片失败");
-                    }
-                }
-
-                // 图片动画
-                // @ts-ignore
-                let backgroundImageDiv: HTMLElement = document.getElementById("backgroundImage");
-                // @ts-ignore
-                let backgroundImage: HTMLElement = backgroundImageDiv.children[0];
-                if (backgroundImage instanceof HTMLElement) {
-                    backgroundImage.onload = () => {
-                        backgroundImage.style.width = "102%";
-
-                        // 降低亮度与夜间模式
-                        let nightMode = this.state.preferenceData.nightMode;
-                        let autoDarkMode = this.state.preferenceData.autoDarkMode;
-                        let tempDisplayMask = "none";
-                        let currentTime = parseInt(getTimeDetails(new Date()).hour);
-                        if(currentTime > 18 || currentTime < 6) {
-                            if( !nightMode && !autoDarkMode ) {
-                                tempDisplayMask = "none";
-                            }
-                            else {
-                                tempDisplayMask = "block";
-                            }
-                        }
-                        else {
-                            tempDisplayMask = this.state.preferenceData.nightMode ? "block" : "none";
-                        }
-
-                        this.setState({
-                            display: "block",
-                            displayMask: tempDisplayMask,
-                        }, () => {
-                            $("#backgroundCanvas").removeClass("wallpaperFadeIn").addClass("wallpaperFadeOut");
-                            message.destroy();
-                            message.success("图片加载成功");
-
-                            // 设置动态效果
-                            backgroundImage.classList.add("wallpaperFadeIn");
-                            setTimeout(() => {
-                                backgroundImage.style.transform = "scale(1.05, 1.05)";
-                                backgroundImage.style.transition = "5s";
-
-                                setTimeout(() => {
-                                    backgroundImageDiv.style.perspective = "500px";
-                                    imageDynamicEffect(backgroundImage, this.state.preferenceData.dynamicEffect);
-                                }, 5000);
-                            }, 2000);
-                        })
-                    }
+        let noImageMode = this.state.preferenceData.noImageMode;
+        if (!noImageMode) {
+            // 防抖节流
+            let lastRequestTime: any = localStorage.getItem("lastImageRequestTime");
+            let nowTimeStamp = new Date().getTime();
+            if (lastRequestTime === null) {  // 第一次请求时 lastRequestTime 为 null，因此直接进行请求赋值 lastRequestTime
+                this.getWallpaper();
+            // } else if (nowTimeStamp - parseInt(lastRequestTime) > 60 * 1000) {  // 必须多于切换间隔才能进行新的请求
+            } else if (nowTimeStamp - parseInt(lastRequestTime) > parseInt(this.state.preferenceData.changeImageTime)) {  // 必须多于切换间隔才能进行新的请求
+                this.getWallpaper();
+            } else {  // 切换间隔内使用上一次请求结果
+                let lastImage: any = localStorage.getItem("lastImage");
+                if (lastImage) {
+                    message.loading("正在加载历史图片", 0);
+                    lastImage = JSON.parse(lastImage);
+                    this.setWallpaper(lastImage);
+                } else {
+                    message.error("无历史图片可加载，一秒后刷新页面");
+                    localStorage.removeItem("lastImageRequestTime");
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 1000);
                 }
             }
-        });
+
+            // 图片动画
+            // @ts-ignore
+            let backgroundImageDiv: HTMLElement = document.getElementById("backgroundImage");
+            // @ts-ignore
+            let backgroundImage: HTMLElement = backgroundImageDiv.children[0];
+            if (backgroundImage instanceof HTMLElement) {
+                backgroundImage.onload = () => {
+                    backgroundImage.style.width = "102%";
+
+                    // 降低亮度与夜间模式
+                    let nightMode = this.state.preferenceData.nightMode;
+                    let autoDarkMode = this.state.preferenceData.autoDarkMode;
+                    let tempDisplayMask = "none";
+                    let currentTime = parseInt(getTimeDetails(new Date()).hour);
+                    if(currentTime > 18 || currentTime < 6) {
+                        if( !nightMode && !autoDarkMode ) {
+                            tempDisplayMask = "none";
+                        }
+                        else {
+                            tempDisplayMask = "block";
+                        }
+                    }
+                    else {
+                        tempDisplayMask = this.state.preferenceData.nightMode ? "block" : "none";
+                    }
+
+                    this.setState({
+                        display: "block",
+                        displayMask: tempDisplayMask,
+                    }, () => {
+                        $("#backgroundCanvas").removeClass("wallpaperFadeIn").addClass("wallpaperFadeOut");
+                        message.destroy();
+                        message.success("图片加载成功");
+
+                        // 设置动态效果
+                        backgroundImage.classList.add("wallpaperFadeIn");
+                        setTimeout(() => {
+                            backgroundImage.style.transform = "scale(1.05, 1.05)";
+                            backgroundImage.style.transition = "5s";
+
+                            setTimeout(() => {
+                                backgroundImageDiv.style.perspective = "500px";
+                                imageDynamicEffect(backgroundImage, this.state.preferenceData.dynamicEffect);
+                            }, 5000);
+                        }, 2000);
+                    })
+                }
+            }
+        }
     }
 
     render() {

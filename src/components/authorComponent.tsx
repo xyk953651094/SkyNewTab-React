@@ -5,7 +5,8 @@ import {
     ClockCircleOutlined,
     EnvironmentOutlined,
     InfoCircleOutlined,
-    LinkOutlined,
+    HomeOutlined,
+    FileImageOutlined,
     UserOutlined
 } from "@ant-design/icons";
 import {unsplashUrl} from "../typescripts/publicConstants";
@@ -159,14 +160,14 @@ class AuthorComponent extends React.Component {
                 </Col>
                 <Col span={14} style={{textAlign: "right"}}>
                     <Space>
-                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<LinkOutlined/>}
+                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<HomeOutlined />}
                                 onMouseOver={this.btnMouseOver.bind(this)}
                                 onMouseOut={this.btnMouseOut.bind(this)}
                                 onClick={this.authorLinkBtnOnClick.bind(this)}
                                 style={{color: this.state.fontColor}}>
                             {"摄影师主页"}
                         </Button>
-                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<LinkOutlined/>}
+                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<FileImageOutlined />}
                                 onMouseOver={this.btnMouseOver.bind(this)}
                                 onMouseOut={this.btnMouseOut.bind(this)}
                                 onClick={this.imageLinkBtnOnClick.bind(this)}
@@ -265,7 +266,7 @@ class AuthorComponent extends React.Component {
                             cursor: "default"
                         }}
                 >
-                    {"由 Unsplash 的 " + this.state.authorName + " 拍摄"}
+                    {"由 Unsplash 的 " + (this.state.authorName.length < btnMaxSize ? this.state.authorName : this.state.authorName.substring(0, btnMaxSize) + "...") + " 拍摄"}
                 </Button>
             </Popover>
         );

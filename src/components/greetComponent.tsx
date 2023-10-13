@@ -4,7 +4,7 @@ import {
     CalendarOutlined,
     CheckCircleOutlined,
     CloseCircleOutlined,
-    InfoCircleOutlined
+    MoreOutlined
 } from "@ant-design/icons";
 import {
     changeThemeColor,
@@ -171,7 +171,7 @@ class GreetComponent extends React.Component {
                     <Text style={{color: this.state.fontColor}}>{"万年历"}</Text>
                 </Col>
                 <Col span={14} style={{textAlign: "right"}}>
-                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<InfoCircleOutlined/>}
+                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<MoreOutlined/>}
                                 onMouseOver={this.btnMouseOver.bind(this)}
                                 onMouseOut={this.btnMouseOut.bind(this)}
                                 onClick={this.infoBtnOnClick.bind(this)}

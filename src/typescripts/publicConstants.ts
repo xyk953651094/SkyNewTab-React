@@ -66,6 +66,7 @@ export let defaultPreferenceData: PreferenceDataInterface = {
     imageQuality: "regular",
     imageTopics: ["bo8jQKTaE0Y"],
     customTopic: "",
+    changeImageTime: "3600000",
     nightMode: false,
     autoDarkMode: false,
     noImageMode: false,

@@ -10,13 +10,18 @@ import {
     message,
     Radio,
     RadioChangeEvent,
+    Select,
     Row,
     Space, Switch,
     Typography
 } from "antd";
 import {CheckOutlined, StopOutlined, SettingOutlined} from "@ant-design/icons";
-import {getFontColor, getTimeDetails, isEmptyString} from "../typescripts/publicFunctions";
-import {defaultPreferenceData} from "../typescripts/publicConstants";
+import {
+    getFontColor,
+    getPreferenceDataStorage,
+    getTimeDetails,
+    isEmptyString
+} from "../typescripts/publicFunctions";
 import {CheckboxValueType} from "antd/es/checkbox/Group";
 import {PreferenceDataInterface} from "../typescripts/publicInterface";
 
@@ -45,7 +50,7 @@ class PreferenceImageComponent extends React.Component {
     constructor(props: any) {
         super(props);
         this.state = {
-            preferenceData: defaultPreferenceData,
+            preferenceData: getPreferenceDataStorage(),
             buttonShape: "round",
             disableImageTopic: false
         };
@@ -125,6 +130,17 @@ class PreferenceImageComponent extends React.Component {
         })
     }
 
+    changeImageTimeOnChange(value: string) {
+        this.setState({
+            preferenceData: this.setPreferenceData({changeImageTime: value}),
+        }, () => {
+            this.props.getPreferenceData(this.state.preferenceData);
+            localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
+            message.success("已修改切换间隔，一秒后刷新页面");
+            this.refreshWindow();
+        })
+    }
+
     nightModeSwitchOnChange(checked: boolean) {
         this.setState({
             preferenceData: this.setPreferenceData({nightMode: checked}),
@@ -195,18 +211,9 @@ class PreferenceImageComponent extends React.Component {
     }
 
     componentWillMount() {
-        // 初始化偏好设置
-        let tempPreferenceData = localStorage.getItem("preferenceData");
-        if (tempPreferenceData === null) {
-            localStorage.setItem("preferenceData", JSON.stringify(defaultPreferenceData));
-        }
         this.setState({
-            preferenceData: tempPreferenceData === null ? defaultPreferenceData : JSON.parse(tempPreferenceData),
-        }, () => {
-            this.setState({
-                buttonShape: this.state.preferenceData.buttonShape === "round" ? "circle" : "default",
-                disableImageTopic: !isEmptyString(this.state.preferenceData.customTopic)
-            })
+            buttonShape: this.state.preferenceData.buttonShape === "round" ? "circle" : "default",
+            disableImageTopic: !isEmptyString(this.state.preferenceData.customTopic)
         })
     }
 
@@ -311,6 +318,13 @@ class PreferenceImageComponent extends React.Component {
                             </Button>
                         </Space>
                     </Form.Item>
+                    <Form.Item name={"changeImageTime"} label={"切换间隔"}>
+                        <Select style={{ width: 156 }} onChange={this.changeImageTimeOnChange.bind(this)}>
+                            <Select.Option value={"900000"}>{"每 15 分钟"}</Select.Option>
+                            <Select.Option value={"1800000"}>{"每 30 分钟"}</Select.Option>
+                            <Select.Option value={"3600000"}>{"每 60 分钟"}</Select.Option>
+                        </Select>
+                    </Form.Item>
                     <Row gutter={24}>
                         <Col span={12}>
                             <Form.Item name={"nightMode"} label={"降低亮度"} valuePropName={"checked"}>
@@ -324,11 +338,13 @@ class PreferenceImageComponent extends React.Component {
                                         onChange={this.autoDarkModeSwitchOnChange.bind(this)}/>
                             </Form.Item>
                         </Col>
+                        <Col span={12}>
+                            <Form.Item name={"noImageMode"} label={"无图模式"} valuePropName={"checked"}>
+                                <Switch checkedChildren="已开启" unCheckedChildren="已关闭"
+                                        onChange={this.noImageModeSwitchOnChange.bind(this)}/>
+                            </Form.Item>
+                        </Col>
                     </Row>
-                    <Form.Item name={"noImageMode"} label={"无图模式"} valuePropName={"checked"}>
-                        <Switch checkedChildren="已开启" unCheckedChildren="已关闭"
-                                onChange={this.noImageModeSwitchOnChange.bind(this)}/>
-                    </Form.Item>
                     <Alert
                         message="提示信息"
                         description={

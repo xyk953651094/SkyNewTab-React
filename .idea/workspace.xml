@@ -4,10 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="菜单栏新增回到顶部按钮、夜间模式">
+    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="搜索框按钮能快速切换搜索引擎了">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/authorComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/authorComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/greetComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/greetComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/popupComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/popupComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/wallpaperComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/wallpaperComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/weatherComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/weatherComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/popupComponents/popupImageComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/popupComponents/popupImageComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/preferenceComponents/preferenceEmailComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/preferenceComponents/preferenceEmailComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/preferenceComponents/preferenceFunctionComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/preferenceComponents/preferenceFunctionComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/preferenceComponents/preferenceImageComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/preferenceComponents/preferenceImageComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/preferenceComponents/preferenceProductComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/preferenceComponents/preferenceProductComponent.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/typescripts/publicConstants.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/typescripts/publicConstants.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/typescripts/publicFunctions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/typescripts/publicFunctions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/typescripts/publicInterface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/typescripts/publicInterface.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -271,6 +283,14 @@
       <workItem from="1696677760142" duration="1213000" />
       <workItem from="1696683997927" duration="3712000" />
       <workItem from="1696733114087" duration="2516000" />
+      <workItem from="1696853241722" duration="2978000" />
+      <workItem from="1696859020407" duration="1285000" />
+      <workItem from="1696860723596" duration="193000" />
+      <workItem from="1697024481207" duration="477000" />
+      <workItem from="1697025878323" duration="531000" />
+      <workItem from="1697114130285" duration="73000" />
+      <workItem from="1697114216181" duration="4584000" />
+      <workItem from="1697163985155" duration="5506000" />
     </task>
     <task id="LOCAL-00001" summary="优化抽屉蒙版的显示效果&#10;优化代码质量">
       <created>1683952184207</created>
@@ -390,22 +410,6 @@
       <option name="presentableId" value="LOCAL-00017" />
       <option name="project" value="LOCAL" />
       <updated>1687402693401</updated>
-    </task>
-    <task id="LOCAL-00068" summary="优化视觉效果">
-      <option name="closed" value="true" />
-      <created>1692263335029</created>
-      <option name="number" value="00068" />
-      <option name="presentableId" value="LOCAL-00068" />
-      <option name="project" value="LOCAL" />
-      <updated>1692263335030</updated>
-    </task>
-    <task id="LOCAL-00069" summary="优化视觉效果">
-      <option name="closed" value="true" />
-      <created>1692268396467</created>
-      <option name="number" value="00069" />
-      <option name="presentableId" value="LOCAL-00069" />
-      <option name="project" value="LOCAL" />
-      <updated>1692268396467</updated>
     </task>
     <task id="LOCAL-00070" summary="优化视觉效果">
       <option name="closed" value="true" />
@@ -647,7 +651,23 @@
       <option name="project" value="LOCAL" />
       <updated>1696678943546</updated>
     </task>
-    <option name="localTasksCounter" value="100" />
+    <task id="LOCAL-00100" summary="优化无图模式颜色显示">
+      <option name="closed" value="true" />
+      <created>1696854849817</created>
+      <option name="number" value="00100" />
+      <option name="presentableId" value="LOCAL-00100" />
+      <option name="project" value="LOCAL" />
+      <updated>1696854849817</updated>
+    </task>
+    <task id="LOCAL-00101" summary="搜索框按钮能快速切换搜索引擎了">
+      <option name="closed" value="true" />
+      <created>1696857583447</created>
+      <option name="number" value="00101" />
+      <option name="presentableId" value="LOCAL-00101" />
+      <option name="project" value="LOCAL" />
+      <updated>1696857583447</updated>
+    </task>
+    <option name="localTasksCounter" value="102" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -665,8 +685,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="优化部分按钮 鼠标hover 显示效果&#10;优化部分代码质量" />
-    <MESSAGE value="优化时钟显示效果&#10;优化高分辨率屏幕显示效果" />
     <MESSAGE value="优化部分显示效果&#10;优化部分代码质量" />
     <MESSAGE value="新增多个搜索引擎" />
     <MESSAGE value="优化部分显示效果" />
@@ -690,6 +708,8 @@
     <MESSAGE value="新增更多产品，优化视觉效果" />
     <MESSAGE value="优化视觉效果" />
     <MESSAGE value="菜单栏新增回到顶部按钮、夜间模式" />
-    <option name="LAST_COMMIT_MESSAGE" value="菜单栏新增回到顶部按钮、夜间模式" />
+    <MESSAGE value="优化无图模式颜色显示" />
+    <MESSAGE value="搜索框按钮能快速切换搜索引擎了" />
+    <option name="LAST_COMMIT_MESSAGE" value="搜索框按钮能快速切换搜索引擎了" />
   </component>
 </project>
