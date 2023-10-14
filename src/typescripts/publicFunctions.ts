@@ -75,6 +75,7 @@ export function getTimeDetails(param: Date) {
         showDate4: year + "年" + month + "月" + day + "日",
         showDate5: year + "-" + month + "-" + day,
         showTime: hour + ":" + minute,
+        showDetail: year + "/" + month + "/" + day + " " + hour + ":" + minute + ":" + second,
         showLocaleDate: "农历" + localeDate.split(" ")[0] + "日"
     };
 }

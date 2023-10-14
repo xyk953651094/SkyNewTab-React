@@ -3,12 +3,12 @@ import {Button, Col, List, message, Popover, Row, Space, Typography} from "antd"
 import {
     changeThemeColor,
     getFontColor,
-    getSearchEngineDetail,
+    getSearchEngineDetail, getTimeDetails,
     getWeatherIcon,
     httpRequest
 } from "../typescripts/publicFunctions";
 import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
-import {EnvironmentOutlined, MoreOutlined} from "@ant-design/icons";
+import {EnvironmentOutlined, MoreOutlined, ClockCircleOutlined} from "@ant-design/icons";
 
 const {Text} = Typography;
 
@@ -22,6 +22,7 @@ type stateType = {
     hoverColor: string,
     backgroundColor: string,
     fontColor: string,
+    lastRequestTime: string,
     weatherIcon: string,
     weatherInfo: string,
     searchEngineUrl: string,
@@ -46,6 +47,7 @@ class WeatherComponent extends React.Component {
             hoverColor: "",
             backgroundColor: "",
             fontColor: "",
+            lastRequestTime: "暂无信息",
             weatherIcon: "",
             weatherInfo: "暂无信息",
             searchEngineUrl: "https://www.bing.com/search?q=",
@@ -108,18 +110,25 @@ class WeatherComponent extends React.Component {
             })
             .catch(function () {
                 // 请求失败也更新请求时间，防止超时后无信息可显示
-                localStorage.setItem("lastWeatherRequestTime", String(new Date().getTime()));  // 保存请求时间，防抖节流
+                // localStorage.setItem("lastWeatherRequestTime", String(new Date().getTime()));  // 保存请求时间，防抖节流
+
+                // 请求失败时使用上一次请求结果
+                let lastWeather: any = localStorage.getItem("lastWeather");
+                if (lastWeather) {
+                    lastWeather = JSON.parse(lastWeather);
+                    tempThis.setWeather(lastWeather);
+                }
             });
     }
 
     componentDidMount() {
         if (!this.props.preferenceData.simpleMode) {
             // 防抖节流
-            let lastRequestTime: any = localStorage.getItem("lastWeatherRequestTime");
+            let tempLastRequestTime: any = localStorage.getItem("lastWeatherRequestTime");
             let nowTimeStamp = new Date().getTime();
-            if (lastRequestTime === null) {  // 第一次请求时 lastRequestTime 为 null，因此直接进行请求赋值 lastRequestTime
+            if (tempLastRequestTime === null) {  // 第一次请求时 tempLastRequestTime 为 null，因此直接进行请求赋值 tempLastRequestTime
                 this.getWeather();
-            } else if (nowTimeStamp - parseInt(lastRequestTime) > 60 * 60 * 1000) {  // 必须多于一小时才能进行新的请求
+            } else if (nowTimeStamp - parseInt(tempLastRequestTime) > 60 * 60 * 1000) {  // 必须多于一小时才能进行新的请求
                 this.getWeather();
             } else {  // 一小时之内使用上一次请求结果
                 let lastWeather: any = localStorage.getItem("lastWeather");
@@ -127,6 +136,12 @@ class WeatherComponent extends React.Component {
                     lastWeather = JSON.parse(lastWeather);
                     this.setWeather(lastWeather);
                 }
+            }
+
+            if(tempLastRequestTime !== null) {
+                this.setState({
+                    lastRequestTime: getTimeDetails(new Date(parseInt(tempLastRequestTime))).showDetail,
+                });
             }
         }
     }
@@ -174,6 +189,12 @@ class WeatherComponent extends React.Component {
             <List>
                 <List.Item>
                     <Space direction={"vertical"}>
+                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<ClockCircleOutlined />}
+                                onMouseOver={this.btnMouseOver.bind(this)}
+                                onMouseOut={this.btnMouseOut.bind(this)}
+                                style={{color: this.state.fontColor, cursor: "default"}}>
+                            {"最后更新时间：" + this.state.lastRequestTime}
+                        </Button>
                         <Row gutter={8}>
                             <Col span={12}>
                                 <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<EnvironmentOutlined/>}

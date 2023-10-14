@@ -177,7 +177,7 @@ class PreferenceFunctionComponent extends React.Component {
                                 <ol>
                                     <Space direction={"vertical"}>
                                         <li>重置插件将清空缓存恢复初始设置</li>
-                                        <li>插件设置出现异常可尝试重置插件</li>
+                                        <li>插件出现任何异常可尝试重置插件</li>
                                     </Space>
                                 </ol>
                             </Paragraph>

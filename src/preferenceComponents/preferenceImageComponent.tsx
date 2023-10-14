@@ -38,6 +38,7 @@ type propType = {
 type stateType = {
     preferenceData: PreferenceDataInterface,
     buttonShape: "circle" | "default" | "round" | undefined,
+    lastRequestTime: string,
     disableImageTopic: boolean
 }
 
@@ -52,6 +53,7 @@ class PreferenceImageComponent extends React.Component {
         this.state = {
             preferenceData: getPreferenceDataStorage(),
             buttonShape: "round",
+            lastRequestTime: "暂无信息",
             disableImageTopic: false
         };
     }
@@ -211,6 +213,13 @@ class PreferenceImageComponent extends React.Component {
     }
 
     componentWillMount() {
+        let tempLastRequestTime: any = localStorage.getItem("lastImageRequestTime");
+        if (tempLastRequestTime !== null) {
+            this.setState({
+                lastRequestTime: getTimeDetails(new Date(parseInt(tempLastRequestTime))).showDetail,
+            })
+        }
+
         this.setState({
             buttonShape: this.state.preferenceData.buttonShape === "round" ? "circle" : "default",
             disableImageTopic: !isEmptyString(this.state.preferenceData.customTopic)
@@ -318,7 +327,7 @@ class PreferenceImageComponent extends React.Component {
                             </Button>
                         </Space>
                     </Form.Item>
-                    <Form.Item name={"changeImageTime"} label={"切换间隔"}>
+                    <Form.Item name={"changeImageTime"} label={"切换间隔"} extra={"上次切换时间：" + this.state.lastRequestTime}>
                         <Select style={{ width: 156 }} onChange={this.changeImageTimeOnChange.bind(this)}>
                             <Select.Option value={"900000"}>{"每 15 分钟"}</Select.Option>
                             <Select.Option value={"1800000"}>{"每 30 分钟"}</Select.Option>

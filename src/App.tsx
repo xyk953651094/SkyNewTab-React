@@ -138,6 +138,7 @@ class App extends React.Component {
                 $(".ant-drawer-close").css("color", this.state.themeColor.componentFontColor);
                 $(".ant-drawer-title").css("color", this.state.themeColor.componentFontColor);
                 $(".ant-form-item-label > label").css("color", this.state.themeColor.componentFontColor);
+                $(".ant-form-item-extra").css("color", this.state.themeColor.componentFontColor);
                 $(".ant-radio-wrapper").children(":last-child").css("color", this.state.themeColor.componentFontColor);
                 $(".ant-checkbox-wrapper").children(":last-child").css("color", this.state.themeColor.componentFontColor);
                 $(".ant-collapse").css("backgroundColor", this.state.themeColor.componentBackgroundColor);
