@@ -10,13 +10,18 @@ import {
     message,
     Radio,
     RadioChangeEvent,
+    Select,
     Row,
     Space, Switch,
     Typography
 } from "antd";
 import {CheckOutlined, StopOutlined, SettingOutlined} from "@ant-design/icons";
-import {getFontColor, isEmptyString} from "../typescripts/publicFunctions";
-import {defaultPreferenceData} from "../typescripts/publicConstants";
+import {
+    getFontColor,
+    getPreferenceDataStorage,
+    getTimeDetails,
+    isEmptyString
+} from "../typescripts/publicFunctions";
 import {CheckboxValueType} from "antd/es/checkbox/Group";
 import {PreferenceDataInterface} from "../typescripts/publicInterface";
 
@@ -33,6 +38,7 @@ type propType = {
 type stateType = {
     preferenceData: PreferenceDataInterface,
     buttonShape: "circle" | "default" | "round" | undefined,
+    lastRequestTime: string,
     disableImageTopic: boolean
 }
 
@@ -45,8 +51,9 @@ class PreferenceImageComponent extends React.Component {
     constructor(props: any) {
         super(props);
         this.state = {
-            preferenceData: defaultPreferenceData,
+            preferenceData: getPreferenceDataStorage(),
             buttonShape: "round",
+            lastRequestTime: "暂无信息",
             disableImageTopic: false
         };
     }
@@ -125,6 +132,17 @@ class PreferenceImageComponent extends React.Component {
         })
     }
 
+    changeImageTimeOnChange(value: string) {
+        this.setState({
+            preferenceData: this.setPreferenceData({changeImageTime: value}),
+        }, () => {
+            this.props.getPreferenceData(this.state.preferenceData);
+            localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
+            message.success("已修改切换间隔，一秒后刷新页面");
+            this.refreshWindow();
+        })
+    }
+
     nightModeSwitchOnChange(checked: boolean) {
         this.setState({
             preferenceData: this.setPreferenceData({nightMode: checked}),
@@ -138,6 +156,32 @@ class PreferenceImageComponent extends React.Component {
 
             }
             this.refreshWindow();
+        })
+    }
+
+    autoDarkModeSwitchOnChange(checked: boolean) {
+        this.setState({
+            preferenceData: this.setPreferenceData({autoDarkMode: checked}),
+        }, () => {
+            this.props.getPreferenceData(this.state.preferenceData);
+            localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
+
+            let currentTime = parseInt(getTimeDetails(new Date()).hour);
+            if(currentTime > 18 || currentTime < 6) {
+                if (checked) {
+                    message.success("已开启夜间自动降低背景亮度，一秒后刷新页面");
+                } else {
+                    message.success("已关闭夜间自动降低背景亮度，一秒后刷新页面");
+                }
+                this.refreshWindow();
+            }
+            else {
+                if (checked) {
+                    message.success("已开启夜间自动降低背景亮度");
+                } else {
+                    message.success("已关闭夜间自动降低背景亮度");
+                }
+            }
         })
     }
 
@@ -169,18 +213,16 @@ class PreferenceImageComponent extends React.Component {
     }
 
     componentWillMount() {
-        // 初始化偏好设置
-        let tempPreferenceData = localStorage.getItem("preferenceData");
-        if (tempPreferenceData === null) {
-            localStorage.setItem("preferenceData", JSON.stringify(defaultPreferenceData));
-        }
-        this.setState({
-            preferenceData: tempPreferenceData === null ? defaultPreferenceData : JSON.parse(tempPreferenceData),
-        }, () => {
+        let tempLastRequestTime: any = localStorage.getItem("lastImageRequestTime");
+        if (tempLastRequestTime !== null) {
             this.setState({
-                buttonShape: this.state.preferenceData.buttonShape === "round" ? "circle" : "default",
-                disableImageTopic: !isEmptyString(this.state.preferenceData.customTopic)
+                lastRequestTime: getTimeDetails(new Date(parseInt(tempLastRequestTime))).showDetail,
             })
+        }
+
+        this.setState({
+            buttonShape: this.state.preferenceData.buttonShape === "round" ? "circle" : "default",
+            disableImageTopic: !isEmptyString(this.state.preferenceData.customTopic)
         })
     }
 
@@ -285,11 +327,24 @@ class PreferenceImageComponent extends React.Component {
                             </Button>
                         </Space>
                     </Form.Item>
+                    <Form.Item name={"changeImageTime"} label={"切换间隔"} extra={"上次切换时间：" + this.state.lastRequestTime}>
+                        <Select style={{ width: 156 }} onChange={this.changeImageTimeOnChange.bind(this)}>
+                            <Select.Option value={"900000"}>{"每 15 分钟"}</Select.Option>
+                            <Select.Option value={"1800000"}>{"每 30 分钟"}</Select.Option>
+                            <Select.Option value={"3600000"}>{"每 60 分钟"}</Select.Option>
+                        </Select>
+                    </Form.Item>
                     <Row gutter={24}>
                         <Col span={12}>
                             <Form.Item name={"nightMode"} label={"降低亮度"} valuePropName={"checked"}>
                                 <Switch checkedChildren="已开启" unCheckedChildren="已关闭"
                                         onChange={this.nightModeSwitchOnChange.bind(this)}/>
+                            </Form.Item>
+                        </Col>
+                        <Col span={12}>
+                            <Form.Item name={"autoDarkMode"} label={"夜间模式"} valuePropName={"checked"}>
+                                <Switch checkedChildren="已开启" unCheckedChildren="已关闭"
+                                        onChange={this.autoDarkModeSwitchOnChange.bind(this)}/>
                             </Form.Item>
                         </Col>
                         <Col span={12}>
@@ -308,6 +363,7 @@ class PreferenceImageComponent extends React.Component {
                                         <li>新的主题刷新后可能不会立即生效</li>
                                         <li>启用自定主题时不能使用图片主题</li>
                                         <li>禁用自定主题时才能使用图片主题</li>
+                                        <li>夜间模式于18点至6点自动降低亮度</li>
                                     </Space>
                                 </ol>
                             </Paragraph>

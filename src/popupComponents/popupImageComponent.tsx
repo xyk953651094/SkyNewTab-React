@@ -226,7 +226,7 @@ class PopupImageComponent extends React.Component {
                         </Space>
                     </Space>
                 </Space>
-                <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<CameraOutlined/>}
+                <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<InfoCircleOutlined/>}
                         onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
                         style={{
                             color: this.state.fontColor,

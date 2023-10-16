@@ -1,8 +1,8 @@
 import React from "react";
 import "../stylesheets/searchComponent.scss"
 import "../stylesheets/publicStyles.scss"
-import {Row, Col, Divider, Input, Avatar, Button} from "antd";
-import {DeleteOutlined, SearchOutlined} from "@ant-design/icons";
+import {Row, Col, Divider, Input, Button} from "antd";
+import {SearchOutlined} from "@ant-design/icons";
 import {changeThemeColor, fadeIn, fadeOut, getSearchEngineDetail} from "../typescripts/publicFunctions";
 import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
 
@@ -81,6 +81,19 @@ class SearchComponent extends React.Component {
         window.open(this.state.searchEngineUrl + e.target.value);
     }
 
+    changeSearchEngine() {
+        const searchEngines = ["Baidu", "Bing", "Google", "Yandex"];
+        let currentIndex = searchEngines.indexOf(this.state.searchEngineName);
+        let nextIndex = 0;
+        if (currentIndex !== searchEngines.length - 1) {
+            nextIndex = currentIndex + 1;
+        }
+        this.setState({
+            searchEngineName: searchEngines[nextIndex],
+            searchEngineUrl: getSearchEngineDetail(searchEngines[nextIndex].toLowerCase()).searchEngineUrl
+        })
+    }
+
     render() {
         return (
             <Col span={24} className={"alignCenter"}>
@@ -95,7 +108,7 @@ class SearchComponent extends React.Component {
                     prefix={
                     <Row align={"middle"}>
                         <Button type={"text"} shape={this.props.preferenceData.buttonShape} size={"small"}
-                                id={"searchEngineIconBtn"} style={{cursor: "default"}}>
+                                id={"searchEngineIconBtn"} onClick={this.changeSearchEngine.bind(this)}>
                             {this.state.searchEngineName}
                         </Button>
                         <Divider type="vertical" />

@@ -5,8 +5,7 @@ import {
     CheckCircleOutlined,
     CloseCircleOutlined,
     HistoryOutlined,
-    InfoCircleOutlined,
-    StarOutlined
+    MoreOutlined
 } from "@ant-design/icons";
 import {
     changeThemeColor,
@@ -74,6 +73,11 @@ class GreetComponent extends React.Component {
         e.currentTarget.style.color = this.state.fontColor;
     }
 
+    historyBtnOnClick() {
+        console.log("history");
+        window.open(this.state.searchEngineUrl + "历史上的今天", "_blank");
+    }
+
     infoBtnOnClick() {
         window.open(this.state.searchEngineUrl + "万年历", "_blank");
     }
@@ -117,7 +121,14 @@ class GreetComponent extends React.Component {
             })
             .catch(function () {
                 // 请求失败也更新请求时间，防止超时后无信息可显示
-                localStorage.setItem("lastHolidayRequestTime", String(new Date().getTime()));  // 保存请求时间，防抖节流
+                // localStorage.setItem("lastHolidayRequestTime", String(new Date().getTime()));  // 保存请求时间，防抖节流
+
+                // 请求失败时使用上一次请求结果
+                let lastHoliday: any = localStorage.getItem("lastHoliday");
+                if (lastHoliday) {
+                    lastHoliday = JSON.parse(lastHoliday);
+                    tempThis.setHoliday(lastHoliday);
+                }
             });
     }
 
@@ -130,7 +141,7 @@ class GreetComponent extends React.Component {
                 this.getHoliday();
             } else if (nowTimeStamp - parseInt(lastRequestTime) > 4 * 60 * 60 * 1000) {  // 必须多于四小时才能进行新的请求
                 this.getHoliday();
-            } else {  // 一小时之内使用上一次请求结果
+            } else {  // 四小时之内使用上一次请求结果
                 let lastHoliday: any = localStorage.getItem("lastHoliday");
                 if (lastHoliday) {
                     lastHoliday = JSON.parse(lastHoliday);
@@ -173,13 +184,22 @@ class GreetComponent extends React.Component {
                     <Text style={{color: this.state.fontColor}}>{"万年历"}</Text>
                 </Col>
                 <Col span={14} style={{textAlign: "right"}}>
-                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<InfoCircleOutlined/>}
+                    <Space>
+                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<HistoryOutlined />}
+                                onMouseOver={this.btnMouseOver.bind(this)}
+                                onMouseOut={this.btnMouseOut.bind(this)}
+                                onClick={this.historyBtnOnClick.bind(this)}
+                                style={{color: this.state.fontColor}}>
+                            {"历史上的今天"}
+                        </Button>
+                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<MoreOutlined/>}
                                 onMouseOver={this.btnMouseOver.bind(this)}
                                 onMouseOut={this.btnMouseOut.bind(this)}
                                 onClick={this.infoBtnOnClick.bind(this)}
                                 style={{color: this.state.fontColor}}>
                             {"更多信息"}
                         </Button>
+                    </Space>
                 </Col>
             </Row>
         );

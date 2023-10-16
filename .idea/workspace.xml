@@ -4,12 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="优化视觉效果">
+    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="优化代码逻辑">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/searchComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/searchComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/preferenceComponents/preferenceImageComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/preferenceComponents/preferenceImageComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stylesheets/clockComponent.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/stylesheets/clockComponent.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stylesheets/searchComponent.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/stylesheets/searchComponent.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -264,7 +260,32 @@
       <workItem from="1695736414424" duration="1829000" />
       <workItem from="1695791080682" duration="1482000" />
       <workItem from="1695957370052" duration="896000" />
-      <workItem from="1695967046054" duration="3338000" />
+      <workItem from="1695967046054" duration="3875000" />
+      <workItem from="1695976358594" duration="479000" />
+      <workItem from="1696049182597" duration="280000" />
+      <workItem from="1696600648449" duration="1078000" />
+      <workItem from="1696602403530" duration="1817000" />
+      <workItem from="1696670116489" duration="322000" />
+      <workItem from="1696677760142" duration="1213000" />
+      <workItem from="1696683997927" duration="3712000" />
+      <workItem from="1696733114087" duration="2516000" />
+      <workItem from="1696853241722" duration="2978000" />
+      <workItem from="1696859020407" duration="1285000" />
+      <workItem from="1696860723596" duration="193000" />
+      <workItem from="1697024481207" duration="477000" />
+      <workItem from="1697025878323" duration="531000" />
+      <workItem from="1697114130285" duration="73000" />
+      <workItem from="1697114216181" duration="4584000" />
+      <workItem from="1697163985155" duration="5506000" />
+      <workItem from="1697189724578" duration="243000" />
+      <workItem from="1697196336853" duration="922000" />
+      <workItem from="1697197271109" duration="1765000" />
+      <workItem from="1697199611722" duration="297000" />
+      <workItem from="1697257377711" duration="1768000" />
+      <workItem from="1697270485541" duration="634000" />
+      <workItem from="1697271195411" duration="5441000" />
+      <workItem from="1697335317763" duration="919000" />
+      <workItem from="1697448295188" duration="217000" />
     </task>
     <task id="LOCAL-00001" summary="优化抽屉蒙版的显示效果&#10;优化代码质量">
       <created>1683952184207</created>
@@ -384,54 +405,6 @@
       <option name="presentableId" value="LOCAL-00017" />
       <option name="project" value="LOCAL" />
       <updated>1687402693401</updated>
-    </task>
-    <task id="LOCAL-00066" summary="新增联系作者&#10;优化视觉效果">
-      <option name="closed" value="true" />
-      <created>1692252750346</created>
-      <option name="number" value="00066" />
-      <option name="presentableId" value="LOCAL-00066" />
-      <option name="project" value="LOCAL" />
-      <updated>1692252750346</updated>
-    </task>
-    <task id="LOCAL-00067" summary="新增联系作者&#10;优化视觉效果">
-      <option name="closed" value="true" />
-      <created>1692252857912</created>
-      <option name="number" value="00067" />
-      <option name="presentableId" value="LOCAL-00067" />
-      <option name="project" value="LOCAL" />
-      <updated>1692252857912</updated>
-    </task>
-    <task id="LOCAL-00068" summary="优化视觉效果">
-      <option name="closed" value="true" />
-      <created>1692263335029</created>
-      <option name="number" value="00068" />
-      <option name="presentableId" value="LOCAL-00068" />
-      <option name="project" value="LOCAL" />
-      <updated>1692263335030</updated>
-    </task>
-    <task id="LOCAL-00069" summary="优化视觉效果">
-      <option name="closed" value="true" />
-      <created>1692268396467</created>
-      <option name="number" value="00069" />
-      <option name="presentableId" value="LOCAL-00069" />
-      <option name="project" value="LOCAL" />
-      <updated>1692268396467</updated>
-    </task>
-    <task id="LOCAL-00070" summary="优化视觉效果">
-      <option name="closed" value="true" />
-      <created>1692268467439</created>
-      <option name="number" value="00070" />
-      <option name="presentableId" value="LOCAL-00070" />
-      <option name="project" value="LOCAL" />
-      <updated>1692268467439</updated>
-    </task>
-    <task id="LOCAL-00071" summary="优化视觉效果">
-      <option name="closed" value="true" />
-      <created>1692268704036</created>
-      <option name="number" value="00071" />
-      <option name="presentableId" value="LOCAL-00071" />
-      <option name="project" value="LOCAL" />
-      <updated>1692268704036</updated>
     </task>
     <task id="LOCAL-00072" summary="优化视觉效果">
       <option name="closed" value="true" />
@@ -641,7 +614,55 @@
       <option name="project" value="LOCAL" />
       <updated>1695958826197</updated>
     </task>
-    <option name="localTasksCounter" value="98" />
+    <task id="LOCAL-00098" summary="优化视觉效果">
+      <option name="closed" value="true" />
+      <created>1695971204931</created>
+      <option name="number" value="00098" />
+      <option name="presentableId" value="LOCAL-00098" />
+      <option name="project" value="LOCAL" />
+      <updated>1695971204932</updated>
+    </task>
+    <task id="LOCAL-00099" summary="菜单栏新增回到顶部按钮、夜间模式">
+      <option name="closed" value="true" />
+      <created>1696678943546</created>
+      <option name="number" value="00099" />
+      <option name="presentableId" value="LOCAL-00099" />
+      <option name="project" value="LOCAL" />
+      <updated>1696678943546</updated>
+    </task>
+    <task id="LOCAL-00100" summary="优化无图模式颜色显示">
+      <option name="closed" value="true" />
+      <created>1696854849817</created>
+      <option name="number" value="00100" />
+      <option name="presentableId" value="LOCAL-00100" />
+      <option name="project" value="LOCAL" />
+      <updated>1696854849817</updated>
+    </task>
+    <task id="LOCAL-00101" summary="搜索框按钮能快速切换搜索引擎了">
+      <option name="closed" value="true" />
+      <created>1696857583447</created>
+      <option name="number" value="00101" />
+      <option name="presentableId" value="LOCAL-00101" />
+      <option name="project" value="LOCAL" />
+      <updated>1696857583447</updated>
+    </task>
+    <task id="LOCAL-00102" summary="新增图片切换间隔，修复已知问题">
+      <option name="closed" value="true" />
+      <created>1697189853065</created>
+      <option name="number" value="00102" />
+      <option name="presentableId" value="LOCAL-00102" />
+      <option name="project" value="LOCAL" />
+      <updated>1697189853067</updated>
+    </task>
+    <task id="LOCAL-00103" summary="优化代码逻辑">
+      <option name="closed" value="true" />
+      <created>1697291751452</created>
+      <option name="number" value="00103" />
+      <option name="presentableId" value="LOCAL-00103" />
+      <option name="project" value="LOCAL" />
+      <updated>1697291751453</updated>
+    </task>
+    <option name="localTasksCounter" value="104" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -659,11 +680,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="修复 Firefox 图片错位问题" />
-    <MESSAGE value="优化部分按钮 鼠标hover 显示效果&#10;优化部分代码质量" />
-    <MESSAGE value="优化时钟显示效果&#10;优化高分辨率屏幕显示效果" />
-    <MESSAGE value="优化部分显示效果&#10;优化部分代码质量" />
-    <MESSAGE value="新增多个搜索引擎" />
     <MESSAGE value="优化部分显示效果" />
     <MESSAGE value="优化大屏显示效果" />
     <MESSAGE value="popup 图片加载新增 blurhash 效果" />
@@ -684,6 +700,11 @@
     <MESSAGE value="新增修改按钮形状" />
     <MESSAGE value="新增更多产品，优化视觉效果" />
     <MESSAGE value="优化视觉效果" />
-    <option name="LAST_COMMIT_MESSAGE" value="优化视觉效果" />
+    <MESSAGE value="菜单栏新增回到顶部按钮、夜间模式" />
+    <MESSAGE value="优化无图模式颜色显示" />
+    <MESSAGE value="搜索框按钮能快速切换搜索引擎了" />
+    <MESSAGE value="新增图片切换间隔，修复已知问题" />
+    <MESSAGE value="优化代码逻辑" />
+    <option name="LAST_COMMIT_MESSAGE" value="优化代码逻辑" />
   </component>
 </project>

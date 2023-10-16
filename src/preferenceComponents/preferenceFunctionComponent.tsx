@@ -1,9 +1,8 @@
 import React from "react";
 import {Alert, Button, Card, Col, Form, message, Radio, RadioChangeEvent, Row, Space, Switch, Typography} from "antd";
 import {RedoOutlined, SettingOutlined} from "@ant-design/icons";
-import {getFontColor} from "../typescripts/publicFunctions";
+import {getFontColor, getPreferenceDataStorage} from "../typescripts/publicFunctions";
 import {PreferenceDataInterface} from "../typescripts/publicInterface";
-import {defaultPreferenceData} from "../typescripts/publicConstants";
 
 const {Paragraph} = Typography;
 
@@ -28,7 +27,7 @@ class PreferenceFunctionComponent extends React.Component {
     constructor(props: any) {
         super(props);
         this.state = {
-            preferenceData: defaultPreferenceData,
+            preferenceData: getPreferenceDataStorage(),
             disableSwitch: false
         };
     }
@@ -115,17 +114,6 @@ class PreferenceFunctionComponent extends React.Component {
         return Object.assign({}, this.state.preferenceData, data);
     }
 
-    componentWillMount() {
-        // 初始化偏好设置
-        let tempPreferenceData = localStorage.getItem("preferenceData");
-        if (tempPreferenceData === null) {
-            localStorage.setItem("preferenceData", JSON.stringify(defaultPreferenceData));
-        }
-        this.setState({
-            preferenceData: tempPreferenceData === null ? defaultPreferenceData : JSON.parse(tempPreferenceData),
-        });
-    }
-
     render() {
         return (
             <Card title={"功能设置"} size={"small"}
@@ -189,7 +177,7 @@ class PreferenceFunctionComponent extends React.Component {
                                 <ol>
                                     <Space direction={"vertical"}>
                                         <li>重置插件将清空缓存恢复初始设置</li>
-                                        <li>插件设置出现异常可尝试重置插件</li>
+                                        <li>插件出现任何异常可尝试重置插件</li>
                                     </Space>
                                 </ol>
                             </Paragraph>
