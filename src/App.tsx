@@ -12,7 +12,7 @@ import CollectionComponent from "./components/collectionComponent";
 import AuthorComponent from "./components/authorComponent";
 import AuthorLiteComponent from "./components/authorLiteComponent"
 
-import {Col, Layout, Row, Space} from "antd";
+import {Col, Layout, Row, Space, notification} from "antd";
 import "./stylesheets/publicStyles.scss"
 import {
     changeThemeColor,
@@ -94,6 +94,20 @@ class App extends React.Component {
             })
         }
 
+        // 版本号提醒
+        let storageVersion = localStorage.getItem("SkyNewTabReactVersion");
+        let currentVersion = require('../package.json').version;
+        if(storageVersion !== currentVersion) {
+            notification.info({
+                message: "已更新至 " + currentVersion,
+                description: "详情请前往 GitHub 或 GitLab 查看",
+                placement: "bottomLeft",
+                duration: 5,
+                closeIcon: false
+            });
+            localStorage.setItem("SkyNewTabReactVersion", currentVersion);
+        }
+
         // 修改各类弹窗样式
         $("body").bind("DOMNodeInserted", () => {
             // 通用
@@ -130,6 +144,15 @@ class App extends React.Component {
                     "color": this.state.themeColor.componentFontColor
                 });
                 $(".ant-message-custom-content > .anticon").css("color", this.state.themeColor.componentFontColor);
+            }
+
+            // notification
+            let notificationEle = $(".ant-notification");
+            if (notificationEle.length && notificationEle.length > 0) {
+                $(".ant-notification-notice").css({"backgroundColor": this.state.themeColor.componentBackgroundColor,});
+                $(".ant-notification-notice-icon").css("color", this.state.themeColor.componentFontColor);
+                $(".ant-notification-notice-message").css("color", this.state.themeColor.componentFontColor);
+                $(".ant-notification-notice-description").css("color", this.state.themeColor.componentFontColor);
             }
 
             // drawer
