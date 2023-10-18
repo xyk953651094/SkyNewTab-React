@@ -83,7 +83,7 @@ class AuthorComponent extends React.Component {
 
     authorLinkBtnOnClick() {
         if (!isEmptyString(this.state.authorLink)) {
-            window.open(this.state.authorLink + unsplashUrl);
+            window.open(this.state.authorLink + unsplashUrl, "_blank");
         } else {
             message.error("无跳转链接");
         }
@@ -91,7 +91,7 @@ class AuthorComponent extends React.Component {
 
     imageLinkBtnOnClick() {
         if (!isEmptyString(this.state.imageLink)) {
-            window.open(this.state.imageLink + unsplashUrl);
+            window.open(this.state.imageLink + unsplashUrl, "_blank");
         } else {
             message.error("无跳转链接");
         }

@@ -21,6 +21,7 @@ import {
     setColorTheme
 } from "./typescripts/publicFunctions";
 import {PreferenceDataInterface, ThemeColorInterface} from "./typescripts/publicInterface";
+import ImageHistoryComponent from "./components/imageHistoryComponent";
 
 const {Header, Content, Footer} = Layout;
 const $ = require("jquery");
@@ -31,6 +32,7 @@ type stateType = {
     themeColor: ThemeColorInterface,
 
     imageData: any,
+    imageHistory: any,
     preferenceData: PreferenceDataInterface,
     componentDisplay: "none" | "block",
 }
@@ -51,6 +53,7 @@ class App extends React.Component {
             },
 
             imageData: null,
+            imageHistory: [],
             preferenceData: getPreferenceDataStorage(),  // 加载偏好设置
             componentDisplay: "none"
         }
@@ -77,6 +80,12 @@ class App extends React.Component {
                     },
                 })
             }
+        })
+    }
+
+    getImageHistory(value: any) {
+        this.setState({
+            imageHistory: value
         })
     }
 
@@ -251,6 +260,7 @@ class App extends React.Component {
                 <Content id={"content"} className={"alignCenter"}>
                     <WallpaperComponent
                         getImageData={this.getImageData.bind(this)}
+                        getImageHistory={this.getImageHistory.bind(this)}
                     />
                     <Space direction={"vertical"} align={"center"}>
                         <ClockComponent themeColor={this.state.themeColor} preferenceData={this.state.preferenceData}/>
@@ -271,6 +281,12 @@ class App extends React.Component {
                                     display={this.state.componentDisplay}
                                     themeColor={this.state.themeColor}
                                     imageData={this.state.imageData}
+                                    preferenceData={this.state.preferenceData}
+                                />
+                                <ImageHistoryComponent
+                                    display={this.state.componentDisplay}
+                                    themeColor={this.state.themeColor}
+                                    imageHistory={this.state.imageHistory}
                                     preferenceData={this.state.preferenceData}
                                 />
                             </Space>

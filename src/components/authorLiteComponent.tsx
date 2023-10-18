@@ -40,7 +40,7 @@ class AuthorLiteComponent extends React.Component {
 
     authorLiteOnClick() {
         if (!isEmptyString(this.state.imageLink)) {
-            window.open(this.state.imageLink + unsplashUrl);
+            window.open(this.state.imageLink + unsplashUrl, "_blank");
         } else {
             message.error("无跳转链接");
         }

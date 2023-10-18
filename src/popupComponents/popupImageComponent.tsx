@@ -76,7 +76,7 @@ class PopupImageComponent extends React.Component {
 
     authorLinkBtnOnClick() {
         if (!isEmptyString(this.state.authorLink)) {
-            window.open(this.state.authorLink);
+            window.open(this.state.authorLink, "_blank");
         } else {
             message.error("暂无链接")
         }
@@ -84,7 +84,7 @@ class PopupImageComponent extends React.Component {
 
     imageLinkBtnOnClick() {
         if (!isEmptyString(this.state.imageLink)) {
-            window.open(this.state.imageLink);
+            window.open(this.state.imageLink, "_blank");
         } else {
             message.error("暂无链接")
         }

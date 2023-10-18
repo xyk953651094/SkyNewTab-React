@@ -9,7 +9,7 @@ import {
     imageDynamicEffect,
     isEmptyString
 } from "../typescripts/publicFunctions";
-import {clientId, device} from "../typescripts/publicConstants";
+import {clientId, device, imageHistoryMaxSize} from "../typescripts/publicConstants";
 import {PreferenceDataInterface} from "../typescripts/publicInterface";
 import {decode} from "blurhash";
 
@@ -17,6 +17,7 @@ const $ = require("jquery");
 
 type propType = {
     getImageData: any,
+    getImageHistory: any
 }
 
 type stateType = {
@@ -126,14 +127,37 @@ class WallpaperComponent extends React.Component {
             .then(function (resultData: any) {
                 message.destroy();
                 message.loading("正在加载图片", 0);
-                localStorage.setItem("lastImageRequestTime", String(new Date().getTime()));  // 保存请求时间，防抖节流
-                localStorage.setItem("lastImage", JSON.stringify(resultData));                // 保存请求结果，防抖节流
+
+                // 缓存历史图片
+                let lastImageStorage = localStorage.getItem("lastImage"); // 上一张图片
+                let imageHistoryStorage = localStorage.getItem("imageHistory");
+                let imageHistoryJson = [];
+                if(imageHistoryStorage !== null) {
+                    imageHistoryJson = JSON.parse(imageHistoryStorage);
+                }
+                if(lastImageStorage !== null) {
+                    let lastImageJson = JSON.parse(lastImageStorage);
+                    let imageArrayJsonItem = {
+                        index: new Date().getTime(),
+                        imageUrl: lastImageJson.urls.regular,
+                        imageLink: lastImageJson.links.html
+                    };
+
+                    if(imageHistoryJson.length === imageHistoryMaxSize) { // 满了就把第一个删掉
+                        imageHistoryJson.shift();
+                    }
+                    imageHistoryJson.push(imageArrayJsonItem);
+                }
+                localStorage.setItem("imageHistory", JSON.stringify(imageHistoryJson));
+                tempThis.props.getImageHistory(imageHistoryJson);  // 传递给历史图片组件
+
+                // 保存请求时间，防抖节流
+                localStorage.setItem("lastImageRequestTime", String(new Date().getTime()));
+                localStorage.setItem("lastImage", JSON.stringify(resultData));
                 tempThis.setWallpaper(resultData);
             })
             .catch(function () {
                 message.destroy();
-                // 请求失败也更新请求时间，防止超时后无信息可显示
-                // localStorage.setItem("lastImageRequestTime", String(new Date().getTime()));  // 保存请求时间，防抖节流
 
                 // 请求失败时使用上一次请求结果
                 let lastImage: any = localStorage.getItem("lastImage");
@@ -157,8 +181,8 @@ class WallpaperComponent extends React.Component {
             let nowTimeStamp = new Date().getTime();
             if (lastRequestTime === null) {  // 第一次请求时 lastRequestTime 为 null，因此直接进行请求赋值 lastRequestTime
                 this.getWallpaper();
-            // } else if (nowTimeStamp - parseInt(lastRequestTime) > 10 * 1000) {  // 必须多于切换间隔才能进行新的请求
-            } else if (nowTimeStamp - parseInt(lastRequestTime) > parseInt(this.state.preferenceData.changeImageTime)) {  // 必须多于切换间隔才能进行新的请求
+            } else if (nowTimeStamp - parseInt(lastRequestTime) > 0) {  // 必须多于切换间隔才能进行新的请求
+            // } else if (nowTimeStamp - parseInt(lastRequestTime) > parseInt(this.state.preferenceData.changeImageTime)) {  // 必须多于切换间隔才能进行新的请求
                 this.getWallpaper();
             } else {  // 切换间隔内使用上一次请求结果
                 let lastImage: any = localStorage.getItem("lastImage");
@@ -168,12 +192,6 @@ class WallpaperComponent extends React.Component {
                     this.setWallpaper(lastImage);
                 } else {
                     message.error("无缓存图片可加载，请前往设置手动刷新");
-
-                    // message.error("无缓存图片可加载，一秒后刷新页面");
-                    // localStorage.removeItem("lastImageRequestTime");
-                    // setTimeout(() => {
-                    //     window.location.reload();
-                    // }, 1000);
                 }
             }
 

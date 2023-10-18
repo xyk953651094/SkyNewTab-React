@@ -78,7 +78,7 @@ class SearchComponent extends React.Component {
     }
 
     onPressEnter(e: any) {
-        window.open(this.state.searchEngineUrl + e.target.value);
+        window.open(this.state.searchEngineUrl + e.target.value, "_blank");
     }
 
     changeSearchEngine() {

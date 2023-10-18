@@ -214,7 +214,7 @@ class CollectionComponent extends React.Component {
                                         <Button type={"primary"} shape={this.props.preferenceData.buttonShape} className={"componentTheme"}
                                                 key={item.timeStamp}
                                                 onClick={() => {
-                                                    window.open(item.webUrl)
+                                                    window.open(item.webUrl, "_blank")
                                                 }}
                                                 style={{
                                                     color: this.state.fontColor,
