@@ -10,7 +10,7 @@ import {
     UserOutlined
 } from "@ant-design/icons";
 import {unsplashUrl} from "../typescripts/publicConstants";
-import {changeThemeColor, getFontColor, getSearchEngineDetail, isEmptyString} from "../typescripts/publicFunctions";
+import {changeThemeColor, getFontColor, getSearchEngineDetail, isEmpty} from "../typescripts/publicFunctions";
 import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
 import "../stylesheets/publicStyles.scss"
 
@@ -82,7 +82,7 @@ class AuthorComponent extends React.Component {
     }
 
     authorLinkBtnOnClick() {
-        if (!isEmptyString(this.state.authorLink)) {
+        if (!isEmpty(this.state.authorLink)) {
             window.open(this.state.authorLink + unsplashUrl, "_blank");
         } else {
             message.error("无跳转链接");
@@ -90,7 +90,7 @@ class AuthorComponent extends React.Component {
     }
 
     imageLinkBtnOnClick() {
-        if (!isEmptyString(this.state.imageLink)) {
+        if (!isEmpty(this.state.imageLink)) {
             window.open(this.state.imageLink + unsplashUrl, "_blank");
         } else {
             message.error("无跳转链接");
@@ -136,10 +136,10 @@ class AuthorComponent extends React.Component {
                 authorPhotos: nextProps.imageData.user.total_photos,
                 imageLink: nextProps.imageData.links.html,
                 imagePreviewUrl: nextProps.imageData.urls.regular,
-                imageLocation: isEmptyString(nextProps.imageData.location.name) ? "暂无信息" : nextProps.imageData.location.name,
-                imageDescription: isEmptyString(nextProps.imageData.alt_description) ? "暂无信息" : nextProps.imageData.alt_description,
+                imageLocation: isEmpty(nextProps.imageData.location.name) ? "暂无信息" : nextProps.imageData.location.name,
+                imageDescription: isEmpty(nextProps.imageData.alt_description) ? "暂无信息" : nextProps.imageData.alt_description,
                 imageCreateTime: this.getCreateTime(nextProps.imageData.created_at),
-                imageCamera: isEmptyString(nextProps.imageData.exif.name) ? "暂无信息" : nextProps.imageData.exif.name,
+                imageCamera: isEmpty(nextProps.imageData.exif.name) ? "暂无信息" : nextProps.imageData.exif.name,
             }, () => {
                 changeThemeColor("#authorBtn", this.state.backgroundColor, this.state.fontColor);
             })

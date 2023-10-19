@@ -20,7 +20,7 @@ import {
     getFontColor,
     getPreferenceDataStorage,
     getTimeDetails,
-    isEmptyString
+    isEmpty
 } from "../typescripts/publicFunctions";
 import {CheckboxValueType} from "antd/es/checkbox/Group";
 import {PreferenceDataInterface} from "../typescripts/publicInterface";
@@ -111,7 +111,7 @@ class PreferenceImageComponent extends React.Component {
         let inputValue = $("#customTopicInput").val();
         this.setState({
             preferenceData: this.setPreferenceData({customTopic: inputValue}),
-            disableImageTopic: !isEmptyString(inputValue)
+            disableImageTopic: !isEmpty(inputValue)
         }, () => {
             this.props.getPreferenceData(this.state.preferenceData);
             localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
@@ -222,7 +222,7 @@ class PreferenceImageComponent extends React.Component {
 
         this.setState({
             buttonShape: this.state.preferenceData.buttonShape === "round" ? "circle" : "default",
-            disableImageTopic: !isEmptyString(this.state.preferenceData.customTopic)
+            disableImageTopic: !isEmpty(this.state.preferenceData.customTopic)
         })
     }
 

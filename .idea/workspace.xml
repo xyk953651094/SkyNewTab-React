@@ -4,18 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="新增版本更新提醒，优化跳转链接">
-      <change afterPath="$PROJECT_DIR$/src/components/imageHistoryComponent.tsx" afterDir="false" />
+    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="新增历史图片">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/authorComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/authorComponent.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/authorLiteComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/authorLiteComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/collectionComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/collectionComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/searchComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/searchComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/clockComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/clockComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/imageHistoryComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/imageHistoryComponent.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/wallpaperComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/wallpaperComponent.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/popupComponents/popupImageComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/popupComponents/popupImageComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stylesheets/wallpaperComponent.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/stylesheets/wallpaperComponent.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/typescripts/publicConstants.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/typescripts/publicConstants.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/preferenceComponents/preferenceImageComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/preferenceComponents/preferenceImageComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/typescripts/publicFunctions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/typescripts/publicFunctions.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -298,7 +296,9 @@
       <workItem from="1697448295188" duration="217000" />
       <workItem from="1697451938404" duration="471000" />
       <workItem from="1697616580580" duration="3647000" />
-      <workItem from="1697625779702" duration="4893000" />
+      <workItem from="1697625779702" duration="4995000" />
+      <workItem from="1697680284104" duration="34000" />
+      <workItem from="1697680332330" duration="6149000" />
     </task>
     <task id="LOCAL-00001" summary="优化抽屉蒙版的显示效果&#10;优化代码质量">
       <created>1683952184207</created>
@@ -418,14 +418,6 @@
       <option name="presentableId" value="LOCAL-00017" />
       <option name="project" value="LOCAL" />
       <updated>1687402693401</updated>
-    </task>
-    <task id="LOCAL-00074" summary="优化视觉效果">
-      <option name="closed" value="true" />
-      <created>1693231148261</created>
-      <option name="number" value="00074" />
-      <option name="presentableId" value="LOCAL-00074" />
-      <option name="project" value="LOCAL" />
-      <updated>1693231148262</updated>
     </task>
     <task id="LOCAL-00075" summary="修复部分问题">
       <option name="closed" value="true" />
@@ -675,7 +667,15 @@
       <option name="project" value="LOCAL" />
       <updated>1697624533687</updated>
     </task>
-    <option name="localTasksCounter" value="106" />
+    <task id="LOCAL-00106" summary="新增历史图片">
+      <option name="closed" value="true" />
+      <created>1697638273248</created>
+      <option name="number" value="00106" />
+      <option name="presentableId" value="LOCAL-00106" />
+      <option name="project" value="LOCAL" />
+      <updated>1697638273248</updated>
+    </task>
+    <option name="localTasksCounter" value="107" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -693,7 +693,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="popup 图片加载新增 blurhash 效果" />
     <MESSAGE value="优化视觉效果&#10;优化代码质量" />
     <MESSAGE value="整理代码格式" />
     <MESSAGE value="新增简洁模式" />
@@ -718,6 +717,7 @@
     <MESSAGE value="优化代码逻辑" />
     <MESSAGE value="2.1.0发布" />
     <MESSAGE value="新增版本更新提醒，优化跳转链接" />
-    <option name="LAST_COMMIT_MESSAGE" value="新增版本更新提醒，优化跳转链接" />
+    <MESSAGE value="新增历史图片" />
+    <option name="LAST_COMMIT_MESSAGE" value="新增历史图片" />
   </component>
 </project>

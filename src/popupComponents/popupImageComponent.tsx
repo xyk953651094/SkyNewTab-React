@@ -9,7 +9,7 @@ import {
 } from "@ant-design/icons";
 import "../stylesheets/popupComponent.scss";
 import {decode} from "blurhash"
-import {getFontColor, getSearchEngineDetail, isEmptyString} from "../typescripts/publicFunctions";
+import {getFontColor, getSearchEngineDetail, isEmpty} from "../typescripts/publicFunctions";
 import {PreferenceDataInterface} from "../typescripts/publicInterface";
 
 const $ = require("jquery");
@@ -75,7 +75,7 @@ class PopupImageComponent extends React.Component {
     }
 
     authorLinkBtnOnClick() {
-        if (!isEmptyString(this.state.authorLink)) {
+        if (!isEmpty(this.state.authorLink)) {
             window.open(this.state.authorLink, "_blank");
         } else {
             message.error("暂无链接")
@@ -83,7 +83,7 @@ class PopupImageComponent extends React.Component {
     }
 
     imageLinkBtnOnClick() {
-        if (!isEmptyString(this.state.imageLink)) {
+        if (!isEmpty(this.state.imageLink)) {
             window.open(this.state.imageLink, "_blank");
         } else {
             message.error("暂无链接")
@@ -135,14 +135,14 @@ class PopupImageComponent extends React.Component {
                     authorLink: nextProps.imageData.user.links.html,
                     imageLink: nextProps.imageData.links.html,
                     imagePreviewUrl: nextProps.imageData.urls.regular,
-                    imageLocation: isEmptyString(nextProps.imageData.location.name) ? "暂无信息" : nextProps.imageData.location.name,
-                    imageDescription: isEmptyString(nextProps.imageData.alt_description) ? "暂无信息" : nextProps.imageData.alt_description,
+                    imageLocation: isEmpty(nextProps.imageData.location.name) ? "暂无信息" : nextProps.imageData.location.name,
+                    imageDescription: isEmpty(nextProps.imageData.alt_description) ? "暂无信息" : nextProps.imageData.alt_description,
                     imageCreateTime: this.getCreateTime(nextProps.imageData.created_at),
-                    imageCamera: isEmptyString(nextProps.imageData.exif.name) ? "暂无信息" : nextProps.imageData.exif.name,
+                    imageCamera: isEmpty(nextProps.imageData.exif.name) ? "暂无信息" : nextProps.imageData.exif.name,
                     hoverColor: nextProps.imageData.color,
                     blurHashCode: nextProps.imageData.blur_hash
                 }, () => {
-                    if (!isEmptyString(this.state.blurHashCode)) {
+                    if (!isEmpty(this.state.blurHashCode)) {
                         const popupCanvas = document.getElementById("popupCanvas") as HTMLCanvasElement | null;
                         if (popupCanvas instanceof HTMLCanvasElement) {
                             let blurHashImage = decode(this.state.blurHashCode, popupCanvas.width, popupCanvas.height);

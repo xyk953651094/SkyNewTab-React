@@ -1,8 +1,8 @@
 import React from "react";
-import {Button, message, Popover, Row, Typography, Carousel, Image, Empty} from "antd";
-import {HistoryOutlined,} from "@ant-design/icons";
+import {Button, message, Popover, Row, Typography, Carousel, Image, Empty, Col, Space} from "antd";
+import {FileImageOutlined, HistoryOutlined} from "@ant-design/icons";
 import {imageHistoryMaxSize, unsplashUrl} from "../typescripts/publicConstants";
-import {changeThemeColor} from "../typescripts/publicFunctions";
+import {changeThemeColor, getFontColor, isEmpty} from "../typescripts/publicFunctions";
 import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
 import "../stylesheets/publicStyles.scss"
 
@@ -20,7 +20,8 @@ type stateType = {
     backgroundColor: string,
     fontColor: string,
     buttonShape: "circle" | "default" | "round" | undefined,
-    imageHistoryJson: any
+    imageHistoryJson: any,
+    imageLink: string
 }
 
 interface ImageHistoryComponent {
@@ -36,16 +37,33 @@ class ImageHistoryComponent extends React.Component {
             backgroundColor: "",
             fontColor: "",
             buttonShape: "round",
-            imageHistoryJson: []
+            imageHistoryJson: [],
+            imageLink: "",
         };
     }
 
-    imageOnClick(item: any) {
-        if(item.imageLink) {
-            window.open(item.imageLink + unsplashUrl, '_blank');
+    btnMouseOver(e: any) {
+        e.currentTarget.style.backgroundColor = this.state.hoverColor;
+        e.currentTarget.style.color = getFontColor(this.state.hoverColor);
+    }
+
+    btnMouseOut(e: any) {
+        e.currentTarget.style.backgroundColor = "transparent";
+        e.currentTarget.style.color = this.state.fontColor;
+    }
+
+    imageLinkBtnOnClick() {
+        if (!isEmpty(this.state.imageLink)) {
+            window.open(this.state.imageLink + unsplashUrl, "_blank");
         } else {
             message.error("无跳转链接");
         }
+    }
+
+    carouselOnChange(currentIndex: number) {
+        this.setState({
+            imageLink: this.state.imageHistoryJson[currentIndex].imageLink
+        })
     }
 
     componentWillReceiveProps(nextProps: any, prevProps: any) {
@@ -59,9 +77,12 @@ class ImageHistoryComponent extends React.Component {
             });
         }
 
-        if (nextProps.imageHistory && nextProps.imageHistory !== prevProps.imageHistory) {
+        if (nextProps.imageHistory.length > 0 && nextProps.imageHistory !== prevProps.imageHistory) {
+            let tempImageHistoryJson = nextProps.imageHistory.reverse(); // 重新到旧排序
+            console.log(tempImageHistoryJson);
             this.setState({
-                imageHistoryJson: nextProps.imageHistory,
+                imageHistoryJson: tempImageHistoryJson,
+                imageLink: tempImageHistoryJson[0].imageLink,
             })
         }
 
@@ -76,22 +97,42 @@ class ImageHistoryComponent extends React.Component {
         // 获取缓存图片列表
         let imageHistoryStorage = localStorage.getItem("imageHistory");
         if(imageHistoryStorage !== null) {
-            this.setState({
-                imageHistoryJson: JSON.parse(imageHistoryStorage)
-            })
+            let tempImageHistoryJson = JSON.parse(imageHistoryStorage);
+            if (!isEmpty(tempImageHistoryJson)) {
+                tempImageHistoryJson = tempImageHistoryJson.reverse(); // 重新到旧排序
+                this.setState({
+                    imageHistoryJson: tempImageHistoryJson,
+                    imageLink: tempImageHistoryJson[0].imageLink,
+                })
+            }
         }
     }
 
     render() {
         const popoverTitle = (
-            <Text style={{color: this.state.fontColor}}>{"历史记录 " + this.state.imageHistoryJson.length + " / " + imageHistoryMaxSize}</Text>
+            <Row align={"middle"}>
+                <Col span={10}>
+                    <Text style={{color: this.state.fontColor}}>{"历史记录 " + this.state.imageHistoryJson.length + " / " + imageHistoryMaxSize}</Text>
+                </Col>
+                <Col span={14} style={{textAlign: "right"}}>
+                    <Space>
+                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<FileImageOutlined />}
+                                onMouseOver={this.btnMouseOver.bind(this)}
+                                onMouseOut={this.btnMouseOut.bind(this)}
+                                onClick={this.imageLinkBtnOnClick.bind(this)}
+                                style={{color: this.state.fontColor}}>
+                            {"当前历史图片主页"}
+                        </Button>
+                    </Space>
+                </Col>
+            </Row>
         );
 
         const popoverContent = (
             <Row className="alignCenter">
                 <Empty image={Empty.PRESENTED_IMAGE_SIMPLE}
                        style={{display: this.state.imageHistoryJson.length === 0? "block" : "none"}}/>
-                <Carousel effect="fade"
+                <Carousel effect="fade" afterChange={this.carouselOnChange.bind(this)}
                           style={{display: this.state.imageHistoryJson.length === 0? "none" : "block", width: "350px", height: "210px"}}>
                     {
                         this.state.imageHistoryJson.map((item: any) => {
@@ -103,8 +144,7 @@ class ImageHistoryComponent extends React.Component {
                                         preview={false}
                                         alt={"暂无图片"}
                                         src={item.imageUrl}
-                                        style={{borderRadius: "8px", cursor: "pointer"}}
-                                        onClick={this.imageOnClick.bind(this, item)}
+                                        style={{borderRadius: "8px"}}
                                     />
                                 </div>
                             )

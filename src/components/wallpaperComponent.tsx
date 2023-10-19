@@ -7,7 +7,7 @@ import {
     getTimeDetails,
     httpRequest,
     imageDynamicEffect,
-    isEmptyString
+    isEmpty
 } from "../typescripts/publicFunctions";
 import {clientId, device, imageHistoryMaxSize} from "../typescripts/publicConstants";
 import {PreferenceDataInterface} from "../typescripts/publicInterface";
@@ -81,7 +81,7 @@ class WallpaperComponent extends React.Component {
             }
 
             // blurHash
-            if (!isEmptyString(imageData.blur_hash)) {
+            if (!isEmpty(imageData.blur_hash)) {
                 const backgroundCanvas = document.getElementById("backgroundCanvas") as HTMLCanvasElement | null;
                 if (backgroundCanvas instanceof HTMLCanvasElement) {
                     let blurHashImage = decode(imageData.blur_hash, backgroundCanvas.width, backgroundCanvas.height);
@@ -117,7 +117,7 @@ class WallpaperComponent extends React.Component {
         let data = {
             "client_id": clientId,
             "orientation": (device === "iPhone" || device === "Android") ? "portrait" : "landscape",
-            "topics": isEmptyString(imageQuery) ? tempImageTopics : "",
+            "topics": isEmpty(imageQuery) ? tempImageTopics : "",
             "query": imageQuery,
             "content_filter": "high",
         };
@@ -137,7 +137,7 @@ class WallpaperComponent extends React.Component {
                 }
                 if(lastImageStorage !== null) {
                     let lastImageJson = JSON.parse(lastImageStorage);
-                    let imageArrayJsonItem = {
+                    let imageHistoryJsonItem = {
                         index: new Date().getTime(),
                         imageUrl: lastImageJson.urls.regular,
                         imageLink: lastImageJson.links.html
@@ -146,7 +146,7 @@ class WallpaperComponent extends React.Component {
                     if(imageHistoryJson.length === imageHistoryMaxSize) { // 满了就把第一个删掉
                         imageHistoryJson.shift();
                     }
-                    imageHistoryJson.push(imageArrayJsonItem);
+                    imageHistoryJson.push(imageHistoryJsonItem);
                 }
                 localStorage.setItem("imageHistory", JSON.stringify(imageHistoryJson));
                 tempThis.props.getImageHistory(imageHistoryJson);  // 传递给历史图片组件
