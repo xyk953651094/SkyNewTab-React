@@ -11,8 +11,8 @@ import "../stylesheets/popupComponent.scss";
 import {decode} from "blurhash"
 import {getFontColor, getSearchEngineDetail, isEmpty} from "../typescripts/publicFunctions";
 import {PreferenceDataInterface} from "../typescripts/publicInterface";
+import $ from "jquery";
 
-const $ = require("jquery");
 const btnMaxSize = 35;
 
 type propType = {
@@ -120,8 +120,7 @@ class PopupImageComponent extends React.Component {
         if (popupImage instanceof HTMLElement) {
             popupImage.onload = () => {
                 // $("#popupCanvas").remove();
-                $("#popupCanvas").removeClass("imageFadeIn");
-                $("#popupCanvas").addClass("imageFadeOut");
+                $("#popupCanvas").removeClass("imageFadeIn").addClass("imageFadeOut");
                 popupImageDiv.style.display = "block";
                 popupImageDiv.className = "imageFadeIn";
             }

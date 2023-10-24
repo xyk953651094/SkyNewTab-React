@@ -1,5 +1,5 @@
 import React from "react";
-import {Button, message, Popover, Row, Typography, Carousel, Image, Empty, Col, Space} from "antd";
+import {Button, message, Popover, Row, Typography, Carousel, Image, Empty, Col, Space, List} from "antd";
 import {FileImageOutlined, HistoryOutlined} from "@ant-design/icons";
 import {imageHistoryMaxSize, unsplashUrl} from "../typescripts/publicConstants";
 import {changeThemeColor, getFontColor, isEmpty} from "../typescripts/publicFunctions";
@@ -129,29 +129,43 @@ class ImageHistoryComponent extends React.Component {
         );
 
         const popoverContent = (
-            <Row className="alignCenter">
-                <Empty image={Empty.PRESENTED_IMAGE_SIMPLE}
-                       style={{display: this.state.imageHistoryJson.length === 0? "block" : "none"}}/>
-                <Carousel effect="fade" afterChange={this.carouselOnChange.bind(this)}
-                          style={{display: this.state.imageHistoryJson.length === 0? "none" : "block", width: "350px", height: "210px"}}>
-                    {
-                        this.state.imageHistoryJson.map((item: any) => {
-                            return (
-                                <div key={item.index} style={{width: "350px", height: "210px", lineHeight: "210px"}}>
-                                    <Image
-                                        width={350}
-                                        height={210}
-                                        preview={false}
-                                        alt={"暂无图片"}
-                                        src={item.imageUrl}
-                                        style={{borderRadius: "8px"}}
-                                    />
-                                </div>
-                            )
-                        })
-                    }
-                </Carousel>
-            </Row>
+            <List>
+                <List.Item>
+                    <Row className="alignCenter">
+                        <Empty image={Empty.PRESENTED_IMAGE_SIMPLE}
+                               style={{display: this.state.imageHistoryJson.length === 0? "block" : "none"}}/>
+                        <Carousel effect="fade" afterChange={this.carouselOnChange.bind(this)}
+                                  style={{display: this.state.imageHistoryJson.length === 0? "none" : "block", width: "350px", height: "210px"}}>
+                            {
+                                this.state.imageHistoryJson.map((item: any) => {
+                                    return (
+                                        <div key={item.index} style={{width: "350px", height: "210px", lineHeight: "210px"}}>
+                                            <Image
+                                                width={350}
+                                                height={210}
+                                                preview={false}
+                                                alt={"暂无图片"}
+                                                src={item.imageUrl}
+                                                style={{borderRadius: "8px"}}
+                                                placeholder={
+                                                    <Image
+                                                        width={350}
+                                                        height={210}
+                                                        preview={false}
+                                                        alt={"暂无图片"}
+                                                        src={item.placeholderUrl}
+                                                        style={{borderRadius: "8px"}}
+                                                    />
+                                                }
+                                            />
+                                        </div>
+                                    )
+                                })
+                            }
+                        </Carousel>
+                    </Row>
+                </List.Item>
+            </List>
         );
 
         return (

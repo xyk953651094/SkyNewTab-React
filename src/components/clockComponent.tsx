@@ -3,9 +3,9 @@ import {Col, Row, Space, Typography} from "antd";
 import "../stylesheets/clockComponent.scss"
 import {changeBackgroundColor, changeFontColor, getTimeDetails} from "../typescripts/publicFunctions";
 import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
+import $ from "jquery";
 
 const {Text} = Typography;
-const $ = require("jquery");
 
 type propType = {
     themeColor: ThemeColorInterface,

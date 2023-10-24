@@ -26,7 +26,7 @@ import {CheckboxValueType} from "antd/es/checkbox/Group";
 import {PreferenceDataInterface} from "../typescripts/publicInterface";
 
 const {Paragraph} = Typography;
-const $ = require("jquery");
+import $ from "jquery";;
 
 type propType = {
     hoverColor: string,

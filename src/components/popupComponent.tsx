@@ -13,7 +13,7 @@ import {PreferenceDataInterface} from "../typescripts/publicInterface";
 import PopupHeaderComponent from "../popupComponents/popupHeaderComponent";
 
 const {Header, Content, Footer} = Layout;
-const $ = require("jquery")
+import $ from "jquery";;
 
 type propType = {}
 

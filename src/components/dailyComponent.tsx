@@ -6,7 +6,7 @@ import {changeThemeColor, getFontColor, getTimeDetails} from "../typescripts/pub
 import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
 
 const {Text} = Typography;
-const $ = require("jquery");
+import $ from "jquery";;
 
 type propType = {
     themeColor: ThemeColorInterface,
@@ -275,7 +275,12 @@ class DailyComponent extends React.Component {
                         {this.state.dailySize + " 个倒数日"}
                     </Button>
                 </Popover>
-                <Modal title={"添加倒数日 " + this.state.dailySize + " / " + this.state.dailyMaxSize} closeIcon={false}
+                <Modal title={
+                    <Text style={{color: this.state.fontColor}}>
+                        {"添加倒数日 " + this.state.dailySize + " / " + this.state.dailyMaxSize}
+                    </Text>
+                }
+                       closeIcon={false}
                        centered
                        open={this.state.displayModal} onOk={this.modalOkBtnOnClick.bind(this)}
                        onCancel={this.modalCancelBtnOnClick.bind(this)}

@@ -2,7 +2,7 @@ import {darkThemeArray, defaultPreferenceData, lightThemeArray} from "./publicCo
 import "jquery-color"
 import {PreferenceDataInterface, ThemeColorInterface} from "./publicInterface";
 
-const $ = require("jquery");
+import $ from "jquery";;
 
 // 网络请求
 export function httpRequest(headers: object, url: string, data: object, method: "GET" | "POST") {

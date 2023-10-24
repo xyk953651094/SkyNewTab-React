@@ -3,9 +3,11 @@ import {Button, Col, Form, Input, List, message, Modal, Popover, Rate, Row, Sele
 import {CheckOutlined, CheckSquareOutlined, PlusOutlined, TagOutlined} from "@ant-design/icons";
 import {changeThemeColor, getFontColor} from "../typescripts/publicFunctions";
 import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
+import $ from "jquery";
 
 const {Text} = Typography;
-const $ = require("jquery");
+// const $ = require("jquery");
+
 
 type propType = {
     themeColor: ThemeColorInterface,
@@ -149,7 +151,7 @@ class TodoComponent extends React.Component {
     }
 
     selectOnChange(value: string) {
-        let tempTag = "工作";
+        let tempTag;
         switch (value) {
             case "work":
                 tempTag = "工作";
@@ -211,8 +213,9 @@ class TodoComponent extends React.Component {
         const popoverTitle = (
             <Row align={"middle"}>
                 <Col span={10}>
-                    <Text
-                        style={{color: this.state.fontColor}}>{"待办事项 " + this.state.todoSize + " / " + this.state.todoMaxSize}</Text>
+                    <Text style={{color: this.state.fontColor}}>
+                        {"待办事项 " + this.state.todoSize + " / " + this.state.todoMaxSize}
+                    </Text>
                 </Col>
                 <Col span={14} style={{textAlign: "right"}}>
                     <Space>
@@ -279,8 +282,12 @@ class TodoComponent extends React.Component {
                         {this.state.todoSize + " 个待办事项"}
                     </Button>
                 </Popover>
-                <Modal title={"添加待办事项 " + this.state.todoSize + " / " + this.state.todoMaxSize} closeIcon={false}
-                       centered
+                <Modal title={
+                    <Text style={{color: this.state.fontColor}}>
+                        {"添加待办事项 " + this.state.todoSize + " / " + this.state.todoMaxSize}
+                    </Text>
+                }
+                       closeIcon={false} centered
                        open={this.state.displayModal} onOk={this.modalOkBtnOnClick.bind(this)}
                        onCancel={this.modalCancelBtnOnClick.bind(this)}
                        destroyOnClose={true}

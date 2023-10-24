@@ -22,9 +22,9 @@ import {
 } from "./typescripts/publicFunctions";
 import {PreferenceDataInterface, ThemeColorInterface} from "./typescripts/publicInterface";
 import ImageHistoryComponent from "./components/imageHistoryComponent";
+import $ from "jquery";
 
 const {Header, Content, Footer} = Layout;
-const $ = require("jquery");
 
 type propType = {}
 
