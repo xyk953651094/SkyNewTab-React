@@ -168,7 +168,7 @@ class ImageHistoryComponent extends React.Component {
         return (
             <Popover title={popoverTitle} content={popoverContent} placement={"topRight"}
                      color={this.state.backgroundColor}
-                     overlayStyle={{width: "370px"}} trigger={"click"}>
+                     overlayStyle={{width: "370px"}}>
                 <Button shape={this.state.buttonShape} icon={<HistoryOutlined/>} size={"large"}
                         id={"imageHistoryBtn"}
                         className={"componentTheme zIndexHigh"}
