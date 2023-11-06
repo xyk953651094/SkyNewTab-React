@@ -5,20 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="修复已知问题">
-      <change afterPath="$PROJECT_DIR$/src/declaration.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/stylesheets/imageHistoryComponent.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/clockComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/clockComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/collectionComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/collectionComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/dailyComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dailyComponent.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/imageHistoryComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/imageHistoryComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/popupComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/popupComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/todoComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/todoComponent.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/wallpaperComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/wallpaperComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/popupComponents/popupImageComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/popupComponents/popupImageComponent.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/preferenceComponents/preferenceImageComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/preferenceComponents/preferenceImageComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/typescripts/publicFunctions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/typescripts/publicFunctions.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,9 +22,9 @@
       <list>
         <option value="CSS File" />
         <option value="HTML File" />
-        <option value="SCSS File" />
         <option value="TypeScript JSX File" />
         <option value="TypeScript File" />
+        <option value="SCSS File" />
       </list>
     </option>
   </component>
@@ -308,6 +300,12 @@
       <workItem from="1697713620803" duration="1645000" />
       <workItem from="1698060936251" duration="197000" />
       <workItem from="1698061843328" duration="3316000" />
+      <workItem from="1698151660401" duration="1138000" />
+      <workItem from="1698206249309" duration="181000" />
+      <workItem from="1698327553048" duration="3098000" />
+      <workItem from="1698922397319" duration="833000" />
+      <workItem from="1699157334868" duration="271000" />
+      <workItem from="1699233206302" duration="6717000" />
     </task>
     <task id="LOCAL-00001" summary="优化抽屉蒙版的显示效果&#10;优化代码质量">
       <created>1683952184207</created>
@@ -427,14 +425,6 @@
       <option name="presentableId" value="LOCAL-00017" />
       <option name="project" value="LOCAL" />
       <updated>1687402693401</updated>
-    </task>
-    <task id="LOCAL-00076" summary="修复部分问题">
-      <option name="closed" value="true" />
-      <created>1693405476834</created>
-      <option name="number" value="00076" />
-      <option name="presentableId" value="LOCAL-00076" />
-      <option name="project" value="LOCAL" />
-      <updated>1693405476835</updated>
     </task>
     <task id="LOCAL-00077" summary="修复已知问题">
       <option name="closed" value="true" />
@@ -684,7 +674,15 @@
       <option name="project" value="LOCAL" />
       <updated>1697687566545</updated>
     </task>
-    <option name="localTasksCounter" value="108" />
+    <task id="LOCAL-00108" summary="修复已知问题">
+      <option name="closed" value="true" />
+      <created>1698151914440</created>
+      <option name="number" value="00108" />
+      <option name="presentableId" value="LOCAL-00108" />
+      <option name="project" value="LOCAL" />
+      <updated>1698151914441</updated>
+    </task>
+    <option name="localTasksCounter" value="109" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

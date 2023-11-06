@@ -13,7 +13,9 @@ import {clientId, device, imageHistoryMaxSize} from "../typescripts/publicConsta
 import {PreferenceDataInterface} from "../typescripts/publicInterface";
 import {decode} from "blurhash";
 
-import $ from "jquery";;
+import $ from "jquery";
+
+
 
 type propType = {
     getImageData: any,
@@ -132,19 +134,18 @@ class WallpaperComponent extends React.Component {
                 let lastImageStorage = localStorage.getItem("lastImage"); // 上一张图片
                 let imageHistoryStorage = localStorage.getItem("imageHistory");
                 let imageHistoryJson = [];
-                if(imageHistoryStorage !== null) {
+                if (imageHistoryStorage !== null) {
                     imageHistoryJson = JSON.parse(imageHistoryStorage);
                 }
-                if(lastImageStorage !== null) {
+                if (lastImageStorage !== null) {
                     let lastImageJson = JSON.parse(lastImageStorage);
                     let imageHistoryJsonItem = {
                         index: new Date().getTime(),
                         imageUrl: lastImageJson.urls.regular,
-                        placeholderUrl: lastImageJson.urls.small_s3,
-                        imageLink: lastImageJson.links.html链接链接快速
+                        imageLink: lastImageJson.links.html,
                     };
 
-                    if(imageHistoryJson.length === imageHistoryMaxSize) { // 满了就把第一个删掉
+                    if (imageHistoryJson.length === imageHistoryMaxSize) { // 满了就把第一个删掉
                         imageHistoryJson.shift();
                     }
                     imageHistoryJson.push(imageHistoryJsonItem);
@@ -182,7 +183,7 @@ class WallpaperComponent extends React.Component {
             let nowTimeStamp = new Date().getTime();
             if (lastRequestTime === null) {  // 第一次请求时 lastRequestTime 为 null，因此直接进行请求赋值 lastRequestTime
                 this.getWallpaper();
-            // } else if (nowTimeStamp - parseInt(lastRequestTime) > 0) {  // 必须多于切换间隔才能进行新的请求
+                // } else if (nowTimeStamp - parseInt(lastRequestTime) > 0) {  // 必须多于切换间隔才能进行新的请求
             } else if (nowTimeStamp - parseInt(lastRequestTime) > parseInt(this.state.preferenceData.changeImageTime)) {  // 必须多于切换间隔才能进行新的请求
                 this.getWallpaper();
             } else {  // 切换间隔内使用上一次请求结果
@@ -210,15 +211,13 @@ class WallpaperComponent extends React.Component {
                     let autoDarkMode = this.state.preferenceData.autoDarkMode;
                     let tempDisplayMask = "none";
                     let currentTime = parseInt(getTimeDetails(new Date()).hour);
-                    if(currentTime > 18 || currentTime < 6) {
-                        if( !nightMode && !autoDarkMode ) {
+                    if (currentTime > 18 || currentTime < 6) {
+                        if (!nightMode && !autoDarkMode) {
                             tempDisplayMask = "none";
-                        }
-                        else {
+                        } else {
                             tempDisplayMask = "block";
                         }
-                    }
-                    else {
+                    } else {
                         tempDisplayMask = this.state.preferenceData.nightMode ? "block" : "none";
                     }
 

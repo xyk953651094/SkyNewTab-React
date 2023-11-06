@@ -1,6 +1,6 @@
 import React from "react";
 import {Button, Card, Space} from "antd";
-import {InfoCircleOutlined, CalendarOutlined, CloudOutlined, FileImageOutlined, CodeOutlined} from "@ant-design/icons";
+import {CalendarOutlined, CloudOutlined, CodeOutlined, FileImageOutlined, InfoCircleOutlined} from "@ant-design/icons";
 import {getFontColor} from "../typescripts/publicFunctions";
 import {PreferenceDataInterface} from "../typescripts/publicInterface";
 

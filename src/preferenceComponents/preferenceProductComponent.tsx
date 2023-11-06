@@ -1,7 +1,7 @@
 import React from "react";
 import {Button, Card, Col, Row, Space} from "antd";
 import {AppstoreOutlined, GithubOutlined, GitlabOutlined} from "@ant-design/icons";
-import {changeThemeColor, getFontColor} from "../typescripts/publicFunctions";
+import {getFontColor} from "../typescripts/publicFunctions";
 import {PreferenceDataInterface} from "../typescripts/publicInterface";
 
 type propType = {
@@ -57,13 +57,17 @@ class PreferenceProductComponent extends React.Component {
                     </Col>
                     <Col span="8">
                         <Space>
-                            <Button type={"text"} shape={this.props.preferenceData.buttonShape === "round" ? "circle" : "default"} icon={<GithubOutlined/>}
+                            <Button type={"text"}
+                                    shape={this.props.preferenceData.buttonShape === "round" ? "circle" : "default"}
+                                    icon={<GithubOutlined/>}
                                     href={"https://github.com/xyk953651094/SkyNewTab-Vue/"} target={"_blank"}
                                     onMouseOver={this.btnMouseOver.bind(this)}
                                     onMouseOut={this.btnMouseOut.bind(this)}
                                     style={{color: this.props.fontColor}}>
                             </Button>
-                            <Button type={"text"} shape={this.props.preferenceData.buttonShape === "round" ? "circle" : "default"} icon={<GitlabOutlined />}
+                            <Button type={"text"}
+                                    shape={this.props.preferenceData.buttonShape === "round" ? "circle" : "default"}
+                                    icon={<GitlabOutlined/>}
                                     href={"https://gitlab.com/xyk953651094/SkyNewTab-Vue/"} target={"_blank"}
                                     onMouseOver={this.btnMouseOver.bind(this)}
                                     onMouseOut={this.btnMouseOut.bind(this)}
@@ -82,13 +86,17 @@ class PreferenceProductComponent extends React.Component {
                     </Col>
                     <Col span="8">
                         <Space>
-                            <Button type={"text"} shape={this.props.preferenceData.buttonShape === "round" ? "circle" : "default"} icon={<GithubOutlined/>}
+                            <Button type={"text"}
+                                    shape={this.props.preferenceData.buttonShape === "round" ? "circle" : "default"}
+                                    icon={<GithubOutlined/>}
                                     href={"https://github.com/xyk953651094/SkyNewTab-Poem-React/"} target={"_blank"}
                                     onMouseOver={this.btnMouseOver.bind(this)}
                                     onMouseOut={this.btnMouseOut.bind(this)}
                                     style={{color: this.props.fontColor}}>
                             </Button>
-                            <Button type={"text"} shape={this.props.preferenceData.buttonShape === "round" ? "circle" : "default"} icon={<GitlabOutlined />}
+                            <Button type={"text"}
+                                    shape={this.props.preferenceData.buttonShape === "round" ? "circle" : "default"}
+                                    icon={<GitlabOutlined/>}
                                     href={"https://gitlab.com/xyk953651094/SkyNewTab-Poem-React/"} target={"_blank"}
                                     onMouseOver={this.btnMouseOver.bind(this)}
                                     onMouseOut={this.btnMouseOut.bind(this)}

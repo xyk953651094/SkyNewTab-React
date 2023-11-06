@@ -42,13 +42,13 @@ class PreferenceFooterComponent extends React.Component {
                         style={{color: this.props.fontColor}}>
                     GitHub
                 </Button>
-                <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<GitlabOutlined />}
+                <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<GitlabOutlined/>}
                         href={"https://gitlab.com/xyk953651094/SkyNewTab-React/"} target={"_blank"}
                         onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
                         style={{color: this.props.fontColor}}>
                     GitLab
                 </Button>
-                <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<NotificationOutlined />}
+                <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<NotificationOutlined/>}
                         href={"https://xyk953651094.blogspot.com/"} target={"_blank"}
                         onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
                         style={{color: this.props.fontColor}}>

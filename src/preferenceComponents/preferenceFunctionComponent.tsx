@@ -52,7 +52,7 @@ class PreferenceFunctionComponent extends React.Component {
             message.success("已更换搜索引擎");
         })
     }
-    
+
     // 按钮形状
     buttonShapeRadioOnChange(event: RadioChangeEvent) {
         this.setState({
@@ -150,7 +150,8 @@ class PreferenceFunctionComponent extends React.Component {
                     <Row gutter={24}>
                         <Col span={12}>
                             <Form.Item name={"simpleMode"} label={"简洁模式"} valuePropName={"checked"}>
-                                <Switch checkedChildren="已开启" unCheckedChildren="已关闭" disabled={this.state.disableSwitch}
+                                <Switch checkedChildren="已开启" unCheckedChildren="已关闭"
+                                        disabled={this.state.disableSwitch}
                                         onChange={this.simpleModeSwitchOnChange.bind(this)}/>
                             </Form.Item>
                         </Col>
@@ -162,7 +163,7 @@ class PreferenceFunctionComponent extends React.Component {
                         </Col>
                     </Row>
                     <Form.Item name={"clearStorageButton"} label={"危险设置"}>
-                        <Button type={"text"} shape={this.state.preferenceData.buttonShape} icon={<RedoOutlined />}
+                        <Button type={"text"} shape={this.state.preferenceData.buttonShape} icon={<RedoOutlined/>}
                                 onMouseOver={this.btnMouseOver.bind(this)}
                                 onMouseOut={this.btnMouseOut.bind(this)}
                                 onClick={this.clearStorageBtnOnClick.bind(this)}

@@ -1,5 +1,5 @@
 import React from "react";
-import {Button, message, Popover, Row, Typography, Carousel, Image, Empty, Col, Space, List} from "antd";
+import {Button, Carousel, Col, Empty, Image, List, message, Popover, Row, Space, Spin, Typography} from "antd";
 import {FileImageOutlined, HistoryOutlined} from "@ant-design/icons";
 import {imageHistoryMaxSize, unsplashUrl} from "../typescripts/publicConstants";
 import {changeThemeColor, getFontColor, isEmpty} from "../typescripts/publicFunctions";
@@ -79,11 +79,10 @@ class ImageHistoryComponent extends React.Component {
 
         if (nextProps.imageHistory.length > 0 && nextProps.imageHistory !== prevProps.imageHistory) {
             let tempImageHistoryJson = nextProps.imageHistory.reverse(); // 重新到旧排序
-            console.log(tempImageHistoryJson);
             this.setState({
                 imageHistoryJson: tempImageHistoryJson,
                 imageLink: tempImageHistoryJson[0].imageLink,
-            })
+            });
         }
 
         if (nextProps.preferenceData !== prevProps.preferenceData) {
@@ -96,7 +95,7 @@ class ImageHistoryComponent extends React.Component {
     componentDidMount() {
         // 获取缓存图片列表
         let imageHistoryStorage = localStorage.getItem("imageHistory");
-        if(imageHistoryStorage !== null) {
+        if (imageHistoryStorage !== null) {
             let tempImageHistoryJson = JSON.parse(imageHistoryStorage);
             if (!isEmpty(tempImageHistoryJson)) {
                 tempImageHistoryJson = tempImageHistoryJson.reverse(); // 重新到旧排序
@@ -112,11 +111,12 @@ class ImageHistoryComponent extends React.Component {
         const popoverTitle = (
             <Row align={"middle"}>
                 <Col span={10}>
-                    <Text style={{color: this.state.fontColor}}>{"历史记录 " + this.state.imageHistoryJson.length + " / " + imageHistoryMaxSize}</Text>
+                    <Text
+                        style={{color: this.state.fontColor}}>{"历史记录 " + this.state.imageHistoryJson.length + " / " + imageHistoryMaxSize}</Text>
                 </Col>
                 <Col span={14} style={{textAlign: "right"}}>
                     <Space>
-                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<FileImageOutlined />}
+                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<FileImageOutlined/>}
                                 onMouseOver={this.btnMouseOver.bind(this)}
                                 onMouseOut={this.btnMouseOut.bind(this)}
                                 onClick={this.imageLinkBtnOnClick.bind(this)}
@@ -131,15 +131,16 @@ class ImageHistoryComponent extends React.Component {
         const popoverContent = (
             <List>
                 <List.Item>
-                    <Row className="alignCenter">
+                    <Row className="alignCenter" style={{width: "100%"}}>
                         <Empty image={Empty.PRESENTED_IMAGE_SIMPLE}
-                               style={{display: this.state.imageHistoryJson.length === 0? "block" : "none"}}/>
+                               style={{display: this.state.imageHistoryJson.length === 0 ? "block" : "none"}}/>
                         <Carousel effect="fade" afterChange={this.carouselOnChange.bind(this)}
-                                  style={{display: this.state.imageHistoryJson.length === 0? "none" : "block", width: "350px", height: "210px"}}>
+                                  style={{display: this.state.imageHistoryJson.length === 0 ? "none" : "block", width: "350px", height: "210px"}}>
                             {
                                 this.state.imageHistoryJson.map((item: any) => {
                                     return (
-                                        <div key={item.index} style={{width: "350px", height: "210px", lineHeight: "210px"}}>
+                                        <div key={item.index}
+                                             style={{width: "350px", height: "210px", lineHeight: "210px"}}>
                                             <Image
                                                 width={350}
                                                 height={210}
@@ -148,14 +149,10 @@ class ImageHistoryComponent extends React.Component {
                                                 src={item.imageUrl}
                                                 style={{borderRadius: "8px"}}
                                                 placeholder={
-                                                    <Image
-                                                        width={350}
-                                                        height={210}
-                                                        preview={false}
-                                                        alt={"暂无图片"}
-                                                        src={item.placeholderUrl}
-                                                        style={{borderRadius: "8px"}}
-                                                    />
+                                                    <div style={{width: '350px', height: '210px', borderRadius: '8px'}}
+                                                         className="alignCenter">
+                                                        <Spin tip="加载中，请稍后..."/>
+                                                    </div>
                                                 }
                                             />
                                         </div>
@@ -171,8 +168,8 @@ class ImageHistoryComponent extends React.Component {
         return (
             <Popover title={popoverTitle} content={popoverContent} placement={"topRight"}
                      color={this.state.backgroundColor}
-                     overlayStyle={{width: "370px"}}>
-                <Button shape={this.state.buttonShape} icon={<HistoryOutlined />} size={"large"}
+                     overlayStyle={{width: "370px"}} trigger={"click"}>
+                <Button shape={this.state.buttonShape} icon={<HistoryOutlined/>} size={"large"}
                         id={"imageHistoryBtn"}
                         className={"componentTheme zIndexHigh"}
                         style={{

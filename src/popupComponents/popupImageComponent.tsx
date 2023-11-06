@@ -200,7 +200,8 @@ class PopupImageComponent extends React.Component {
                                 style={{color: this.state.fontColor}}>
                             {this.state.authorName.length < btnMaxSize ? this.state.authorName : this.state.authorName.substring(0, btnMaxSize) + "..."}
                         </Button>
-                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<EnvironmentOutlined/>}
+                        <Button type={"text"} shape={this.props.preferenceData.buttonShape}
+                                icon={<EnvironmentOutlined/>}
                                 onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
                                 onClick={this.imageLocationBtnOnClick.bind(this)} style={{color: this.state.fontColor}}>
                             {this.state.imageLocation.length < btnMaxSize ? this.state.imageLocation : this.state.imageLocation.substring(0, btnMaxSize) + "..."}
@@ -211,7 +212,8 @@ class PopupImageComponent extends React.Component {
                             {this.state.imageDescription.length < btnMaxSize ? this.state.imageDescription : this.state.imageDescription.substring(0, btnMaxSize) + "..."}
                         </Button>
                         <Space>
-                            <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<ClockCircleOutlined/>}
+                            <Button type={"text"} shape={this.props.preferenceData.buttonShape}
+                                    icon={<ClockCircleOutlined/>}
                                     style={{color: this.state.fontColor, cursor: "default"}}
                                     onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
                                 {this.state.imageCreateTime}

@@ -10,23 +10,19 @@ import {
     message,
     Radio,
     RadioChangeEvent,
-    Select,
     Row,
-    Space, Switch,
+    Select,
+    Space,
+    Switch,
     Typography
 } from "antd";
-import {CheckOutlined, StopOutlined, SettingOutlined} from "@ant-design/icons";
-import {
-    getFontColor,
-    getPreferenceDataStorage,
-    getTimeDetails,
-    isEmpty
-} from "../typescripts/publicFunctions";
+import {CheckOutlined, SettingOutlined, StopOutlined} from "@ant-design/icons";
+import {getFontColor, getPreferenceDataStorage, getTimeDetails, isEmpty} from "../typescripts/publicFunctions";
 import {CheckboxValueType} from "antd/es/checkbox/Group";
 import {PreferenceDataInterface} from "../typescripts/publicInterface";
+import $ from "jquery";
 
 const {Paragraph} = Typography;
-import $ from "jquery";;
 
 type propType = {
     hoverColor: string,
@@ -167,15 +163,14 @@ class PreferenceImageComponent extends React.Component {
             localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
 
             let currentTime = parseInt(getTimeDetails(new Date()).hour);
-            if(currentTime > 18 || currentTime < 6) {
+            if (currentTime > 18 || currentTime < 6) {
                 if (checked) {
                     message.success("已开启夜间自动降低背景亮度，一秒后刷新页面");
                 } else {
                     message.success("已关闭夜间自动降低背景亮度，一秒后刷新页面");
                 }
                 this.refreshWindow();
-            }
-            else {
+            } else {
                 if (checked) {
                     message.success("已开启夜间自动降低背景亮度");
                 } else {
@@ -319,7 +314,7 @@ class PreferenceImageComponent extends React.Component {
                                     onClick={this.submitCustomTopicBtnOnClick.bind(this)}
                                     style={{color: this.props.fontColor}}>
                             </Button>
-                            <Button type={"text"} shape={this.state.buttonShape} icon={<StopOutlined />}
+                            <Button type={"text"} shape={this.state.buttonShape} icon={<StopOutlined/>}
                                     onMouseOver={this.btnMouseOver.bind(this)}
                                     onMouseOut={this.btnMouseOut.bind(this)}
                                     onClick={this.clearCustomTopicBtnOnClick.bind(this)}
@@ -327,8 +322,9 @@ class PreferenceImageComponent extends React.Component {
                             </Button>
                         </Space>
                     </Form.Item>
-                    <Form.Item name={"changeImageTime"} label={"切换间隔"} extra={"上次切换时间：" + this.state.lastRequestTime}>
-                        <Select style={{ width: 156 }} onChange={this.changeImageTimeOnChange.bind(this)}>
+                    <Form.Item name={"changeImageTime"} label={"切换间隔"}
+                               extra={"上次切换时间：" + this.state.lastRequestTime}>
+                        <Select style={{width: 156}} onChange={this.changeImageTimeOnChange.bind(this)}>
                             <Select.Option value={"900000"}>{"每 15 分钟"}</Select.Option>
                             <Select.Option value={"1800000"}>{"每 30 分钟"}</Select.Option>
                             <Select.Option value={"3600000"}>{"每 60 分钟"}</Select.Option>

@@ -91,7 +91,8 @@ class ClockComponent extends React.Component {
     render() {
         return (
             <Row justify={"center"}>
-                <Col span={24} id={"clockDiv"} className={"zIndexHigh"} style={{padding: "5px 10px", borderRadius: "8px"}}
+                <Col span={24} id={"clockDiv"} className={"zIndexHigh"}
+                     style={{padding: "5px 10px", borderRadius: "8px"}}
                      onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
                     <Space align={"center"} id={"clock"}>
                         <Text className={"textShadow clockText"} style={{color: this.state.backgroundColor}}>

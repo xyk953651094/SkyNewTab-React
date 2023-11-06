@@ -211,7 +211,8 @@ class CollectionComponent extends React.Component {
                                 return (
                                     <Tooltip title={item.webUrl} key={item.timeStamp} placement={"bottom"}
                                              color={this.state.backgroundColor}>
-                                        <Button type={"primary"} shape={this.props.preferenceData.buttonShape} className={"componentTheme"}
+                                        <Button type={"primary"} shape={this.props.preferenceData.buttonShape}
+                                                className={"componentTheme"}
                                                 key={item.timeStamp}
                                                 onClick={() => {
                                                     window.open(item.webUrl, "_blank")
@@ -270,7 +271,8 @@ class CollectionComponent extends React.Component {
                                     </Text>
                                 </Col>
                                 <Col span={12} style={{textAlign: "right"}}>
-                                    <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<DeleteOutlined/>}
+                                    <Button type={"text"} shape={this.props.preferenceData.buttonShape}
+                                            icon={<DeleteOutlined/>}
                                             onMouseOver={this.btnMouseOver.bind(this)}
                                             onMouseOut={this.btnMouseOut.bind(this)}
                                             onClick={this.removeAllBtnOnClick.bind(this)}
@@ -298,7 +300,8 @@ class CollectionComponent extends React.Component {
                                     ]}>
                                         <Row style={{width: "100%"}}>
                                             <Col span={8}>
-                                                <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<PushpinOutlined/>}
+                                                <Button type={"text"} shape={this.props.preferenceData.buttonShape}
+                                                        icon={<PushpinOutlined/>}
                                                         onMouseOver={this.btnMouseOver.bind(this)}
                                                         onMouseOut={this.btnMouseOut.bind(this)}
                                                         style={{color: this.state.fontColor, cursor: "default"}}>
@@ -306,7 +309,8 @@ class CollectionComponent extends React.Component {
                                                 </Button>
                                             </Col>
                                             <Col span={16}>
-                                                <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<LinkOutlined/>}
+                                                <Button type={"text"} shape={this.props.preferenceData.buttonShape}
+                                                        icon={<LinkOutlined/>}
                                                         onMouseOver={this.btnMouseOver.bind(this)}
                                                         onMouseOut={this.btnMouseOut.bind(this)}
                                                         style={{color: this.state.fontColor, cursor: "default"}}>

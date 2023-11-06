@@ -248,7 +248,8 @@ class TodoComponent extends React.Component {
                     >
                         <Row style={{width: "100%"}}>
                             <Col span={12}>
-                                <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<CheckSquareOutlined/>}
+                                <Button type={"text"} shape={this.props.preferenceData.buttonShape}
+                                        icon={<CheckSquareOutlined/>}
                                         onMouseOver={this.btnMouseOver.bind(this)}
                                         onMouseOut={this.btnMouseOut.bind(this)}
                                         style={{color: this.state.fontColor, cursor: "default"}}>
@@ -256,7 +257,8 @@ class TodoComponent extends React.Component {
                                 </Button>
                             </Col>
                             <Col span={12}>
-                                <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<TagOutlined/>}
+                                <Button type={"text"} shape={this.props.preferenceData.buttonShape}
+                                        icon={<TagOutlined/>}
                                         onMouseOver={this.btnMouseOver.bind(this)}
                                         onMouseOut={this.btnMouseOut.bind(this)}
                                         style={{color: this.state.fontColor, cursor: "default"}}>

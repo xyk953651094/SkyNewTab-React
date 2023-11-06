@@ -1,6 +1,6 @@
 import React from "react";
 import {Button, Card, Col, Row} from "antd";
-import {LikeOutlined, DislikeOutlined, MailOutlined} from "@ant-design/icons";
+import {DislikeOutlined, LikeOutlined, MailOutlined} from "@ant-design/icons";
 import {getFontColor} from "../typescripts/publicFunctions";
 import {PreferenceDataInterface} from "../typescripts/publicInterface";
 

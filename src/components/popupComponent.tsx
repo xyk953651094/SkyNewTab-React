@@ -1,19 +1,17 @@
 import React from "react";
 import {Layout, List, message} from "antd";
 import "../stylesheets/popupComponent.scss"
-import {
-    getFontColor,
-    getPreferenceDataStorage,
-    getReverseColor
-} from "../typescripts/publicFunctions";
+import {getFontColor, getPreferenceDataStorage, getReverseColor} from "../typescripts/publicFunctions";
 import PopupImageComponent from "../popupComponents/popupImageComponent";
 import PopupStatusComponent from "../popupComponents/popupStatusComponent";
 import PopupFooterComponent from "../popupComponents/popupFooterComponent";
 import {PreferenceDataInterface} from "../typescripts/publicInterface";
 import PopupHeaderComponent from "../popupComponents/popupHeaderComponent";
+import $ from "jquery";
 
 const {Header, Content, Footer} = Layout;
-import $ from "jquery";;
+
+
 
 type propType = {}
 

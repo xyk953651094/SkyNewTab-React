@@ -12,11 +12,12 @@ import CollectionComponent from "./components/collectionComponent";
 import AuthorComponent from "./components/authorComponent";
 import AuthorLiteComponent from "./components/authorLiteComponent"
 
-import {Col, Layout, Row, Space, notification} from "antd";
+import {Col, Layout, notification, Row, Space, Typography} from "antd";
 import "./stylesheets/publicStyles.scss"
 import {
     changeThemeColor,
-    getFontColor, getPreferenceDataStorage,
+    getFontColor,
+    getPreferenceDataStorage,
     getReverseColor,
     setColorTheme
 } from "./typescripts/publicFunctions";
@@ -25,6 +26,7 @@ import ImageHistoryComponent from "./components/imageHistoryComponent";
 import $ from "jquery";
 
 const {Header, Content, Footer} = Layout;
+const {Text, Link} = Typography;
 
 type propType = {}
 
@@ -106,7 +108,7 @@ class App extends React.Component {
         // 版本号提醒
         let storageVersion = localStorage.getItem("SkyNewTabReactVersion");
         let currentVersion = require('../package.json').version;
-        if(storageVersion !== currentVersion) {
+        if (storageVersion !== currentVersion) {
             notification.info({
                 message: "已更新至 " + currentVersion,
                 description: "详情请前往 GitHub 或 GitLab 查看",
@@ -187,10 +189,9 @@ class App extends React.Component {
                 });
                 $(".ant-form-item-label > label").css("color", this.state.themeColor.componentFontColor);
                 $(".ant-modal-footer > .ant-btn").css("color", this.state.themeColor.componentFontColor);
-                if(this.state.preferenceData.buttonShape === "round") {
+                if (this.state.preferenceData.buttonShape === "round") {
                     $(".ant-modal-footer > .ant-btn").removeClass("ant-btn-default ant-btn-primary").addClass("ant-btn-round ant-btn-text");
-                }
-                else {
+                } else {
                     $(".ant-modal-footer > .ant-btn").removeClass("ant-btn-round ant-btn-default ant-btn-primary").addClass("ant-btn-text");
                 }
 
