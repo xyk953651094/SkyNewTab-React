@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="优化代码逻辑">
+    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="修复已知问题">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/imageHistoryComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/imageHistoryComponent.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,8 +19,9 @@
       <list>
         <option value="CSS File" />
         <option value="HTML File" />
-        <option value="SCSS File" />
         <option value="TypeScript JSX File" />
+        <option value="TypeScript File" />
+        <option value="SCSS File" />
       </list>
     </option>
   </component>
@@ -286,6 +289,23 @@
       <workItem from="1697271195411" duration="5441000" />
       <workItem from="1697335317763" duration="919000" />
       <workItem from="1697448295188" duration="217000" />
+      <workItem from="1697451938404" duration="471000" />
+      <workItem from="1697616580580" duration="3647000" />
+      <workItem from="1697625779702" duration="4995000" />
+      <workItem from="1697680284104" duration="34000" />
+      <workItem from="1697680332330" duration="6313000" />
+      <workItem from="1697713620803" duration="1645000" />
+      <workItem from="1698060936251" duration="197000" />
+      <workItem from="1698061843328" duration="3316000" />
+      <workItem from="1698151660401" duration="1138000" />
+      <workItem from="1698206249309" duration="181000" />
+      <workItem from="1698327553048" duration="3098000" />
+      <workItem from="1698922397319" duration="833000" />
+      <workItem from="1699157334868" duration="271000" />
+      <workItem from="1699233206302" duration="7391000" />
+      <workItem from="1699242900960" duration="69000" />
+      <workItem from="1699271351044" duration="12000" />
+      <workItem from="1699274736224" duration="1002000" />
     </task>
     <task id="LOCAL-00001" summary="优化抽屉蒙版的显示效果&#10;优化代码质量">
       <created>1683952184207</created>
@@ -405,54 +425,6 @@
       <option name="presentableId" value="LOCAL-00017" />
       <option name="project" value="LOCAL" />
       <updated>1687402693401</updated>
-    </task>
-    <task id="LOCAL-00072" summary="优化视觉效果">
-      <option name="closed" value="true" />
-      <created>1692268766737</created>
-      <option name="number" value="00072" />
-      <option name="presentableId" value="LOCAL-00072" />
-      <option name="project" value="LOCAL" />
-      <updated>1692268766737</updated>
-    </task>
-    <task id="LOCAL-00073" summary="修复已知问题">
-      <option name="closed" value="true" />
-      <created>1693052157781</created>
-      <option name="number" value="00073" />
-      <option name="presentableId" value="LOCAL-00073" />
-      <option name="project" value="LOCAL" />
-      <updated>1693052157781</updated>
-    </task>
-    <task id="LOCAL-00074" summary="优化视觉效果">
-      <option name="closed" value="true" />
-      <created>1693231148261</created>
-      <option name="number" value="00074" />
-      <option name="presentableId" value="LOCAL-00074" />
-      <option name="project" value="LOCAL" />
-      <updated>1693231148262</updated>
-    </task>
-    <task id="LOCAL-00075" summary="修复部分问题">
-      <option name="closed" value="true" />
-      <created>1693400510621</created>
-      <option name="number" value="00075" />
-      <option name="presentableId" value="LOCAL-00075" />
-      <option name="project" value="LOCAL" />
-      <updated>1693400510622</updated>
-    </task>
-    <task id="LOCAL-00076" summary="修复部分问题">
-      <option name="closed" value="true" />
-      <created>1693405476834</created>
-      <option name="number" value="00076" />
-      <option name="presentableId" value="LOCAL-00076" />
-      <option name="project" value="LOCAL" />
-      <updated>1693405476835</updated>
-    </task>
-    <task id="LOCAL-00077" summary="修复已知问题">
-      <option name="closed" value="true" />
-      <created>1693487934090</created>
-      <option name="number" value="00077" />
-      <option name="presentableId" value="LOCAL-00077" />
-      <option name="project" value="LOCAL" />
-      <updated>1693487934091</updated>
     </task>
     <task id="LOCAL-00078" summary="优化代码结构">
       <option name="closed" value="true" />
@@ -662,7 +634,55 @@
       <option name="project" value="LOCAL" />
       <updated>1697291751453</updated>
     </task>
-    <option name="localTasksCounter" value="104" />
+    <task id="LOCAL-00104" summary="2.1.0发布">
+      <option name="closed" value="true" />
+      <created>1697451984337</created>
+      <option name="number" value="00104" />
+      <option name="presentableId" value="LOCAL-00104" />
+      <option name="project" value="LOCAL" />
+      <updated>1697451984337</updated>
+    </task>
+    <task id="LOCAL-00105" summary="新增版本更新提醒，优化跳转链接">
+      <option name="closed" value="true" />
+      <created>1697624533687</created>
+      <option name="number" value="00105" />
+      <option name="presentableId" value="LOCAL-00105" />
+      <option name="project" value="LOCAL" />
+      <updated>1697624533687</updated>
+    </task>
+    <task id="LOCAL-00106" summary="新增历史图片">
+      <option name="closed" value="true" />
+      <created>1697638273248</created>
+      <option name="number" value="00106" />
+      <option name="presentableId" value="LOCAL-00106" />
+      <option name="project" value="LOCAL" />
+      <updated>1697638273248</updated>
+    </task>
+    <task id="LOCAL-00107" summary="修复已知问题">
+      <option name="closed" value="true" />
+      <created>1697687566545</created>
+      <option name="number" value="00107" />
+      <option name="presentableId" value="LOCAL-00107" />
+      <option name="project" value="LOCAL" />
+      <updated>1697687566545</updated>
+    </task>
+    <task id="LOCAL-00108" summary="修复已知问题">
+      <option name="closed" value="true" />
+      <created>1698151914440</created>
+      <option name="number" value="00108" />
+      <option name="presentableId" value="LOCAL-00108" />
+      <option name="project" value="LOCAL" />
+      <updated>1698151914441</updated>
+    </task>
+    <task id="LOCAL-00109" summary="修复已知问题">
+      <option name="closed" value="true" />
+      <created>1699242397082</created>
+      <option name="number" value="00109" />
+      <option name="presentableId" value="LOCAL-00109" />
+      <option name="project" value="LOCAL" />
+      <updated>1699242397083</updated>
+    </task>
+    <option name="localTasksCounter" value="110" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -680,9 +700,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="优化部分显示效果" />
-    <MESSAGE value="优化大屏显示效果" />
-    <MESSAGE value="popup 图片加载新增 blurhash 效果" />
     <MESSAGE value="优化视觉效果&#10;优化代码质量" />
     <MESSAGE value="整理代码格式" />
     <MESSAGE value="新增简洁模式" />
@@ -693,7 +710,6 @@
     <MESSAGE value="新增联系作者&#10;优化视觉效果" />
     <MESSAGE value="修复部分问题" />
     <MESSAGE value="优化代码结构" />
-    <MESSAGE value="修复已知问题" />
     <MESSAGE value="移动项目" />
     <MESSAGE value="优化产品文档" />
     <MESSAGE value="新增调节亮度，优化视觉效果" />
@@ -705,6 +721,10 @@
     <MESSAGE value="搜索框按钮能快速切换搜索引擎了" />
     <MESSAGE value="新增图片切换间隔，修复已知问题" />
     <MESSAGE value="优化代码逻辑" />
-    <option name="LAST_COMMIT_MESSAGE" value="优化代码逻辑" />
+    <MESSAGE value="2.1.0发布" />
+    <MESSAGE value="新增版本更新提醒，优化跳转链接" />
+    <MESSAGE value="新增历史图片" />
+    <MESSAGE value="修复已知问题" />
+    <option name="LAST_COMMIT_MESSAGE" value="修复已知问题" />
   </component>
 </project>

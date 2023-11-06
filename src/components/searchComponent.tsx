@@ -1,7 +1,7 @@
 import React from "react";
 import "../stylesheets/searchComponent.scss"
 import "../stylesheets/publicStyles.scss"
-import {Row, Col, Divider, Input, Button} from "antd";
+import {Button, Col, Divider, Input, Row} from "antd";
 import {SearchOutlined} from "@ant-design/icons";
 import {changeThemeColor, fadeIn, fadeOut, getSearchEngineDetail} from "../typescripts/publicFunctions";
 import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
@@ -78,7 +78,7 @@ class SearchComponent extends React.Component {
     }
 
     onPressEnter(e: any) {
-        window.open(this.state.searchEngineUrl + e.target.value);
+        window.open(this.state.searchEngineUrl + e.target.value, "_blank");
     }
 
     changeSearchEngine() {
@@ -106,13 +106,13 @@ class SearchComponent extends React.Component {
                 <Input
                     className={"searchInput componentTheme zIndexHigh"}
                     prefix={
-                    <Row align={"middle"}>
-                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} size={"small"}
-                                id={"searchEngineIconBtn"} onClick={this.changeSearchEngine.bind(this)}>
-                            {this.state.searchEngineName}
-                        </Button>
-                        <Divider type="vertical" />
-                    </Row>
+                        <Row align={"middle"}>
+                            <Button type={"text"} shape={this.props.preferenceData.buttonShape} size={"small"}
+                                    id={"searchEngineIconBtn"} onClick={this.changeSearchEngine.bind(this)}>
+                                {this.state.searchEngineName}
+                            </Button>
+                            <Divider type="vertical"/>
+                        </Row>
                     }
                     suffix={<SearchOutlined/>}
                     placeholder={"按下 Enter 键搜索"}

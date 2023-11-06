@@ -4,9 +4,11 @@ import {Button, Col, DatePicker, Form, Input, List, message, Modal, Popover, Row
 import {CalendarOutlined, ClockCircleOutlined, DeleteOutlined, PlusOutlined} from "@ant-design/icons";
 import {changeThemeColor, getFontColor, getTimeDetails} from "../typescripts/publicFunctions";
 import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
+import $ from "jquery";
 
 const {Text} = Typography;
-const $ = require("jquery");
+
+
 
 type propType = {
     themeColor: ThemeColorInterface,
@@ -241,7 +243,8 @@ class DailyComponent extends React.Component {
                     >
                         <Row style={{width: "100%"}}>
                             <Col span={10}>
-                                <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<CalendarOutlined/>}
+                                <Button type={"text"} shape={this.props.preferenceData.buttonShape}
+                                        icon={<CalendarOutlined/>}
                                         onMouseOver={this.btnMouseOver.bind(this)}
                                         onMouseOut={this.btnMouseOut.bind(this)}
                                         style={{color: this.state.fontColor, cursor: "default"}}>
@@ -249,7 +252,8 @@ class DailyComponent extends React.Component {
                                 </Button>
                             </Col>
                             <Col span={14}>
-                                <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<ClockCircleOutlined/>}
+                                <Button type={"text"} shape={this.props.preferenceData.buttonShape}
+                                        icon={<ClockCircleOutlined/>}
                                         onMouseOver={this.btnMouseOver.bind(this)}
                                         onMouseOut={this.btnMouseOut.bind(this)}
                                         style={{color: this.state.fontColor, cursor: "default"}}>
@@ -275,7 +279,12 @@ class DailyComponent extends React.Component {
                         {this.state.dailySize + " 个倒数日"}
                     </Button>
                 </Popover>
-                <Modal title={"添加倒数日 " + this.state.dailySize + " / " + this.state.dailyMaxSize} closeIcon={false}
+                <Modal title={
+                    <Text style={{color: this.state.fontColor}}>
+                        {"添加倒数日 " + this.state.dailySize + " / " + this.state.dailyMaxSize}
+                    </Text>
+                }
+                       closeIcon={false}
                        centered
                        open={this.state.displayModal} onOk={this.modalOkBtnOnClick.bind(this)}
                        onCancel={this.modalCancelBtnOnClick.bind(this)}

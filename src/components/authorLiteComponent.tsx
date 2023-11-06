@@ -2,7 +2,7 @@ import React from "react";
 import {Button, message} from "antd";
 import {LinkOutlined} from "@ant-design/icons";
 import {unsplashUrl} from "../typescripts/publicConstants";
-import {changeThemeColor, getSearchEngineDetail, isEmptyString} from "../typescripts/publicFunctions";
+import {changeThemeColor, getSearchEngineDetail, isEmpty} from "../typescripts/publicFunctions";
 import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
 import "../stylesheets/publicStyles.scss"
 
@@ -39,8 +39,8 @@ class AuthorLiteComponent extends React.Component {
     }
 
     authorLiteOnClick() {
-        if (!isEmptyString(this.state.imageLink)) {
-            window.open(this.state.imageLink + unsplashUrl);
+        if (!isEmpty(this.state.imageLink)) {
+            window.open(this.state.imageLink + unsplashUrl, "_blank");
         } else {
             message.error("无跳转链接");
         }

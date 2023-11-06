@@ -3,9 +3,9 @@ import {Col, Row, Space, Typography} from "antd";
 import "../stylesheets/clockComponent.scss"
 import {changeBackgroundColor, changeFontColor, getTimeDetails} from "../typescripts/publicFunctions";
 import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
+import $ from "jquery";
 
 const {Text} = Typography;
-const $ = require("jquery");
 
 type propType = {
     themeColor: ThemeColorInterface,
@@ -41,13 +41,14 @@ class ClockComponent extends React.Component {
 
     btnMouseOver(e: any) {
         if (!this.state.noImageMode) {
+            let currentTarget = e.currentTarget;
             new Promise((resolve) => {
                 $(".clockText, .dateText").removeClass("textShadow");
                 changeBackgroundColor(e.currentTarget, this.state.backgroundColor, 150);
                 changeFontColor(".clockText, .dateText", this.state.fontColor, 150);
                 resolve("success");
             }).then(() => {
-                e.currentTarget.classList.add("componentTheme");
+                currentTarget.classList.add("componentTheme");
             })
         }
     }
@@ -90,7 +91,8 @@ class ClockComponent extends React.Component {
     render() {
         return (
             <Row justify={"center"}>
-                <Col span={24} className={"zIndexHigh"} style={{padding: "5px 10px", borderRadius: "8px"}}
+                <Col span={24} id={"clockDiv"} className={"zIndexHigh"}
+                     style={{padding: "5px 10px", borderRadius: "8px"}}
                      onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
                     <Space align={"center"} id={"clock"}>
                         <Text className={"textShadow clockText"} style={{color: this.state.backgroundColor}}>

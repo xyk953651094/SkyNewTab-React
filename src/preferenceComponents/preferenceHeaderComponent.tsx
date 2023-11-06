@@ -1,5 +1,5 @@
 import React from "react";
-import {Row, Col, Typography, Button} from "antd";
+import {Button, Col, Row, Typography} from "antd";
 import {GiftOutlined} from "@ant-design/icons";
 import {getFontColor} from "../typescripts/publicFunctions";
 import {PreferenceDataInterface} from "../typescripts/publicInterface";

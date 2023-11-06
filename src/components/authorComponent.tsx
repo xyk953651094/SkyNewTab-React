@@ -4,13 +4,13 @@ import {
     CameraOutlined,
     ClockCircleOutlined,
     EnvironmentOutlined,
-    InfoCircleOutlined,
-    HomeOutlined,
     FileImageOutlined,
+    HomeOutlined,
+    InfoCircleOutlined,
     UserOutlined
 } from "@ant-design/icons";
 import {unsplashUrl} from "../typescripts/publicConstants";
-import {changeThemeColor, getFontColor, getSearchEngineDetail, isEmptyString} from "../typescripts/publicFunctions";
+import {changeThemeColor, getFontColor, getSearchEngineDetail, isEmpty} from "../typescripts/publicFunctions";
 import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
 import "../stylesheets/publicStyles.scss"
 
@@ -82,16 +82,16 @@ class AuthorComponent extends React.Component {
     }
 
     authorLinkBtnOnClick() {
-        if (!isEmptyString(this.state.authorLink)) {
-            window.open(this.state.authorLink + unsplashUrl);
+        if (!isEmpty(this.state.authorLink)) {
+            window.open(this.state.authorLink + unsplashUrl, "_blank");
         } else {
             message.error("无跳转链接");
         }
     }
 
     imageLinkBtnOnClick() {
-        if (!isEmptyString(this.state.imageLink)) {
-            window.open(this.state.imageLink + unsplashUrl);
+        if (!isEmpty(this.state.imageLink)) {
+            window.open(this.state.imageLink + unsplashUrl, "_blank");
         } else {
             message.error("无跳转链接");
         }
@@ -136,10 +136,10 @@ class AuthorComponent extends React.Component {
                 authorPhotos: nextProps.imageData.user.total_photos,
                 imageLink: nextProps.imageData.links.html,
                 imagePreviewUrl: nextProps.imageData.urls.regular,
-                imageLocation: isEmptyString(nextProps.imageData.location.name) ? "暂无信息" : nextProps.imageData.location.name,
-                imageDescription: isEmptyString(nextProps.imageData.alt_description) ? "暂无信息" : nextProps.imageData.alt_description,
+                imageLocation: isEmpty(nextProps.imageData.location.name) ? "暂无信息" : nextProps.imageData.location.name,
+                imageDescription: isEmpty(nextProps.imageData.alt_description) ? "暂无信息" : nextProps.imageData.alt_description,
                 imageCreateTime: this.getCreateTime(nextProps.imageData.created_at),
-                imageCamera: isEmptyString(nextProps.imageData.exif.name) ? "暂无信息" : nextProps.imageData.exif.name,
+                imageCamera: isEmpty(nextProps.imageData.exif.name) ? "暂无信息" : nextProps.imageData.exif.name,
             }, () => {
                 changeThemeColor("#authorBtn", this.state.backgroundColor, this.state.fontColor);
             })
@@ -160,14 +160,14 @@ class AuthorComponent extends React.Component {
                 </Col>
                 <Col span={14} style={{textAlign: "right"}}>
                     <Space>
-                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<HomeOutlined />}
+                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<HomeOutlined/>}
                                 onMouseOver={this.btnMouseOver.bind(this)}
                                 onMouseOut={this.btnMouseOut.bind(this)}
                                 onClick={this.authorLinkBtnOnClick.bind(this)}
                                 style={{color: this.state.fontColor}}>
                             {"摄影师主页"}
                         </Button>
-                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<FileImageOutlined />}
+                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<FileImageOutlined/>}
                                 onMouseOver={this.btnMouseOver.bind(this)}
                                 onMouseOut={this.btnMouseOut.bind(this)}
                                 onClick={this.imageLinkBtnOnClick.bind(this)}
@@ -192,19 +192,22 @@ class AuthorComponent extends React.Component {
                                 {this.state.authorName.length < btnMaxSize ? this.state.authorName : this.state.authorName.substring(0, btnMaxSize) + "..."}
                             </Button>
                             <Space>
-                                <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<i className="bi bi-collection"></i>}
+                                <Button type={"text"} shape={this.props.preferenceData.buttonShape}
+                                        icon={<i className="bi bi-collection"></i>}
                                         style={{color: this.state.fontColor, cursor: "default"}}
                                         onMouseOver={this.btnMouseOver.bind(this)}
                                         onMouseOut={this.btnMouseOut.bind(this)}>
                                     {" " + this.state.authorCollections + " 个合集"}
                                 </Button>
-                                <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<i className="bi bi-heart"></i>}
+                                <Button type={"text"} shape={this.props.preferenceData.buttonShape}
+                                        icon={<i className="bi bi-heart"></i>}
                                         style={{color: this.state.fontColor, cursor: "default"}}
                                         onMouseOver={this.btnMouseOver.bind(this)}
                                         onMouseOut={this.btnMouseOut.bind(this)}>
                                     {" " + this.state.authorLikes + " 个点赞"}
                                 </Button>
-                                <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<i className="bi bi-images"></i>}
+                                <Button type={"text"} shape={this.props.preferenceData.buttonShape}
+                                        icon={<i className="bi bi-images"></i>}
                                         style={{color: this.state.fontColor, cursor: "default"}}
                                         onMouseOver={this.btnMouseOver.bind(this)}
                                         onMouseOut={this.btnMouseOut.bind(this)}>
@@ -219,27 +222,31 @@ class AuthorComponent extends React.Component {
                         <Space>
                             <Avatar size={64} shape={"square"} src={this.state.imagePreviewUrl} alt={"信息"}/>
                             <Space direction={"vertical"}>
-                                <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<EnvironmentOutlined/>}
+                                <Button type={"text"} shape={this.props.preferenceData.buttonShape}
+                                        icon={<EnvironmentOutlined/>}
                                         style={{color: this.state.fontColor}}
                                         onMouseOver={this.btnMouseOver.bind(this)}
                                         onMouseOut={this.btnMouseOut.bind(this)}
                                         onClick={this.imageLocationBtnOnClick.bind(this)}>
                                     {this.state.imageLocation.length < btnMaxSize ? this.state.imageLocation : this.state.imageLocation.substring(0, btnMaxSize) + "..."}
                                 </Button>
-                                <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<InfoCircleOutlined/>}
+                                <Button type={"text"} shape={this.props.preferenceData.buttonShape}
+                                        icon={<InfoCircleOutlined/>}
                                         style={{color: this.state.fontColor, cursor: "default"}}
                                         onMouseOver={this.btnMouseOver.bind(this)}
                                         onMouseOut={this.btnMouseOut.bind(this)}>
                                     {this.state.imageDescription.length < btnMaxSize ? this.state.imageDescription : this.state.imageDescription.substring(0, btnMaxSize) + "..."}
                                 </Button>
                                 <Space>
-                                    <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<ClockCircleOutlined/>}
+                                    <Button type={"text"} shape={this.props.preferenceData.buttonShape}
+                                            icon={<ClockCircleOutlined/>}
                                             style={{color: this.state.fontColor, cursor: "default"}}
                                             onMouseOver={this.btnMouseOver.bind(this)}
                                             onMouseOut={this.btnMouseOut.bind(this)}>
                                         {this.state.imageCreateTime}
                                     </Button>
-                                    <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<CameraOutlined/>}
+                                    <Button type={"text"} shape={this.props.preferenceData.buttonShape}
+                                            icon={<CameraOutlined/>}
                                             style={{color: this.state.fontColor}}
                                             onMouseOver={this.btnMouseOver.bind(this)}
                                             onMouseOut={this.btnMouseOut.bind(this)}

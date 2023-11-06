@@ -12,18 +12,21 @@ import CollectionComponent from "./components/collectionComponent";
 import AuthorComponent from "./components/authorComponent";
 import AuthorLiteComponent from "./components/authorLiteComponent"
 
-import {Col, Layout, Row, Space} from "antd";
+import {Col, Layout, notification, Row, Space, Typography} from "antd";
 import "./stylesheets/publicStyles.scss"
 import {
     changeThemeColor,
-    getFontColor, getPreferenceDataStorage,
+    getFontColor,
+    getPreferenceDataStorage,
     getReverseColor,
     setColorTheme
 } from "./typescripts/publicFunctions";
 import {PreferenceDataInterface, ThemeColorInterface} from "./typescripts/publicInterface";
+import ImageHistoryComponent from "./components/imageHistoryComponent";
+import $ from "jquery";
 
 const {Header, Content, Footer} = Layout;
-const $ = require("jquery");
+const {Text, Link} = Typography;
 
 type propType = {}
 
@@ -31,6 +34,7 @@ type stateType = {
     themeColor: ThemeColorInterface,
 
     imageData: any,
+    imageHistory: any,
     preferenceData: PreferenceDataInterface,
     componentDisplay: "none" | "block",
 }
@@ -51,6 +55,7 @@ class App extends React.Component {
             },
 
             imageData: null,
+            imageHistory: [],
             preferenceData: getPreferenceDataStorage(),  // 加载偏好设置
             componentDisplay: "none"
         }
@@ -80,6 +85,12 @@ class App extends React.Component {
         })
     }
 
+    getImageHistory(value: any) {
+        this.setState({
+            imageHistory: value
+        })
+    }
+
     getPreferenceData(value: PreferenceDataInterface) {
         this.setState({
             preferenceData: value
@@ -92,6 +103,20 @@ class App extends React.Component {
             this.setState({
                 themeColor: setColorTheme()
             })
+        }
+
+        // 版本号提醒
+        let storageVersion = localStorage.getItem("SkyNewTabReactVersion");
+        let currentVersion = require('../package.json').version;
+        if (storageVersion !== currentVersion) {
+            notification.info({
+                message: "已更新至 " + currentVersion,
+                description: "详情请前往 GitHub 或 GitLab 查看",
+                placement: "bottomLeft",
+                duration: 5,
+                closeIcon: false
+            });
+            localStorage.setItem("SkyNewTabReactVersion", currentVersion);
         }
 
         // 修改各类弹窗样式
@@ -132,6 +157,15 @@ class App extends React.Component {
                 $(".ant-message-custom-content > .anticon").css("color", this.state.themeColor.componentFontColor);
             }
 
+            // notification
+            let notificationEle = $(".ant-notification");
+            if (notificationEle.length && notificationEle.length > 0) {
+                $(".ant-notification-notice").css({"backgroundColor": this.state.themeColor.componentBackgroundColor,});
+                $(".ant-notification-notice-icon").css("color", this.state.themeColor.componentFontColor);
+                $(".ant-notification-notice-message").css("color", this.state.themeColor.componentFontColor);
+                $(".ant-notification-notice-description").css("color", this.state.themeColor.componentFontColor);
+            }
+
             // drawer
             let drawerEle = $(".ant-drawer");
             if (drawerEle.length && drawerEle.length > 0) {
@@ -155,10 +189,9 @@ class App extends React.Component {
                 });
                 $(".ant-form-item-label > label").css("color", this.state.themeColor.componentFontColor);
                 $(".ant-modal-footer > .ant-btn").css("color", this.state.themeColor.componentFontColor);
-                if(this.state.preferenceData.buttonShape === "round") {
+                if (this.state.preferenceData.buttonShape === "round") {
                     $(".ant-modal-footer > .ant-btn").removeClass("ant-btn-default ant-btn-primary").addClass("ant-btn-round ant-btn-text");
-                }
-                else {
+                } else {
                     $(".ant-modal-footer > .ant-btn").removeClass("ant-btn-round ant-btn-default ant-btn-primary").addClass("ant-btn-text");
                 }
 
@@ -228,6 +261,7 @@ class App extends React.Component {
                 <Content id={"content"} className={"alignCenter"}>
                     <WallpaperComponent
                         getImageData={this.getImageData.bind(this)}
+                        getImageHistory={this.getImageHistory.bind(this)}
                     />
                     <Space direction={"vertical"} align={"center"}>
                         <ClockComponent themeColor={this.state.themeColor} preferenceData={this.state.preferenceData}/>
@@ -248,6 +282,12 @@ class App extends React.Component {
                                     display={this.state.componentDisplay}
                                     themeColor={this.state.themeColor}
                                     imageData={this.state.imageData}
+                                    preferenceData={this.state.preferenceData}
+                                />
+                                <ImageHistoryComponent
+                                    display={this.state.componentDisplay}
+                                    themeColor={this.state.themeColor}
+                                    imageHistory={this.state.imageHistory}
                                     preferenceData={this.state.preferenceData}
                                 />
                             </Space>

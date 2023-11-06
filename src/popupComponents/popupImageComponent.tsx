@@ -9,10 +9,10 @@ import {
 } from "@ant-design/icons";
 import "../stylesheets/popupComponent.scss";
 import {decode} from "blurhash"
-import {getFontColor, getSearchEngineDetail, isEmptyString} from "../typescripts/publicFunctions";
+import {getFontColor, getSearchEngineDetail, isEmpty} from "../typescripts/publicFunctions";
 import {PreferenceDataInterface} from "../typescripts/publicInterface";
+import $ from "jquery";
 
-const $ = require("jquery");
 const btnMaxSize = 35;
 
 type propType = {
@@ -75,16 +75,16 @@ class PopupImageComponent extends React.Component {
     }
 
     authorLinkBtnOnClick() {
-        if (!isEmptyString(this.state.authorLink)) {
-            window.open(this.state.authorLink);
+        if (!isEmpty(this.state.authorLink)) {
+            window.open(this.state.authorLink, "_blank");
         } else {
             message.error("暂无链接")
         }
     }
 
     imageLinkBtnOnClick() {
-        if (!isEmptyString(this.state.imageLink)) {
-            window.open(this.state.imageLink);
+        if (!isEmpty(this.state.imageLink)) {
+            window.open(this.state.imageLink, "_blank");
         } else {
             message.error("暂无链接")
         }
@@ -120,8 +120,7 @@ class PopupImageComponent extends React.Component {
         if (popupImage instanceof HTMLElement) {
             popupImage.onload = () => {
                 // $("#popupCanvas").remove();
-                $("#popupCanvas").removeClass("imageFadeIn");
-                $("#popupCanvas").addClass("imageFadeOut");
+                $("#popupCanvas").removeClass("imageFadeIn").addClass("imageFadeOut");
                 popupImageDiv.style.display = "block";
                 popupImageDiv.className = "imageFadeIn";
             }
@@ -135,14 +134,14 @@ class PopupImageComponent extends React.Component {
                     authorLink: nextProps.imageData.user.links.html,
                     imageLink: nextProps.imageData.links.html,
                     imagePreviewUrl: nextProps.imageData.urls.regular,
-                    imageLocation: isEmptyString(nextProps.imageData.location.name) ? "暂无信息" : nextProps.imageData.location.name,
-                    imageDescription: isEmptyString(nextProps.imageData.alt_description) ? "暂无信息" : nextProps.imageData.alt_description,
+                    imageLocation: isEmpty(nextProps.imageData.location.name) ? "暂无信息" : nextProps.imageData.location.name,
+                    imageDescription: isEmpty(nextProps.imageData.alt_description) ? "暂无信息" : nextProps.imageData.alt_description,
                     imageCreateTime: this.getCreateTime(nextProps.imageData.created_at),
-                    imageCamera: isEmptyString(nextProps.imageData.exif.name) ? "暂无信息" : nextProps.imageData.exif.name,
+                    imageCamera: isEmpty(nextProps.imageData.exif.name) ? "暂无信息" : nextProps.imageData.exif.name,
                     hoverColor: nextProps.imageData.color,
                     blurHashCode: nextProps.imageData.blur_hash
                 }, () => {
-                    if (!isEmptyString(this.state.blurHashCode)) {
+                    if (!isEmpty(this.state.blurHashCode)) {
                         const popupCanvas = document.getElementById("popupCanvas") as HTMLCanvasElement | null;
                         if (popupCanvas instanceof HTMLCanvasElement) {
                             let blurHashImage = decode(this.state.blurHashCode, popupCanvas.width, popupCanvas.height);
@@ -201,7 +200,8 @@ class PopupImageComponent extends React.Component {
                                 style={{color: this.state.fontColor}}>
                             {this.state.authorName.length < btnMaxSize ? this.state.authorName : this.state.authorName.substring(0, btnMaxSize) + "..."}
                         </Button>
-                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<EnvironmentOutlined/>}
+                        <Button type={"text"} shape={this.props.preferenceData.buttonShape}
+                                icon={<EnvironmentOutlined/>}
                                 onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
                                 onClick={this.imageLocationBtnOnClick.bind(this)} style={{color: this.state.fontColor}}>
                             {this.state.imageLocation.length < btnMaxSize ? this.state.imageLocation : this.state.imageLocation.substring(0, btnMaxSize) + "..."}
@@ -212,7 +212,8 @@ class PopupImageComponent extends React.Component {
                             {this.state.imageDescription.length < btnMaxSize ? this.state.imageDescription : this.state.imageDescription.substring(0, btnMaxSize) + "..."}
                         </Button>
                         <Space>
-                            <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<ClockCircleOutlined/>}
+                            <Button type={"text"} shape={this.props.preferenceData.buttonShape}
+                                    icon={<ClockCircleOutlined/>}
                                     style={{color: this.state.fontColor, cursor: "default"}}
                                     onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
                                 {this.state.imageCreateTime}

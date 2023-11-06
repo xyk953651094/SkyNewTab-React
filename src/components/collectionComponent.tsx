@@ -3,9 +3,9 @@ import {Button, Col, Form, Input, List, message, Modal, Row, Space, Tooltip, Typ
 import {DeleteOutlined, EditOutlined, LinkOutlined, PlusOutlined, PushpinOutlined} from "@ant-design/icons";
 import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
 import {getFontColor} from "../typescripts/publicFunctions";
+import $ from "jquery";
 
 const {Text} = Typography;
-const $ = require("jquery");
 
 type propType = {
     themeColor: ThemeColorInterface,
@@ -211,10 +211,11 @@ class CollectionComponent extends React.Component {
                                 return (
                                     <Tooltip title={item.webUrl} key={item.timeStamp} placement={"bottom"}
                                              color={this.state.backgroundColor}>
-                                        <Button type={"primary"} shape={this.props.preferenceData.buttonShape} className={"componentTheme"}
+                                        <Button type={"primary"} shape={this.props.preferenceData.buttonShape}
+                                                className={"componentTheme"}
                                                 key={item.timeStamp}
                                                 onClick={() => {
-                                                    window.open(item.webUrl)
+                                                    window.open(item.webUrl, "_blank")
                                                 }}
                                                 style={{
                                                     color: this.state.fontColor,
@@ -226,12 +227,12 @@ class CollectionComponent extends React.Component {
                                 )
                             })
                         }
-                        <Tooltip title={"添加链接"} placement={"bottom"} color={this.state.backgroundColor}>
+                        <Tooltip title={"添加快速链接"} placement={"bottom"} color={this.state.backgroundColor}>
                             <Button type={"primary"} shape={this.state.buttonShape} className={"componentTheme"}
                                     style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}}
                                     icon={<PlusOutlined/>} onClick={this.showAddModalBtnOnClick.bind(this)}/>
                         </Tooltip>
-                        <Tooltip title={"编辑链接"} placement={"bottom"} color={this.state.backgroundColor}>
+                        <Tooltip title={"编辑快速链接"} placement={"bottom"} color={this.state.backgroundColor}>
                             <Button type={"primary"} shape={this.state.buttonShape} className={"componentTheme"}
                                     style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}}
                                     icon={<EditOutlined/>} onClick={this.showEditModalBtnOnClick.bind(this)}/>
@@ -241,7 +242,11 @@ class CollectionComponent extends React.Component {
                                     style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}}
                                     icon={<DeleteOutlined/>} onClick={this.removeAllBtnOnClick.bind(this)}/>
                         </Tooltip>
-                        <Modal title={"添加链接 " + this.state.collectionSize + " / " + this.state.collectionMaxSize}
+                        <Modal title={
+                            <Text style={{color: this.state.fontColor}}>
+                                {"添加快速链接 " + this.state.collectionSize + " / " + this.state.collectionMaxSize}
+                            </Text>
+                        }
                                closeIcon={false} centered
                                open={this.state.displayAddModal} onOk={this.addModalOkBtnOnClick.bind(this)}
                                onCancel={this.addModalCancelBtnOnClick.bind(this)}
@@ -262,11 +267,12 @@ class CollectionComponent extends React.Component {
                             <Row align={"middle"}>
                                 <Col span={12}>
                                     <Text style={{color: this.state.fontColor}}>
-                                        {"编辑链接 " + this.state.collectionSize + " / " + this.state.collectionMaxSize}
+                                        {"编辑快速链接 " + this.state.collectionSize + " / " + this.state.collectionMaxSize}
                                     </Text>
                                 </Col>
                                 <Col span={12} style={{textAlign: "right"}}>
-                                    <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<DeleteOutlined/>}
+                                    <Button type={"text"} shape={this.props.preferenceData.buttonShape}
+                                            icon={<DeleteOutlined/>}
                                             onMouseOver={this.btnMouseOver.bind(this)}
                                             onMouseOut={this.btnMouseOut.bind(this)}
                                             onClick={this.removeAllBtnOnClick.bind(this)}
@@ -294,7 +300,8 @@ class CollectionComponent extends React.Component {
                                     ]}>
                                         <Row style={{width: "100%"}}>
                                             <Col span={8}>
-                                                <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<PushpinOutlined/>}
+                                                <Button type={"text"} shape={this.props.preferenceData.buttonShape}
+                                                        icon={<PushpinOutlined/>}
                                                         onMouseOver={this.btnMouseOver.bind(this)}
                                                         onMouseOut={this.btnMouseOut.bind(this)}
                                                         style={{color: this.state.fontColor, cursor: "default"}}>
@@ -302,7 +309,8 @@ class CollectionComponent extends React.Component {
                                                 </Button>
                                             </Col>
                                             <Col span={16}>
-                                                <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<LinkOutlined/>}
+                                                <Button type={"text"} shape={this.props.preferenceData.buttonShape}
+                                                        icon={<LinkOutlined/>}
                                                         onMouseOver={this.btnMouseOver.bind(this)}
                                                         onMouseOut={this.btnMouseOut.bind(this)}
                                                         style={{color: this.state.fontColor, cursor: "default"}}>

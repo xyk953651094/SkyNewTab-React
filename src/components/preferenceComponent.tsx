@@ -4,7 +4,6 @@ import {MenuOutlined} from "@ant-design/icons";
 import {changeThemeColor, getFontColor} from "../typescripts/publicFunctions";
 import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
 import {device} from "../typescripts/publicConstants";
-import PreferenceLinkComponent from "../preferenceComponents/preferenceLinkComponent";
 import PreferenceFooterComponent from "../preferenceComponents/preferenceFooterComponent";
 import PreferenceEmailComponent from "../preferenceComponents/preferenceEmailComponent";
 import PreferenceInfoComponent from "../preferenceComponents/preferenceInfoComponent";
@@ -100,7 +99,8 @@ class PreferenceComponent extends React.Component {
         return (
             <>
                 <Tooltip title={"菜单栏"} placement={"bottomRight"} color={this.state.backgroundColor}>
-                    <Button shape={this.state.buttonShape} icon={<MenuOutlined style={{fontSize: "16px"}}/>} size={"large"}
+                    <Button shape={this.state.buttonShape} icon={<MenuOutlined style={{fontSize: "16px"}}/>}
+                            size={"large"}
                             onClick={this.showDrawerBtnOnClick.bind(this)}
                             id={"preferenceBtn"}
                             className={"componentTheme zIndexHigh"}

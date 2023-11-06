@@ -43,7 +43,7 @@ class PreferenceFooterComponent extends React.Component {
     render() {
         return (
             <Row justify={"center"}>
-                <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<ToTopOutlined />}
+                <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<ToTopOutlined/>}
                         onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
                         onClick={this.toTopBtnOnClick.bind(this)}
                         style={{color: this.props.fontColor}}>
