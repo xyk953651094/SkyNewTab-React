@@ -190,13 +190,6 @@ class WeatherComponent extends React.Component {
             <List>
                 <List.Item>
                     <Space direction={"vertical"}>
-                        <Button type={"text"} shape={this.props.preferenceData.buttonShape}
-                                icon={<ClockCircleOutlined/>}
-                                onMouseOver={this.btnMouseOver.bind(this)}
-                                onMouseOut={this.btnMouseOut.bind(this)}
-                                style={{color: this.state.fontColor, cursor: "default"}}>
-                            {"最后更新时间：" + this.state.lastRequestTime}
-                        </Button>
                         <Row gutter={8}>
                             <Col span={12}>
                                 <Button type={"text"} shape={this.props.preferenceData.buttonShape}
@@ -257,6 +250,15 @@ class WeatherComponent extends React.Component {
                                     {" 视线距离：" + this.state.visibility}
                                 </Button>
                             </Col>
+                        </Row>
+                        <Row>
+                            <Button type={"text"} shape={this.props.preferenceData.buttonShape}
+                                    icon={<ClockCircleOutlined/>}
+                                    onMouseOver={this.btnMouseOver.bind(this)}
+                                    onMouseOut={this.btnMouseOut.bind(this)}
+                                    style={{color: this.state.fontColor, cursor: "default"}}>
+                                {"上次更新：" + this.state.lastRequestTime}
+                            </Button>
                         </Row>
                     </Space>
                 </List.Item>

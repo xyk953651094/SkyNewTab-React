@@ -323,7 +323,7 @@ class PreferenceImageComponent extends React.Component {
                         </Space>
                     </Form.Item>
                     <Form.Item name={"changeImageTime"} label={"切换间隔"}
-                               extra={"上次切换时间：" + this.state.lastRequestTime}>
+                               extra={"上次切换：" + this.state.lastRequestTime}>
                         <Select style={{width: 156}} onChange={this.changeImageTimeOnChange.bind(this)}>
                             <Select.Option value={"900000"}>{"每 15 分钟"}</Select.Option>
                             <Select.Option value={"1800000"}>{"每 30 分钟"}</Select.Option>

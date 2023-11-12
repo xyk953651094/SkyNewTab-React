@@ -1,19 +1,17 @@
 import React from "react";
 import {Col, Row, Space, Typography} from "antd";
 import "../stylesheets/clockComponent.scss"
-import {changeBackgroundColor, changeFontColor, getTimeDetails} from "../typescripts/publicFunctions";
-import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
+import {getTimeDetails} from "../typescripts/publicFunctions";
+import {ThemeColorInterface} from "../typescripts/publicInterface";
 import $ from "jquery";
 
 const {Text} = Typography;
 
 type propType = {
     themeColor: ThemeColorInterface,
-    preferenceData: PreferenceDataInterface,
 }
 
 type stateType = {
-    noImageMode: boolean,
     backgroundColor: string,
     fontColor: string,
     currentTime: string,
@@ -30,7 +28,6 @@ class ClockComponent extends React.Component {
     constructor(props: any) {
         super(props);
         this.state = {
-            noImageMode: false,
             backgroundColor: "",
             fontColor: "",
             currentTime: getTimeDetails(new Date()).showTime,
@@ -40,26 +37,28 @@ class ClockComponent extends React.Component {
     }
 
     btnMouseOver(e: any) {
-        if (!this.state.noImageMode) {
-            let currentTarget = e.currentTarget;
-            new Promise((resolve) => {
-                $(".clockText, .dateText").removeClass("textShadow");
-                changeBackgroundColor(e.currentTarget, this.state.backgroundColor, 150);
-                changeFontColor(".clockText, .dateText", this.state.fontColor, 150);
-                resolve("success");
-            }).then(() => {
-                currentTarget.classList.add("componentTheme");
-            })
-        }
+        $(".clockText, .dateText").removeClass("textShadow").css("color", this.state.fontColor);
+        e.currentTarget.style.backgroundColor = this.state.backgroundColor;
+        e.currentTarget.classList.add("componentTheme");
+
+        // let currentTarget = e.currentTarget;
+        // new Promise((resolve) => {
+        //     $(".clockText, .dateText").removeClass("textShadow");
+        //     changeBackgroundColor(e.currentTarget, this.state.backgroundColor, 150);
+        //     changeFontColor(".clockText, .dateText", this.state.fontColor, 150);
+        //     resolve("success");
+        // }).then(() => {
+        //     currentTarget.classList.add("componentTheme");
+        // })
     }
 
     btnMouseOut(e: any) {
-        if (!this.state.noImageMode) {
-            $(".clockText, .dateText").addClass("textShadow");
-            e.currentTarget.classList.remove("componentTheme");
-            changeBackgroundColor(e.currentTarget, "transparent", 150);
-            changeFontColor(".clockText, .dateText", this.state.backgroundColor, 150);
-        }
+        $(".clockText, .dateText").addClass("textShadow").css("color", this.state.backgroundColor);
+        e.currentTarget.style.backgroundColor = "transparent";
+        e.currentTarget.classList.remove("componentTheme");
+
+        // changeBackgroundColor(e.currentTarget, "transparent", 150);
+        // changeFontColor(".clockText, .dateText", this.state.backgroundColor, 150);
     }
 
     componentDidMount() {
@@ -79,12 +78,6 @@ class ClockComponent extends React.Component {
                 backgroundColor: nextProps.themeColor.componentBackgroundColor,
                 fontColor: nextProps.themeColor.componentFontColor,
             });
-        }
-
-        if (nextProps.preferenceData !== prevProps.preferenceData) {
-            this.setState({
-                noImageMode: nextProps.preferenceData.noImageMode
-            })
         }
     }
 
