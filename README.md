@@ -16,8 +16,12 @@
 ## 安装
 * Chrome、Edge、Firefox：前往插件商店搜索“云开新标签页”（推荐）
 * Safari：由于成本原因，暂不提供安装方式
-* 其他浏览器（Brave、Avast、Whale、Opera、WaterFox 等）：前往 Chrome 插件商店或 FireFox 插件商店搜索安装（推荐），或者下载 Releases 页面提供的安装包自行安装
-* 注意：由于 Edge 的插件审核周期过长（一般超过7天），因此 Edge 更新时间一般晚于 Chrome 和 Firefox
+* 其他浏览器（Brave、Avast、Whale、Opera、WaterFox 等）：前往 Chrome 插件商店或 FireFox 插件商店搜索“云开新标签页”（推荐）
+* 下载 [Releases](https://github.com/xyk953651094/SkyNewTab-React/releases/) 页面提供的安装包自行安装
+
+## 注意
+* 由于 Edge 插件商店审核周期过长（一般为 7 天），因此 Edge 更新时间一般晚于 Chrome 和 Firefox
+* Firefox 版本号需要 109.0.0 或以上
 
 ## 指南
 * 新的主题刷新后可能不会立即生效，请耐心等待
