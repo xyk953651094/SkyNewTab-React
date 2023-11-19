@@ -1,7 +1,7 @@
 import React from "react";
 import {Alert, Button, Card, Col, Form, message, Radio, RadioChangeEvent, Row, Space, Switch, Typography} from "antd";
 import {RedoOutlined, SettingOutlined} from "@ant-design/icons";
-import {getFontColor, getPreferenceDataStorage} from "../typescripts/publicFunctions";
+import {getPreferenceDataStorage, btnMouseOver, btnMouseOut} from "../typescripts/publicFunctions";
 import {PreferenceDataInterface} from "../typescripts/publicInterface";
 
 const {Paragraph} = Typography;
@@ -30,16 +30,6 @@ class PreferenceFunctionComponent extends React.Component {
             preferenceData: getPreferenceDataStorage(),
             disableSwitch: false
         };
-    }
-
-    btnMouseOver(e: any) {
-        e.currentTarget.style.backgroundColor = this.props.hoverColor;
-        e.currentTarget.style.color = getFontColor(this.props.hoverColor);
-    }
-
-    btnMouseOut(e: any) {
-        e.currentTarget.style.backgroundColor = "transparent";
-        e.currentTarget.style.color = this.props.fontColor;
     }
 
     // 搜索引擎
@@ -164,8 +154,8 @@ class PreferenceFunctionComponent extends React.Component {
                     </Row>
                     <Form.Item name={"clearStorageButton"} label={"危险设置"}>
                         <Button type={"text"} shape={this.state.preferenceData.buttonShape} icon={<RedoOutlined/>}
-                                onMouseOver={this.btnMouseOver.bind(this)}
-                                onMouseOut={this.btnMouseOut.bind(this)}
+                                onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
+                                onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
                                 onClick={this.clearStorageBtnOnClick.bind(this)}
                                 style={{color: this.props.fontColor}}>
                             重置插件

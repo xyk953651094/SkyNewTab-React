@@ -40,16 +40,6 @@ class PopupComponent extends React.Component {
         }
     }
 
-    btnMouseOver(e: any) {
-        e.currentTarget.style.backgroundColor = this.state.hoverColor;
-        e.currentTarget.style.color = getFontColor(this.state.hoverColor);
-    }
-
-    btnMouseOut(e: any) {
-        e.currentTarget.style.backgroundColor = "transparent";
-        e.currentTarget.style.color = this.state.fontColor;
-    }
-
     componentDidMount() {
         let imageData = localStorage.getItem("lastImage");
         // let tempPreferenceData = localStorage.getItem("preferenceData");
@@ -98,6 +88,7 @@ class PopupComponent extends React.Component {
                         <List.Item className={"alignCenter"} style={{borderBlockEndColor: this.state.fontColor}}>
                             <PopupStatusComponent
                                 imageData={this.state.imageData}
+                                hoverColor={this.state.hoverColor}
                                 fontColor={this.state.fontColor}
                                 preferenceData={this.state.preferenceData}
                             />
@@ -105,6 +96,7 @@ class PopupComponent extends React.Component {
                         <List.Item className={"alignCenter"}>
                             <PopupImageComponent
                                 imageData={this.state.imageData}
+                                hoverColor={this.state.hoverColor}
                                 fontColor={this.state.fontColor}
                                 preferenceData={this.state.preferenceData}
                             />
