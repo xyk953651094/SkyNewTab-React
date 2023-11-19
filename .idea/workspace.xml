@@ -7,6 +7,9 @@
     <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="新增历史记录，修复已知问题">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/extensionFiles/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/extensionFiles/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/preferenceComponents/preferenceProductComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/preferenceComponents/preferenceProductComponent.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +66,7 @@
     &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;通义灵码&quot;,
     &quot;ts.external.directory.path&quot;: &quot;/Users/xiaoyunkai/Projects/WebStorm/SkyNewTab-React/node_modules/typescript/lib&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
@@ -313,7 +316,27 @@
       <workItem from="1699703812173" duration="4722000" />
       <workItem from="1699757975602" duration="198000" />
       <workItem from="1699758180801" duration="242000" />
-      <workItem from="1699759372414" duration="1112000" />
+      <workItem from="1699759372414" duration="1327000" />
+      <workItem from="1699765489800" duration="380000" />
+      <workItem from="1699767696665" duration="431000" />
+      <workItem from="1699873548301" duration="385000" />
+      <workItem from="1699968572492" duration="164000" />
+      <workItem from="1700057234305" duration="979000" />
+      <workItem from="1700101920540" duration="171000" />
+      <workItem from="1700132060942" duration="87000" />
+      <workItem from="1700132428112" duration="419000" />
+      <workItem from="1700133651117" duration="1190000" />
+      <workItem from="1700213299506" duration="550000" />
+      <workItem from="1700214767153" duration="481000" />
+      <workItem from="1700215393668" duration="2748000" />
+      <workItem from="1700223521475" duration="2362000" />
+      <workItem from="1700230434006" duration="41000" />
+      <workItem from="1700278725481" duration="4145000" />
+      <workItem from="1700309777909" duration="117000" />
+      <workItem from="1700310025348" duration="1189000" />
+      <workItem from="1700311507440" duration="1153000" />
+      <workItem from="1700312949611" duration="757000" />
+      <workItem from="1700314709631" duration="576000" />
     </task>
     <task id="LOCAL-00001" summary="优化抽屉蒙版的显示效果&#10;优化代码质量">
       <created>1683952184207</created>
@@ -433,14 +456,6 @@
       <option name="presentableId" value="LOCAL-00017" />
       <option name="project" value="LOCAL" />
       <updated>1687402693401</updated>
-    </task>
-    <task id="LOCAL-00080" summary="修复已知问题">
-      <option name="closed" value="true" />
-      <created>1693997349101</created>
-      <option name="number" value="00080" />
-      <option name="presentableId" value="LOCAL-00080" />
-      <option name="project" value="LOCAL" />
-      <updated>1693997349102</updated>
     </task>
     <task id="LOCAL-00081" summary="优化视觉效果">
       <option name="closed" value="true" />
@@ -690,7 +705,15 @@
       <option name="project" value="LOCAL" />
       <updated>1699758084897</updated>
     </task>
-    <option name="localTasksCounter" value="112" />
+    <task id="LOCAL-00112" summary="新增历史记录，修复已知问题">
+      <option name="closed" value="true" />
+      <created>1699763826803</created>
+      <option name="number" value="00112" />
+      <option name="presentableId" value="LOCAL-00112" />
+      <option name="project" value="LOCAL" />
+      <updated>1699763826804</updated>
+    </task>
+    <option name="localTasksCounter" value="113" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
