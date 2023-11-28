@@ -9,12 +9,11 @@ import {
 } from "@ant-design/icons";
 import {
     changeThemeColor,
-    getFontColor,
     getGreetContent,
     getGreetIcon,
     getSearchEngineDetail,
     getTimeDetails,
-    httpRequest
+    httpRequest, btnMouseOver, btnMouseOut
 } from "../typescripts/publicFunctions";
 import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
 
@@ -61,16 +60,6 @@ class GreetComponent extends React.Component {
             suit: "暂无信息",
             avoid: "暂无信息",
         };
-    }
-
-    btnMouseOver(e: any) {
-        e.currentTarget.style.backgroundColor = this.state.hoverColor;
-        e.currentTarget.style.color = getFontColor(this.state.hoverColor);
-    }
-
-    btnMouseOut(e: any) {
-        e.currentTarget.style.backgroundColor = "transparent";
-        e.currentTarget.style.color = this.state.fontColor;
     }
 
     historyBtnOnClick() {
@@ -185,15 +174,15 @@ class GreetComponent extends React.Component {
                 <Col span={14} style={{textAlign: "right"}}>
                     <Space>
                         <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<HistoryOutlined/>}
-                                onMouseOver={this.btnMouseOver.bind(this)}
-                                onMouseOut={this.btnMouseOut.bind(this)}
+                                onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
+                                onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}
                                 onClick={this.historyBtnOnClick.bind(this)}
                                 style={{color: this.state.fontColor}}>
                             {"历史上的今天"}
                         </Button>
                         <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<MoreOutlined/>}
-                                onMouseOver={this.btnMouseOver.bind(this)}
-                                onMouseOut={this.btnMouseOut.bind(this)}
+                                onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
+                                onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}
                                 onClick={this.infoBtnOnClick.bind(this)}
                                 style={{color: this.state.fontColor}}>
                             {"更多信息"}
@@ -209,19 +198,19 @@ class GreetComponent extends React.Component {
                     <Space direction={"vertical"}>
                         <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<CalendarOutlined/>}
                                 style={{color: this.state.fontColor, cursor: "default"}}
-                                onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
+                                onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)} onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}>
                             {this.state.calendar}
                         </Button>
                         <Button type={"text"} shape={this.props.preferenceData.buttonShape}
                                 icon={<CheckCircleOutlined/>}
                                 style={{color: this.state.fontColor, cursor: "default"}}
-                                onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
+                                onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)} onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}>
                             {"宜：" + (this.state.suit.length < btnMaxSize) ? this.state.suit : this.state.suit.substring(0, btnMaxSize) + "..."}
                         </Button>
                         <Button type={"text"} shape={this.props.preferenceData.buttonShape}
                                 icon={<CloseCircleOutlined/>}
                                 style={{color: this.state.fontColor, cursor: "default"}}
-                                onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
+                                onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)} onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}>
                             {"忌：" + (this.state.avoid.length < btnMaxSize) ? this.state.avoid : this.state.avoid.substring(0, btnMaxSize) + "..."}
                         </Button>
                     </Space>

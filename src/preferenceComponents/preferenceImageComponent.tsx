@@ -17,7 +17,7 @@ import {
     Typography
 } from "antd";
 import {CheckOutlined, SettingOutlined, StopOutlined} from "@ant-design/icons";
-import {getFontColor, getPreferenceDataStorage, getTimeDetails, isEmpty} from "../typescripts/publicFunctions";
+import {getPreferenceDataStorage, getTimeDetails, isEmpty, btnMouseOver, btnMouseOut} from "../typescripts/publicFunctions";
 import {CheckboxValueType} from "antd/es/checkbox/Group";
 import {PreferenceDataInterface} from "../typescripts/publicInterface";
 import $ from "jquery";
@@ -52,16 +52,6 @@ class PreferenceImageComponent extends React.Component {
             lastRequestTime: "暂无信息",
             disableImageTopic: false
         };
-    }
-
-    btnMouseOver(e: any) {
-        e.currentTarget.style.backgroundColor = this.props.hoverColor;
-        e.currentTarget.style.color = getFontColor(this.props.hoverColor);
-    }
-
-    btnMouseOut(e: any) {
-        e.currentTarget.style.backgroundColor = "transparent";
-        e.currentTarget.style.color = this.props.fontColor;
     }
 
     // 图片动效
@@ -309,14 +299,14 @@ class PreferenceImageComponent extends React.Component {
                                 <Input id={"customTopicInput"} placeholder="英文搜索最准确" allowClear/>
                             </Form.Item>
                             <Button type={"text"} shape={this.state.buttonShape} icon={<CheckOutlined/>}
-                                    onMouseOver={this.btnMouseOver.bind(this)}
-                                    onMouseOut={this.btnMouseOut.bind(this)}
+                                    onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
+                                    onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
                                     onClick={this.submitCustomTopicBtnOnClick.bind(this)}
                                     style={{color: this.props.fontColor}}>
                             </Button>
                             <Button type={"text"} shape={this.state.buttonShape} icon={<StopOutlined/>}
-                                    onMouseOver={this.btnMouseOver.bind(this)}
-                                    onMouseOut={this.btnMouseOut.bind(this)}
+                                    onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
+                                    onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
                                     onClick={this.clearCustomTopicBtnOnClick.bind(this)}
                                     style={{color: this.props.fontColor}}>
                             </Button>

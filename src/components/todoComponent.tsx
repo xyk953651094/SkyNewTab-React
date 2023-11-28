@@ -1,7 +1,7 @@
 import React from "react";
 import {Button, Col, Form, Input, List, message, Modal, Popover, Rate, Row, Select, Space, Typography} from "antd";
 import {CheckOutlined, CheckSquareOutlined, PlusOutlined, TagOutlined} from "@ant-design/icons";
-import {changeThemeColor, getFontColor} from "../typescripts/publicFunctions";
+import {changeThemeColor, btnMouseOver, btnMouseOut} from "../typescripts/publicFunctions";
 import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
 import $ from "jquery";
 
@@ -49,16 +49,6 @@ class TodoComponent extends React.Component {
             tag: "工作",
             priority: "★",
         };
-    }
-
-    btnMouseOver(e: any) {
-        e.currentTarget.style.backgroundColor = this.state.hoverColor;
-        e.currentTarget.style.color = getFontColor(this.state.hoverColor);
-    }
-
-    btnMouseOut(e: any) {
-        e.currentTarget.style.backgroundColor = "transparent";
-        e.currentTarget.style.color = this.state.fontColor;
     }
 
     finishAllBtnOnClick() {
@@ -220,12 +210,12 @@ class TodoComponent extends React.Component {
                 <Col span={14} style={{textAlign: "right"}}>
                     <Space>
                         <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<PlusOutlined/>}
-                                onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
+                                onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)} onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}
                                 style={{color: this.state.fontColor}} onClick={this.showAddModalBtnOnClick.bind(this)}>
                             {"添加待办事项"}
                         </Button>
                         <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<CheckOutlined/>}
-                                onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
+                                onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)} onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}
                                 style={{color: this.state.fontColor}} onClick={this.finishAllBtnOnClick.bind(this)}>
                             {"全部完成"}
                         </Button>
@@ -241,7 +231,7 @@ class TodoComponent extends React.Component {
                     <List.Item
                         actions={[
                             <Button type={"text"} shape={this.state.buttonShape} icon={<CheckOutlined/>}
-                                    onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
+                                    onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)} onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}
                                     onClick={this.finishBtnOnClick.bind(this, item)}
                                     style={{color: this.state.fontColor}}/>
                         ]}
@@ -250,8 +240,8 @@ class TodoComponent extends React.Component {
                             <Col span={12}>
                                 <Button type={"text"} shape={this.props.preferenceData.buttonShape}
                                         icon={<CheckSquareOutlined/>}
-                                        onMouseOver={this.btnMouseOver.bind(this)}
-                                        onMouseOut={this.btnMouseOut.bind(this)}
+                                        onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
+                                        onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}
                                         style={{color: this.state.fontColor, cursor: "default"}}>
                                     {item.title}
                                 </Button>
@@ -259,8 +249,8 @@ class TodoComponent extends React.Component {
                             <Col span={12}>
                                 <Button type={"text"} shape={this.props.preferenceData.buttonShape}
                                         icon={<TagOutlined/>}
-                                        onMouseOver={this.btnMouseOver.bind(this)}
-                                        onMouseOut={this.btnMouseOut.bind(this)}
+                                        onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
+                                        onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}
                                         style={{color: this.state.fontColor, cursor: "default"}}>
                                     {item.tag + "｜" + item.priority}
                                 </Button>

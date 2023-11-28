@@ -1,7 +1,7 @@
 import React from "react";
 import {Button, Drawer, Space, Tooltip} from "antd";
 import {MenuOutlined} from "@ant-design/icons";
-import {changeThemeColor, getFontColor} from "../typescripts/publicFunctions";
+import {changeThemeColor} from "../typescripts/publicFunctions";
 import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
 import {device} from "../typescripts/publicConstants";
 import PreferenceFooterComponent from "../preferenceComponents/preferenceFooterComponent";
@@ -44,16 +44,6 @@ class PreferenceComponent extends React.Component {
             displayDrawer: false,
             drawerPosition: "right",
         };
-    }
-
-    btnMouseOver(e: any) {
-        e.currentTarget.style.backgroundColor = this.state.hoverColor;
-        e.currentTarget.style.color = getFontColor(this.state.hoverColor);
-    }
-
-    btnMouseOut(e: any) {
-        e.currentTarget.style.backgroundColor = "transparent";
-        e.currentTarget.style.color = this.state.fontColor;
     }
 
     showDrawerBtnOnClick() {
@@ -111,7 +101,7 @@ class PreferenceComponent extends React.Component {
                 </Tooltip>
                 <Drawer
                     size={"default"}
-                    width={380}
+                    width={400}
                     height={500}
                     placement={this.state.drawerPosition}
                     onClose={this.drawerOnClose.bind(this)}

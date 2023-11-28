@@ -360,6 +360,22 @@ export function getPreferenceDataStorage() {
     }
 }
 
+export function getImageHistoryStorage() {
+    let imageHistoryStorage = localStorage.getItem("imageHistory");
+    if (imageHistoryStorage !== null) {
+        let tempImageHistoryJson = JSON.parse(imageHistoryStorage);
+        if (!isEmpty(tempImageHistoryJson)) {
+            return tempImageHistoryJson.reverse();  // 重新到旧排序
+        }
+        else {
+            return [];
+        }
+    }
+    else {
+        return [];
+    }
+}
+
 // 过渡动画
 export function changeThemeColor(element: string, backgroundColor: string, fontColor: string, time: number = 300) {
     $(element).animate({
@@ -386,4 +402,15 @@ export function fadeIn(element: string, time = 300) {
 
 export function fadeOut(element: string, time = 300) {
     $(element).fadeOut(time);
+}
+
+// 按钮（clockComponent 不适用公共方法，已单独实现）
+export function btnMouseOver(hoverColor: string, e: any) {
+    e.currentTarget.style.backgroundColor = hoverColor;
+    e.currentTarget.style.color = getFontColor(hoverColor);
+}
+
+export function btnMouseOut(fontColor: string, e: any) {
+    e.currentTarget.style.backgroundColor = "transparent";
+    e.currentTarget.style.color = fontColor;
 }

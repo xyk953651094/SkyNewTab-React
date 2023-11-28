@@ -2,7 +2,7 @@ import React from "react";
 import {Button, Col, Form, Input, List, message, Modal, Row, Space, Tooltip, Typography} from "antd";
 import {DeleteOutlined, EditOutlined, LinkOutlined, PlusOutlined, PushpinOutlined} from "@ant-design/icons";
 import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
-import {getFontColor} from "../typescripts/publicFunctions";
+import {btnMouseOver, btnMouseOut} from "../typescripts/publicFunctions";
 import $ from "jquery";
 
 const {Text} = Typography;
@@ -47,16 +47,6 @@ class CollectionComponent extends React.Component {
             collectionSize: 0,
             collectionMaxSize: 5
         };
-    }
-
-    btnMouseOver(e: any) {
-        e.currentTarget.style.backgroundColor = this.state.hoverColor;
-        e.currentTarget.style.color = getFontColor(this.state.hoverColor);
-    }
-
-    btnMouseOut(e: any) {
-        e.currentTarget.style.backgroundColor = "transparent";
-        e.currentTarget.style.color = this.state.fontColor;
     }
 
     // 添加导航弹窗
@@ -273,8 +263,8 @@ class CollectionComponent extends React.Component {
                                 <Col span={12} style={{textAlign: "right"}}>
                                     <Button type={"text"} shape={this.props.preferenceData.buttonShape}
                                             icon={<DeleteOutlined/>}
-                                            onMouseOver={this.btnMouseOver.bind(this)}
-                                            onMouseOut={this.btnMouseOut.bind(this)}
+                                            onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
+                                            onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}
                                             onClick={this.removeAllBtnOnClick.bind(this)}
                                             style={{color: this.state.fontColor}}>
                                         全部删除
@@ -292,8 +282,8 @@ class CollectionComponent extends React.Component {
                                 renderItem={(item: any) => (
                                     <List.Item actions={[
                                         <Button type={"text"} shape={this.state.buttonShape} icon={<DeleteOutlined/>}
-                                                onMouseOver={this.btnMouseOver.bind(this)}
-                                                onMouseOut={this.btnMouseOut.bind(this)}
+                                                onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
+                                                onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}
                                                 onClick={this.removeBtnOnClick.bind(this, item)}
                                                 style={{color: this.state.fontColor}}>
                                         </Button>
@@ -302,8 +292,8 @@ class CollectionComponent extends React.Component {
                                             <Col span={8}>
                                                 <Button type={"text"} shape={this.props.preferenceData.buttonShape}
                                                         icon={<PushpinOutlined/>}
-                                                        onMouseOver={this.btnMouseOver.bind(this)}
-                                                        onMouseOut={this.btnMouseOut.bind(this)}
+                                                        onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
+                                                        onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}
                                                         style={{color: this.state.fontColor, cursor: "default"}}>
                                                     {item.webName}
                                                 </Button>
@@ -311,8 +301,8 @@ class CollectionComponent extends React.Component {
                                             <Col span={16}>
                                                 <Button type={"text"} shape={this.props.preferenceData.buttonShape}
                                                         icon={<LinkOutlined/>}
-                                                        onMouseOver={this.btnMouseOver.bind(this)}
-                                                        onMouseOut={this.btnMouseOut.bind(this)}
+                                                        onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
+                                                        onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}
                                                         style={{color: this.state.fontColor, cursor: "default"}}>
                                                     {item.webUrl.length < 30 ? item.webUrl : item.webUrl.substring(0, 30) + "..."}
                                                 </Button>

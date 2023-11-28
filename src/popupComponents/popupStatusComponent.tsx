@@ -3,7 +3,8 @@ import {Button, Space} from "antd";
 import {CalendarOutlined, CheckSquareOutlined, InfoCircleOutlined} from "@ant-design/icons";
 import "../stylesheets/popupComponent.scss"
 import {
-    getFontColor,
+    btnMouseOut,
+    btnMouseOver,
     getGreetContent,
     getGreetIcon,
     getSearchEngineDetail,
@@ -13,7 +14,8 @@ import {PreferenceDataInterface} from "../typescripts/publicInterface";
 
 type propType = {
     imageData: string,
-    fontColor: any,
+    hoverColor: string,
+    fontColor: string,
     preferenceData: PreferenceDataInterface,
 }
 
@@ -24,8 +26,6 @@ type stateType = {
     weatherContent: string,
     dailySize: number,
     todoSize: number,
-    hoverColor: string,
-    fontColor: string,
     searchEngineUrl: string,
     simpleMode: boolean,
 }
@@ -45,21 +45,9 @@ class PopupImageComponent extends React.Component {
             weatherContent: "暂无信息",
             dailySize: 0,
             todoSize: 0,
-            hoverColor: "#000000",
-            fontColor: "#000000",
             searchEngineUrl: "https://www.bing.com/search?q=",
             simpleMode: false,
         }
-    }
-
-    btnMouseOver(e: any) {
-        e.currentTarget.style.backgroundColor = this.state.hoverColor;
-        e.currentTarget.style.color = getFontColor(this.state.hoverColor);
-    }
-
-    btnMouseOut(e: any) {
-        e.currentTarget.style.backgroundColor = "transparent";
-        e.currentTarget.style.color = this.state.fontColor;
     }
 
     greetBtnOnClick() {
@@ -85,12 +73,6 @@ class PopupImageComponent extends React.Component {
         if (nextProps.imageData && nextProps.imageData !== prevProps.imageData) {
             this.setState({
                 hoverColor: nextProps.imageData.color,
-            });
-        }
-
-        if (nextProps.fontColor !== prevProps.fontColor) {
-            this.setState({
-                fontColor: nextProps.fontColor,
             });
         }
 
@@ -123,34 +105,34 @@ class PopupImageComponent extends React.Component {
                 <Space style={{display: this.state.simpleMode ? "none" : "inline-flex"}}>
                     <Button type={"text"} shape={this.props.preferenceData.buttonShape}
                             icon={<i className={this.state.greetIcon}> </i>}
-                            onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
+                            onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)} onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
                             onClick={this.greetBtnOnClick.bind(this)}
-                            style={{color: this.state.fontColor}}>
+                            style={{color: this.props.fontColor}}>
                         {this.state.greetContent}
                     </Button>
                     <Button type={"text"} shape={this.props.preferenceData.buttonShape}
                             icon={<i className={this.state.weatherIcon}> </i>}
-                            onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
+                            onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)} onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
                             onClick={this.weatherBtnOnClick.bind(this)}
-                            style={{color: this.state.fontColor}}>
+                            style={{color: this.props.fontColor}}>
                         {this.state.weatherContent}
                     </Button>
                     <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<CalendarOutlined/>}
-                            onMouseOver={this.btnMouseOver.bind(this)}
-                            onMouseOut={this.btnMouseOut.bind(this)}
-                            style={{color: this.state.fontColor, cursor: "default"}}>
+                            onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
+                            onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
+                            style={{color: this.props.fontColor, cursor: "default"}}>
                         {this.state.dailySize + " 个倒数日"}
                     </Button>
                     <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<CheckSquareOutlined/>}
-                            onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
-                            style={{color: this.state.fontColor, cursor: "default"}}>
+                            onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)} onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
+                            style={{color: this.props.fontColor, cursor: "default"}}>
                         {this.state.todoSize + " 个待办事项"}
                     </Button>
                 </Space>
                 <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<InfoCircleOutlined/>}
-                        onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}
+                        onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)} onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
                         style={{
-                            color: this.state.fontColor,
+                            color: this.props.fontColor,
                             cursor: "default",
                             display: this.state.simpleMode ? "inline-block" : "none"
                         }}>
