@@ -106,8 +106,8 @@ class ImageHistoryComponent extends React.Component {
         );
 
         const popoverContent = (
-            <List>
-                <List.Item style={{display: this.state.imageHistoryJson.length === 0 ? "block" : "none", borderBlockEndColor: "transparent"}}>
+            <List split={false}>
+                <List.Item style={{display: this.state.imageHistoryJson.length === 0 ? "block" : "none"}}>
                     <Row className="alignCenter" style={{width: "100%"}}>
                         <Empty image={Empty.PRESENTED_IMAGE_SIMPLE}
                                />
@@ -147,7 +147,7 @@ class ImageHistoryComponent extends React.Component {
         return (
             <Popover title={popoverTitle} content={popoverContent} placement={"topRight"}
                      color={this.state.backgroundColor}
-                     overlayStyle={{width: "370px"}} trigger={"click"}>
+                     overlayStyle={{width: "370px"}}>
                 <Button shape={this.state.buttonShape} icon={<HistoryOutlined/>} size={"large"}
                         id={"imageHistoryBtn"}
                         className={"componentTheme zIndexHigh"}
