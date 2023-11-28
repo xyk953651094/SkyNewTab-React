@@ -1,6 +1,6 @@
 import React from "react";
 import {Button, Carousel, Col, Empty, Image, List, message, Popover, Row, Space, Spin, Typography} from "antd";
-import {FileImageOutlined, HistoryOutlined} from "@ant-design/icons";
+import {FileImageOutlined, HistoryOutlined, DeleteOutlined} from "@ant-design/icons";
 import {imageHistoryMaxSize, unsplashUrl} from "../typescripts/publicConstants";
 import {changeThemeColor, isEmpty, btnMouseOver, btnMouseOut} from "../typescripts/publicFunctions";
 import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
@@ -68,7 +68,7 @@ class ImageHistoryComponent extends React.Component {
         }
 
         if (nextProps.imageHistory.length > 0 && nextProps.imageHistory !== prevProps.imageHistory) {
-            let tempImageHistoryJson = nextProps.imageHistory.reverse(); // 重新到旧排序
+            let tempImageHistoryJson = nextProps.imageHistory;
             this.setState({
                 imageHistoryJson: tempImageHistoryJson,
                 imageLink: tempImageHistoryJson[0].imageLink,
@@ -82,36 +82,23 @@ class ImageHistoryComponent extends React.Component {
         }
     }
 
-    componentDidMount() {
-        // 获取缓存图片列表
-        let imageHistoryStorage = localStorage.getItem("imageHistory");
-        if (imageHistoryStorage !== null) {
-            let tempImageHistoryJson = JSON.parse(imageHistoryStorage);
-            if (!isEmpty(tempImageHistoryJson)) {
-                tempImageHistoryJson = tempImageHistoryJson.reverse(); // 重新到旧排序
-                this.setState({
-                    imageHistoryJson: tempImageHistoryJson,
-                    imageLink: tempImageHistoryJson[0].imageLink,
-                })
-            }
-        }
-    }
+    componentDidMount() {}
 
     render() {
         const popoverTitle = (
             <Row align={"middle"}>
-                <Col span={10}>
+                <Col span={8}>
                     <Text
                         style={{color: this.state.fontColor}}>{"历史记录 " + this.state.imageHistoryJson.length + " / " + imageHistoryMaxSize}</Text>
                 </Col>
-                <Col span={14} style={{textAlign: "right"}}>
+                <Col span={16} style={{textAlign: "right"}}>
                     <Space>
                         <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<FileImageOutlined/>}
                                 onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
                                 onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}
                                 onClick={this.imageLinkBtnOnClick.bind(this)}
                                 style={{color: this.state.fontColor}}>
-                            {"当前历史图片主页"}
+                            {"图片主页"}
                         </Button>
                     </Space>
                 </Col>
@@ -120,37 +107,39 @@ class ImageHistoryComponent extends React.Component {
 
         const popoverContent = (
             <List>
-                <List.Item>
+                <List.Item style={{display: this.state.imageHistoryJson.length === 0 ? "block" : "none", borderBlockEndColor: "transparent"}}>
                     <Row className="alignCenter" style={{width: "100%"}}>
                         <Empty image={Empty.PRESENTED_IMAGE_SIMPLE}
-                               style={{display: this.state.imageHistoryJson.length === 0 ? "block" : "none"}}/>
-                        <Carousel effect="fade" afterChange={this.carouselOnChange.bind(this)}
-                                  style={{display: this.state.imageHistoryJson.length === 0 ? "none" : "block", width: "350px", height: "210px"}}>
-                            {
-                                this.state.imageHistoryJson.map((item: any) => {
-                                    return (
-                                        <div key={item.index}
-                                             style={{width: "350px", height: "210px", lineHeight: "210px"}}>
-                                            <Image
-                                                width={350}
-                                                height={210}
-                                                preview={false}
-                                                alt={"暂无图片"}
-                                                src={item.imageUrl}
-                                                style={{borderRadius: "8px"}}
-                                                placeholder={
-                                                    <div style={{width: '350px', height: '210px', borderRadius: '8px'}}
-                                                         className="alignCenter">
-                                                        <Spin tip="加载中，请稍后..."/>
-                                                    </div>
-                                                }
-                                            />
-                                        </div>
-                                    )
-                                })
-                            }
-                        </Carousel>
+                               />
                     </Row>
+                </List.Item>
+                <List.Item style={{display: this.state.imageHistoryJson.length === 0 ? "none" : "block"}}>
+                    <Carousel effect="fade" afterChange={this.carouselOnChange.bind(this)}
+                              style={{width: "100%", height: "210px"}}>
+                        {
+                            this.state.imageHistoryJson.map((item: any) => {
+                                return (
+                                    <div key={item.index}
+                                         style={{width: "100%", height: "210px", lineHeight: "210px"}}>
+                                        <Image
+                                            width={"100%"}
+                                            height={210}
+                                            preview={false}
+                                            alt={"暂无图片"}
+                                            src={item.imageUrl}
+                                            style={{borderRadius: "8px"}}
+                                            placeholder={
+                                                <div style={{width: '100%', height: '210px', borderRadius: '8px'}}
+                                                     className="alignCenter">
+                                                    <Spin tip="加载中，请稍后..."/>
+                                                </div>
+                                            }
+                                        />
+                                    </div>
+                                )
+                            })
+                        }
+                    </Carousel>
                 </List.Item>
             </List>
         );
@@ -158,7 +147,7 @@ class ImageHistoryComponent extends React.Component {
         return (
             <Popover title={popoverTitle} content={popoverContent} placement={"topRight"}
                      color={this.state.backgroundColor}
-                     overlayStyle={{width: "370px"}}>
+                     overlayStyle={{width: "370px"}} trigger={"click"}>
                 <Button shape={this.state.buttonShape} icon={<HistoryOutlined/>} size={"large"}
                         id={"imageHistoryBtn"}
                         className={"componentTheme zIndexHigh"}

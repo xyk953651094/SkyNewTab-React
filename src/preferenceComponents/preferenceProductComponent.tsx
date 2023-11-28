@@ -37,15 +37,15 @@ class PreferenceProductComponent extends React.Component {
                   bodyStyle={{backgroundColor: this.props.backgroundColor}}
             >
                 <Row gutter={[0, 8]}>
-                    <Col span="16">
+                    <Col span="19">
                         <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<AppstoreOutlined/>}
                                 onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
                                 onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
                                 style={{color: this.props.fontColor, cursor: "default"}}>
-                            {"云开壁纸"}
+                            {"云开壁纸（React）"}
                         </Button>
                     </Col>
-                    <Col span="8">
+                    <Col span="5">
                         <Space>
                             <Button type={"text"}
                                     shape={this.props.preferenceData.buttonShape === "round" ? "circle" : "default"}
@@ -65,7 +65,7 @@ class PreferenceProductComponent extends React.Component {
                             </Button>
                         </Space>
                     </Col>
-                    <Col span="16">
+                    <Col span="19">
                         <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<i className="bi bi-puzzle"/>}
                                 onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
                                 onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
@@ -73,7 +73,7 @@ class PreferenceProductComponent extends React.Component {
                             {"云开新标签页（Vue）"}
                         </Button>
                     </Col>
-                    <Col span="8">
+                    <Col span="5">
                         <Space>
                             <Button type={"text"}
                                     shape={this.props.preferenceData.buttonShape === "round" ? "circle" : "default"}
@@ -93,16 +93,16 @@ class PreferenceProductComponent extends React.Component {
                             </Button>
                         </Space>
                     </Col>
-                    <Col span="16">
+                    <Col span="19">
                         <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<i className="bi bi-puzzle"/>}
                                 onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
                                 onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
                                 style={{color: this.props.fontColor, cursor: "default"}}>
 
-                            {"云开诗词新标签页"}
+                            {"云开诗词新标签页（React）"}
                         </Button>
                     </Col>
-                    <Col span="8">
+                    <Col span="5">
                         <Space>
                             <Button type={"text"}
                                     shape={this.props.preferenceData.buttonShape === "round" ? "circle" : "default"}
@@ -116,6 +116,35 @@ class PreferenceProductComponent extends React.Component {
                                     shape={this.props.preferenceData.buttonShape === "round" ? "circle" : "default"}
                                     icon={<GitlabOutlined/>}
                                     href={"https://gitlab.com/xyk953651094/SkyNewTab-Poem-React/"} target={"_blank"}
+                                    onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
+                                    onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
+                                    style={{color: this.props.fontColor}}>
+                            </Button>
+                        </Space>
+                    </Col>
+                    <Col span="19">
+                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<i className="bi bi-puzzle"/>}
+                                onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
+                                onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
+                                style={{color: this.props.fontColor, cursor: "default"}}>
+
+                            {"云开诗词新标签页（Angular）"}
+                        </Button>
+                    </Col>
+                    <Col span="5">
+                        <Space>
+                            <Button type={"text"}
+                                    shape={this.props.preferenceData.buttonShape === "round" ? "circle" : "default"}
+                                    icon={<GithubOutlined/>}
+                                    href={"https://github.com/xyk953651094/SkyNewTab-Poem-Angular/"} target={"_blank"}
+                                    onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
+                                    onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
+                                    style={{color: this.props.fontColor}}>
+                            </Button>
+                            <Button type={"text"}
+                                    shape={this.props.preferenceData.buttonShape === "round" ? "circle" : "default"}
+                                    icon={<GitlabOutlined/>}
+                                    href={"https://gitlab.com/xyk953651094/SkyNewTab-Poem-Angular/"} target={"_blank"}
                                     onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
                                     onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
                                     style={{color: this.props.fontColor}}>

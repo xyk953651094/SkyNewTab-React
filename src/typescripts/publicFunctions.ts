@@ -360,6 +360,22 @@ export function getPreferenceDataStorage() {
     }
 }
 
+export function getImageHistoryStorage() {
+    let imageHistoryStorage = localStorage.getItem("imageHistory");
+    if (imageHistoryStorage !== null) {
+        let tempImageHistoryJson = JSON.parse(imageHistoryStorage);
+        if (!isEmpty(tempImageHistoryJson)) {
+            return tempImageHistoryJson.reverse();  // 重新到旧排序
+        }
+        else {
+            return [];
+        }
+    }
+    else {
+        return [];
+    }
+}
+
 // 过渡动画
 export function changeThemeColor(element: string, backgroundColor: string, fontColor: string, time: number = 300) {
     $(element).animate({

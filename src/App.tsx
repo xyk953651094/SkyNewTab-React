@@ -16,7 +16,7 @@ import {Col, Layout, notification, Row, Space, Typography} from "antd";
 import "./stylesheets/publicStyles.scss"
 import {
     changeThemeColor,
-    getFontColor,
+    getFontColor, getImageHistoryStorage,
     getPreferenceDataStorage,
     getReverseColor,
     setColorTheme
@@ -55,7 +55,7 @@ class App extends React.Component {
             },
 
             imageData: null,
-            imageHistory: [],
+            imageHistory: getImageHistoryStorage(),
             preferenceData: getPreferenceDataStorage(),  // 加载偏好设置
             componentDisplay: "none"
         }

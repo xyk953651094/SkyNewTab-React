@@ -101,7 +101,7 @@ class PreferenceComponent extends React.Component {
                 </Tooltip>
                 <Drawer
                     size={"default"}
-                    width={380}
+                    width={400}
                     height={500}
                     placement={this.state.drawerPosition}
                     onClose={this.drawerOnClose.bind(this)}
