@@ -1,6 +1,6 @@
 import React from "react";
 import {Button, Card, Col, Row} from "antd";
-import {DislikeOutlined, LikeOutlined, MailOutlined} from "@ant-design/icons";
+import {QuestionCircleOutlined, DislikeOutlined, LikeOutlined, MailOutlined} from "@ant-design/icons";
 import {btnMouseOver, btnMouseOut} from "../typescripts/publicFunctions";
 import {PreferenceDataInterface} from "../typescripts/publicInterface";
 
@@ -36,14 +36,14 @@ class PreferenceEmailComponent extends React.Component {
                   }}
                   bodyStyle={{backgroundColor: this.props.backgroundColor}}
             >
-                <Row gutter={[0, 8]}>
+                <Row gutter={[8, 8]}>
                     <Col span="12">
                         <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<LikeOutlined/>}
                                 href={"mailto:xyk953651094@qq.com?&subject=云开新标签页-功能建议"} target={"_blank"}
                                 onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
                                 onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
                                 style={{color: this.props.fontColor}}>
-                            功能建议
+                            {"功能建议"}
                         </Button>
                     </Col>
                     <Col span="12">
@@ -52,7 +52,16 @@ class PreferenceEmailComponent extends React.Component {
                                 onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
                                 onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
                                 style={{color: this.props.fontColor}}>
-                            问题反馈
+                            {"问题反馈"}
+                        </Button>
+                    </Col>
+                    <Col span="12">
+                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<QuestionCircleOutlined />}
+                                href={"https://xyk953651094.github.io/SkyDocuments/"} target={"_blank"}
+                                onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
+                                onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
+                                style={{color: this.props.fontColor}}>
+                            {"帮助文档"}
                         </Button>
                     </Col>
                 </Row>
