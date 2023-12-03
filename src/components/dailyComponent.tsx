@@ -2,12 +2,11 @@ import React from "react";
 import type {DatePickerProps} from 'antd';
 import {Button, Col, DatePicker, Form, Input, List, message, Modal, Popover, Row, Space, Typography} from "antd";
 import {CalendarOutlined, ClockCircleOutlined, DeleteOutlined, PlusOutlined} from "@ant-design/icons";
-import {changeThemeColor, getTimeDetails, btnMouseOver, btnMouseOut} from "../typescripts/publicFunctions";
+import {btnMouseOut, btnMouseOver, changeThemeColor, getTimeDetails} from "../typescripts/publicFunctions";
 import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
 import $ from "jquery";
 
 const {Text} = Typography;
-
 
 
 type propType = {
@@ -205,12 +204,14 @@ class DailyComponent extends React.Component {
                 <Col span={14} style={{textAlign: "right"}}>
                     <Space>
                         <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<PlusOutlined/>}
-                                onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)} onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}
+                                onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
+                                onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}
                                 style={{color: this.state.fontColor}} onClick={this.showAddModalBtnOnClick.bind(this)}>
                             {"添加倒数日"}
                         </Button>
                         <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<DeleteOutlined/>}
-                                onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)} onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}
+                                onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
+                                onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}
                                 style={{color: this.state.fontColor}} onClick={this.removeAllBtnOnClick.bind(this)}>
                             {"全部删除"}
                         </Button>
@@ -226,7 +227,8 @@ class DailyComponent extends React.Component {
                     <List.Item
                         actions={[
                             <Button type={"text"} shape={this.state.buttonShape} icon={<DeleteOutlined/>}
-                                    onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)} onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}
+                                    onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
+                                    onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}
                                     onClick={this.removeBtnOnClick.bind(this, item)}
                                     style={{color: this.state.fontColor}}/>
                         ]}

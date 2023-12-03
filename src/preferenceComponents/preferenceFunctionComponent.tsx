@@ -1,7 +1,7 @@
 import React from "react";
 import {Alert, Button, Card, Col, Form, message, Radio, RadioChangeEvent, Row, Space, Switch, Typography} from "antd";
 import {RedoOutlined, SettingOutlined} from "@ant-design/icons";
-import {getPreferenceDataStorage, btnMouseOver, btnMouseOut} from "../typescripts/publicFunctions";
+import {btnMouseOut, btnMouseOver, getPreferenceDataStorage} from "../typescripts/publicFunctions";
 import {PreferenceDataInterface} from "../typescripts/publicInterface";
 
 const {Paragraph} = Typography;

@@ -1,8 +1,8 @@
 import React from "react";
 import {Button, Carousel, Col, Empty, Image, List, message, Popover, Row, Space, Spin, Typography} from "antd";
-import {FileImageOutlined, HistoryOutlined, DeleteOutlined} from "@ant-design/icons";
+import {FileImageOutlined, HistoryOutlined} from "@ant-design/icons";
 import {imageHistoryMaxSize, unsplashUrl} from "../typescripts/publicConstants";
-import {changeThemeColor, isEmpty, btnMouseOver, btnMouseOut} from "../typescripts/publicFunctions";
+import {btnMouseOut, btnMouseOver, changeThemeColor, isEmpty} from "../typescripts/publicFunctions";
 import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
 import "../stylesheets/publicStyles.scss"
 
@@ -82,7 +82,8 @@ class ImageHistoryComponent extends React.Component {
         }
     }
 
-    componentDidMount() {}
+    componentDidMount() {
+    }
 
     render() {
         const popoverTitle = (
@@ -110,7 +111,7 @@ class ImageHistoryComponent extends React.Component {
                 <List.Item style={{display: this.state.imageHistoryJson.length === 0 ? "block" : "none"}}>
                     <Row className="alignCenter" style={{width: "100%"}}>
                         <Empty image={Empty.PRESENTED_IMAGE_SIMPLE}
-                               />
+                        />
                     </Row>
                 </List.Item>
                 <List.Item style={{display: this.state.imageHistoryJson.length === 0 ? "none" : "block"}}>

@@ -1,7 +1,7 @@
 import React from "react";
 import {Button, Card, Col, Row, Space} from "antd";
-import {AppstoreOutlined, GithubOutlined, GitlabOutlined} from "@ant-design/icons";
-import {btnMouseOver, btnMouseOut} from "../typescripts/publicFunctions";
+import {AppstoreOutlined, GithubOutlined, GitlabOutlined, ProfileOutlined} from "@ant-design/icons";
+import {btnMouseOut, btnMouseOver} from "../typescripts/publicFunctions";
 import {PreferenceDataInterface} from "../typescripts/publicInterface";
 
 type propType = {
@@ -38,6 +38,34 @@ class PreferenceProductComponent extends React.Component {
             >
                 <Row gutter={[0, 8]}>
                     <Col span="19">
+                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<ProfileOutlined/>}
+                                onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
+                                onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
+                                style={{color: this.props.fontColor, cursor: "default"}}>
+                            {"云开帮助文档"}
+                        </Button>
+                    </Col>
+                    <Col span="5">
+                        <Space>
+                            <Button type={"text"}
+                                    shape={this.props.preferenceData.buttonShape === "round" ? "circle" : "default"}
+                                    icon={<GithubOutlined/>}
+                                    href={"https://github.com/xyk953651094/SkyDocuments/"} target={"_blank"}
+                                    onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
+                                    onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
+                                    style={{color: this.props.fontColor}}>
+                            </Button>
+                            <Button type={"text"}
+                                    shape={this.props.preferenceData.buttonShape === "round" ? "circle" : "default"}
+                                    icon={<GitlabOutlined/>}
+                                    href={"https://gitlab.com/xyk953651094/SkyDocuments/"} target={"_blank"}
+                                    onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
+                                    onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
+                                    style={{color: this.props.fontColor}}>
+                            </Button>
+                        </Space>
+                    </Col>
+                    <Col span="19">
                         <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<AppstoreOutlined/>}
                                 onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
                                 onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
@@ -66,7 +94,8 @@ class PreferenceProductComponent extends React.Component {
                         </Space>
                     </Col>
                     <Col span="19">
-                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<i className="bi bi-puzzle"/>}
+                        <Button type={"text"} shape={this.props.preferenceData.buttonShape}
+                                icon={<i className="bi bi-puzzle"/>}
                                 onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
                                 onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
                                 style={{color: this.props.fontColor, cursor: "default"}}>
@@ -94,7 +123,8 @@ class PreferenceProductComponent extends React.Component {
                         </Space>
                     </Col>
                     <Col span="19">
-                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<i className="bi bi-puzzle"/>}
+                        <Button type={"text"} shape={this.props.preferenceData.buttonShape}
+                                icon={<i className="bi bi-puzzle"/>}
                                 onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
                                 onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
                                 style={{color: this.props.fontColor, cursor: "default"}}>
@@ -123,7 +153,8 @@ class PreferenceProductComponent extends React.Component {
                         </Space>
                     </Col>
                     <Col span="19">
-                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<i className="bi bi-puzzle"/>}
+                        <Button type={"text"} shape={this.props.preferenceData.buttonShape}
+                                icon={<i className="bi bi-puzzle"/>}
                                 onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
                                 onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
                                 style={{color: this.props.fontColor, cursor: "default"}}>

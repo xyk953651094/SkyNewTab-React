@@ -9,7 +9,7 @@ import {
 } from "@ant-design/icons";
 import "../stylesheets/popupComponent.scss";
 import {decode} from "blurhash"
-import {getSearchEngineDetail, isEmpty, btnMouseOver, btnMouseOut} from "../typescripts/publicFunctions";
+import {btnMouseOut, btnMouseOver, getSearchEngineDetail, isEmpty} from "../typescripts/publicFunctions";
 import {PreferenceDataInterface} from "../typescripts/publicInterface";
 import $ from "jquery";
 
@@ -177,18 +177,21 @@ class PopupImageComponent extends React.Component {
                     <Space direction={"vertical"} align="start">
                         <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<UserOutlined/>}
                                 onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
-                                onMouseOut={btnMouseOut.bind(this, this.props.fontColor)} onClick={this.authorLinkBtnOnClick.bind(this)}
+                                onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
+                                onClick={this.authorLinkBtnOnClick.bind(this)}
                                 style={{color: this.props.fontColor}}>
                             {this.state.authorName.length < btnMaxSize ? this.state.authorName : this.state.authorName.substring(0, btnMaxSize) + "..."}
                         </Button>
                         <Button type={"text"} shape={this.props.preferenceData.buttonShape}
                                 icon={<EnvironmentOutlined/>}
-                                onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)} onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
+                                onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
+                                onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
                                 onClick={this.imageLocationBtnOnClick.bind(this)} style={{color: this.props.fontColor}}>
                             {this.state.imageLocation.length < btnMaxSize ? this.state.imageLocation : this.state.imageLocation.substring(0, btnMaxSize) + "..."}
                         </Button>
                         <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<InfoCircleOutlined/>}
-                                onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)} onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
+                                onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
+                                onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
                                 onClick={this.imageLinkBtnOnClick.bind(this)} style={{color: this.props.fontColor}}>
                             {this.state.imageDescription.length < btnMaxSize ? this.state.imageDescription : this.state.imageDescription.substring(0, btnMaxSize) + "..."}
                         </Button>
@@ -196,20 +199,23 @@ class PopupImageComponent extends React.Component {
                             <Button type={"text"} shape={this.props.preferenceData.buttonShape}
                                     icon={<ClockCircleOutlined/>}
                                     style={{color: this.props.fontColor, cursor: "default"}}
-                                    onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)} onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}>
+                                    onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
+                                    onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}>
                                 {this.state.imageCreateTime}
                             </Button>
                             <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<CameraOutlined/>}
                                     onClick={this.imageCameraBtnOnClick.bind(this)}
                                     style={{color: this.props.fontColor}}
-                                    onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)} onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}>
+                                    onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
+                                    onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}>
                                 {this.state.imageCamera}
                             </Button>
                         </Space>
                     </Space>
                 </Space>
                 <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<InfoCircleOutlined/>}
-                        onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)} onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
+                        onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
+                        onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
                         style={{
                             color: this.props.fontColor,
                             cursor: "default",

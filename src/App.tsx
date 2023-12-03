@@ -16,7 +16,8 @@ import {Col, Layout, notification, Row, Space, Typography} from "antd";
 import "./stylesheets/publicStyles.scss"
 import {
     changeThemeColor,
-    getFontColor, getImageHistoryStorage,
+    getFontColor,
+    getImageHistoryStorage,
     getPreferenceDataStorage,
     getReverseColor,
     setColorTheme

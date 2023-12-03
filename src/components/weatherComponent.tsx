@@ -1,11 +1,13 @@
 import React from "react";
 import {Button, Col, List, message, Popover, Row, Space, Typography} from "antd";
 import {
+    btnMouseOut,
+    btnMouseOver,
     changeThemeColor,
     getSearchEngineDetail,
     getTimeDetails,
     getWeatherIcon,
-    httpRequest, btnMouseOver, btnMouseOut
+    httpRequest
 } from "../typescripts/publicFunctions";
 import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
 import {ClockCircleOutlined, EnvironmentOutlined, MoreOutlined} from "@ant-design/icons";

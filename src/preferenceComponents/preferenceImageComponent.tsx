@@ -17,7 +17,13 @@ import {
     Typography
 } from "antd";
 import {CheckOutlined, SettingOutlined, StopOutlined} from "@ant-design/icons";
-import {getPreferenceDataStorage, getTimeDetails, isEmpty, btnMouseOver, btnMouseOut} from "../typescripts/publicFunctions";
+import {
+    btnMouseOut,
+    btnMouseOver,
+    getPreferenceDataStorage,
+    getTimeDetails,
+    isEmpty
+} from "../typescripts/publicFunctions";
 import {CheckboxValueType} from "antd/es/checkbox/Group";
 import {PreferenceDataInterface} from "../typescripts/publicInterface";
 import $ from "jquery";

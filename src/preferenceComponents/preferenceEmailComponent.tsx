@@ -1,7 +1,7 @@
 import React from "react";
 import {Button, Card, Col, Row} from "antd";
-import {QuestionCircleOutlined, DislikeOutlined, LikeOutlined, MailOutlined} from "@ant-design/icons";
-import {btnMouseOver, btnMouseOut} from "../typescripts/publicFunctions";
+import {DislikeOutlined, GithubOutlined, GitlabOutlined, LikeOutlined, MailOutlined} from "@ant-design/icons";
+import {btnMouseOut, btnMouseOver} from "../typescripts/publicFunctions";
 import {PreferenceDataInterface} from "../typescripts/publicInterface";
 
 type propType = {
@@ -56,8 +56,17 @@ class PreferenceEmailComponent extends React.Component {
                         </Button>
                     </Col>
                     <Col span="12">
-                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<QuestionCircleOutlined />}
+                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<GithubOutlined/>}
                                 href={"https://xyk953651094.github.io/SkyDocuments/"} target={"_blank"}
+                                onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
+                                onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
+                                style={{color: this.props.fontColor}}>
+                            {"帮助文档"}
+                        </Button>
+                    </Col>
+                    <Col span="12">
+                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<GitlabOutlined/>}
+                                href={"https://xyk953651094.gitlab.io/SkyDocuments/"} target={"_blank"}
                                 onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
                                 onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
                                 style={{color: this.props.fontColor}}>

@@ -5,7 +5,6 @@ import {PreferenceDataInterface, ThemeColorInterface} from "./publicInterface";
 import $ from "jquery";
 
 
-
 // 网络请求
 export function httpRequest(headers: object, url: string, data: object, method: "GET" | "POST") {
     return new Promise(function (resolve, reject) {
@@ -288,7 +287,11 @@ export function getSearchEngineDetail(searchEngine: string) {
             searchEngineIconUrl = "https://www.bing.com/favicon.ico";
             break;
     }
-    return {"searchEngineName": searchEngineName, "searchEngineUrl": searchEngineUrl, "searchEngineIconUrl": searchEngineIconUrl};
+    return {
+        "searchEngineName": searchEngineName,
+        "searchEngineUrl": searchEngineUrl,
+        "searchEngineIconUrl": searchEngineIconUrl
+    };
 }
 
 // 补全设置数据
@@ -366,12 +369,10 @@ export function getImageHistoryStorage() {
         let tempImageHistoryJson = JSON.parse(imageHistoryStorage);
         if (!isEmpty(tempImageHistoryJson)) {
             return tempImageHistoryJson.reverse();  // 重新到旧排序
-        }
-        else {
+        } else {
             return [];
         }
-    }
-    else {
+    } else {
         return [];
     }
 }
