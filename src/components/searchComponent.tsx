@@ -34,7 +34,7 @@ class SearchComponent extends React.Component {
             fontColor: "",
             searchValue: "",
             displayMask: "none",
-            searchEngineName: "Bing",
+            searchEngineName: "必应",
             searchEngineUrl: "https://www.bing.com/search?q=",
             borderRadius: "20px"
         };
@@ -82,7 +82,7 @@ class SearchComponent extends React.Component {
     }
 
     changeSearchEngine() {
-        const searchEngines = ["Baidu", "Bing", "Google", "Yandex"];
+        const searchEngines = ["百度", "必应", "谷歌", "Yandex"];
         let currentIndex = searchEngines.indexOf(this.state.searchEngineName);
         let nextIndex = 0;
         if (currentIndex !== searchEngines.length - 1) {

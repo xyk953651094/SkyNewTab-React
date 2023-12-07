@@ -40,25 +40,12 @@ class ClockComponent extends React.Component {
         $(".clockText, .dateText").removeClass("textShadow").css("color", this.state.fontColor);
         e.currentTarget.style.backgroundColor = this.state.backgroundColor;
         e.currentTarget.classList.add("componentTheme");
-
-        // let currentTarget = e.currentTarget;
-        // new Promise((resolve) => {
-        //     $(".clockText, .dateText").removeClass("textShadow");
-        //     changeBackgroundColor(e.currentTarget, this.state.backgroundColor, 150);
-        //     changeFontColor(".clockText, .dateText", this.state.fontColor, 150);
-        //     resolve("success");
-        // }).then(() => {
-        //     currentTarget.classList.add("componentTheme");
-        // })
     }
 
     btnMouseOut(e: any) {
         $(".clockText, .dateText").addClass("textShadow").css("color", this.state.backgroundColor);
         e.currentTarget.style.backgroundColor = "transparent";
         e.currentTarget.classList.remove("componentTheme");
-
-        // changeBackgroundColor(e.currentTarget, "transparent", 150);
-        // changeFontColor(".clockText, .dateText", this.state.backgroundColor, 150);
     }
 
     componentDidMount() {
