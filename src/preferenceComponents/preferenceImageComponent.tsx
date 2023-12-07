@@ -1,6 +1,5 @@
 import React from "react";
 import {
-    Alert,
     Button,
     Card,
     Checkbox,
@@ -13,8 +12,7 @@ import {
     Row,
     Select,
     Space,
-    Switch,
-    Typography
+    Switch
 } from "antd";
 import {CheckOutlined, SettingOutlined, StopOutlined} from "@ant-design/icons";
 import {
@@ -27,8 +25,6 @@ import {
 import {CheckboxValueType} from "antd/es/checkbox/Group";
 import {PreferenceDataInterface} from "../typescripts/publicInterface";
 import $ from "jquery";
-
-const {Paragraph} = Typography;
 
 type propType = {
     hoverColor: string,
@@ -142,36 +138,10 @@ class PreferenceImageComponent extends React.Component {
             this.props.getPreferenceData(this.state.preferenceData);
             localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
             if (checked) {
-                message.success("已降低背景亮度，一秒后刷新页面");
+                message.success("已降低背景亮度");
             } else {
-                message.success("已恢复背景亮度，一秒后刷新页面");
+                message.success("已恢复背景亮度");
 
-            }
-            this.refreshWindow();
-        })
-    }
-
-    autoDarkModeSwitchOnChange(checked: boolean) {
-        this.setState({
-            preferenceData: this.setPreferenceData({autoDarkMode: checked}),
-        }, () => {
-            this.props.getPreferenceData(this.state.preferenceData);
-            localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
-
-            let currentTime = parseInt(getTimeDetails(new Date()).hour);
-            if (currentTime > 18 || currentTime < 6) {
-                if (checked) {
-                    message.success("已开启夜间自动降低背景亮度，一秒后刷新页面");
-                } else {
-                    message.success("已关闭夜间自动降低背景亮度，一秒后刷新页面");
-                }
-                this.refreshWindow();
-            } else {
-                if (checked) {
-                    message.success("已开启夜间自动降低背景亮度");
-                } else {
-                    message.success("已关闭夜间自动降低背景亮度");
-                }
             }
         })
     }
@@ -334,35 +304,12 @@ class PreferenceImageComponent extends React.Component {
                             </Form.Item>
                         </Col>
                         <Col span={12}>
-                            <Form.Item name={"autoDarkMode"} label={"夜间模式"} valuePropName={"checked"}>
-                                <Switch checkedChildren="已开启" unCheckedChildren="已关闭"
-                                        onChange={this.autoDarkModeSwitchOnChange.bind(this)}/>
-                            </Form.Item>
-                        </Col>
-                        <Col span={12}>
                             <Form.Item name={"noImageMode"} label={"无图模式"} valuePropName={"checked"}>
                                 <Switch checkedChildren="已开启" unCheckedChildren="已关闭"
                                         onChange={this.noImageModeSwitchOnChange.bind(this)}/>
                             </Form.Item>
                         </Col>
                     </Row>
-                    <Alert
-                        message="提示信息"
-                        description={
-                            <Paragraph>
-                                <ol>
-                                    <Space direction={"vertical"}>
-                                        <li>新的主题刷新后可能不会立即生效</li>
-                                        <li>启用自定主题时不能使用图片主题</li>
-                                        <li>禁用自定主题时才能使用图片主题</li>
-                                        <li>夜间模式于18点至6点自动降低亮度</li>
-                                    </Space>
-                                </ol>
-                            </Paragraph>
-                        }
-                        type="info"
-                        style={{display: this.state.preferenceData.displayAlert ? "block" : "none"}}
-                    />
                 </Form>
             </Card>
         );

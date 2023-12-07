@@ -5,13 +5,11 @@ export interface PreferenceDataInterface {
     customTopic: string,
     changeImageTime: string,
     nightMode: boolean,
-    autoDarkMode: boolean,
     noImageMode: boolean,
 
     searchEngine: "bing" | "google" | "baidu",
     buttonShape: "circle" | "default" | "round" | undefined,
     simpleMode: boolean,
-    displayAlert: boolean,
 }
 
 export interface ThemeColorInterface {

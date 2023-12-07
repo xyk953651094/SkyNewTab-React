@@ -262,6 +262,7 @@ class App extends React.Component {
                 </Header>
                 <Content id={"content"} className={"alignCenter"}>
                     <WallpaperComponent
+                        preferenceData={this.state.preferenceData}
                         getImageData={this.getImageData.bind(this)}
                         getImageHistory={this.getImageHistory.bind(this)}
                     />

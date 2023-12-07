@@ -321,10 +321,6 @@ export function fixPreferenceData(preferenceData: PreferenceDataInterface) {
         preferenceData.nightMode = defaultPreferenceData.nightMode;
         isFixed = true;
     }
-    if (preferenceData.autoDarkMode === undefined || preferenceData.autoDarkMode === null) {
-        preferenceData.autoDarkMode = defaultPreferenceData.autoDarkMode;
-        isFixed = true;
-    }
     if (preferenceData.noImageMode === undefined || preferenceData.noImageMode === null) {
         preferenceData.noImageMode = defaultPreferenceData.noImageMode;
         isFixed = true;
@@ -340,10 +336,6 @@ export function fixPreferenceData(preferenceData: PreferenceDataInterface) {
     }
     if (preferenceData.simpleMode === undefined || preferenceData.simpleMode === null) {
         preferenceData.simpleMode = defaultPreferenceData.simpleMode;
-        isFixed = true;
-    }
-    if (preferenceData.displayAlert === undefined || preferenceData.displayAlert === null) {
-        preferenceData.displayAlert = defaultPreferenceData.displayAlert;
         isFixed = true;
     }
 

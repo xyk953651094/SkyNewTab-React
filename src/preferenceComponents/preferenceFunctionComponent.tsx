@@ -1,10 +1,8 @@
 import React from "react";
-import {Alert, Button, Card, Col, Form, message, Radio, RadioChangeEvent, Row, Space, Switch, Typography} from "antd";
+import {Button, Card, Col, Form, message, Radio, RadioChangeEvent, Row, Switch} from "antd";
 import {RedoOutlined, SettingOutlined} from "@ant-design/icons";
 import {btnMouseOut, btnMouseOver, getPreferenceDataStorage} from "../typescripts/publicFunctions";
 import {PreferenceDataInterface} from "../typescripts/publicInterface";
-
-const {Paragraph} = Typography;
 
 type propType = {
     hoverColor: string,
@@ -15,7 +13,6 @@ type propType = {
 
 type stateType = {
     preferenceData: PreferenceDataInterface,
-    disableSwitch: boolean
 }
 
 interface PreferenceFunctionComponent {
@@ -28,7 +25,6 @@ class PreferenceFunctionComponent extends React.Component {
         super(props);
         this.state = {
             preferenceData: getPreferenceDataStorage(),
-            disableSwitch: false
         };
     }
 
@@ -50,8 +46,7 @@ class PreferenceFunctionComponent extends React.Component {
         }, () => {
             this.props.getPreferenceData(this.state.preferenceData);
             localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
-            message.success("已更换按钮形状，一秒后刷新页面");
-            this.refreshWindow();
+            message.success("已更换按钮形状");
         })
     }
 
@@ -63,27 +58,10 @@ class PreferenceFunctionComponent extends React.Component {
             this.props.getPreferenceData(this.state.preferenceData);
             localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
             if (checked) {
-                message.success("已开启简洁模式，一秒后刷新页面");
+                message.success("已开启简洁模式");
             } else {
-                message.success("已关闭简洁模式，一秒后刷新页面");
+                message.success("已关闭简洁模式");
             }
-            this.refreshWindow();
-        })
-    }
-
-    displayAlertSwitchOnChange(checked: boolean) {
-        this.setState({
-            preferenceData: this.setPreferenceData({displayAlert: checked}),
-        }, () => {
-            this.props.getPreferenceData(this.state.preferenceData);
-            localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
-            if (checked) {
-                message.success("已显示提示信息，一秒后刷新页面");
-            } else {
-                message.success("已隐藏提示信息，一秒后刷新页面");
-
-            }
-            this.refreshWindow();
         })
     }
 
@@ -137,21 +115,10 @@ class PreferenceFunctionComponent extends React.Component {
                             </Row>
                         </Radio.Group>
                     </Form.Item>
-                    <Row gutter={24}>
-                        <Col span={12}>
-                            <Form.Item name={"simpleMode"} label={"简洁模式"} valuePropName={"checked"}>
-                                <Switch checkedChildren="已开启" unCheckedChildren="已关闭"
-                                        disabled={this.state.disableSwitch}
-                                        onChange={this.simpleModeSwitchOnChange.bind(this)}/>
-                            </Form.Item>
-                        </Col>
-                        <Col span={12}>
-                            <Form.Item name={"displayAlert"} label={"提示信息"} valuePropName={"checked"}>
-                                <Switch checkedChildren="已显示" unCheckedChildren="已隐藏"
-                                        onChange={this.displayAlertSwitchOnChange.bind(this)}/>
-                            </Form.Item>
-                        </Col>
-                    </Row>
+                    <Form.Item name={"simpleMode"} label={"简洁模式"} valuePropName={"checked"}>
+                        <Switch checkedChildren="已开启" unCheckedChildren="已关闭"
+                                onChange={this.simpleModeSwitchOnChange.bind(this)}/>
+                    </Form.Item>
                     <Form.Item name={"clearStorageButton"} label={"危险设置"}>
                         <Button type={"text"} shape={this.state.preferenceData.buttonShape} icon={<RedoOutlined/>}
                                 onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
@@ -161,21 +128,6 @@ class PreferenceFunctionComponent extends React.Component {
                             重置插件
                         </Button>
                     </Form.Item>
-                    <Alert
-                        message="提示信息"
-                        description={
-                            <Paragraph>
-                                <ol>
-                                    <Space direction={"vertical"}>
-                                        <li>重置插件将清空缓存恢复初始设置</li>
-                                        <li>插件出现任何异常可尝试重置插件</li>
-                                    </Space>
-                                </ol>
-                            </Paragraph>
-                        }
-                        type="info"
-                        style={{display: this.state.preferenceData.displayAlert ? "block" : "none"}}
-                    />
                 </Form>
             </Card>
         );

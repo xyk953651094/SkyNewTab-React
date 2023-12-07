@@ -3,8 +3,6 @@ import "../stylesheets/wallpaperComponent.scss"
 import "../stylesheets/publicStyles.scss"
 import {Image, message} from "antd";
 import {
-    getPreferenceDataStorage,
-    getTimeDetails,
     httpRequest,
     imageDynamicEffect,
     isEmpty
@@ -16,17 +14,16 @@ import {decode} from "blurhash";
 import $ from "jquery";
 
 type propType = {
+    preferenceData: PreferenceDataInterface,
     getImageData: any,
     getImageHistory: any
 }
 
 type stateType = {
     imageData: any,
-    preferenceData: PreferenceDataInterface,
     imageLink: string,
     display: "none" | "block",
     displayCanvas: "none" | "block",
-    displayMask: "none" | "block",
 }
 
 interface WallpaperComponent {
@@ -39,11 +36,9 @@ class WallpaperComponent extends React.Component {
         super(props);
         this.state = {
             imageData: null,
-            preferenceData: getPreferenceDataStorage(),
             imageLink: "",
             display: "none",
             displayCanvas: "none",
-            displayMask: "none",
         };
     }
 
@@ -52,7 +47,7 @@ class WallpaperComponent extends React.Component {
             imageData: imageData,
         }, () => {
             this.props.getImageData(imageData);
-            switch (this.state.preferenceData.imageQuality) {
+            switch (this.props.preferenceData.imageQuality) {
                 case "full":
                     this.setState({
                         imageLink: this.state.imageData.urls.full,
@@ -103,13 +98,13 @@ class WallpaperComponent extends React.Component {
 
     getWallpaper() {
         let tempImageTopics = "";
-        for (let i = 0; i < this.state.preferenceData.imageTopics.length; i++) {
-            tempImageTopics += this.state.preferenceData.imageTopics[i];
-            if (i !== this.state.preferenceData.imageTopics.length - 1) {
+        for (let i = 0; i < this.props.preferenceData.imageTopics.length; i++) {
+            tempImageTopics += this.props.preferenceData.imageTopics[i];
+            if (i !== this.props.preferenceData.imageTopics.length - 1) {
                 tempImageTopics += ",";
             }
         }
-        let imageQuery = this.state.preferenceData.customTopic;
+        let imageQuery = this.props.preferenceData.customTopic;
 
         let tempThis = this;
         let headers = {};
@@ -174,7 +169,8 @@ class WallpaperComponent extends React.Component {
     }
 
     componentDidMount() {
-        let noImageMode = this.state.preferenceData.noImageMode;
+        console.log(this.props.preferenceData);
+        let noImageMode = this.props.preferenceData.noImageMode;
         if (!noImageMode) {
             // 防抖节流
             let lastRequestTime: any = localStorage.getItem("lastImageRequestTime");
@@ -182,7 +178,7 @@ class WallpaperComponent extends React.Component {
             if (lastRequestTime === null) {  // 第一次请求时 lastRequestTime 为 null，因此直接进行请求赋值 lastRequestTime
                 this.getWallpaper();
                 // } else if (nowTimeStamp - parseInt(lastRequestTime) > 0) {  // 必须多于切换间隔才能进行新的请求
-            } else if (nowTimeStamp - parseInt(lastRequestTime) > parseInt(this.state.preferenceData.changeImageTime)) {  // 必须多于切换间隔才能进行新的请求
+            } else if (nowTimeStamp - parseInt(lastRequestTime) > parseInt(this.props.preferenceData.changeImageTime)) {  // 必须多于切换间隔才能进行新的请求
                 this.getWallpaper();
             } else {  // 切换间隔内使用上一次请求结果
                 let lastImage: any = localStorage.getItem("lastImage");
@@ -204,24 +200,8 @@ class WallpaperComponent extends React.Component {
                 backgroundImage.onload = () => {
                     backgroundImage.style.width = "102%";
 
-                    // 降低亮度与夜间模式
-                    let nightMode = this.state.preferenceData.nightMode;
-                    let autoDarkMode = this.state.preferenceData.autoDarkMode;
-                    let tempDisplayMask = "none";
-                    let currentTime = parseInt(getTimeDetails(new Date()).hour);
-                    if (currentTime > 18 || currentTime < 6) {
-                        if (!nightMode && !autoDarkMode) {
-                            tempDisplayMask = "none";
-                        } else {
-                            tempDisplayMask = "block";
-                        }
-                    } else {
-                        tempDisplayMask = this.state.preferenceData.nightMode ? "block" : "none";
-                    }
-
                     this.setState({
                         display: "block",
-                        displayMask: tempDisplayMask,
                     }, () => {
                         $("#backgroundCanvas").removeClass("wallpaperFadeIn").addClass("wallpaperFadeOut");
                         message.destroy();
@@ -235,7 +215,7 @@ class WallpaperComponent extends React.Component {
 
                             setTimeout(() => {
                                 backgroundImageDiv.style.perspective = "500px";
-                                imageDynamicEffect(backgroundImage, this.state.preferenceData.dynamicEffect);
+                                imageDynamicEffect(backgroundImage, this.props.preferenceData.dynamicEffect);
                             }, 5000);
                         }, 2000);
                     })
@@ -262,7 +242,7 @@ class WallpaperComponent extends React.Component {
                 <div
                     id={"backgroundMask"}
                     className={"backgroundMask zIndexMiddle"}
-                    style={{display: this.state.displayMask}}
+                    style={{display: this.props.preferenceData.nightMode ? "block" : "none"}}
                 />
             </>
         );
