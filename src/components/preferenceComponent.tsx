@@ -139,12 +139,12 @@ class PreferenceComponent extends React.Component {
                             backgroundColor={this.state.backgroundColor}
                             fontColor={this.state.fontColor}
                             getPreferenceData={this.props.getPreferenceData}/>
-                        <PreferenceInfoComponent
+                        <PreferenceEmailComponent
                             hoverColor={this.state.hoverColor}
                             backgroundColor={this.state.backgroundColor}
                             fontColor={this.state.fontColor}
                             preferenceData={this.props.preferenceData}/>
-                        <PreferenceEmailComponent
+                        <PreferenceInfoComponent
                             hoverColor={this.state.hoverColor}
                             backgroundColor={this.state.backgroundColor}
                             fontColor={this.state.fontColor}
@@ -154,11 +154,6 @@ class PreferenceComponent extends React.Component {
                             backgroundColor={this.state.backgroundColor}
                             fontColor={this.state.fontColor}
                             preferenceData={this.props.preferenceData}/>
-                        {/*<PreferenceLinkComponent*/}
-                        {/*    hoverColor={this.state.hoverColor}*/}
-                        {/*    backgroundColor={this.state.backgroundColor}*/}
-                        {/*    fontColor={this.state.fontColor}*/}
-                        {/*    preferenceData={this.props.preferenceData}/>*/}
                         <PreferenceToTopComponent
                             hoverColor={this.state.hoverColor}
                             fontColor={this.state.fontColor}
