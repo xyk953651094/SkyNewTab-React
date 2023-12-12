@@ -87,7 +87,7 @@ class PreferenceImageComponent extends React.Component {
         }, () => {
             this.props.getPreferenceData(this.state.preferenceData);
             localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
-            message.success("已更换图片主题，下次加载时生效");
+            message.success("已更换图片主题，下次切换图片时生效");
             if (checkedValues.length === 0) {
                 message.info("全不选与全选的效果一样");
             }
@@ -103,8 +103,8 @@ class PreferenceImageComponent extends React.Component {
         }, () => {
             this.props.getPreferenceData(this.state.preferenceData);
             localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
-            message.success("已启用自定主题，一秒后刷新页面");
-            this.refreshWindow();
+            message.success("已启用自定主题，下次切换图片时生效");
+            // this.refreshWindow();
         })
     }
 

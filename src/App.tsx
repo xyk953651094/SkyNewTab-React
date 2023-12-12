@@ -10,9 +10,9 @@ import ClockComponent from "./components/clockComponent";
 import SearchComponent from "./components/searchComponent";
 import CollectionComponent from "./components/collectionComponent";
 import AuthorComponent from "./components/authorComponent";
-import AuthorLiteComponent from "./components/authorLiteComponent"
+import ImageLinkComponent from "./components/imageLinkComponent"
 
-import {Col, Layout, notification, Row, Space, Typography} from "antd";
+import {Col, Layout, notification, Row, Space} from "antd";
 import "./stylesheets/publicStyles.scss"
 import {
     changeThemeColor,
@@ -27,7 +27,6 @@ import ImageHistoryComponent from "./components/imageHistoryComponent";
 import $ from "jquery";
 
 const {Header, Content, Footer} = Layout;
-const {Text, Link} = Typography;
 
 type propType = {}
 
@@ -119,6 +118,18 @@ class App extends React.Component {
                 closeIcon: false
             });
             localStorage.setItem("SkyNewTabReactVersion", currentVersion);
+
+            // 额外提醒
+            if (currentVersion === "2.5.0") {
+                notification.open({
+                    icon: null,
+                    message: "重要通知",
+                    description: "本次更新改动较大，请前往 菜单栏 => 功能设置 => 重置设置",
+                    placement: "bottomLeft",
+                    duration: 10,
+                    closeIcon: false
+                });
+            }
         }
 
         // 修改各类弹窗样式
@@ -245,7 +256,7 @@ class App extends React.Component {
                         </Col>
                         <Col xs={22} sm={22} md={22} lg={0} xl={0} xxl={0} style={{textAlign: "right"}}>
                             <Space align={"center"}>
-                                <AuthorLiteComponent
+                                <ImageLinkComponent
                                     display={this.state.componentDisplay}
                                     themeColor={this.state.themeColor}
                                     imageData={this.state.imageData}
