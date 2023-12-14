@@ -74,7 +74,6 @@ class ImageLinkComponent extends React.Component {
                     className={"componentTheme zIndexHigh"}
                     style={{
                         display: this.props.display,
-                        cursor: "default"
                     }}
             />
         );

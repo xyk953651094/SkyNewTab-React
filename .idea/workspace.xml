@@ -4,12 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="优化视觉效果">
+    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="优化功能体验">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/authorLiteComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/imageLinkComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/imageLinkComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/imageLinkComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/searchComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/searchComponent.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/preferenceComponents/preferenceFunctionComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/preferenceComponents/preferenceFunctionComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/preferenceComponents/preferenceImageComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/preferenceComponents/preferenceImageComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/typescripts/publicFunctions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/typescripts/publicFunctions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/typescripts/publicInterface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/typescripts/publicInterface.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -367,6 +368,8 @@
       <workItem from="1701920789597" duration="2857000" />
       <workItem from="1702023525137" duration="931000" />
       <workItem from="1702377879105" duration="6940000" />
+      <workItem from="1702387990606" duration="213000" />
+      <workItem from="1702542473978" duration="4697000" />
     </task>
     <task id="LOCAL-00001" summary="优化抽屉蒙版的显示效果&#10;优化代码质量">
       <created>1683952184207</created>
@@ -486,14 +489,6 @@
       <option name="presentableId" value="LOCAL-00017" />
       <option name="project" value="LOCAL" />
       <updated>1687402693401</updated>
-    </task>
-    <task id="LOCAL-00093" summary="新增调节亮度，优化视觉效果">
-      <option name="closed" value="true" />
-      <created>1695521906005</created>
-      <option name="number" value="00093" />
-      <option name="presentableId" value="LOCAL-00093" />
-      <option name="project" value="LOCAL" />
-      <updated>1695521906006</updated>
     </task>
     <task id="LOCAL-00094" summary="新增修改按钮形状">
       <option name="closed" value="true" />
@@ -743,7 +738,15 @@
       <option name="project" value="LOCAL" />
       <updated>1702024210390</updated>
     </task>
-    <option name="localTasksCounter" value="125" />
+    <task id="LOCAL-00125" summary="优化功能体验">
+      <option name="closed" value="true" />
+      <created>1702388180206</created>
+      <option name="number" value="00125" />
+      <option name="presentableId" value="LOCAL-00125" />
+      <option name="project" value="LOCAL" />
+      <updated>1702388180207</updated>
+    </task>
+    <option name="localTasksCounter" value="126" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -762,7 +765,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="修复已知问题&#10;优化视觉效果" />
     <MESSAGE value="优化视觉效果&#10;修复已知问题" />
     <MESSAGE value="新增自定义主题&#10;优化视觉效果" />
     <MESSAGE value="新增联系作者&#10;优化视觉效果" />
@@ -787,6 +789,7 @@
     <MESSAGE value="新增帮助文档链接" />
     <MESSAGE value="删除了不必要的设置项" />
     <MESSAGE value="优化视觉效果" />
-    <option name="LAST_COMMIT_MESSAGE" value="优化视觉效果" />
+    <MESSAGE value="优化功能体验" />
+    <option name="LAST_COMMIT_MESSAGE" value="优化功能体验" />
   </component>
 </project>

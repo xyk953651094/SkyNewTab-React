@@ -153,13 +153,11 @@ class PreferenceFunctionComponent extends React.Component {
                 >
                     <Form colon={false} initialValues={this.state.preferenceData}>
                         <Form.Item name={"searchEngine"} label={"搜索引擎"}>
-                            <Radio.Group buttonStyle={"solid"}
+                            <Radio.Group buttonStyle={"solid"} style={{width: "100%"}}
                                          onChange={this.searchEngineRadioOnChange.bind(this)}>
-                                <Row gutter={[0, 8]}>
-                                    <Col span={12}><Radio value={"baidu"}>百度</Radio></Col>
+                                <Row>
                                     <Col span={12}><Radio value={"bing"}>必应</Radio></Col>
                                     <Col span={12}><Radio value={"google"}>谷歌</Radio></Col>
-                                    <Col span={12}><Radio value={"yandex"}>央捷科斯</Radio></Col>
                                 </Row>
                             </Radio.Group>
                         </Form.Item>

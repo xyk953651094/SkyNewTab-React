@@ -7,7 +7,7 @@ export interface PreferenceDataInterface {
     nightMode: boolean,
     noImageMode: boolean,
 
-    searchEngine: "bing" | "google" | "baidu",
+    searchEngine: "bing" | "google",
     buttonShape: "circle" | "default" | "round" | undefined,
     simpleMode: boolean,
 }
