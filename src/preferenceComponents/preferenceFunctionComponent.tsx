@@ -13,7 +13,12 @@ import {
     Typography
 } from "antd";
 import {RedoOutlined, SettingOutlined} from "@ant-design/icons";
-import {btnMouseOut, btnMouseOver, getPreferenceDataStorage} from "../typescripts/publicFunctions";
+import {
+    btnMouseOut,
+    btnMouseOver, getFontColor,
+    getPreferenceDataStorage,
+    resetRadioColor,
+} from "../typescripts/publicFunctions";
 import {PreferenceDataInterface} from "../typescripts/publicInterface";
 import {defaultPreferenceData} from "../typescripts/publicConstants";
 import $ from "jquery";
@@ -56,6 +61,8 @@ class PreferenceFunctionComponent extends React.Component {
             this.props.getPreferenceData(this.state.preferenceData);
             localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
             message.success("已更换搜索引擎");
+
+            resetRadioColor("#searchEngineRadio");
         })
     }
 
@@ -67,16 +74,13 @@ class PreferenceFunctionComponent extends React.Component {
             this.props.getPreferenceData(this.state.preferenceData);
             localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
             message.success("已更换按钮形状");
+
+            resetRadioColor("#buttonShapeRadio");
         })
     }
 
     // 简洁模式
     simpleModeSwitchOnChange(checked: boolean, e: any) {
-        // if(!checked) {
-        //     e.target.style.color = "rgb(0, 0, 0, 0.88)";
-        //     e.target.style.backgroundColor = "rgb(0, 0, 0, 0.25)";
-        // }
-
         this.setState({
             preferenceData: this.setPreferenceData({simpleMode: checked}),
         }, () => {
@@ -86,6 +90,11 @@ class PreferenceFunctionComponent extends React.Component {
                 message.success("已开启简洁模式");
             } else {
                 message.success("已关闭简洁模式");
+            }
+
+            if(!checked) {
+                e.target.style.backgroundColor = "rgb(0, 0, 0, 0.25)";
+                e.target.lastChild.style.color = "#ffffff";
             }
         })
     }
@@ -159,7 +168,7 @@ class PreferenceFunctionComponent extends React.Component {
                 >
                     <Form colon={false} initialValues={this.state.preferenceData}>
                         <Form.Item name={"searchEngine"} label={"搜索引擎"}>
-                            <Radio.Group buttonStyle={"solid"} style={{width: "100%"}}
+                            <Radio.Group buttonStyle={"solid"} style={{width: "100%"}} id={"searchEngineRadio"}
                                          onChange={this.searchEngineRadioOnChange.bind(this)}>
                                 <Row>
                                     <Col span={12}><Radio value={"bing"}>必应</Radio></Col>
@@ -168,7 +177,7 @@ class PreferenceFunctionComponent extends React.Component {
                             </Radio.Group>
                         </Form.Item>
                         <Form.Item name={"buttonShape"} label={"按钮形状"}>
-                            <Radio.Group buttonStyle={"solid"} style={{width: "100%"}}
+                            <Radio.Group buttonStyle={"solid"} style={{width: "100%"}} id={"buttonShapeRadio"}
                                          onChange={this.buttonShapeRadioOnChange.bind(this)}>
                                 <Row>
                                     <Col span={12}><Radio value={"round"}>圆形</Radio></Col>

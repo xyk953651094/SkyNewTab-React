@@ -188,19 +188,17 @@ class App extends React.Component {
                 $(".ant-form-item-extra").css("color", this.state.themeColor.componentFontColor);
                 $(".ant-radio-wrapper").children(":last-child").css("color", this.state.themeColor.componentFontColor);
                 $(".ant-radio-button-wrapper-checked").css("borderColor", this.state.themeColor.componentBackgroundColor);
-                // $(".ant-radio-checked").children(".ant-radio-inner").css({
-                //     "borderColor": this.state.themeColor.themeColor,
-                //     "backgroundColor": this.state.themeColor.themeColor,
-                // });
+                $(".ant-radio-checked").children(".ant-radio-inner").css({
+                    "borderColor": this.state.themeColor.themeColor,
+                    "backgroundColor": this.state.themeColor.themeColor,
+                });
                 $(".ant-checkbox-wrapper").children(":last-child").css("color", this.state.themeColor.componentFontColor);
-                // $(".ant-checkbox-checked").children(".ant-checkbox-inner").css({
-                //     "borderColor": this.state.themeColor.themeColor,
-                //     "backgroundColor": this.state.themeColor.themeColor,
-                // });
-                // $(".ant-switch-checked").children(".ant-switch-inner").css({
-                //     "color": getFontColor(this.state.themeColor.themeColor),
-                //     "backgroundColor": this.state.themeColor.themeColor,
-                // });
+                $(".ant-checkbox-checked").children(".ant-checkbox-inner").css({
+                    "borderColor": this.state.themeColor.themeColor,
+                    "backgroundColor": this.state.themeColor.themeColor,
+                });
+                $(".ant-switch-checked").children(".ant-switch-inner").css("backgroundColor", this.state.themeColor.themeColor)
+                    .find(".ant-switch-inner-checked").css("color", getFontColor(this.state.themeColor.themeColor));
                 $(".ant-collapse").css("backgroundColor", this.state.themeColor.componentBackgroundColor);
                 $(".ant-collapse-header").css("color", this.state.themeColor.componentFontColor);
             }

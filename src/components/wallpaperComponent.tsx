@@ -159,7 +159,6 @@ class WallpaperComponent extends React.Component {
     }
 
     componentDidMount() {
-        console.log(this.props.preferenceData);
         let noImageMode = this.props.preferenceData.noImageMode;
         if (!noImageMode) {
             // 防抖节流
