@@ -58,16 +58,6 @@ class WallpaperComponent extends React.Component {
                         imageLink: this.state.imageData.urls.regular,
                     });
                     break;
-                case "small":
-                    this.setState({
-                        imageLink: this.state.imageData.urls.small,
-                    });
-                    break;
-                case "small_s3":
-                    this.setState({
-                        imageLink: this.state.imageData.urls.small_s3,
-                    });
-                    break;
                 default:
                     this.setState({
                         imageLink: this.state.imageData.urls.regular,
@@ -187,7 +177,7 @@ class WallpaperComponent extends React.Component {
                     lastImage = JSON.parse(lastImage);
                     this.setWallpaper(lastImage);
                 } else {
-                    message.error("无缓存图片可加载，请前往设置手动刷新");
+                    message.error("无缓存图片可加载，请尝试重置插件");
                 }
             }
 

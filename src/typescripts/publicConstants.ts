@@ -62,8 +62,8 @@ export let darkThemeArray = [
 ];
 
 export let defaultPreferenceData: PreferenceDataInterface = {
-    dynamicEffect: "all",
-    imageQuality: "regular",
+    dynamicEffect: "close",
+    imageQuality: "full",
     imageTopics: ["bo8jQKTaE0Y"],
     customTopic: "",
     changeImageTime: "3600000",

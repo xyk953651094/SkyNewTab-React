@@ -1,6 +1,6 @@
 export interface PreferenceDataInterface {
     dynamicEffect: "all" | "rotate" | "translate" | "close",
-    imageQuality: "full" | "regular" | "small" | "small_s3",
+    imageQuality: "full" | "regular",
     imageTopics: string[],
     customTopic: string,
     changeImageTime: string,

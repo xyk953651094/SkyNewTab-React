@@ -212,13 +212,11 @@ class PreferenceImageComponent extends React.Component {
                         </Radio.Group>
                     </Form.Item>
                     <Form.Item name={"imageQuality"} label={"图片质量"}>
-                        <Radio.Group buttonStyle={"solid"}
+                        <Radio.Group buttonStyle={"solid"} style={{width: "100%"}}
                                      onChange={this.imageQualityRadioOnChange.bind(this)}>
-                            <Row gutter={[0, 8]}>
-                                <Col span={12}><Radio value={"full"}>最高</Radio></Col>
-                                <Col span={12}><Radio value={"regular"}>标准</Radio></Col>
-                                <Col span={12}><Radio value={"small"}>较低</Radio></Col>
-                                <Col span={12}><Radio value={"small_s3"}>最低</Radio></Col>
+                            <Row>
+                                <Col span={12}><Radio value={"full"}>清晰</Radio></Col>
+                                <Col span={12}><Radio value={"regular"}>省流</Radio></Col>
                             </Row>
                         </Radio.Group>
                     </Form.Item>
