@@ -17,7 +17,7 @@ import {
 import {CheckOutlined, SettingOutlined, StopOutlined} from "@ant-design/icons";
 import {
     btnMouseOut,
-    btnMouseOver,
+    btnMouseOver, getFontColor,
     getPreferenceDataStorage,
     getTimeDetails,
     isEmpty
@@ -131,7 +131,7 @@ class PreferenceImageComponent extends React.Component {
         })
     }
 
-    nightModeSwitchOnChange(checked: boolean) {
+    nightModeSwitchOnChange(checked: boolean, e: any) {
         this.setState({
             preferenceData: this.setPreferenceData({nightMode: checked}),
         }, () => {
@@ -147,7 +147,7 @@ class PreferenceImageComponent extends React.Component {
     }
 
     // 无图模式
-    noImageModeSwitchOnChange(checked: boolean) {
+    noImageModeSwitchOnChange(checked: boolean, e: any) {
         this.setState({
             preferenceData: this.setPreferenceData({noImageMode: checked}),
         }, () => {

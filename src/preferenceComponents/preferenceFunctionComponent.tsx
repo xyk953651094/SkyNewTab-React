@@ -16,6 +16,7 @@ import {RedoOutlined, SettingOutlined} from "@ant-design/icons";
 import {btnMouseOut, btnMouseOver, getPreferenceDataStorage} from "../typescripts/publicFunctions";
 import {PreferenceDataInterface} from "../typescripts/publicInterface";
 import {defaultPreferenceData} from "../typescripts/publicConstants";
+import $ from "jquery";
 
 const {Text} = Typography;
 
@@ -70,7 +71,12 @@ class PreferenceFunctionComponent extends React.Component {
     }
 
     // 简洁模式
-    simpleModeSwitchOnChange(checked: boolean) {
+    simpleModeSwitchOnChange(checked: boolean, e: any) {
+        // if(!checked) {
+        //     e.target.style.color = "rgb(0, 0, 0, 0.88)";
+        //     e.target.style.backgroundColor = "rgb(0, 0, 0, 0.25)";
+        // }
+
         this.setState({
             preferenceData: this.setPreferenceData({simpleMode: checked}),
         }, () => {
