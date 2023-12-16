@@ -402,29 +402,3 @@ export function btnMouseOut(fontColor: string, e: any) {
     e.currentTarget.style.backgroundColor = "transparent";
     e.currentTarget.style.color = fontColor;
 }
-
-export function resetRadioColor(element: string) {
-    $(element).find(".ant-radio").each((index: any, item: any) =>{
-        item = $(item);  // DOM 转换为 jquery 对象，便于操作
-        // 没有被选中的选项恢复默认颜色
-        if (!item.hasClass("ant-radio-checked")) {
-            item.children(".ant-radio-inner").css({
-                "borderColor": "#d9d9d9",
-                "backgroundColor": "#ffffff",
-            });
-        }
-    });
-}
-
-export function resetCheckBoxColor(element: string) {
-    $(element).find(".ant-checkbox").each((index: any, item: any) =>{
-        item = $(item);  // DOM 转换为 jquery 对象，便于操作
-        // 没有被选中的选项恢复默认颜色
-        if (!item.hasClass("ant-checkbox-checked")) {
-            item.children(".ant-checkbox-inner").css({
-                "borderColor": "#d9d9d9",
-                "backgroundColor": "#ffffff",
-            });
-        }
-    });
-}

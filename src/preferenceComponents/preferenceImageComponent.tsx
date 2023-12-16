@@ -20,7 +20,7 @@ import {
     btnMouseOver,
     getPreferenceDataStorage,
     getTimeDetails,
-    isEmpty, resetCheckBoxColor, resetRadioColor
+    isEmpty
 } from "../typescripts/publicFunctions";
 import {CheckboxValueType} from "antd/es/checkbox/Group";
 import {PreferenceDataInterface} from "../typescripts/publicInterface";
@@ -64,8 +64,6 @@ class PreferenceImageComponent extends React.Component {
             this.props.getPreferenceData(this.state.preferenceData);
             localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
             message.success("已更换显示效果，一秒后刷新页面");
-
-            resetRadioColor("#dynamicEffectRadio");
             this.refreshWindow();
         })
     }
@@ -78,8 +76,6 @@ class PreferenceImageComponent extends React.Component {
             this.props.getPreferenceData(this.state.preferenceData);
             localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
             message.success("已更换图片质量，一秒后刷新页面");
-
-            resetRadioColor("#imageQualityRadio");
             this.refreshWindow();
         })
     }
@@ -95,8 +91,6 @@ class PreferenceImageComponent extends React.Component {
             if (checkedValues.length === 0) {
                 message.info("全不选与全选的效果一样");
             }
-
-            resetCheckBoxColor("#imageTopics");
         })
     }
 
@@ -110,7 +104,6 @@ class PreferenceImageComponent extends React.Component {
             this.props.getPreferenceData(this.state.preferenceData);
             localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
             message.success("已启用自定主题，下次切换图片时生效");
-            // this.refreshWindow();
         })
     }
 
@@ -147,8 +140,6 @@ class PreferenceImageComponent extends React.Component {
                 message.success("已降低背景亮度");
             } else {
                 message.success("已恢复背景亮度");
-                e.target.style.backgroundColor = "rgb(0, 0, 0, 0.25)";
-                e.target.lastChild.style.color = "#ffffff";
             }
         })
     }
@@ -164,12 +155,6 @@ class PreferenceImageComponent extends React.Component {
                 message.success("已开启无图模式，一秒后刷新页面");
             } else {
                 message.success("已关闭无图模式，一秒后刷新页面");
-
-            }
-
-            if(!checked) {
-                e.target.style.backgroundColor = "rgb(0, 0, 0, 0.25)";
-                e.target.lastChild.style.color = "#ffffff";
             }
             this.refreshWindow();
         })
@@ -213,7 +198,7 @@ class PreferenceImageComponent extends React.Component {
             >
                 <Form colon={false} initialValues={this.state.preferenceData}>
                     <Form.Item name={"dynamicEffect"} label={"鼠标互动"}>
-                        <Radio.Group buttonStyle={"solid"} id={"dynamicEffectRadio"}
+                        <Radio.Group buttonStyle={"solid"}
                                      onChange={this.dynamicEffectRadioOnChange.bind(this)}>
                             <Row gutter={[0, 8]}>
                                 <Col span={12}><Radio value={"all"}>视差</Radio></Col>
@@ -224,7 +209,7 @@ class PreferenceImageComponent extends React.Component {
                         </Radio.Group>
                     </Form.Item>
                     <Form.Item name={"imageQuality"} label={"图片质量"}>
-                        <Radio.Group buttonStyle={"solid"} style={{width: "100%"}} id={"imageQualityRadio"}
+                        <Radio.Group buttonStyle={"solid"} style={{width: "100%"}}
                                      onChange={this.imageQualityRadioOnChange.bind(this)}>
                             <Row>
                                 <Col span={12}><Radio value={"full"}>清晰</Radio></Col>
@@ -233,7 +218,7 @@ class PreferenceImageComponent extends React.Component {
                         </Radio.Group>
                     </Form.Item>
                     <Form.Item name={"imageTopics"} label={"图片主题"}>
-                        <Checkbox.Group disabled={this.state.disableImageTopic} className={"imageTopicsCheckbox"}
+                        <Checkbox.Group disabled={this.state.disableImageTopic}
                                         onChange={this.imageTopicsCheckboxOnChange.bind(this)}>
                             <Row gutter={[0, 8]}>
                                 <Col span={12}><Checkbox name={"travel"}

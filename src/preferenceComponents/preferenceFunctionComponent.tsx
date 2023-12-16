@@ -15,9 +15,8 @@ import {
 import {RedoOutlined, SettingOutlined} from "@ant-design/icons";
 import {
     btnMouseOut,
-    btnMouseOver, getFontColor,
+    btnMouseOver,
     getPreferenceDataStorage,
-    resetRadioColor,
 } from "../typescripts/publicFunctions";
 import {PreferenceDataInterface} from "../typescripts/publicInterface";
 import {defaultPreferenceData} from "../typescripts/publicConstants";
@@ -61,8 +60,6 @@ class PreferenceFunctionComponent extends React.Component {
             this.props.getPreferenceData(this.state.preferenceData);
             localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
             message.success("已更换搜索引擎");
-
-            resetRadioColor("#searchEngineRadio");
         })
     }
 
@@ -74,8 +71,6 @@ class PreferenceFunctionComponent extends React.Component {
             this.props.getPreferenceData(this.state.preferenceData);
             localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
             message.success("已更换按钮形状");
-
-            resetRadioColor("#buttonShapeRadio");
         })
     }
 
@@ -90,11 +85,6 @@ class PreferenceFunctionComponent extends React.Component {
                 message.success("已开启简洁模式");
             } else {
                 message.success("已关闭简洁模式");
-            }
-
-            if(!checked) {
-                e.target.style.backgroundColor = "rgb(0, 0, 0, 0.25)";
-                e.target.lastChild.style.color = "#ffffff";
             }
         })
     }
@@ -168,7 +158,7 @@ class PreferenceFunctionComponent extends React.Component {
                 >
                     <Form colon={false} initialValues={this.state.preferenceData}>
                         <Form.Item name={"searchEngine"} label={"搜索引擎"}>
-                            <Radio.Group buttonStyle={"solid"} style={{width: "100%"}} id={"searchEngineRadio"}
+                            <Radio.Group buttonStyle={"solid"} style={{width: "100%"}}
                                          onChange={this.searchEngineRadioOnChange.bind(this)}>
                                 <Row>
                                     <Col span={12}><Radio value={"bing"}>必应</Radio></Col>
@@ -177,7 +167,7 @@ class PreferenceFunctionComponent extends React.Component {
                             </Radio.Group>
                         </Form.Item>
                         <Form.Item name={"buttonShape"} label={"按钮形状"}>
-                            <Radio.Group buttonStyle={"solid"} style={{width: "100%"}} id={"buttonShapeRadio"}
+                            <Radio.Group buttonStyle={"solid"} style={{width: "100%"}}
                                          onChange={this.buttonShapeRadioOnChange.bind(this)}>
                                 <Row>
                                     <Col span={12}><Radio value={"round"}>圆形</Radio></Col>

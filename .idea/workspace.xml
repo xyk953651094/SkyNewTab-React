@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="优化功能体验">
+    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="菜单栏表单控件颜色主题，进展不顺，回滚前保存">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/wallpaperComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/wallpaperComponent.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/preferenceComponents/preferenceFunctionComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/preferenceComponents/preferenceFunctionComponent.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/preferenceComponents/preferenceImageComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/preferenceComponents/preferenceImageComponent.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/typescripts/publicFunctions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/typescripts/publicFunctions.ts" afterDir="false" />
@@ -68,6 +67,7 @@
     &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;npm.start.executor&quot;: &quot;Run&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;通义灵码&quot;,
     &quot;ts.external.directory.path&quot;: &quot;/Users/xiaoyunkai/Projects/WebStorm/SkyNewTab-React/node_modules/typescript/lib&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
@@ -371,7 +371,9 @@
       <workItem from="1702387990606" duration="213000" />
       <workItem from="1702542473978" duration="4840000" />
       <workItem from="1702561180531" duration="2511000" />
-      <workItem from="1702608971403" duration="11407000" />
+      <workItem from="1702608971403" duration="13818000" />
+      <workItem from="1702701422869" duration="2741000" />
+      <workItem from="1702717773825" duration="2028000" />
     </task>
     <task id="LOCAL-00001" summary="优化抽屉蒙版的显示效果&#10;优化代码质量">
       <created>1683952184207</created>
@@ -491,14 +493,6 @@
       <option name="presentableId" value="LOCAL-00017" />
       <option name="project" value="LOCAL" />
       <updated>1687402693401</updated>
-    </task>
-    <task id="LOCAL-00097" summary="优化视觉效果">
-      <option name="closed" value="true" />
-      <created>1695958826197</created>
-      <option name="number" value="00097" />
-      <option name="presentableId" value="LOCAL-00097" />
-      <option name="project" value="LOCAL" />
-      <updated>1695958826197</updated>
     </task>
     <task id="LOCAL-00098" summary="优化视觉效果">
       <option name="closed" value="true" />
@@ -748,7 +742,15 @@
       <option name="project" value="LOCAL" />
       <updated>1702631711817</updated>
     </task>
-    <option name="localTasksCounter" value="129" />
+    <task id="LOCAL-00129" summary="菜单栏表单控件颜色主题，进展不顺，回滚前保存">
+      <option name="closed" value="true" />
+      <created>1702646067184</created>
+      <option name="number" value="00129" />
+      <option name="presentableId" value="LOCAL-00129" />
+      <option name="project" value="LOCAL" />
+      <updated>1702646067184</updated>
+    </task>
+    <option name="localTasksCounter" value="130" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -767,7 +769,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="优化视觉效果&#10;修复已知问题" />
     <MESSAGE value="新增自定义主题&#10;优化视觉效果" />
     <MESSAGE value="新增联系作者&#10;优化视觉效果" />
     <MESSAGE value="修复部分问题" />
@@ -792,6 +793,7 @@
     <MESSAGE value="删除了不必要的设置项" />
     <MESSAGE value="优化视觉效果" />
     <MESSAGE value="优化功能体验" />
-    <option name="LAST_COMMIT_MESSAGE" value="优化功能体验" />
+    <MESSAGE value="菜单栏表单控件颜色主题，进展不顺，回滚前保存" />
+    <option name="LAST_COMMIT_MESSAGE" value="菜单栏表单控件颜色主题，进展不顺，回滚前保存" />
   </component>
 </project>
