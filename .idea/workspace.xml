@@ -4,12 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="菜单栏表单控件颜色主题，进展不顺，回滚前保存">
+    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="菜单栏表单控件颜色主题，存在卡顿，回滚前保存">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/preferenceComponents/preferenceFunctionComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/preferenceComponents/preferenceFunctionComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/preferenceComponents/preferenceImageComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/preferenceComponents/preferenceImageComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/typescripts/publicFunctions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/typescripts/publicFunctions.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -373,7 +370,8 @@
       <workItem from="1702561180531" duration="2511000" />
       <workItem from="1702608971403" duration="13818000" />
       <workItem from="1702701422869" duration="2741000" />
-      <workItem from="1702717773825" duration="2028000" />
+      <workItem from="1702717773825" duration="2684000" />
+      <workItem from="1702791921421" duration="668000" />
     </task>
     <task id="LOCAL-00001" summary="优化抽屉蒙版的显示效果&#10;优化代码质量">
       <created>1683952184207</created>
@@ -493,14 +491,6 @@
       <option name="presentableId" value="LOCAL-00017" />
       <option name="project" value="LOCAL" />
       <updated>1687402693401</updated>
-    </task>
-    <task id="LOCAL-00098" summary="优化视觉效果">
-      <option name="closed" value="true" />
-      <created>1695971204931</created>
-      <option name="number" value="00098" />
-      <option name="presentableId" value="LOCAL-00098" />
-      <option name="project" value="LOCAL" />
-      <updated>1695971204932</updated>
     </task>
     <task id="LOCAL-00099" summary="菜单栏新增回到顶部按钮、夜间模式">
       <option name="closed" value="true" />
@@ -750,7 +740,15 @@
       <option name="project" value="LOCAL" />
       <updated>1702646067184</updated>
     </task>
-    <option name="localTasksCounter" value="130" />
+    <task id="LOCAL-00130" summary="菜单栏表单控件颜色主题，进展不顺，回滚前保存">
+      <option name="closed" value="true" />
+      <created>1702721715955</created>
+      <option name="number" value="00130" />
+      <option name="presentableId" value="LOCAL-00130" />
+      <option name="project" value="LOCAL" />
+      <updated>1702721715955</updated>
+    </task>
+    <option name="localTasksCounter" value="131" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
