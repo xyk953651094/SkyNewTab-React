@@ -3,6 +3,7 @@ import "jquery-color"
 import {PreferenceDataInterface, ThemeColorInterface} from "./publicInterface";
 
 import $ from "jquery";
+import {CheckboxValueType} from "antd/es/checkbox/Group";
 
 
 // 网络请求
@@ -401,4 +402,51 @@ export function btnMouseOver(hoverColor: string, e: any) {
 export function btnMouseOut(fontColor: string, e: any) {
     e.currentTarget.style.backgroundColor = "transparent";
     e.currentTarget.style.color = fontColor;
+}
+
+// 修改菜单栏表单控件时变化主题颜色
+export function resetRadioColor(selectedRadio: string | undefined, allRadios: string[], themeColor: string) {
+    // 重置所有不是当前选中的选项的颜色
+    for (let i = 0; i < allRadios.length; i++) {
+        if (selectedRadio && allRadios[i] !== selectedRadio) {
+            $("#" + allRadios[i]).next().css({
+                "borderColor": "#d9d9d9",
+                "backgroundColor": "#ffffff"
+            });
+        }
+        else {
+            $("#" + allRadios[i]).next().css({
+                "borderColor": themeColor,
+                "backgroundColor": themeColor,
+            });
+        }
+    }
+}
+
+export function resetCheckboxColor(selectedCheckboxes: CheckboxValueType[], allCheckboxes: string[], themeColor: string) {
+    // 重置所有不是当前选中的选项的颜色
+    for (let i = 0; i < allCheckboxes.length; i++) {
+        if (selectedCheckboxes.indexOf(allCheckboxes[i]) === -1) {
+            $("#" + allCheckboxes[i]).next().css({
+                "borderColor": "#d9d9d9",
+                "backgroundColor": "#ffffff"
+            });
+        }
+        else {
+            $("#" + allCheckboxes[i]).next().css({
+                "borderColor": themeColor,
+                "backgroundColor": themeColor
+            }).find(".arco-checkbox-icon-check").css("color", getFontColor(themeColor));
+        }
+    }
+}
+
+export function resetSwitchColor(element: string, checked: boolean, themeColor: string) {
+    if (!checked) {
+        $(element).children(".ant-switch-inner").css("backgroundColor", "rgb(0, 0, 0, 0)");
+    }
+    else {
+        $(element).children(".ant-switch-inner").css("backgroundColor", themeColor)
+            .find(".ant-switch-inner-checked").css("color", getFontColor(themeColor));
+    }
 }

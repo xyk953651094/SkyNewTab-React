@@ -7,6 +7,11 @@
     <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="菜单栏表单控件颜色主题，存在卡顿，回滚前保存">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/preferenceComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/preferenceComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/preferenceComponents/preferenceFunctionComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/preferenceComponents/preferenceFunctionComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/preferenceComponents/preferenceImageComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/preferenceComponents/preferenceImageComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/typescripts/publicConstants.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/typescripts/publicConstants.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/typescripts/publicFunctions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/typescripts/publicFunctions.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -371,7 +376,9 @@
       <workItem from="1702608971403" duration="13818000" />
       <workItem from="1702701422869" duration="2741000" />
       <workItem from="1702717773825" duration="2684000" />
-      <workItem from="1702791921421" duration="668000" />
+      <workItem from="1702791921421" duration="768000" />
+      <workItem from="1702815505419" duration="1564000" />
+      <workItem from="1702867639302" duration="4834000" />
     </task>
     <task id="LOCAL-00001" summary="优化抽屉蒙版的显示效果&#10;优化代码质量">
       <created>1683952184207</created>
@@ -491,14 +498,6 @@
       <option name="presentableId" value="LOCAL-00017" />
       <option name="project" value="LOCAL" />
       <updated>1687402693401</updated>
-    </task>
-    <task id="LOCAL-00099" summary="菜单栏新增回到顶部按钮、夜间模式">
-      <option name="closed" value="true" />
-      <created>1696678943546</created>
-      <option name="number" value="00099" />
-      <option name="presentableId" value="LOCAL-00099" />
-      <option name="project" value="LOCAL" />
-      <updated>1696678943546</updated>
     </task>
     <task id="LOCAL-00100" summary="优化无图模式颜色显示">
       <option name="closed" value="true" />
@@ -748,11 +747,30 @@
       <option name="project" value="LOCAL" />
       <updated>1702721715955</updated>
     </task>
-    <option name="localTasksCounter" value="131" />
+    <task id="LOCAL-00131" summary="菜单栏表单控件颜色主题，存在卡顿，回滚前保存">
+      <option name="closed" value="true" />
+      <created>1702792761430</created>
+      <option name="number" value="00131" />
+      <option name="presentableId" value="LOCAL-00131" />
+      <option name="project" value="LOCAL" />
+      <updated>1702792761431</updated>
+    </task>
+    <option name="localTasksCounter" value="132" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ID_ORDER">
+      <list>
+        <option value="Default.Root" />
+        <option value="Default.Author" />
+        <option value="Default.Date" />
+        <option value="Default.Subject" />
+        <option value="Space.CommitStatus" />
+      </list>
+    </option>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -767,7 +785,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="新增自定义主题&#10;优化视觉效果" />
     <MESSAGE value="新增联系作者&#10;优化视觉效果" />
     <MESSAGE value="修复部分问题" />
     <MESSAGE value="优化代码结构" />
@@ -792,6 +809,7 @@
     <MESSAGE value="优化视觉效果" />
     <MESSAGE value="优化功能体验" />
     <MESSAGE value="菜单栏表单控件颜色主题，进展不顺，回滚前保存" />
-    <option name="LAST_COMMIT_MESSAGE" value="菜单栏表单控件颜色主题，进展不顺，回滚前保存" />
+    <MESSAGE value="菜单栏表单控件颜色主题，存在卡顿，回滚前保存" />
+    <option name="LAST_COMMIT_MESSAGE" value="菜单栏表单控件颜色主题，存在卡顿，回滚前保存" />
   </component>
 </project>

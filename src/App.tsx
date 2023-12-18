@@ -19,12 +19,13 @@ import {
     getFontColor,
     getImageHistoryStorage,
     getPreferenceDataStorage,
-    getReverseColor,
+    getReverseColor, resetCheckboxColor, resetRadioColor, resetSwitchColor,
     setColorTheme
 } from "./typescripts/publicFunctions";
 import {PreferenceDataInterface, ThemeColorInterface} from "./typescripts/publicInterface";
 import ImageHistoryComponent from "./components/imageHistoryComponent";
 import $ from "jquery";
+import {imageTopics} from "./typescripts/publicConstants";
 
 const {Header, Content, Footer} = Layout;
 
@@ -187,49 +188,22 @@ class App extends React.Component {
                 $(".ant-form-item-label > label").css("color", this.state.themeColor.componentFontColor);
                 $(".ant-form-item-extra").css("color", this.state.themeColor.componentFontColor);
                 $(".ant-radio-wrapper").children(":last-child").css("color", this.state.themeColor.componentFontColor);
-                // $(".ant-radio-checked").children(".ant-radio-inner").css({
-                //     "borderColor": this.state.themeColor.themeColor,
-                //     "backgroundColor": this.state.themeColor.themeColor,
-                // });
                 $(".ant-checkbox-wrapper").children(":last-child").css("color", this.state.themeColor.componentFontColor);
-                // $(".ant-checkbox-checked").children(".ant-checkbox-inner").css({
-                //     "borderColor": this.state.themeColor.themeColor,
-                //     "backgroundColor": this.state.themeColor.themeColor,
-                // });
-                // $(".ant-switch-checked").children(".ant-switch-inner").css("backgroundColor", this.state.themeColor.themeColor)
-                //     .find(".ant-switch-inner-checked").css("color", getFontColor(this.state.themeColor.themeColor));
                 $(".ant-collapse").css("backgroundColor", this.state.themeColor.componentBackgroundColor);
                 $(".ant-collapse-header").css("color", this.state.themeColor.componentFontColor);
-            }
 
-            // 监视表单元素的 class 变化（卡顿）
-            // let antFormItem = $(".ant-radio, .ant-checkbox, .ant-switch");
-            // if (antFormItem.length && antFormItem.length > 0) {
-            //     let observer = new MutationObserver(function (mutations) {
-            //         mutations.forEach(function (mutation) {
-            //             antFormItem.each((index: number, item: any) => {
-            //                 if ($(item).hasClass("ant-radio") && !$(item).hasClass("ant-radio-checked")) {
-            //                     $(item).children(".ant-radio-inner").css({
-            //                         "borderColor": "#d9d9d9",
-            //                         "backgroundColor": "#ffffff",
-            //                     });
-            //                 }
-            //                 if ($(item).hasClass("ant-checkbox") && !$(item).hasClass("ant-checkbox-checked")) {
-            //                     $(item).children(".ant-checkbox-inner").css({
-            //                         "borderColor": "#d9d9d9",
-            //                         "backgroundColor": "#ffffff",
-            //                     });
-            //                 }
-            //                 if ($(item).hasClass("ant-switch") && !$(item).hasClass("ant-switch-checked")) {
-            //                     $(item).children(".ant-switch-inner").css("backgroundColor", "rgb(0, 0, 0, 0)");
-            //                 }
-            //             })
-            //         });
-            //     });
-            //     antFormItem.each((index: number, item: any) => {
-            //         observer.observe(item, {attributes: true, attributeFilter: ["class"]});
-            //     });
-            // }
+                // preferenceImageComponent
+                resetRadioColor(this.state.preferenceData.dynamicEffect, ["all", "translate", "rotate", "close"], this.state.themeColor.themeColor);
+                resetRadioColor(this.state.preferenceData.imageQuality, ["full", "regular"], this.state.themeColor.themeColor);
+                resetCheckboxColor(this.state.preferenceData.imageTopics, imageTopics, this.state.themeColor.themeColor);
+                resetSwitchColor("#nightModeSwitch", this.state.preferenceData.nightMode, this.state.themeColor.themeColor);
+                resetSwitchColor("#noImageModeSwitch", this.state.preferenceData.noImageMode, this.state.themeColor.themeColor);
+
+                // preferenceFunctionComponent
+                resetRadioColor(this.state.preferenceData.searchEngine, ["bing", "google"], this.state.themeColor.themeColor);
+                resetRadioColor(this.state.preferenceData.buttonShape, ["round", "default"], this.state.themeColor.themeColor);
+                resetSwitchColor("#simpleModeSwitch", this.state.preferenceData.simpleMode, this.state.themeColor.themeColor);
+            }
 
             // modal
             let modalEle = $(".ant-modal");

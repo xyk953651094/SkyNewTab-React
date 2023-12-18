@@ -75,6 +75,29 @@ export let defaultPreferenceData: PreferenceDataInterface = {
     simpleMode: false,
 }
 
+export let imageTopics = [
+    "Fzo3zuOHN6w",
+    "bo8jQKTaE0Y",
+    "CDwuwXJAbEw",
+    "iUIsnVtjB0Y",
+    "qPYsDzvJOYc",
+    "rnSKDHwwYUk",
+    "6sMVjTLSkeQ",
+    "aeu6rL-j6ew",
+    "S4MKLAsBB74",
+    "hmenvQhUmxM",
+    "xjPR4hlkBGA",
+    "_hb-dl4Q-4U",
+    "towJZFskpGg",
+    "R_Fyn-Gwtlw",
+    "xHxYTMHLgOc",
+    "Jpg6Kidl-Hk",
+    "_8zFHuhRhyo",
+    "bDo48cUhwnY",
+    "dijpbw99kQQ",
+    "Bn-DjrcBrwo"
+]
+
 // 常用变量
 export const device = getDevice();  // 获取当前设备类型
 export const clientId = "ntHZZmwZUkhiLBMvwqqzmOG29nyXSCXlX7x_i-qhVHM";
