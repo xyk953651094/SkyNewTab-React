@@ -65,7 +65,7 @@ class PreferenceImageComponent extends React.Component {
             this.props.getPreferenceData(this.state.preferenceData);
             localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
             message.success("已更换显示效果，一秒后刷新页面");
-            resetRadioColor(event.target.value, ["all", "translate", "rotate", "close"], this.props.hoverColor);
+            // resetRadioColor(event.target.value, ["all", "translate", "rotate", "close"], this.props.hoverColor);
             this.refreshWindow();
         })
     }
@@ -78,7 +78,7 @@ class PreferenceImageComponent extends React.Component {
             this.props.getPreferenceData(this.state.preferenceData);
             localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
             message.success("已更换图片质量，一秒后刷新页面");
-            resetRadioColor(event.target.value, ["full", "regular"], this.props.hoverColor);
+            // resetRadioColor(event.target.value, ["full", "regular"], this.props.hoverColor);
             this.refreshWindow();
         })
     }
@@ -94,7 +94,7 @@ class PreferenceImageComponent extends React.Component {
             if (checkedValues.length === 0) {
                 message.info("全不选与全选的效果一样");
             }
-            resetCheckboxColor(checkedValues, imageTopics, this.props.hoverColor);
+            // resetCheckboxColor(checkedValues, imageTopics, this.props.hoverColor);
         })
     }
 
@@ -145,7 +145,7 @@ class PreferenceImageComponent extends React.Component {
             } else {
                 message.success("已恢复背景亮度");
             }
-            resetSwitchColor("#nightModeSwitch", checked, this.props.hoverColor);
+            // resetSwitchColor("#nightModeSwitch", checked, this.props.hoverColor);
         })
     }
 
@@ -161,7 +161,7 @@ class PreferenceImageComponent extends React.Component {
             } else {
                 message.success("已关闭无图模式，一秒后刷新页面");
             }
-            resetSwitchColor("#noImageModeSwitch", checked, this.props.hoverColor);
+            // resetSwitchColor("#noImageModeSwitch", checked, this.props.hoverColor);
             this.refreshWindow();
         })
     }
