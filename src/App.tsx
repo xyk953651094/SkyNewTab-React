@@ -189,7 +189,7 @@ class App extends React.Component {
                 $(".ant-form-item-extra").css("color", this.state.themeColor.componentFontColor);
                 $(".ant-radio-wrapper").children(":last-child").css("color", this.state.themeColor.componentFontColor);
                 $(".ant-checkbox-wrapper").children(":last-child").css("color", this.state.themeColor.componentFontColor);
-                $(".ant-switch").find(".ant-switch-inner-checked").css("color", getFontColor(this.state.themeColor.themeColor));
+                // $(".ant-switch").find(".ant-switch-inner-checked").css("color", getFontColor(this.state.themeColor.themeColor));
                 $(".ant-collapse").css("backgroundColor", this.state.themeColor.componentBackgroundColor);
                 $(".ant-collapse-header").css("color", this.state.themeColor.componentFontColor);
 
