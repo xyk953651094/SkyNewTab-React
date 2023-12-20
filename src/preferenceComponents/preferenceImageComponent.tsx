@@ -1,6 +1,5 @@
 import React from "react";
 import {
-    Alert,
     Button,
     Card,
     Checkbox,
@@ -13,16 +12,20 @@ import {
     Row,
     Select,
     Space,
-    Switch,
-    Typography
+    Switch
 } from "antd";
 import {CheckOutlined, SettingOutlined, StopOutlined} from "@ant-design/icons";
-import {getPreferenceDataStorage, getTimeDetails, isEmpty, btnMouseOver, btnMouseOut} from "../typescripts/publicFunctions";
+import {
+    btnMouseOut,
+    btnMouseOver,
+    getPreferenceDataStorage,
+    getTimeDetails,
+    isEmpty, resetCheckboxColor, resetRadioColor, resetSwitchColor
+} from "../typescripts/publicFunctions";
 import {CheckboxValueType} from "antd/es/checkbox/Group";
 import {PreferenceDataInterface} from "../typescripts/publicInterface";
 import $ from "jquery";
-
-const {Paragraph} = Typography;
+import {imageTopics} from "../typescripts/publicConstants";
 
 type propType = {
     hoverColor: string,
@@ -62,6 +65,7 @@ class PreferenceImageComponent extends React.Component {
             this.props.getPreferenceData(this.state.preferenceData);
             localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
             message.success("已更换显示效果，一秒后刷新页面");
+            // resetRadioColor(event.target.value, ["all", "translate", "rotate", "close"], this.props.hoverColor);
             this.refreshWindow();
         })
     }
@@ -74,6 +78,7 @@ class PreferenceImageComponent extends React.Component {
             this.props.getPreferenceData(this.state.preferenceData);
             localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
             message.success("已更换图片质量，一秒后刷新页面");
+            // resetRadioColor(event.target.value, ["full", "regular"], this.props.hoverColor);
             this.refreshWindow();
         })
     }
@@ -85,10 +90,11 @@ class PreferenceImageComponent extends React.Component {
         }, () => {
             this.props.getPreferenceData(this.state.preferenceData);
             localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
-            message.success("已更换图片主题，下次加载时生效");
+            message.success("已更换图片主题，下次切换图片时生效");
             if (checkedValues.length === 0) {
                 message.info("全不选与全选的效果一样");
             }
+            // resetCheckboxColor(checkedValues, imageTopics, this.props.hoverColor);
         })
     }
 
@@ -101,8 +107,7 @@ class PreferenceImageComponent extends React.Component {
         }, () => {
             this.props.getPreferenceData(this.state.preferenceData);
             localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
-            message.success("已启用自定主题，一秒后刷新页面");
-            this.refreshWindow();
+            message.success("已启用自定主题，下次切换图片时生效");
         })
     }
 
@@ -129,49 +134,23 @@ class PreferenceImageComponent extends React.Component {
         })
     }
 
-    nightModeSwitchOnChange(checked: boolean) {
+    nightModeSwitchOnChange(checked: boolean, e: any) {
         this.setState({
             preferenceData: this.setPreferenceData({nightMode: checked}),
         }, () => {
             this.props.getPreferenceData(this.state.preferenceData);
             localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
             if (checked) {
-                message.success("已降低背景亮度，一秒后刷新页面");
+                message.success("已降低背景亮度");
             } else {
-                message.success("已恢复背景亮度，一秒后刷新页面");
-
+                message.success("已恢复背景亮度");
             }
-            this.refreshWindow();
-        })
-    }
-
-    autoDarkModeSwitchOnChange(checked: boolean) {
-        this.setState({
-            preferenceData: this.setPreferenceData({autoDarkMode: checked}),
-        }, () => {
-            this.props.getPreferenceData(this.state.preferenceData);
-            localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
-
-            let currentTime = parseInt(getTimeDetails(new Date()).hour);
-            if (currentTime > 18 || currentTime < 6) {
-                if (checked) {
-                    message.success("已开启夜间自动降低背景亮度，一秒后刷新页面");
-                } else {
-                    message.success("已关闭夜间自动降低背景亮度，一秒后刷新页面");
-                }
-                this.refreshWindow();
-            } else {
-                if (checked) {
-                    message.success("已开启夜间自动降低背景亮度");
-                } else {
-                    message.success("已关闭夜间自动降低背景亮度");
-                }
-            }
+            // resetSwitchColor("#nightModeSwitch", checked, this.props.hoverColor);
         })
     }
 
     // 无图模式
-    noImageModeSwitchOnChange(checked: boolean) {
+    noImageModeSwitchOnChange(checked: boolean, e: any) {
         this.setState({
             preferenceData: this.setPreferenceData({noImageMode: checked}),
         }, () => {
@@ -181,8 +160,8 @@ class PreferenceImageComponent extends React.Component {
                 message.success("已开启无图模式，一秒后刷新页面");
             } else {
                 message.success("已关闭无图模式，一秒后刷新页面");
-
             }
+            // resetSwitchColor("#noImageModeSwitch", checked, this.props.hoverColor);
             this.refreshWindow();
         })
     }
@@ -228,21 +207,19 @@ class PreferenceImageComponent extends React.Component {
                         <Radio.Group buttonStyle={"solid"}
                                      onChange={this.dynamicEffectRadioOnChange.bind(this)}>
                             <Row gutter={[0, 8]}>
-                                <Col span={12}><Radio value={"all"}>视差</Radio></Col>
-                                <Col span={12}><Radio value={"translate"}>平移</Radio></Col>
-                                <Col span={12}><Radio value={"rotate"}>旋转</Radio></Col>
-                                <Col span={12}><Radio value={"close"}>关闭</Radio></Col>
+                                <Col span={12}><Radio value={"all"} id={"all"}>视差</Radio></Col>
+                                <Col span={12}><Radio value={"translate"} id={"translate"}>平移</Radio></Col>
+                                <Col span={12}><Radio value={"rotate"} id={"rotate"}>旋转</Radio></Col>
+                                <Col span={12}><Radio value={"close"} id={"close"}>关闭</Radio></Col>
                             </Row>
                         </Radio.Group>
                     </Form.Item>
                     <Form.Item name={"imageQuality"} label={"图片质量"}>
-                        <Radio.Group buttonStyle={"solid"}
+                        <Radio.Group buttonStyle={"solid"} style={{width: "100%"}}
                                      onChange={this.imageQualityRadioOnChange.bind(this)}>
-                            <Row gutter={[0, 8]}>
-                                <Col span={12}><Radio value={"full"}>最高</Radio></Col>
-                                <Col span={12}><Radio value={"regular"}>标准</Radio></Col>
-                                <Col span={12}><Radio value={"small"}>较低</Radio></Col>
-                                <Col span={12}><Radio value={"small_s3"}>最低</Radio></Col>
+                            <Row>
+                                <Col span={12}><Radio value={"full"} id={"full"}>清晰</Radio></Col>
+                                <Col span={12}><Radio value={"regular"} id={"regular"}>省流</Radio></Col>
                             </Row>
                         </Radio.Group>
                     </Form.Item>
@@ -251,45 +228,45 @@ class PreferenceImageComponent extends React.Component {
                                         onChange={this.imageTopicsCheckboxOnChange.bind(this)}>
                             <Row gutter={[0, 8]}>
                                 <Col span={12}><Checkbox name={"travel"}
-                                                         value={"Fzo3zuOHN6w"}>旅游</Checkbox></Col>
+                                                         value={"Fzo3zuOHN6w"} id={"Fzo3zuOHN6w"}>旅游</Checkbox></Col>
                                 <Col span={12}><Checkbox name={"wallpapers"}
-                                                         value={"bo8jQKTaE0Y"}>壁纸</Checkbox></Col>
+                                                         value={"bo8jQKTaE0Y"} id={"bo8jQKTaE0Y"}>壁纸</Checkbox></Col>
                                 <Col span={12}><Checkbox name={"3d-renders"}
-                                                         value={"CDwuwXJAbEw"}>三维</Checkbox></Col>
+                                                         value={"CDwuwXJAbEw"} id={"CDwuwXJAbEw"}>三维</Checkbox></Col>
                                 <Col span={12}><Checkbox name={"textures-patterns"}
-                                                         value={"iUIsnVtjB0Y"}>纹理</Checkbox></Col>
+                                                         value={"iUIsnVtjB0Y"} id={"iUIsnVtjB0Y"}>纹理</Checkbox></Col>
                                 <Col span={12}><Checkbox name={"experimental"}
-                                                         value={"qPYsDzvJOYc"}>实验</Checkbox></Col>
+                                                         value={"qPYsDzvJOYc"} id={"qPYsDzvJOYc"}>实验</Checkbox></Col>
                                 <Col span={12}><Checkbox name={"architecture"}
-                                                         value={"rnSKDHwwYUk"}>建筑</Checkbox></Col>
+                                                         value={"rnSKDHwwYUk"} id={"rnSKDHwwYUk"}>建筑</Checkbox></Col>
                                 <Col span={12}><Checkbox name={"nature"}
-                                                         value={"6sMVjTLSkeQ"}>自然</Checkbox></Col>
+                                                         value={"6sMVjTLSkeQ"} id={"6sMVjTLSkeQ"}>自然</Checkbox></Col>
                                 <Col span={12}><Checkbox name={"business-work"}
-                                                         value={"aeu6rL-j6ew"}>商务</Checkbox></Col>
+                                                         value={"aeu6rL-j6ew"} id={"aeu6rL-j6ew"}>商务</Checkbox></Col>
                                 <Col span={12}><Checkbox name={"fashion"}
-                                                         value={"S4MKLAsBB74"}>时尚</Checkbox></Col>
+                                                         value={"S4MKLAsBB74"} id={"S4MKLAsBB74"}>时尚</Checkbox></Col>
                                 <Col span={12}><Checkbox name={"film"}
-                                                         value={"hmenvQhUmxM"}>电影</Checkbox></Col>
+                                                         value={"hmenvQhUmxM"} id={"hmenvQhUmxM"}>电影</Checkbox></Col>
                                 <Col span={12}><Checkbox name={"food-drink"}
-                                                         value={"xjPR4hlkBGA"}>饮食</Checkbox></Col>
+                                                         value={"xjPR4hlkBGA"} id={"xjPR4hlkBGA"}>饮食</Checkbox></Col>
                                 <Col span={12}><Checkbox name={"health"}
-                                                         value={"_hb-dl4Q-4U"}>健康</Checkbox></Col>
+                                                         value={"_hb-dl4Q-4U"} id={"_hb-dl4Q-4U"}>健康</Checkbox></Col>
                                 <Col span={12}><Checkbox name={"people"}
-                                                         value={"towJZFskpGg"}>人物</Checkbox></Col>
+                                                         value={"towJZFskpGg"} id={"towJZFskpGg"}>人物</Checkbox></Col>
                                 <Col span={12}><Checkbox name={"interiors"}
-                                                         value={"R_Fyn-Gwtlw"}>精神</Checkbox></Col>
+                                                         value={"R_Fyn-Gwtlw"} id={"R_Fyn-Gwtlw"}>精神</Checkbox></Col>
                                 <Col span={12}><Checkbox name={"street-photography"}
-                                                         value={"xHxYTMHLgOc"}>街头</Checkbox></Col>
+                                                         value={"xHxYTMHLgOc"} id={"xHxYTMHLgOc"}>街头</Checkbox></Col>
                                 <Col span={12}><Checkbox name={"animals"}
-                                                         value={"Jpg6Kidl-Hk"}>动物</Checkbox></Col>
+                                                         value={"Jpg6Kidl-Hk"} id={"Jpg6Kidl-Hk"}>动物</Checkbox></Col>
                                 <Col span={12}><Checkbox name={"spirituality"}
-                                                         value={"_8zFHuhRhyo"}>灵魂</Checkbox></Col>
+                                                         value={"_8zFHuhRhyo"} id={"_8zFHuhRhyo"}>灵魂</Checkbox></Col>
                                 <Col span={12}><Checkbox name={"arts-culture"}
-                                                         value={"bDo48cUhwnY"}>文化</Checkbox></Col>
+                                                         value={"bDo48cUhwnY"} id={"bDo48cUhwnY"}>文化</Checkbox></Col>
                                 <Col span={12}><Checkbox name={"history"}
-                                                         value={"dijpbw99kQQ"}>历史</Checkbox></Col>
+                                                         value={"dijpbw99kQQ"} id={"dijpbw99kQQ"}>历史</Checkbox></Col>
                                 <Col span={12}><Checkbox name={"athletics"}
-                                                         value={"Bn-DjrcBrwo"}>体育</Checkbox></Col>
+                                                         value={"Bn-DjrcBrwo"} id={"Bn-DjrcBrwo"}>体育</Checkbox></Col>
                             </Row>
                         </Checkbox.Group>
                     </Form.Item>
@@ -323,40 +300,17 @@ class PreferenceImageComponent extends React.Component {
                     <Row gutter={24}>
                         <Col span={12}>
                             <Form.Item name={"nightMode"} label={"降低亮度"} valuePropName={"checked"}>
-                                <Switch checkedChildren="已开启" unCheckedChildren="已关闭"
+                                <Switch checkedChildren="已开启" unCheckedChildren="已关闭" id={"nightModeSwitch"}
                                         onChange={this.nightModeSwitchOnChange.bind(this)}/>
                             </Form.Item>
                         </Col>
                         <Col span={12}>
-                            <Form.Item name={"autoDarkMode"} label={"夜间模式"} valuePropName={"checked"}>
-                                <Switch checkedChildren="已开启" unCheckedChildren="已关闭"
-                                        onChange={this.autoDarkModeSwitchOnChange.bind(this)}/>
-                            </Form.Item>
-                        </Col>
-                        <Col span={12}>
                             <Form.Item name={"noImageMode"} label={"无图模式"} valuePropName={"checked"}>
-                                <Switch checkedChildren="已开启" unCheckedChildren="已关闭"
+                                <Switch checkedChildren="已开启" unCheckedChildren="已关闭" id={"noImageModeSwitch"}
                                         onChange={this.noImageModeSwitchOnChange.bind(this)}/>
                             </Form.Item>
                         </Col>
                     </Row>
-                    <Alert
-                        message="提示信息"
-                        description={
-                            <Paragraph>
-                                <ol>
-                                    <Space direction={"vertical"}>
-                                        <li>新的主题刷新后可能不会立即生效</li>
-                                        <li>启用自定主题时不能使用图片主题</li>
-                                        <li>禁用自定主题时才能使用图片主题</li>
-                                        <li>夜间模式于18点至6点自动降低亮度</li>
-                                    </Space>
-                                </ol>
-                            </Paragraph>
-                        }
-                        type="info"
-                        style={{display: this.state.preferenceData.displayAlert ? "block" : "none"}}
-                    />
                 </Form>
             </Card>
         );

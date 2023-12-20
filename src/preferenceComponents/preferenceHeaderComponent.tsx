@@ -1,7 +1,7 @@
 import React from "react";
 import {Button, Col, Row, Typography} from "antd";
 import {GiftOutlined} from "@ant-design/icons";
-import {btnMouseOver, btnMouseOut} from "../typescripts/publicFunctions";
+import {btnMouseOut, btnMouseOver} from "../typescripts/publicFunctions";
 import {PreferenceDataInterface} from "../typescripts/publicInterface";
 
 const {Text} = Typography;
@@ -34,7 +34,8 @@ class PreferenceHeaderComponent extends React.Component {
                 <Col span={12} style={{textAlign: "right"}}>
                     <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<GiftOutlined/>}
                             href={"https://afdian.net/a/xyk953651094"} target={"_blank"}
-                            onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)} onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
+                            onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
+                            onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
                             style={{color: this.props.fontColor}}>
                         支持
                     </Button>

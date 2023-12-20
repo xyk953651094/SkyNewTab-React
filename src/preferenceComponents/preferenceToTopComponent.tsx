@@ -1,7 +1,7 @@
 import React from "react";
 import {Button, Row} from "antd";
 import {ToTopOutlined} from "@ant-design/icons";
-import {btnMouseOver, btnMouseOut} from "../typescripts/publicFunctions";
+import {btnMouseOut, btnMouseOver} from "../typescripts/publicFunctions";
 import {PreferenceDataInterface} from "../typescripts/publicInterface";
 
 type propType = {
@@ -12,12 +12,12 @@ type propType = {
 
 type stateType = {}
 
-interface PreferenceFooterComponent {
+interface PreferenceToTopComponent {
     state: stateType,
     props: propType
 }
 
-class PreferenceFooterComponent extends React.Component {
+class PreferenceToTopComponent extends React.Component {
     constructor(props: any) {
         super(props);
         this.state = {};
@@ -34,7 +34,8 @@ class PreferenceFooterComponent extends React.Component {
         return (
             <Row justify={"center"}>
                 <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<ToTopOutlined/>}
-                        onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)} onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
+                        onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
+                        onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
                         onClick={this.toTopBtnOnClick.bind(this)}
                         style={{color: this.props.fontColor}}>
                     {"回到顶部"}
@@ -44,4 +45,4 @@ class PreferenceFooterComponent extends React.Component {
     }
 }
 
-export default PreferenceFooterComponent;
+export default PreferenceToTopComponent;

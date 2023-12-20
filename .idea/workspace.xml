@@ -4,12 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="修复已知问题">
+    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="菜单栏表单控件颜色主题">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/extensionFiles/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/extensionFiles/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/preferenceComponents/preferenceEmailComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/preferenceComponents/preferenceEmailComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/preferenceComponents/preferenceFunctionComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/preferenceComponents/preferenceFunctionComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/preferenceComponents/preferenceImageComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/preferenceComponents/preferenceImageComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/typescripts/publicFunctions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/typescripts/publicFunctions.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,6 +52,7 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
     &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
@@ -66,6 +67,7 @@
     &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;npm.start.executor&quot;: &quot;Run&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;通义灵码&quot;,
     &quot;ts.external.directory.path&quot;: &quot;/Users/xiaoyunkai/Projects/WebStorm/SkyNewTab-React/node_modules/typescript/lib&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
@@ -356,6 +358,30 @@
       <workItem from="1701437278784" duration="512000" />
       <workItem from="1701439456967" duration="830000" />
       <workItem from="1701487116389" duration="562000" />
+      <workItem from="1701508921650" duration="447000" />
+      <workItem from="1701568315068" duration="943000" />
+      <workItem from="1701569452316" duration="177000" />
+      <workItem from="1701841128571" duration="176000" />
+      <workItem from="1701841574538" duration="12000" />
+      <workItem from="1701868532474" duration="2215000" />
+      <workItem from="1701917212783" duration="2311000" />
+      <workItem from="1701920789597" duration="2857000" />
+      <workItem from="1702023525137" duration="931000" />
+      <workItem from="1702377879105" duration="6940000" />
+      <workItem from="1702387990606" duration="213000" />
+      <workItem from="1702542473978" duration="4840000" />
+      <workItem from="1702561180531" duration="2511000" />
+      <workItem from="1702608971403" duration="13818000" />
+      <workItem from="1702701422869" duration="2741000" />
+      <workItem from="1702717773825" duration="2684000" />
+      <workItem from="1702791921421" duration="768000" />
+      <workItem from="1702815505419" duration="1564000" />
+      <workItem from="1702867639302" duration="4911000" />
+      <workItem from="1702890656657" duration="1052000" />
+      <workItem from="1702956634704" duration="139000" />
+      <workItem from="1702956845519" duration="38000" />
+      <workItem from="1702956910858" duration="1072000" />
+      <workItem from="1703066160445" duration="371000" />
     </task>
     <task id="LOCAL-00001" summary="优化抽屉蒙版的显示效果&#10;优化代码质量">
       <created>1683952184207</created>
@@ -475,110 +501,6 @@
       <option name="presentableId" value="LOCAL-00017" />
       <option name="project" value="LOCAL" />
       <updated>1687402693401</updated>
-    </task>
-    <task id="LOCAL-00088" summary="移动项目">
-      <option name="closed" value="true" />
-      <created>1695011888571</created>
-      <option name="number" value="00088" />
-      <option name="presentableId" value="LOCAL-00088" />
-      <option name="project" value="LOCAL" />
-      <updated>1695011888571</updated>
-    </task>
-    <task id="LOCAL-00089" summary="优化视觉效果">
-      <option name="closed" value="true" />
-      <created>1695110225100</created>
-      <option name="number" value="00089" />
-      <option name="presentableId" value="LOCAL-00089" />
-      <option name="project" value="LOCAL" />
-      <updated>1695110225101</updated>
-    </task>
-    <task id="LOCAL-00090" summary="优化产品文档">
-      <option name="closed" value="true" />
-      <created>1695189513682</created>
-      <option name="number" value="00090" />
-      <option name="presentableId" value="LOCAL-00090" />
-      <option name="project" value="LOCAL" />
-      <updated>1695189513683</updated>
-    </task>
-    <task id="LOCAL-00091" summary="优化视觉效果">
-      <option name="closed" value="true" />
-      <created>1695275582240</created>
-      <option name="number" value="00091" />
-      <option name="presentableId" value="LOCAL-00091" />
-      <option name="project" value="LOCAL" />
-      <updated>1695275582240</updated>
-    </task>
-    <task id="LOCAL-00092" summary="优化视觉效果">
-      <option name="closed" value="true" />
-      <created>1695297515974</created>
-      <option name="number" value="00092" />
-      <option name="presentableId" value="LOCAL-00092" />
-      <option name="project" value="LOCAL" />
-      <updated>1695297515974</updated>
-    </task>
-    <task id="LOCAL-00093" summary="新增调节亮度，优化视觉效果">
-      <option name="closed" value="true" />
-      <created>1695521906005</created>
-      <option name="number" value="00093" />
-      <option name="presentableId" value="LOCAL-00093" />
-      <option name="project" value="LOCAL" />
-      <updated>1695521906006</updated>
-    </task>
-    <task id="LOCAL-00094" summary="新增修改按钮形状">
-      <option name="closed" value="true" />
-      <created>1695554837838</created>
-      <option name="number" value="00094" />
-      <option name="presentableId" value="LOCAL-00094" />
-      <option name="project" value="LOCAL" />
-      <updated>1695554837838</updated>
-    </task>
-    <task id="LOCAL-00095" summary="新增更多产品，优化视觉效果">
-      <option name="closed" value="true" />
-      <created>1695733703096</created>
-      <option name="number" value="00095" />
-      <option name="presentableId" value="LOCAL-00095" />
-      <option name="project" value="LOCAL" />
-      <updated>1695733703101</updated>
-    </task>
-    <task id="LOCAL-00096" summary="优化视觉效果">
-      <option name="closed" value="true" />
-      <created>1695735317310</created>
-      <option name="number" value="00096" />
-      <option name="presentableId" value="LOCAL-00096" />
-      <option name="project" value="LOCAL" />
-      <updated>1695735317310</updated>
-    </task>
-    <task id="LOCAL-00097" summary="优化视觉效果">
-      <option name="closed" value="true" />
-      <created>1695958826197</created>
-      <option name="number" value="00097" />
-      <option name="presentableId" value="LOCAL-00097" />
-      <option name="project" value="LOCAL" />
-      <updated>1695958826197</updated>
-    </task>
-    <task id="LOCAL-00098" summary="优化视觉效果">
-      <option name="closed" value="true" />
-      <created>1695971204931</created>
-      <option name="number" value="00098" />
-      <option name="presentableId" value="LOCAL-00098" />
-      <option name="project" value="LOCAL" />
-      <updated>1695971204932</updated>
-    </task>
-    <task id="LOCAL-00099" summary="菜单栏新增回到顶部按钮、夜间模式">
-      <option name="closed" value="true" />
-      <created>1696678943546</created>
-      <option name="number" value="00099" />
-      <option name="presentableId" value="LOCAL-00099" />
-      <option name="project" value="LOCAL" />
-      <updated>1696678943546</updated>
-    </task>
-    <task id="LOCAL-00100" summary="优化无图模式颜色显示">
-      <option name="closed" value="true" />
-      <created>1696854849817</created>
-      <option name="number" value="00100" />
-      <option name="presentableId" value="LOCAL-00100" />
-      <option name="project" value="LOCAL" />
-      <updated>1696854849817</updated>
     </task>
     <task id="LOCAL-00101" summary="搜索框按钮能快速切换搜索引擎了">
       <option name="closed" value="true" />
@@ -732,11 +654,126 @@
       <option name="project" value="LOCAL" />
       <updated>1701176578366</updated>
     </task>
-    <option name="localTasksCounter" value="120" />
+    <task id="LOCAL-00120" summary="修复已知问题">
+      <option name="closed" value="true" />
+      <created>1701508986046</created>
+      <option name="number" value="00120" />
+      <option name="presentableId" value="LOCAL-00120" />
+      <option name="project" value="LOCAL" />
+      <updated>1701508986047</updated>
+    </task>
+    <task id="LOCAL-00121" summary="新增帮助文档链接">
+      <option name="closed" value="true" />
+      <created>1701569462854</created>
+      <option name="number" value="00121" />
+      <option name="presentableId" value="LOCAL-00121" />
+      <option name="project" value="LOCAL" />
+      <updated>1701569462854</updated>
+    </task>
+    <task id="LOCAL-00122" summary="删除了不必要的设置项">
+      <option name="closed" value="true" />
+      <created>1701919555931</created>
+      <option name="number" value="00122" />
+      <option name="presentableId" value="LOCAL-00122" />
+      <option name="project" value="LOCAL" />
+      <updated>1701919555931</updated>
+    </task>
+    <task id="LOCAL-00123" summary="优化视觉效果">
+      <option name="closed" value="true" />
+      <created>1701931160774</created>
+      <option name="number" value="00123" />
+      <option name="presentableId" value="LOCAL-00123" />
+      <option name="project" value="LOCAL" />
+      <updated>1701931160775</updated>
+    </task>
+    <task id="LOCAL-00124" summary="优化视觉效果">
+      <option name="closed" value="true" />
+      <created>1702024210390</created>
+      <option name="number" value="00124" />
+      <option name="presentableId" value="LOCAL-00124" />
+      <option name="project" value="LOCAL" />
+      <updated>1702024210390</updated>
+    </task>
+    <task id="LOCAL-00125" summary="优化功能体验">
+      <option name="closed" value="true" />
+      <created>1702388180206</created>
+      <option name="number" value="00125" />
+      <option name="presentableId" value="LOCAL-00125" />
+      <option name="project" value="LOCAL" />
+      <updated>1702388180207</updated>
+    </task>
+    <task id="LOCAL-00126" summary="优化功能体验">
+      <option name="closed" value="true" />
+      <created>1702560621684</created>
+      <option name="number" value="00126" />
+      <option name="presentableId" value="LOCAL-00126" />
+      <option name="project" value="LOCAL" />
+      <updated>1702560621685</updated>
+    </task>
+    <task id="LOCAL-00127" summary="优化功能体验">
+      <option name="closed" value="true" />
+      <created>1702629797938</created>
+      <option name="number" value="00127" />
+      <option name="presentableId" value="LOCAL-00127" />
+      <option name="project" value="LOCAL" />
+      <updated>1702629797938</updated>
+    </task>
+    <task id="LOCAL-00128" summary="优化功能体验">
+      <option name="closed" value="true" />
+      <created>1702631711817</created>
+      <option name="number" value="00128" />
+      <option name="presentableId" value="LOCAL-00128" />
+      <option name="project" value="LOCAL" />
+      <updated>1702631711817</updated>
+    </task>
+    <task id="LOCAL-00129" summary="菜单栏表单控件颜色主题，进展不顺，回滚前保存">
+      <option name="closed" value="true" />
+      <created>1702646067184</created>
+      <option name="number" value="00129" />
+      <option name="presentableId" value="LOCAL-00129" />
+      <option name="project" value="LOCAL" />
+      <updated>1702646067184</updated>
+    </task>
+    <task id="LOCAL-00130" summary="菜单栏表单控件颜色主题，进展不顺，回滚前保存">
+      <option name="closed" value="true" />
+      <created>1702721715955</created>
+      <option name="number" value="00130" />
+      <option name="presentableId" value="LOCAL-00130" />
+      <option name="project" value="LOCAL" />
+      <updated>1702721715955</updated>
+    </task>
+    <task id="LOCAL-00131" summary="菜单栏表单控件颜色主题，存在卡顿，回滚前保存">
+      <option name="closed" value="true" />
+      <created>1702792761430</created>
+      <option name="number" value="00131" />
+      <option name="presentableId" value="LOCAL-00131" />
+      <option name="project" value="LOCAL" />
+      <updated>1702792761431</updated>
+    </task>
+    <task id="LOCAL-00132" summary="菜单栏表单控件颜色主题">
+      <option name="closed" value="true" />
+      <created>1702874796711</created>
+      <option name="number" value="00132" />
+      <option name="presentableId" value="LOCAL-00132" />
+      <option name="project" value="LOCAL" />
+      <updated>1702874796712</updated>
+    </task>
+    <option name="localTasksCounter" value="133" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ID_ORDER">
+      <list>
+        <option value="Default.Root" />
+        <option value="Default.Author" />
+        <option value="Default.Date" />
+        <option value="Default.Subject" />
+        <option value="Space.CommitStatus" />
+      </list>
+    </option>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -750,12 +787,7 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="新增简洁模式" />
-    <MESSAGE value="新增无图模式" />
-    <MESSAGE value="修复已知问题&#10;优化视觉效果" />
-    <MESSAGE value="优化视觉效果&#10;修复已知问题" />
-    <MESSAGE value="新增自定义主题&#10;优化视觉效果" />
-    <MESSAGE value="新增联系作者&#10;优化视觉效果" />
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="修复部分问题" />
     <MESSAGE value="优化代码结构" />
     <MESSAGE value="移动项目" />
@@ -763,7 +795,6 @@
     <MESSAGE value="新增调节亮度，优化视觉效果" />
     <MESSAGE value="新增修改按钮形状" />
     <MESSAGE value="新增更多产品，优化视觉效果" />
-    <MESSAGE value="优化视觉效果" />
     <MESSAGE value="菜单栏新增回到顶部按钮、夜间模式" />
     <MESSAGE value="优化无图模式颜色显示" />
     <MESSAGE value="搜索框按钮能快速切换搜索引擎了" />
@@ -775,6 +806,13 @@
     <MESSAGE value="新增历史记录，修复已知问题" />
     <MESSAGE value="优化代码质量" />
     <MESSAGE value="修复已知问题" />
-    <option name="LAST_COMMIT_MESSAGE" value="修复已知问题" />
+    <MESSAGE value="新增帮助文档链接" />
+    <MESSAGE value="删除了不必要的设置项" />
+    <MESSAGE value="优化视觉效果" />
+    <MESSAGE value="优化功能体验" />
+    <MESSAGE value="菜单栏表单控件颜色主题，进展不顺，回滚前保存" />
+    <MESSAGE value="菜单栏表单控件颜色主题，存在卡顿，回滚前保存" />
+    <MESSAGE value="菜单栏表单控件颜色主题" />
+    <option name="LAST_COMMIT_MESSAGE" value="菜单栏表单控件颜色主题" />
   </component>
 </project>

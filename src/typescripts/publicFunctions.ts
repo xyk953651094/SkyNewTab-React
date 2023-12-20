@@ -3,7 +3,7 @@ import "jquery-color"
 import {PreferenceDataInterface, ThemeColorInterface} from "./publicInterface";
 
 import $ from "jquery";
-
+import {CheckboxValueType} from "antd/es/checkbox/Group";
 
 
 // 网络请求
@@ -259,36 +259,35 @@ export function getDevice() {
 
 export function getSearchEngineDetail(searchEngine: string) {
     let searchEngineName: string;
+    let searchEngineValue: string;
     let searchEngineUrl: string;
     let searchEngineIconUrl: string;
     switch (searchEngine) {
-        case "baidu":
-            searchEngineName = "Baidu";
-            searchEngineUrl = "https://www.baidu.com/s?wd=";
-            searchEngineIconUrl = "https://www.baidu.com/favicon.ico";
-            break;
         case "bing":
-            searchEngineName = "Bing";
+            searchEngineName = "必应";
+            searchEngineValue = "bing";
             searchEngineUrl = "https://www.bing.com/search?q=";
             searchEngineIconUrl = "https://www.bing.com/favicon.ico";
             break;
         case "google":
-            searchEngineName = "Google";
+            searchEngineName = "谷歌";
+            searchEngineValue = "google";
             searchEngineUrl = "https://www.google.com/search?q=";
             searchEngineIconUrl = "https://www.google.com/favicon.ico";
             break;
-        case "yandex":
-            searchEngineName = "Yandex";
-            searchEngineUrl = "https://yandex.com/search/?text=";
-            searchEngineIconUrl = "https://yastatic.net/s3/home-static/_/92/929b10d17990e806734f68758ec917ec.png";
-            break;
         default:
-            searchEngineName = "Bing";
+            searchEngineName = "必应";
+            searchEngineValue = "bing";
             searchEngineUrl = "https://www.bing.com/search?q=";
             searchEngineIconUrl = "https://www.bing.com/favicon.ico";
             break;
     }
-    return {"searchEngineName": searchEngineName, "searchEngineUrl": searchEngineUrl, "searchEngineIconUrl": searchEngineIconUrl};
+    return {
+        "searchEngineName": searchEngineName,
+        "searchEngineValue": searchEngineValue,
+        "searchEngineUrl": searchEngineUrl,
+        "searchEngineIconUrl": searchEngineIconUrl
+    };
 }
 
 // 补全设置数据
@@ -318,10 +317,6 @@ export function fixPreferenceData(preferenceData: PreferenceDataInterface) {
         preferenceData.nightMode = defaultPreferenceData.nightMode;
         isFixed = true;
     }
-    if (preferenceData.autoDarkMode === undefined || preferenceData.autoDarkMode === null) {
-        preferenceData.autoDarkMode = defaultPreferenceData.autoDarkMode;
-        isFixed = true;
-    }
     if (preferenceData.noImageMode === undefined || preferenceData.noImageMode === null) {
         preferenceData.noImageMode = defaultPreferenceData.noImageMode;
         isFixed = true;
@@ -337,10 +332,6 @@ export function fixPreferenceData(preferenceData: PreferenceDataInterface) {
     }
     if (preferenceData.simpleMode === undefined || preferenceData.simpleMode === null) {
         preferenceData.simpleMode = defaultPreferenceData.simpleMode;
-        isFixed = true;
-    }
-    if (preferenceData.displayAlert === undefined || preferenceData.displayAlert === null) {
-        preferenceData.displayAlert = defaultPreferenceData.displayAlert;
         isFixed = true;
     }
 
@@ -366,12 +357,10 @@ export function getImageHistoryStorage() {
         let tempImageHistoryJson = JSON.parse(imageHistoryStorage);
         if (!isEmpty(tempImageHistoryJson)) {
             return tempImageHistoryJson.reverse();  // 重新到旧排序
-        }
-        else {
+        } else {
             return [];
         }
-    }
-    else {
+    } else {
         return [];
     }
 }
@@ -413,4 +402,42 @@ export function btnMouseOver(hoverColor: string, e: any) {
 export function btnMouseOut(fontColor: string, e: any) {
     e.currentTarget.style.backgroundColor = "transparent";
     e.currentTarget.style.color = fontColor;
+}
+
+// 修改菜单栏表单控件时变化主题颜色
+export function resetRadioColor(selectedRadio: string | undefined, allRadios: string[], themeColor: string) {
+    // 重置所有不是当前选中的选项的颜色
+    for (let i = 0; i < allRadios.length; i++) {
+        let currentRadio = $("#" + allRadios[i]);
+        if (selectedRadio && allRadios[i] !== selectedRadio) {
+            currentRadio.next().css({ "borderColor": "#d9d9d9", "backgroundColor": "#ffffff" });
+        }
+        else {
+            currentRadio.next().css({ "borderColor": themeColor, "backgroundColor": themeColor, });
+            currentRadio.parent().next().css("color", themeColor);
+        }
+    }
+}
+
+export function resetCheckboxColor(selectedCheckboxes: CheckboxValueType[], allCheckboxes: string[], themeColor: string) {
+    // 重置所有不是当前选中的选项的颜色
+    for (let i = 0; i < allCheckboxes.length; i++) {
+        let currentCheckbox = $("#" + allCheckboxes[i]);
+        if (selectedCheckboxes.indexOf(allCheckboxes[i]) === -1) {
+            currentCheckbox.next().css({ "borderColor": "#d9d9d9", "backgroundColor": "#ffffff" });
+        }
+        else {
+            currentCheckbox.next().css({ "borderColor": themeColor, "backgroundColor": themeColor});
+            currentCheckbox.parent().next().css("color", themeColor);
+        }
+    }
+}
+
+export function resetSwitchColor(element: string, checked: boolean, themeColor: string) {
+    if (!checked) {
+        $(element).children(".ant-switch-inner").css("backgroundColor", "rgb(0, 0, 0, 0)");
+    }
+    else {
+        $(element).children(".ant-switch-inner").css("backgroundColor", themeColor);
+    }
 }

@@ -2,7 +2,7 @@ import React from "react";
 import {Button, Col, Form, Input, List, message, Modal, Row, Space, Tooltip, Typography} from "antd";
 import {DeleteOutlined, EditOutlined, LinkOutlined, PlusOutlined, PushpinOutlined} from "@ant-design/icons";
 import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
-import {btnMouseOver, btnMouseOut} from "../typescripts/publicFunctions";
+import {btnMouseOut, btnMouseOver} from "../typescripts/publicFunctions";
 import $ from "jquery";
 
 const {Text} = Typography;

@@ -62,20 +62,41 @@ export let darkThemeArray = [
 ];
 
 export let defaultPreferenceData: PreferenceDataInterface = {
-    dynamicEffect: "all",
-    imageQuality: "regular",
+    dynamicEffect: "close",
+    imageQuality: "full",
     imageTopics: ["bo8jQKTaE0Y"],
     customTopic: "",
     changeImageTime: "3600000",
     nightMode: false,
-    autoDarkMode: false,
     noImageMode: false,
 
     searchEngine: "bing",
     buttonShape: "round",
     simpleMode: false,
-    displayAlert: true,
 }
+
+export let imageTopics = [
+    "Fzo3zuOHN6w",
+    "bo8jQKTaE0Y",
+    "CDwuwXJAbEw",
+    "iUIsnVtjB0Y",
+    "qPYsDzvJOYc",
+    "rnSKDHwwYUk",
+    "6sMVjTLSkeQ",
+    "aeu6rL-j6ew",
+    "S4MKLAsBB74",
+    "hmenvQhUmxM",
+    "xjPR4hlkBGA",
+    "_hb-dl4Q-4U",
+    "towJZFskpGg",
+    "R_Fyn-Gwtlw",
+    "xHxYTMHLgOc",
+    "Jpg6Kidl-Hk",
+    "_8zFHuhRhyo",
+    "bDo48cUhwnY",
+    "dijpbw99kQQ",
+    "Bn-DjrcBrwo"
+]
 
 // 常用变量
 export const device = getDevice();  // 获取当前设备类型

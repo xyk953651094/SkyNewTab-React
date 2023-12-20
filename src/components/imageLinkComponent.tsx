@@ -16,23 +16,21 @@ type propType = {
 type stateType = {
     backgroundColor: string,
     fontColor: string,
-    searchEngineUrl: string,
     buttonShape: "circle" | "default" | "round" | undefined,
     imageLink: string,
 }
 
-interface AuthorLiteComponent {
+interface ImageLinkComponent {
     state: stateType,
     props: propType
 }
 
-class AuthorLiteComponent extends React.Component {
+class ImageLinkComponent extends React.Component {
     constructor(props: any) {
         super(props);
         this.state = {
             backgroundColor: "",
             fontColor: "",
-            searchEngineUrl: "https://www.bing.com/search?q=",
             buttonShape: "round",
             imageLink: "",
         };
@@ -64,7 +62,6 @@ class AuthorLiteComponent extends React.Component {
 
         if (nextProps.preferenceData !== prevProps.preferenceData) {
             this.setState({
-                searchEngineUrl: getSearchEngineDetail(nextProps.preferenceData.searchEngine).searchEngineUrl,
                 buttonShape: nextProps.preferenceData.buttonShape === "round" ? "circle" : "default"
             });
         }
@@ -77,11 +74,10 @@ class AuthorLiteComponent extends React.Component {
                     className={"componentTheme zIndexHigh"}
                     style={{
                         display: this.props.display,
-                        cursor: "default"
                     }}
             />
         );
     }
 }
 
-export default AuthorLiteComponent;
+export default ImageLinkComponent;

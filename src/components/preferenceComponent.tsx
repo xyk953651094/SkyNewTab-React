@@ -1,9 +1,9 @@
 import React from "react";
 import {Button, Drawer, Space, Tooltip} from "antd";
 import {MenuOutlined} from "@ant-design/icons";
-import {changeThemeColor} from "../typescripts/publicFunctions";
+import {changeThemeColor, resetCheckboxColor, resetRadioColor, resetSwitchColor} from "../typescripts/publicFunctions";
 import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
-import {device} from "../typescripts/publicConstants";
+import {device, imageTopics} from "../typescripts/publicConstants";
 import PreferenceFooterComponent from "../preferenceComponents/preferenceFooterComponent";
 import PreferenceEmailComponent from "../preferenceComponents/preferenceEmailComponent";
 import PreferenceInfoComponent from "../preferenceComponents/preferenceInfoComponent";
@@ -139,12 +139,12 @@ class PreferenceComponent extends React.Component {
                             backgroundColor={this.state.backgroundColor}
                             fontColor={this.state.fontColor}
                             getPreferenceData={this.props.getPreferenceData}/>
-                        <PreferenceInfoComponent
+                        <PreferenceEmailComponent
                             hoverColor={this.state.hoverColor}
                             backgroundColor={this.state.backgroundColor}
                             fontColor={this.state.fontColor}
                             preferenceData={this.props.preferenceData}/>
-                        <PreferenceEmailComponent
+                        <PreferenceInfoComponent
                             hoverColor={this.state.hoverColor}
                             backgroundColor={this.state.backgroundColor}
                             fontColor={this.state.fontColor}
@@ -154,11 +154,6 @@ class PreferenceComponent extends React.Component {
                             backgroundColor={this.state.backgroundColor}
                             fontColor={this.state.fontColor}
                             preferenceData={this.props.preferenceData}/>
-                        {/*<PreferenceLinkComponent*/}
-                        {/*    hoverColor={this.state.hoverColor}*/}
-                        {/*    backgroundColor={this.state.backgroundColor}*/}
-                        {/*    fontColor={this.state.fontColor}*/}
-                        {/*    preferenceData={this.props.preferenceData}/>*/}
                         <PreferenceToTopComponent
                             hoverColor={this.state.hoverColor}
                             fontColor={this.state.fontColor}

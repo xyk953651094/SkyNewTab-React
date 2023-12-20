@@ -10,7 +10,13 @@ import {
     UserOutlined
 } from "@ant-design/icons";
 import {unsplashUrl} from "../typescripts/publicConstants";
-import {changeThemeColor, getSearchEngineDetail, isEmpty, btnMouseOver, btnMouseOut} from "../typescripts/publicFunctions";
+import {
+    btnMouseOut,
+    btnMouseOver,
+    changeThemeColor,
+    getSearchEngineDetail,
+    isEmpty
+} from "../typescripts/publicFunctions";
 import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
 import "../stylesheets/publicStyles.scss"
 
@@ -177,7 +183,8 @@ class AuthorComponent extends React.Component {
                         <Space direction={"vertical"}>
                             <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<UserOutlined/>}
                                     style={{color: this.state.fontColor}}
-                                    onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)} onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}
+                                    onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
+                                    onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}
                                     onClick={this.authorLinkBtnOnClick.bind(this)}>
                                 {this.state.authorName.length < btnMaxSize ? this.state.authorName : this.state.authorName.substring(0, btnMaxSize) + "..."}
                             </Button>

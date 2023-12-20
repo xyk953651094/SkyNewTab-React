@@ -12,7 +12,6 @@ import $ from "jquery";
 const {Header, Content, Footer} = Layout;
 
 
-
 type propType = {}
 
 type stateType = {

@@ -17,6 +17,7 @@ type stateType = {
     searchValue: string
     displayMask: "none" | "block",
     searchEngineName: string,
+    searchEngineValue: string,
     searchEngineUrl: string,
     borderRadius: string,
 }
@@ -34,7 +35,8 @@ class SearchComponent extends React.Component {
             fontColor: "",
             searchValue: "",
             displayMask: "none",
-            searchEngineName: "Bing",
+            searchEngineName: "必应",
+            searchEngineValue: "bing",
             searchEngineUrl: "https://www.bing.com/search?q=",
             borderRadius: "20px"
         };
@@ -58,6 +60,7 @@ class SearchComponent extends React.Component {
             let searchEngineDetail = getSearchEngineDetail(nextProps.preferenceData.searchEngine);
             this.setState({
                 searchEngineName: searchEngineDetail.searchEngineName,
+                searchEngineValue: searchEngineDetail.searchEngineValue,
                 searchEngineUrl: searchEngineDetail.searchEngineUrl,
                 borderRadius: nextProps.preferenceData.buttonShape === "round" ? "20px" : ""
             });
@@ -82,15 +85,17 @@ class SearchComponent extends React.Component {
     }
 
     changeSearchEngine() {
-        const searchEngines = ["Baidu", "Bing", "Google", "Yandex"];
-        let currentIndex = searchEngines.indexOf(this.state.searchEngineName);
+        const searchEngines = ["bing", "google"];
+        let currentIndex = searchEngines.indexOf(this.state.searchEngineValue);
         let nextIndex = 0;
         if (currentIndex !== searchEngines.length - 1) {
             nextIndex = currentIndex + 1;
         }
+        let searchEngineDetail = getSearchEngineDetail(searchEngines[nextIndex]);
         this.setState({
-            searchEngineName: searchEngines[nextIndex],
-            searchEngineUrl: getSearchEngineDetail(searchEngines[nextIndex].toLowerCase()).searchEngineUrl
+            searchEngineName: searchEngineDetail.searchEngineName,
+            searchEngineValue: searchEngineDetail.searchEngineValue,
+            searchEngineUrl: searchEngineDetail.searchEngineUrl,
         })
     }
 
@@ -108,6 +113,7 @@ class SearchComponent extends React.Component {
                     prefix={
                         <Row align={"middle"}>
                             <Button type={"text"} shape={this.props.preferenceData.buttonShape} size={"small"}
+                                    icon={<i className={"bi bi-" + this.state.searchEngineValue}></i>}
                                     id={"searchEngineIconBtn"} onClick={this.changeSearchEngine.bind(this)}>
                                 {this.state.searchEngineName}
                             </Button>

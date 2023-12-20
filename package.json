@@ -1,6 +1,6 @@
 {
   "name": "sky_new_tab_react",
-  "version": "2.4.0",
+  "version": "2.5.0",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
@@ -12,7 +12,7 @@
     "@types/react-dom": "^18.2.6",
     "antd": "^5.7.3",
     "blurhash": "^2.0.5",
-    "bootstrap-icons": "^1.10.5",
+    "bootstrap-icons": "^1.11.2",
     "clean-webpack-plugin": "^4.0.0",
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.8.1",
