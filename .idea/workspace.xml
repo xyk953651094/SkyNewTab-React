@@ -4,11 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="暂时注释菜单栏表单控件颜色主题">
+    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="简洁模式现在可以隐藏搜索框了">
+      <change beforePath="$PROJECT_DIR$/.idea/SkyNewTab-React.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/SkyNewTab-React.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/searchComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/searchComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/extensionFiles/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/extensionFiles/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/preferenceComponents/preferenceFunctionComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/preferenceComponents/preferenceFunctionComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/preferenceComponents/preferenceImageComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/preferenceComponents/preferenceImageComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/typescripts/publicFunctions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/typescripts/publicFunctions.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,7 +69,7 @@
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;npm.start.executor&quot;: &quot;Run&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;通义灵码&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;JavaScript.Libraries&quot;,
     &quot;ts.external.directory.path&quot;: &quot;/Users/xiaoyunkai/Projects/WebStorm/SkyNewTab-React/node_modules/typescript/lib&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
@@ -384,7 +386,18 @@
       <workItem from="1703079365190" duration="214000" />
       <workItem from="1703168649455" duration="535000" />
       <workItem from="1703222448852" duration="638000" />
-      <workItem from="1703397002817" duration="1146000" />
+      <workItem from="1703397002817" duration="1352000" />
+      <workItem from="1703399087975" duration="126000" />
+      <workItem from="1703422072078" duration="111000" />
+      <workItem from="1703422339535" duration="112000" />
+      <workItem from="1703422463250" duration="47000" />
+      <workItem from="1703422521646" duration="182000" />
+      <workItem from="1703423883946" duration="107000" />
+      <workItem from="1703425418741" duration="30000" />
+      <workItem from="1703425461899" duration="29000" />
+      <workItem from="1703510088154" duration="203000" />
+      <workItem from="1703510971179" duration="566000" />
+      <workItem from="1703587640882" duration="4235000" />
     </task>
     <task id="LOCAL-00001" summary="优化抽屉蒙版的显示效果&#10;优化代码质量">
       <created>1683952184207</created>
@@ -504,14 +517,6 @@
       <option name="presentableId" value="LOCAL-00017" />
       <option name="project" value="LOCAL" />
       <updated>1687402693401</updated>
-    </task>
-    <task id="LOCAL-00103" summary="优化代码逻辑">
-      <option name="closed" value="true" />
-      <created>1697291751452</created>
-      <option name="number" value="00103" />
-      <option name="presentableId" value="LOCAL-00103" />
-      <option name="project" value="LOCAL" />
-      <updated>1697291751453</updated>
     </task>
     <task id="LOCAL-00104" summary="2.1.0发布">
       <option name="closed" value="true" />
@@ -761,7 +766,15 @@
       <option name="project" value="LOCAL" />
       <updated>1703079527065</updated>
     </task>
-    <option name="localTasksCounter" value="135" />
+    <task id="LOCAL-00135" summary="简洁模式现在可以隐藏搜索框了">
+      <option name="closed" value="true" />
+      <created>1703398700557</created>
+      <option name="number" value="00135" />
+      <option name="presentableId" value="LOCAL-00135" />
+      <option name="project" value="LOCAL" />
+      <updated>1703398700558</updated>
+    </task>
+    <option name="localTasksCounter" value="136" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -791,7 +804,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="优化代码结构" />
     <MESSAGE value="移动项目" />
     <MESSAGE value="优化产品文档" />
     <MESSAGE value="新增调节亮度，优化视觉效果" />
@@ -816,6 +828,7 @@
     <MESSAGE value="菜单栏表单控件颜色主题，存在卡顿，回滚前保存" />
     <MESSAGE value="菜单栏表单控件颜色主题" />
     <MESSAGE value="暂时注释菜单栏表单控件颜色主题" />
-    <option name="LAST_COMMIT_MESSAGE" value="暂时注释菜单栏表单控件颜色主题" />
+    <MESSAGE value="简洁模式现在可以隐藏搜索框了" />
+    <option name="LAST_COMMIT_MESSAGE" value="简洁模式现在可以隐藏搜索框了" />
   </component>
 </project>

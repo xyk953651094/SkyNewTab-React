@@ -4,13 +4,14 @@ import GreetComponent from "./components/greetComponent";
 import WeatherComponent from "./components/weatherComponent";
 import DailyComponent from "./components/dailyComponent";
 import TodoComponent from "./components/todoComponent";
+import ImageLinkComponent from "./components/imageLinkComponent"
 import PreferenceComponent from "./components/preferenceComponent";
 import WallpaperComponent from "./components/wallpaperComponent";
 import ClockComponent from "./components/clockComponent";
 import SearchComponent from "./components/searchComponent";
 import CollectionComponent from "./components/collectionComponent";
 import AuthorComponent from "./components/authorComponent";
-import ImageLinkComponent from "./components/imageLinkComponent"
+import ImageHistoryComponent from "./components/imageHistoryComponent";
 
 import {Col, Layout, notification, Row, Space} from "antd";
 import "./stylesheets/publicStyles.scss"
@@ -23,7 +24,7 @@ import {
     setColorTheme
 } from "./typescripts/publicFunctions";
 import {PreferenceDataInterface, ThemeColorInterface} from "./typescripts/publicInterface";
-import ImageHistoryComponent from "./components/imageHistoryComponent";
+
 import $ from "jquery";
 import {imageTopics} from "./typescripts/publicConstants";
 
@@ -113,7 +114,7 @@ class App extends React.Component {
             notification.open({
                 icon: null,
                 message: "已更新至版本 V" + currentVersion,
-                description: "详细更新内容请前往 GitHub 或 GitLab 主页查看",
+                description: "详细内容请前往 GitHub 或 GitLab 主页查看",
                 placement: "bottomLeft",
                 duration: 5,
                 closeIcon: false
@@ -194,16 +195,16 @@ class App extends React.Component {
                 $(".ant-collapse-header").css("color", this.state.themeColor.componentFontColor);
 
                 // preferenceImageComponent
-                // resetRadioColor(this.state.preferenceData.dynamicEffect, ["all", "translate", "rotate", "close"], this.state.themeColor.themeColor);
-                // resetRadioColor(this.state.preferenceData.imageQuality, ["full", "regular"], this.state.themeColor.themeColor);
-                // resetCheckboxColor(this.state.preferenceData.imageTopics, imageTopics, this.state.themeColor.themeColor);
-                // resetSwitchColor("#nightModeSwitch", this.state.preferenceData.nightMode, this.state.themeColor.themeColor);
-                // resetSwitchColor("#noImageModeSwitch", this.state.preferenceData.noImageMode, this.state.themeColor.themeColor);
+                resetRadioColor(this.state.preferenceData.dynamicEffect, ["all", "translate", "rotate", "close"], this.state.themeColor.themeColor);
+                resetRadioColor(this.state.preferenceData.imageQuality, ["full", "regular"], this.state.themeColor.themeColor);
+                resetCheckboxColor(this.state.preferenceData.imageTopics, imageTopics, this.state.themeColor.themeColor);
+                resetSwitchColor("#nightModeSwitch", this.state.preferenceData.nightMode, this.state.themeColor.themeColor);
+                resetSwitchColor("#noImageModeSwitch", this.state.preferenceData.noImageMode, this.state.themeColor.themeColor);
 
                 // preferenceFunctionComponent
-                // resetRadioColor(this.state.preferenceData.searchEngine, ["bing", "google"], this.state.themeColor.themeColor);
-                // resetRadioColor(this.state.preferenceData.buttonShape, ["round", "default"], this.state.themeColor.themeColor);
-                // resetSwitchColor("#simpleModeSwitch", this.state.preferenceData.simpleMode, this.state.themeColor.themeColor);
+                resetRadioColor(this.state.preferenceData.searchEngine, ["bing", "google"], this.state.themeColor.themeColor);
+                resetRadioColor(this.state.preferenceData.buttonShape, ["round", "default"], this.state.themeColor.themeColor);
+                resetSwitchColor("#simpleModeSwitch", this.state.preferenceData.simpleMode, this.state.themeColor.themeColor);
             }
 
             // modal

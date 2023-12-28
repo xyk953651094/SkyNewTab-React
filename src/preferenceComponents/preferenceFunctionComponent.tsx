@@ -60,7 +60,7 @@ class PreferenceFunctionComponent extends React.Component {
             this.props.getPreferenceData(this.state.preferenceData);
             localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
             message.success("已更换搜索引擎");
-            // resetRadioColor(event.target.value, ["bing", "google"], this.props.hoverColor);
+            resetRadioColor(event.target.value, ["bing", "google"], this.props.hoverColor);
         })
     }
 
@@ -72,7 +72,7 @@ class PreferenceFunctionComponent extends React.Component {
             this.props.getPreferenceData(this.state.preferenceData);
             localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
             message.success("已更换按钮形状");
-            // resetRadioColor(event.target.value, ["round", "default"], this.props.hoverColor);
+            resetRadioColor(event.target.value, ["round", "default"], this.props.hoverColor);
         })
     }
 
@@ -86,9 +86,10 @@ class PreferenceFunctionComponent extends React.Component {
             if (checked) {
                 message.success("已开启简洁模式");
             } else {
-                message.success("已关闭简洁模式");
+                message.success("已关闭简洁模式，一秒后刷新页面");
+                this.refreshWindow();
             }
-            // resetSwitchColor("#simpleModeSwitch", checked, this.props.hoverColor)
+            resetSwitchColor("#simpleModeSwitch", checked, this.props.hoverColor)
         })
     }
 
