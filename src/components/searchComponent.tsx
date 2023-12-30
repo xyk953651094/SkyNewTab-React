@@ -12,6 +12,7 @@ type propType = {
 }
 
 type stateType = {
+    display: "none" | "inline-flex",
     backgroundColor: string,
     fontColor: string,
     searchValue: string
@@ -31,6 +32,7 @@ class SearchComponent extends React.Component {
     constructor(props: any) {
         super(props);
         this.state = {
+            display: "inline-flex",
             backgroundColor: "",
             fontColor: "",
             searchValue: "",
@@ -59,6 +61,7 @@ class SearchComponent extends React.Component {
         if (nextProps.preferenceData !== prevProps.preferenceData) {
             let searchEngineDetail = getSearchEngineDetail(nextProps.preferenceData.searchEngine);
             this.setState({
+                display: nextProps.preferenceData.simpleMode ? "none" : "inline-flex",
                 searchEngineName: searchEngineDetail.searchEngineName,
                 searchEngineValue: searchEngineDetail.searchEngineValue,
                 searchEngineUrl: searchEngineDetail.searchEngineUrl,
@@ -127,7 +130,10 @@ class SearchComponent extends React.Component {
                     onPressEnter={this.onPressEnter.bind(this)}
                     size={"large"}
                     allowClear
-                    style={{borderRadius: this.state.borderRadius}}
+                    style={{
+                        borderRadius: this.state.borderRadius,
+                        display: this.state.display
+                    }}
                 />
             </Col>
         );

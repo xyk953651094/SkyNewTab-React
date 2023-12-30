@@ -411,10 +411,11 @@ export function resetRadioColor(selectedRadio: string | undefined, allRadios: st
         let currentRadio = $("#" + allRadios[i]);
         if (selectedRadio && allRadios[i] !== selectedRadio) {
             currentRadio.next().css({ "borderColor": "#d9d9d9", "backgroundColor": "#ffffff" });
+            currentRadio.parent().next().css({"fontWeight": "normal", "textDecoration": "none"});
         }
         else {
             currentRadio.next().css({ "borderColor": themeColor, "backgroundColor": themeColor, });
-            currentRadio.parent().next().css("color", themeColor);
+            currentRadio.parent().next().css({"color": themeColor, "fontWeight": "bold", "textDecoration": "underline"});
         }
     }
 }
@@ -425,10 +426,11 @@ export function resetCheckboxColor(selectedCheckboxes: CheckboxValueType[], allC
         let currentCheckbox = $("#" + allCheckboxes[i]);
         if (selectedCheckboxes.indexOf(allCheckboxes[i]) === -1) {
             currentCheckbox.next().css({ "borderColor": "#d9d9d9", "backgroundColor": "#ffffff" });
+            currentCheckbox.parent().next().css({"fontWeight": "normal", "textDecoration": "none"});
         }
         else {
             currentCheckbox.next().css({ "borderColor": themeColor, "backgroundColor": themeColor});
-            currentCheckbox.parent().next().css("color", themeColor);
+            currentCheckbox.parent().next().css({"color": themeColor, "fontWeight": "bold", "textDecoration": "underline"});
         }
     }
 }
