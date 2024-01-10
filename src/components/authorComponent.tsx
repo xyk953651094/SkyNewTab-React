@@ -1,5 +1,5 @@
 import React from "react";
-import {Avatar, Button, Col, List, message, Popover, Row, Space, Typography} from "antd";
+import {Avatar, Button, Col, Divider, List, message, Popover, Row, Space, Typography} from "antd";
 import {
     CameraOutlined,
     ClockCircleOutlined,
@@ -196,6 +196,7 @@ class AuthorComponent extends React.Component {
                                         onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}>
                                     {" " + this.state.authorCollections + " 个合集"}
                                 </Button>
+                                <Divider type="vertical" style={{borderColor: this.state.fontColor}}/>
                                 <Button type={"text"} shape={this.props.preferenceData.buttonShape}
                                         icon={<i className="bi bi-heart"></i>}
                                         style={{color: this.state.fontColor, cursor: "default"}}
@@ -203,6 +204,7 @@ class AuthorComponent extends React.Component {
                                         onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}>
                                     {" " + this.state.authorLikes + " 个点赞"}
                                 </Button>
+                                <Divider type="vertical" style={{borderColor: this.state.fontColor}}/>
                                 <Button type={"text"} shape={this.props.preferenceData.buttonShape}
                                         icon={<i className="bi bi-images"></i>}
                                         style={{color: this.state.fontColor, cursor: "default"}}
@@ -234,23 +236,23 @@ class AuthorComponent extends React.Component {
                                         onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}>
                                     {this.state.imageDescription.length < btnMaxSize ? this.state.imageDescription : this.state.imageDescription.substring(0, btnMaxSize) + "..."}
                                 </Button>
-                                <Space>
-                                    <Button type={"text"} shape={this.props.preferenceData.buttonShape}
-                                            icon={<ClockCircleOutlined/>}
-                                            style={{color: this.state.fontColor, cursor: "default"}}
-                                            onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
-                                            onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}>
-                                        {this.state.imageCreateTime}
-                                    </Button>
-                                    <Button type={"text"} shape={this.props.preferenceData.buttonShape}
-                                            icon={<CameraOutlined/>}
-                                            style={{color: this.state.fontColor}}
-                                            onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
-                                            onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}
-                                            onClick={this.imageCameraBtnOnClick.bind(this)}>
-                                        {this.state.imageCamera}
-                                    </Button>
-                                </Space>
+                                {/*<Space>*/}
+                                {/*    <Button type={"text"} shape={this.props.preferenceData.buttonShape}*/}
+                                {/*            icon={<ClockCircleOutlined/>}*/}
+                                {/*            style={{color: this.state.fontColor, cursor: "default"}}*/}
+                                {/*            onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}*/}
+                                {/*            onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}>*/}
+                                {/*        {this.state.imageCreateTime}*/}
+                                {/*    </Button>*/}
+                                {/*    <Button type={"text"} shape={this.props.preferenceData.buttonShape}*/}
+                                {/*            icon={<CameraOutlined/>}*/}
+                                {/*            style={{color: this.state.fontColor}}*/}
+                                {/*            onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}*/}
+                                {/*            onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}*/}
+                                {/*            onClick={this.imageCameraBtnOnClick.bind(this)}>*/}
+                                {/*        {this.state.imageCamera}*/}
+                                {/*    </Button>*/}
+                                {/*</Space>*/}
                             </Space>
                         </Space>
                     </Space>
@@ -261,7 +263,7 @@ class AuthorComponent extends React.Component {
         return (
             <Popover title={popoverTitle} content={popoverContent} placement={"topRight"}
                      color={this.state.backgroundColor}
-                     overlayStyle={{width: "550px"}}>
+                     overlayStyle={{minWidth: "550px"}}>
                 <Button shape={this.props.preferenceData.buttonShape} icon={<CameraOutlined/>} size={"large"}
                         id={"authorBtn"}
                         className={"componentTheme zIndexHigh"}

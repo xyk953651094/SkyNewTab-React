@@ -85,8 +85,8 @@ class GreetComponent extends React.Component {
         let timeDetails = getTimeDetails(new Date());
         this.setState({
             holidayContent: holidayContent,
-            calendar: timeDetails.showDate4 + " " + timeDetails.showWeek + "｜" +
-                data.yearTips + data.chineseZodiac + "年｜" + data.lunarCalendar + "｜" + data.constellation,
+            calendar: timeDetails.showDate4 + " " + timeDetails.showWeek + " ｜ " +
+                data.yearTips + data.chineseZodiac + "年 ｜ " + data.lunarCalendar + " ｜ " + data.constellation,
             suit: data.suit.replace(/\./g, " · "),
             avoid: data.avoid.replace(/\./g, " · "),
         });
@@ -238,7 +238,7 @@ class GreetComponent extends React.Component {
                             display: this.state.display
                         }}
                 >
-                    {this.state.greetContent + "｜" + this.state.holidayContent}
+                    {this.state.greetContent + " ｜ " + this.state.holidayContent}
                 </Button>
             </Popover>
         );

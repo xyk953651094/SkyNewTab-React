@@ -249,7 +249,7 @@ class DailyComponent extends React.Component {
                                         onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
                                         onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}
                                         style={{color: this.state.fontColor, cursor: "default"}}>
-                                    {getTimeDetails(new Date(item.selectedTimeStamp)).showDate4 + "｜" + this.getDailyDescription(item.selectedTimeStamp)}
+                                    {getTimeDetails(new Date(item.selectedTimeStamp)).showDate4 + " ｜ " + this.getDailyDescription(item.selectedTimeStamp)}
                                 </Button>
                             </Col>
                         </Row>

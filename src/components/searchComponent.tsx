@@ -120,7 +120,7 @@ class SearchComponent extends React.Component {
                                     id={"searchEngineIconBtn"} onClick={this.changeSearchEngine.bind(this)}>
                                 {this.state.searchEngineName}
                             </Button>
-                            <Divider type="vertical"/>
+                            <Divider type="vertical" style={{borderColor: this.state.backgroundColor}}/>
                         </Row>
                     }
                     suffix={<SearchOutlined/>}
