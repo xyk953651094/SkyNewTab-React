@@ -75,15 +75,20 @@ class CollectionComponent extends React.Component {
                 collections = JSON.parse(tempCollections);
             }
             if (collections.length < this.state.collectionMaxSize) {
-                collections.push({"webName": webName, "webUrl": webUrl, "timeStamp": Date.now()});
-                localStorage.setItem("collections", JSON.stringify(collections));
+                let urlRegExp = new RegExp("(https?|ftp|file)://[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]", "g");
+                if (urlRegExp.exec(webUrl) !== null) {
+                    collections.push({"webName": webName, "webUrl": webUrl, "timeStamp": Date.now()});
+                    localStorage.setItem("collections", JSON.stringify(collections));
 
-                this.setState({
-                    displayAddModal: false,
-                    collectionData: collections,
-                    collectionSize: collections.length
-                });
-                message.success("添加成功");
+                    this.setState({
+                        displayAddModal: false,
+                        collectionData: collections,
+                        collectionSize: collections.length
+                    });
+                    message.success("添加成功");
+                } else {
+                    message.error("网页地址格式错误");
+                }
             } else {
                 message.error("链接数量最多为" + this.state.collectionMaxSize + "个");
             }
