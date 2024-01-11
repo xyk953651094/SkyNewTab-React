@@ -1,6 +1,6 @@
 import React from "react";
 import {Button, Carousel, Col, Empty, Image, List, message, Popover, Row, Space, Spin, Typography} from "antd";
-import {FileImageOutlined, HistoryOutlined} from "@ant-design/icons";
+import {DownloadOutlined, HistoryOutlined} from "@ant-design/icons";
 import {imageHistoryMaxSize, unsplashUrl} from "../typescripts/publicConstants";
 import {btnMouseOut, btnMouseOver, changeThemeColor, isEmpty} from "../typescripts/publicFunctions";
 import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
@@ -94,12 +94,12 @@ class ImageHistoryComponent extends React.Component {
                 </Col>
                 <Col span={16} style={{textAlign: "right"}}>
                     <Space>
-                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<FileImageOutlined/>}
+                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<DownloadOutlined/>}
                                 onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
                                 onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}
                                 onClick={this.imageLinkBtnOnClick.bind(this)}
                                 style={{color: this.state.fontColor}}>
-                            {"图片主页"}
+                            {"下载图片"}
                         </Button>
                     </Space>
                 </Col>

@@ -38,7 +38,9 @@ type stateType = {
     preferenceData: PreferenceDataInterface,
     buttonShape: "circle" | "default" | "round" | undefined,
     lastRequestTime: string,
-    disableImageTopic: boolean
+    disableImageTopic: boolean,
+    imageTopicStatus: string,
+    customTopicStatus: string,
 }
 
 interface PreferenceImageComponent {
@@ -53,7 +55,9 @@ class PreferenceImageComponent extends React.Component {
             preferenceData: getPreferenceDataStorage(),
             buttonShape: "round",
             lastRequestTime: "暂无信息",
-            disableImageTopic: false
+            disableImageTopic: false,
+            imageTopicStatus: "已启用图片主题",
+            customTopicStatus: "已禁用图片主题",
         };
     }
 
@@ -103,18 +107,28 @@ class PreferenceImageComponent extends React.Component {
         let inputValue = $("#customTopicInput").val();
         this.setState({
             preferenceData: this.setPreferenceData({customTopic: inputValue}),
-            disableImageTopic: !isEmpty(inputValue)
+            disableImageTopic: !isEmpty(inputValue),
+            imageTopicStatus: isEmpty(inputValue)? "已启用图片主题" : "已禁用图片主题",
+            customTopicStatus: isEmpty(inputValue)? "已禁用自定主题" : "已启用自定主题",
         }, () => {
             this.props.getPreferenceData(this.state.preferenceData);
             localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
-            message.success("已启用自定主题，下次切换图片时生效");
+
+            if(!isEmpty(inputValue)) {
+                message.success("已启用自定主题，下次切换图片时生效");
+            } else {
+                message.success("已禁用自定主题，一秒后刷新页面");
+                this.refreshWindow();
+            }
         })
     }
 
     clearCustomTopicBtnOnClick() {
         this.setState({
             preferenceData: this.setPreferenceData({customTopic: ""}),
-            disableImageTopic: false
+            disableImageTopic: false,
+            imageTopicStatus: "已启用图片主题",
+            customTopicStatus: "已禁用自定主题",
         }, () => {
             this.props.getPreferenceData(this.state.preferenceData);
             localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
@@ -187,6 +201,13 @@ class PreferenceImageComponent extends React.Component {
         this.setState({
             buttonShape: this.state.preferenceData.buttonShape === "round" ? "circle" : "default",
             disableImageTopic: !isEmpty(this.state.preferenceData.customTopic)
+        }, () => {
+            if (this.state.disableImageTopic) {
+                this.setState({
+                    imageTopicStatus: "已禁用图片主题",
+                    customTopicStatus: "已启用自定主题",
+                })
+            }
         })
     }
 
@@ -223,7 +244,7 @@ class PreferenceImageComponent extends React.Component {
                             </Row>
                         </Radio.Group>
                     </Form.Item>
-                    <Form.Item name={"imageTopics"} label={"图片主题"}>
+                    <Form.Item name={"imageTopics"} label={"图片主题"}  extra={this.state.imageTopicStatus}>
                         <Checkbox.Group disabled={this.state.disableImageTopic}
                                         onChange={this.imageTopicsCheckboxOnChange.bind(this)}>
                             <Row gutter={[0, 8]}>
@@ -270,7 +291,7 @@ class PreferenceImageComponent extends React.Component {
                             </Row>
                         </Checkbox.Group>
                     </Form.Item>
-                    <Form.Item label={"自定主题"}>
+                    <Form.Item label={"自定主题"} extra={this.state.customTopicStatus}>
                         <Space>
                             <Form.Item name={"customTopic"} noStyle>
                                 <Input id={"customTopicInput"} placeholder="英文搜索最准确" allowClear/>
