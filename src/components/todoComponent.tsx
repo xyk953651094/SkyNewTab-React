@@ -6,8 +6,6 @@ import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publi
 import $ from "jquery";
 
 const {Text} = Typography;
-// const $ = require("jquery");
-
 
 type propType = {
     themeColor: ThemeColorInterface,
