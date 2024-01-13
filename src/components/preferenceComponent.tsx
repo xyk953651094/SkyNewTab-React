@@ -1,9 +1,9 @@
 import React from "react";
 import {Button, Drawer, Space, Tooltip} from "antd";
 import {MenuOutlined} from "@ant-design/icons";
-import {changeThemeColor, resetCheckboxColor, resetRadioColor, resetSwitchColor} from "../typescripts/publicFunctions";
+import {changeThemeColor} from "../typescripts/publicFunctions";
 import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
-import {device, imageTopics} from "../typescripts/publicConstants";
+import {device} from "../typescripts/publicConstants";
 import PreferenceFooterComponent from "../preferenceComponents/preferenceFooterComponent";
 import PreferenceEmailComponent from "../preferenceComponents/preferenceEmailComponent";
 import PreferenceInfoComponent from "../preferenceComponents/preferenceInfoComponent";
@@ -12,6 +12,7 @@ import PreferenceFunctionComponent from "../preferenceComponents/preferenceFunct
 import PreferenceHeaderComponent from "../preferenceComponents/preferenceHeaderComponent";
 import PreferenceProductComponent from "../preferenceComponents/preferenceProductComponent";
 import PreferenceToTopComponent from "../preferenceComponents/preferenceToTopComponent";
+import PreferenceHelpComponent from "../preferenceComponents/preferenceHelpComponent";
 
 type propType = {
     themeColor: ThemeColorInterface,
@@ -139,6 +140,11 @@ class PreferenceComponent extends React.Component {
                             backgroundColor={this.state.backgroundColor}
                             fontColor={this.state.fontColor}
                             getPreferenceData={this.props.getPreferenceData}/>
+                        <PreferenceHelpComponent
+                            hoverColor={this.state.hoverColor}
+                            backgroundColor={this.state.backgroundColor}
+                            fontColor={this.state.fontColor}
+                            preferenceData={this.props.preferenceData}/>
                         <PreferenceEmailComponent
                             hoverColor={this.state.hoverColor}
                             backgroundColor={this.state.backgroundColor}

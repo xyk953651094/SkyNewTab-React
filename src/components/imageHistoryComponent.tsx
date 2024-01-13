@@ -1,6 +1,6 @@
 import React from "react";
 import {Button, Carousel, Col, Empty, Image, List, message, Popover, Row, Space, Spin, Typography} from "antd";
-import {FileImageOutlined, HistoryOutlined} from "@ant-design/icons";
+import {DownloadOutlined, HistoryOutlined} from "@ant-design/icons";
 import {imageHistoryMaxSize, unsplashUrl} from "../typescripts/publicConstants";
 import {btnMouseOut, btnMouseOver, changeThemeColor, isEmpty} from "../typescripts/publicFunctions";
 import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
@@ -94,12 +94,12 @@ class ImageHistoryComponent extends React.Component {
                 </Col>
                 <Col span={16} style={{textAlign: "right"}}>
                     <Space>
-                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<FileImageOutlined/>}
+                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<DownloadOutlined/>}
                                 onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
                                 onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}
                                 onClick={this.imageLinkBtnOnClick.bind(this)}
                                 style={{color: this.state.fontColor}}>
-                            {"图片主页"}
+                            {"下载图片"}
                         </Button>
                     </Space>
                 </Col>
@@ -108,29 +108,29 @@ class ImageHistoryComponent extends React.Component {
 
         const popoverContent = (
             <List split={false}>
-                <List.Item style={{display: this.state.imageHistoryJson.length === 0 ? "block" : "none"}}>
-                    <Row className="alignCenter" style={{width: "100%"}}>
+                <List.Item style={{display: this.state.imageHistoryJson.length === 0 ? "flex" : "none"}}>
+                    <Row className="alignCenter" style={{width: "350px"}}>
                         <Empty image={Empty.PRESENTED_IMAGE_SIMPLE}
                         />
                     </Row>
                 </List.Item>
-                <List.Item style={{display: this.state.imageHistoryJson.length === 0 ? "none" : "block"}}>
+                <List.Item style={{display: this.state.imageHistoryJson.length === 0 ? "none" : "flex"}}>
                     <Carousel effect="fade" afterChange={this.carouselOnChange.bind(this)}
-                              style={{width: "100%", height: "210px"}}>
+                              style={{width: "350px", height: "210px"}}>
                         {
                             this.state.imageHistoryJson.map((item: any) => {
                                 return (
                                     <div key={item.index}
-                                         style={{width: "100%", height: "210px", lineHeight: "210px"}}>
+                                         style={{width: "350px", height: "210px", lineHeight: "210px"}}>
                                         <Image
-                                            width={"100%"}
+                                            width={"350px"}
                                             height={210}
                                             preview={false}
                                             alt={"暂无图片"}
                                             src={item.imageUrl}
                                             style={{borderRadius: "8px"}}
                                             placeholder={
-                                                <div style={{width: '100%', height: '210px', borderRadius: '8px'}}
+                                                <div style={{width: '35px%', height: '210px', borderRadius: '8px'}}
                                                      className="alignCenter">
                                                     <Spin tip="加载中，请稍后..."/>
                                                 </div>
@@ -148,7 +148,7 @@ class ImageHistoryComponent extends React.Component {
         return (
             <Popover title={popoverTitle} content={popoverContent} placement={"topRight"}
                      color={this.state.backgroundColor}
-                     overlayStyle={{width: "370px"}}>
+                     overlayStyle={{minWidth: "350px"}} trigger={"click"}>
                 <Button shape={this.state.buttonShape} icon={<HistoryOutlined/>} size={"large"}
                         id={"imageHistoryBtn"}
                         className={"componentTheme zIndexHigh"}

@@ -100,15 +100,15 @@ export function getGreetContent() {
         daybreak: "又一宿"
     };
 
-    if (hour >= 0 && hour < 6) {          // 凌晨
+    if (hour >= 0 && hour < 6) {           // 凌晨
         return greets.daybreak;
     } else if (hour >= 6 && hour < 11) {   // 上午
         return greets.morning;
-    } else if (hour >= 11 && hour < 14) {  // 中午
+    } else if (hour >= 11 && hour < 13) {  // 中午
         return greets.noon;
-    } else if (hour >= 14 && hour < 17) {  // 下午
+    } else if (hour >= 13 && hour < 17) {  // 下午
         return greets.afternoon;
-    } else if (hour >= 17 && hour < 20) {   // 傍晚
+    } else if (hour >= 17 && hour < 19) {  // 傍晚
         return greets.evening;
     } else {                               // 夜晚
         return greets.night;

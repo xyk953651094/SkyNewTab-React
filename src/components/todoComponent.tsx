@@ -6,8 +6,6 @@ import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publi
 import $ from "jquery";
 
 const {Text} = Typography;
-// const $ = require("jquery");
-
 
 type propType = {
     themeColor: ThemeColorInterface,
@@ -255,7 +253,7 @@ class TodoComponent extends React.Component {
                                         onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
                                         onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}
                                         style={{color: this.state.fontColor, cursor: "default"}}>
-                                    {item.tag + "｜" + item.priority}
+                                    {item.tag + " ｜ " + item.priority}
                                 </Button>
                             </Col>
                         </Row>

@@ -77,7 +77,7 @@ class WeatherComponent extends React.Component {
     setWeather(data: any) {
         this.setState({
             weatherIcon: getWeatherIcon(data.weatherData.weather),
-            weatherInfo: data.weatherData.weather + "｜" + data.weatherData.temperature + "°C",
+            weatherInfo: data.weatherData.weather + " ｜ " + data.weatherData.temperature + "°C",
             location: data.region.replace("|", " · "),
             humidity: data.weatherData.humidity,
             pm25: data.weatherData.pm25,

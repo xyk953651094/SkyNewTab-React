@@ -1,11 +1,9 @@
 import React from "react";
-import {Avatar, Button, Col, List, message, Popover, Row, Space, Typography} from "antd";
+import {Avatar, Button, Col, Divider, List, message, Popover, Row, Space, Typography} from "antd";
 import {
     CameraOutlined,
-    ClockCircleOutlined,
     EnvironmentOutlined,
-    FileImageOutlined,
-    HomeOutlined,
+    DownloadOutlined,
     InfoCircleOutlined,
     UserOutlined
 } from "@ant-design/icons";
@@ -45,8 +43,6 @@ type stateType = {
     imagePreviewUrl: string,
     imageLocation: string,
     imageDescription: string,
-    imageCreateTime: string,
-    imageCamera: string,
 }
 
 interface AuthorComponent {
@@ -72,8 +68,6 @@ class AuthorComponent extends React.Component {
             imagePreviewUrl: "",
             imageLocation: "暂无信息",
             imageDescription: "暂无信息",
-            imageCreateTime: "暂无信息",
-            imageCamera: "暂无信息",
         };
     }
 
@@ -101,18 +95,6 @@ class AuthorComponent extends React.Component {
         }
     }
 
-    imageCameraBtnOnClick() {
-        if (this.state.imageCamera !== "暂无信息") {
-            window.open(this.state.searchEngineUrl + this.state.imageCamera, "_blank");
-        } else {
-            message.error("无跳转链接");
-        }
-    }
-
-    getCreateTime(createTime: string) {
-        return createTime.substring(0, createTime.indexOf("T"));
-    }
-
     componentWillReceiveProps(nextProps: any, prevProps: any) {
         if (nextProps.themeColor !== prevProps.themeColor) {
             this.setState({
@@ -134,8 +116,6 @@ class AuthorComponent extends React.Component {
                 imagePreviewUrl: nextProps.imageData.urls.regular,
                 imageLocation: isEmpty(nextProps.imageData.location.name) ? "暂无信息" : nextProps.imageData.location.name,
                 imageDescription: isEmpty(nextProps.imageData.alt_description) ? "暂无信息" : nextProps.imageData.alt_description,
-                imageCreateTime: this.getCreateTime(nextProps.imageData.created_at),
-                imageCamera: isEmpty(nextProps.imageData.exif.name) ? "暂无信息" : nextProps.imageData.exif.name,
             }, () => {
                 changeThemeColor("#authorBtn", this.state.backgroundColor, this.state.fontColor);
             })
@@ -156,19 +136,12 @@ class AuthorComponent extends React.Component {
                 </Col>
                 <Col span={14} style={{textAlign: "right"}}>
                     <Space>
-                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<HomeOutlined/>}
-                                onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
-                                onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}
-                                onClick={this.authorLinkBtnOnClick.bind(this)}
-                                style={{color: this.state.fontColor}}>
-                            {"摄影师主页"}
-                        </Button>
-                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<FileImageOutlined/>}
+                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<DownloadOutlined/>}
                                 onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
                                 onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}
                                 onClick={this.imageLinkBtnOnClick.bind(this)}
                                 style={{color: this.state.fontColor}}>
-                            {"图片主页"}
+                            {"下载图片"}
                         </Button>
                     </Space>
                 </Col>
@@ -196,6 +169,7 @@ class AuthorComponent extends React.Component {
                                         onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}>
                                     {" " + this.state.authorCollections + " 个合集"}
                                 </Button>
+                                <Divider type="vertical" style={{borderColor: this.state.fontColor}}/>
                                 <Button type={"text"} shape={this.props.preferenceData.buttonShape}
                                         icon={<i className="bi bi-heart"></i>}
                                         style={{color: this.state.fontColor, cursor: "default"}}
@@ -203,6 +177,7 @@ class AuthorComponent extends React.Component {
                                         onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}>
                                     {" " + this.state.authorLikes + " 个点赞"}
                                 </Button>
+                                <Divider type="vertical" style={{borderColor: this.state.fontColor}}/>
                                 <Button type={"text"} shape={this.props.preferenceData.buttonShape}
                                         icon={<i className="bi bi-images"></i>}
                                         style={{color: this.state.fontColor, cursor: "default"}}
@@ -234,23 +209,6 @@ class AuthorComponent extends React.Component {
                                         onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}>
                                     {this.state.imageDescription.length < btnMaxSize ? this.state.imageDescription : this.state.imageDescription.substring(0, btnMaxSize) + "..."}
                                 </Button>
-                                <Space>
-                                    <Button type={"text"} shape={this.props.preferenceData.buttonShape}
-                                            icon={<ClockCircleOutlined/>}
-                                            style={{color: this.state.fontColor, cursor: "default"}}
-                                            onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
-                                            onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}>
-                                        {this.state.imageCreateTime}
-                                    </Button>
-                                    <Button type={"text"} shape={this.props.preferenceData.buttonShape}
-                                            icon={<CameraOutlined/>}
-                                            style={{color: this.state.fontColor}}
-                                            onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
-                                            onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}
-                                            onClick={this.imageCameraBtnOnClick.bind(this)}>
-                                        {this.state.imageCamera}
-                                    </Button>
-                                </Space>
                             </Space>
                         </Space>
                     </Space>
@@ -261,7 +219,7 @@ class AuthorComponent extends React.Component {
         return (
             <Popover title={popoverTitle} content={popoverContent} placement={"topRight"}
                      color={this.state.backgroundColor}
-                     overlayStyle={{width: "550px"}}>
+                     overlayStyle={{minWidth: "550px"}}>
                 <Button shape={this.props.preferenceData.buttonShape} icon={<CameraOutlined/>} size={"large"}
                         id={"authorBtn"}
                         className={"componentTheme zIndexHigh"}

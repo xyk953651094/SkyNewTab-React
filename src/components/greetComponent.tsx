@@ -18,6 +18,7 @@ import {
     httpRequest
 } from "../typescripts/publicFunctions";
 import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
+import ButtonComponent from "../publicComponents/buttonComponent";
 
 const {Text} = Typography;
 const btnMaxSize = 80;
@@ -85,8 +86,8 @@ class GreetComponent extends React.Component {
         let timeDetails = getTimeDetails(new Date());
         this.setState({
             holidayContent: holidayContent,
-            calendar: timeDetails.showDate4 + " " + timeDetails.showWeek + "｜" +
-                data.yearTips + data.chineseZodiac + "年｜" + data.lunarCalendar + "｜" + data.constellation,
+            calendar: timeDetails.showDate4 + " " + timeDetails.showWeek + " ｜ " +
+                data.yearTips + data.chineseZodiac + "年 ｜ " + data.lunarCalendar + " ｜ " + data.constellation,
             suit: data.suit.replace(/\./g, " · "),
             avoid: data.avoid.replace(/\./g, " · "),
         });
@@ -189,6 +190,10 @@ class GreetComponent extends React.Component {
                                 style={{color: this.state.fontColor}}>
                             {"更多信息"}
                         </Button>
+                        {/*<ButtonComponent buttonIcon={<MoreOutlined/>} buttonShape={this.props.preferenceData.buttonShape}*/}
+                        {/*                 buttonCursor={"pointer"} buttonContent={"更多信息"}*/}
+                        {/*                 buttonOnClick={this.infoBtnOnClick.bind(this)} themeColor={this.props.themeColor}*/}
+                        {/*/>*/}
                     </Space>
                 </Col>
             </Row>
@@ -238,9 +243,17 @@ class GreetComponent extends React.Component {
                             display: this.state.display
                         }}
                 >
-                    {this.state.greetContent + "｜" + this.state.holidayContent}
+                    {this.state.greetContent + " ｜ " + this.state.holidayContent}
                 </Button>
             </Popover>
+
+            // <PopoverComponent popoverTitle={popoverTitle} popoverContent={popoverContent}
+            //                   popoverPlacement={"bottomLeft"} popoverMinWidth={"550px"}
+            //                   buttonIcon={<i className={this.state.greetIcon}></i>}
+            //                   buttonId={"greetBtn"} buttonDisplay={this.state.display}
+            //                   buttonContent={this.state.greetContent + " ｜ " + this.state.holidayContent}
+            //                   buttonShape={this.props.preferenceData.buttonShape} themeColor={this.props.themeColor}
+            // />
         );
     }
 }

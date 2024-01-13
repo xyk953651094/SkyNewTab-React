@@ -91,9 +91,9 @@ class PopupImageComponent extends React.Component {
         let tempTodos = localStorage.getItem("todos");
 
         this.setState({
-            greetContent: tempGreet ? getGreetContent() + "｜" + this.setHoliday(JSON.parse(tempGreet)) : "暂无信息",
+            greetContent: tempGreet ? getGreetContent() + " ｜ " + this.setHoliday(JSON.parse(tempGreet)) : "暂无信息",
             weatherIcon: tempWeather ? getWeatherIcon(JSON.parse(tempWeather).weatherData.weather) : "",
-            weatherContent: tempWeather ? JSON.parse(tempWeather).weatherData.weather + "｜" + JSON.parse(tempWeather).weatherData.temperature + "°C" : "暂无信息",
+            weatherContent: tempWeather ? JSON.parse(tempWeather).weatherData.weather + " ｜ " + JSON.parse(tempWeather).weatherData.temperature + "°C" : "暂无信息",
             dailySize: tempDaily ? JSON.parse(tempDaily).length : 0,
             todoSize: tempTodos ? JSON.parse(tempTodos).length : 0,
         })
