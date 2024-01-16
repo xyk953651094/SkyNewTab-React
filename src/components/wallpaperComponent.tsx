@@ -158,7 +158,6 @@ class WallpaperComponent extends React.Component {
 
                     setTimeout(() => {
                         if(tempThis.state.display === "none") {
-                            message.destroy();
                             message.loading("努力加载中，请耐心等待或检查网络", 0);
                         }
                     }, 5000);

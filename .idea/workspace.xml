@@ -4,13 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="提升使用体验">
-      <change afterPath="$PROJECT_DIR$/src/publicComponents/buttonComponent.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/publicComponents/popoverComponent.tsx" afterDir="false" />
+    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="模块化公用的 popover 组件和 button 组件（测试版）">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/greetComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/greetComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/imageHistoryComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/imageHistoryComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/todoComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/todoComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/wallpaperComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/wallpaperComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/extensionFiles/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/extensionFiles/manifest.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -412,6 +411,14 @@
       <workItem from="1704937319200" duration="11549000" />
       <workItem from="1705057666454" duration="3921000" />
       <workItem from="1705115499324" duration="43000" />
+      <workItem from="1705115553494" duration="379000" />
+      <workItem from="1705144965225" duration="248000" />
+      <workItem from="1705232632147" duration="1366000" />
+      <workItem from="1705241760447" duration="932000" />
+      <workItem from="1705308627917" duration="49000" />
+      <workItem from="1705321023565" duration="57000" />
+      <workItem from="1705393527717" duration="61000" />
+      <workItem from="1705393600008" duration="606000" />
     </task>
     <task id="LOCAL-00001" summary="优化抽屉蒙版的显示效果&#10;优化代码质量">
       <created>1683952184207</created>
@@ -531,14 +538,6 @@
       <option name="presentableId" value="LOCAL-00017" />
       <option name="project" value="LOCAL" />
       <updated>1687402693401</updated>
-    </task>
-    <task id="LOCAL-00109" summary="修复已知问题">
-      <option name="closed" value="true" />
-      <created>1699242397082</created>
-      <option name="number" value="00109" />
-      <option name="presentableId" value="LOCAL-00109" />
-      <option name="project" value="LOCAL" />
-      <updated>1699242397083</updated>
     </task>
     <task id="LOCAL-00110" summary="修复已知问题">
       <option name="closed" value="true" />
@@ -788,7 +787,15 @@
       <option name="project" value="LOCAL" />
       <updated>1704940482173</updated>
     </task>
-    <option name="localTasksCounter" value="141" />
+    <task id="LOCAL-00141" summary="模块化公用的 popover 组件和 button 组件（测试版）">
+      <option name="closed" value="true" />
+      <created>1705115782908</created>
+      <option name="number" value="00141" />
+      <option name="presentableId" value="LOCAL-00141" />
+      <option name="project" value="LOCAL" />
+      <updated>1705115782908</updated>
+    </task>
+    <option name="localTasksCounter" value="142" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -818,7 +825,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="优化产品文档" />
     <MESSAGE value="新增调节亮度，优化视觉效果" />
     <MESSAGE value="新增修改按钮形状" />
     <MESSAGE value="新增更多产品，优化视觉效果" />
@@ -843,7 +849,8 @@
     <MESSAGE value="暂时注释菜单栏表单控件颜色主题" />
     <MESSAGE value="简洁模式现在可以隐藏搜索框了" />
     <MESSAGE value="提升使用体验" />
-    <option name="LAST_COMMIT_MESSAGE" value="提升使用体验" />
+    <MESSAGE value="模块化公用的 popover 组件和 button 组件（测试版）" />
+    <option name="LAST_COMMIT_MESSAGE" value="模块化公用的 popover 组件和 button 组件（测试版）" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
