@@ -27,21 +27,21 @@ class PreferenceFooterComponent extends React.Component {
         return (
             <Space>
                 <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<GithubOutlined/>}
-                        href={"https://github.com/xyk953651094/SkyNewTab-React/"} target={"_blank"}
+                        href={"https://github.com/xyk953651094/SkyNewTab-React/"} target={"_self"}
                         onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
                         onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
                         style={{color: this.props.fontColor}}>
                     GitHub
                 </Button>
                 <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<GitlabOutlined/>}
-                        href={"https://gitlab.com/xyk953651094/SkyNewTab-React/"} target={"_blank"}
+                        href={"https://gitlab.com/xyk953651094/SkyNewTab-React/"} target={"_self"}
                         onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
                         onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
                         style={{color: this.props.fontColor}}>
                     GitLab
                 </Button>
                 <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<NotificationOutlined/>}
-                        href={"https://xyk953651094.blogspot.com/"} target={"_blank"}
+                        href={"https://xyk953651094.blogspot.com/"} target={"_self"}
                         onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
                         onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
                         style={{color: this.props.fontColor}}>

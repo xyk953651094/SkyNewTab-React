@@ -50,7 +50,7 @@ class PreferenceProductComponent extends React.Component {
                             <Button type={"text"}
                                     shape={this.props.preferenceData.buttonShape === "round" ? "circle" : "default"}
                                     icon={<GithubOutlined/>}
-                                    href={"https://github.com/xyk953651094/SkyDocuments/"} target={"_blank"}
+                                    href={"https://github.com/xyk953651094/SkyDocuments/"} target={"_self"}
                                     onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
                                     onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
                                     style={{color: this.props.fontColor}}>
@@ -58,7 +58,7 @@ class PreferenceProductComponent extends React.Component {
                             <Button type={"text"}
                                     shape={this.props.preferenceData.buttonShape === "round" ? "circle" : "default"}
                                     icon={<GitlabOutlined/>}
-                                    href={"https://gitlab.com/xyk953651094/SkyDocuments/"} target={"_blank"}
+                                    href={"https://gitlab.com/xyk953651094/SkyDocuments/"} target={"_self"}
                                     onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
                                     onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
                                     style={{color: this.props.fontColor}}>
@@ -78,7 +78,7 @@ class PreferenceProductComponent extends React.Component {
                             <Button type={"text"}
                                     shape={this.props.preferenceData.buttonShape === "round" ? "circle" : "default"}
                                     icon={<GithubOutlined/>}
-                                    href={"https://github.com/xyk953651094/SkyWallpaper-Electron/"} target={"_blank"}
+                                    href={"https://github.com/xyk953651094/SkyWallpaper-Electron/"} target={"_self"}
                                     onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
                                     onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
                                     style={{color: this.props.fontColor}}>
@@ -86,7 +86,7 @@ class PreferenceProductComponent extends React.Component {
                             <Button type={"text"}
                                     shape={this.props.preferenceData.buttonShape === "round" ? "circle" : "default"}
                                     icon={<GitlabOutlined/>}
-                                    href={"https://gitlab.com/xyk953651094/SkyWallpaper-Electron/"} target={"_blank"}
+                                    href={"https://gitlab.com/xyk953651094/SkyWallpaper-Electron/"} target={"_self"}
                                     onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
                                     onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
                                     style={{color: this.props.fontColor}}>
@@ -107,7 +107,7 @@ class PreferenceProductComponent extends React.Component {
                             <Button type={"text"}
                                     shape={this.props.preferenceData.buttonShape === "round" ? "circle" : "default"}
                                     icon={<GithubOutlined/>}
-                                    href={"https://github.com/xyk953651094/SkyNewTab-Vue/"} target={"_blank"}
+                                    href={"https://github.com/xyk953651094/SkyNewTab-Vue/"} target={"_self"}
                                     onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
                                     onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
                                     style={{color: this.props.fontColor}}>
@@ -115,7 +115,7 @@ class PreferenceProductComponent extends React.Component {
                             <Button type={"text"}
                                     shape={this.props.preferenceData.buttonShape === "round" ? "circle" : "default"}
                                     icon={<GitlabOutlined/>}
-                                    href={"https://gitlab.com/xyk953651094/SkyNewTab-Vue/"} target={"_blank"}
+                                    href={"https://gitlab.com/xyk953651094/SkyNewTab-Vue/"} target={"_self"}
                                     onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
                                     onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
                                     style={{color: this.props.fontColor}}>
@@ -137,7 +137,7 @@ class PreferenceProductComponent extends React.Component {
                             <Button type={"text"}
                                     shape={this.props.preferenceData.buttonShape === "round" ? "circle" : "default"}
                                     icon={<GithubOutlined/>}
-                                    href={"https://github.com/xyk953651094/SkyNewTab-Poem-React/"} target={"_blank"}
+                                    href={"https://github.com/xyk953651094/SkyNewTab-Poem-React/"} target={"_self"}
                                     onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
                                     onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
                                     style={{color: this.props.fontColor}}>
@@ -145,7 +145,7 @@ class PreferenceProductComponent extends React.Component {
                             <Button type={"text"}
                                     shape={this.props.preferenceData.buttonShape === "round" ? "circle" : "default"}
                                     icon={<GitlabOutlined/>}
-                                    href={"https://gitlab.com/xyk953651094/SkyNewTab-Poem-React/"} target={"_blank"}
+                                    href={"https://gitlab.com/xyk953651094/SkyNewTab-Poem-React/"} target={"_self"}
                                     onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
                                     onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
                                     style={{color: this.props.fontColor}}>
@@ -167,7 +167,7 @@ class PreferenceProductComponent extends React.Component {
                             <Button type={"text"}
                                     shape={this.props.preferenceData.buttonShape === "round" ? "circle" : "default"}
                                     icon={<GithubOutlined/>}
-                                    href={"https://github.com/xyk953651094/SkyNewTab-Poem-Angular/"} target={"_blank"}
+                                    href={"https://github.com/xyk953651094/SkyNewTab-Poem-Angular/"} target={"_self"}
                                     onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
                                     onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
                                     style={{color: this.props.fontColor}}>
@@ -175,7 +175,7 @@ class PreferenceProductComponent extends React.Component {
                             <Button type={"text"}
                                     shape={this.props.preferenceData.buttonShape === "round" ? "circle" : "default"}
                                     icon={<GitlabOutlined/>}
-                                    href={"https://gitlab.com/xyk953651094/SkyNewTab-Poem-Angular/"} target={"_blank"}
+                                    href={"https://gitlab.com/xyk953651094/SkyNewTab-Poem-Angular/"} target={"_self"}
                                     onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
                                     onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
                                     style={{color: this.props.fontColor}}>

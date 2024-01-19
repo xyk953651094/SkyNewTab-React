@@ -73,7 +73,7 @@ class AuthorComponent extends React.Component {
 
     authorLinkBtnOnClick() {
         if (!isEmpty(this.state.authorLink)) {
-            window.open(this.state.authorLink + unsplashUrl, "_blank");
+            window.open(this.state.authorLink + unsplashUrl, "_self");
         } else {
             message.error("无跳转链接");
         }
@@ -81,7 +81,7 @@ class AuthorComponent extends React.Component {
 
     imageLinkBtnOnClick() {
         if (!isEmpty(this.state.imageLink)) {
-            window.open(this.state.imageLink + unsplashUrl, "_blank");
+            window.open(this.state.imageLink + unsplashUrl, "_self");
         } else {
             message.error("无跳转链接");
         }
@@ -89,7 +89,7 @@ class AuthorComponent extends React.Component {
 
     imageLocationBtnOnClick() {
         if (this.state.imageLocation !== "暂无信息") {
-            window.open(this.state.searchEngineUrl + this.state.imageLocation, "_blank");
+            window.open(this.state.searchEngineUrl + this.state.imageLocation, "_self");
         } else {
             message.error("无跳转链接");
         }

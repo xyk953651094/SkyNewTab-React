@@ -210,7 +210,7 @@ class CollectionComponent extends React.Component {
                                                 className={"componentTheme"}
                                                 key={item.timeStamp}
                                                 onClick={() => {
-                                                    window.open(item.webUrl, "_blank")
+                                                    window.open(item.webUrl, "_self")
                                                 }}
                                                 style={{
                                                     color: this.state.fontColor,

@@ -27,6 +27,7 @@ import {PreferenceDataInterface, ThemeColorInterface} from "./typescripts/public
 
 import $ from "jquery";
 import {imageTopics} from "./typescripts/publicConstants";
+import FocusComponent from "./components/focusComponent";
 
 const {Header, Content, Footer} = Layout;
 
@@ -154,6 +155,7 @@ class App extends React.Component {
             if (popoverEle.length && popoverEle.length > 0) {
                 $(".ant-popover-title").css("color", this.state.themeColor.componentFontColor);
                 $(".ant-popover-inner-content").css("color", this.state.themeColor.componentFontColor);
+                $(".ant-checkbox-wrapper").children(":last-child").css("color", this.state.themeColor.componentFontColor);
             }
 
             // toolTip
@@ -262,6 +264,10 @@ class App extends React.Component {
                                     themeColor={this.state.themeColor}
                                     preferenceData={this.state.preferenceData}
                                 />
+                                {/*<FocusComponent*/}
+                                {/*    themeColor={this.state.themeColor}*/}
+                                {/*    preferenceData={this.state.preferenceData}*/}
+                                {/*/>*/}
                                 <PreferenceComponent
                                     themeColor={this.state.themeColor}
                                     preferenceData={this.state.preferenceData}

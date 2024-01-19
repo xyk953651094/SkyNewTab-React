@@ -29,5 +29,12 @@
     },
     "chrome_url_overrides": {
         "newtab": "./mainPage.html"
+    },
+    "background": {
+        "service_worker": "./background.js",
+        "module": true,
+
+        "scripts": ["./background.js"],
+        "persistent": false
     }
 }

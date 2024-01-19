@@ -44,7 +44,7 @@ class ImageHistoryComponent extends React.Component {
 
     imageLinkBtnOnClick() {
         if (!isEmpty(this.state.imageLink)) {
-            window.open(this.state.imageLink + unsplashUrl, "_blank");
+            window.open(this.state.imageLink + unsplashUrl, "_self");
         } else {
             message.error("无跳转链接");
         }

@@ -66,11 +66,11 @@ class GreetComponent extends React.Component {
     }
 
     historyBtnOnClick() {
-        window.open(this.state.searchEngineUrl + "历史上的今天", "_blank");
+        window.open(this.state.searchEngineUrl + "历史上的今天", "_self");
     }
 
     infoBtnOnClick() {
-        window.open(this.state.searchEngineUrl + "万年历", "_blank");
+        window.open(this.state.searchEngineUrl + "万年历", "_self");
     }
 
     // 请求完成后处理步骤
