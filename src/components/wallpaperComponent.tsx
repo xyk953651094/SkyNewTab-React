@@ -158,7 +158,6 @@ class WallpaperComponent extends React.Component {
 
                     setTimeout(() => {
                         if(tempThis.state.display === "none") {
-                            message.destroy();
                             message.loading("努力加载中，请耐心等待或检查网络", 0);
                         }
                     }, 5000);
@@ -178,7 +177,7 @@ class WallpaperComponent extends React.Component {
             let nowTimeStamp = new Date().getTime();
             if (lastRequestTime === null) {  // 第一次请求时 lastRequestTime 为 null，因此直接进行请求赋值 lastRequestTime
                 this.getWallpaper();
-                // } else if (nowTimeStamp - parseInt(lastRequestTime) > 0) {  // 必须多于切换间隔才能进行新的请求
+            // } else if (nowTimeStamp - parseInt(lastRequestTime) > 0) {  // 必须多于切换间隔才能进行新的请求
             } else if (nowTimeStamp - parseInt(lastRequestTime) > parseInt(this.props.preferenceData.changeImageTime)) {  // 必须多于切换间隔才能进行新的请求
                 this.getWallpaper();
             } else {  // 切换间隔内使用上一次请求结果

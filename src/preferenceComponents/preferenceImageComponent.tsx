@@ -24,23 +24,27 @@ import {
 } from "../typescripts/publicFunctions";
 import {CheckboxValueType} from "antd/es/checkbox/Group";
 import {PreferenceDataInterface} from "../typescripts/publicInterface";
-import $ from "jquery";
 import {imageTopics} from "../typescripts/publicConstants";
 
 type propType = {
     hoverColor: string,
     backgroundColor: string,
     fontColor: string,
-    getPreferenceData: any
+    preferenceModified: boolean,
+    getPreferenceData: any,
+    getPreferenceModified: any
 }
 
 type stateType = {
+    formDisabled: boolean,  // 刷新页面前禁止更改设置
+    preferenceModified: boolean,
     preferenceData: PreferenceDataInterface,
     buttonShape: "circle" | "default" | "round" | undefined,
     lastRequestTime: string,
     disableImageTopic: boolean,
     imageTopicStatus: string,
     customTopicStatus: string,
+    inputValue: string,
 }
 
 interface PreferenceImageComponent {
@@ -52,24 +56,29 @@ class PreferenceImageComponent extends React.Component {
     constructor(props: any) {
         super(props);
         this.state = {
+            formDisabled: false,
+            preferenceModified: false,
             preferenceData: getPreferenceDataStorage(),
             buttonShape: "round",
             lastRequestTime: "暂无信息",
             disableImageTopic: false,
             imageTopicStatus: "已启用图片主题",
-            customTopicStatus: "已禁用图片主题",
+            customTopicStatus: "已禁用自定主题",
+            inputValue: "",
         };
     }
 
     // 图片动效
     dynamicEffectRadioOnChange(event: RadioChangeEvent) {
         this.setState({
+            formDisabled: true,
             preferenceData: this.setPreferenceData({dynamicEffect: event.target.value}),
         }, () => {
-            this.props.getPreferenceData(this.state.preferenceData);
             localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
+            this.props.getPreferenceData(this.state.preferenceData);
+            this.props.getPreferenceModified(new Date().getTime()); // 设置已修改，通知 preferenceFunctionComponent 刷新
             message.success("已更换显示效果，一秒后刷新页面");
-            resetRadioColor(event.target.value, ["all", "translate", "rotate", "close"], this.props.hoverColor);
+            // resetRadioColor(event.target.value, ["all", "translate", "rotate", "close"], this.props.hoverColor);
             this.refreshWindow();
         })
     }
@@ -77,12 +86,14 @@ class PreferenceImageComponent extends React.Component {
     // 图片质量
     imageQualityRadioOnChange(event: RadioChangeEvent) {
         this.setState({
+            formDisabled: true,
             preferenceData: this.setPreferenceData({imageQuality: event.target.value}),
         }, () => {
-            this.props.getPreferenceData(this.state.preferenceData);
             localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
+            this.props.getPreferenceData(this.state.preferenceData);
+            this.props.getPreferenceModified(new Date().getTime()); // 设置已修改，通知 preferenceFunctionComponent 刷新
             message.success("已更换图片质量，一秒后刷新页面");
-            resetRadioColor(event.target.value, ["full", "regular"], this.props.hoverColor);
+            // resetRadioColor(event.target.value, ["full", "regular"], this.props.hoverColor);
             this.refreshWindow();
         })
     }
@@ -92,46 +103,59 @@ class PreferenceImageComponent extends React.Component {
         this.setState({
             preferenceData: this.setPreferenceData({imageTopics: checkedValues}),
         }, () => {
-            this.props.getPreferenceData(this.state.preferenceData);
             localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
+            this.props.getPreferenceData(this.state.preferenceData);
+            this.props.getPreferenceModified(new Date().getTime()); // 设置已修改，通知 preferenceFunctionComponent 刷新
             message.success("已更换图片主题，下次切换图片时生效");
             if (checkedValues.length === 0) {
                 message.info("全不选与全选的效果一样");
             }
-            resetCheckboxColor(checkedValues, imageTopics, this.props.hoverColor);
+            // resetCheckboxColor(checkedValues, imageTopics, this.props.hoverColor);
+        })
+    }
+
+    inputOnChange(e: any) {
+        this.setState({
+            inputValue: e.target.value
         })
     }
 
     // 自定义主题
     submitCustomTopicBtnOnClick() {
-        let inputValue = $("#customTopicInput").val();
         this.setState({
-            preferenceData: this.setPreferenceData({customTopic: inputValue}),
-            disableImageTopic: !isEmpty(inputValue),
-            imageTopicStatus: isEmpty(inputValue)? "已启用图片主题" : "已禁用图片主题",
-            customTopicStatus: isEmpty(inputValue)? "已禁用自定主题" : "已启用自定主题",
+            preferenceData: this.setPreferenceData({customTopic: this.state.inputValue}),
+            disableImageTopic: !isEmpty(this.state.inputValue),
+            imageTopicStatus: isEmpty(this.state.inputValue)? "已启用图片主题" : "已禁用图片主题",
+            customTopicStatus: isEmpty(this.state.inputValue)? "已禁用自定主题" : "已启用自定主题",
         }, () => {
-            this.props.getPreferenceData(this.state.preferenceData);
             localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
+            this.props.getPreferenceData(this.state.preferenceData);
+            this.props.getPreferenceModified(new Date().getTime()); // 设置已修改，通知 preferenceFunctionComponent 刷新
 
-            if(!isEmpty(inputValue)) {
+            if(!isEmpty(this.state.inputValue)) {
                 message.success("已启用自定主题，下次切换图片时生效");
             } else {
-                message.success("已禁用自定主题，一秒后刷新页面");
-                this.refreshWindow();
+                this.setState({
+                    formDisabled: true,
+                }, () => {
+                    message.success("已禁用自定主题，一秒后刷新页面");
+                    this.refreshWindow();
+                })
             }
         })
     }
 
     clearCustomTopicBtnOnClick() {
         this.setState({
+            formDisabled: true,
             preferenceData: this.setPreferenceData({customTopic: ""}),
             disableImageTopic: false,
             imageTopicStatus: "已启用图片主题",
             customTopicStatus: "已禁用自定主题",
         }, () => {
-            this.props.getPreferenceData(this.state.preferenceData);
             localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
+            this.props.getPreferenceData(this.state.preferenceData);
+            this.props.getPreferenceModified(new Date().getTime()); // 设置已修改，通知 preferenceFunctionComponent 刷新
             message.success("已禁用自定主题，一秒后刷新页面");
             this.refreshWindow();
         })
@@ -139,10 +163,12 @@ class PreferenceImageComponent extends React.Component {
 
     changeImageTimeOnChange(value: string) {
         this.setState({
+            formDisabled: true,
             preferenceData: this.setPreferenceData({changeImageTime: value}),
         }, () => {
-            this.props.getPreferenceData(this.state.preferenceData);
             localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
+            this.props.getPreferenceData(this.state.preferenceData);
+            this.props.getPreferenceModified(new Date().getTime()); // 设置已修改，通知 preferenceFunctionComponent 刷新
             message.success("已修改切换间隔，一秒后刷新页面");
             this.refreshWindow();
         })
@@ -152,30 +178,33 @@ class PreferenceImageComponent extends React.Component {
         this.setState({
             preferenceData: this.setPreferenceData({nightMode: checked}),
         }, () => {
-            this.props.getPreferenceData(this.state.preferenceData);
             localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
+            this.props.getPreferenceData(this.state.preferenceData);
+            this.props.getPreferenceModified(new Date().getTime()); // 设置已修改，通知 preferenceFunctionComponent 刷新
             if (checked) {
                 message.success("已降低背景亮度");
             } else {
                 message.success("已恢复背景亮度");
             }
-            resetSwitchColor("#nightModeSwitch", checked, this.props.hoverColor);
+            // resetSwitchColor("#nightModeSwitch", checked, this.props.hoverColor);
         })
     }
 
     // 无图模式
     noImageModeSwitchOnChange(checked: boolean, e: any) {
         this.setState({
+            formDisabled: true,
             preferenceData: this.setPreferenceData({noImageMode: checked}),
         }, () => {
-            this.props.getPreferenceData(this.state.preferenceData);
             localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
+            this.props.getPreferenceData(this.state.preferenceData);
+            this.props.getPreferenceModified(new Date().getTime()); // 设置已修改，通知 preferenceFunctionComponent 刷新
             if (checked) {
                 message.success("已开启无图模式，一秒后刷新页面");
             } else {
                 message.success("已关闭无图模式，一秒后刷新页面");
             }
-            resetSwitchColor("#noImageModeSwitch", checked, this.props.hoverColor);
+            // resetSwitchColor("#noImageModeSwitch", checked, this.props.hoverColor);
             this.refreshWindow();
         })
     }
@@ -188,6 +217,16 @@ class PreferenceImageComponent extends React.Component {
 
     setPreferenceData(data: Object) {
         return Object.assign({}, this.state.preferenceData, data);
+    }
+
+    componentWillReceiveProps(nextProps: any, prevProps: any) {
+        if (nextProps.preferenceModified !== prevProps.preferenceModified && nextProps.preferenceModified !== 0) {
+            let tempPreferenceData = getPreferenceDataStorage();
+            this.setState({
+                preferenceData: tempPreferenceData,
+                buttonShape: tempPreferenceData.buttonShape === "round" ? "circle" : "default"
+            })
+        }
     }
 
     componentWillMount() {
@@ -223,7 +262,7 @@ class PreferenceImageComponent extends React.Component {
                   }}
                   bodyStyle={{backgroundColor: this.props.backgroundColor}}
             >
-                <Form colon={false} initialValues={this.state.preferenceData}>
+                <Form colon={false} initialValues={this.state.preferenceData} disabled={this.state.formDisabled}>
                     <Form.Item name={"dynamicEffect"} label={"鼠标互动"}>
                         <Radio.Group buttonStyle={"solid"}
                                      onChange={this.dynamicEffectRadioOnChange.bind(this)}>
@@ -294,7 +333,7 @@ class PreferenceImageComponent extends React.Component {
                     <Form.Item label={"自定主题"} extra={this.state.customTopicStatus}>
                         <Space>
                             <Form.Item name={"customTopic"} noStyle>
-                                <Input id={"customTopicInput"} placeholder="英文搜索最准确" allowClear/>
+                                <Input placeholder="英文搜索最准确" value={this.state.inputValue} onChange={this.inputOnChange.bind(this)} allowClear/>
                             </Form.Item>
                             <Button type={"text"} shape={this.state.buttonShape} icon={<CheckOutlined/>}
                                     onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}

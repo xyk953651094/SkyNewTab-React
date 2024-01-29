@@ -64,14 +64,14 @@ class WeatherComponent extends React.Component {
 
     locationBtnOnClick() {
         if (this.state.location !== "暂无信息") {
-            window.open(this.state.searchEngineUrl + this.state.location, "_blank");
+            window.open(this.state.searchEngineUrl + this.state.location, "_self");
         } else {
             message.error("无跳转链接");
         }
     }
 
     infoBtnOnClick() {
-        window.open(this.state.searchEngineUrl + "天气", "_blank");
+        window.open(this.state.searchEngineUrl + "天气", "_self");
     }
 
     setWeather(data: any) {

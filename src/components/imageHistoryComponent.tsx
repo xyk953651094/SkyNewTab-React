@@ -44,7 +44,7 @@ class ImageHistoryComponent extends React.Component {
 
     imageLinkBtnOnClick() {
         if (!isEmpty(this.state.imageLink)) {
-            window.open(this.state.imageLink + unsplashUrl, "_blank");
+            window.open(this.state.imageLink + unsplashUrl, "_self");
         } else {
             message.error("无跳转链接");
         }
@@ -148,7 +148,7 @@ class ImageHistoryComponent extends React.Component {
         return (
             <Popover title={popoverTitle} content={popoverContent} placement={"topRight"}
                      color={this.state.backgroundColor}
-                     overlayStyle={{minWidth: "350px"}} trigger={"click"}>
+                     overlayStyle={{minWidth: "350px"}}>
                 <Button shape={this.state.buttonShape} icon={<HistoryOutlined/>} size={"large"}
                         id={"imageHistoryBtn"}
                         className={"componentTheme zIndexHigh"}

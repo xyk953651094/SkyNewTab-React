@@ -39,7 +39,7 @@ class PreferenceEmailComponent extends React.Component {
                 <Row>
                     <Col span="12">
                         <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<LikeOutlined/>}
-                                href={"mailto:xyk953651094@qq.com?&subject=云开新标签页-功能建议"} target={"_blank"}
+                                href={"mailto:xyk953651094@qq.com?&subject=云开新标签页-功能建议"} target={"_self"}
                                 onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
                                 onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
                                 style={{color: this.props.fontColor}}>
@@ -48,7 +48,7 @@ class PreferenceEmailComponent extends React.Component {
                     </Col>
                     <Col span="12">
                         <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<DislikeOutlined/>}
-                                href={"mailto:xyk953651094@qq.com?&subject=云开新标签页-问题反馈"} target={"_blank"}
+                                href={"mailto:xyk953651094@qq.com?&subject=云开新标签页-问题反馈"} target={"_self"}
                                 onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
                                 onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
                                 style={{color: this.props.fontColor}}>

@@ -32,6 +32,7 @@
     },
     "background": {
         "service_worker": "./background.js",
-        "module": true
+        "module": true,
+        "scripts": ["./background.js"]
     }
 }

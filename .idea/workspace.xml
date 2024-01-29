@@ -4,13 +4,29 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="提升使用体验">
-      <change afterPath="$PROJECT_DIR$/src/publicComponents/buttonComponent.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/publicComponents/popoverComponent.tsx" afterDir="false" />
+    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="优化使用体验">
+      <change beforePath="$PROJECT_DIR$/.idea/SkyNewTab-React.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/SkyNewTab-React.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/greetComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/greetComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/imageHistoryComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/imageHistoryComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/collectionComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/collectionComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/dailyComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dailyComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/focusComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/focusComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/preferenceComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/preferenceComponent.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/todoComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/todoComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/extensionFiles/_locales/zh_CN/messages.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/extensionFiles/_locales/zh_CN/messages.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/extensionFiles/background.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/extensionFiles/background.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/extensionFiles/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/extensionFiles/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/extensionFiles/manifest_temp.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/extensionFiles/tempManifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/popupComponents/popupFooterComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/popupComponents/popupFooterComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/popupComponents/popupStatusComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/popupComponents/popupStatusComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/preferenceComponents/preferenceFunctionComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/preferenceComponents/preferenceFunctionComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/preferenceComponents/preferenceHeaderComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/preferenceComponents/preferenceHeaderComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/preferenceComponents/preferenceImageComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/preferenceComponents/preferenceImageComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/typescripts/publicConstants.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/typescripts/publicConstants.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/typescripts/publicFunctions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/typescripts/publicFunctions.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,6 +41,7 @@
         <option value="TypeScript File" />
         <option value="SCSS File" />
         <option value="TypeScript JSX File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -69,7 +86,7 @@
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;npm.start.executor&quot;: &quot;Run&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;JavaScript.Libraries&quot;,
     &quot;ts.external.directory.path&quot;: &quot;/Users/xiaoyunkai/Projects/WebStorm/SkyNewTab-React/node_modules/typescript/lib&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
@@ -412,6 +429,37 @@
       <workItem from="1704937319200" duration="11549000" />
       <workItem from="1705057666454" duration="3921000" />
       <workItem from="1705115499324" duration="43000" />
+      <workItem from="1705115553494" duration="379000" />
+      <workItem from="1705144965225" duration="248000" />
+      <workItem from="1705232632147" duration="1366000" />
+      <workItem from="1705241760447" duration="932000" />
+      <workItem from="1705308627917" duration="49000" />
+      <workItem from="1705321023565" duration="57000" />
+      <workItem from="1705393527717" duration="61000" />
+      <workItem from="1705393600008" duration="2098000" />
+      <workItem from="1705456264226" duration="313000" />
+      <workItem from="1705479060073" duration="105000" />
+      <workItem from="1705563530650" duration="1618000" />
+      <workItem from="1705581476429" duration="675000" />
+      <workItem from="1705582271941" duration="79000" />
+      <workItem from="1705582477102" duration="18000" />
+      <workItem from="1705582974861" duration="24000" />
+      <workItem from="1705584130974" duration="2754000" />
+      <workItem from="1705644211902" duration="2321000" />
+      <workItem from="1705653235375" duration="12337000" />
+      <workItem from="1705717112957" duration="778000" />
+      <workItem from="1705718544639" duration="14082000" />
+      <workItem from="1705902626772" duration="5021000" />
+      <workItem from="1705926651675" duration="4942000" />
+      <workItem from="1705977187829" duration="3683000" />
+      <workItem from="1705983747768" duration="1539000" />
+      <workItem from="1706001595457" duration="5232000" />
+      <workItem from="1706082523135" duration="5490000" />
+      <workItem from="1706091614975" duration="9456000" />
+      <workItem from="1706170610751" duration="7366000" />
+      <workItem from="1706323203448" duration="18075000" />
+      <workItem from="1706355853366" duration="395000" />
+      <workItem from="1706504100343" duration="2926000" />
     </task>
     <task id="LOCAL-00001" summary="优化抽屉蒙版的显示效果&#10;优化代码质量">
       <created>1683952184207</created>
@@ -531,30 +579,6 @@
       <option name="presentableId" value="LOCAL-00017" />
       <option name="project" value="LOCAL" />
       <updated>1687402693401</updated>
-    </task>
-    <task id="LOCAL-00109" summary="修复已知问题">
-      <option name="closed" value="true" />
-      <created>1699242397082</created>
-      <option name="number" value="00109" />
-      <option name="presentableId" value="LOCAL-00109" />
-      <option name="project" value="LOCAL" />
-      <updated>1699242397083</updated>
-    </task>
-    <task id="LOCAL-00110" summary="修复已知问题">
-      <option name="closed" value="true" />
-      <created>1699275990440</created>
-      <option name="number" value="00110" />
-      <option name="presentableId" value="LOCAL-00110" />
-      <option name="project" value="LOCAL" />
-      <updated>1699275990440</updated>
-    </task>
-    <task id="LOCAL-00111" summary="新增历史记录，修复已知问题">
-      <option name="closed" value="true" />
-      <created>1699758084896</created>
-      <option name="number" value="00111" />
-      <option name="presentableId" value="LOCAL-00111" />
-      <option name="project" value="LOCAL" />
-      <updated>1699758084897</updated>
     </task>
     <task id="LOCAL-00112" summary="新增历史记录，修复已知问题">
       <option name="closed" value="true" />
@@ -788,7 +812,31 @@
       <option name="project" value="LOCAL" />
       <updated>1704940482173</updated>
     </task>
-    <option name="localTasksCounter" value="141" />
+    <task id="LOCAL-00141" summary="模块化公用的 popover 组件和 button 组件（测试版）">
+      <option name="closed" value="true" />
+      <created>1705115782908</created>
+      <option name="number" value="00141" />
+      <option name="presentableId" value="LOCAL-00141" />
+      <option name="project" value="LOCAL" />
+      <updated>1705115782908</updated>
+    </task>
+    <task id="LOCAL-00142" summary="优化使用体验">
+      <option name="closed" value="true" />
+      <created>1705394646005</created>
+      <option name="number" value="00142" />
+      <option name="presentableId" value="LOCAL-00142" />
+      <option name="project" value="LOCAL" />
+      <updated>1705394646006</updated>
+    </task>
+    <task id="LOCAL-00143" summary="优化使用体验">
+      <option name="closed" value="true" />
+      <created>1705671637370</created>
+      <option name="number" value="00143" />
+      <option name="presentableId" value="LOCAL-00143" />
+      <option name="project" value="LOCAL" />
+      <updated>1705671637372</updated>
+    </task>
+    <option name="localTasksCounter" value="144" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -818,8 +866,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="优化产品文档" />
-    <MESSAGE value="新增调节亮度，优化视觉效果" />
     <MESSAGE value="新增修改按钮形状" />
     <MESSAGE value="新增更多产品，优化视觉效果" />
     <MESSAGE value="菜单栏新增回到顶部按钮、夜间模式" />
@@ -843,7 +889,9 @@
     <MESSAGE value="暂时注释菜单栏表单控件颜色主题" />
     <MESSAGE value="简洁模式现在可以隐藏搜索框了" />
     <MESSAGE value="提升使用体验" />
-    <option name="LAST_COMMIT_MESSAGE" value="提升使用体验" />
+    <MESSAGE value="模块化公用的 popover 组件和 button 组件（测试版）" />
+    <MESSAGE value="优化使用体验" />
+    <option name="LAST_COMMIT_MESSAGE" value="优化使用体验" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

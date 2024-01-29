@@ -27,6 +27,7 @@ type stateType = {
     buttonShape: "circle" | "default" | "round" | undefined,
     displayDrawer: boolean,
     drawerPosition: "right" | "bottom",
+    preferenceModified: boolean
 }
 
 interface PreferenceComponent {
@@ -44,7 +45,14 @@ class PreferenceComponent extends React.Component {
             buttonShape: "round",
             displayDrawer: false,
             drawerPosition: "right",
+            preferenceModified: false
         };
+    }
+
+    getPreferenceModified(status: boolean) {
+        this.setState({
+            preferenceModified: status
+        })
     }
 
     showDrawerBtnOnClick() {
@@ -108,9 +116,16 @@ class PreferenceComponent extends React.Component {
                     onClose={this.drawerOnClose.bind(this)}
                     open={this.state.displayDrawer}
                     closeIcon={false}
-                    headerStyle={{color: this.state.fontColor, borderBottomColor: this.state.fontColor}}
-                    drawerStyle={{backgroundColor: this.state.backgroundColor}}
-                    maskStyle={{backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)"}}
+                    styles={{
+                        mask: {backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)"},
+                        header: {color: this.state.fontColor, borderBottomColor: this.state.fontColor},
+                        content: {backgroundColor: this.state.backgroundColor},
+                        footer: {
+                            backgroundColor: this.state.backgroundColor,
+                            borderTopColor: this.state.fontColor,
+                            textAlign: "center"
+                        }
+                    }}
                     title={
                         <PreferenceHeaderComponent
                             hoverColor={this.state.hoverColor}
@@ -123,23 +138,22 @@ class PreferenceComponent extends React.Component {
                             fontColor={this.state.fontColor}
                             preferenceData={this.props.preferenceData}/>
                     }
-                    footerStyle={{
-                        backgroundColor: this.state.backgroundColor,
-                        borderTopColor: this.state.fontColor,
-                        textAlign: "center"
-                    }}
                 >
                     <Space direction={"vertical"} size={"large"} id={"drawerContent"}>
                         <PreferenceImageComponent
                             hoverColor={this.state.hoverColor}
                             backgroundColor={this.state.backgroundColor}
                             fontColor={this.state.fontColor}
-                            getPreferenceData={this.props.getPreferenceData}/>
+                            preferenceModified={this.state.preferenceModified}
+                            getPreferenceData={this.props.getPreferenceData}
+                            getPreferenceModified={this.getPreferenceModified.bind(this)}/>
                         <PreferenceFunctionComponent
                             hoverColor={this.state.hoverColor}
                             backgroundColor={this.state.backgroundColor}
                             fontColor={this.state.fontColor}
-                            getPreferenceData={this.props.getPreferenceData}/>
+                            preferenceModified={this.state.preferenceModified}
+                            getPreferenceData={this.props.getPreferenceData}
+                            getPreferenceModified={this.getPreferenceModified.bind(this)}/>
                         <PreferenceHelpComponent
                             hoverColor={this.state.hoverColor}
                             backgroundColor={this.state.backgroundColor}

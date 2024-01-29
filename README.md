@@ -1,9 +1,10 @@
 # 云开新标签页 based on React
 
 ## 简介
-* 适用于 Chrome、Edge、Firefox、Safari 的新标签页插件。  
+* 适用于 Chrome、Edge、Firefox、Safari 的新标签页插件，定期展示不同的高质量图片，并提供日历、天气、倒数日、待办事项、专注模式、快速链接等实用功能
 * 基于 Html + Typescript + Sass + React + Webpack + Ant Design + Bootstrap Icon
 * 支持语言：中文
+* 所需权限：tabs、storage
 * 节气来源：https://www.mxnzp.com
 * 天气来源：https://www.jinrishici.com
 * 图片来源：https://unsplash.com（图片中的内容不代表作者任何观点）
@@ -26,7 +27,7 @@
 
 ## 链接
 * 博客：https://xyk953651094.blogspot.com
-* 支持：https://afdian.net/a/xyk953651094
+* 捐助：https://afdian.net/a/xyk953651094
 
 ## 展示
 ### Chromium & Firefox & Safari for Mac

@@ -26,6 +26,7 @@ type stateType = {
     weatherContent: string,
     dailySize: number,
     todoSize: number,
+    focusMode: boolean,
     searchEngineUrl: string,
     simpleMode: boolean,
 }
@@ -45,6 +46,7 @@ class PopupImageComponent extends React.Component {
             weatherContent: "暂无信息",
             dailySize: 0,
             todoSize: 0,
+            focusMode: false,
             searchEngineUrl: "https://www.bing.com/search?q=",
             simpleMode: false,
         }
@@ -89,6 +91,7 @@ class PopupImageComponent extends React.Component {
         let tempWeather = localStorage.getItem("lastWeather");
         let tempDaily = localStorage.getItem("daily");
         let tempTodos = localStorage.getItem("todos");
+        let tempFocusMode = localStorage.getItem("focusMode");
 
         this.setState({
             greetContent: tempGreet ? getGreetContent() + " ｜ " + this.setHoliday(JSON.parse(tempGreet)) : "暂无信息",
@@ -96,6 +99,7 @@ class PopupImageComponent extends React.Component {
             weatherContent: tempWeather ? JSON.parse(tempWeather).weatherData.weather + " ｜ " + JSON.parse(tempWeather).weatherData.temperature + "°C" : "暂无信息",
             dailySize: tempDaily ? JSON.parse(tempDaily).length : 0,
             todoSize: tempTodos ? JSON.parse(tempTodos).length : 0,
+            focusMode: tempFocusMode ? JSON.parse(tempFocusMode) : false,
         })
     }
 
@@ -123,13 +127,20 @@ class PopupImageComponent extends React.Component {
                             onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
                             onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
                             style={{color: this.props.fontColor, cursor: "default"}}>
-                        {this.state.dailySize + " 个倒数日"}
+                        {this.state.dailySize + " 个"}
                     </Button>
                     <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<CheckSquareOutlined/>}
                             onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
                             onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
                             style={{color: this.props.fontColor, cursor: "default"}}>
-                        {this.state.todoSize + " 个待办事项"}
+                        {this.state.todoSize + " 个"}
+                    </Button>
+                    <Button type={"text"} shape={this.props.preferenceData.buttonShape}
+                            icon={<i className={this.state.focusMode ? "bi bi-cup-hot-fill" : "bi bi-cup-hot"}></i>}
+                            onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
+                            onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
+                            style={{color: this.props.fontColor, cursor: "default"}}>
+                        {this.state.focusMode ? "专注中" : "未专注"}
                     </Button>
                 </Space>
                 <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<InfoCircleOutlined/>}

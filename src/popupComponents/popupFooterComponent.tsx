@@ -52,7 +52,7 @@ class PopupFooterComponent extends React.Component {
                         onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
                         onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
                         style={{color: this.props.fontColor}}>
-                    支持
+                    捐助
                 </Button>
             </Space>
         );

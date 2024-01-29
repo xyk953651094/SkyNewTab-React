@@ -38,28 +38,28 @@ class PreferenceInfoComponent extends React.Component {
             >
                 <Space direction={"vertical"}>
                     <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<CalendarOutlined/>}
-                            href={"https://www.mxnzp.com/"} target={"_blank"}
+                            href={"https://www.mxnzp.com/"} target={"_self"}
                             onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
                             onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
                             style={{color: this.props.fontColor}}>
                         {"节气来源：https://www.mxnzp.com"}
                     </Button>
                     <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<CloudOutlined/>}
-                            href={"https://www.jinrishici.com/"} target={"_blank"}
+                            href={"https://www.jinrishici.com/"} target={"_self"}
                             onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
                             onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
                             style={{color: this.props.fontColor}}>
                         {"天气来源：https://www.jinrishici.com"}
                     </Button>
                     <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<FileImageOutlined/>}
-                            href={"https://unsplash.com/"} target={"_blank"}
+                            href={"https://unsplash.com/"} target={"_self"}
                             onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
                             onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
                             style={{color: this.props.fontColor}}>
                         {"图片来源：https://unsplash.com"}
                     </Button>
                     <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<CodeOutlined/>}
-                            href={"https://www.jetbrains.com.cn/community/opensource/#support/"} target={"_blank"}
+                            href={"https://www.jetbrains.com.cn/community/opensource/#support/"} target={"_self"}
                             onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
                             onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
                             style={{color: this.props.fontColor}}>

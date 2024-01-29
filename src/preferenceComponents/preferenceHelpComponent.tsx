@@ -39,7 +39,7 @@ class PreferenceHelpComponent extends React.Component {
                 <Row>
                     <Col span="12">
                         <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<GithubOutlined/>}
-                                href={"https://xyk953651094.github.io/SkyDocuments/"} target={"_blank"}
+                                href={"https://xyk953651094.github.io/SkyDocuments/"} target={"_self"}
                                 onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
                                 onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
                                 style={{color: this.props.fontColor}}>
@@ -48,7 +48,7 @@ class PreferenceHelpComponent extends React.Component {
                     </Col>
                     <Col span="12">
                         <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<GitlabOutlined/>}
-                                href={"https://xyk953651094.gitlab.io/SkyDocuments/"} target={"_blank"}
+                                href={"https://xyk953651094.gitlab.io/SkyDocuments/"} target={"_self"}
                                 onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
                                 onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
                                 style={{color: this.props.fontColor}}>
