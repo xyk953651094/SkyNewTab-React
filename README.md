@@ -31,30 +31,15 @@
 
 ## 展示
 ### Chromium & Firefox & Safari for Mac
-<img width="1440" alt="截屏2023-09-10 20 40 10" src="https://github.com/xyk953651094/SkyNewTab-React/assets/28004442/3f4ea3f9-d974-47cc-8ffb-004ed5b267f4">
+<img width="1440" alt="截屏2024-01-27 19 56 11" src="https://github.com/xyk953651094/SkyNewTab-React/assets/28004442/d01df005-4a35-48bb-a502-c76f28f3ed2c">
 
-<img width="1440" alt="截屏2023-09-10 20 47 05" src="https://github.com/xyk953651094/SkyNewTab-React/assets/28004442/b5b4b651-4407-40f8-83ac-436fdf6addef">
+<img width="1440" alt="截屏2024-01-27 20 04 17" src="https://github.com/xyk953651094/SkyNewTab-React/assets/28004442/b861d3b2-2ef6-45c8-95c1-e9599715d1b4">
 
-<img width="1440" alt="截屏2023-09-10 20 41 11" src="https://github.com/xyk953651094/SkyNewTab-React/assets/28004442/d9a03d46-2f0e-4a7d-82ac-783aa31e80ee">
-
-<img width="1440" alt="截屏2023-09-10 20 41 41" src="https://github.com/xyk953651094/SkyNewTab-React/assets/28004442/12b57c36-ff9a-486d-b50e-b48244719f12">
-
-<img width="1440" alt="截屏2023-09-10 20 42 01" src="https://github.com/xyk953651094/SkyNewTab-React/assets/28004442/459b0933-94bb-4f47-9181-b4a571f3c310">
-
-<img width="1440" alt="截屏2023-09-10 20 45 09" src="https://github.com/xyk953651094/SkyNewTab-React/assets/28004442/159fe4c9-08fb-4935-b1dd-d05744c67a00">
-
-<img width="1440" alt="截屏2023-09-10 20 45 31" src="https://github.com/xyk953651094/SkyNewTab-React/assets/28004442/81fcf780-90c1-4ce6-850e-fb411b6f89d0">
-
-<img width="1440" alt="截屏2023-09-10 20 50 08" src="https://github.com/xyk953651094/SkyNewTab-React/assets/28004442/81ab75f4-86b7-4cfd-969c-463519b30357">
-
-<img width="1440" alt="截屏2023-09-10 20 51 11" src="https://github.com/xyk953651094/SkyNewTab-React/assets/28004442/4329f2ad-1010-4c42-b8d5-0760e9c9b5dd">
+<img width="1440" alt="截屏2024-01-27 19 54 50" src="https://github.com/xyk953651094/SkyNewTab-React/assets/28004442/12aac15d-f1d0-4fef-9d3b-65e6d7ef3b26">
 
 ### Safari for iPhone
-<img width="300" alt="IMG_5792561EB323-1" src="https://github.com/xyk953651094/SkyNewTab-React/assets/28004442/293658c9-6072-4418-9b21-3b2ae1ef4a53">
-
-<img width="300" alt="IMG_6442D2F43545-1" src="https://github.com/xyk953651094/SkyNewTab-React/assets/28004442/2973f70d-e31c-45f9-846b-12f9850de429">
+<img width="300" alt="IMG_5792561EB323-1" src="https://github.com/xyk953651094/SkyNewTab-React/assets/28004442/f38257ff-3867-4a27-bbd9-78c35eb97458">
 
 ### Safari for iPad
-![IMG_67FEECFA8DEF-1](https://github.com/xyk953651094/SkyNewTab-React/assets/28004442/80ff21d0-4d2e-4f7e-b8ff-ad4ea7b3e41e)
+![IMG_0093](https://github.com/xyk953651094/SkyNewTab-React/assets/28004442/3cdfa6f4-f2fd-4268-85d3-5fc5f3eac7c0)
 
-![IMG_0033](https://github.com/xyk953651094/SkyNewTab-React/assets/28004442/64583e09-b7af-4ad9-8c1e-c102a25f23e4)
