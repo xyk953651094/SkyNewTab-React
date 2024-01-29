@@ -21,6 +21,7 @@ type stateType = {
     fontColor: string,
     buttonShape: "circle" | "default" | "round" | undefined,
     displayModal: boolean,
+    inputValue: string,
     listItems: any,
     dailySize: number,
     dailyMaxSize: number,
@@ -40,8 +41,9 @@ class DailyComponent extends React.Component {
             hoverColor: "",
             backgroundColor: "",
             fontColor: "",
-            buttonShape: "round",
+            buttonShape: "circle",
             displayModal: false,
+            inputValue: "",
             listItems: [],
             dailySize: 0,
             dailyMaxSize: 5,
@@ -93,6 +95,7 @@ class DailyComponent extends React.Component {
         if (daily.length < this.state.dailyMaxSize) {
             this.setState({
                 displayModal: true,
+                inputValue: "",
                 selectedTimeStamp: 0
             })
         } else {
@@ -100,9 +103,14 @@ class DailyComponent extends React.Component {
         }
     }
 
+    inputOnChange(e: any) {
+        this.setState({
+            inputValue: e.target.value
+        })
+    }
+
     modalOkBtnOnClick() {
-        let title = $("#dailyInput").val();
-        if (title && title.length > 0 && this.state.selectedTimeStamp !== 0) {
+        if (this.state.inputValue && this.state.inputValue.length > 0 && this.state.selectedTimeStamp !== 0) {
             let daily = [];
             let tempDaily = localStorage.getItem("daily");
             if (tempDaily) {
@@ -110,7 +118,7 @@ class DailyComponent extends React.Component {
             }
             if (daily.length < this.state.dailyMaxSize) {
                 daily.push({
-                    "title": title,
+                    "title": this.state.inputValue,
                     "selectedTimeStamp": this.state.selectedTimeStamp,
                     "timeStamp": Date.now()
                 });
@@ -268,7 +276,7 @@ class DailyComponent extends React.Component {
                             className={"componentTheme zIndexHigh"}
                             style={{cursor: "default", display: this.state.display}}
                     >
-                        {this.state.dailySize + " 个倒数日"}
+                        {this.state.dailySize + " 个"}
                     </Button>
                 </Popover>
                 <Modal title={
@@ -281,11 +289,12 @@ class DailyComponent extends React.Component {
                        open={this.state.displayModal} onOk={this.modalOkBtnOnClick.bind(this)}
                        onCancel={this.modalCancelBtnOnClick.bind(this)}
                        destroyOnClose={true}
-                       maskStyle={{backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)"}}
+                       styles={{mask: {backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)"}}}
                 >
                     <Form>
                         <Form.Item label={"倒数标题"} name={"dailyInput"}>
-                            <Input placeholder="请输入标题" id={"dailyInput"} maxLength={10} allowClear showCount/>
+                            <Input placeholder="请输入标题" value={this.state.inputValue} onChange={this.inputOnChange.bind(this)}
+                                   maxLength={10} showCount allowClear/>
                         </Form.Item>
                         <Form.Item label={"倒数日期"} name={"dailyDatePicker"}>
                             <DatePicker onChange={this.datePickerOnChange} id={"dailyDatePicker"} allowClear={false}/>

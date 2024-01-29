@@ -19,6 +19,7 @@ type stateType = {
     fontColor: string,
     buttonShape: "circle" | "default" | "round" | undefined,
     displayModal: boolean,
+    inputValue: string,
     listItems: any,
     todoSize: number,
     todoMaxSize: number,
@@ -41,6 +42,7 @@ class TodoComponent extends React.Component {
             fontColor: "",
             buttonShape: "round",
             displayModal: false,
+            inputValue: "",
             listItems: [],
             todoSize: 0,
             todoMaxSize: 5,
@@ -69,6 +71,7 @@ class TodoComponent extends React.Component {
         if (todos.length < this.state.todoMaxSize) {
             this.setState({
                 displayModal: true,
+                inputValue: "",
                 tag: "工作",
                 priority: "★",
             })
@@ -77,9 +80,14 @@ class TodoComponent extends React.Component {
         }
     }
 
+    inputOnChange(e: any) {
+        this.setState({
+            inputValue: e.target.value
+        })
+    }
+
     modalOkBtnOnClick() {
-        let todoContent = $("#todoInput").val();
-        if (todoContent && todoContent.length > 0) {
+        if (this.state.inputValue && this.state.inputValue.length > 0) {
             let todos = [];
             let tempTodos = localStorage.getItem("todos");
             if (tempTodos) {
@@ -87,7 +95,7 @@ class TodoComponent extends React.Component {
             }
             if (todos.length < this.state.todoMaxSize) {
                 todos.push({
-                    "title": todoContent,
+                    "title": this.state.inputValue,
                     "tag": this.state.tag,
                     "priority": this.state.priority,
                     "timeStamp": Date.now()
@@ -272,7 +280,7 @@ class TodoComponent extends React.Component {
                             className={"componentTheme zIndexHigh"}
                             style={{cursor: "default", display: this.state.display}}
                     >
-                        {this.state.todoSize + " 个待办事项"}
+                        {this.state.todoSize + " 个"}
                     </Button>
                 </Popover>
                 <Modal title={
@@ -284,11 +292,12 @@ class TodoComponent extends React.Component {
                        open={this.state.displayModal} onOk={this.modalOkBtnOnClick.bind(this)}
                        onCancel={this.modalCancelBtnOnClick.bind(this)}
                        destroyOnClose={true}
-                       maskStyle={{backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)"}}
+                       styles={{mask: {backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)"}}}
                 >
                     <Form>
                         <Form.Item label={"待办事项"} name={"todoInput"}>
-                            <Input placeholder="请输入待办内容" id="todoInput" maxLength={10} allowClear showCount/>
+                            <Input placeholder="请输入待办内容" value={this.state.inputValue} onChange={this.inputOnChange.bind(this)}
+                                   maxLength={10} showCount allowClear/>
                         </Form.Item>
                         <Form.Item label={"标签分类"} name={"todoSelect"}>
                             <Select

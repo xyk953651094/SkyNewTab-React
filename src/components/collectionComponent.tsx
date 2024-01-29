@@ -246,7 +246,7 @@ class CollectionComponent extends React.Component {
                                open={this.state.displayAddModal} onOk={this.addModalOkBtnOnClick.bind(this)}
                                onCancel={this.addModalCancelBtnOnClick.bind(this)}
                                destroyOnClose={true}
-                               maskStyle={{backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)"}}
+                               styles={{mask: {backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)"}}}
                         >
                             <Form>
                                 <Form.Item label={"网页名称"} name={"webName"}>
@@ -280,7 +280,7 @@ class CollectionComponent extends React.Component {
                                closeIcon={false} centered
                                open={this.state.displayEditModal} onOk={this.editModalOkBtnOnClick.bind(this)}
                                onCancel={this.editModalCancelBtnOnClick.bind(this)}
-                               maskStyle={{backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)"}}
+                               styles={{mask: {backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)"}}}
                         >
                             <List
                                 dataSource={this.state.collectionData}

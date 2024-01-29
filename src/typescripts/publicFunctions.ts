@@ -5,7 +5,6 @@ import {PreferenceDataInterface, ThemeColorInterface} from "./publicInterface";
 import $ from "jquery";
 import {CheckboxValueType} from "antd/es/checkbox/Group";
 
-
 // 网络请求
 export function httpRequest(headers: object, url: string, data: object, method: "GET" | "POST") {
     return new Promise(function (resolve, reject) {
@@ -257,6 +256,24 @@ export function getDevice() {
     }
 }
 
+export function getBrowserType() {
+    let userAgent = navigator.userAgent;
+    let browser='Other';
+    if (userAgent.indexOf('Chrome') !== -1 && userAgent.indexOf('Safari') !== -1){
+        browser="Chrome";
+    }
+    else if (userAgent.indexOf('Edge') !== -1){
+        browser="Edge";
+    }
+    else if (userAgent.indexOf('Firefox') !== -1){
+        browser = "Firefox";
+    }
+    else if (userAgent.indexOf('Safari') !== -1 && userAgent.indexOf('Chrome') === -1){
+        browser="Safari";
+    }
+    return browser;
+}
+
 export function getSearchEngineDetail(searchEngine: string) {
     let searchEngineName: string;
     let searchEngineValue: string;
@@ -369,18 +386,6 @@ export function getImageHistoryStorage() {
 export function changeThemeColor(element: string, backgroundColor: string, fontColor: string, time: number = 300) {
     $(element).animate({
         backgroundColor: backgroundColor,
-        color: fontColor,
-    }, {queue: false, duration: time});
-}
-
-export function changeBackgroundColor(element: string, backgroundColor: string, time = 300) {
-    $(element).animate({
-        backgroundColor: backgroundColor,
-    }, {queue: false, duration: time});
-}
-
-export function changeFontColor(element: string, fontColor: string, time = 300) {
-    $(element).animate({
         color: fontColor,
     }, {queue: false, duration: time});
 }

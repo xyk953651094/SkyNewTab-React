@@ -28,10 +28,13 @@ type propType = {
     hoverColor: string,
     backgroundColor: string,
     fontColor: string,
-    getPreferenceData: any
+    preferenceModified: boolean,
+    getPreferenceData: any,
+    getPreferenceModified: any
 }
 
 type stateType = {
+    formDisabled: boolean,  // 刷新页面前禁止更改设置
     displayResetPreferenceModal: boolean,
     displayClearStorageModal: boolean,
     preferenceData: PreferenceDataInterface,
@@ -46,6 +49,7 @@ class PreferenceFunctionComponent extends React.Component {
     constructor(props: any) {
         super(props);
         this.state = {
+            formDisabled: false,
             displayResetPreferenceModal: false,
             displayClearStorageModal: false,
             preferenceData: getPreferenceDataStorage(),
@@ -57,10 +61,12 @@ class PreferenceFunctionComponent extends React.Component {
         this.setState({
             preferenceData: this.setPreferenceData({searchEngine: event.target.value}),
         }, () => {
-            this.props.getPreferenceData(this.state.preferenceData);
             localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
+            this.props.getPreferenceData(this.state.preferenceData);
+            this.props.getPreferenceModified(new Date().getTime()); // 设置已修改，通知 preferenceFunctionComponent 刷新
+
             message.success("已更换搜索引擎");
-            resetRadioColor(event.target.value, ["bing", "google"], this.props.hoverColor);
+            // resetRadioColor(event.target.value, ["bing", "google"], this.props.hoverColor);
         })
     }
 
@@ -69,10 +75,12 @@ class PreferenceFunctionComponent extends React.Component {
         this.setState({
             preferenceData: this.setPreferenceData({buttonShape: event.target.value}),
         }, () => {
-            this.props.getPreferenceData(this.state.preferenceData);
             localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
+            this.props.getPreferenceData(this.state.preferenceData);
+            this.props.getPreferenceModified(new Date().getTime()); // 设置已修改，通知 preferenceFunctionComponent 刷新
+
             message.success("已更换按钮形状");
-            resetRadioColor(event.target.value, ["round", "default"], this.props.hoverColor);
+            // resetRadioColor(event.target.value, ["round", "default"], this.props.hoverColor);
         })
     }
 
@@ -81,15 +89,21 @@ class PreferenceFunctionComponent extends React.Component {
         this.setState({
             preferenceData: this.setPreferenceData({simpleMode: checked}),
         }, () => {
-            this.props.getPreferenceData(this.state.preferenceData);
             localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
+            this.props.getPreferenceData(this.state.preferenceData);
+            this.props.getPreferenceModified(new Date().getTime()); // 设置已修改，通知 preferenceFunctionComponent 刷新
+
             if (checked) {
                 message.success("已开启简洁模式");
             } else {
-                message.success("已关闭简洁模式，一秒后刷新页面");
-                this.refreshWindow();
+                this.setState({
+                    formDisabled: true,
+                }, () => {
+                    message.success("已关闭简洁模式，一秒后刷新页面");
+                    this.refreshWindow();
+                })
             }
-            resetSwitchColor("#simpleModeSwitch", checked, this.props.hoverColor)
+            // resetSwitchColor("#simpleModeSwitch", checked, this.props.hoverColor)
         })
     }
 
@@ -101,6 +115,7 @@ class PreferenceFunctionComponent extends React.Component {
     }
     resetPreferenceOkBtnOnClick() {
         this.setState({
+            formDisabled: true,
             displayResetPreferenceModal: false,
         }, () => {
             localStorage.setItem("preferenceData", JSON.stringify(defaultPreferenceData));
@@ -123,6 +138,7 @@ class PreferenceFunctionComponent extends React.Component {
 
     clearStorageOkBtnOnClick() {
         this.setState({
+            formDisabled: true,
             displayClearStorageModal: false,
         }, () => {
             localStorage.clear();
@@ -147,6 +163,16 @@ class PreferenceFunctionComponent extends React.Component {
         return Object.assign({}, this.state.preferenceData, data);
     }
 
+    componentWillReceiveProps(nextProps: any, prevProps: any) {
+        if (nextProps.preferenceModified !== prevProps.preferenceModified && nextProps.preferenceModified !== 0) {
+            if (nextProps.preferenceModified) {
+                this.setState({
+                    preferenceData: getPreferenceDataStorage()
+                })
+            }
+        }
+    }
+
     render() {
         return (
             <>
@@ -160,7 +186,7 @@ class PreferenceFunctionComponent extends React.Component {
                       }}
                       bodyStyle={{backgroundColor: this.props.backgroundColor}}
                 >
-                    <Form colon={false} initialValues={this.state.preferenceData}>
+                    <Form colon={false} initialValues={this.state.preferenceData} disabled={this.state.formDisabled}>
                         <Form.Item name={"searchEngine"} label={"搜索引擎"}>
                             <Radio.Group buttonStyle={"solid"} style={{width: "100%"}}
                                          onChange={this.searchEngineRadioOnChange.bind(this)}>
@@ -214,7 +240,7 @@ class PreferenceFunctionComponent extends React.Component {
                        onOk={this.resetPreferenceOkBtnOnClick.bind(this)}
                        onCancel={this.resetPreferenceCancelBtnOnClick.bind(this)}
                        destroyOnClose={true}
-                       maskStyle={{backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)"}}
+                       styles={{mask: {backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)"}}}
                 >
                     <Text style={{color: this.props.fontColor}}>
                         {"注意：所有设置项将被重置为默认值，确定重置吗？"}
@@ -231,7 +257,7 @@ class PreferenceFunctionComponent extends React.Component {
                        onOk={this.clearStorageOkBtnOnClick.bind(this)}
                        onCancel={this.clearStorageCancelBtnOnClick.bind(this)}
                        destroyOnClose={true}
-                       maskStyle={{backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)"}}
+                       styles={{mask: {backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)"}}}
                 >
                     <Text style={{color: this.props.fontColor}}>
                         {"注意：本地存储的所有数据将被清空，确定重置吗？"}

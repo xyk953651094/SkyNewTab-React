@@ -123,11 +123,11 @@ class App extends React.Component {
             localStorage.setItem("SkyNewTabReactVersion", currentVersion);
 
             // 额外提醒
-            if (currentVersion === "2.5.0") {
+            if (currentVersion === "2.8.0") {
                 notification.open({
                     icon: null,
                     message: "重要通知",
-                    description: "本次更新改动较大，请前往 菜单栏 => 功能设置 => 重置设置",
+                    description: "新增专注模式，若专注模式无法生效，可尝试重新安装本插件",
                     placement: "bottomLeft",
                     duration: 10,
                     closeIcon: false
@@ -138,6 +138,7 @@ class App extends React.Component {
         // 修改各类弹窗样式
         $("body").bind("DOMNodeInserted", () => {
             // 通用
+            $(".ant-list-header").css({"borderBlockEndColor": this.state.themeColor.componentFontColor,});
             $(".ant-list-item").css({
                 "borderBlockEndColor": this.state.themeColor.componentFontColor,
                 "padding": "10px, 0"
@@ -155,7 +156,12 @@ class App extends React.Component {
             if (popoverEle.length && popoverEle.length > 0) {
                 $(".ant-popover-title").css("color", this.state.themeColor.componentFontColor);
                 $(".ant-popover-inner-content").css("color", this.state.themeColor.componentFontColor);
-                $(".ant-checkbox-wrapper").children(":last-child").css("color", this.state.themeColor.componentFontColor);
+                $(".ant-switch-inner-checked").css("color", getFontColor(this.state.themeColor.themeColor));
+
+                let focusMode = localStorage.getItem("focusMode");
+                if (focusMode) {
+                    resetSwitchColor("#focusModeSwitch", JSON.parse(focusMode), this.state.themeColor.themeColor);
+                }
             }
 
             // toolTip
@@ -192,7 +198,7 @@ class App extends React.Component {
                 $(".ant-form-item-extra").css("color", this.state.themeColor.componentFontColor);
                 $(".ant-radio-wrapper").children(":last-child").css("color", this.state.themeColor.componentFontColor);
                 $(".ant-checkbox-wrapper").children(":last-child").css("color", this.state.themeColor.componentFontColor);
-                // $(".ant-switch").find(".ant-switch-inner-checked").css("color", getFontColor(this.state.themeColor.themeColor));
+                $(".ant-switch-inner-checked").css("color", getFontColor(this.state.themeColor.themeColor));
                 $(".ant-collapse").css("backgroundColor", this.state.themeColor.componentBackgroundColor);
                 $(".ant-collapse-header").css("color", this.state.themeColor.componentFontColor);
 
@@ -235,6 +241,25 @@ class App extends React.Component {
                 });
             }
         });
+
+        // const observer = new MutationObserver((mutations) => {
+        //     mutations.forEach((mutation) => {
+        //         if (mutation.type === 'childList') {
+        //             console.log(mutation);
+        //             mutation.addedNodes.forEach((addedNode) => {
+        //                 const node = addedNode as HTMLElement;
+        //                 if (node.classList.contains("ant-message")) {
+        //                     $(".ant-message-notice-content").css({
+        //                         "backgroundColor": this.state.themeColor.componentBackgroundColor,
+        //                         "color": this.state.themeColor.componentFontColor
+        //                     });
+        //                     $(".ant-message-custom-content > .anticon").css("color", this.state.themeColor.componentFontColor);
+        //                 }
+        //             });
+        //         }
+        //     });
+        // });
+        // observer.observe(document.body, {childList: true});
     }
 
     render() {
@@ -264,10 +289,10 @@ class App extends React.Component {
                                     themeColor={this.state.themeColor}
                                     preferenceData={this.state.preferenceData}
                                 />
-                                {/*<FocusComponent*/}
-                                {/*    themeColor={this.state.themeColor}*/}
-                                {/*    preferenceData={this.state.preferenceData}*/}
-                                {/*/>*/}
+                                <FocusComponent
+                                    themeColor={this.state.themeColor}
+                                    preferenceData={this.state.preferenceData}
+                                />
                                 <PreferenceComponent
                                     themeColor={this.state.themeColor}
                                     preferenceData={this.state.preferenceData}

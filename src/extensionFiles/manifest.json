@@ -10,7 +10,7 @@
         }
     },
     "default_locale": "zh_CN",
-    "permissions": ["tabs"],
+    "permissions": ["tabs","storage"],
     "icons": {
         "16": "./assets/icon-16.png",
         "32": "./assets/icon-32.png",
@@ -29,5 +29,9 @@
     },
     "chrome_url_overrides": {
         "newtab": "./mainPage.html"
+    },
+    "background": {
+        "service_worker": "./background.js",
+        "module": true
     }
 }

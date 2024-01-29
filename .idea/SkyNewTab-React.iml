@@ -9,6 +9,5 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="@types/jquery" level="application" />
-    <orderEntry type="library" name="index.d.ts" level="application" />
   </component>
 </module>
