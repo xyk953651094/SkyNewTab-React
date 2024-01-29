@@ -1,7 +1,8 @@
-import React from "react";
+import React, {MouseEventHandler} from "react";
 import {Button} from "antd";
 import {ThemeColorInterface} from "../typescripts/publicInterface";
 import {btnMouseOut, btnMouseOver} from "../typescripts/publicFunctions";
+import {ButtonShape} from "antd/es/button";
 
 type propType = {
     themeColor: ThemeColorInterface,
@@ -9,8 +10,8 @@ type propType = {
     buttonIcon: any,
     buttonCursor: "default" | "pointer",
     buttonContent: string,
-    buttonShape: "default" | "circle" | "round" | undefined,
-    buttonOnClick: any,
+    buttonShape: ButtonShape,
+    buttonOnClick: MouseEventHandler<HTMLElement>,
 }
 
 type stateType = {
@@ -32,6 +33,13 @@ class ButtonComponent extends React.Component {
             backgroundColor: "",
             fontColor: "",
         };
+    }
+
+    defaultProps = {
+        buttonCursor: "default",
+        buttonContent: "",
+        buttonShape: "default",
+        buttonOnClick: null,
     }
 
     componentWillReceiveProps(nextProps: any, prevProps: any) {
