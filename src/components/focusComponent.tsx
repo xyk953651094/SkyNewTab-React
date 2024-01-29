@@ -187,7 +187,9 @@ class FocusComponent extends React.Component {
         // 初始化过滤模式
         let tempFocusFilter = "whiteListFilter";
         let focusFilterStorage = localStorage.getItem("focusFilter");
-        if (focusFilterStorage === null) {
+        if (focusFilterStorage) {
+            tempFocusFilter = focusFilterStorage;
+        } else {
             localStorage.setItem("focusFilter", "whiteListFilter");
             this.setExtensionStorage("focusFilter", "whiteListFilter");
         }

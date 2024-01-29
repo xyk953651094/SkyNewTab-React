@@ -2,6 +2,7 @@ import React from "react";
 import {Button, Popover} from "antd";
 import {ThemeColorInterface} from "../typescripts/publicInterface";
 import {TooltipPlacement} from "antd/es/tooltip";
+import {ButtonShape} from "antd/es/button";
 
 type propType = {
     themeColor: ThemeColorInterface,
@@ -14,7 +15,7 @@ type propType = {
     buttonId: string,
     buttonDisplay: string,
     buttonContent: string,
-    buttonShape: "default" | "circle" | "round" | undefined,
+    buttonShape: ButtonShape,
 }
 
 type stateType = {
