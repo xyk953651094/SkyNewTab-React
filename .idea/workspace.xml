@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="修复已知问题">
-      <change afterPath="$PROJECT_DIR$/src/publicComponents/modalComponent.tsx" afterDir="false" />
+    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="新增 modal 公共组件">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/publicComponents/buttonComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/publicComponents/buttonComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/focusComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/focusComponent.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -444,7 +444,11 @@
       <workItem from="1706519501961" duration="1723000" />
       <workItem from="1706527735144" duration="2136000" />
       <workItem from="1706530660064" duration="248000" />
-      <workItem from="1706531234833" duration="1796000" />
+      <workItem from="1706531234833" duration="2090000" />
+      <workItem from="1706536183094" duration="361000" />
+      <workItem from="1706537348819" duration="54000" />
+      <workItem from="1706583911258" duration="110000" />
+      <workItem from="1706584034480" duration="3528000" />
     </task>
     <task id="LOCAL-00001" summary="优化抽屉蒙版的显示效果&#10;优化代码质量">
       <created>1683952184207</created>
@@ -564,14 +568,6 @@
       <option name="presentableId" value="LOCAL-00017" />
       <option name="project" value="LOCAL" />
       <updated>1687402693401</updated>
-    </task>
-    <task id="LOCAL-00115" summary="修复已知问题">
-      <option name="closed" value="true" />
-      <created>1701156324648</created>
-      <option name="number" value="00115" />
-      <option name="presentableId" value="LOCAL-00115" />
-      <option name="project" value="LOCAL" />
-      <updated>1701156324648</updated>
     </task>
     <task id="LOCAL-00116" summary="修复已知问题">
       <option name="closed" value="true" />
@@ -821,7 +817,15 @@
       <option name="project" value="LOCAL" />
       <updated>1706530407147</updated>
     </task>
-    <option name="localTasksCounter" value="147" />
+    <task id="LOCAL-00147" summary="新增 modal 公共组件">
+      <option name="closed" value="true" />
+      <created>1706533646506</created>
+      <option name="number" value="00147" />
+      <option name="presentableId" value="LOCAL-00147" />
+      <option name="project" value="LOCAL" />
+      <updated>1706533646506</updated>
+    </task>
+    <option name="localTasksCounter" value="148" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -851,7 +855,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="新增更多产品，优化视觉效果" />
     <MESSAGE value="菜单栏新增回到顶部按钮、夜间模式" />
     <MESSAGE value="优化无图模式颜色显示" />
     <MESSAGE value="搜索框按钮能快速切换搜索引擎了" />
@@ -876,7 +879,8 @@
     <MESSAGE value="优化使用体验" />
     <MESSAGE value="新增专注模式" />
     <MESSAGE value="修复已知问题" />
-    <option name="LAST_COMMIT_MESSAGE" value="修复已知问题" />
+    <MESSAGE value="新增 modal 公共组件" />
+    <option name="LAST_COMMIT_MESSAGE" value="新增 modal 公共组件" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

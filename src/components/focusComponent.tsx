@@ -1,5 +1,5 @@
 import React from "react";
-import {Popover, Button, Space, Row, Col, Typography, Switch, List, Input, message} from "antd";
+import {Popover, Button, Space, Row, Col, Typography, Switch, List, Input, message, notification} from "antd";
 import {btnMouseOut, btnMouseOver, changeThemeColor} from "../typescripts/publicFunctions";
 import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
 import "../stylesheets/publicStyles.scss"
@@ -50,12 +50,12 @@ class FocusComponent extends React.Component {
 
     setExtensionStorage(key: string, value: any) {
         const browserType = getBrowserType();
-        if (["Chrome", "Edge"].indexOf(browserType) !== -1) {
-            chrome.storage.local.set({[key]: value});
-        }
-        else if (["Firefox", "Safari"].indexOf(browserType) !== -1) {
-            browser.storage.local.set({[key]: value});
-        }
+        // if (["Chrome", "Edge"].indexOf(browserType) !== -1) {
+        //     chrome.storage.local.set({[key]: value});
+        // }
+        // else if (["Firefox", "Safari"].indexOf(browserType) !== -1) {
+        //     browser.storage.local.set({[key]: value});
+        // }
     }
 
     focusModeSwitchOnChange(checked: boolean) {
@@ -179,6 +179,16 @@ class FocusComponent extends React.Component {
         let focusModeStorage = localStorage.getItem("focusMode");
         if (focusModeStorage) {
             tempFocusMode = JSON.parse(focusModeStorage);
+            if (tempFocusMode) {
+                notification.open({
+                    icon: null,
+                    message: "已开启专注模式",
+                    description: "部分网页将无法访问，右上角专注中可修改设置",
+                    placement: "bottomLeft",
+                    duration: 5,
+                    closeIcon: false
+                });
+            }
         } else {
             localStorage.setItem("focusMode", JSON.stringify(false));
             this.setExtensionStorage("focusMode", false);
