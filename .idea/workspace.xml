@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="新增 modal 公共组件">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/focusComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/focusComponent.tsx" afterDir="false" />
-    </list>
+    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="修复已知问题" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -448,7 +444,7 @@
       <workItem from="1706536183094" duration="361000" />
       <workItem from="1706537348819" duration="54000" />
       <workItem from="1706583911258" duration="110000" />
-      <workItem from="1706584034480" duration="3528000" />
+      <workItem from="1706584034480" duration="3701000" />
     </task>
     <task id="LOCAL-00001" summary="优化抽屉蒙版的显示效果&#10;优化代码质量">
       <created>1683952184207</created>
@@ -568,14 +564,6 @@
       <option name="presentableId" value="LOCAL-00017" />
       <option name="project" value="LOCAL" />
       <updated>1687402693401</updated>
-    </task>
-    <task id="LOCAL-00116" summary="修复已知问题">
-      <option name="closed" value="true" />
-      <created>1701156725964</created>
-      <option name="number" value="00116" />
-      <option name="presentableId" value="LOCAL-00116" />
-      <option name="project" value="LOCAL" />
-      <updated>1701156725964</updated>
     </task>
     <task id="LOCAL-00117" summary="修复已知问题">
       <option name="closed" value="true" />
@@ -825,7 +813,15 @@
       <option name="project" value="LOCAL" />
       <updated>1706533646506</updated>
     </task>
-    <option name="localTasksCounter" value="148" />
+    <task id="LOCAL-00148" summary="修复已知问题">
+      <option name="closed" value="true" />
+      <created>1706601879840</created>
+      <option name="number" value="00148" />
+      <option name="presentableId" value="LOCAL-00148" />
+      <option name="project" value="LOCAL" />
+      <updated>1706601879841</updated>
+    </task>
+    <option name="localTasksCounter" value="149" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -878,9 +874,9 @@
     <MESSAGE value="模块化公用的 popover 组件和 button 组件（测试版）" />
     <MESSAGE value="优化使用体验" />
     <MESSAGE value="新增专注模式" />
-    <MESSAGE value="修复已知问题" />
     <MESSAGE value="新增 modal 公共组件" />
-    <option name="LAST_COMMIT_MESSAGE" value="新增 modal 公共组件" />
+    <MESSAGE value="修复已知问题" />
+    <option name="LAST_COMMIT_MESSAGE" value="修复已知问题" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
