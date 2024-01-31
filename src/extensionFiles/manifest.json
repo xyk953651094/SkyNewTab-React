@@ -1,7 +1,7 @@
 {
     "name": "__MSG_extensionName__",
     "description": "__MSG_extensionDescription__",
-    "version": "2.8.0",
+    "version": "2.8.1",
     "manifest_version": 3,
     "browser_specific_settings": {
         "gecko": {
@@ -10,7 +10,10 @@
         }
     },
     "default_locale": "zh_CN",
-    "permissions": ["tabs","storage"],
+    "permissions": [
+        "tabs",
+        "storage"
+    ],
     "icons": {
         "16": "./assets/icon-16.png",
         "32": "./assets/icon-32.png",

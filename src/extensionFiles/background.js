@@ -66,13 +66,11 @@ function forbiddenWeb(url) {
             let focusFilter = result.focusFilter;
             let filterList = result.filterList;
             if (focusMode === true && filterList !== null) {
-                // 白名单模式
+                // 白名单模式（Firefox 暂不支持白名单模式）
                 if (focusFilter === "whiteListFilter") {
                     if (filterList.length === 0) {
-                        if (browserType === "Firefox") {
-                            browser.tabs.update({url: "about:newtab"});
-                        } else {
-                            browser.tabs.update({url: "about:blank"});
+                        if (browserType === "Safari") {
+                            browser.tabs.update({url: "./mainPage.html"});
                         }
                     } else if (filterList.length > 0) {
                         let isInWhiteList = false;
@@ -83,10 +81,8 @@ function forbiddenWeb(url) {
                         }
 
                         if (isInWhiteList === false) {
-                            if (browserType === "Firefox") {
-                                browser.tabs.update({url: "about:newtab"});
-                            } else {
-                                browser.tabs.update({url: "about:blank"});
+                           if (browserType === "Safari") {
+                                browser.tabs.update({url: "./mainPage.html"});
                             }
                         }
                     }
@@ -102,11 +98,7 @@ function forbiddenWeb(url) {
                         }
 
                         if (isInBlackList === true) {
-                            if (browserType === "Firefox") {
-                                browser.tabs.update({url: "about:newtab"});
-                            } else {
-                                browser.tabs.update({url: "about:blank"});
-                            }
+                            browser.tabs.update({url: "./mainPage.html"});
                         }
                     }
                 }

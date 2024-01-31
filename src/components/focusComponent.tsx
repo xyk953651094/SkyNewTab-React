@@ -7,6 +7,7 @@ import {getBrowserType} from "../typescripts/publicFunctions";
 import {LinkOutlined, DeleteOutlined, PlusOutlined, SyncOutlined} from "@ant-design/icons";
 
 const {Text} = Typography;
+const browserType = getBrowserType();
 
 type propType = {
     themeColor: ThemeColorInterface,
@@ -41,7 +42,7 @@ class FocusComponent extends React.Component {
             fontColor: "",
             buttonShape: "circle",
             focusMode: false,
-            focusFilter: "whiteListFilter",
+            focusFilter: "blackListFilter",
             inputValue: "",
             filterList: [],
             focusMaxSize: 5,
@@ -49,7 +50,6 @@ class FocusComponent extends React.Component {
     }
 
     setExtensionStorage(key: string, value: any) {
-        const browserType = getBrowserType();
         if (["Chrome", "Edge"].indexOf(browserType) !== -1) {
             chrome.storage.local.set({[key]: value});
         }
@@ -80,13 +80,18 @@ class FocusComponent extends React.Component {
     }
 
     switchFilterBtnOnClick() {
-        let tempFocusFilter = this.state.focusFilter;
-        this.setState({
-            focusFilter: (tempFocusFilter === "whiteListFilter" ? "blackListFilter" : "whiteListFilter")
-        }, () => {
-            localStorage.setItem("focusFilter", this.state.focusFilter);
-            this.setExtensionStorage("focusFilter", this.state.focusFilter);
-        })
+        if (browserType === "Firefox") {
+            message.error("Firefox 暂不支持白名单模式");
+        }
+        else {
+            let tempFocusFilter = this.state.focusFilter;
+            this.setState({
+                focusFilter: (tempFocusFilter === "whiteListFilter" ? "blackListFilter" : "whiteListFilter")
+            }, () => {
+                localStorage.setItem("focusFilter", this.state.focusFilter);
+                this.setExtensionStorage("focusFilter", this.state.focusFilter);
+            })
+        }
     }
 
     inputOnChange(e: any) {
@@ -195,13 +200,16 @@ class FocusComponent extends React.Component {
         }
 
         // 初始化过滤模式
-        let tempFocusFilter = "whiteListFilter";
+        let tempFocusFilter = "blackListFilter";
         let focusFilterStorage = localStorage.getItem("focusFilter");
         if (focusFilterStorage) {
             tempFocusFilter = focusFilterStorage;
+            if (tempFocusFilter === "whiteListFilter" && browserType === "Firefox") {
+                message.info("Firefox 暂不支持白名单模式，请切换成黑名单模式");
+            }
         } else {
-            localStorage.setItem("focusFilter", "whiteListFilter");
-            this.setExtensionStorage("focusFilter", "whiteListFilter");
+            localStorage.setItem("focusFilter", "blackListFilter");
+            this.setExtensionStorage("focusFilter", "blackListFilter");
         }
 
         // 初始化名单
