@@ -6,10 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="修复已知问题">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/focusComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/focusComponent.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/extensionFiles/background.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/extensionFiles/background.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/extensionFiles/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/extensionFiles/manifest.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -455,7 +453,8 @@
       <workItem from="1706602963698" duration="131000" />
       <workItem from="1706606552107" duration="2810000" />
       <workItem from="1706690998405" duration="231000" />
-      <workItem from="1706691275254" duration="3773000" />
+      <workItem from="1706691275254" duration="4162000" />
+      <workItem from="1706697218245" duration="815000" />
     </task>
     <task id="LOCAL-00001" summary="优化抽屉蒙版的显示效果&#10;优化代码质量">
       <created>1683952184207</created>
@@ -575,14 +574,6 @@
       <option name="presentableId" value="LOCAL-00017" />
       <option name="project" value="LOCAL" />
       <updated>1687402693401</updated>
-    </task>
-    <task id="LOCAL-00118" summary="修复已知问题">
-      <option name="closed" value="true" />
-      <created>1701176509442</created>
-      <option name="number" value="00118" />
-      <option name="presentableId" value="LOCAL-00118" />
-      <option name="project" value="LOCAL" />
-      <updated>1701176509442</updated>
     </task>
     <task id="LOCAL-00119" summary="修复已知问题">
       <option name="closed" value="true" />
@@ -832,7 +823,15 @@
       <option name="project" value="LOCAL" />
       <updated>1706602597069</updated>
     </task>
-    <option name="localTasksCounter" value="150" />
+    <task id="LOCAL-00150" summary="修复已知问题">
+      <option name="closed" value="true" />
+      <created>1706695617007</created>
+      <option name="number" value="00150" />
+      <option name="presentableId" value="LOCAL-00150" />
+      <option name="project" value="LOCAL" />
+      <updated>1706695617008</updated>
+    </task>
+    <option name="localTasksCounter" value="151" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

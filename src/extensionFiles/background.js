@@ -66,29 +66,9 @@ function forbiddenWeb(url) {
             let focusFilter = result.focusFilter;
             let filterList = result.filterList;
             if (focusMode === true && filterList !== null) {
-                // 白名单模式（Firefox 暂不支持白名单模式）
-                if (focusFilter === "whiteListFilter") {
-                    if (filterList.length === 0) {
-                        if (browserType === "Safari") {
-                            browser.tabs.update({url: "./mainPage.html"});
-                        }
-                    } else if (filterList.length > 0) {
-                        let isInWhiteList = false;
-                        for (let i = 0; i < filterList.length; i++) {
-                            if (url.indexOf(filterList[i].domain) !== -1) {
-                                isInWhiteList = true;
-                            }
-                        }
-
-                        if (isInWhiteList === false) {
-                           if (browserType === "Safari") {
-                                browser.tabs.update({url: "./mainPage.html"});
-                            }
-                        }
-                    }
-                }
+                // Firefox 和 Safari 暂不支持白名单模式
                 // 黑名单模式
-                else if (focusFilter === "blackListFilter") {
+                if (focusFilter === "blackListFilter") {
                     if (filterList.length > 0) {
                         let isInBlackList = false;
                         for (let i = 0; i < filterList.length; i++) {
