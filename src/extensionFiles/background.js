@@ -20,66 +20,40 @@ function getBrowserType() {
 
 function forbiddenWeb(url) {
     if (["Chrome", "Edge"].indexOf(browserType) !== -1) {
-        chrome.storage.local.get(["focusMode", "focusFilter", "filterList"]).then((result) => {
+        chrome.storage.local.get(["focusMode", "filterList"]).then((result) => {
             let focusMode = result.focusMode;
-            let focusFilter = result.focusFilter;
             let filterList = result.filterList;
             if (focusMode === true && filterList !== null) {
-                // 白名单模式
-                if (focusFilter === "whiteListFilter") {
-                    if (filterList.length === 0) {
-                        chrome.tabs.update({url: browserType + "://newtab"});
-                    } else if (filterList.length > 0) {
-                        let isInWhiteList = false;
-                        for (let i = 0; i < filterList.length; i++) {
-                            if (url.indexOf(filterList[i].domain) !== -1) {
-                                isInWhiteList = true;
-                            }
-                        }
-
-                        if (isInWhiteList === false) {
-                            chrome.tabs.update({url: browserType + "://newtab"});
+                if (filterList.length > 0) {
+                    let isInBlackList = false;
+                    for (let i = 0; i < filterList.length; i++) {
+                        if (url.indexOf(filterList[i].domain) !== -1) {
+                            isInBlackList = true;
                         }
                     }
-                }
-                // 黑名单模式
-                else if (focusFilter === "blackListFilter") {
-                    if (filterList.length > 0) {
-                        let isInBlackList = false;
-                        for (let i = 0; i < filterList.length; i++) {
-                            if (url.indexOf(filterList[i].domain) !== -1) {
-                                isInBlackList = true;
-                            }
-                        }
 
-                        if (isInBlackList === true) {
-                            chrome.tabs.update({url: browserType + "://newtab"});
-                        }
+                    if (isInBlackList === true) {
+                        chrome.tabs.update({url: browserType + "://newtab"});
                     }
                 }
             }
         });
     }
     else if (["Firefox", "Safari"].indexOf(browserType) !== -1) {
-        browser.storage.local.get(["focusMode", "focusFilter", "filterList"]).then((result) => {
+        browser.storage.local.get(["focusMode", "filterList"]).then((result) => {
             let focusMode = result.focusMode;
-            let focusFilter = result.focusFilter;
             let filterList = result.filterList;
             if (focusMode === true && filterList !== null) {
-                // Firefox 和 Safari 暂不支持白名单模式
-                // 黑名单模式
-                if (focusFilter === "blackListFilter") {
-                    if (filterList.length > 0) {
-                        let isInBlackList = false;
-                        for (let i = 0; i < filterList.length; i++) {
-                            if (url.indexOf(filterList[i].domain) !== -1) {
-                                isInBlackList = true;
-                            }
+                if (filterList.length > 0) {
+                    let isInBlackList = false;
+                    for (let i = 0; i < filterList.length; i++) {
+                        if (url.indexOf(filterList[i].domain) !== -1) {
+                            isInBlackList = true;
                         }
+                    }
 
-                        if (isInBlackList === true) {
-                            browser.tabs.update({url: "./mainPage.html"});
-                        }
+                    if (isInBlackList === true) {
+                        browser.tabs.update({url: "./mainPage.html"});
                     }
                 }
             }
