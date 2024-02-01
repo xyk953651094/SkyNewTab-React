@@ -123,16 +123,16 @@ class App extends React.Component {
             localStorage.setItem("SkyNewTabReactVersion", currentVersion);
 
             // 额外提醒
-            if (currentVersion === "2.8.0") {
-                notification.open({
-                    icon: null,
-                    message: "重要通知",
-                    description: "新增专注模式，若专注模式无法生效，可尝试重新安装本插件",
-                    placement: "bottomLeft",
-                    duration: 10,
-                    closeIcon: false
-                });
-            }
+            // if (currentVersion === "2.8.0") {
+            //     notification.open({
+            //         icon: null,
+            //         message: "重要通知",
+            //         description: "若专注模式无法生效，可尝试重新安装本插件",
+            //         placement: "bottomLeft",
+            //         duration: 10,
+            //         closeIcon: false
+            //     });
+            // }
         }
 
         // 修改各类弹窗样式

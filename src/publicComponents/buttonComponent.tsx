@@ -35,13 +35,6 @@ class ButtonComponent extends React.Component {
         };
     }
 
-    defaultProps = {
-        buttonCursor: "default",
-        buttonContent: "",
-        buttonShape: "default",
-        buttonOnClick: null,
-    }
-
     componentWillReceiveProps(nextProps: any, prevProps: any) {
         if (nextProps.themeColor !== prevProps.themeColor) {
             this.setState({

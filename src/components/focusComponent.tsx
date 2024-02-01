@@ -4,9 +4,10 @@ import {btnMouseOut, btnMouseOver, changeThemeColor} from "../typescripts/public
 import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
 import "../stylesheets/publicStyles.scss"
 import {getBrowserType} from "../typescripts/publicFunctions";
-import {LinkOutlined, DeleteOutlined, PlusOutlined, SyncOutlined} from "@ant-design/icons";
+import {LinkOutlined, DeleteOutlined, PlusOutlined} from "@ant-design/icons";
 
 const {Text} = Typography;
+const browserType = getBrowserType();
 
 type propType = {
     themeColor: ThemeColorInterface,
@@ -20,7 +21,6 @@ type stateType = {
     fontColor: string,
     buttonShape: "circle" | "default" | "round" | undefined,
     focusMode: boolean,
-    focusFilter: "whiteListFilter" | "blackListFilter"
     inputValue: string,
     filterList: any[],
     focusMaxSize: number,
@@ -41,7 +41,6 @@ class FocusComponent extends React.Component {
             fontColor: "",
             buttonShape: "circle",
             focusMode: false,
-            focusFilter: "whiteListFilter",
             inputValue: "",
             filterList: [],
             focusMaxSize: 5,
@@ -49,7 +48,6 @@ class FocusComponent extends React.Component {
     }
 
     setExtensionStorage(key: string, value: any) {
-        const browserType = getBrowserType();
         if (["Chrome", "Edge"].indexOf(browserType) !== -1) {
             chrome.storage.local.set({[key]: value});
         }
@@ -77,16 +75,6 @@ class FocusComponent extends React.Component {
                 this.setExtensionStorage("filterList", []);
             })
         }
-    }
-
-    switchFilterBtnOnClick() {
-        let tempFocusFilter = this.state.focusFilter;
-        this.setState({
-            focusFilter: (tempFocusFilter === "whiteListFilter" ? "blackListFilter" : "whiteListFilter")
-        }, () => {
-            localStorage.setItem("focusFilter", this.state.focusFilter);
-            this.setExtensionStorage("focusFilter", this.state.focusFilter);
-        })
     }
 
     inputOnChange(e: any) {
@@ -184,16 +172,6 @@ class FocusComponent extends React.Component {
             this.setExtensionStorage("focusMode", false);
         }
 
-        // 初始化过滤模式
-        let tempFocusFilter = "whiteListFilter";
-        let focusFilterStorage = localStorage.getItem("focusFilter");
-        if (focusFilterStorage) {
-            tempFocusFilter = focusFilterStorage;
-        } else {
-            localStorage.setItem("focusFilter", "whiteListFilter");
-            this.setExtensionStorage("focusFilter", "whiteListFilter");
-        }
-
         // 初始化名单
         let tempFilterList = [];
         let filterListStorage = localStorage.getItem("filterList");
@@ -206,7 +184,6 @@ class FocusComponent extends React.Component {
 
         this.setState({
             focusMode: tempFocusMode,
-            focusFilter: tempFocusFilter,
             filterList: tempFilterList,
         });
     }
@@ -237,17 +214,9 @@ class FocusComponent extends React.Component {
                 header={
                     <Row align={"middle"}>
                         <Col span={8}>
-                            <Space>
-                                <Text style={{color: this.state.fontColor}}>
-                                    {(this.state.focusFilter === "whiteListFilter" ? "白名单 " : "黑名单 ") + this.state.filterList.length + " / " + this.state.focusMaxSize}
-                                </Text>
-                                <Button type={"text"} shape={this.state.buttonShape} icon={<SyncOutlined />}
-                                        onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
-                                        onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}
-                                        onClick={this.switchFilterBtnOnClick.bind(this)}
-                                        style={{color: this.state.fontColor}}>
-                                </Button>
-                            </Space>
+                            <Text style={{color: this.state.fontColor}}>
+                                {"黑名单 " + this.state.filterList.length + " / " + this.state.focusMaxSize}
+                            </Text>
                         </Col>
                         <Col span={16} style={{textAlign: "right"}}>
                             <Space>
@@ -287,11 +256,7 @@ class FocusComponent extends React.Component {
                 )}
                 footer={
                     <Text style={{color: this.state.fontColor}}>
-                        {
-                            this.state.focusFilter === "whiteListFilter" ?
-                                "白名单模式下，访问白名单外的网站将自动跳转至新标签页或空白页" :
-                                "黑名单模式下，访问黑名单中的网站将自动跳转至新标签页或空白页"
-                        }
+                        {"访问黑名单中的网站将自动跳转至新标签页"}
                     </Text>
                 }
             />

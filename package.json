@@ -1,6 +1,6 @@
 {
   "name": "sky_new_tab_react",
-  "version": "2.8.0",
+  "version": "2.8.1",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
