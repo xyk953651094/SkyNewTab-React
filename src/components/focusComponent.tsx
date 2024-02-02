@@ -20,6 +20,7 @@ import {getBrowserType} from "../typescripts/publicFunctions";
 import {LinkOutlined, DeleteOutlined, PlusOutlined} from "@ant-design/icons";
 
 const {Text} = Typography;
+const focusMaxSize = 5;
 const browserType = getBrowserType();
 
 type propType = {
@@ -37,7 +38,6 @@ type stateType = {
     focusMode: boolean,
     inputValue: string,
     filterList: any[],
-    focusMaxSize: number,
 }
 
 interface FocusComponent {
@@ -57,8 +57,7 @@ class FocusComponent extends React.Component {
             displayModal: false,
             focusMode: false,
             inputValue: "",
-            filterList: [],
-            focusMaxSize: 5,
+            filterList: []
         };
     }
 
@@ -81,49 +80,43 @@ class FocusComponent extends React.Component {
     }
 
     removeAllBtnOnClick() {
-        let tempFilterList = localStorage.getItem("filterList");
-        if (tempFilterList) {
-            this.setState({
-                filterList: []
-            }, () => {
-                localStorage.removeItem("filterList");
-                this.setExtensionStorage("filterList", []);
-            })
-        }
+        this.setState({
+            filterList: []
+        }, () => {
+            localStorage.removeItem("filterList");
+            this.setExtensionStorage("filterList", this.state.filterList);
+        });
     }
 
     removeBtnOnClick(item: any) {
-        let filterList = [];
-        let tempFilterList = localStorage.getItem("filterList");
-        if (tempFilterList) {
-            filterList = JSON.parse(tempFilterList);
-            let index = -1;
-            for (let i = 0; i < filterList.length; i++) {
-                if (item.timeStamp === filterList[i].timeStamp) {
-                    index = i;
-                    break;
-                }
+        let tempFilterList = this.state.filterList;
+        let index = -1;
+        for (let i = 0; i < tempFilterList.length; i++) {
+            if (item.timeStamp === tempFilterList[i].timeStamp) {
+                index = i;
+                break;
             }
-            if (index !== -1) {
-                filterList.splice(index, 1);
-            }
-            localStorage.setItem("filterList", JSON.stringify(filterList));
-            this.setExtensionStorage("filterList", filterList);
-
-            this.setState({
-                filterList: filterList,
-            })
         }
+        if (index !== -1) {
+            tempFilterList.splice(index, 1);
+        }
+
+        this.setState({
+            filterList: tempFilterList,
+        }, () => {
+            localStorage.setItem("filterList", JSON.stringify(this.state.filterList));
+            this.setExtensionStorage("filterList", this.state.filterList);
+        })
     }
 
     showAddModalBtnOnClick() {
-        if (this.state.filterList.length < this.state.focusMaxSize) {
+        if (this.state.filterList.length < focusMaxSize) {
             this.setState({
                 displayModal: true,
                 inputValue: ""
             })
         } else {
-            message.error("域名数量最多为" + this.state.focusMaxSize + "个");
+            message.error("域名数量最多为" + focusMaxSize + "个");
         }
     }
 
@@ -134,7 +127,7 @@ class FocusComponent extends React.Component {
     }
 
     modalOkBtnOnClick() {
-        if (this.state.filterList.length < this.state.focusMaxSize) {
+        if (this.state.filterList.length < focusMaxSize) {
             if (this.state.inputValue.length > 0) {
                 let tempFilterList = this.state.filterList;
                 tempFilterList.push({
@@ -150,13 +143,11 @@ class FocusComponent extends React.Component {
                     this.setExtensionStorage("filterList", this.state.filterList);
                     message.success("添加成功");
                 });
-            }
-            else {
+            } else {
                 message.error("域名不能为空");
             }
-        }
-        else {
-            message.error("域名数量最多为" + this.state.focusMaxSize + "个");
+        } else {
+            message.error("域名数量最多为" + focusMaxSize + "个");
         }
     }
 
@@ -226,7 +217,7 @@ class FocusComponent extends React.Component {
             <Row align={"middle"}>
                 <Col span={8}>
                     <Text style={{color: this.state.fontColor}}>
-                        {"专注模式 " + this.state.filterList.length + " / " + this.state.focusMaxSize}
+                        {"专注模式 " + this.state.filterList.length + " / " + focusMaxSize}
                     </Text>
                 </Col>
                 <Col span={16} style={{textAlign: "right"}}>
@@ -297,7 +288,7 @@ class FocusComponent extends React.Component {
                 </Popover>
                 <Modal title={
                     <Text style={{color: this.state.fontColor}}>
-                        {"添加域名 " + this.state.filterList.length + " / " + this.state.focusMaxSize}
+                        {"添加域名 " + this.state.filterList.length + " / " + focusMaxSize}
                     </Text>
                 }
                        closeIcon={false}

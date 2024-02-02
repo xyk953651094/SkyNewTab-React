@@ -7,6 +7,7 @@ import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publi
 import $ from "jquery";
 
 const {Text} = Typography;
+const dailyMaxSize = 5
 
 
 type propType = {
@@ -22,9 +23,7 @@ type stateType = {
     buttonShape: "circle" | "default" | "round" | undefined,
     displayModal: boolean,
     inputValue: string,
-    listItems: any,
-    dailySize: number,
-    dailyMaxSize: number,
+    dailyList: any,
     selectedTimeStamp: number,
 }
 
@@ -44,62 +43,49 @@ class DailyComponent extends React.Component {
             buttonShape: "circle",
             displayModal: false,
             inputValue: "",
-            listItems: [],
-            dailySize: 0,
-            dailyMaxSize: 5,
+            dailyList: [],
             selectedTimeStamp: 0,
         };
     }
 
     removeAllBtnOnClick() {
-        let tempDaily = localStorage.getItem("daily");
-        if (tempDaily) {
+        this.setState({
+            dailyList: [],
+        }, () => {
             localStorage.removeItem("daily");
-            this.setState({
-                listItems: [],
-                dailySize: 0
-            })
-        }
+        })
     }
 
     removeBtnOnClick(item: any) {
-        let daily = [];
-        let tempDaily = localStorage.getItem("daily");
-        if (tempDaily) {
-            daily = JSON.parse(tempDaily);
-            let index = -1;
-            for (let i = 0; i < daily.length; i++) {
-                if (item.timeStamp === daily[i].timeStamp) {
-                    index = i;
-                    break;
-                }
+        let tempDailyList = this.state.dailyList;
+        let index = -1;
+        for (let i = 0; i < tempDailyList.length; i++) {
+            if (item.timeStamp === tempDailyList[i].timeStamp) {
+                index = i;
+                break;
             }
-            if (index !== -1) {
-                daily.splice(index, 1);
-            }
-            localStorage.setItem("daily", JSON.stringify(daily));
-
-            this.setState({
-                listItems: daily,
-                dailySize: daily.length
-            })
         }
+        if (index !== -1) {
+            tempDailyList.splice(index, 1);
+        }
+
+        this.setState({
+            dailyList: tempDailyList,
+        }, () => {
+            localStorage.setItem("daily", JSON.stringify(this.state.dailyList));
+        })
+
     }
 
     showAddModalBtnOnClick() {
-        let daily = [];
-        let tempDaily = localStorage.getItem("daily");
-        if (tempDaily) {
-            daily = JSON.parse(tempDaily);
-        }
-        if (daily.length < this.state.dailyMaxSize) {
+        if (this.state.dailyList.length < dailyMaxSize) {
             this.setState({
                 displayModal: true,
                 inputValue: "",
                 selectedTimeStamp: 0
             })
         } else {
-            message.error("倒数日数量最多为" + this.state.dailyMaxSize + "个");
+            message.error("倒数日数量最多为" + dailyMaxSize + "个");
         }
     }
 
@@ -110,31 +96,27 @@ class DailyComponent extends React.Component {
     }
 
     modalOkBtnOnClick() {
-        if (this.state.inputValue && this.state.inputValue.length > 0 && this.state.selectedTimeStamp !== 0) {
-            let daily = [];
-            let tempDaily = localStorage.getItem("daily");
-            if (tempDaily) {
-                daily = JSON.parse(tempDaily);
-            }
-            if (daily.length < this.state.dailyMaxSize) {
-                daily.push({
+        if (this.state.dailyList.length < dailyMaxSize) {
+            if (this.state.inputValue && this.state.inputValue.length > 0 && this.state.selectedTimeStamp !== 0) {
+                let tempDailyList = this.state.dailyList;
+                tempDailyList.push({
                     "title": this.state.inputValue,
                     "selectedTimeStamp": this.state.selectedTimeStamp,
                     "timeStamp": Date.now()
                 });
-                localStorage.setItem("daily", JSON.stringify(daily));
 
                 this.setState({
                     displayModal: false,
-                    listItems: daily,
-                    dailySize: daily.length
+                    dailyList: tempDailyList,
+                }, () => {
+                    localStorage.setItem("daily", JSON.stringify(this.state.dailyList));
+                    message.success("添加成功");
                 });
-                message.success("添加成功");
             } else {
-                message.error("倒数日数量最多为" + this.state.dailyMaxSize + "个");
+                message.error("表单不能为空");
             }
         } else {
-            message.error("表单不能为空");
+            message.error("倒数日数量最多为" + dailyMaxSize + "个");
         }
     }
 
@@ -170,15 +152,14 @@ class DailyComponent extends React.Component {
     };
 
     componentDidMount() {
-        let daily = [];
-        let tempDaily = localStorage.getItem("daily");
-        if (tempDaily) {
-            daily = JSON.parse(tempDaily);
+        let tempDailyList = [];
+        let dailyListStorage = localStorage.getItem("daily");
+        if (dailyListStorage) {
+            tempDailyList = JSON.parse(dailyListStorage);
         }
 
         this.setState({
-            listItems: daily,
-            dailySize: daily.length
+            dailyList: tempDailyList,
         })
     }
 
@@ -206,7 +187,7 @@ class DailyComponent extends React.Component {
             <Row align={"middle"}>
                 <Col span={10}>
                     <Text style={{color: this.state.fontColor}}>
-                        {"倒数日 " + this.state.dailySize + " / " + this.state.dailyMaxSize}
+                        {"倒数日 " + this.state.dailyList.length + " / " + dailyMaxSize}
                     </Text>
                 </Col>
                 <Col span={14} style={{textAlign: "right"}}>
@@ -230,7 +211,7 @@ class DailyComponent extends React.Component {
 
         const popoverContent = (
             <List
-                dataSource={this.state.listItems}
+                dataSource={this.state.dailyList}
                 renderItem={(item: any) => (
                     <List.Item
                         actions={[
@@ -276,12 +257,12 @@ class DailyComponent extends React.Component {
                             className={"componentTheme zIndexHigh"}
                             style={{cursor: "default", display: this.state.display}}
                     >
-                        {this.state.dailySize + " 个"}
+                        {this.state.dailyList.length + " 个"}
                     </Button>
                 </Popover>
                 <Modal title={
                     <Text style={{color: this.state.fontColor}}>
-                        {"添加倒数日 " + this.state.dailySize + " / " + this.state.dailyMaxSize}
+                        {"添加倒数日 " + this.state.dailyList.length + " / " + dailyMaxSize}
                     </Text>
                 }
                        closeIcon={false}
