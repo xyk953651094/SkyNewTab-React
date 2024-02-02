@@ -6,8 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="修复已知问题">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/focusComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/focusComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/extensionFiles/background.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/extensionFiles/background.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/extensionFiles/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/extensionFiles/manifest.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -456,7 +458,16 @@
       <workItem from="1706691275254" duration="4162000" />
       <workItem from="1706697218245" duration="923000" />
       <workItem from="1706698443948" duration="547000" />
-      <workItem from="1706757001887" duration="2831000" />
+      <workItem from="1706757001887" duration="3135000" />
+      <workItem from="1706784058588" duration="2471000" />
+      <workItem from="1706843730439" duration="845000" />
+      <workItem from="1706846348061" duration="326000" />
+      <workItem from="1706846794026" duration="186000" />
+      <workItem from="1706847004997" duration="361000" />
+      <workItem from="1706847872097" duration="368000" />
+      <workItem from="1706848252043" duration="54000" />
+      <workItem from="1706848318034" duration="187000" />
+      <workItem from="1706862976510" duration="4383000" />
     </task>
     <task id="LOCAL-00001" summary="优化抽屉蒙版的显示效果&#10;优化代码质量">
       <created>1683952184207</created>
@@ -576,14 +587,6 @@
       <option name="presentableId" value="LOCAL-00017" />
       <option name="project" value="LOCAL" />
       <updated>1687402693401</updated>
-    </task>
-    <task id="LOCAL-00120" summary="修复已知问题">
-      <option name="closed" value="true" />
-      <created>1701508986046</created>
-      <option name="number" value="00120" />
-      <option name="presentableId" value="LOCAL-00120" />
-      <option name="project" value="LOCAL" />
-      <updated>1701508986047</updated>
     </task>
     <task id="LOCAL-00121" summary="新增帮助文档链接">
       <option name="closed" value="true" />
@@ -833,7 +836,15 @@
       <option name="project" value="LOCAL" />
       <updated>1706698298839</updated>
     </task>
-    <option name="localTasksCounter" value="152" />
+    <task id="LOCAL-00152" summary="修复已知问题">
+      <option name="closed" value="true" />
+      <created>1706766427736</created>
+      <option name="number" value="00152" />
+      <option name="presentableId" value="LOCAL-00152" />
+      <option name="project" value="LOCAL" />
+      <updated>1706766427737</updated>
+    </task>
+    <option name="localTasksCounter" value="153" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

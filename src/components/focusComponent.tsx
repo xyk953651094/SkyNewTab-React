@@ -1,5 +1,18 @@
 import React from "react";
-import {Popover, Button, Space, Row, Col, Typography, Switch, List, Input, message} from "antd";
+import {
+    Popover,
+    Button,
+    Space,
+    Row,
+    Col,
+    Typography,
+    Switch,
+    List,
+    Input,
+    message,
+    Form,
+    Modal
+} from "antd";
 import {btnMouseOut, btnMouseOver, changeThemeColor} from "../typescripts/publicFunctions";
 import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
 import "../stylesheets/publicStyles.scss"
@@ -20,6 +33,7 @@ type stateType = {
     backgroundColor: string,
     fontColor: string,
     buttonShape: "circle" | "default" | "round" | undefined,
+    displayModal: boolean,
     focusMode: boolean,
     inputValue: string,
     filterList: any[],
@@ -40,6 +54,7 @@ class FocusComponent extends React.Component {
             backgroundColor: "",
             fontColor: "",
             buttonShape: "circle",
+            displayModal: false,
             focusMode: false,
             inputValue: "",
             filterList: [],
@@ -48,12 +63,12 @@ class FocusComponent extends React.Component {
     }
 
     setExtensionStorage(key: string, value: any) {
-        if (["Chrome", "Edge"].indexOf(browserType) !== -1) {
-            chrome.storage.local.set({[key]: value});
-        }
-        else if (["Firefox", "Safari"].indexOf(browserType) !== -1) {
-            browser.storage.local.set({[key]: value});
-        }
+        // if (["Chrome", "Edge"].indexOf(browserType) !== -1) {
+        //     chrome.storage.local.set({[key]: value});
+        // }
+        // else if (["Firefox", "Safari"].indexOf(browserType) !== -1) {
+        //     browser.storage.local.set({[key]: value});
+        // }
     }
 
     focusModeSwitchOnChange(checked: boolean) {
@@ -74,38 +89,6 @@ class FocusComponent extends React.Component {
                 localStorage.removeItem("filterList");
                 this.setExtensionStorage("filterList", []);
             })
-        }
-    }
-
-    inputOnChange(e: any) {
-        this.setState({
-            inputValue: e.target.value
-        })
-    }
-
-    addFilterListBtnOnClick() {
-        if (this.state.filterList.length < this.state.focusMaxSize) {
-            if (this.state.inputValue.length > 0) {
-                let tempFilterList = this.state.filterList;
-                tempFilterList.push({
-                    "domain": this.state.inputValue,
-                    "timeStamp": Date.now()
-                });
-
-                this.setState({
-                    inputValue: "",
-                    filterList: tempFilterList
-                }, () => {
-                    localStorage.setItem("filterList", JSON.stringify(this.state.filterList));
-                    this.setExtensionStorage("filterList", this.state.filterList);
-                })
-            }
-            else {
-                message.error("域名不能为空");
-            }
-        }
-        else {
-            message.error("名单数量最多为" + this.state.focusMaxSize + "个");
         }
     }
 
@@ -131,6 +114,56 @@ class FocusComponent extends React.Component {
                 filterList: filterList,
             })
         }
+    }
+
+    showAddModalBtnOnClick() {
+        if (this.state.filterList.length < this.state.focusMaxSize) {
+            this.setState({
+                displayModal: true,
+                inputValue: ""
+            })
+        } else {
+            message.error("域名数量最多为" + this.state.focusMaxSize + "个");
+        }
+    }
+
+    inputOnChange(e: any) {
+        this.setState({
+            inputValue: e.target.value
+        })
+    }
+
+    modalOkBtnOnClick() {
+        if (this.state.filterList.length < this.state.focusMaxSize) {
+            if (this.state.inputValue.length > 0) {
+                let tempFilterList = this.state.filterList;
+                tempFilterList.push({
+                    "domain": this.state.inputValue,
+                    "timeStamp": Date.now()
+                });
+
+                this.setState({
+                    displayModal: false,
+                    filterList: tempFilterList
+                }, () => {
+                    localStorage.setItem("filterList", JSON.stringify(this.state.filterList));
+                    this.setExtensionStorage("filterList", this.state.filterList);
+                    message.success("添加成功");
+                });
+            }
+            else {
+                message.error("域名不能为空");
+            }
+        }
+        else {
+            message.error("域名数量最多为" + this.state.focusMaxSize + "个");
+        }
+    }
+
+    modalCancelBtnOnClick() {
+        this.setState({
+            displayModal: false
+        })
     }
 
     componentWillReceiveProps(nextProps: any, prevProps: any) {
@@ -192,17 +225,25 @@ class FocusComponent extends React.Component {
         const popoverTitle = (
             <Row align={"middle"}>
                 <Col span={8}>
-                    <Text style={{color: this.state.fontColor}}>{"专注模式"}</Text>
+                    <Text style={{color: this.state.fontColor}}>
+                        {"专注模式 " + this.state.filterList.length + " / " + this.state.focusMaxSize}
+                    </Text>
                 </Col>
                 <Col span={16} style={{textAlign: "right"}}>
                     <Space>
                         <Switch checkedChildren="已开启" unCheckedChildren="已关闭" id={"focusModeSwitch"}
                                 checked={this.state.focusMode} onChange={this.focusModeSwitchOnChange.bind(this)}/>
+                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<PlusOutlined/>}
+                                onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
+                                onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}
+                                style={{color: this.state.fontColor}} onClick={this.showAddModalBtnOnClick.bind(this)}>
+                            {"添加域名"}
+                        </Button>
                         <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<DeleteOutlined/>}
                                 onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
                                 onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}
                                 style={{color: this.state.fontColor}} onClick={this.removeAllBtnOnClick.bind(this)}>
-                            {"全部清空"}
+                            {"全部删除"}
                         </Button>
                     </Space>
                 </Col>
@@ -211,28 +252,6 @@ class FocusComponent extends React.Component {
 
         const popoverContent = (
             <List
-                header={
-                    <Row align={"middle"}>
-                        <Col span={8}>
-                            <Text style={{color: this.state.fontColor}}>
-                                {"黑名单 " + this.state.filterList.length + " / " + this.state.focusMaxSize}
-                            </Text>
-                        </Col>
-                        <Col span={16} style={{textAlign: "right"}}>
-                            <Space>
-                                <Input placeholder="example.com" value={this.state.inputValue} onChange={this.inputOnChange.bind(this)}
-                                       maxLength={20} showCount allowClear/>
-                                <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<PlusOutlined/>}
-                                        onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
-                                        onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}
-                                        onClick={this.addFilterListBtnOnClick.bind(this)}
-                                        style={{color: this.state.fontColor}}>
-                                    {"添加"}
-                                </Button>
-                            </Space>
-                        </Col>
-                    </Row>
-                }
                 dataSource={this.state.filterList}
                 renderItem={(item: any) => (
                     <List.Item
@@ -256,25 +275,46 @@ class FocusComponent extends React.Component {
                 )}
                 footer={
                     <Text style={{color: this.state.fontColor}}>
-                        {"访问黑名单中的网站将自动跳转至新标签页"}
+                        {"开启专注模式后，访问以上域名时将自动跳转至新标签页"}
                     </Text>
                 }
             />
         );
         
         return (
-            <Popover title={popoverTitle} content={popoverContent} placement={"bottomRight"}
-                     color={this.state.backgroundColor}
-                     overlayStyle={{width: "500px"}}>
-                <Button shape={this.props.preferenceData.buttonShape} size={"large"}
-                        icon={<i className={this.state.focusMode ? "bi bi-cup-hot-fill" : "bi bi-cup-hot"}></i>}
-                        id={"focusBtn"}
-                        className={"componentTheme zIndexHigh"}
-                        style={{cursor: "default", display: this.state.display}}
+            <>
+                <Popover title={popoverTitle} content={popoverContent} placement={"bottomRight"}
+                         color={this.state.backgroundColor}
+                         overlayStyle={{width: "500px"}}>
+                    <Button shape={this.props.preferenceData.buttonShape} size={"large"}
+                            icon={<i className={this.state.focusMode ? "bi bi-cup-hot-fill" : "bi bi-cup-hot"}></i>}
+                            id={"focusBtn"}
+                            className={"componentTheme zIndexHigh"}
+                            style={{cursor: "default", display: this.state.display}}
+                    >
+                        {this.state.focusMode ? "专注中" : "未专注"}
+                    </Button>
+                </Popover>
+                <Modal title={
+                    <Text style={{color: this.state.fontColor}}>
+                        {"添加域名 " + this.state.filterList.length + " / " + this.state.focusMaxSize}
+                    </Text>
+                }
+                       closeIcon={false}
+                       centered
+                       open={this.state.displayModal} onOk={this.modalOkBtnOnClick.bind(this)}
+                       onCancel={this.modalCancelBtnOnClick.bind(this)}
+                       destroyOnClose={true}
+                       styles={{mask: {backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)"}}}
                 >
-                    {this.state.focusMode ? "专注中" : "未专注"}
-                </Button>
-            </Popover>
+                    <Form>
+                        <Form.Item label={"网站域名"} name={"focusInput"}>
+                            <Input placeholder="example.com" value={this.state.inputValue} onChange={this.inputOnChange.bind(this)}
+                                   maxLength={20} showCount allowClear/>
+                        </Form.Item>
+                    </Form>
+                </Modal>
+            </>
         );
     }
 }

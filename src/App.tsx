@@ -244,18 +244,9 @@ class App extends React.Component {
 
         // const observer = new MutationObserver((mutations) => {
         //     mutations.forEach((mutation) => {
-        //         if (mutation.type === 'childList') {
-        //             console.log(mutation);
-        //             mutation.addedNodes.forEach((addedNode) => {
-        //                 const node = addedNode as HTMLElement;
-        //                 if (node.classList.contains("ant-message")) {
-        //                     $(".ant-message-notice-content").css({
-        //                         "backgroundColor": this.state.themeColor.componentBackgroundColor,
-        //                         "color": this.state.themeColor.componentFontColor
-        //                     });
-        //                     $(".ant-message-custom-content > .anticon").css("color", this.state.themeColor.componentFontColor);
-        //                 }
-        //             });
+        //         // 插入节点时
+        //         if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+        //
         //         }
         //     });
         // });
