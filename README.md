@@ -10,7 +10,6 @@
 * 图片来源：https://unsplash.com（图片中的内容不代表作者任何观点）
 * 开发支持：[JetBrains Open Source Support](https://jb.gg/OpenSourceSupport "跳转至 JetBrains Open Source Support")
 * <img width="40" src="https://resources.jetbrains.com/storage/products/company/brand/logos/WebStorm_icon.png" alt="WebStorm logo.">
-* 使用须知：本作品由作者个人出于学习目的开发，由于成本原因，难以保证不同型号设备下的最终品质，后续尽量完善
 
 ## 更新
 * 请前往 Releases 页面查看
@@ -40,8 +39,8 @@
 ![IMG_0093](https://github.com/xyk953651094/SkyNewTab-React/assets/28004442/3cdfa6f4-f2fd-4268-85d3-5fc5f3eac7c0)
 
 ## 捐助
-* 如果您喜欢我的作品，请考虑捐助
-* 注意：捐助是无偿的，但这可以为我提供更大的创作动力
+* 如果您喜欢我的作品，请考虑捐助。注意：捐助是无偿的，但这可以为我提供更大的创作动力
+* [爱发电](https://afdian.net/a/xyk953651094)
 <figure class="half">
   <img width="200" alt="爱发电" src="https://github.com/xyk953651094/SkyNewTab-React/assets/28004442/7766955b-46fe-490f-aadb-55099ce4f6fc">
   <img width="200" alt="微信赞赏码" src="https://github.com/xyk953651094/SkyNewTab-React/assets/28004442/6b7c2305-753c-4841-9031-106f39683494">
