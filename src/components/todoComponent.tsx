@@ -6,7 +6,7 @@ import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publi
 import $ from "jquery";
 
 const {Text} = Typography;
-const todoMaxSize = 5;
+const todoMaxSize = 10;
 
 type propType = {
     themeColor: ThemeColorInterface,
@@ -96,28 +96,24 @@ class TodoComponent extends React.Component {
     }
 
     modalOkBtnOnClick() {
-        if (this.state.todoList.length < todoMaxSize) {
-            if (this.state.inputValue && this.state.inputValue.length > 0) {
-                let tempTodoList = this.state.todoList;
-                tempTodoList.push({
-                    "title": this.state.inputValue,
-                    "tag": this.state.tag,
-                    "priority": this.state.priority,
-                    "timeStamp": Date.now()
-                });
+        if (this.state.inputValue && this.state.inputValue.length > 0) {
+            let tempTodoList = this.state.todoList;
+            tempTodoList.push({
+                "title": this.state.inputValue,
+                "tag": this.state.tag,
+                "priority": this.state.priority,
+                "timeStamp": Date.now()
+            });
 
-                this.setState({
-                    displayModal: false,
-                    todoList: tempTodoList,
-                }, () => {
-                    localStorage.setItem("todos", JSON.stringify(this.state.todoList));
-                    message.success("添加成功");
-                });
-            } else {
-                message.error("表单不能为空");
-            }
+            this.setState({
+                displayModal: false,
+                todoList: tempTodoList,
+            }, () => {
+                localStorage.setItem("todos", JSON.stringify(this.state.todoList));
+                message.success("添加成功");
+            });
         } else {
-            message.error("待办数量最多为" + todoMaxSize + "个");
+            message.error("表单不能为空");
         }
     }
 

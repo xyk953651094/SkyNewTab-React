@@ -138,18 +138,15 @@ class App extends React.Component {
         // 修改各类弹窗样式
         $("body").bind("DOMNodeInserted", () => {
             // 通用
-            $(".ant-list-header").css({"borderBlockEndColor": this.state.themeColor.componentFontColor,});
             $(".ant-list-item").css({
                 "borderBlockEndColor": this.state.themeColor.componentFontColor,
-                "padding": "10px, 0"
+                "padding": "6px  0"
             });
             $(".ant-list-item-meta-title").css("color", this.state.themeColor.componentFontColor);
             $(".ant-list-item-meta-description").css("color", this.state.themeColor.componentFontColor);
             $(".ant-list-item-action").css("marginInlineStart", "0");
             $(".ant-empty-description").css("color", this.state.themeColor.componentFontColor);
-            $(".ant-alert").css("padding", "10px");
             $("div.ant-typography").css("margin-bottom", "0");
-            $("ol").css("margin-bottom", "0");
 
             // popover
             let popoverEle = $(".ant-popover");

@@ -20,7 +20,7 @@ import {getBrowserType} from "../typescripts/publicFunctions";
 import {LinkOutlined, DeleteOutlined, PlusOutlined} from "@ant-design/icons";
 
 const {Text} = Typography;
-const focusMaxSize = 5;
+const focusMaxSize = 10;
 const browserType = getBrowserType();
 
 type propType = {
@@ -127,27 +127,23 @@ class FocusComponent extends React.Component {
     }
 
     modalOkBtnOnClick() {
-        if (this.state.filterList.length < focusMaxSize) {
-            if (this.state.inputValue.length > 0) {
-                let tempFilterList = this.state.filterList;
-                tempFilterList.push({
-                    "domain": this.state.inputValue,
-                    "timeStamp": Date.now()
-                });
+        if (this.state.inputValue.length > 0) {
+            let tempFilterList = this.state.filterList;
+            tempFilterList.push({
+                "domain": this.state.inputValue,
+                "timeStamp": Date.now()
+            });
 
-                this.setState({
-                    displayModal: false,
-                    filterList: tempFilterList
-                }, () => {
-                    localStorage.setItem("filterList", JSON.stringify(this.state.filterList));
-                    this.setExtensionStorage("filterList", this.state.filterList);
-                    message.success("添加成功");
-                });
-            } else {
-                message.error("域名不能为空");
-            }
+            this.setState({
+                displayModal: false,
+                filterList: tempFilterList
+            }, () => {
+                localStorage.setItem("filterList", JSON.stringify(this.state.filterList));
+                this.setExtensionStorage("filterList", this.state.filterList);
+                message.success("添加成功");
+            });
         } else {
-            message.error("域名数量最多为" + focusMaxSize + "个");
+            message.error("域名不能为空");
         }
     }
 

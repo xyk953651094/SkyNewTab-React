@@ -112,11 +112,6 @@ class WallpaperComponent extends React.Component {
             .then(function (resultData: any) {
                 message.destroy();
                 message.loading("正在加载图片", 0);
-                setTimeout(() => {
-                    if(tempThis.state.display === "none") {
-                        message.loading("努力加载中，请耐心等待或检查网络", 0);
-                    }
-                }, 5000);
 
                 // 缓存历史图片
                 let lastImageStorage = localStorage.getItem("lastImage"); // 上一张图片
@@ -155,12 +150,6 @@ class WallpaperComponent extends React.Component {
                     message.loading("获取图片失败，正在加载缓存图片", 0);
                     lastImage = JSON.parse(lastImage);
                     tempThis.setWallpaper(lastImage);
-
-                    setTimeout(() => {
-                        if(tempThis.state.display === "none") {
-                            message.loading("努力加载中，请耐心等待或检查网络", 0);
-                        }
-                    }, 5000);
                 } else {
                     message.error("获取图片失败，请检查网络连接");
                 }
@@ -186,12 +175,6 @@ class WallpaperComponent extends React.Component {
                     message.loading("正在加载缓存图片", 0);
                     lastImage = JSON.parse(lastImage);
                     this.setWallpaper(lastImage);
-
-                    setTimeout(() => {
-                        if(this.state.display === "none") {
-                            message.loading("努力加载中，请耐心等待或检查网络", 0);
-                        }
-                    }, 5000);
                 } else {
                     message.error("无缓存图片可加载，请尝试重置插件");
                 }

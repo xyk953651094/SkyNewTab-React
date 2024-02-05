@@ -7,7 +7,7 @@ import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publi
 import $ from "jquery";
 
 const {Text} = Typography;
-const dailyMaxSize = 5
+const dailyMaxSize = 10;
 
 
 type propType = {
@@ -96,27 +96,23 @@ class DailyComponent extends React.Component {
     }
 
     modalOkBtnOnClick() {
-        if (this.state.dailyList.length < dailyMaxSize) {
-            if (this.state.inputValue && this.state.inputValue.length > 0 && this.state.selectedTimeStamp !== 0) {
-                let tempDailyList = this.state.dailyList;
-                tempDailyList.push({
-                    "title": this.state.inputValue,
-                    "selectedTimeStamp": this.state.selectedTimeStamp,
-                    "timeStamp": Date.now()
-                });
+        if (this.state.inputValue && this.state.inputValue.length > 0 && this.state.selectedTimeStamp !== 0) {
+            let tempDailyList = this.state.dailyList;
+            tempDailyList.push({
+                "title": this.state.inputValue,
+                "selectedTimeStamp": this.state.selectedTimeStamp,
+                "timeStamp": Date.now()
+            });
 
-                this.setState({
-                    displayModal: false,
-                    dailyList: tempDailyList,
-                }, () => {
-                    localStorage.setItem("daily", JSON.stringify(this.state.dailyList));
-                    message.success("添加成功");
-                });
-            } else {
-                message.error("表单不能为空");
-            }
+            this.setState({
+                displayModal: false,
+                dailyList: tempDailyList,
+            }, () => {
+                localStorage.setItem("daily", JSON.stringify(this.state.dailyList));
+                message.success("添加成功");
+            });
         } else {
-            message.error("倒数日数量最多为" + dailyMaxSize + "个");
+            message.error("表单不能为空");
         }
     }
 

@@ -75,14 +75,14 @@ class ClockComponent extends React.Component {
                      style={{padding: "5px 10px", borderRadius: "8px"}}
                      onMouseOver={this.btnMouseOver.bind(this)} onMouseOut={this.btnMouseOut.bind(this)}>
                     <Space align={"center"} id={"clock"}>
-                        <Text className={"textShadow clockText"} style={{color: this.state.backgroundColor}}>
+                        <Text className={"textShadow clockText"} style={{color: this.state.backgroundColor, cursor: "default"}}>
                             {this.state.currentTime}
                         </Text>
                         <Space align={"center"} direction={"vertical"}>
-                            <Text className={"textShadow dateText"} style={{color: this.state.backgroundColor}}>
+                            <Text className={"textShadow dateText"} style={{color: this.state.backgroundColor, cursor: "default"}}>
                                 {this.state.currentWeek}
                             </Text>
-                            <Text className={"textShadow dateText"} style={{color: this.state.backgroundColor}}>
+                            <Text className={"textShadow dateText"} style={{color: this.state.backgroundColor, cursor: "default"}}>
                                 {this.state.currentDate}
                             </Text>
                         </Space>
