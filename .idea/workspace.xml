@@ -4,15 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="优化代码质量">
+    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="提升使用体验">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/clockComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/clockComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/collectionComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/collectionComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/dailyComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dailyComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/focusComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/focusComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/todoComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/todoComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/wallpaperComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/wallpaperComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -480,6 +474,10 @@
       <workItem from="1707015827110" duration="163000" />
       <workItem from="1707016512524" duration="2282000" />
       <workItem from="1707042551168" duration="3273000" />
+      <workItem from="1707099309019" duration="2204000" />
+      <workItem from="1707104919726" duration="13000" />
+      <workItem from="1707106921832" duration="79000" />
+      <workItem from="1707109674986" duration="1011000" />
     </task>
     <task id="LOCAL-00001" summary="优化抽屉蒙版的显示效果&#10;优化代码质量">
       <created>1683952184207</created>
@@ -599,30 +597,6 @@
       <option name="presentableId" value="LOCAL-00017" />
       <option name="project" value="LOCAL" />
       <updated>1687402693401</updated>
-    </task>
-    <task id="LOCAL-00123" summary="优化视觉效果">
-      <option name="closed" value="true" />
-      <created>1701931160774</created>
-      <option name="number" value="00123" />
-      <option name="presentableId" value="LOCAL-00123" />
-      <option name="project" value="LOCAL" />
-      <updated>1701931160775</updated>
-    </task>
-    <task id="LOCAL-00124" summary="优化视觉效果">
-      <option name="closed" value="true" />
-      <created>1702024210390</created>
-      <option name="number" value="00124" />
-      <option name="presentableId" value="LOCAL-00124" />
-      <option name="project" value="LOCAL" />
-      <updated>1702024210390</updated>
-    </task>
-    <task id="LOCAL-00125" summary="优化功能体验">
-      <option name="closed" value="true" />
-      <created>1702388180206</created>
-      <option name="number" value="00125" />
-      <option name="presentableId" value="LOCAL-00125" />
-      <option name="project" value="LOCAL" />
-      <updated>1702388180207</updated>
     </task>
     <task id="LOCAL-00126" summary="优化功能体验">
       <option name="closed" value="true" />
@@ -856,7 +830,31 @@
       <option name="project" value="LOCAL" />
       <updated>1706880659743</updated>
     </task>
-    <option name="localTasksCounter" value="155" />
+    <task id="LOCAL-00155" summary="提升使用体验">
+      <option name="closed" value="true" />
+      <created>1707099493897</created>
+      <option name="number" value="00155" />
+      <option name="presentableId" value="LOCAL-00155" />
+      <option name="project" value="LOCAL" />
+      <updated>1707099493897</updated>
+    </task>
+    <task id="LOCAL-00156" summary="提升使用体验">
+      <option name="closed" value="true" />
+      <created>1707099512125</created>
+      <option name="number" value="00156" />
+      <option name="presentableId" value="LOCAL-00156" />
+      <option name="project" value="LOCAL" />
+      <updated>1707099512125</updated>
+    </task>
+    <task id="LOCAL-00157" summary="提升使用体验">
+      <option name="closed" value="true" />
+      <created>1707103396182</created>
+      <option name="number" value="00157" />
+      <option name="presentableId" value="LOCAL-00157" />
+      <option name="project" value="LOCAL" />
+      <updated>1707103396182</updated>
+    </task>
+    <option name="localTasksCounter" value="158" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -903,7 +901,6 @@
     <MESSAGE value="菜单栏表单控件颜色主题" />
     <MESSAGE value="暂时注释菜单栏表单控件颜色主题" />
     <MESSAGE value="简洁模式现在可以隐藏搜索框了" />
-    <MESSAGE value="提升使用体验" />
     <MESSAGE value="模块化公用的 popover 组件和 button 组件（测试版）" />
     <MESSAGE value="优化使用体验" />
     <MESSAGE value="新增专注模式" />
@@ -911,7 +908,8 @@
     <MESSAGE value="修复已知问题" />
     <MESSAGE value="优化专注模式界面" />
     <MESSAGE value="优化代码质量" />
-    <option name="LAST_COMMIT_MESSAGE" value="优化代码质量" />
+    <MESSAGE value="提升使用体验" />
+    <option name="LAST_COMMIT_MESSAGE" value="提升使用体验" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
