@@ -87,13 +87,13 @@ class CollectionComponent extends React.Component {
                     });
                     message.success("添加成功");
                 } else {
-                    message.error("网页地址格式错误");
+                    message.error("链接地址格式错误");
                 }
             } else {
                 message.error("链接数量最多为" + this.state.collectionMaxSize + "个");
             }
         } else {
-            message.error("网页名称或网页地址不能为空");
+            message.error("表单不能为空");
         }
     }
 
@@ -222,12 +222,12 @@ class CollectionComponent extends React.Component {
                                 )
                             })
                         }
-                        <Tooltip title={"添加快速链接"} placement={"bottom"} color={this.state.backgroundColor}>
+                        <Tooltip title={"添加链接"} placement={"bottom"} color={this.state.backgroundColor}>
                             <Button type={"primary"} shape={this.state.buttonShape} className={"componentTheme"}
                                     style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}}
                                     icon={<PlusOutlined/>} onClick={this.showAddModalBtnOnClick.bind(this)}/>
                         </Tooltip>
-                        <Tooltip title={"编辑快速链接"} placement={"bottom"} color={this.state.backgroundColor}>
+                        <Tooltip title={"编辑链接"} placement={"bottom"} color={this.state.backgroundColor}>
                             <Button type={"primary"} shape={this.state.buttonShape} className={"componentTheme"}
                                     style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}}
                                     icon={<EditOutlined/>} onClick={this.showEditModalBtnOnClick.bind(this)}/>
@@ -239,7 +239,7 @@ class CollectionComponent extends React.Component {
                         </Tooltip>
                         <Modal title={
                             <Text style={{color: this.state.fontColor}}>
-                                {"添加快速链接 " + this.state.collectionSize + " / " + this.state.collectionMaxSize}
+                                {"添加链接 " + this.state.collectionSize + " / " + this.state.collectionMaxSize}
                             </Text>
                         }
                                closeIcon={false} centered
@@ -249,12 +249,12 @@ class CollectionComponent extends React.Component {
                                styles={{mask: {backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)"}}}
                         >
                             <Form>
-                                <Form.Item label={"网页名称"} name={"webName"}>
-                                    <Input placeholder={"请输入网页名称"} id={"webNameInput"} maxLength={5} allowClear
+                                <Form.Item label={"链接名称"} name={"webName"}>
+                                    <Input placeholder={"请输入链接名称"} id={"webNameInput"} maxLength={5} allowClear
                                            showCount/>
                                 </Form.Item>
-                                <Form.Item label={"网页地址"} name={"webNameUrl"}>
-                                    <Input placeholder={"请输入网页地址"} id={"webUrlInput"} allowClear/>
+                                <Form.Item label={"链接地址"} name={"webNameUrl"}>
+                                    <Input placeholder={"请输入链接地址"} id={"webUrlInput"} allowClear/>
                                 </Form.Item>
                             </Form>
                         </Modal>
@@ -262,7 +262,7 @@ class CollectionComponent extends React.Component {
                             <Row align={"middle"}>
                                 <Col span={12}>
                                     <Text style={{color: this.state.fontColor}}>
-                                        {"编辑快速链接 " + this.state.collectionSize + " / " + this.state.collectionMaxSize}
+                                        {"编辑链接 " + this.state.collectionSize + " / " + this.state.collectionMaxSize}
                                     </Text>
                                 </Col>
                                 <Col span={12} style={{textAlign: "right"}}>

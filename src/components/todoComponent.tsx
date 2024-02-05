@@ -6,6 +6,7 @@ import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publi
 import $ from "jquery";
 
 const {Text} = Typography;
+const todoMaxSize = 10;
 
 type propType = {
     themeColor: ThemeColorInterface,
@@ -20,9 +21,7 @@ type stateType = {
     buttonShape: "circle" | "default" | "round" | undefined,
     displayModal: boolean,
     inputValue: string,
-    listItems: any,
-    todoSize: number,
-    todoMaxSize: number,
+    todoList: any,
     tag: string,
     priority: string,
 }
@@ -43,32 +42,42 @@ class TodoComponent extends React.Component {
             buttonShape: "round",
             displayModal: false,
             inputValue: "",
-            listItems: [],
-            todoSize: 0,
-            todoMaxSize: 5,
+            todoList: [],
             tag: "工作",
             priority: "★",
         };
     }
 
     finishAllBtnOnClick() {
-        let tempTodos = localStorage.getItem("todos");
-        if (tempTodos) {
+        this.setState({
+            todoList: [],
+        }, () => {
             localStorage.removeItem("todos");
-            this.setState({
-                listItems: [],
-                todoSize: 0
-            })
+        })
+    }
+
+    finishBtnOnClick(item: any) {
+        let tempTodoList = this.state.todoList;
+        let index = -1;
+        for (let i = 0; i < tempTodoList.length; i++) {
+            if (item.timeStamp === tempTodoList[i].timeStamp) {
+                index = i;
+                break;
+            }
         }
+        if (index !== -1) {
+            tempTodoList.splice(index, 1);
+        }
+
+        this.setState({
+            todoList: tempTodoList,
+        }, () => {
+            localStorage.setItem("todos", JSON.stringify(this.state.todoList));
+        })
     }
 
     showAddModalBtnOnClick() {
-        let todos = [];
-        let tempTodos = localStorage.getItem("todos");
-        if (tempTodos) {
-            todos = JSON.parse(tempTodos);
-        }
-        if (todos.length < this.state.todoMaxSize) {
+        if (this.state.todoList.length < todoMaxSize) {
             this.setState({
                 displayModal: true,
                 inputValue: "",
@@ -76,7 +85,7 @@ class TodoComponent extends React.Component {
                 priority: "★",
             })
         } else {
-            message.error("待办数量最多为" + this.state.todoMaxSize + "个");
+            message.error("待办数量最多为" + todoMaxSize + "个");
         }
     }
 
@@ -88,29 +97,21 @@ class TodoComponent extends React.Component {
 
     modalOkBtnOnClick() {
         if (this.state.inputValue && this.state.inputValue.length > 0) {
-            let todos = [];
-            let tempTodos = localStorage.getItem("todos");
-            if (tempTodos) {
-                todos = JSON.parse(tempTodos);
-            }
-            if (todos.length < this.state.todoMaxSize) {
-                todos.push({
-                    "title": this.state.inputValue,
-                    "tag": this.state.tag,
-                    "priority": this.state.priority,
-                    "timeStamp": Date.now()
-                });
-                localStorage.setItem("todos", JSON.stringify(todos));
+            let tempTodoList = this.state.todoList;
+            tempTodoList.push({
+                "title": this.state.inputValue,
+                "tag": this.state.tag,
+                "priority": this.state.priority,
+                "timeStamp": Date.now()
+            });
 
-                this.setState({
-                    displayModal: false,
-                    listItems: todos,
-                    todoSize: todos.length
-                });
+            this.setState({
+                displayModal: false,
+                todoList: tempTodoList,
+            }, () => {
+                localStorage.setItem("todos", JSON.stringify(this.state.todoList));
                 message.success("添加成功");
-            } else {
-                message.error("待办数量最多为" + this.state.todoMaxSize + "个");
-            }
+            });
         } else {
             message.error("表单不能为空");
         }
@@ -120,30 +121,6 @@ class TodoComponent extends React.Component {
         this.setState({
             displayModal: false
         })
-    }
-
-    finishBtnOnClick(item: any) {
-        let todos = [];
-        let tempTodos = localStorage.getItem("todos");
-        if (tempTodos) {
-            todos = JSON.parse(tempTodos);
-            let index = -1;
-            for (let i = 0; i < todos.length; i++) {
-                if (item.timeStamp === todos[i].timeStamp) {
-                    index = i;
-                    break;
-                }
-            }
-            if (index !== -1) {
-                todos.splice(index, 1);
-            }
-            localStorage.setItem("todos", JSON.stringify(todos));
-
-            this.setState({
-                listItems: todos,
-                todoSize: todos.length
-            })
-        }
     }
 
     selectOnChange(value: string) {
@@ -174,15 +151,14 @@ class TodoComponent extends React.Component {
     }
 
     componentDidMount() {
-        let todos = [];
-        let tempTodos = localStorage.getItem("todos");
-        if (tempTodos) {
-            todos = JSON.parse(tempTodos);
+        let tempTodoList = [];
+        let todoListStorage = localStorage.getItem("todos");
+        if (todoListStorage) {
+            tempTodoList = JSON.parse(todoListStorage);
         }
 
         this.setState({
-            listItems: todos,
-            todoSize: todos.length
+            todoList: tempTodoList,
         })
     }
 
@@ -210,7 +186,7 @@ class TodoComponent extends React.Component {
             <Row align={"middle"}>
                 <Col span={10}>
                     <Text style={{color: this.state.fontColor}}>
-                        {"待办事项 " + this.state.todoSize + " / " + this.state.todoMaxSize}
+                        {"待办事项 " + this.state.todoList.length + " / " + todoMaxSize}
                     </Text>
                 </Col>
                 <Col span={14} style={{textAlign: "right"}}>
@@ -234,7 +210,7 @@ class TodoComponent extends React.Component {
 
         const popoverContent = (
             <List
-                dataSource={this.state.listItems}
+                dataSource={this.state.todoList}
                 renderItem={(item: any) => (
                     <List.Item
                         actions={[
@@ -280,12 +256,12 @@ class TodoComponent extends React.Component {
                             className={"componentTheme zIndexHigh"}
                             style={{cursor: "default", display: this.state.display}}
                     >
-                        {this.state.todoSize + " 个"}
+                        {this.state.todoList.length + " 个"}
                     </Button>
                 </Popover>
                 <Modal title={
                     <Text style={{color: this.state.fontColor}}>
-                        {"添加待办事项 " + this.state.todoSize + " / " + this.state.todoMaxSize}
+                        {"添加待办事项 " + this.state.todoList.length + " / " + todoMaxSize}
                     </Text>
                 }
                        closeIcon={false} centered

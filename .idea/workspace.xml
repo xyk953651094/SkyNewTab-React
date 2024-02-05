@@ -4,10 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="修复已知问题">
+    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="优化代码质量">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/clockComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/clockComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/collectionComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/collectionComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/dailyComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dailyComponent.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/focusComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/focusComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/extensionFiles/background.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/extensionFiles/background.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/todoComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/todoComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/wallpaperComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/wallpaperComponent.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -456,7 +461,25 @@
       <workItem from="1706691275254" duration="4162000" />
       <workItem from="1706697218245" duration="923000" />
       <workItem from="1706698443948" duration="547000" />
-      <workItem from="1706757001887" duration="2831000" />
+      <workItem from="1706757001887" duration="3135000" />
+      <workItem from="1706784058588" duration="2471000" />
+      <workItem from="1706843730439" duration="845000" />
+      <workItem from="1706846348061" duration="326000" />
+      <workItem from="1706846794026" duration="186000" />
+      <workItem from="1706847004997" duration="361000" />
+      <workItem from="1706847872097" duration="368000" />
+      <workItem from="1706848252043" duration="54000" />
+      <workItem from="1706848318034" duration="187000" />
+      <workItem from="1706862976510" duration="9275000" />
+      <workItem from="1706880588391" duration="92000" />
+      <workItem from="1706883525782" duration="113000" />
+      <workItem from="1706884535785" duration="533000" />
+      <workItem from="1706926852129" duration="15000" />
+      <workItem from="1706932949432" duration="40000" />
+      <workItem from="1706955613859" duration="27000" />
+      <workItem from="1707015827110" duration="163000" />
+      <workItem from="1707016512524" duration="2282000" />
+      <workItem from="1707042551168" duration="3273000" />
     </task>
     <task id="LOCAL-00001" summary="优化抽屉蒙版的显示效果&#10;优化代码质量">
       <created>1683952184207</created>
@@ -576,30 +599,6 @@
       <option name="presentableId" value="LOCAL-00017" />
       <option name="project" value="LOCAL" />
       <updated>1687402693401</updated>
-    </task>
-    <task id="LOCAL-00120" summary="修复已知问题">
-      <option name="closed" value="true" />
-      <created>1701508986046</created>
-      <option name="number" value="00120" />
-      <option name="presentableId" value="LOCAL-00120" />
-      <option name="project" value="LOCAL" />
-      <updated>1701508986047</updated>
-    </task>
-    <task id="LOCAL-00121" summary="新增帮助文档链接">
-      <option name="closed" value="true" />
-      <created>1701569462854</created>
-      <option name="number" value="00121" />
-      <option name="presentableId" value="LOCAL-00121" />
-      <option name="project" value="LOCAL" />
-      <updated>1701569462854</updated>
-    </task>
-    <task id="LOCAL-00122" summary="删除了不必要的设置项">
-      <option name="closed" value="true" />
-      <created>1701919555931</created>
-      <option name="number" value="00122" />
-      <option name="presentableId" value="LOCAL-00122" />
-      <option name="project" value="LOCAL" />
-      <updated>1701919555931</updated>
     </task>
     <task id="LOCAL-00123" summary="优化视觉效果">
       <option name="closed" value="true" />
@@ -833,7 +832,31 @@
       <option name="project" value="LOCAL" />
       <updated>1706698298839</updated>
     </task>
-    <option name="localTasksCounter" value="152" />
+    <task id="LOCAL-00152" summary="修复已知问题">
+      <option name="closed" value="true" />
+      <created>1706766427736</created>
+      <option name="number" value="00152" />
+      <option name="presentableId" value="LOCAL-00152" />
+      <option name="project" value="LOCAL" />
+      <updated>1706766427737</updated>
+    </task>
+    <task id="LOCAL-00153" summary="优化专注模式界面">
+      <option name="closed" value="true" />
+      <created>1706872862753</created>
+      <option name="number" value="00153" />
+      <option name="presentableId" value="LOCAL-00153" />
+      <option name="project" value="LOCAL" />
+      <updated>1706872862754</updated>
+    </task>
+    <task id="LOCAL-00154" summary="优化代码质量">
+      <option name="closed" value="true" />
+      <created>1706880659743</created>
+      <option name="number" value="00154" />
+      <option name="presentableId" value="LOCAL-00154" />
+      <option name="project" value="LOCAL" />
+      <updated>1706880659743</updated>
+    </task>
+    <option name="localTasksCounter" value="155" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -863,7 +886,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="菜单栏新增回到顶部按钮、夜间模式" />
     <MESSAGE value="优化无图模式颜色显示" />
     <MESSAGE value="搜索框按钮能快速切换搜索引擎了" />
     <MESSAGE value="新增图片切换间隔，修复已知问题" />
@@ -872,7 +894,6 @@
     <MESSAGE value="新增版本更新提醒，优化跳转链接" />
     <MESSAGE value="新增历史图片" />
     <MESSAGE value="新增历史记录，修复已知问题" />
-    <MESSAGE value="优化代码质量" />
     <MESSAGE value="新增帮助文档链接" />
     <MESSAGE value="删除了不必要的设置项" />
     <MESSAGE value="优化视觉效果" />
@@ -888,7 +909,9 @@
     <MESSAGE value="新增专注模式" />
     <MESSAGE value="新增 modal 公共组件" />
     <MESSAGE value="修复已知问题" />
-    <option name="LAST_COMMIT_MESSAGE" value="修复已知问题" />
+    <MESSAGE value="优化专注模式界面" />
+    <MESSAGE value="优化代码质量" />
+    <option name="LAST_COMMIT_MESSAGE" value="优化代码质量" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
