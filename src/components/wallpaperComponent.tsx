@@ -42,6 +42,15 @@ class WallpaperComponent extends React.Component {
         };
     }
 
+    showFocusModeMessage() {
+        let focusModeStorage = localStorage.getItem("focusMode");
+        if (focusModeStorage) {
+            if (JSON.parse(focusModeStorage) === true) {
+                message.info("已开启专注模式");
+            }
+        }
+    }
+
     setWallpaper(imageData: any) {
         this.setState({
             imageData: imageData,
@@ -151,7 +160,7 @@ class WallpaperComponent extends React.Component {
                     lastImage = JSON.parse(lastImage);
                     tempThis.setWallpaper(lastImage);
                 } else {
-                    message.error("获取图片失败，请检查网络连接");
+                    message.error("获取图片失败，请检查网络连接").then(tempThis.showFocusModeMessage);
                 }
             })
             .finally(function () {
@@ -176,7 +185,7 @@ class WallpaperComponent extends React.Component {
                     lastImage = JSON.parse(lastImage);
                     this.setWallpaper(lastImage);
                 } else {
-                    message.error("无缓存图片可加载，请尝试重置插件");
+                    message.error("无缓存图片可加载，请尝试重置插件").then(this.showFocusModeMessage);
                 }
             }
 
@@ -194,7 +203,7 @@ class WallpaperComponent extends React.Component {
                     }, () => {
                         $("#backgroundCanvas").removeClass("wallpaperFadeIn").addClass("wallpaperFadeOut");
                         message.destroy();
-                        message.success("图片加载成功");
+                        message.success("图片加载成功").then(this.showFocusModeMessage);
 
                         // 设置动态效果
                         backgroundImage.classList.add("wallpaperFadeIn");
