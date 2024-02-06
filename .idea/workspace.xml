@@ -478,7 +478,9 @@
       <workItem from="1707104919726" duration="13000" />
       <workItem from="1707106921832" duration="79000" />
       <workItem from="1707109674986" duration="1160000" />
-      <workItem from="1707113457018" duration="148000" />
+      <workItem from="1707113457018" duration="1269000" />
+      <workItem from="1707115830682" duration="214000" />
+      <workItem from="1707188473451" duration="1029000" />
     </task>
     <task id="LOCAL-00001" summary="优化抽屉蒙版的显示效果&#10;优化代码质量">
       <created>1683952184207</created>
@@ -598,22 +600,6 @@
       <option name="presentableId" value="LOCAL-00017" />
       <option name="project" value="LOCAL" />
       <updated>1687402693401</updated>
-    </task>
-    <task id="LOCAL-00127" summary="优化功能体验">
-      <option name="closed" value="true" />
-      <created>1702629797938</created>
-      <option name="number" value="00127" />
-      <option name="presentableId" value="LOCAL-00127" />
-      <option name="project" value="LOCAL" />
-      <updated>1702629797938</updated>
-    </task>
-    <task id="LOCAL-00128" summary="优化功能体验">
-      <option name="closed" value="true" />
-      <created>1702631711817</created>
-      <option name="number" value="00128" />
-      <option name="presentableId" value="LOCAL-00128" />
-      <option name="project" value="LOCAL" />
-      <updated>1702631711817</updated>
     </task>
     <task id="LOCAL-00129" summary="菜单栏表单控件颜色主题，进展不顺，回滚前保存">
       <option name="closed" value="true" />
@@ -855,7 +841,23 @@
       <option name="project" value="LOCAL" />
       <updated>1707110852068</updated>
     </task>
-    <option name="localTasksCounter" value="159" />
+    <task id="LOCAL-00159" summary="提升使用体验">
+      <option name="closed" value="true" />
+      <created>1707113891335</created>
+      <option name="number" value="00159" />
+      <option name="presentableId" value="LOCAL-00159" />
+      <option name="project" value="LOCAL" />
+      <updated>1707113891336</updated>
+    </task>
+    <task id="LOCAL-00160" summary="提升使用体验">
+      <option name="closed" value="true" />
+      <created>1707115145602</created>
+      <option name="number" value="00160" />
+      <option name="presentableId" value="LOCAL-00160" />
+      <option name="project" value="LOCAL" />
+      <updated>1707115145603</updated>
+    </task>
+    <option name="localTasksCounter" value="161" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
