@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="提升使用体验">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -483,7 +482,8 @@
       <workItem from="1707115830682" duration="214000" />
       <workItem from="1707188473451" duration="1354000" />
       <workItem from="1707209496448" duration="2259000" />
-      <workItem from="1707273129495" duration="1053000" />
+      <workItem from="1707273129495" duration="1159000" />
+      <workItem from="1707276511502" duration="36000" />
     </task>
     <task id="LOCAL-00001" summary="优化抽屉蒙版的显示效果&#10;优化代码质量">
       <created>1683952184207</created>
@@ -603,14 +603,6 @@
       <option name="presentableId" value="LOCAL-00017" />
       <option name="project" value="LOCAL" />
       <updated>1687402693401</updated>
-    </task>
-    <task id="LOCAL-00130" summary="菜单栏表单控件颜色主题，进展不顺，回滚前保存">
-      <option name="closed" value="true" />
-      <created>1702721715955</created>
-      <option name="number" value="00130" />
-      <option name="presentableId" value="LOCAL-00130" />
-      <option name="project" value="LOCAL" />
-      <updated>1702721715955</updated>
     </task>
     <task id="LOCAL-00131" summary="菜单栏表单控件颜色主题，存在卡顿，回滚前保存">
       <option name="closed" value="true" />
@@ -860,7 +852,15 @@
       <option name="project" value="LOCAL" />
       <updated>1707209032945</updated>
     </task>
-    <option name="localTasksCounter" value="162" />
+    <task id="LOCAL-00162" summary="提升使用体验">
+      <option name="closed" value="true" />
+      <created>1707274534103</created>
+      <option name="number" value="00162" />
+      <option name="presentableId" value="LOCAL-00162" />
+      <option name="project" value="LOCAL" />
+      <updated>1707274534103</updated>
+    </task>
+    <option name="localTasksCounter" value="163" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
