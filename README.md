@@ -5,14 +5,14 @@
 * 基于 Html + Typescript + Sass + React + Webpack + Ant Design + Bootstrap Icon
 * 支持语言：中文
 * 所需权限：tabs、storage
-* 节气来源：https://www.mxnzp.com
+* 日历来源：https://www.mxnzp.com
 * 天气来源：https://www.jinrishici.com
 * 图片来源（图片中的内容不代表作者任何观点）：https://unsplash.com
 * 开发支持：[JetBrains Open Source Support](https://jb.gg/OpenSourceSupport "跳转至 JetBrains Open Source Support")
 * <img width="40" src="https://resources.jetbrains.com/storage/products/company/brand/logos/WebStorm_icon.png" alt="WebStorm logo.">
 
 ## 更新
-* 请前往 Releases 页面查看
+* 请前往发布（Releases）页面查看
 
 ## 安装
 * Chrome、Edge、Firefox：前往插件商店搜索“云开新标签页”（推荐）
@@ -40,6 +40,7 @@
 
 ## 捐助
 * 如果您喜欢我的作品，请考虑捐助。注意：捐助是无偿的，但这可以为我提供更大的创作动力
+* 若无意捐助，也可在各插件商店五星好评或者在 Github、GitLab 添加星标支持一下
 * 爱发电：https://afdian.net/a/xyk953651094
 <figure class="half">
   <img width="200" alt="爱发电" src="https://github.com/xyk953651094/SkyNewTab-React/assets/28004442/7766955b-46fe-490f-aadb-55099ce4f6fc">

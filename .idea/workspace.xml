@@ -67,6 +67,7 @@
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;npm.start.executor&quot;: &quot;Run&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;settings.editor.splitter.proportion&quot;: &quot;0.24166666&quot;,
     &quot;ts.external.directory.path&quot;: &quot;/Users/xiaoyunkai/Projects/WebStorm/SkyNewTab-React/node_modules/typescript/lib&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
@@ -480,7 +481,9 @@
       <workItem from="1707109674986" duration="1160000" />
       <workItem from="1707113457018" duration="1269000" />
       <workItem from="1707115830682" duration="214000" />
-      <workItem from="1707188473451" duration="1029000" />
+      <workItem from="1707188473451" duration="1354000" />
+      <workItem from="1707209496448" duration="2259000" />
+      <workItem from="1707273129495" duration="1053000" />
     </task>
     <task id="LOCAL-00001" summary="优化抽屉蒙版的显示效果&#10;优化代码质量">
       <created>1683952184207</created>
@@ -600,14 +603,6 @@
       <option name="presentableId" value="LOCAL-00017" />
       <option name="project" value="LOCAL" />
       <updated>1687402693401</updated>
-    </task>
-    <task id="LOCAL-00129" summary="菜单栏表单控件颜色主题，进展不顺，回滚前保存">
-      <option name="closed" value="true" />
-      <created>1702646067184</created>
-      <option name="number" value="00129" />
-      <option name="presentableId" value="LOCAL-00129" />
-      <option name="project" value="LOCAL" />
-      <updated>1702646067184</updated>
     </task>
     <task id="LOCAL-00130" summary="菜单栏表单控件颜色主题，进展不顺，回滚前保存">
       <option name="closed" value="true" />
@@ -857,7 +852,15 @@
       <option name="project" value="LOCAL" />
       <updated>1707115145603</updated>
     </task>
-    <option name="localTasksCounter" value="161" />
+    <task id="LOCAL-00161" summary="提升使用体验">
+      <option name="closed" value="true" />
+      <created>1707209032943</created>
+      <option name="number" value="00161" />
+      <option name="presentableId" value="LOCAL-00161" />
+      <option name="project" value="LOCAL" />
+      <updated>1707209032945</updated>
+    </task>
+    <option name="localTasksCounter" value="162" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
