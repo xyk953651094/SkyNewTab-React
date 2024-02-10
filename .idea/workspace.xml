@@ -6,11 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="提升使用体验">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/focusComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/focusComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/greetComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/greetComponent.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/extensionFiles/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/extensionFiles/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/preferenceComponents/preferenceEmailComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/preferenceComponents/preferenceEmailComponent.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -493,7 +490,9 @@
       <workItem from="1707305977211" duration="58000" />
       <workItem from="1707397005975" duration="1640000" />
       <workItem from="1707448122020" duration="579000" />
-      <workItem from="1707449707581" duration="3111000" />
+      <workItem from="1707449707581" duration="3546000" />
+      <workItem from="1707461581298" duration="834000" />
+      <workItem from="1707560435130" duration="963000" />
     </task>
     <task id="LOCAL-00001" summary="优化抽屉蒙版的显示效果&#10;优化代码质量">
       <created>1683952184207</created>
@@ -613,14 +612,6 @@
       <option name="presentableId" value="LOCAL-00017" />
       <option name="project" value="LOCAL" />
       <updated>1687402693401</updated>
-    </task>
-    <task id="LOCAL-00132" summary="菜单栏表单控件颜色主题">
-      <option name="closed" value="true" />
-      <created>1702874796711</created>
-      <option name="number" value="00132" />
-      <option name="presentableId" value="LOCAL-00132" />
-      <option name="project" value="LOCAL" />
-      <updated>1702874796712</updated>
     </task>
     <task id="LOCAL-00133" summary="暂时注释菜单栏表单控件颜色主题">
       <option name="closed" value="true" />
@@ -870,7 +861,15 @@
       <option name="project" value="LOCAL" />
       <updated>1707276819202</updated>
     </task>
-    <option name="localTasksCounter" value="164" />
+    <task id="LOCAL-00164" summary="提升使用体验">
+      <option name="closed" value="true" />
+      <created>1707458474913</created>
+      <option name="number" value="00164" />
+      <option name="presentableId" value="LOCAL-00164" />
+      <option name="project" value="LOCAL" />
+      <updated>1707458474913</updated>
+    </task>
+    <option name="localTasksCounter" value="165" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

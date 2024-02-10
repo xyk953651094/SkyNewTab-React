@@ -34,7 +34,6 @@
         "newtab": "./mainPage.html"
     },
     "background": {
-        "service_worker": "./background.js",
-        "module": true
+        "service_worker": "./background.js"
     }
 }
