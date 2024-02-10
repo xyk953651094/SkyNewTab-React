@@ -79,18 +79,25 @@ class GreetComponent extends React.Component {
         if (data.solarTerms.indexOf("后") === -1) {
             holidayContent = "今日" + holidayContent;
         }
+
         if (data.typeDes !== "休息日" && data.typeDes !== "工作日") {
             holidayContent = holidayContent + " · " + data.typeDes;
 
             // 发送恭贺通知
-            notification.open({
-                icon: null,
-                message: "今日" + data.typeDes,
-                description: "云开新标签页祝您" + data.typeDes + "快乐！",
-                placement: "bottomLeft",
-                duration: 5,
-                closeIcon: false
-            });
+            let hideBlessStorage = localStorage.getItem("displayBless");
+            if (hideBlessStorage === null) {
+                notification.open({
+                    icon: null,
+                    message: "今日" + data.typeDes,
+                    description: "云开新标签页祝您" + data.typeDes + "快乐！",
+                    placement: "bottomLeft",
+                    duration: 5,
+                    closeIcon: false
+                });
+                localStorage.setItem("displayBless", JSON.stringify(true));
+            }
+        } else {
+            localStorage.removeItem("displayBless");
         }
 
         let timeDetails = getTimeDetails(new Date());
