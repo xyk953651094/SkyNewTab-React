@@ -1,12 +1,13 @@
 # 云开新标签页 based on React
 
 ## 简介
-* 适用于 Chrome、Edge、Firefox、Safari 的新标签页插件，定期展示不同的高质量图片，并提供日历、天气、倒数日、待办事项、专注模式、快速链接等实用功能
+* 在新标签页随机展示不同的精美图片，并提供日历、天气、倒数日、待办事项、专注模式、白噪音、快速链接等实用功能
 * 基于 Html + Typescript + Sass + React + Webpack + Ant Design + Bootstrap Icon
 * 支持语言：中文
 * 所需权限：tabs、storage
 * 日历来源：https://www.mxnzp.com
 * 天气来源：https://www.jinrishici.com
+* 噪音来源：https://www.soundvery.com
 * 图片来源（图片中的内容不代表作者任何观点）：https://unsplash.com
 * 开发支持：[JetBrains Open Source Support](https://jb.gg/OpenSourceSupport "跳转至 JetBrains Open Source Support")
 * <img width="40" src="https://resources.jetbrains.com/storage/products/company/brand/logos/WebStorm_icon.png" alt="WebStorm logo.">

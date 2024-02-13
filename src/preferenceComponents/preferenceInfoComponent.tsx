@@ -1,6 +1,6 @@
 import React from "react";
 import {Button, Card, Space} from "antd";
-import {CalendarOutlined, CloudOutlined, CodeOutlined, FileImageOutlined, InfoCircleOutlined} from "@ant-design/icons";
+import {CalendarOutlined, CloudOutlined, CodeOutlined, FileImageOutlined, InfoCircleOutlined, SoundOutlined} from "@ant-design/icons";
 import {btnMouseOut, btnMouseOver} from "../typescripts/publicFunctions";
 import {PreferenceDataInterface} from "../typescripts/publicInterface";
 
@@ -42,7 +42,7 @@ class PreferenceInfoComponent extends React.Component {
                             onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
                             onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
                             style={{color: this.props.fontColor}}>
-                        {"节气来源：https://www.mxnzp.com"}
+                        {"日历来源：https://www.mxnzp.com"}
                     </Button>
                     <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<CloudOutlined/>}
                             href={"https://www.jinrishici.com/"} target={"_self"}
@@ -57,6 +57,13 @@ class PreferenceInfoComponent extends React.Component {
                             onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
                             style={{color: this.props.fontColor}}>
                         {"图片来源：https://unsplash.com"}
+                    </Button>
+                    <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<SoundOutlined />}
+                            href={"https://www.soundvery.com/"} target={"_self"}
+                            onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
+                            onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
+                            style={{color: this.props.fontColor}}>
+                        {"噪音来源：https://www.soundvery.com"}
                     </Button>
                     <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<CodeOutlined/>}
                             href={"https://www.jetbrains.com.cn/community/opensource/#support/"} target={"_self"}

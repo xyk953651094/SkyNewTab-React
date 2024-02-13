@@ -4,7 +4,7 @@
         "description": "extension_name"
     },
     "extensionDescription": {
-        "message": "适用于 Chrome、Edge、Firefox、Safari 的新标签页插件，定期展示不同的高质量图片，并提供日历、天气、倒数日、待办事项、专注模式、快速链接等实用功能",
+        "message": "在新标签页随机展示不同的精美图片，并提供日历、天气、倒数日、待办事项、专注模式、白噪音、快速链接等实用功能",
         "description": "extension_description"
     },
     "extensionDefaultTitle": {
