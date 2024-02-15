@@ -151,7 +151,7 @@ class PopupImageComponent extends React.Component {
                             cursor: "default",
                             display: this.state.simpleMode ? "inline-block" : "none"
                         }}>
-                    {"已开启简洁模式"}
+                    {"已开启极简模式"}
                 </Button>
             </>
         );

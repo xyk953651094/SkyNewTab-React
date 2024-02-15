@@ -4,16 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="新增节日祝福通知">
-      <change afterPath="$PROJECT_DIR$/src/assets/focusSounds/古镇雨滴.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/focusSounds/松树林小雪.mp3" afterDir="false" />
+    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="新增白噪音">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/focusComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/focusComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/declaration.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/declaration.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/extensionFiles/_locales/zh_CN/messages.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/extensionFiles/_locales/zh_CN/messages.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/preferenceComponents/preferenceInfoComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/preferenceComponents/preferenceInfoComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webpack.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/popupComponents/popupImageComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/popupComponents/popupImageComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/popupComponents/popupStatusComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/popupComponents/popupStatusComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/preferenceComponents/preferenceFunctionComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/preferenceComponents/preferenceFunctionComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/preferenceComponents/preferenceImageComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/preferenceComponents/preferenceImageComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/typescripts/publicFunctions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/typescripts/publicFunctions.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -508,7 +507,9 @@
       <workItem from="1707728763309" duration="7983000" />
       <workItem from="1707746417546" duration="279000" />
       <workItem from="1707746966092" duration="91000" />
-      <workItem from="1707790683457" duration="843000" />
+      <workItem from="1707790683457" duration="2603000" />
+      <workItem from="1707877856628" duration="1117000" />
+      <workItem from="1707963372232" duration="4737000" />
     </task>
     <task id="LOCAL-00001" summary="优化抽屉蒙版的显示效果&#10;优化代码质量">
       <created>1683952184207</created>
@@ -628,14 +629,6 @@
       <option name="presentableId" value="LOCAL-00017" />
       <option name="project" value="LOCAL" />
       <updated>1687402693401</updated>
-    </task>
-    <task id="LOCAL-00136" summary="提升使用体验">
-      <option name="closed" value="true" />
-      <created>1703744674555</created>
-      <option name="number" value="00136" />
-      <option name="presentableId" value="LOCAL-00136" />
-      <option name="project" value="LOCAL" />
-      <updated>1703744674556</updated>
     </task>
     <task id="LOCAL-00137" summary="提升使用体验">
       <option name="closed" value="true" />
@@ -885,7 +878,15 @@
       <option name="project" value="LOCAL" />
       <updated>1707570078652</updated>
     </task>
-    <option name="localTasksCounter" value="168" />
+    <task id="LOCAL-00168" summary="新增白噪音">
+      <option name="closed" value="true" />
+      <created>1707791610875</created>
+      <option name="number" value="00168" />
+      <option name="presentableId" value="LOCAL-00168" />
+      <option name="project" value="LOCAL" />
+      <updated>1707791610875</updated>
+    </task>
+    <option name="localTasksCounter" value="169" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -915,7 +916,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="搜索框按钮能快速切换搜索引擎了" />
     <MESSAGE value="新增图片切换间隔，修复已知问题" />
     <MESSAGE value="优化代码逻辑" />
     <MESSAGE value="2.1.0发布" />
@@ -940,7 +940,8 @@
     <MESSAGE value="优化代码质量" />
     <MESSAGE value="提升使用体验" />
     <MESSAGE value="新增节日祝福通知" />
-    <option name="LAST_COMMIT_MESSAGE" value="新增节日祝福通知" />
+    <MESSAGE value="新增白噪音" />
+    <option name="LAST_COMMIT_MESSAGE" value="新增白噪音" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
