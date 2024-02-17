@@ -31,9 +31,8 @@ type stateType = {
     focusMode: boolean,
     inputValue: string,
     filterList: any[],
-    focusSound: string
-    displayPlayBtn: "block" | "none",
-    displayPauseBtn: "block" | "none",
+    focusSound: string,
+    focusAudioPaused: boolean
 }
 
 interface FocusComponent {
@@ -55,8 +54,7 @@ class FocusComponent extends React.Component {
             inputValue: "",
             filterList: [],
             focusSound: "古镇雨滴",
-            displayPlayBtn: "block",
-            displayPauseBtn: "none"
+            focusAudioPaused: true
         };
     }
 
@@ -155,29 +153,26 @@ class FocusComponent extends React.Component {
     focusSoundSelectOnChange(value: string) {
         this.setState({
             focusSound: value,
-            displayPlayBtn: "none",
-            displayPauseBtn: "block"
+            focusAudioPaused: false
         }, () => {
             this.playFocusSound(value);
         });
     }
 
     playBtnOnClick() {
-        this.setState({
-            displayPlayBtn: "none",
-            displayPauseBtn: "block"
-        }, () => {
-            this.playFocusSound(this.state.focusSound);
-        });
-    }
-
-    pauseBtnOnClick() {
-        this.setState({
-            displayPlayBtn: "block",
-            displayPauseBtn: "none"
-        }, () => {
-            focusAudio.pause();
-        });
+        if (focusAudio.paused) {
+            this.setState({
+                focusAudioPaused: false
+            }, () => {
+                this.playFocusSound(this.state.focusSound);
+            });
+        } else {
+            this.setState({
+                focusAudioPaused: true
+            }, () => {
+                focusAudio.pause();
+            });
+        }
     }
 
     playFocusSound(focusSound: string) {
@@ -251,6 +246,8 @@ class FocusComponent extends React.Component {
             focusMode: tempFocusMode,
             filterList: tempFilterList,
         });
+
+        console.log("focusAudioPaused:" + focusAudio.paused);
     }
 
     render() {
@@ -308,7 +305,7 @@ class FocusComponent extends React.Component {
                 footer={
                     <Space>
                         <Text style={{color: this.state.fontColor}}>
-                            {this.state.displayPlayBtn === "block" ? "白噪音" : "播放中"}
+                            {this.state.focusAudioPaused ? "白噪音" : "播放中"}
                         </Text>
                         <Select defaultValue={this.state.focusSound} style={{width: 120}} placement={"topLeft"}
                                 onChange={this.focusSoundSelectOnChange.bind(this)}>
@@ -316,20 +313,12 @@ class FocusComponent extends React.Component {
                             <Select.Option value={"松树林小雪"}>{"松树林小雪"}</Select.Option>
                         </Select>
                         <Button type={"text"} shape={this.props.preferenceData.buttonShape}
-                                icon={<PlayCircleOutlined />}
+                                icon={this.state.focusAudioPaused ? <PlayCircleOutlined /> : <PauseCircleOutlined />}
                                 onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
                                 onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}
                                 onClick={this.playBtnOnClick.bind(this)}
-                                style={{color: this.state.fontColor, display: this.state.displayPlayBtn}}>
-                            {"播放"}
-                        </Button>
-                        <Button type={"text"} shape={this.props.preferenceData.buttonShape}
-                                icon={<PauseCircleOutlined />}
-                                onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
-                                onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}
-                                onClick={this.pauseBtnOnClick.bind(this)}
-                                style={{color: this.state.fontColor, display: this.state.displayPauseBtn}}>
-                            {"暂停"}
+                                style={{color: this.state.fontColor}}>
+                            {this.state.focusAudioPaused ? "播放" : "暂停"}
                         </Button>
                     </Space>
                 }
