@@ -160,18 +160,22 @@ class FocusComponent extends React.Component {
     }
 
     playBtnOnClick() {
-        if (focusAudio.paused) {
-            this.setState({
-                focusAudioPaused: false
-            }, () => {
-                this.playFocusSound(this.state.focusSound);
-            });
+        if (browserType !== "Safari") {
+            if (focusAudio.paused) {
+                this.setState({
+                    focusAudioPaused: false
+                }, () => {
+                    this.playFocusSound(this.state.focusSound);
+                });
+            } else {
+                this.setState({
+                    focusAudioPaused: true
+                }, () => {
+                    focusAudio.pause();
+                });
+            }
         } else {
-            this.setState({
-                focusAudioPaused: true
-            }, () => {
-                focusAudio.pause();
-            });
+            message.error("Safari 暂不支持播放白噪音");
         }
     }
 

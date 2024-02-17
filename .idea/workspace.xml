@@ -6,9 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="提升使用体验">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/focusSounds/古镇雨滴.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/focusSounds/古镇雨滴.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/focusSounds/松树林小雪.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/focusSounds/松树林小雪.mp3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/focusComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/focusComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/extensionFiles/tempManifest.json" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,7 +57,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;xyk&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/xiaoyunkai/Documents/Projects/WebStorm/SkyNewTab-React/public&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/xiaoyunkai/Projects/WebStorm/SkyNewTab-React/src/assets/focusSounds&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;SCSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
@@ -76,6 +75,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/assets/focusSounds" />
       <recent name="$PROJECT_DIR$/public" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -507,7 +507,8 @@
       <workItem from="1707877856628" duration="1117000" />
       <workItem from="1707963372232" duration="4919000" />
       <workItem from="1708141475727" duration="436000" />
-      <workItem from="1708148169001" duration="4413000" />
+      <workItem from="1708148169001" duration="4925000" />
+      <workItem from="1708170117652" duration="1562000" />
     </task>
     <task id="LOCAL-00001" summary="优化抽屉蒙版的显示效果&#10;优化代码质量">
       <created>1683952184207</created>
@@ -627,14 +628,6 @@
       <option name="presentableId" value="LOCAL-00017" />
       <option name="project" value="LOCAL" />
       <updated>1687402693401</updated>
-    </task>
-    <task id="LOCAL-00139" summary="提升使用体验">
-      <option name="closed" value="true" />
-      <created>1704895584445</created>
-      <option name="number" value="00139" />
-      <option name="presentableId" value="LOCAL-00139" />
-      <option name="project" value="LOCAL" />
-      <updated>1704895584445</updated>
     </task>
     <task id="LOCAL-00140" summary="提升使用体验">
       <option name="closed" value="true" />
@@ -884,7 +877,15 @@
       <option name="project" value="LOCAL" />
       <updated>1708150377004</updated>
     </task>
-    <option name="localTasksCounter" value="171" />
+    <task id="LOCAL-00171" summary="提升使用体验">
+      <option name="closed" value="true" />
+      <created>1708167269187</created>
+      <option name="number" value="00171" />
+      <option name="presentableId" value="LOCAL-00171" />
+      <option name="project" value="LOCAL" />
+      <updated>1708167269187</updated>
+    </task>
+    <option name="localTasksCounter" value="172" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
