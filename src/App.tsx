@@ -167,6 +167,7 @@ class App extends React.Component {
                 $(".ant-popover-title").css("color", this.state.themeColor.componentFontColor);
                 $(".ant-popover-inner-content").css("color", this.state.themeColor.componentFontColor);
                 $(".ant-switch-inner-checked").css("color", getFontColor(this.state.themeColor.themeColor));
+                $(".ant-form-item-extra").css("color", this.state.themeColor.componentFontColor);
 
                 let focusMode = localStorage.getItem("focusMode");
                 if (focusMode) {

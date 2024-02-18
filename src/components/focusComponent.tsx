@@ -1,24 +1,17 @@
 import React from "react";
-import {
-    Popover,
-    Button,
-    Space,
-    Row,
-    Col,
-    Typography,
-    Switch,
-    List,
-    Input,
-    message,
-    Form,
-    Modal
-} from "antd";
-import {btnMouseOut, btnMouseOver, changeThemeColor} from "../typescripts/publicFunctions";
+import {Button, Col, Form, Input, List, message, Modal, Popover, Row, Select, Space, Switch, Typography} from "antd";
+import {btnMouseOut, btnMouseOver, changeThemeColor, getBrowserType} from "../typescripts/publicFunctions";
 import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
 import "../stylesheets/publicStyles.scss"
-import {getBrowserType} from "../typescripts/publicFunctions";
-import {LinkOutlined, DeleteOutlined, PlusOutlined} from "@ant-design/icons";
+import {DeleteOutlined, LinkOutlined, PauseCircleOutlined, PlayCircleOutlined, PlusOutlined} from "@ant-design/icons";
+import focusSoundOne from "../assets/focusSounds/古镇雨滴.mp3";
+import focusSoundTwo from "../assets/focusSounds/松树林小雪.mp3";
 
+const focusAudio = new Audio();
+const focusSoundsDictionary = {
+    "focusSoundOne": focusSoundOne,
+    "focusSoundTwo": focusSoundTwo,
+}
 const {Text} = Typography;
 const focusMaxSize = 10;
 const browserType = getBrowserType();
@@ -38,6 +31,8 @@ type stateType = {
     focusMode: boolean,
     inputValue: string,
     filterList: any[],
+    focusSound: string,
+    focusAudioPaused: boolean
 }
 
 interface FocusComponent {
@@ -57,7 +52,9 @@ class FocusComponent extends React.Component {
             displayModal: false,
             focusMode: false,
             inputValue: "",
-            filterList: []
+            filterList: [],
+            focusSound: "古镇雨滴",
+            focusAudioPaused: true
         };
     }
 
@@ -153,6 +150,53 @@ class FocusComponent extends React.Component {
         })
     }
 
+    focusSoundSelectOnChange(value: string) {
+        this.setState({
+            focusSound: value,
+            focusAudioPaused: false
+        }, () => {
+            this.playFocusSound(value);
+        });
+    }
+
+    playBtnOnClick() {
+        if (browserType !== "Safari") {
+            if (focusAudio.paused) {
+                this.setState({
+                    focusAudioPaused: false
+                }, () => {
+                    this.playFocusSound(this.state.focusSound);
+                });
+            } else {
+                this.setState({
+                    focusAudioPaused: true
+                }, () => {
+                    focusAudio.pause();
+                });
+            }
+        } else {
+            message.error("Safari 暂不支持播放白噪音");
+        }
+    }
+
+    playFocusSound(focusSound: string) {
+        switch (focusSound) {
+            case "古镇雨滴": {
+                focusAudio.src = focusSoundsDictionary.focusSoundOne;
+                break;
+            }
+            case "松树林小雪": {
+                focusAudio.src = focusSoundsDictionary.focusSoundTwo;
+                break;
+            }
+            default: {
+                focusAudio.src = focusSoundsDictionary.focusSoundOne;
+            }
+        }
+        focusAudio.loop = true;
+        focusAudio.play();
+    }
+
     componentWillReceiveProps(nextProps: any, prevProps: any) {
         if (nextProps.themeColor !== prevProps.themeColor) {
             this.setState({
@@ -206,6 +250,8 @@ class FocusComponent extends React.Component {
             focusMode: tempFocusMode,
             filterList: tempFilterList,
         });
+
+        console.log("focusAudioPaused:" + focusAudio.paused);
     }
 
     render() {
@@ -261,9 +307,24 @@ class FocusComponent extends React.Component {
                     </List.Item>
                 )}
                 footer={
-                    <Text style={{color: this.state.fontColor}}>
-                        {"开启专注模式后，访问以上域名时将自动跳转至新标签页"}
-                    </Text>
+                    <Space>
+                        <Text style={{color: this.state.fontColor}}>
+                            {this.state.focusAudioPaused ? "白噪音" : "播放中"}
+                        </Text>
+                        <Select defaultValue={this.state.focusSound} style={{width: 120}} placement={"topLeft"}
+                                onChange={this.focusSoundSelectOnChange.bind(this)}>
+                            <Select.Option value={"古镇雨滴"}>{"古镇雨滴"}</Select.Option>
+                            <Select.Option value={"松树林小雪"}>{"松树林小雪"}</Select.Option>
+                        </Select>
+                        <Button type={"text"} shape={this.props.preferenceData.buttonShape}
+                                icon={this.state.focusAudioPaused ? <PlayCircleOutlined /> : <PauseCircleOutlined />}
+                                onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
+                                onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}
+                                onClick={this.playBtnOnClick.bind(this)}
+                                style={{color: this.state.fontColor}}>
+                            {this.state.focusAudioPaused ? "播放" : "暂停"}
+                        </Button>
+                    </Space>
                 }
             />
         );
@@ -295,7 +356,7 @@ class FocusComponent extends React.Component {
                        styles={{mask: {backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)"}}}
                 >
                     <Form>
-                        <Form.Item label={"网站域名"} name={"focusInput"}>
+                        <Form.Item label={"网站域名"} name={"focusInput"} extra={"开启专注模式后，访问添加的域名时将自动跳转至本插件"}>
                             <Input placeholder="example.com" value={this.state.inputValue} onChange={this.inputOnChange.bind(this)}
                                    maxLength={20} showCount allowClear/>
                         </Form.Item>

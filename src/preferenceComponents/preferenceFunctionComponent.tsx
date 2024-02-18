@@ -84,7 +84,7 @@ class PreferenceFunctionComponent extends React.Component {
         })
     }
 
-    // 简洁模式
+    // 极简模式
     simpleModeSwitchOnChange(checked: boolean, e: any) {
         this.setState({
             preferenceData: this.setPreferenceData({simpleMode: checked}),
@@ -94,12 +94,12 @@ class PreferenceFunctionComponent extends React.Component {
             this.props.getPreferenceModified(new Date().getTime()); // 设置已修改，通知 preferenceFunctionComponent 刷新
 
             if (checked) {
-                message.success("已开启简洁模式");
+                message.success("已开启极简模式");
             } else {
                 this.setState({
                     formDisabled: true,
                 }, () => {
-                    message.success("已关闭简洁模式，一秒后刷新页面");
+                    message.success("已关闭极简模式，一秒后刷新页面");
                     this.refreshWindow();
                 })
             }
@@ -205,11 +205,11 @@ class PreferenceFunctionComponent extends React.Component {
                                 </Row>
                             </Radio.Group>
                         </Form.Item>
-                        <Form.Item name={"simpleMode"} label={"简洁模式"} valuePropName={"checked"}>
+                        <Form.Item name={"simpleMode"} label={"极简模式"} valuePropName={"checked"}>
                             <Switch checkedChildren="已开启" unCheckedChildren="已关闭" id={"simpleModeSwitch"}
                                     onChange={this.simpleModeSwitchOnChange.bind(this)}/>
                         </Form.Item>
-                        <Form.Item name={"clearStorageButton"} label={"危险设置"}>
+                        <Form.Item name={"clearStorageButton"} label={"危险设置"} extra={"出现异常时可尝试重置设置或插件"}>
                             <Space>
                                 <Button type={"text"} shape={this.state.preferenceData.buttonShape} icon={<RedoOutlined/>}
                                         onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
@@ -243,7 +243,7 @@ class PreferenceFunctionComponent extends React.Component {
                        styles={{mask: {backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)"}}}
                 >
                     <Text style={{color: this.props.fontColor}}>
-                        {"注意：所有设置项将被重置为默认值，确定重置吗？"}
+                        {"注意：所有设置项将被重置为默认值"}
                     </Text>
                 </Modal>
                 <Modal title={
@@ -260,7 +260,7 @@ class PreferenceFunctionComponent extends React.Component {
                        styles={{mask: {backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)"}}}
                 >
                     <Text style={{color: this.props.fontColor}}>
-                        {"注意：本地存储的所有数据将被清空，确定重置吗？"}
+                        {"注意：所有设置项将被重置为默认值，所有数据将被清空"}
                     </Text>
                 </Modal>
             </>

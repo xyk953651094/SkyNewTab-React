@@ -190,7 +190,7 @@ class PreferenceImageComponent extends React.Component {
         })
     }
 
-    // 无图模式
+    // 纯色模式
     noImageModeSwitchOnChange(checked: boolean, e: any) {
         this.setState({
             formDisabled: true,
@@ -200,9 +200,9 @@ class PreferenceImageComponent extends React.Component {
             this.props.getPreferenceData(this.state.preferenceData);
             this.props.getPreferenceModified(new Date().getTime()); // 设置已修改，通知 preferenceFunctionComponent 刷新
             if (checked) {
-                message.success("已开启无图模式，一秒后刷新页面");
+                message.success("已开启纯色模式，一秒后刷新页面");
             } else {
-                message.success("已关闭无图模式，一秒后刷新页面");
+                message.success("已关闭纯色模式，一秒后刷新页面");
             }
             // resetSwitchColor("#noImageModeSwitch", checked, this.props.hoverColor);
             this.refreshWindow();
@@ -365,7 +365,7 @@ class PreferenceImageComponent extends React.Component {
                             </Form.Item>
                         </Col>
                         <Col span={12}>
-                            <Form.Item name={"noImageMode"} label={"无图模式"} valuePropName={"checked"}>
+                            <Form.Item name={"noImageMode"} label={"纯色模式"} valuePropName={"checked"}>
                                 <Switch checkedChildren="已开启" unCheckedChildren="已关闭" id={"noImageModeSwitch"}
                                         onChange={this.noImageModeSwitchOnChange.bind(this)}/>
                             </Form.Item>

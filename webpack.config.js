@@ -53,6 +53,16 @@ module.exports = {
                 test: /\.scss$/,
                 use: ['style-loader', 'css-loader', 'sass-loader'],
             },
+            {
+                test: /\.mp3$/,
+                use: {
+                    loader: 'file-loader',
+                    options: {
+                        outputPath: 'assets/focusSounds',
+                        name: '[name].[ext]'
+                    }
+                }
+            },
         ]
     },
     plugins: [

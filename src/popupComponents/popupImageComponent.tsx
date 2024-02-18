@@ -221,7 +221,7 @@ class PopupImageComponent extends React.Component {
                             cursor: "default",
                             display: this.state.noImageMode ? "inline-block" : "none"
                         }}>
-                    {"已开启无图模式"}
+                    {"已开启纯色模式"}
                 </Button>
             </>
         );

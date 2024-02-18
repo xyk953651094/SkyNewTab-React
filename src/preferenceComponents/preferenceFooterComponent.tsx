@@ -45,7 +45,7 @@ class PreferenceFooterComponent extends React.Component {
                         onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
                         onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
                         style={{color: this.props.fontColor}}>
-                    博客
+                    Blogger
                 </Button>
             </Space>
         );
