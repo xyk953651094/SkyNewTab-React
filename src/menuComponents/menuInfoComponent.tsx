@@ -13,12 +13,12 @@ type propType = {
 
 type stateType = {}
 
-interface PreferenceInfoComponent {
+interface MenuInfoComponent {
     state: stateType,
     props: propType
 }
 
-class PreferenceInfoComponent extends React.Component {
+class MenuInfoComponent extends React.Component {
     constructor(props: any) {
         super(props);
         this.state = {};
@@ -78,4 +78,4 @@ class PreferenceInfoComponent extends React.Component {
     }
 }
 
-export default PreferenceInfoComponent;
+export default MenuInfoComponent;

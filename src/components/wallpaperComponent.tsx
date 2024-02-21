@@ -203,7 +203,8 @@ class WallpaperComponent extends React.Component {
                     }, () => {
                         $("#backgroundCanvas").removeClass("wallpaperFadeIn").addClass("wallpaperFadeOut");
                         message.destroy();
-                        message.success("图片加载成功").then(this.showFocusModeMessage);
+                        this.showFocusModeMessage();
+                        // message.success("图片加载成功").then(this.showFocusModeMessage);
 
                         // 设置动态效果
                         backgroundImage.classList.add("wallpaperFadeIn");

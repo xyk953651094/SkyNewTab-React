@@ -14,12 +14,12 @@ type propType = {
 
 type stateType = {}
 
-interface PreferenceHeaderComponent {
+interface MenuHeaderComponent {
     state: stateType,
     props: propType
 }
 
-class PreferenceHeaderComponent extends React.Component {
+class MenuHeaderComponent extends React.Component {
     constructor(props: any) {
         super(props);
         this.state = {};
@@ -45,4 +45,4 @@ class PreferenceHeaderComponent extends React.Component {
     }
 }
 
-export default PreferenceHeaderComponent;
+export default MenuHeaderComponent;

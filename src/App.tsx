@@ -4,14 +4,14 @@ import GreetComponent from "./components/greetComponent";
 import WeatherComponent from "./components/weatherComponent";
 import DailyComponent from "./components/dailyComponent";
 import TodoComponent from "./components/todoComponent";
-import ImageLinkComponent from "./components/imageLinkComponent"
-import PreferenceComponent from "./components/preferenceComponent";
+import LinkComponent from "./components/linkComponent"
+import MenuComponent from "./components/menuComponent";
 import WallpaperComponent from "./components/wallpaperComponent";
 import ClockComponent from "./components/clockComponent";
 import SearchComponent from "./components/searchComponent";
 import CollectionComponent from "./components/collectionComponent";
 import AuthorComponent from "./components/authorComponent";
-import ImageHistoryComponent from "./components/imageHistoryComponent";
+import HistoryComponent from "./components/historyComponent";
 
 import {Col, Layout, notification, Row, Space } from "antd";
 import "./stylesheets/publicStyles.scss"
@@ -295,7 +295,7 @@ class App extends React.Component {
                                     themeColor={this.state.themeColor}
                                     preferenceData={this.state.preferenceData}
                                 />
-                                <PreferenceComponent
+                                <MenuComponent
                                     themeColor={this.state.themeColor}
                                     preferenceData={this.state.preferenceData}
                                     getPreferenceData={this.getPreferenceData.bind(this)}
@@ -304,13 +304,13 @@ class App extends React.Component {
                         </Col>
                         <Col xs={22} sm={22} md={22} lg={0} xl={0} xxl={0} style={{textAlign: "right"}}>
                             <Space align={"center"}>
-                                <ImageLinkComponent
+                                <LinkComponent
                                     display={this.state.componentDisplay}
                                     themeColor={this.state.themeColor}
                                     imageData={this.state.imageData}
                                     preferenceData={this.state.preferenceData}
                                 />
-                                <PreferenceComponent
+                                <MenuComponent
                                     themeColor={this.state.themeColor}
                                     preferenceData={this.state.preferenceData}
                                     getPreferenceData={this.getPreferenceData.bind(this)}
@@ -346,7 +346,7 @@ class App extends React.Component {
                                     imageData={this.state.imageData}
                                     preferenceData={this.state.preferenceData}
                                 />
-                                <ImageHistoryComponent
+                                <HistoryComponent
                                     display={this.state.componentDisplay}
                                     themeColor={this.state.themeColor}
                                     imageHistory={this.state.imageHistory}

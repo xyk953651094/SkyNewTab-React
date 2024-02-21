@@ -12,12 +12,12 @@ type propType = {
 
 type stateType = {}
 
-interface PreferenceFooterComponent {
+interface MenuFooterComponent {
     state: stateType,
     props: propType
 }
 
-class PreferenceFooterComponent extends React.Component {
+class MenuFooterComponent extends React.Component {
     constructor(props: any) {
         super(props);
         this.state = {};
@@ -52,4 +52,4 @@ class PreferenceFooterComponent extends React.Component {
     }
 }
 
-export default PreferenceFooterComponent;
+export default MenuFooterComponent;

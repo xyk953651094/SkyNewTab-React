@@ -16,22 +16,20 @@ type propType = {
 type stateType = {
     backgroundColor: string,
     fontColor: string,
-    buttonShape: "circle" | "default" | "round" | undefined,
     imageLink: string,
 }
 
-interface ImageLinkComponent {
+interface LinkComponent {
     state: stateType,
     props: propType
 }
 
-class ImageLinkComponent extends React.Component {
+class LinkComponent extends React.Component {
     constructor(props: any) {
         super(props);
         this.state = {
             backgroundColor: "",
             fontColor: "",
-            buttonShape: "round",
             imageLink: "",
         };
     }
@@ -59,17 +57,12 @@ class ImageLinkComponent extends React.Component {
                 changeThemeColor("#authorLiteBtn", this.state.backgroundColor, this.state.fontColor);
             })
         }
-
-        if (nextProps.preferenceData !== prevProps.preferenceData) {
-            this.setState({
-                buttonShape: nextProps.preferenceData.buttonShape === "round" ? "circle" : "default"
-            });
-        }
     }
 
     render() {
         return (
-            <Button shape={this.state.buttonShape} icon={<LinkOutlined/>} size={"large"}
+            <Button shape={this.props.preferenceData.buttonShape === "round" ? "circle" : "default"}
+                    icon={<LinkOutlined/>} size={"large"}
                     id={"authorLiteBtn"} onClick={this.authorLiteOnClick.bind(this)}
                     className={"componentTheme zIndexHigh"}
                     style={{
@@ -80,4 +73,4 @@ class ImageLinkComponent extends React.Component {
     }
 }
 
-export default ImageLinkComponent;
+export default LinkComponent;

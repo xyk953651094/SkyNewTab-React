@@ -24,12 +24,12 @@ type stateType = {
     imageLink: string
 }
 
-interface ImageHistoryComponent {
+interface HistoryComponent {
     state: stateType,
     props: propType
 }
 
-class ImageHistoryComponent extends React.Component {
+class HistoryComponent extends React.Component {
     constructor(props: any) {
         super(props);
         this.state = {
@@ -162,4 +162,4 @@ class ImageHistoryComponent extends React.Component {
     }
 }
 
-export default ImageHistoryComponent;
+export default HistoryComponent;

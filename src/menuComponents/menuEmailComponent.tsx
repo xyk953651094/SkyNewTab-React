@@ -13,12 +13,12 @@ type propType = {
 
 type stateType = {}
 
-interface PreferenceEmailComponent {
+interface MenuEmailComponent {
     state: stateType,
     props: propType
 }
 
-class PreferenceEmailComponent extends React.Component {
+class MenuEmailComponent extends React.Component {
     constructor(props: any) {
         super(props);
         this.state = {};
@@ -69,4 +69,4 @@ class PreferenceEmailComponent extends React.Component {
     }
 }
 
-export default PreferenceEmailComponent;
+export default MenuEmailComponent;
