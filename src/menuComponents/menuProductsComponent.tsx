@@ -1,6 +1,6 @@
 import React from "react";
-import {Button, Card, Col, Row, Space} from "antd";
-import {AppstoreOutlined, GithubOutlined, GitlabOutlined, ProfileOutlined} from "@ant-design/icons";
+import {Button, Card, Col, Row} from "antd";
+import {AppstoreOutlined, GithubOutlined, GitlabOutlined} from "@ant-design/icons";
 import {btnMouseOut, btnMouseOver} from "../typescripts/publicFunctions";
 import {PreferenceDataInterface} from "../typescripts/publicInterface";
 
@@ -36,151 +36,24 @@ class MenuProductsComponent extends React.Component {
                   }}
                   bodyStyle={{backgroundColor: this.props.backgroundColor}}
             >
-                <Row gutter={[0, 8]}>
-                    <Col span="19">
-                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<ProfileOutlined/>}
+                <Row>
+                    <Col span="12">
+                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<GithubOutlined/>}
+                                href={"https://github.com/xyk953651094/"} target={"_self"}
                                 onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
                                 onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
-                                style={{color: this.props.fontColor, cursor: "default"}}>
-                            {"云开帮助文档"}
+                                style={{color: this.props.fontColor}}>
+                            {"GitHub 作者主页"}
                         </Button>
                     </Col>
-                    <Col span="5">
-                        <Space>
-                            <Button type={"text"}
-                                    shape={this.props.preferenceData.buttonShape === "round" ? "circle" : "default"}
-                                    icon={<GithubOutlined/>}
-                                    href={"https://github.com/xyk953651094/SkyDocuments/"} target={"_self"}
-                                    onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
-                                    onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
-                                    style={{color: this.props.fontColor}}>
-                            </Button>
-                            <Button type={"text"}
-                                    shape={this.props.preferenceData.buttonShape === "round" ? "circle" : "default"}
-                                    icon={<GitlabOutlined/>}
-                                    href={"https://gitlab.com/xyk953651094/SkyDocuments/"} target={"_self"}
-                                    onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
-                                    onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
-                                    style={{color: this.props.fontColor}}>
-                            </Button>
-                        </Space>
-                    </Col>
-                    <Col span="19">
-                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<AppstoreOutlined/>}
+                    <Col span="12">
+                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<GitlabOutlined/>}
+                                href={"https://gitlab.com/xyk953651094/"} target={"_self"}
                                 onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
                                 onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
-                                style={{color: this.props.fontColor, cursor: "default"}}>
-                            {"云开壁纸（React）"}
+                                style={{color: this.props.fontColor}}>
+                            {"GitLab 作者主页"}
                         </Button>
-                    </Col>
-                    <Col span="5">
-                        <Space>
-                            <Button type={"text"}
-                                    shape={this.props.preferenceData.buttonShape === "round" ? "circle" : "default"}
-                                    icon={<GithubOutlined/>}
-                                    href={"https://github.com/xyk953651094/SkyWallpaper-Electron/"} target={"_self"}
-                                    onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
-                                    onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
-                                    style={{color: this.props.fontColor}}>
-                            </Button>
-                            <Button type={"text"}
-                                    shape={this.props.preferenceData.buttonShape === "round" ? "circle" : "default"}
-                                    icon={<GitlabOutlined/>}
-                                    href={"https://gitlab.com/xyk953651094/SkyWallpaper-Electron/"} target={"_self"}
-                                    onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
-                                    onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
-                                    style={{color: this.props.fontColor}}>
-                            </Button>
-                        </Space>
-                    </Col>
-                    <Col span="19">
-                        <Button type={"text"} shape={this.props.preferenceData.buttonShape}
-                                icon={<i className="bi bi-puzzle"/>}
-                                onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
-                                onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
-                                style={{color: this.props.fontColor, cursor: "default"}}>
-                            {"云开新标签页（Vue）"}
-                        </Button>
-                    </Col>
-                    <Col span="5">
-                        <Space>
-                            <Button type={"text"}
-                                    shape={this.props.preferenceData.buttonShape === "round" ? "circle" : "default"}
-                                    icon={<GithubOutlined/>}
-                                    href={"https://github.com/xyk953651094/SkyNewTab-Vue/"} target={"_self"}
-                                    onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
-                                    onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
-                                    style={{color: this.props.fontColor}}>
-                            </Button>
-                            <Button type={"text"}
-                                    shape={this.props.preferenceData.buttonShape === "round" ? "circle" : "default"}
-                                    icon={<GitlabOutlined/>}
-                                    href={"https://gitlab.com/xyk953651094/SkyNewTab-Vue/"} target={"_self"}
-                                    onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
-                                    onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
-                                    style={{color: this.props.fontColor}}>
-                            </Button>
-                        </Space>
-                    </Col>
-                    <Col span="19">
-                        <Button type={"text"} shape={this.props.preferenceData.buttonShape}
-                                icon={<i className="bi bi-puzzle"/>}
-                                onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
-                                onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
-                                style={{color: this.props.fontColor, cursor: "default"}}>
-
-                            {"云开诗词新标签页（React）"}
-                        </Button>
-                    </Col>
-                    <Col span="5">
-                        <Space>
-                            <Button type={"text"}
-                                    shape={this.props.preferenceData.buttonShape === "round" ? "circle" : "default"}
-                                    icon={<GithubOutlined/>}
-                                    href={"https://github.com/xyk953651094/SkyNewTab-Poem-React/"} target={"_self"}
-                                    onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
-                                    onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
-                                    style={{color: this.props.fontColor}}>
-                            </Button>
-                            <Button type={"text"}
-                                    shape={this.props.preferenceData.buttonShape === "round" ? "circle" : "default"}
-                                    icon={<GitlabOutlined/>}
-                                    href={"https://gitlab.com/xyk953651094/SkyNewTab-Poem-React/"} target={"_self"}
-                                    onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
-                                    onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
-                                    style={{color: this.props.fontColor}}>
-                            </Button>
-                        </Space>
-                    </Col>
-                    <Col span="19">
-                        <Button type={"text"} shape={this.props.preferenceData.buttonShape}
-                                icon={<i className="bi bi-puzzle"/>}
-                                onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
-                                onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
-                                style={{color: this.props.fontColor, cursor: "default"}}>
-
-                            {"云开诗词新标签页（Angular）"}
-                        </Button>
-                    </Col>
-                    <Col span="5">
-                        <Space>
-                            <Button type={"text"}
-                                    shape={this.props.preferenceData.buttonShape === "round" ? "circle" : "default"}
-                                    icon={<GithubOutlined/>}
-                                    href={"https://github.com/xyk953651094/SkyNewTab-Poem-Angular/"} target={"_self"}
-                                    onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
-                                    onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
-                                    style={{color: this.props.fontColor}}>
-                            </Button>
-                            <Button type={"text"}
-                                    shape={this.props.preferenceData.buttonShape === "round" ? "circle" : "default"}
-                                    icon={<GitlabOutlined/>}
-                                    href={"https://gitlab.com/xyk953651094/SkyNewTab-Poem-Angular/"} target={"_self"}
-                                    onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
-                                    onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
-                                    style={{color: this.props.fontColor}}>
-                            </Button>
-                        </Space>
                     </Col>
                 </Row>
             </Card>

@@ -136,17 +136,17 @@ class MenuComponent extends React.Component {
                             backgroundColor={this.state.backgroundColor}
                             fontColor={this.state.fontColor}
                             getPreferenceData={this.props.getPreferenceData}/>
+                        <MenuInfoComponent
+                            hoverColor={this.state.hoverColor}
+                            backgroundColor={this.state.backgroundColor}
+                            fontColor={this.state.fontColor}
+                            preferenceData={this.props.preferenceData}/>
                         <MenuHelpComponent
                             hoverColor={this.state.hoverColor}
                             backgroundColor={this.state.backgroundColor}
                             fontColor={this.state.fontColor}
                             preferenceData={this.props.preferenceData}/>
                         <MenuEmailComponent
-                            hoverColor={this.state.hoverColor}
-                            backgroundColor={this.state.backgroundColor}
-                            fontColor={this.state.fontColor}
-                            preferenceData={this.props.preferenceData}/>
-                        <MenuInfoComponent
                             hoverColor={this.state.hoverColor}
                             backgroundColor={this.state.backgroundColor}
                             fontColor={this.state.fontColor}
