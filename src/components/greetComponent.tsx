@@ -105,8 +105,8 @@ class GreetComponent extends React.Component {
             holidayContent: holidayContent,
             calendar: timeDetails.showDate4 + " " + timeDetails.showWeek + " ｜ " +
                 data.yearTips + data.chineseZodiac + "年 ｜ " + data.lunarCalendar + " ｜ " + data.constellation,
-            suit: data.suit.split(" ").join(" · "),
-            avoid: data.avoid.split(" ").join(" · "),
+            suit: data.suit.replace(/\./g, " · "),
+            avoid: data.avoid.replace(/\./g, " · "),
         });
     }
 
