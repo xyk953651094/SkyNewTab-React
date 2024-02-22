@@ -36,14 +36,14 @@ class MenuInfoComponent extends React.Component {
                   }}
                   bodyStyle={{backgroundColor: this.props.backgroundColor}}
             >
-                <Row>
+                <Row gutter={[0, 8]}>
                     <Col span="12">
                         <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<GithubOutlined/>}
                                 href={"https://github.com/xyk953651094/SkyNewTab-React/"} target={"_self"}
                                 onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
                                 onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
                                 style={{color: this.props.fontColor}}>
-                            {"GitHub 产品主页"}
+                            {"产品主页"}
                         </Button>
                     </Col>
                     <Col span="12">
@@ -52,7 +52,43 @@ class MenuInfoComponent extends React.Component {
                                 onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
                                 onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
                                 style={{color: this.props.fontColor}}>
-                            {"GitLab 产品主页"}
+                            {"产品主页"}
+                        </Button>
+                    </Col>
+                    <Col span="12">
+                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<GithubOutlined/>}
+                                href={"https://github.com/xyk953651094/SkyNewTab-React/releases/"} target={"_self"}
+                                onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
+                                onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
+                                style={{color: this.props.fontColor}}>
+                            {"更新日志"}
+                        </Button>
+                    </Col>
+                    <Col span="12">
+                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<GitlabOutlined/>}
+                                href={"https://gitlab.com/xyk953651094/SkyNewTab-React/-/releases/"} target={"_self"}
+                                onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
+                                onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
+                                style={{color: this.props.fontColor}}>
+                            {"更新日志"}
+                        </Button>
+                    </Col>
+                    <Col span="12">
+                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<GithubOutlined/>}
+                                href={"https://xyk953651094.github.io/SkyDocuments/"} target={"_self"}
+                                onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
+                                onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
+                                style={{color: this.props.fontColor}}>
+                            {"帮助文档"}
+                        </Button>
+                    </Col>
+                    <Col span="12">
+                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<GitlabOutlined/>}
+                                href={"https://xyk953651094.gitlab.io/SkyDocuments/"} target={"_self"}
+                                onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
+                                onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
+                                style={{color: this.props.fontColor}}>
+                            {"帮助文档"}
                         </Button>
                     </Col>
                 </Row>

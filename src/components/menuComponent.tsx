@@ -5,13 +5,11 @@ import {changeThemeColor} from "../typescripts/publicFunctions";
 import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
 import {device} from "../typescripts/publicConstants";
 import MenuFooterComponent from "../menuComponents/menuFooterComponent";
-import MenuEmailComponent from "../menuComponents/menuEmailComponent";
+import MenuEmailComponent from "../menuComponents/menuContactComponent";
 import MenuInfoComponent from "../menuComponents/menuInfoComponent";
 import MenuPreferenceComponent from "../menuComponents/menuPreferenceComponent";
 import MenuHeaderComponent from "../menuComponents/menuHeaderComponent";
-import MenuProductsComponent from "../menuComponents/menuProductsComponent";
 import MenuToTopComponent from "../menuComponents/menuToTopComponent";
-import MenuHelpComponent from "../menuComponents/menuHelpComponent";
 
 type propType = {
     themeColor: ThemeColorInterface,
@@ -141,17 +139,7 @@ class MenuComponent extends React.Component {
                             backgroundColor={this.state.backgroundColor}
                             fontColor={this.state.fontColor}
                             preferenceData={this.props.preferenceData}/>
-                        <MenuHelpComponent
-                            hoverColor={this.state.hoverColor}
-                            backgroundColor={this.state.backgroundColor}
-                            fontColor={this.state.fontColor}
-                            preferenceData={this.props.preferenceData}/>
                         <MenuEmailComponent
-                            hoverColor={this.state.hoverColor}
-                            backgroundColor={this.state.backgroundColor}
-                            fontColor={this.state.fontColor}
-                            preferenceData={this.props.preferenceData}/>
-                        <MenuProductsComponent
                             hoverColor={this.state.hoverColor}
                             backgroundColor={this.state.backgroundColor}
                             fontColor={this.state.fontColor}
