@@ -33,19 +33,19 @@ class MenuHeaderComponent extends React.Component {
                 </Col>
                 <Col span={12} style={{textAlign: "right"}}>
                     <Space>
-                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<GiftOutlined/>}
-                                href={"https://afdian.net/a/xyk953651094"} target={"_self"}
-                                onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
-                                onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
-                                style={{color: this.props.fontColor}}>
-                            捐助
-                        </Button>
                         <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<NotificationOutlined/>}
                                 href={"https://xyk953651094.blogspot.com/"} target={"_self"}
                                 onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
                                 onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
                                 style={{color: this.props.fontColor}}>
                             博客
+                        </Button>
+                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<GiftOutlined/>}
+                                href={"https://afdian.net/a/xyk953651094"} target={"_self"}
+                                onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
+                                onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
+                                style={{color: this.props.fontColor}}>
+                            捐助
                         </Button>
                     </Space>
                 </Col>
