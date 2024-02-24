@@ -247,9 +247,14 @@ class MenuPreferenceComponent extends React.Component {
 
     // 重置设置
     resetPreferenceBtnOnClick() {
-        this.setState({
-            displayResetPreferenceModal: true,
-        })
+        let resetTimeStampStorage = localStorage.getItem("resetTimeStamp");
+        if (resetTimeStampStorage && new Date().getTime() - parseInt(resetTimeStampStorage) < 60 * 1000) {
+            message.error("操作过于频繁，请稍后再试");
+        } else {
+            this.setState({
+                displayResetPreferenceModal: true,
+            })
+        }
     }
     resetPreferenceOkBtnOnClick() {
         this.setState({
@@ -257,6 +262,7 @@ class MenuPreferenceComponent extends React.Component {
             displayResetPreferenceModal: false,
         }, () => {
             localStorage.setItem("preferenceData", JSON.stringify(defaultPreferenceData));
+            localStorage.setItem("resetTimeStamp", JSON.stringify(new Date().getTime()));
             message.success("已重置设置，一秒后刷新页面");
             this.refreshWindow();
         })
@@ -269,9 +275,14 @@ class MenuPreferenceComponent extends React.Component {
 
     // 重置插件
     clearStorageBtnOnClick() {
-        this.setState({
-            displayClearStorageModal: true,
-        })
+        let resetTimeStampStorage = localStorage.getItem("resetTimeStamp");
+        if (resetTimeStampStorage && new Date().getTime() - parseInt(resetTimeStampStorage) < 60 * 1000) {
+            message.error("操作过于频繁，请稍后再试");
+        } else {
+            this.setState({
+                displayClearStorageModal: true,
+            })
+        }
     }
 
     clearStorageOkBtnOnClick() {
@@ -280,6 +291,7 @@ class MenuPreferenceComponent extends React.Component {
             displayClearStorageModal: false,
         }, () => {
             localStorage.clear();
+            localStorage.setItem("resetTimeStamp", JSON.stringify(new Date().getTime()));
             message.success("已重置插件，一秒后刷新页面");
             this.refreshWindow();
         })
@@ -445,10 +457,10 @@ class MenuPreferenceComponent extends React.Component {
                                    extra={"上次切换：" + this.state.lastImageRequestTime}>
                             <Select style={{width: 170}} onChange={this.changeImageTimeOnChange.bind(this)}
                                     options={[
-                                        {value: "0", label: "每次刷新（不推荐）"},
-                                        {value: "900000", label: "每 15 分钟"},
-                                        {value: "1800000", label: "每 30 分钟"},
-                                        {value: "3600000", label: "每 60 分钟"},
+                                        {value: "60000", label: "每隔 1 分钟"},
+                                        {value: "900000", label: "每隔 15 分钟"},
+                                        {value: "3600000", label: "每隔 1 小时"},
+                                        {value: "86400000", label: "每隔 1 天"},
                                     ]}
                             />
                         </Form.Item>

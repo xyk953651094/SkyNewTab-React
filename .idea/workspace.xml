@@ -6,11 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="优化菜单栏界面">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/menuComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/menuComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/menuComponents/menuEmailComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/menuComponents/menuContactComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/menuComponents/menuHelpComponent.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/menuComponents/menuInfoComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/menuComponents/menuInfoComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/menuComponents/menuProductsComponent.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/weatherComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/weatherComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/menuComponents/menuPreferenceComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/menuComponents/menuPreferenceComponent.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -524,7 +522,8 @@
       <workItem from="1708572940011" duration="462000" />
       <workItem from="1708573496147" duration="739000" />
       <workItem from="1708574514732" duration="143000" />
-      <workItem from="1708587553793" duration="443000" />
+      <workItem from="1708587553793" duration="1015000" />
+      <workItem from="1708742996001" duration="5286000" />
     </task>
     <task id="LOCAL-00001" summary="优化抽屉蒙版的显示效果&#10;优化代码质量">
       <created>1683952184207</created>
@@ -644,14 +643,6 @@
       <option name="presentableId" value="LOCAL-00017" />
       <option name="project" value="LOCAL" />
       <updated>1687402693401</updated>
-    </task>
-    <task id="LOCAL-00148" summary="修复已知问题">
-      <option name="closed" value="true" />
-      <created>1706601879840</created>
-      <option name="number" value="00148" />
-      <option name="presentableId" value="LOCAL-00148" />
-      <option name="project" value="LOCAL" />
-      <updated>1706601879841</updated>
     </task>
     <task id="LOCAL-00149" summary="修复已知问题">
       <option name="closed" value="true" />
@@ -901,7 +892,15 @@
       <option name="project" value="LOCAL" />
       <updated>1708574564268</updated>
     </task>
-    <option name="localTasksCounter" value="180" />
+    <task id="LOCAL-00180" summary="优化菜单栏界面">
+      <option name="closed" value="true" />
+      <created>1708587998608</created>
+      <option name="number" value="00180" />
+      <option name="presentableId" value="LOCAL-00180" />
+      <option name="project" value="LOCAL" />
+      <updated>1708587998608</updated>
+    </task>
+    <option name="localTasksCounter" value="181" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

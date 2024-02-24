@@ -10,7 +10,7 @@ import {
     httpRequest
 } from "../typescripts/publicFunctions";
 import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
-import {ClockCircleOutlined, EnvironmentOutlined, MoreOutlined} from "@ant-design/icons";
+import {BulbOutlined, ClockCircleOutlined, EnvironmentOutlined, MoreOutlined} from "@ant-design/icons";
 
 const {Text} = Typography;
 
@@ -28,6 +28,7 @@ type stateType = {
     weatherIcon: string,
     weatherInfo: string,
     searchEngineUrl: string,
+    weatherTips: string,
     location: string,
     humidity: string,
     pm25: string,
@@ -53,6 +54,7 @@ class WeatherComponent extends React.Component {
             weatherIcon: "",
             weatherInfo: "暂无信息",
             searchEngineUrl: "https://www.bing.com/search?q=",
+            weatherTips: "",
             location: "暂无信息",
             humidity: "暂无信息",
             pm25: "暂无信息",
@@ -84,6 +86,16 @@ class WeatherComponent extends React.Component {
             rainfall: data.weatherData.rainfall + "%",
             visibility: data.weatherData.visibility,
             windInfo: data.weatherData.windDirection + " " + data.weatherData.windPower + " 级",
+        }, () => {
+            if (parseInt(data.weatherData.temperature) > 30) {
+                this.setState({
+                    weatherTips: "天气炎热，请注意避暑，减少户外活动",
+                })
+            } else if (parseInt(data.weatherData.temperature) < 0) {
+                this.setState({
+                    weatherTips: "天气寒冷，请注意防寒，减少户外活动",
+                })
+            }
         });
     }
 
@@ -160,10 +172,10 @@ class WeatherComponent extends React.Component {
     render() {
         const popoverTitle = (
             <Row align={"middle"}>
-                <Col span={10}>
+                <Col span={6}>
                     <Text style={{color: this.state.fontColor}}>{"天气信息"}</Text>
                 </Col>
-                <Col span={14} style={{textAlign: "right"}}>
+                <Col span={18} style={{textAlign: "right"}}>
                     <Space>
                         <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<MoreOutlined/>}
                                 onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
@@ -181,6 +193,15 @@ class WeatherComponent extends React.Component {
             <List>
                 <List.Item>
                     <Space direction={"vertical"}>
+                        <Row style={{display: this.state.weatherTips.length === 0 ? "none" : "flex"}}>
+                            <Button type={"text"} shape={this.props.preferenceData.buttonShape}
+                                    icon={<BulbOutlined />}
+                                    onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
+                                    onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}
+                                    style={{color: this.state.fontColor, cursor: "default"}}>
+                                {this.state.weatherTips}
+                            </Button>
+                        </Row>
                         <Row gutter={8}>
                             <Col span={12}>
                                 <Button type={"text"} shape={this.props.preferenceData.buttonShape}

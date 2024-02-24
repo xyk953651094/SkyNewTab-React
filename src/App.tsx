@@ -134,18 +134,18 @@ class App extends React.Component {
             }, 1000);
 
             // 额外提醒
-            // if (currentVersion === "2.8.0") {
-            //     setTimeout(() => {
-            //         notification.open({
-            //             icon: null,
-            //             message: "重要通知",
-            //             description: "若专注模式无法生效，可尝试重新安装本插件",
-            //             placement: "bottomLeft",
-            //             duration: 10,
-            //             closeIcon: false
-            //         });
-            //     }, 2000);
-            // }
+            if (currentVersion === "3.1.0") {
+                setTimeout(() => {
+                    notification.open({
+                        icon: null,
+                        message: "重要通知",
+                        description: "本次更新修改了偏好设置中的切换间隔，如出现异常请点击重置设置按钮",
+                        placement: "bottomLeft",
+                        duration: 10,
+                        closeIcon: false
+                    });
+                }, 2000);
+            }
         }
 
         // 修改各类弹窗样式
