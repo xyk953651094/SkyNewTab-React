@@ -77,8 +77,8 @@ class MenuContactComponent extends React.Component {
                         <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<BulbOutlined />}
                                 onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
                                 onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
-                                style={{color: this.props.fontColor}}>
-                            {"联系作者前请先查阅帮助文档"}
+                                style={{color: this.props.fontColor, cursor: "default"}}>
+                            {"建议或反馈前请优先查阅帮助文档"}
                         </Button>
                     </Col>
                 </Row>
