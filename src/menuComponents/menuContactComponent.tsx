@@ -57,7 +57,7 @@ class MenuContactComponent extends React.Component {
                     </Col>
                     <Col span="12">
                         <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<LikeOutlined/>}
-                                href={"mailto:xyk953651094@qq.com?&subject=云开新标签页-功能建议"} target={"_self"}
+                                href={"mailto:xyk953651094@qq.com?&subject=云开新标签页-功能建议&body=提示：功能建议前请优先查阅帮助文档"} target={"_self"}
                                 onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
                                 onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
                                 style={{color: this.props.fontColor}}>
@@ -66,19 +66,11 @@ class MenuContactComponent extends React.Component {
                     </Col>
                     <Col span="12">
                         <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<DislikeOutlined/>}
-                                href={"mailto:xyk953651094@qq.com?&subject=云开新标签页-问题反馈"} target={"_self"}
+                                href={"mailto:xyk953651094@qq.com?&subject=云开新标签页-问题反馈&body=提示：问题反馈前请优先查阅帮助文档"} target={"_self"}
                                 onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
                                 onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
                                 style={{color: this.props.fontColor}}>
                             {"问题反馈"}
-                        </Button>
-                    </Col>
-                    <Col span="12">
-                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<BulbOutlined />}
-                                onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
-                                onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
-                                style={{color: this.props.fontColor, cursor: "default"}}>
-                            {"建议或反馈前请优先查阅帮助文档"}
                         </Button>
                     </Col>
                 </Row>
