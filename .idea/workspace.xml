@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="优化菜单栏界面">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/weatherComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/weatherComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/menuComponents/menuPreferenceComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/menuComponents/menuPreferenceComponent.tsx" afterDir="false" />
-    </list>
+    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="提升使用体验" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -523,7 +518,7 @@
       <workItem from="1708573496147" duration="739000" />
       <workItem from="1708574514732" duration="143000" />
       <workItem from="1708587553793" duration="1015000" />
-      <workItem from="1708742996001" duration="5286000" />
+      <workItem from="1708742996001" duration="5694000" />
     </task>
     <task id="LOCAL-00001" summary="优化抽屉蒙版的显示效果&#10;优化代码质量">
       <created>1683952184207</created>
@@ -643,14 +638,6 @@
       <option name="presentableId" value="LOCAL-00017" />
       <option name="project" value="LOCAL" />
       <updated>1687402693401</updated>
-    </task>
-    <task id="LOCAL-00149" summary="修复已知问题">
-      <option name="closed" value="true" />
-      <created>1706602597068</created>
-      <option name="number" value="00149" />
-      <option name="presentableId" value="LOCAL-00149" />
-      <option name="project" value="LOCAL" />
-      <updated>1706602597069</updated>
     </task>
     <task id="LOCAL-00150" summary="修复已知问题">
       <option name="closed" value="true" />
@@ -900,7 +887,15 @@
       <option name="project" value="LOCAL" />
       <updated>1708587998608</updated>
     </task>
-    <option name="localTasksCounter" value="181" />
+    <task id="LOCAL-00181" summary="提升使用体验">
+      <option name="closed" value="true" />
+      <created>1708751488395</created>
+      <option name="number" value="00181" />
+      <option name="presentableId" value="LOCAL-00181" />
+      <option name="project" value="LOCAL" />
+      <updated>1708751488395</updated>
+    </task>
+    <option name="localTasksCounter" value="182" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -953,9 +948,9 @@
     <MESSAGE value="优化代码质量" />
     <MESSAGE value="新增节日祝福通知" />
     <MESSAGE value="新增白噪音" />
-    <MESSAGE value="提升使用体验" />
     <MESSAGE value="优化菜单栏界面" />
-    <option name="LAST_COMMIT_MESSAGE" value="优化菜单栏界面" />
+    <MESSAGE value="提升使用体验" />
+    <option name="LAST_COMMIT_MESSAGE" value="提升使用体验" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
