@@ -1,8 +1,6 @@
 import React from "react";
 import {Button, Image, message, Space} from "antd";
 import {
-    CameraOutlined,
-    ClockCircleOutlined,
     EnvironmentOutlined,
     InfoCircleOutlined,
     UserOutlined
@@ -13,7 +11,7 @@ import {btnMouseOut, btnMouseOver, getSearchEngineDetail, isEmpty} from "../type
 import {PreferenceDataInterface} from "../typescripts/publicInterface";
 import $ from "jquery";
 
-const btnMaxSize = 35;
+const btnMaxSize = 50;
 
 type propType = {
     imageData: any,
@@ -30,8 +28,6 @@ type stateType = {
     imagePreviewUrl: string,
     imageLocation: string,
     imageDescription: string,
-    imageCreateTime: string,
-    imageCamera: string,
     blurHashCode: string,
     searchEngineUrl: string,
     noImageMode: boolean,
@@ -53,8 +49,6 @@ class PopupImageComponent extends React.Component {
             imagePreviewUrl: "",
             imageLocation: "暂无信息",
             imageDescription: "暂无信息",
-            imageCreateTime: "暂无信息",
-            imageCamera: "暂无信息",
             blurHashCode: "",
             searchEngineUrl: "https://www.bing.com/search?q=",
             noImageMode: false,
@@ -80,14 +74,6 @@ class PopupImageComponent extends React.Component {
     imageLocationBtnOnClick() {
         if (this.state.imageLocation !== "暂无信息") {
             window.open(this.state.searchEngineUrl + this.state.imageLocation, "_blank");
-        } else {
-            message.error("无跳转链接");
-        }
-    }
-
-    imageCameraBtnOnClick() {
-        if (this.state.imageCamera !== "暂无信息") {
-            window.open(this.state.searchEngineUrl + this.state.imageCamera, "_blank");
         } else {
             message.error("无跳转链接");
         }
@@ -123,8 +109,6 @@ class PopupImageComponent extends React.Component {
                     imagePreviewUrl: nextProps.imageData.urls.regular,
                     imageLocation: isEmpty(nextProps.imageData.location.name) ? "暂无信息" : nextProps.imageData.location.name,
                     imageDescription: isEmpty(nextProps.imageData.alt_description) ? "暂无信息" : nextProps.imageData.alt_description,
-                    imageCreateTime: this.getCreateTime(nextProps.imageData.created_at),
-                    imageCamera: isEmpty(nextProps.imageData.exif.name) ? "暂无信息" : nextProps.imageData.exif.name,
                     hoverColor: nextProps.imageData.color,
                     blurHashCode: nextProps.imageData.blur_hash
                 }, () => {
@@ -164,8 +148,8 @@ class PopupImageComponent extends React.Component {
                     <div className="popupImageDiv">
                         <Image
                             id={"popupImage"}
-                            width={250}
-                            height={150}
+                            width={200}
+                            height={120}
                             preview={false}
                             alt={"暂无图片"}
                             src={this.state.imagePreviewUrl}
@@ -195,22 +179,6 @@ class PopupImageComponent extends React.Component {
                                 onClick={this.imageLinkBtnOnClick.bind(this)} style={{color: this.props.fontColor}}>
                             {this.state.imageDescription.length < btnMaxSize ? this.state.imageDescription : this.state.imageDescription.substring(0, btnMaxSize) + "..."}
                         </Button>
-                        {/*<Space>*/}
-                        {/*    <Button type={"text"} shape={this.props.preferenceData.buttonShape}*/}
-                        {/*            icon={<ClockCircleOutlined/>}*/}
-                        {/*            style={{color: this.props.fontColor, cursor: "default"}}*/}
-                        {/*            onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}*/}
-                        {/*            onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}>*/}
-                        {/*        {this.state.imageCreateTime}*/}
-                        {/*    </Button>*/}
-                        {/*    <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<CameraOutlined/>}*/}
-                        {/*            onClick={this.imageCameraBtnOnClick.bind(this)}*/}
-                        {/*            style={{color: this.props.fontColor}}*/}
-                        {/*            onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}*/}
-                        {/*            onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}>*/}
-                        {/*        {this.state.imageCamera}*/}
-                        {/*    </Button>*/}
-                        {/*</Space>*/}
                     </Space>
                 </Space>
                 <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<InfoCircleOutlined/>}

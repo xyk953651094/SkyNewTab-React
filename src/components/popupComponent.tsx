@@ -47,9 +47,9 @@ class PopupComponent extends React.Component {
 
             this.setState({
                 imageData: tempImageData,
-                hoverColor: tempImageData.color,
-                backgroundColor: getReverseColor(tempImageData.color),
-                fontColor: getFontColor(getReverseColor(tempImageData.color)),
+                hoverColor: getReverseColor(tempImageData.color),
+                backgroundColor: tempImageData.color,
+                fontColor: getFontColor(tempImageData.color),
                 // preferenceData: getPreferenceDataStorage(),
             }, () => {
                 $("body").css({"backgroundColor": this.state.backgroundColor});
