@@ -6,8 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="提升使用体验">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/focusComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/focusComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/popupComponents/popupFooterComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/popupComponents/popupFooterComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/weatherComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/weatherComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/menuComponents/menuContactComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/menuComponents/menuContactComponent.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -527,7 +527,8 @@
       <workItem from="1708856677962" duration="1210000" />
       <workItem from="1708861747356" duration="460000" />
       <workItem from="1708862741651" duration="135000" />
-      <workItem from="1708934518417" duration="184000" />
+      <workItem from="1708934518417" duration="2680000" />
+      <workItem from="1708954070507" duration="1384000" />
     </task>
     <task id="LOCAL-00001" summary="优化抽屉蒙版的显示效果&#10;优化代码质量">
       <created>1683952184207</created>
@@ -647,30 +648,6 @@
       <option name="presentableId" value="LOCAL-00017" />
       <option name="project" value="LOCAL" />
       <updated>1687402693401</updated>
-    </task>
-    <task id="LOCAL-00154" summary="优化代码质量">
-      <option name="closed" value="true" />
-      <created>1706880659743</created>
-      <option name="number" value="00154" />
-      <option name="presentableId" value="LOCAL-00154" />
-      <option name="project" value="LOCAL" />
-      <updated>1706880659743</updated>
-    </task>
-    <task id="LOCAL-00155" summary="提升使用体验">
-      <option name="closed" value="true" />
-      <created>1707099493897</created>
-      <option name="number" value="00155" />
-      <option name="presentableId" value="LOCAL-00155" />
-      <option name="project" value="LOCAL" />
-      <updated>1707099493897</updated>
-    </task>
-    <task id="LOCAL-00156" summary="提升使用体验">
-      <option name="closed" value="true" />
-      <created>1707099512125</created>
-      <option name="number" value="00156" />
-      <option name="presentableId" value="LOCAL-00156" />
-      <option name="project" value="LOCAL" />
-      <updated>1707099512125</updated>
     </task>
     <task id="LOCAL-00157" summary="提升使用体验">
       <option name="closed" value="true" />
@@ -904,7 +881,31 @@
       <option name="project" value="LOCAL" />
       <updated>1708862812969</updated>
     </task>
-    <option name="localTasksCounter" value="186" />
+    <task id="LOCAL-00186" summary="提升使用体验">
+      <option name="closed" value="true" />
+      <created>1708934910173</created>
+      <option name="number" value="00186" />
+      <option name="presentableId" value="LOCAL-00186" />
+      <option name="project" value="LOCAL" />
+      <updated>1708934910174</updated>
+    </task>
+    <task id="LOCAL-00187" summary="提升使用体验">
+      <option name="closed" value="true" />
+      <created>1708935092596</created>
+      <option name="number" value="00187" />
+      <option name="presentableId" value="LOCAL-00187" />
+      <option name="project" value="LOCAL" />
+      <updated>1708935092596</updated>
+    </task>
+    <task id="LOCAL-00188" summary="提升使用体验">
+      <option name="closed" value="true" />
+      <created>1708935832665</created>
+      <option name="number" value="00188" />
+      <option name="presentableId" value="LOCAL-00188" />
+      <option name="project" value="LOCAL" />
+      <updated>1708935832665</updated>
+    </task>
+    <option name="localTasksCounter" value="189" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
