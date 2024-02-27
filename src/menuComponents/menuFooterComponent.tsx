@@ -30,7 +30,7 @@ class MenuFooterComponent extends React.Component {
                         onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
                         onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
                         style={{color: this.props.fontColor, cursor: "default"}}>
-                    {"如果喜欢这款插件，请在插件商店五星好评"}
+                    {"如果喜欢这款插件，请考虑捐助或五星好评"}
                 </Button>
             </Space>
         );

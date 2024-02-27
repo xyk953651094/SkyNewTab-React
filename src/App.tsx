@@ -126,7 +126,7 @@ class App extends React.Component {
                 notification.open({
                     icon: null,
                     message: "支持作者",
-                    description: "如果喜欢这款插件，请在插件商店五星好评",
+                    description: "如果喜欢这款插件，请考虑捐助或五星好评",
                     placement: "bottomLeft",
                     duration: 5,
                     closeIcon: false
