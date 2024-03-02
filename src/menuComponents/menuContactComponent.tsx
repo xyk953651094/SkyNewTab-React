@@ -56,6 +56,24 @@ class MenuContactComponent extends React.Component {
                         </Button>
                     </Col>
                     <Col span="12">
+                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<GithubOutlined/>}
+                                href={"https://github.com/xyk953651094?tab=repositories/"} target={"_self"}
+                                onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
+                                onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
+                                style={{color: this.props.fontColor}}>
+                            {"更多产品"}
+                        </Button>
+                    </Col>
+                    <Col span="12">
+                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<GitlabOutlined/>}
+                                href={"https://gitlab.com/users/xyk953651094/projects/"} target={"_self"}
+                                onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
+                                onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
+                                style={{color: this.props.fontColor}}>
+                            {"更多产品"}
+                        </Button>
+                    </Col>
+                    <Col span="12">
                         <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<LikeOutlined/>}
                                 href={"mailto:xyk953651094@qq.com?&subject=云开新标签页-功能建议&body=提示：功能建议前请优先查阅帮助文档"} target={"_self"}
                                 onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
