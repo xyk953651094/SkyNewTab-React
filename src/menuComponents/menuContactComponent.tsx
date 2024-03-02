@@ -57,7 +57,7 @@ class MenuContactComponent extends React.Component {
                     </Col>
                     <Col span="12">
                         <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<GithubOutlined/>}
-                                href={"https://github.com/xyk953651094?tab=repositories/"} target={"_self"}
+                                href={"https://github.com/xyk953651094?tab=repositories"} target={"_self"}
                                 onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
                                 onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
                                 style={{color: this.props.fontColor}}>
