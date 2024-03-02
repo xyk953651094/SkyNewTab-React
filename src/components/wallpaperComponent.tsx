@@ -175,7 +175,6 @@ class WallpaperComponent extends React.Component {
             let nowTimeStamp = new Date().getTime();
             if (lastRequestTime === null) {  // 第一次请求时 lastRequestTime 为 null，因此直接进行请求赋值 lastRequestTime
                 this.getWallpaper();
-            // } else if (nowTimeStamp - parseInt(lastRequestTime) > 0) {  // 必须多于切换间隔才能进行新的请求
             } else if (nowTimeStamp - parseInt(lastRequestTime) > parseInt(this.props.preferenceData.changeImageTime)) {  // 必须多于切换间隔才能进行新的请求
                 this.getWallpaper();
             } else {  // 切换间隔内使用上一次请求结果
@@ -203,7 +202,8 @@ class WallpaperComponent extends React.Component {
                     }, () => {
                         $("#backgroundCanvas").removeClass("wallpaperFadeIn").addClass("wallpaperFadeOut");
                         message.destroy();
-                        message.success("图片加载成功").then(this.showFocusModeMessage);
+                        this.showFocusModeMessage();
+                        // message.success("图片加载成功").then(this.showFocusModeMessage);
 
                         // 设置动态效果
                         backgroundImage.classList.add("wallpaperFadeIn");

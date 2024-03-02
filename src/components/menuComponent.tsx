@@ -4,15 +4,12 @@ import {MenuOutlined} from "@ant-design/icons";
 import {changeThemeColor} from "../typescripts/publicFunctions";
 import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
 import {device} from "../typescripts/publicConstants";
-import PreferenceFooterComponent from "../preferenceComponents/preferenceFooterComponent";
-import PreferenceEmailComponent from "../preferenceComponents/preferenceEmailComponent";
-import PreferenceInfoComponent from "../preferenceComponents/preferenceInfoComponent";
-import PreferenceImageComponent from "../preferenceComponents/preferenceImageComponent";
-import PreferenceFunctionComponent from "../preferenceComponents/preferenceFunctionComponent";
-import PreferenceHeaderComponent from "../preferenceComponents/preferenceHeaderComponent";
-import PreferenceProductComponent from "../preferenceComponents/preferenceProductComponent";
-import PreferenceToTopComponent from "../preferenceComponents/preferenceToTopComponent";
-import PreferenceHelpComponent from "../preferenceComponents/preferenceHelpComponent";
+import MenuFooterComponent from "../menuComponents/menuFooterComponent";
+import MenuEmailComponent from "../menuComponents/menuContactComponent";
+import MenuInfoComponent from "../menuComponents/menuInfoComponent";
+import MenuPreferenceComponent from "../menuComponents/menuPreferenceComponent";
+import MenuHeaderComponent from "../menuComponents/menuHeaderComponent";
+import MenuToTopComponent from "../menuComponents/menuToTopComponent";
 
 type propType = {
     themeColor: ThemeColorInterface,
@@ -27,15 +24,14 @@ type stateType = {
     buttonShape: "circle" | "default" | "round" | undefined,
     displayDrawer: boolean,
     drawerPosition: "right" | "bottom",
-    preferenceModified: boolean
 }
 
-interface PreferenceComponent {
+interface MenuComponent {
     state: stateType,
     props: propType
 }
 
-class PreferenceComponent extends React.Component {
+class MenuComponent extends React.Component {
     constructor(props: any) {
         super(props);
         this.state = {
@@ -45,14 +41,7 @@ class PreferenceComponent extends React.Component {
             buttonShape: "round",
             displayDrawer: false,
             drawerPosition: "right",
-            preferenceModified: false
         };
-    }
-
-    getPreferenceModified(status: boolean) {
-        this.setState({
-            preferenceModified: status
-        })
     }
 
     showDrawerBtnOnClick() {
@@ -127,54 +116,35 @@ class PreferenceComponent extends React.Component {
                         }
                     }}
                     title={
-                        <PreferenceHeaderComponent
+                        <MenuHeaderComponent
                             hoverColor={this.state.hoverColor}
                             fontColor={this.state.fontColor}
                             preferenceData={this.props.preferenceData}/>
                     }
                     footer={
-                        <PreferenceFooterComponent
+                        <MenuFooterComponent
                             hoverColor={this.state.hoverColor}
                             fontColor={this.state.fontColor}
                             preferenceData={this.props.preferenceData}/>
                     }
                 >
                     <Space direction={"vertical"} size={"large"} id={"drawerContent"}>
-                        <PreferenceImageComponent
+                        <MenuPreferenceComponent
                             hoverColor={this.state.hoverColor}
                             backgroundColor={this.state.backgroundColor}
                             fontColor={this.state.fontColor}
-                            preferenceModified={this.state.preferenceModified}
-                            getPreferenceData={this.props.getPreferenceData}
-                            getPreferenceModified={this.getPreferenceModified.bind(this)}/>
-                        <PreferenceFunctionComponent
-                            hoverColor={this.state.hoverColor}
-                            backgroundColor={this.state.backgroundColor}
-                            fontColor={this.state.fontColor}
-                            preferenceModified={this.state.preferenceModified}
-                            getPreferenceData={this.props.getPreferenceData}
-                            getPreferenceModified={this.getPreferenceModified.bind(this)}/>
-                        <PreferenceHelpComponent
+                            getPreferenceData={this.props.getPreferenceData}/>
+                        <MenuInfoComponent
                             hoverColor={this.state.hoverColor}
                             backgroundColor={this.state.backgroundColor}
                             fontColor={this.state.fontColor}
                             preferenceData={this.props.preferenceData}/>
-                        <PreferenceEmailComponent
+                        <MenuEmailComponent
                             hoverColor={this.state.hoverColor}
                             backgroundColor={this.state.backgroundColor}
                             fontColor={this.state.fontColor}
                             preferenceData={this.props.preferenceData}/>
-                        <PreferenceInfoComponent
-                            hoverColor={this.state.hoverColor}
-                            backgroundColor={this.state.backgroundColor}
-                            fontColor={this.state.fontColor}
-                            preferenceData={this.props.preferenceData}/>
-                        <PreferenceProductComponent
-                            hoverColor={this.state.hoverColor}
-                            backgroundColor={this.state.backgroundColor}
-                            fontColor={this.state.fontColor}
-                            preferenceData={this.props.preferenceData}/>
-                        <PreferenceToTopComponent
+                        <MenuToTopComponent
                             hoverColor={this.state.hoverColor}
                             fontColor={this.state.fontColor}
                             preferenceData={this.props.preferenceData}/>
@@ -185,4 +155,4 @@ class PreferenceComponent extends React.Component {
     }
 }
 
-export default PreferenceComponent;
+export default MenuComponent;

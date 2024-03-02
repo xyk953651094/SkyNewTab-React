@@ -250,8 +250,6 @@ class FocusComponent extends React.Component {
             focusMode: tempFocusMode,
             filterList: tempFilterList,
         });
-
-        console.log("focusAudioPaused:" + focusAudio.paused);
     }
 
     render() {

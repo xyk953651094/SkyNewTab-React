@@ -4,14 +4,14 @@ import GreetComponent from "./components/greetComponent";
 import WeatherComponent from "./components/weatherComponent";
 import DailyComponent from "./components/dailyComponent";
 import TodoComponent from "./components/todoComponent";
-import ImageLinkComponent from "./components/imageLinkComponent"
-import PreferenceComponent from "./components/preferenceComponent";
+import LinkComponent from "./components/linkComponent"
+import MenuComponent from "./components/menuComponent";
 import WallpaperComponent from "./components/wallpaperComponent";
 import ClockComponent from "./components/clockComponent";
 import SearchComponent from "./components/searchComponent";
 import CollectionComponent from "./components/collectionComponent";
 import AuthorComponent from "./components/authorComponent";
-import ImageHistoryComponent from "./components/imageHistoryComponent";
+import HistoryComponent from "./components/historyComponent";
 
 import {Col, Layout, notification, Row, Space } from "antd";
 import "./stylesheets/publicStyles.scss"
@@ -126,7 +126,7 @@ class App extends React.Component {
                 notification.open({
                     icon: null,
                     message: "支持作者",
-                    description: "如果喜欢这款插件，请在插件商店五星好评",
+                    description: "如果喜欢这款插件，请考虑捐助或五星好评",
                     placement: "bottomLeft",
                     duration: 5,
                     closeIcon: false
@@ -134,12 +134,12 @@ class App extends React.Component {
             }, 1000);
 
             // 额外提醒
-            // if (currentVersion === "2.8.0") {
+            // if (currentVersion === "3.1.0") {
             //     setTimeout(() => {
             //         notification.open({
             //             icon: null,
             //             message: "重要通知",
-            //             description: "若专注模式无法生效，可尝试重新安装本插件",
+            //             description: "本次更新修改了偏好设置中的切换间隔，如出现异常请点击重置设置按钮",
             //             placement: "bottomLeft",
             //             duration: 10,
             //             closeIcon: false
@@ -295,7 +295,7 @@ class App extends React.Component {
                                     themeColor={this.state.themeColor}
                                     preferenceData={this.state.preferenceData}
                                 />
-                                <PreferenceComponent
+                                <MenuComponent
                                     themeColor={this.state.themeColor}
                                     preferenceData={this.state.preferenceData}
                                     getPreferenceData={this.getPreferenceData.bind(this)}
@@ -304,13 +304,13 @@ class App extends React.Component {
                         </Col>
                         <Col xs={22} sm={22} md={22} lg={0} xl={0} xxl={0} style={{textAlign: "right"}}>
                             <Space align={"center"}>
-                                <ImageLinkComponent
+                                <LinkComponent
                                     display={this.state.componentDisplay}
                                     themeColor={this.state.themeColor}
                                     imageData={this.state.imageData}
                                     preferenceData={this.state.preferenceData}
                                 />
-                                <PreferenceComponent
+                                <MenuComponent
                                     themeColor={this.state.themeColor}
                                     preferenceData={this.state.preferenceData}
                                     getPreferenceData={this.getPreferenceData.bind(this)}
@@ -346,7 +346,7 @@ class App extends React.Component {
                                     imageData={this.state.imageData}
                                     preferenceData={this.state.preferenceData}
                                 />
-                                <ImageHistoryComponent
+                                <HistoryComponent
                                     display={this.state.componentDisplay}
                                     themeColor={this.state.themeColor}
                                     imageHistory={this.state.imageHistory}

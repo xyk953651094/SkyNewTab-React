@@ -12,12 +12,12 @@ type propType = {
 
 type stateType = {}
 
-interface PreferenceToTopComponent {
+interface MenuToTopComponent {
     state: stateType,
     props: propType
 }
 
-class PreferenceToTopComponent extends React.Component {
+class MenuToTopComponent extends React.Component {
     constructor(props: any) {
         super(props);
         this.state = {};
@@ -45,4 +45,4 @@ class PreferenceToTopComponent extends React.Component {
     }
 }
 
-export default PreferenceToTopComponent;
+export default MenuToTopComponent;
