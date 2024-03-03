@@ -19,7 +19,7 @@ import {
     getPreferenceDataStorage, getTimeDetails, isEmpty,
 } from "../typescripts/publicFunctions";
 import {PreferenceDataInterface} from "../typescripts/publicInterface";
-import {defaultPreferenceData} from "../typescripts/publicConstants";
+import {defaultPreferenceData, device} from "../typescripts/publicConstants";
 import {CheckboxValueType} from "antd/es/checkbox/Group";
 
 const {Text} = Typography;
@@ -247,15 +247,23 @@ class MenuPreferenceComponent extends React.Component {
 
     // 导入数据
     importDataBtnOnClick() {
-        // TODO: 导入数据
-        message.success("已成功导入数据，一秒后刷新页面");
-        this.refreshWindow();
+        if (device !== "") {
+            message.error("暂不支持移动端");
+        } else {
+            // TODO: 导入数据
+            message.success("已成功导入数据，一秒后刷新页面");
+            this.refreshWindow();
+        }
     }
 
     // 导入数据
     exportDataBtnOnClick() {
-        // TODO: 导出数据
-        message.success("已成功导出数据");
+        if (device !== "") {
+            message.error("暂不支持移动端");
+        } else {
+            // TODO: 导出数据
+            message.success("已成功导出数据");
+        }
     }
 
     // 重置设置
