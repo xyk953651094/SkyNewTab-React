@@ -12,11 +12,11 @@ import {
     Switch,
     Typography
 } from "antd";
-import {CheckOutlined, RedoOutlined, SettingOutlined, StopOutlined} from "@ant-design/icons";
+import {CheckOutlined, RedoOutlined, SettingOutlined, StopOutlined, ImportOutlined, ExportOutlined} from "@ant-design/icons";
 import {
     btnMouseOut,
     btnMouseOver,
-    getPreferenceDataStorage, getTimeDetails, isEmpty, resetRadioColor, resetSwitchColor,
+    getPreferenceDataStorage, getTimeDetails, isEmpty,
 } from "../typescripts/publicFunctions";
 import {PreferenceDataInterface} from "../typescripts/publicInterface";
 import {defaultPreferenceData} from "../typescripts/publicConstants";
@@ -243,6 +243,19 @@ class MenuPreferenceComponent extends React.Component {
             }
             // resetSwitchColor("#simpleModeSwitch", checked, this.props.hoverColor)
         })
+    }
+
+    // 导入数据
+    importDataBtnOnClick() {
+        // TODO: 导入数据
+        message.success("已成功导入数据，一秒后刷新页面");
+        this.refreshWindow();
+    }
+
+    // 导入数据
+    exportDataBtnOnClick() {
+        // TODO: 导出数据
+        message.success("已成功导出数据");
     }
 
     // 重置设置
@@ -486,6 +499,24 @@ class MenuPreferenceComponent extends React.Component {
                                 </Form.Item>
                             </Col>
                         </Row>
+                        <Form.Item name={"manageDataButton"} label={"数据管理"}>
+                            <Space>
+                                <Button type={"text"} shape={this.state.preferenceData.buttonShape} icon={<ImportOutlined />}
+                                        onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
+                                        onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
+                                        onClick={this.importDataBtnOnClick.bind(this)}
+                                        style={{color: this.props.fontColor}}>
+                                    导入数据
+                                </Button>
+                                <Button type={"text"} shape={this.state.preferenceData.buttonShape} icon={<ExportOutlined />}
+                                        onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
+                                        onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
+                                        onClick={this.exportDataBtnOnClick.bind(this)}
+                                        style={{color: this.props.fontColor}}>
+                                    导出数据
+                                </Button>
+                            </Space>
+                        </Form.Item>
                         <Form.Item name={"clearStorageButton"} label={"危险设置"} extra={"出现异常时可尝试重置设置或插件"}>
                             <Space>
                                 <Button type={"text"} shape={this.state.preferenceData.buttonShape} icon={<RedoOutlined/>}
