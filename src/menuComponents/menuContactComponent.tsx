@@ -1,6 +1,6 @@
 import React from "react";
 import {Button, Card, Col, Row} from "antd";
-import {DislikeOutlined, GithubOutlined, GitlabOutlined, LikeOutlined, MailOutlined} from "@ant-design/icons";
+import {DislikeOutlined, GithubOutlined, GitlabOutlined, LikeOutlined, MailOutlined, WechatOutlined} from "@ant-design/icons";
 import {btnMouseOut, btnMouseOver} from "../typescripts/publicFunctions";
 import {PreferenceDataInterface} from "../typescripts/publicInterface";
 
@@ -89,6 +89,14 @@ class MenuContactComponent extends React.Component {
                                 onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
                                 style={{color: this.props.fontColor}}>
                             {"问题反馈"}
+                        </Button>
+                    </Col>
+                    <Col span="12">
+                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<WechatOutlined />}
+                                onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
+                                onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
+                                style={{color: this.props.fontColor}}>
+                            {"公众号"}
                         </Button>
                     </Col>
                 </Row>
