@@ -71,25 +71,9 @@ class AuthorComponent extends React.Component {
         };
     }
 
-    authorLinkBtnOnClick() {
-        if (!isEmpty(this.state.authorLink)) {
-            window.open(this.state.authorLink + unsplashUrl, "_self");
-        } else {
-            message.error("无跳转链接");
-        }
-    }
-
     imageLinkBtnOnClick() {
         if (!isEmpty(this.state.imageLink)) {
             window.open(this.state.imageLink + unsplashUrl, "_self");
-        } else {
-            message.error("无跳转链接");
-        }
-    }
-
-    imageLocationBtnOnClick() {
-        if (this.state.imageLocation !== "暂无信息") {
-            window.open(this.state.searchEngineUrl + this.state.imageLocation, "_self");
         } else {
             message.error("无跳转链接");
         }
@@ -155,10 +139,9 @@ class AuthorComponent extends React.Component {
                         <Avatar size={64} src={this.state.authorIconUrl} alt={"作者"}/>
                         <Space direction={"vertical"}>
                             <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<UserOutlined/>}
-                                    style={{color: this.state.fontColor}}
+                                    style={{color: this.state.fontColor, cursor: "default"}}
                                     onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
-                                    onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}
-                                    onClick={this.authorLinkBtnOnClick.bind(this)}>
+                                    onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}>
                                 {this.state.authorName.length < btnMaxSize ? this.state.authorName : this.state.authorName.substring(0, btnMaxSize) + "..."}
                             </Button>
                             <Space>
@@ -196,10 +179,9 @@ class AuthorComponent extends React.Component {
                             <Space direction={"vertical"}>
                                 <Button type={"text"} shape={this.props.preferenceData.buttonShape}
                                         icon={<EnvironmentOutlined/>}
-                                        style={{color: this.state.fontColor}}
+                                        style={{color: this.state.fontColor, cursor: "default"}}
                                         onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
-                                        onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}
-                                        onClick={this.imageLocationBtnOnClick.bind(this)}>
+                                        onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}>
                                     {this.state.imageLocation.length < btnMaxSize ? this.state.imageLocation : this.state.imageLocation.substring(0, btnMaxSize) + "..."}
                                 </Button>
                                 <Button type={"text"} shape={this.props.preferenceData.buttonShape}

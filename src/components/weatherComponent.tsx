@@ -64,14 +64,6 @@ class WeatherComponent extends React.Component {
         };
     }
 
-    locationBtnOnClick() {
-        if (this.state.location !== "暂无信息") {
-            window.open(this.state.searchEngineUrl + this.state.location, "_self");
-        } else {
-            message.error("无跳转链接");
-        }
-    }
-
     infoBtnOnClick() {
         window.open(this.state.searchEngineUrl + "天气", "_self");
     }
@@ -207,8 +199,7 @@ class WeatherComponent extends React.Component {
                                     icon={<EnvironmentOutlined/>}
                                     onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
                                     onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}
-                                    onClick={this.locationBtnOnClick.bind(this)}
-                                    style={{color: this.state.fontColor}}>
+                                    style={{color: this.state.fontColor, cursor: "default"}}>
                                 {" 地理位置：" + this.state.location}
                             </Button>
                         </Col>

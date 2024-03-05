@@ -325,21 +325,21 @@ class App extends React.Component {
                         getImageData={this.getImageData.bind(this)}
                         getImageHistory={this.getImageHistory.bind(this)}
                     />
-                    <Space direction={"vertical"} align={"center"}>
-                        <ClockComponent themeColor={this.state.themeColor}/>
+                    <Row>
                         <Col xs={0} sm={0} md={0} lg={24} xl={24}>
-                            <SearchComponent
-                                themeColor={this.state.themeColor}
-                                preferenceData={this.state.preferenceData}
-                            />
+                            <Space direction={"vertical"} align={"center"}>
+                                <ClockComponent themeColor={this.state.themeColor}/>
+                                <SearchComponent
+                                    themeColor={this.state.themeColor}
+                                    preferenceData={this.state.preferenceData}
+                                />
+                                <CollectionComponent
+                                    themeColor={this.state.themeColor}
+                                    preferenceData={this.state.preferenceData}
+                                />
+                            </Space>
                         </Col>
-                        <Col xs={0} sm={0} md={0} lg={24} xl={24}>
-                            <CollectionComponent
-                                themeColor={this.state.themeColor}
-                                preferenceData={this.state.preferenceData}
-                            />
-                        </Col>
-                    </Space>
+                    </Row>
                 </Content>
                 <Footer id={"footer"}>
                     <Row justify="center">
