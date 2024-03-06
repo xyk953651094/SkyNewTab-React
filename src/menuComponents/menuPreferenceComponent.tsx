@@ -44,8 +44,7 @@ type stateType = {
     customTopicInputValue: string,
     displayResetPreferenceModal: boolean,
     displayClearStorageModal: boolean,
-    preferenceData: PreferenceDataInterface,
-    uploadOptions: UploadProps
+    preferenceData: PreferenceDataInterface
 }
 
 interface MenuPreferenceComponent {
@@ -66,12 +65,6 @@ class MenuPreferenceComponent extends React.Component {
             displayResetPreferenceModal: false,
             displayClearStorageModal: false,
             preferenceData: getPreferenceDataStorage(),
-            uploadOptions: {
-                accept: "application/json",
-                maxCount: 1,
-                beforeUpload: (file) => {this.importDataBtnOnClick(file)},
-                showUploadList: false
-            }
         };
     }
 
@@ -261,27 +254,30 @@ class MenuPreferenceComponent extends React.Component {
         if (device !== "") {
             message.error("暂不支持移动端");
         } else {
-            file.text().then(result =>{
-                let importData = JSON.parse(result);
-                if (importData) {
-                    localStorage.setItem("daily", JSON.stringify(importData.dailyList ? importData.dailyList : []));
-                    localStorage.setItem("todos", JSON.stringify(importData.todoList ? importData.todoList : []));
-                    localStorage.setItem("filterList", JSON.stringify(importData.filterList ? importData.filterList : []));
-                    localStorage.setItem("collections", JSON.stringify(importData.collectionList ? importData.collectionList : []));
-                    localStorage.setItem("preferenceData", JSON.stringify(importData.preferenceData ? importData.preferenceData : defaultPreferenceData));
-                    this.setState({
-                        formDisabled: true,
-                    }, () => {
-                        message.success("导入数据成功，一秒后刷新页面");
-                        this.refreshWindow();
-                    });
-                }
-                else {
-                    message.success("导入数据失败");
-                }
-            })
-            return false;
+            if (file.name.indexOf("云开新标签页") === 0) {
+                file.text().then(result => {
+                    let importData = JSON.parse(result);
+                    if (importData) {
+                        localStorage.setItem("daily", JSON.stringify(importData.dailyList ? importData.dailyList : []));
+                        localStorage.setItem("todos", JSON.stringify(importData.todoList ? importData.todoList : []));
+                        localStorage.setItem("filterList", JSON.stringify(importData.filterList ? importData.filterList : []));
+                        localStorage.setItem("collections", JSON.stringify(importData.collectionList ? importData.collectionList : []));
+                        localStorage.setItem("preferenceData", JSON.stringify(importData.preferenceData ? importData.preferenceData : defaultPreferenceData));
+                        this.setState({
+                            formDisabled: true,
+                        }, () => {
+                            message.success("导入数据成功，一秒后刷新页面");
+                            this.refreshWindow();
+                        });
+                    } else {
+                        message.error("导入数据失败");
+                    }
+                })
+            } else {
+                message.error("请选择正确的文件");
+            }
         }
+        return false;
     }
 
     // 导出数据
@@ -289,7 +285,6 @@ class MenuPreferenceComponent extends React.Component {
         if (device !== "") {
             message.error("暂不支持移动端");
         } else {
-            // TODO: 导出数据
             // 倒数日
             let tempDailyList = [];
             let dailyListStorage = localStorage.getItem("daily");
@@ -326,12 +321,11 @@ class MenuPreferenceComponent extends React.Component {
                 preferenceData: this.state.preferenceData,
             }
 
-            let fileName = "云开新标签页.json";
-            let file = new File([JSON.stringify(exportData)], fileName);
+            let file = new Blob([JSON.stringify(exportData)], {type: "application/json"});
             const objectURL = URL.createObjectURL(file);
             let a = document.createElement("a");
             a.href = objectURL;
-            a.download = fileName;
+            a.download = "云开新标签页.json";
             a.click();
             URL.revokeObjectURL(objectURL);
             message.success("导出数据成功");
@@ -581,7 +575,10 @@ class MenuPreferenceComponent extends React.Component {
                         </Row>
                         <Form.Item name={"manageDataButton"} label={"数据管理"}>
                             <Space>
-                                <Upload {...this.state.uploadOptions}>
+                                <Upload  accept={"application/json"}
+                                         maxCount={1}
+                                         beforeUpload={(file) => {this.importDataBtnOnClick(file)}}
+                                         showUploadList={false}>
                                     <Button type={"text"} shape={this.state.preferenceData.buttonShape} icon={<ImportOutlined />}
                                             onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
                                             onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
