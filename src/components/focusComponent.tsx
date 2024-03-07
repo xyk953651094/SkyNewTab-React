@@ -1,9 +1,9 @@
 import React from "react";
-import {Button, Col, Form, Input, List, message, Modal, Popover, Row, Select, Space, Switch, Typography} from "antd";
+import {Button, Col, Form, Input, List, message, Modal, Popover, Row, Select, Space, Switch, Typography, Avatar} from "antd";
 import {btnMouseOut, btnMouseOver, changeThemeColor, getBrowserType} from "../typescripts/publicFunctions";
 import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
 import "../stylesheets/publicStyles.scss"
-import {DeleteOutlined, LinkOutlined, PauseCircleOutlined, PlayCircleOutlined, PlusOutlined} from "@ant-design/icons";
+import {DeleteOutlined, LinkOutlined, PauseOutlined, CaretRightOutlined, PlusOutlined} from "@ant-design/icons";
 import focusSoundOne from "../assets/focusSounds/古镇雨滴.mp3";
 import focusSoundTwo from "../assets/focusSounds/松树林小雪.mp3";
 
@@ -32,6 +32,7 @@ type stateType = {
     inputValue: string,
     filterList: any[],
     focusSound: string,
+    focusSoundIconUrl: string,
     focusAudioPaused: boolean
 }
 
@@ -54,6 +55,7 @@ class FocusComponent extends React.Component {
             inputValue: "",
             filterList: [],
             focusSound: "古镇雨滴",
+            focusSoundIconUrl: "https://www.soundvery.com/KUpload/image/20240111/20240111145630_9331.png",
             focusAudioPaused: true
         };
     }
@@ -151,8 +153,24 @@ class FocusComponent extends React.Component {
     }
 
     focusSoundSelectOnChange(value: string) {
+        let tempFocusSoundIconUrl = "";
+        switch (value) {
+            case "古镇雨滴": {
+                tempFocusSoundIconUrl = "https://www.soundvery.com/KUpload/image/20240111/20240111145630_9331.png";
+                break;
+            }
+            case "松树林小雪": {
+                tempFocusSoundIconUrl = "https://www.soundvery.com/KUpload/image/20240125/20240125190604_0946.png";
+                break;
+            }
+            default: {
+                tempFocusSoundIconUrl = "https://www.soundvery.com/KUpload/image/20240111/20240111145630_9331.png";
+            }
+        }
+
         this.setState({
             focusSound: value,
+            focusSoundIconUrl: tempFocusSoundIconUrl,
             focusAudioPaused: false
         }, () => {
             this.playFocusSound(value);
@@ -314,8 +332,9 @@ class FocusComponent extends React.Component {
                             <Select.Option value={"古镇雨滴"}>{"古镇雨滴"}</Select.Option>
                             <Select.Option value={"松树林小雪"}>{"松树林小雪"}</Select.Option>
                         </Select>
+                        <Avatar size={"large"} src={this.state.focusSoundIconUrl} />
                         <Button type={"text"} shape={this.props.preferenceData.buttonShape}
-                                icon={this.state.focusAudioPaused ? <PlayCircleOutlined /> : <PauseCircleOutlined />}
+                                icon={this.state.focusAudioPaused ? <CaretRightOutlined /> : <PauseOutlined />}
                                 onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
                                 onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}
                                 onClick={this.playBtnOnClick.bind(this)}
