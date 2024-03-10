@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="新增微信公众号入口，白噪音封面">
+    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="优化界面">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/greetComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/greetComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/weatherComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/weatherComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/dailyComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dailyComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/todoComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/todoComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/menuComponents/menuPreferenceComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/menuComponents/menuPreferenceComponent.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -545,7 +546,8 @@
       <workItem from="1709695117585" duration="748000" />
       <workItem from="1709701031876" duration="337000" />
       <workItem from="1709794487948" duration="3553000" />
-      <workItem from="1709818172402" duration="2658000" />
+      <workItem from="1709818172402" duration="2917000" />
+      <workItem from="1710054474058" duration="1381000" />
     </task>
     <task id="LOCAL-00001" summary="优化抽屉蒙版的显示效果&#10;优化代码质量">
       <created>1683952184207</created>
@@ -665,14 +667,6 @@
       <option name="presentableId" value="LOCAL-00017" />
       <option name="project" value="LOCAL" />
       <updated>1687402693401</updated>
-    </task>
-    <task id="LOCAL-00172" summary="提升使用体验">
-      <option name="closed" value="true" />
-      <created>1708174159348</created>
-      <option name="number" value="00172" />
-      <option name="presentableId" value="LOCAL-00172" />
-      <option name="project" value="LOCAL" />
-      <updated>1708174159350</updated>
     </task>
     <task id="LOCAL-00173" summary="提升使用体验">
       <option name="closed" value="true" />
@@ -922,7 +916,15 @@
       <option name="project" value="LOCAL" />
       <updated>1709799064802</updated>
     </task>
-    <option name="localTasksCounter" value="204" />
+    <task id="LOCAL-00204" summary="优化界面">
+      <option name="closed" value="true" />
+      <created>1709822171135</created>
+      <option name="number" value="00204" />
+      <option name="presentableId" value="LOCAL-00204" />
+      <option name="project" value="LOCAL" />
+      <updated>1709822171136</updated>
+    </task>
+    <option name="localTasksCounter" value="205" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -952,7 +954,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="新增历史记录，修复已知问题" />
     <MESSAGE value="新增帮助文档链接" />
     <MESSAGE value="删除了不必要的设置项" />
     <MESSAGE value="优化视觉效果" />
@@ -977,7 +978,8 @@
     <MESSAGE value="移除不必要的点击事件，移动端移除时间与搜索组件" />
     <MESSAGE value="新增导入导出数据" />
     <MESSAGE value="新增微信公众号入口，白噪音封面" />
-    <option name="LAST_COMMIT_MESSAGE" value="新增微信公众号入口，白噪音封面" />
+    <MESSAGE value="优化界面" />
+    <option name="LAST_COMMIT_MESSAGE" value="优化界面" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
