@@ -436,7 +436,7 @@ class MenuPreferenceComponent extends React.Component {
                       bodyStyle={{backgroundColor: this.props.backgroundColor}}
                 >
                     <Form colon={false} initialValues={this.state.preferenceData} disabled={this.state.formDisabled}>
-                        <Form.Item name={"searchEngine"} label={"搜索引擎"}>
+                        <Form.Item name={"searchEngine"} label={"搜索引擎"} style={{display: ["iPhone", "Android"].indexOf(device) === -1 ? "block" : "none"}}>
                             <Radio.Group buttonStyle={"solid"} style={{width: "100%"}}
                                          onChange={this.searchEngineRadioOnChange.bind(this)}>
                                 <Row>
@@ -454,7 +454,7 @@ class MenuPreferenceComponent extends React.Component {
                                 </Row>
                             </Radio.Group>
                         </Form.Item>
-                        <Form.Item name={"dynamicEffect"} label={"鼠标互动"}>
+                        <Form.Item name={"dynamicEffect"} label={"鼠标互动"} style={{display: ["iPhone", "Android"].indexOf(device) === -1 ? "block" : "none"}}>
                             <Radio.Group buttonStyle={"solid"}
                                          onChange={this.dynamicEffectRadioOnChange.bind(this)}>
                                 <Row gutter={[0, 8]}>
@@ -569,13 +569,13 @@ class MenuPreferenceComponent extends React.Component {
                                 </Form.Item>
                             </Col>
                             <Col span={12}>
-                                <Form.Item name={"simpleMode"} label={"极简模式"} valuePropName={"checked"}>
+                                <Form.Item name={"simpleMode"} label={"极简模式"} valuePropName={"checked"} style={{display: ["iPhone", "Android"].indexOf(device) === -1 ? "block" : "none"}}>
                                     <Switch checkedChildren="已开启" unCheckedChildren="已关闭" id={"simpleModeSwitch"}
                                             onChange={this.simpleModeSwitchOnChange.bind(this)}/>
                                 </Form.Item>
                             </Col>
                         </Row>
-                        <Form.Item name={"manageDataButton"} label={"数据管理"}>
+                        <Form.Item name={"manageDataButton"} label={"数据管理"} style={{display: ["iPhone", "Android"].indexOf(device) === -1 ? "block" : "none"}}>
                             <Space>
                                 <Upload  accept={"application/json"}
                                          maxCount={1}
