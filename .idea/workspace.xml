@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="优化界面">
+    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="倒数日、待办事项新增排序功能，待办事项新增标签">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/dailyComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dailyComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/todoComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/todoComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/menuComponents/menuPreferenceComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/menuComponents/menuPreferenceComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/focusComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/focusComponent.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -547,7 +545,8 @@
       <workItem from="1709701031876" duration="337000" />
       <workItem from="1709794487948" duration="3553000" />
       <workItem from="1709818172402" duration="2917000" />
-      <workItem from="1710054474058" duration="1381000" />
+      <workItem from="1710054474058" duration="1735000" />
+      <workItem from="1710125970213" duration="971000" />
     </task>
     <task id="LOCAL-00001" summary="优化抽屉蒙版的显示效果&#10;优化代码质量">
       <created>1683952184207</created>
@@ -667,14 +666,6 @@
       <option name="presentableId" value="LOCAL-00017" />
       <option name="project" value="LOCAL" />
       <updated>1687402693401</updated>
-    </task>
-    <task id="LOCAL-00173" summary="提升使用体验">
-      <option name="closed" value="true" />
-      <created>1708504673211</created>
-      <option name="number" value="00173" />
-      <option name="presentableId" value="LOCAL-00173" />
-      <option name="project" value="LOCAL" />
-      <updated>1708504673212</updated>
     </task>
     <task id="LOCAL-00174" summary="提升使用体验">
       <option name="closed" value="true" />
@@ -924,7 +915,15 @@
       <option name="project" value="LOCAL" />
       <updated>1709822171136</updated>
     </task>
-    <option name="localTasksCounter" value="205" />
+    <task id="LOCAL-00205" summary="倒数日、待办事项新增排序功能，待办事项新增标签">
+      <option name="closed" value="true" />
+      <created>1710056840259</created>
+      <option name="number" value="00205" />
+      <option name="presentableId" value="LOCAL-00205" />
+      <option name="project" value="LOCAL" />
+      <updated>1710056840260</updated>
+    </task>
+    <option name="localTasksCounter" value="206" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -954,7 +953,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="新增帮助文档链接" />
     <MESSAGE value="删除了不必要的设置项" />
     <MESSAGE value="优化视觉效果" />
     <MESSAGE value="优化功能体验" />
@@ -979,7 +977,8 @@
     <MESSAGE value="新增导入导出数据" />
     <MESSAGE value="新增微信公众号入口，白噪音封面" />
     <MESSAGE value="优化界面" />
-    <option name="LAST_COMMIT_MESSAGE" value="优化界面" />
+    <MESSAGE value="倒数日、待办事项新增排序功能，待办事项新增标签" />
+    <option name="LAST_COMMIT_MESSAGE" value="倒数日、待办事项新增排序功能，待办事项新增标签" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
