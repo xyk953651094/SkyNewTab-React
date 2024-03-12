@@ -61,12 +61,12 @@ class FocusComponent extends React.Component {
     }
 
     setExtensionStorage(key: string, value: any) {
-        if (["Chrome", "Edge"].indexOf(browserType) !== -1) {
-            chrome.storage.local.set({[key]: value});
-        }
-        else if (["Firefox", "Safari"].indexOf(browserType) !== -1) {
-            browser.storage.local.set({[key]: value});
-        }
+        // if (["Chrome", "Edge"].indexOf(browserType) !== -1) {
+        //     chrome.storage.local.set({[key]: value});
+        // }
+        // else if (["Firefox", "Safari"].indexOf(browserType) !== -1) {
+        //     browser.storage.local.set({[key]: value});
+        // }
     }
 
     focusModeSwitchOnChange(checked: boolean) {
@@ -295,7 +295,7 @@ class FocusComponent extends React.Component {
                                 onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
                                 onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}
                                 style={{color: this.state.fontColor}} onClick={this.showAddModalBtnOnClick.bind(this)}>
-                            {"添加域名"}
+                            {"添加黑名单"}
                         </Button>
                         <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<DeleteOutlined/>}
                                 onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
@@ -332,24 +332,39 @@ class FocusComponent extends React.Component {
                     </List.Item>
                 )}
                 footer={
-                    <Space>
-                        <Text style={{color: this.state.fontColor}}>
-                            {this.state.focusAudioPaused ? "白噪音" : "播放中"}
-                        </Text>
-                        <Select defaultValue={this.state.focusSound} style={{width: 120}} placement={"topLeft"}
-                                onChange={this.focusSoundSelectOnChange.bind(this)}>
-                            <Select.Option value={"古镇雨滴"}>{"古镇雨滴"}</Select.Option>
-                            <Select.Option value={"松树林小雪"}>{"松树林小雪"}</Select.Option>
-                        </Select>
-                        <Avatar size={"large"} src={this.state.focusSoundIconUrl} />
-                        <Button type={"text"} shape={this.props.preferenceData.buttonShape}
-                                icon={this.state.focusAudioPaused ? <CaretRightOutlined /> : <PauseOutlined />}
-                                onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
-                                onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}
-                                onClick={this.playBtnOnClick.bind(this)}
-                                style={{color: this.state.fontColor}}>
-                            {this.state.focusAudioPaused ? "播放" : "暂停"}
-                        </Button>
+                    <Space direction={"vertical"}>
+                        <Space>
+                            <Text style={{color: this.state.fontColor}}>{"专注时段"}</Text>
+                            <Select defaultValue={"manual"} style={{width: 120}} placement={"topLeft"}
+                                    options={[
+                                        {value: "manual", label: "手动"},
+                                        {value: "900000", label: "15 分钟"},
+                                        {value: "1800000", label: "30 分钟"},
+                                        {value: "2700000", label: "45 分钟"},
+                                        {value: "3600000", label: "60 分钟"},
+                                    ]}
+                            />
+                            <Text style={{color: this.state.fontColor}}>{"剩余时间：29 : 36"}</Text>
+                        </Space>
+                        <Space>
+                            <Text style={{color: this.state.fontColor}}>{"专注噪音"}</Text>
+                            <Select defaultValue={this.state.focusSound} style={{width: 120}} placement={"topLeft"}
+                                    onChange={this.focusSoundSelectOnChange.bind(this)}
+                                    options={[
+                                        {value: "古镇雨滴", label: "古镇雨滴"},
+                                        {value: "松树林小雪", label: "松树林小雪"}
+                                    ]}
+                            />
+                            <Avatar size={"large"} src={this.state.focusSoundIconUrl} />
+                            <Button type={"text"} shape={this.props.preferenceData.buttonShape}
+                                    icon={this.state.focusAudioPaused ? <CaretRightOutlined /> : <PauseOutlined />}
+                                    onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
+                                    onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}
+                                    onClick={this.playBtnOnClick.bind(this)}
+                                    style={{color: this.state.fontColor}}>
+                                {this.state.focusAudioPaused ? "播放" : "暂停"}
+                            </Button>
+                        </Space>
                     </Space>
                 }
             />
@@ -359,7 +374,7 @@ class FocusComponent extends React.Component {
             <>
                 <Popover title={popoverTitle} content={popoverContent} placement={"bottomRight"}
                          color={this.state.backgroundColor}
-                         overlayStyle={{width: "500px"}}>
+                         overlayStyle={{width: "550px"}}>
                     <Button shape={this.props.preferenceData.buttonShape} size={"large"}
                             icon={<i className={this.state.focusMode ? "bi bi-cup-hot-fill" : "bi bi-cup-hot"}></i>}
                             id={"focusBtn"}
@@ -371,7 +386,7 @@ class FocusComponent extends React.Component {
                 </Popover>
                 <Modal title={
                     <Text style={{color: this.state.fontColor}}>
-                        {"添加域名 " + this.state.filterList.length + " / " + focusMaxSize}
+                        {"添加黑名单 " + this.state.filterList.length + " / " + focusMaxSize}
                     </Text>
                 }
                        closeIcon={false}
@@ -382,9 +397,9 @@ class FocusComponent extends React.Component {
                        styles={{mask: {backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)"}}}
                 >
                     <Form>
-                        <Form.Item label={"网站域名"} name={"focusInput"} extra={"开启专注模式后，访问添加的域名时将自动跳转至本插件"}>
+                        <Form.Item label={"网站域名"} name={"focusInput"} extra={"开启专注模式后，访问黑名单中的域名时将自动跳转至本插件"}>
                             <Input placeholder="example.com" value={this.state.inputValue} onChange={this.inputOnChange.bind(this)}
-                                   maxLength={20} showCount allowClear/>
+                                   maxLength={30} showCount allowClear/>
                         </Form.Item>
                     </Form>
                 </Modal>
