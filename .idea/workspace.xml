@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="关闭专注模式自动暂停白噪音">
+    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="简化移动端菜单栏">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/menuComponents/menuPreferenceComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/menuComponents/menuPreferenceComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/collectionComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/collectionComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/menuComponents/menuHeaderComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/menuComponents/menuHeaderComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/popupComponents/popupFooterComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/popupComponents/popupFooterComponent.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -547,7 +549,9 @@
       <workItem from="1709818172402" duration="2917000" />
       <workItem from="1710054474058" duration="1735000" />
       <workItem from="1710125970213" duration="1328000" />
-      <workItem from="1710157871822" duration="692000" />
+      <workItem from="1710157871822" duration="1291000" />
+      <workItem from="1710209713307" duration="1493000" />
+      <workItem from="1710214902937" duration="1076000" />
     </task>
     <task id="LOCAL-00001" summary="优化抽屉蒙版的显示效果&#10;优化代码质量">
       <created>1683952184207</created>
@@ -667,14 +671,6 @@
       <option name="presentableId" value="LOCAL-00017" />
       <option name="project" value="LOCAL" />
       <updated>1687402693401</updated>
-    </task>
-    <task id="LOCAL-00175" summary="优化菜单栏界面">
-      <option name="closed" value="true" />
-      <created>1708521426802</created>
-      <option name="number" value="00175" />
-      <option name="presentableId" value="LOCAL-00175" />
-      <option name="project" value="LOCAL" />
-      <updated>1708521426802</updated>
     </task>
     <task id="LOCAL-00176" summary="优化菜单栏界面">
       <option name="closed" value="true" />
@@ -924,7 +920,15 @@
       <option name="project" value="LOCAL" />
       <updated>1710155810288</updated>
     </task>
-    <option name="localTasksCounter" value="207" />
+    <task id="LOCAL-00207" summary="简化移动端菜单栏">
+      <option name="closed" value="true" />
+      <created>1710158736685</created>
+      <option name="number" value="00207" />
+      <option name="presentableId" value="LOCAL-00207" />
+      <option name="project" value="LOCAL" />
+      <updated>1710158736686</updated>
+    </task>
+    <option name="localTasksCounter" value="208" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -954,7 +958,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="优化视觉效果" />
     <MESSAGE value="优化功能体验" />
     <MESSAGE value="菜单栏表单控件颜色主题，进展不顺，回滚前保存" />
     <MESSAGE value="菜单栏表单控件颜色主题，存在卡顿，回滚前保存" />
@@ -979,7 +982,8 @@
     <MESSAGE value="优化界面" />
     <MESSAGE value="倒数日、待办事项新增排序功能，待办事项新增标签" />
     <MESSAGE value="关闭专注模式自动暂停白噪音" />
-    <option name="LAST_COMMIT_MESSAGE" value="关闭专注模式自动暂停白噪音" />
+    <MESSAGE value="简化移动端菜单栏" />
+    <option name="LAST_COMMIT_MESSAGE" value="简化移动端菜单栏" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
