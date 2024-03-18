@@ -4,11 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="简化移动端菜单栏">
+    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="新增专注时段">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/collectionComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/collectionComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/menuComponents/menuHeaderComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/menuComponents/menuHeaderComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/popupComponents/popupFooterComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/popupComponents/popupFooterComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/focusSounds/古镇雨滴.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/focusSounds/松树林小雪.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/focusComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/focusComponent.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -551,7 +552,9 @@
       <workItem from="1710125970213" duration="1328000" />
       <workItem from="1710157871822" duration="1291000" />
       <workItem from="1710209713307" duration="1493000" />
-      <workItem from="1710214902937" duration="1076000" />
+      <workItem from="1710214902937" duration="4599000" />
+      <workItem from="1710679172136" duration="2115000" />
+      <workItem from="1710727034049" duration="1751000" />
     </task>
     <task id="LOCAL-00001" summary="优化抽屉蒙版的显示效果&#10;优化代码质量">
       <created>1683952184207</created>
@@ -671,22 +674,6 @@
       <option name="presentableId" value="LOCAL-00017" />
       <option name="project" value="LOCAL" />
       <updated>1687402693401</updated>
-    </task>
-    <task id="LOCAL-00176" summary="优化菜单栏界面">
-      <option name="closed" value="true" />
-      <created>1708572954212</created>
-      <option name="number" value="00176" />
-      <option name="presentableId" value="LOCAL-00176" />
-      <option name="project" value="LOCAL" />
-      <updated>1708572954213</updated>
-    </task>
-    <task id="LOCAL-00177" summary="优化菜单栏界面">
-      <option name="closed" value="true" />
-      <created>1708573215517</created>
-      <option name="number" value="00177" />
-      <option name="presentableId" value="LOCAL-00177" />
-      <option name="project" value="LOCAL" />
-      <updated>1708573215517</updated>
     </task>
     <task id="LOCAL-00178" summary="优化菜单栏界面">
       <option name="closed" value="true" />
@@ -928,7 +915,23 @@
       <option name="project" value="LOCAL" />
       <updated>1710158736686</updated>
     </task>
-    <option name="localTasksCounter" value="208" />
+    <task id="LOCAL-00208" summary="优化菜单栏界面">
+      <option name="closed" value="true" />
+      <created>1710226526327</created>
+      <option name="number" value="00208" />
+      <option name="presentableId" value="LOCAL-00208" />
+      <option name="project" value="LOCAL" />
+      <updated>1710226526330</updated>
+    </task>
+    <task id="LOCAL-00209" summary="新增专注时段">
+      <option name="closed" value="true" />
+      <created>1710249496639</created>
+      <option name="number" value="00209" />
+      <option name="presentableId" value="LOCAL-00209" />
+      <option name="project" value="LOCAL" />
+      <updated>1710249496639</updated>
+    </task>
+    <option name="localTasksCounter" value="210" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -958,7 +961,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="优化功能体验" />
     <MESSAGE value="菜单栏表单控件颜色主题，进展不顺，回滚前保存" />
     <MESSAGE value="菜单栏表单控件颜色主题，存在卡顿，回滚前保存" />
     <MESSAGE value="菜单栏表单控件颜色主题" />
@@ -973,7 +975,6 @@
     <MESSAGE value="优化代码质量" />
     <MESSAGE value="新增节日祝福通知" />
     <MESSAGE value="新增白噪音" />
-    <MESSAGE value="优化菜单栏界面" />
     <MESSAGE value="提升使用体验" />
     <MESSAGE value="新增公众号入口" />
     <MESSAGE value="移除不必要的点击事件，移动端移除时间与搜索组件" />
@@ -983,7 +984,9 @@
     <MESSAGE value="倒数日、待办事项新增排序功能，待办事项新增标签" />
     <MESSAGE value="关闭专注模式自动暂停白噪音" />
     <MESSAGE value="简化移动端菜单栏" />
-    <option name="LAST_COMMIT_MESSAGE" value="简化移动端菜单栏" />
+    <MESSAGE value="优化菜单栏界面" />
+    <MESSAGE value="新增专注时段" />
+    <option name="LAST_COMMIT_MESSAGE" value="新增专注时段" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

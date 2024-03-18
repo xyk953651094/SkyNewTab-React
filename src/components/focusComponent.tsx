@@ -4,14 +4,8 @@ import {btnMouseOut, btnMouseOver, changeThemeColor, getBrowserType} from "../ty
 import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
 import "../stylesheets/publicStyles.scss"
 import {DeleteOutlined, LinkOutlined, PauseOutlined, CaretRightOutlined, PlusOutlined} from "@ant-design/icons";
-import focusSoundOne from "../assets/focusSounds/古镇雨滴.mp3";
-import focusSoundTwo from "../assets/focusSounds/松树林小雪.mp3";
 
 const focusAudio = new Audio();
-const focusSoundsDictionary = {
-    "focusSoundOne": focusSoundOne,
-    "focusSoundTwo": focusSoundTwo,
-}
 const {Text} = Typography;
 const focusMaxSize = 10;
 const browserType = getBrowserType();
@@ -61,12 +55,12 @@ class FocusComponent extends React.Component {
     }
 
     setExtensionStorage(key: string, value: any) {
-        // if (["Chrome", "Edge"].indexOf(browserType) !== -1) {
-        //     chrome.storage.local.set({[key]: value});
-        // }
-        // else if (["Firefox", "Safari"].indexOf(browserType) !== -1) {
-        //     browser.storage.local.set({[key]: value});
-        // }
+        if (["Chrome", "Edge"].indexOf(browserType) !== -1) {
+            chrome.storage.local.set({[key]: value});
+        }
+        else if (["Firefox", "Safari"].indexOf(browserType) !== -1) {
+            browser.storage.local.set({[key]: value});
+        }
     }
 
     focusModeSwitchOnChange(checked: boolean) {
@@ -187,37 +181,33 @@ class FocusComponent extends React.Component {
     }
 
     playBtnOnClick() {
-        if (browserType !== "Safari") {
-            if (focusAudio.paused) {
-                this.setState({
-                    focusAudioPaused: false
-                }, () => {
-                    this.playFocusSound(this.state.focusSound);
-                });
-            } else {
-                this.setState({
-                    focusAudioPaused: true
-                }, () => {
-                    focusAudio.pause();
-                });
-            }
+        if (focusAudio.paused) {
+            this.setState({
+                focusAudioPaused: false
+            }, () => {
+                this.playFocusSound(this.state.focusSound);
+            });
         } else {
-            message.error("Safari 暂不支持播放白噪音");
+            this.setState({
+                focusAudioPaused: true
+            }, () => {
+                focusAudio.pause();
+            });
         }
     }
 
     playFocusSound(focusSound: string) {
         switch (focusSound) {
             case "古镇雨滴": {
-                focusAudio.src = focusSoundsDictionary.focusSoundOne;
+                focusAudio.src = "https://www.soundvery.com/KUpload/file/20240111/20240111145637_8657.mp3";
                 break;
             }
             case "松树林小雪": {
-                focusAudio.src = focusSoundsDictionary.focusSoundTwo;
+                focusAudio.src = "https://www.soundvery.com/KUpload/file/20240125/20240125190612_0979.mp3";
                 break;
             }
             default: {
-                focusAudio.src = focusSoundsDictionary.focusSoundOne;
+                focusAudio.src = "https://www.soundvery.com/KUpload/file/20240111/20240111145637_8657.mp3";
             }
         }
         focusAudio.loop = true;
@@ -332,39 +322,24 @@ class FocusComponent extends React.Component {
                     </List.Item>
                 )}
                 footer={
-                    <Space direction={"vertical"}>
-                        <Space>
-                            <Text style={{color: this.state.fontColor}}>{"专注时段"}</Text>
-                            <Select defaultValue={"manual"} style={{width: 120}} placement={"topLeft"}
-                                    options={[
-                                        {value: "manual", label: "手动"},
-                                        {value: "900000", label: "15 分钟"},
-                                        {value: "1800000", label: "30 分钟"},
-                                        {value: "2700000", label: "45 分钟"},
-                                        {value: "3600000", label: "60 分钟"},
-                                    ]}
-                            />
-                            <Text style={{color: this.state.fontColor}}>{"剩余时间：29 : 36"}</Text>
-                        </Space>
-                        <Space>
-                            <Text style={{color: this.state.fontColor}}>{"专注噪音"}</Text>
-                            <Select defaultValue={this.state.focusSound} style={{width: 120}} placement={"topLeft"}
-                                    onChange={this.focusSoundSelectOnChange.bind(this)}
-                                    options={[
-                                        {value: "古镇雨滴", label: "古镇雨滴"},
-                                        {value: "松树林小雪", label: "松树林小雪"}
-                                    ]}
-                            />
-                            <Avatar size={"large"} src={this.state.focusSoundIconUrl} />
-                            <Button type={"text"} shape={this.props.preferenceData.buttonShape}
-                                    icon={this.state.focusAudioPaused ? <CaretRightOutlined /> : <PauseOutlined />}
-                                    onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
-                                    onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}
-                                    onClick={this.playBtnOnClick.bind(this)}
-                                    style={{color: this.state.fontColor}}>
-                                {this.state.focusAudioPaused ? "播放" : "暂停"}
-                            </Button>
-                        </Space>
+                    <Space>
+                        <Text style={{color: this.state.fontColor}}>{"白噪音"}</Text>
+                        <Select defaultValue={this.state.focusSound} style={{width: 120}} placement={"topLeft"}
+                                onChange={this.focusSoundSelectOnChange.bind(this)}
+                                options={[
+                                    {value: "古镇雨滴", label: "古镇雨滴"},
+                                    {value: "松树林小雪", label: "松树林小雪"}
+                                ]}
+                        />
+                        <Avatar size={"large"} src={this.state.focusSoundIconUrl} />
+                        <Button type={"text"} shape={this.props.preferenceData.buttonShape}
+                                icon={this.state.focusAudioPaused ? <CaretRightOutlined /> : <PauseOutlined />}
+                                onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
+                                onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}
+                                onClick={this.playBtnOnClick.bind(this)}
+                                style={{color: this.state.fontColor}}>
+                            {this.state.focusAudioPaused ? "播放" : "暂停"}
+                        </Button>
                     </Space>
                 }
             />
