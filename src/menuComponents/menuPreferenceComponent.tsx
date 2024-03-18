@@ -1,4 +1,5 @@
 import React from "react";
+import fs from 'fs';
 import {
     Button,
     Card, Checkbox,
@@ -10,17 +11,20 @@ import {
     Row, Select,
     Space,
     Switch,
-    Typography
+    Typography,
+    Upload
 } from "antd";
-import {CheckOutlined, RedoOutlined, SettingOutlined, StopOutlined} from "@ant-design/icons";
+import type { UploadProps } from 'antd';
+import {CheckOutlined, RedoOutlined, SettingOutlined, StopOutlined, ImportOutlined, ExportOutlined} from "@ant-design/icons";
 import {
     btnMouseOut,
     btnMouseOver,
-    getPreferenceDataStorage, getTimeDetails, isEmpty, resetRadioColor, resetSwitchColor,
+    getPreferenceDataStorage, getTimeDetails, isEmpty,
 } from "../typescripts/publicFunctions";
 import {PreferenceDataInterface} from "../typescripts/publicInterface";
-import {defaultPreferenceData} from "../typescripts/publicConstants";
+import {defaultPreferenceData, device} from "../typescripts/publicConstants";
 import {CheckboxValueType} from "antd/es/checkbox/Group";
+import {RcFile} from "antd/es/upload";
 
 const {Text} = Typography;
 
@@ -40,7 +44,7 @@ type stateType = {
     customTopicInputValue: string,
     displayResetPreferenceModal: boolean,
     displayClearStorageModal: boolean,
-    preferenceData: PreferenceDataInterface,
+    preferenceData: PreferenceDataInterface
 }
 
 interface MenuPreferenceComponent {
@@ -245,6 +249,91 @@ class MenuPreferenceComponent extends React.Component {
         })
     }
 
+    // 导入数据
+    importDataBtnOnClick(file: RcFile) {
+        if (device !== "") {
+            message.error("暂不支持移动端");
+        } else {
+            if (file.name.indexOf("云开新标签页") === 0) {
+                file.text().then(result => {
+                    let importData = JSON.parse(result);
+                    if (importData) {
+                        localStorage.setItem("daily", JSON.stringify(importData.dailyList ? importData.dailyList : []));
+                        localStorage.setItem("todos", JSON.stringify(importData.todoList ? importData.todoList : []));
+                        localStorage.setItem("filterList", JSON.stringify(importData.filterList ? importData.filterList : []));
+                        localStorage.setItem("collections", JSON.stringify(importData.collectionList ? importData.collectionList : []));
+                        localStorage.setItem("preferenceData", JSON.stringify(importData.preferenceData ? importData.preferenceData : defaultPreferenceData));
+                        this.setState({
+                            formDisabled: true,
+                        }, () => {
+                            message.success("导入数据成功，一秒后刷新页面");
+                            this.refreshWindow();
+                        });
+                    } else {
+                        message.error("导入数据失败");
+                    }
+                })
+            } else {
+                message.error("请选择正确的文件");
+            }
+        }
+        return false;
+    }
+
+    // 导出数据
+    exportDataBtnOnClick() {
+        if (device !== "") {
+            message.error("暂不支持移动端");
+        } else {
+            // 倒数日
+            let tempDailyList = [];
+            let dailyListStorage = localStorage.getItem("daily");
+            if (dailyListStorage) {
+                tempDailyList = JSON.parse(dailyListStorage);
+            }
+
+            // 待办事项
+            let tempTodoList = [];
+            let todoListStorage = localStorage.getItem("todos");
+            if (todoListStorage) {
+                tempTodoList = JSON.parse(todoListStorage);
+            }
+
+            // 专注模式过滤名单
+            let tempFilterList = [];
+            let filterListStorage = localStorage.getItem("filterList");
+            if (filterListStorage) {
+                tempFilterList = JSON.parse(filterListStorage);
+            }
+
+            // 快捷链接
+            let tempCollectionList = [];
+            let collectionStorage = localStorage.getItem("collections");
+            if (collectionStorage) {
+                tempCollectionList = JSON.parse(collectionStorage);
+            }
+
+            let exportData = {
+                title: "云开新标签页",
+                attention: "请不要修改本文件的名称和内容",
+                dailyList: tempDailyList,
+                todoList: tempTodoList,
+                filterList: tempFilterList,
+                collectionList: tempCollectionList,
+                preferenceData: this.state.preferenceData,
+            }
+
+            let file = new Blob([JSON.stringify(exportData)], {type: "application/json"});
+            const objectURL = URL.createObjectURL(file);
+            let a = document.createElement("a");
+            a.href = objectURL;
+            a.download = "云开新标签页.json";
+            a.click();
+            URL.revokeObjectURL(objectURL);
+            message.success("导出数据成功");
+        }
+    }
+
     // 重置设置
     resetPreferenceBtnOnClick() {
         let resetTimeStampStorage = localStorage.getItem("resetTimeStamp");
@@ -347,7 +436,7 @@ class MenuPreferenceComponent extends React.Component {
                       bodyStyle={{backgroundColor: this.props.backgroundColor}}
                 >
                     <Form colon={false} initialValues={this.state.preferenceData} disabled={this.state.formDisabled}>
-                        <Form.Item name={"searchEngine"} label={"搜索引擎"}>
+                        <Form.Item name={"searchEngine"} label={"搜索引擎"} style={{display: ["iPhone", "Android"].indexOf(device) === -1 ? "block" : "none"}}>
                             <Radio.Group buttonStyle={"solid"} style={{width: "100%"}}
                                          onChange={this.searchEngineRadioOnChange.bind(this)}>
                                 <Row>
@@ -365,7 +454,7 @@ class MenuPreferenceComponent extends React.Component {
                                 </Row>
                             </Radio.Group>
                         </Form.Item>
-                        <Form.Item name={"dynamicEffect"} label={"鼠标互动"}>
+                        <Form.Item name={"dynamicEffect"} label={"鼠标互动"} style={{display: ["iPhone", "Android"].indexOf(device) === -1 ? "block" : "none"}}>
                             <Radio.Group buttonStyle={"solid"}
                                          onChange={this.dynamicEffectRadioOnChange.bind(this)}>
                                 <Row gutter={[0, 8]}>
@@ -480,12 +569,34 @@ class MenuPreferenceComponent extends React.Component {
                                 </Form.Item>
                             </Col>
                             <Col span={12}>
-                                <Form.Item name={"simpleMode"} label={"极简模式"} valuePropName={"checked"}>
+                                <Form.Item name={"simpleMode"} label={"极简模式"} valuePropName={"checked"} style={{display: ["iPhone", "Android"].indexOf(device) === -1 ? "block" : "none"}}>
                                     <Switch checkedChildren="已开启" unCheckedChildren="已关闭" id={"simpleModeSwitch"}
                                             onChange={this.simpleModeSwitchOnChange.bind(this)}/>
                                 </Form.Item>
                             </Col>
                         </Row>
+                        <Form.Item name={"manageDataButton"} label={"数据管理"} style={{display: ["iPhone", "Android"].indexOf(device) === -1 ? "block" : "none"}}>
+                            <Space>
+                                <Upload  accept={"application/json"}
+                                         maxCount={1}
+                                         beforeUpload={(file) => {this.importDataBtnOnClick(file)}}
+                                         showUploadList={false}>
+                                    <Button type={"text"} shape={this.state.preferenceData.buttonShape} icon={<ImportOutlined />}
+                                            onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
+                                            onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
+                                            style={{color: this.props.fontColor}}>
+                                        导入数据
+                                    </Button>
+                                </Upload>
+                                <Button type={"text"} shape={this.state.preferenceData.buttonShape} icon={<ExportOutlined />}
+                                        onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
+                                        onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
+                                        onClick={this.exportDataBtnOnClick.bind(this)}
+                                        style={{color: this.props.fontColor}}>
+                                    导出数据
+                                </Button>
+                            </Space>
+                        </Form.Item>
                         <Form.Item name={"clearStorageButton"} label={"危险设置"} extra={"出现异常时可尝试重置设置或插件"}>
                             <Space>
                                 <Button type={"text"} shape={this.state.preferenceData.buttonShape} icon={<RedoOutlined/>}

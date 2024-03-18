@@ -69,6 +69,10 @@ class DailyComponent extends React.Component {
             tempDailyList.splice(index, 1);
         }
 
+        tempDailyList.sort((a: any, b: any) => {
+            return a.selectedTimeStamp - b.selectedTimeStamp;
+        });
+
         this.setState({
             dailyList: tempDailyList,
         }, () => {
@@ -102,6 +106,10 @@ class DailyComponent extends React.Component {
                 "title": this.state.inputValue,
                 "selectedTimeStamp": this.state.selectedTimeStamp,
                 "timeStamp": Date.now()
+            });
+
+            tempDailyList.sort((a: any, b: any) => {
+                return a.selectedTimeStamp - b.selectedTimeStamp;
             });
 
             this.setState({

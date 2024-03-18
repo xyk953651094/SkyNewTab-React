@@ -206,7 +206,7 @@ class CollectionComponent extends React.Component {
                                 return (
                                     <Tooltip title={item.webUrl} key={item.timeStamp} placement={"bottom"}
                                              color={this.state.backgroundColor}>
-                                        <Button type={"primary"} shape={this.props.preferenceData.buttonShape}
+                                        <Button shape={this.props.preferenceData.buttonShape}
                                                 className={"componentTheme"}
                                                 key={item.timeStamp}
                                                 onClick={() => {
@@ -223,17 +223,17 @@ class CollectionComponent extends React.Component {
                             })
                         }
                         <Tooltip title={"添加链接"} placement={"bottom"} color={this.state.backgroundColor}>
-                            <Button type={"primary"} shape={this.state.buttonShape} className={"componentTheme"}
+                            <Button shape={this.state.buttonShape} className={"componentTheme"}
                                     style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}}
                                     icon={<PlusOutlined/>} onClick={this.showAddModalBtnOnClick.bind(this)}/>
                         </Tooltip>
                         <Tooltip title={"编辑链接"} placement={"bottom"} color={this.state.backgroundColor}>
-                            <Button type={"primary"} shape={this.state.buttonShape} className={"componentTheme"}
+                            <Button shape={this.state.buttonShape} className={"componentTheme"}
                                     style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}}
                                     icon={<EditOutlined/>} onClick={this.showEditModalBtnOnClick.bind(this)}/>
                         </Tooltip>
                         <Tooltip title={"全部删除"} placement={"bottom"} color={this.state.backgroundColor}>
-                            <Button type={"primary"} shape={this.state.buttonShape} className={"componentTheme"}
+                            <Button shape={this.state.buttonShape} className={"componentTheme"}
                                     style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}}
                                     icon={<DeleteOutlined/>} onClick={this.removeAllBtnOnClick.bind(this)}/>
                         </Tooltip>

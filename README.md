@@ -3,7 +3,7 @@
 ## 简介
 * 在新标签页随机展示不同的精美图片，并提供日历、天气、倒数日、待办事项、专注模式、白噪音、快速链接等实用功能
 * 基于 Html + Typescript + Sass + React + Webpack + Ant Design + Bootstrap Icon
-* 支持语言：中文
+* 支持语言：简体中文
 * 所需权限：tabs、storage
 * 日历来源：https://www.mxnzp.com
 * 天气来源：https://www.jinrishici.com
@@ -46,4 +46,5 @@
 <figure class="half">
   <img width="200" alt="爱发电" src="https://github.com/xyk953651094/SkyNewTab-React/assets/28004442/7766955b-46fe-490f-aadb-55099ce4f6fc">
   <img width="200" alt="微信赞赏码" src="https://github.com/xyk953651094/SkyNewTab-React/assets/28004442/6b7c2305-753c-4841-9031-106f39683494">
+  <img width="200" alt="微信公众号" src="https://github.com/xyk953651094/xyk953651094/assets/28004442/fd605f5c-d2ca-43eb-ae16-86d17d5f6fb1">
 </figure>

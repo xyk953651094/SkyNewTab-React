@@ -217,30 +217,32 @@ class GreetComponent extends React.Component {
         );
 
         const popoverContent = (
-            <List>
+            <List split={false}>
                 <List.Item>
-                    <Space direction={"vertical"}>
-                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<CalendarOutlined/>}
-                                style={{color: this.state.fontColor, cursor: "default"}}
-                                onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
-                                onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}>
-                            {this.state.calendar}
-                        </Button>
-                        <Button type={"text"} shape={this.props.preferenceData.buttonShape}
-                                icon={<CheckCircleOutlined/>}
-                                style={{color: this.state.fontColor, cursor: "default"}}
-                                onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
-                                onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}>
-                            {"宜：" + (this.state.suit.length < btnMaxSize) ? this.state.suit : this.state.suit.substring(0, btnMaxSize) + "..."}
-                        </Button>
-                        <Button type={"text"} shape={this.props.preferenceData.buttonShape}
-                                icon={<CloseCircleOutlined/>}
-                                style={{color: this.state.fontColor, cursor: "default"}}
-                                onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
-                                onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}>
-                            {"忌：" + (this.state.avoid.length < btnMaxSize) ? this.state.avoid : this.state.avoid.substring(0, btnMaxSize) + "..."}
-                        </Button>
-                    </Space>
+                    <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<CalendarOutlined/>}
+                            style={{color: this.state.fontColor, cursor: "default"}}
+                            onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
+                            onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}>
+                        {this.state.calendar}
+                    </Button>
+                </List.Item>
+                <List.Item>
+                    <Button type={"text"} shape={this.props.preferenceData.buttonShape}
+                            icon={<CheckCircleOutlined/>}
+                            style={{color: this.state.fontColor, cursor: "default"}}
+                            onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
+                            onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}>
+                        {"宜：" + (this.state.suit.length < btnMaxSize) ? this.state.suit : this.state.suit.substring(0, btnMaxSize) + "..."}
+                    </Button>
+                </List.Item>
+                <List.Item>
+                    <Button type={"text"} shape={this.props.preferenceData.buttonShape}
+                            icon={<CloseCircleOutlined/>}
+                            style={{color: this.state.fontColor, cursor: "default"}}
+                            onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
+                            onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}>
+                        {"忌：" + (this.state.avoid.length < btnMaxSize) ? this.state.avoid : this.state.avoid.substring(0, btnMaxSize) + "..."}
+                    </Button>
                 </List.Item>
             </List>
         );

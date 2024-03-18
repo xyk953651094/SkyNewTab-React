@@ -69,6 +69,10 @@ class TodoComponent extends React.Component {
             tempTodoList.splice(index, 1);
         }
 
+        tempTodoList.sort((a: any, b: any) => {
+            return b.priority.length - a.priority.length;
+        });
+
         this.setState({
             todoList: tempTodoList,
         }, () => {
@@ -105,6 +109,10 @@ class TodoComponent extends React.Component {
                 "timeStamp": Date.now()
             });
 
+            tempTodoList.sort((a: any, b: any) => {
+                return b.priority.length - a.priority.length;
+            });
+
             this.setState({
                 displayModal: false,
                 todoList: tempTodoList,
@@ -134,6 +142,12 @@ class TodoComponent extends React.Component {
                 break;
             case "life":
                 tempTag = "生活";
+                break;
+            case "rest":
+                tempTag = "休闲";
+                break;
+            case "other":
+                tempTag = "其它";
                 break;
             default:
                 tempTag = "工作";
@@ -283,6 +297,8 @@ class TodoComponent extends React.Component {
                                     {value: 'work', label: '工作'},
                                     {value: 'study', label: '学习'},
                                     {value: 'life', label: '生活'},
+                                    {value: 'rest', label: '休闲'},
+                                    {value: 'other', label: '其它'},
                                 ]}
                             />
                         </Form.Item>
