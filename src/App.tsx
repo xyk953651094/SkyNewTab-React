@@ -326,6 +326,9 @@ class App extends React.Component {
                         getImageHistory={this.getImageHistory.bind(this)}
                     />
                     <Row>
+                        <Col xs={24} sm={24} md={24} lg={0} xl={0}>
+                            <ClockComponent themeColor={this.state.themeColor}/>
+                        </Col>
                         <Col xs={0} sm={0} md={0} lg={24} xl={24}>
                             <Space direction={"vertical"} align={"center"}>
                                 <ClockComponent themeColor={this.state.themeColor}/>

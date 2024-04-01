@@ -55,12 +55,12 @@ class FocusComponent extends React.Component {
     }
 
     setExtensionStorage(key: string, value: any) {
-        if (["Chrome", "Edge"].indexOf(browserType) !== -1) {
-            chrome.storage.local.set({[key]: value});
-        }
-        else if (["Firefox", "Safari"].indexOf(browserType) !== -1) {
-            browser.storage.local.set({[key]: value});
-        }
+        // if (["Chrome", "Edge"].indexOf(browserType) !== -1) {
+        //     chrome.storage.local.set({[key]: value});
+        // }
+        // else if (["Firefox", "Safari"].indexOf(browserType) !== -1) {
+        //     browser.storage.local.set({[key]: value});
+        // }
     }
 
     focusModeSwitchOnChange(checked: boolean) {
@@ -322,24 +322,56 @@ class FocusComponent extends React.Component {
                     </List.Item>
                 )}
                 footer={
-                    <Space>
-                        <Text style={{color: this.state.fontColor}}>{"白噪音"}</Text>
-                        <Select defaultValue={this.state.focusSound} style={{width: 120}} placement={"topLeft"}
-                                onChange={this.focusSoundSelectOnChange.bind(this)}
-                                options={[
-                                    {value: "古镇雨滴", label: "古镇雨滴"},
-                                    {value: "松树林小雪", label: "松树林小雪"}
-                                ]}
-                        />
-                        <Avatar size={"large"} src={this.state.focusSoundIconUrl} />
-                        <Button type={"text"} shape={this.props.preferenceData.buttonShape}
-                                icon={this.state.focusAudioPaused ? <CaretRightOutlined /> : <PauseOutlined />}
-                                onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
-                                onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}
-                                onClick={this.playBtnOnClick.bind(this)}
-                                style={{color: this.state.fontColor}}>
-                            {this.state.focusAudioPaused ? "播放" : "暂停"}
-                        </Button>
+                    <Space direction={"vertical"}>
+                        <Space>
+                            <Button type={"text"} shape={this.props.preferenceData.buttonShape}
+                                    icon={<i className="bi bi-hourglass-split"></i>}
+                                    onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
+                                    onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}
+                                    style={{color: this.state.fontColor, cursor: "default"}}>
+                                {"专注时段"}
+                            </Button>
+                            <Select defaultValue={"manual"} style={{width: 120}} placement={"topLeft"}
+                                    options={[
+                                        {value: "manual", label: "手动结束"},
+                                        {value: "900000", label: "15 分钟后"},
+                                        {value: "1800000", label: "30 分钟后"},
+                                        {value: "2700000", label: "45 分钟后"},
+                                        {value: "3600000", label: "60 分钟后"},
+                                    ]}
+                            />
+                            <Button type={"text"} shape={this.props.preferenceData.buttonShape}
+                                    onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
+                                    onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}
+                                    style={{color: this.state.fontColor, cursor: "default"}}>
+                                {"结束时间：手动结束"}
+                            </Button>
+                        </Space>
+                        <Space>
+                            <Button type={"text"} shape={this.props.preferenceData.buttonShape}
+                                    icon={<i className="bi bi-music-note-beamed"></i>}
+                                    onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
+                                    onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}
+                                    style={{color: this.state.fontColor, cursor: "default"}}>
+                                {"专注噪音"}
+                            </Button>
+                            <Select defaultValue={this.state.focusSound} style={{width: 120}} placement={"topLeft"}
+                                    onChange={this.focusSoundSelectOnChange.bind(this)}
+                                    options={[
+                                        {value: "古镇雨滴", label: "古镇雨滴"},
+                                        {value: "松树林小雪", label: "松树林小雪"}
+                                    ]}
+                            />
+                            <Avatar size={"large"} src={this.state.focusSoundIconUrl} />
+                            <Button type={"text"} shape={this.props.preferenceData.buttonShape}
+                                    icon={this.state.focusAudioPaused ? <CaretRightOutlined /> : <PauseOutlined />}
+                                    onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
+                                    onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}
+                                    onClick={this.playBtnOnClick.bind(this)}
+                                    style={{color: this.state.fontColor}}>
+                                {this.state.focusAudioPaused ? "播放" : "暂停"}
+                            </Button>
+                        </Space>
                     </Space>
                 }
             />

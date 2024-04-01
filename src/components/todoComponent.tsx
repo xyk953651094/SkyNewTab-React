@@ -289,9 +289,8 @@ class TodoComponent extends React.Component {
                             <Input placeholder="请输入待办内容" value={this.state.inputValue} onChange={this.inputOnChange.bind(this)}
                                    maxLength={10} showCount allowClear/>
                         </Form.Item>
-                        <Form.Item label={"标签分类"} name={"todoSelect"}>
+                        <Form.Item label={"标签分类"} name={"todoSelect"} initialValue={"work"}>
                             <Select
-                                defaultValue="work"
                                 onChange={this.selectOnChange.bind(this)}
                                 options={[
                                     {value: 'work', label: '工作'},
@@ -302,8 +301,8 @@ class TodoComponent extends React.Component {
                                 ]}
                             />
                         </Form.Item>
-                        <Form.Item label={"优先级别"} name={"todoRate"}>
-                            <Rate defaultValue={1} onChange={this.rateOnChange.bind(this)} style={{
+                        <Form.Item label={"优先级别"} name={"todoRate"} initialValue={1}>
+                            <Rate onChange={this.rateOnChange.bind(this)} style={{
                                 color: this.state.hoverColor,
                                 stroke: this.state.fontColor,
                                 strokeWidth: "25px"

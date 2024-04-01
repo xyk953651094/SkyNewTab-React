@@ -1,10 +1,10 @@
 import React from "react";
-import type {DatePickerProps} from 'antd';
+import {DatePickerProps, Select} from 'antd';
+import dayjs from 'dayjs';
 import {Button, Col, DatePicker, Form, Input, List, message, Modal, Popover, Row, Space, Typography} from "antd";
 import {CalendarOutlined, ClockCircleOutlined, DeleteOutlined, PlusOutlined} from "@ant-design/icons";
-import {btnMouseOut, btnMouseOver, changeThemeColor, getTimeDetails} from "../typescripts/publicFunctions";
+import {btnMouseOut, btnMouseOver, changeThemeColor, getTimeDetails, isEmpty} from "../typescripts/publicFunctions";
 import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
-import $ from "jquery";
 
 const {Text} = Typography;
 const dailyMaxSize = 10;
@@ -25,6 +25,8 @@ type stateType = {
     inputValue: string,
     dailyList: any,
     selectedTimeStamp: number,
+    dailySelectDisabled: boolean
+    loop: string,
 }
 
 interface DailyComponent {
@@ -45,6 +47,8 @@ class DailyComponent extends React.Component {
             inputValue: "",
             dailyList: [],
             selectedTimeStamp: 0,
+            dailySelectDisabled: false,
+            loop: "",
         };
     }
 
@@ -86,7 +90,8 @@ class DailyComponent extends React.Component {
             this.setState({
                 displayModal: true,
                 inputValue: "",
-                selectedTimeStamp: 0
+                selectedTimeStamp: 0,
+                loop: ""
             })
         } else {
             message.error("倒数日数量最多为" + dailyMaxSize + "个");
@@ -105,6 +110,7 @@ class DailyComponent extends React.Component {
             tempDailyList.push({
                 "title": this.state.inputValue,
                 "selectedTimeStamp": this.state.selectedTimeStamp,
+                "loop": this.state.loop,
                 "timeStamp": Date.now()
             });
 
@@ -144,9 +150,16 @@ class DailyComponent extends React.Component {
     }
 
     datePickerOnChange: DatePickerProps['onChange'] = (date, dateString) => {
-        if (dateString) {
+        if (dateString && typeof dateString === "string") {
             this.setState({
-                selectedTimeStamp: new Date(dateString).getTime()
+                selectedTimeStamp: new Date(dateString).getTime(),
+                dailySelectDisabled: [29, 30, 31].indexOf(new Date(dateString).getDate()) !== -1
+            }, () => {
+                if ([29, 30, 31].indexOf(new Date(dateString).getDate()) !== -1) {
+                    this.setState({
+                        loop: ""
+                    });
+                }
             })
         } else {
             this.setState({
@@ -155,11 +168,85 @@ class DailyComponent extends React.Component {
         }
     };
 
+    selectOnChange(value: string) {
+        let tempLoop;
+        switch (value) {
+            case "noLoop":
+                tempLoop = "";
+                break;
+            case "everyWeek":
+                tempLoop = "每周";
+                break;
+            case "everyMonth":
+                tempLoop = "每月";
+                break;
+            case "everyYear":
+                tempLoop = "每年";
+                break;
+            default:
+                tempLoop = "";
+                break;
+        }
+        this.setState({
+            loop: tempLoop
+        })
+    }
+
     componentDidMount() {
         let tempDailyList = [];
         let dailyListStorage = localStorage.getItem("daily");
         if (dailyListStorage) {
             tempDailyList = JSON.parse(dailyListStorage);
+
+            // 更新循环倒数日
+            let tempDailyListModified = false;
+            tempDailyList.map((value: any) => {
+                let tempValue = value;
+                if (!isEmpty(value.loop)) {
+                    let todayTimeStamp = new Date(getTimeDetails(new Date()).showDate5).getTime();
+                    if (value.selectedTimeStamp < todayTimeStamp) {
+                        tempDailyListModified = true;
+                        switch (value.loop) {
+                            case "每周":
+                                value.selectedTimeStamp += 604800000;
+                                break;
+                            case "每月": {
+                                let loopYear = new Date(value.selectedTimeStamp).getFullYear();
+                                let loopMonth = new Date(value.selectedTimeStamp).getMonth() + 1;
+                                let loopDate = new Date(value.selectedTimeStamp).getDate();
+
+                                let nextLoopYear = loopYear;
+                                let nextLoopMonth = loopMonth + 1;
+                                if (loopMonth === 12) {
+                                    nextLoopYear += 1;
+                                    nextLoopMonth = 1;
+                                }
+
+                                let nextLoopString = nextLoopYear + "-" + nextLoopMonth + "-" + loopDate;
+                                value.selectedTimeStamp = new Date(nextLoopString).getTime();
+                                break;
+                            }
+                            case "每年": {
+                                let nextLoopYear = new Date(value.selectedTimeStamp).getFullYear() + 1;
+                                let loopMonth = new Date(value.selectedTimeStamp).getMonth() + 1;
+                                let loopDate = new Date(value.selectedTimeStamp).getDate();
+
+                                let nextLoopString = nextLoopYear + "-" + loopMonth + "-" + loopDate;
+                                value.selectedTimeStamp = new Date(nextLoopString).getTime();
+                                break;
+                            }
+                        }
+                    }
+                }
+                return tempValue;
+            });
+
+            if (tempDailyListModified) {
+                tempDailyList.sort((a: any, b: any) => {
+                    return a.selectedTimeStamp - b.selectedTimeStamp;
+                });
+                localStorage.setItem("daily", JSON.stringify(tempDailyList));
+            }
         }
 
         this.setState({
@@ -242,7 +329,11 @@ class DailyComponent extends React.Component {
                                         onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
                                         onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}
                                         style={{color: this.state.fontColor, cursor: "default"}}>
-                                    {getTimeDetails(new Date(item.selectedTimeStamp)).showDate4 + " ｜ " + this.getDailyDescription(item.selectedTimeStamp)}
+                                    {
+                                        getTimeDetails(new Date(item.selectedTimeStamp)).showDate4 + " ｜ " +
+                                        this.getDailyDescription(item.selectedTimeStamp) +
+                                        (isEmpty(item.loop) ? "" : " · " + item.loop)
+                                    }
                                 </Button>
                             </Col>
                         </Row>
@@ -255,7 +346,7 @@ class DailyComponent extends React.Component {
             <Row>
                 <Popover title={popoverTitle} content={popoverContent} placement={"bottomRight"}
                          color={this.state.backgroundColor}
-                         overlayStyle={{width: "550px"}}>
+                         overlayStyle={{width: "650px"}}>
                     <Button shape={this.props.preferenceData.buttonShape} icon={<CalendarOutlined/>} size={"large"}
                             id={"dailyBtn"}
                             className={"componentTheme zIndexHigh"}
@@ -282,7 +373,19 @@ class DailyComponent extends React.Component {
                                    maxLength={10} showCount allowClear/>
                         </Form.Item>
                         <Form.Item label={"倒数日期"} name={"dailyDatePicker"}>
-                            <DatePicker onChange={this.datePickerOnChange} id={"dailyDatePicker"} allowClear={false}/>
+                            <DatePicker disabledDate={(current) => dayjs(current).isBefore(dayjs())}
+                                        onChange={this.datePickerOnChange} allowClear={false}
+                                        id={"dailyDatePicker"} style={{width: "100%"}}/>
+                        </Form.Item>
+                        <Form.Item label={"循环周期"} name={"dailySelect"} initialValue={"noLoop"} extra={"倒数日期为29、30、31日时，循环周期不得选择每月、每年"}>
+                            <Select onChange={this.selectOnChange.bind(this)}
+                                    options={[
+                                        {value: "noLoop", label: "不循环"},
+                                        {value: "everyWeek", label: "每周"},
+                                        {value: "everyMonth", label: "每月（29、30、31日不生效）", disabled: this.state.dailySelectDisabled},
+                                        {value: "everyYear", label: "每年（29、30、31日不生效）", disabled: this.state.dailySelectDisabled},
+                                    ]}
+                            />
                         </Form.Item>
                     </Form>
                 </Modal>
