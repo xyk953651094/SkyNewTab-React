@@ -20,11 +20,12 @@ function getBrowserType() {
 
 function forbiddenWeb(url) {
     if (["Chrome", "Edge"].indexOf(browserType) !== -1) {
-        chrome.storage.local.get(["focusMode", "filterList"]).then((result) => {
+        chrome.storage.local.get(["focusMode", "filterList", "focusEndTimeStamp"]).then((result) => {
             let focusMode = result.focusMode;
             let filterList = result.filterList;
-            if (focusMode === true && filterList !== null) {
-                if (filterList.length > 0) {
+            let focusEndTimeStamp = result.focusEndTimeStamp;
+            if (focusMode === true && filterList !== null && filterList.length > 0) {  // 已开启专注模式且有过滤列表
+                if (focusEndTimeStamp === 0 || (focusEndTimeStamp > 0 && Date.now() < focusEndTimeStamp)) {  // 时间在专注时段内
                     let isInBlackList = false;
                     for (let i = 0; i < filterList.length; i++) {
                         if (url.indexOf(filterList[i].domain) !== -1) {
@@ -40,11 +41,12 @@ function forbiddenWeb(url) {
         });
     }
     else if (["Firefox", "Safari"].indexOf(browserType) !== -1) {
-        browser.storage.local.get(["focusMode", "filterList"]).then((result) => {
+        browser.storage.local.get(["focusMode", "filterList", "focusEndTimeStamp"]).then((result) => {
             let focusMode = result.focusMode;
             let filterList = result.filterList;
-            if (focusMode === true && filterList !== null) {
-                if (filterList.length > 0) {
+            let focusEndTimeStamp = result.focusEndTimeStamp;
+            if (focusMode === true && filterList !== null && filterList.length > 0) {  // 已开启专注模式且有过滤列表
+                if (focusEndTimeStamp === 0 || (focusEndTimeStamp > 0 && Date.now() < focusEndTimeStamp)) {  // 时间在专注时段内
                     let isInBlackList = false;
                     for (let i = 0; i < filterList.length; i++) {
                         if (url.indexOf(filterList[i].domain) !== -1) {

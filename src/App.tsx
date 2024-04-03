@@ -151,9 +151,9 @@ class App extends React.Component {
         // 修改各类弹窗样式
         $("body").bind("DOMNodeInserted", () => {
             // 通用
-            $(".ant-list-item").css({
+            $(".ant-list-header, .ant-list-item").css({
                 "borderBlockEndColor": this.state.themeColor.componentFontColor,
-                "padding": "6px  0"
+                "padding": "6px 0"
             });
             $(".ant-list-item-meta-title").css("color", this.state.themeColor.componentFontColor);
             $(".ant-list-item-meta-description").css("color", this.state.themeColor.componentFontColor);

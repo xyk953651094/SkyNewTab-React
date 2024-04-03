@@ -211,27 +211,35 @@ class DailyComponent extends React.Component {
                                 value.selectedTimeStamp += 604800000;
                                 break;
                             case "每月": {
-                                let loopYear = new Date(value.selectedTimeStamp).getFullYear();
-                                let loopMonth = new Date(value.selectedTimeStamp).getMonth() + 1;
-                                let loopDate = new Date(value.selectedTimeStamp).getDate();
+                                let loopYear: string | number = new Date(value.selectedTimeStamp).getFullYear();
+                                let loopMonth: string | number = new Date(value.selectedTimeStamp).getMonth() + 1;
+                                let loopDate: string | number = new Date(value.selectedTimeStamp).getDate();
 
-                                let nextLoopYear = loopYear;
-                                let nextLoopMonth = loopMonth + 1;
+                                let nextLoopYear: string | number = loopYear;
+                                let nextLoopMonth: string | number = loopMonth + 1;
                                 if (loopMonth === 12) {
                                     nextLoopYear += 1;
                                     nextLoopMonth = 1;
                                 }
 
-                                let nextLoopString = nextLoopYear + "-" + nextLoopMonth + "-" + loopDate;
+                                nextLoopYear = nextLoopYear.toString();
+                                nextLoopMonth = nextLoopMonth < 10 ? ("0" + nextLoopMonth) : nextLoopMonth.toString();
+                                loopDate = loopDate < 10 ? ("0" + loopDate) : loopDate.toString();
+
+                                let nextLoopString = nextLoopYear.toString() + "-" + nextLoopMonth.toString() + "-" + loopDate.toString();
                                 value.selectedTimeStamp = new Date(nextLoopString).getTime();
                                 break;
                             }
                             case "每年": {
-                                let nextLoopYear = new Date(value.selectedTimeStamp).getFullYear() + 1;
-                                let loopMonth = new Date(value.selectedTimeStamp).getMonth() + 1;
-                                let loopDate = new Date(value.selectedTimeStamp).getDate();
+                                let nextLoopYear: string | number = new Date(value.selectedTimeStamp).getFullYear() + 1;
+                                let loopMonth: string | number = new Date(value.selectedTimeStamp).getMonth() + 1;
+                                let loopDate: string | number = new Date(value.selectedTimeStamp).getDate();
 
-                                let nextLoopString = nextLoopYear + "-" + loopMonth + "-" + loopDate;
+                                nextLoopYear = nextLoopYear.toString();
+                                loopMonth = loopMonth < 10 ? ("0" + loopMonth) : loopMonth.toString();
+                                loopDate = loopDate < 10 ? ("0" + loopDate) : loopDate.toString();
+
+                                let nextLoopString = nextLoopYear.toString() + "-" + loopMonth.toString() + "-" + loopDate.toString();
                                 value.selectedTimeStamp = new Date(nextLoopString).getTime();
                                 break;
                             }
