@@ -4,13 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="倒数日新增循环周期功能">
+    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="专注模式新增专注时段功能">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/dailyComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dailyComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/focusComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/focusComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/wallpaperComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/wallpaperComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/extensionFiles/background.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/extensionFiles/background.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -565,7 +561,9 @@
       <workItem from="1711854617828" duration="5147000" />
       <workItem from="1711942395957" duration="9509000" />
       <workItem from="1712028318494" duration="9274000" />
-      <workItem from="1712117822328" duration="3853000" />
+      <workItem from="1712117822328" duration="4059000" />
+      <workItem from="1712139608099" duration="20000" />
+      <workItem from="1712140357638" duration="708000" />
     </task>
     <task id="LOCAL-00001" summary="优化抽屉蒙版的显示效果&#10;优化代码质量">
       <created>1683952184207</created>
@@ -685,14 +683,6 @@
       <option name="presentableId" value="LOCAL-00017" />
       <option name="project" value="LOCAL" />
       <updated>1687402693401</updated>
-    </task>
-    <task id="LOCAL-00180" summary="优化菜单栏界面">
-      <option name="closed" value="true" />
-      <created>1708587998608</created>
-      <option name="number" value="00180" />
-      <option name="presentableId" value="LOCAL-00180" />
-      <option name="project" value="LOCAL" />
-      <updated>1708587998608</updated>
     </task>
     <task id="LOCAL-00181" summary="提升使用体验">
       <option name="closed" value="true" />
@@ -942,7 +932,15 @@
       <option name="project" value="LOCAL" />
       <updated>1711947004416</updated>
     </task>
-    <option name="localTasksCounter" value="212" />
+    <task id="LOCAL-00212" summary="专注模式新增专注时段功能">
+      <option name="closed" value="true" />
+      <created>1712138023141</created>
+      <option name="number" value="00212" />
+      <option name="presentableId" value="LOCAL-00212" />
+      <option name="project" value="LOCAL" />
+      <updated>1712138023141</updated>
+    </task>
+    <option name="localTasksCounter" value="213" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -972,7 +970,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="菜单栏表单控件颜色主题" />
     <MESSAGE value="暂时注释菜单栏表单控件颜色主题" />
     <MESSAGE value="简洁模式现在可以隐藏搜索框了" />
     <MESSAGE value="模块化公用的 popover 组件和 button 组件（测试版）" />
@@ -997,7 +994,8 @@
     <MESSAGE value="新增专注时段" />
     <MESSAGE value="移除专注时段，减少插件体积" />
     <MESSAGE value="倒数日新增循环周期功能" />
-    <option name="LAST_COMMIT_MESSAGE" value="倒数日新增循环周期功能" />
+    <MESSAGE value="专注模式新增专注时段功能" />
+    <option name="LAST_COMMIT_MESSAGE" value="专注模式新增专注时段功能" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
