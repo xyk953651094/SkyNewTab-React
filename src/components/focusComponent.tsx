@@ -446,7 +446,6 @@ class FocusComponent extends React.Component {
                                     onChange={this.focusTimeSelectOnChange.bind(this)}
                                     options={[
                                         {value: "manual", label: "手动结束"},
-                                        {value: "60000", label: "1 分钟后"},
                                         {value: "900000", label: "15 分钟后"},
                                         {value: "1800000", label: "30 分钟后"},
                                         {value: "2700000", label: "45 分钟后"},
