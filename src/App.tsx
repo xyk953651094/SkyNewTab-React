@@ -151,9 +151,9 @@ class App extends React.Component {
         // 修改各类弹窗样式
         $("body").bind("DOMNodeInserted", () => {
             // 通用
-            $(".ant-list-item").css({
+            $(".ant-list-header, .ant-list-item").css({
                 "borderBlockEndColor": this.state.themeColor.componentFontColor,
-                "padding": "6px  0"
+                "padding": "6px 0"
             });
             $(".ant-list-item-meta-title").css("color", this.state.themeColor.componentFontColor);
             $(".ant-list-item-meta-description").css("color", this.state.themeColor.componentFontColor);
@@ -326,6 +326,9 @@ class App extends React.Component {
                         getImageHistory={this.getImageHistory.bind(this)}
                     />
                     <Row>
+                        <Col xs={24} sm={24} md={24} lg={0} xl={0}>
+                            <ClockComponent themeColor={this.state.themeColor}/>
+                        </Col>
                         <Col xs={0} sm={0} md={0} lg={24} xl={24}>
                             <Space direction={"vertical"} align={"center"}>
                                 <ClockComponent themeColor={this.state.themeColor}/>

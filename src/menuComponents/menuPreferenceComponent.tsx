@@ -557,13 +557,13 @@ class MenuPreferenceComponent extends React.Component {
                         </Form.Item>
                         <Row gutter={24}>
                             <Col span={12}>
-                                <Form.Item name={"nightMode"} label={"降低亮度"} valuePropName={"checked"}>
+                                <Form.Item name={"nightMode"} label={"降低亮度"} valuePropName={"checked"} style={{display: ["iPhone", "Android"].indexOf(device) === -1 ? "block" : "none"}}>
                                     <Switch checkedChildren="已开启" unCheckedChildren="已关闭" id={"nightModeSwitch"}
                                             onChange={this.nightModeSwitchOnChange.bind(this)}/>
                                 </Form.Item>
                             </Col>
                             <Col span={12}>
-                                <Form.Item name={"noImageMode"} label={"纯色模式"} valuePropName={"checked"}>
+                                <Form.Item name={"noImageMode"} label={"纯色模式"} valuePropName={"checked"} style={{display: ["iPhone", "Android"].indexOf(device) === -1 ? "block" : "none"}}>
                                     <Switch checkedChildren="已开启" unCheckedChildren="已关闭" id={"noImageModeSwitch"}
                                             onChange={this.noImageModeSwitchOnChange.bind(this)}/>
                                 </Form.Item>

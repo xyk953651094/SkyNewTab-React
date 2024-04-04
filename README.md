@@ -9,6 +9,7 @@
 * 天气来源：https://www.jinrishici.com
 * 噪音来源：https://www.soundvery.com
 * 图片来源（图片中的内容不代表作者任何观点）：https://unsplash.com
+* 注意：本插件已将图片 API 过滤等级设为最高，如仍旧出现不合适内容，可自行前往图片主页进行反馈
 * 开发支持：[JetBrains Open Source Support](https://jb.gg/OpenSourceSupport "跳转至 JetBrains Open Source Support")
 * <img width="40" src="https://resources.jetbrains.com/storage/products/company/brand/logos/WebStorm_icon.png" alt="WebStorm logo.">
 
