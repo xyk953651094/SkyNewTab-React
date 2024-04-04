@@ -74,11 +74,11 @@ class FocusComponent extends React.Component {
     }
 
     focusModeSwitchOnChange(checked: boolean) {
-        let tempFocusEndTime: string = "未开启专注模式";
+        let tempFocusEndTime: string;
         let tempFocusEndTimeStamp: number = -1;
         if (checked) {
             if (this.state.focusPeriod === "manual") {
-                tempFocusEndTime = "手动关闭";
+                tempFocusEndTime = "手动结束";
                 tempFocusEndTimeStamp = 0;
             } else {
                 tempFocusEndTimeStamp = Date.now() + Number(this.state.focusPeriod);
@@ -98,7 +98,9 @@ class FocusComponent extends React.Component {
             localStorage.setItem("focusEndTimeStamp", JSON.stringify(tempFocusEndTimeStamp));
             this.setExtensionStorage("focusMode", checked);
             this.setExtensionStorage("focusEndTimeStamp", tempFocusEndTimeStamp);
-        })
+
+            this.autoStopFocus(tempFocusEndTimeStamp);
+        });
 
         // 关闭时停止播放白噪音
         if (!checked && !focusAudio.paused) {
@@ -191,7 +193,7 @@ class FocusComponent extends React.Component {
     }
 
     focusSoundSelectOnChange(value: string) {
-        let tempFocusSoundIconUrl = "";
+        let tempFocusSoundIconUrl: string;
         switch (value) {
             case "古镇雨滴": {
                 tempFocusSoundIconUrl = "https://www.soundvery.com/KUpload/image/20240111/20240111145630_9331.png";
@@ -249,6 +251,34 @@ class FocusComponent extends React.Component {
         focusAudio.play();
     }
 
+    // 倒计时自动关闭专注模式
+    autoStopFocus(focusEndTimeStamp: number) {
+
+        if (this.state.focusMode && focusEndTimeStamp > 0 && Date.now() < focusEndTimeStamp) {
+            let interval = setInterval(() => {
+                if (Date.now() >= focusEndTimeStamp) {
+                    this.setState({
+                        focusMode: false,
+                        focusPeriod: "manual",
+                        focusEndTime: "未开启专注模式",
+                    }, () => {
+                        this.resetFocusModeStorage();
+                        message.info("已关闭专注模式");
+                        clearInterval(interval);
+                    });
+                }
+            }, 1000);
+        }
+    }
+
+    resetFocusModeStorage() {
+        localStorage.setItem("focusMode", JSON.stringify(false));
+        localStorage.setItem("focusPeriod", JSON.stringify("manual"));
+        localStorage.setItem("focusEndTimeStamp", JSON.stringify(-1));
+        this.setExtensionStorage("focusMode", false);
+        this.setExtensionStorage("focusEndTimeStamp", -1);
+    }
+
     componentWillReceiveProps(nextProps: any, prevProps: any) {
         if (nextProps.themeColor !== prevProps.themeColor) {
             this.setState({
@@ -267,11 +297,7 @@ class FocusComponent extends React.Component {
                     focusPeriod: "manual",
                     focusEndTime: "未开启专注模式",
                 }, () => {
-                    localStorage.setItem("focusMode", JSON.stringify(false));
-                    localStorage.setItem("focusPeriod", JSON.stringify("manual"));
-                    localStorage.setItem("focusEndTimeStamp", JSON.stringify(-1));
-                    this.setExtensionStorage("focusMode", false);
-                    this.setExtensionStorage("focusEndTimeStamp", -1);
+                    this.resetFocusModeStorage();
                 })
             }
 
@@ -322,7 +348,7 @@ class FocusComponent extends React.Component {
             if (tempFocusEndTimeStamp === -1) {
                 tempFocusEndTime = "未开启专注模式";
             } else if (tempFocusEndTimeStamp === 0) {
-                tempFocusEndTime = "手动关闭";
+                tempFocusEndTime = "手动结束";
             } else {
                 tempFocusEndTime = getTimeDetails(new Date(tempFocusEndTimeStamp)).showDetail;
             }
@@ -336,11 +362,7 @@ class FocusComponent extends React.Component {
             tempFocusMode = false;
             tempFocusPeriod = "manual";
             tempFocusEndTime = "未开启专注模式";
-            localStorage.setItem("focusMode", JSON.stringify(false));
-            localStorage.setItem("focusPeriod", JSON.stringify("manual"));
-            localStorage.setItem("focusEndTimeStamp", JSON.stringify(-1));
-            this.setExtensionStorage("focusMode", false);
-            this.setExtensionStorage("focusEndTimeStamp", -1);
+            this.resetFocusModeStorage();
         }
 
         if (tempFocusMode) {
@@ -352,6 +374,8 @@ class FocusComponent extends React.Component {
             filterList: tempFilterList,
             focusPeriod: tempFocusPeriod,
             focusEndTime: tempFocusEndTime,
+        }, () => {
+            this.autoStopFocus(tempFocusEndTimeStamp);
         });
     }
 
@@ -415,13 +439,13 @@ class FocusComponent extends React.Component {
                                     onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
                                     onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}
                                     style={{color: this.state.fontColor, cursor: "default"}}>
-                                {"专注时段"}
+                                {"自动结束"}
                             </Button>
-                            <Select defaultValue={this.state.focusPeriod} style={{width: 120}} placement={"topLeft"}
+                            <Select value={this.state.focusPeriod} style={{width: 120}} placement={"topLeft"}
                                     disabled={this.state.focusMode}
                                     onChange={this.focusTimeSelectOnChange.bind(this)}
                                     options={[
-                                        {value: "manual", label: "手动关闭"},
+                                        {value: "manual", label: "手动结束"},
                                         {value: "60000", label: "1 分钟后"},
                                         {value: "900000", label: "15 分钟后"},
                                         {value: "1800000", label: "30 分钟后"},
