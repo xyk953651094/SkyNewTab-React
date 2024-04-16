@@ -264,6 +264,7 @@ class FocusComponent extends React.Component {
                     }, () => {
                         this.resetFocusModeStorage();
                         message.info("已关闭专注模式");
+                        focusAudio.pause();
                         clearInterval(interval);
                     });
                 }
