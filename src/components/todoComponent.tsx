@@ -1,5 +1,20 @@
 import React from "react";
-import {Button, Col, Form, Input, List, message, Modal, Popover, Rate, Row, Select, Space, Typography} from "antd";
+import {
+    Button,
+    Col,
+    Form,
+    Input,
+    List,
+    message,
+    Modal,
+    Popover,
+    Rate,
+    Row,
+    Select,
+    Space,
+    Switch,
+    Typography
+} from "antd";
 import {CheckOutlined, CheckSquareOutlined, PlusOutlined, TagOutlined} from "@ant-design/icons";
 import {btnMouseOut, btnMouseOver, changeThemeColor} from "../typescripts/publicFunctions";
 import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
@@ -19,6 +34,7 @@ type stateType = {
     backgroundColor: string,
     fontColor: string,
     buttonShape: "circle" | "default" | "round" | undefined,
+    notification: boolean,
     displayModal: boolean,
     inputValue: string,
     todoList: any,
@@ -40,6 +56,7 @@ class TodoComponent extends React.Component {
             backgroundColor: "",
             fontColor: "",
             buttonShape: "round",
+            notification: false,
             displayModal: false,
             inputValue: "",
             todoList: [],
@@ -77,6 +94,14 @@ class TodoComponent extends React.Component {
             todoList: tempTodoList,
         }, () => {
             localStorage.setItem("todos", JSON.stringify(this.state.todoList));
+        })
+    }
+
+    notificationSwitchOnChange(checked: boolean) {
+        this.setState({
+            notification: checked,
+        }, () => {
+            localStorage.setItem("todoNotification", JSON.stringify(checked));
         })
     }
 
@@ -165,14 +190,27 @@ class TodoComponent extends React.Component {
     }
 
     componentDidMount() {
+        let tempNotification = false;
+        let notificationStorage = localStorage.getItem("todoNotification");
+        if (notificationStorage) {
+            tempNotification = JSON.parse(notificationStorage);
+        } else {
+            localStorage.setItem("todoNotification", JSON.stringify(false));
+        }
+
         let tempTodoList = [];
         let todoListStorage = localStorage.getItem("todos");
         if (todoListStorage) {
             tempTodoList = JSON.parse(todoListStorage);
+
+            if (tempNotification) {
+                message.warning("剩余 " + tempTodoList.length + " 个待办事项未处理");
+            }
         }
 
         this.setState({
             todoList: tempTodoList,
+            notification: tempNotification,
         })
     }
 
@@ -198,13 +236,15 @@ class TodoComponent extends React.Component {
     render() {
         const popoverTitle = (
             <Row align={"middle"}>
-                <Col span={10}>
+                <Col span={8}>
                     <Text style={{color: this.state.fontColor}}>
                         {"待办事项 " + this.state.todoList.length + " / " + todoMaxSize}
                     </Text>
                 </Col>
-                <Col span={14} style={{textAlign: "right"}}>
+                <Col span={16} style={{textAlign: "right"}}>
                     <Space>
+                        <Switch checkedChildren="已开启" unCheckedChildren="已关闭" id={"todoNotificationSwitch"}
+                                checked={this.state.notification} onChange={this.notificationSwitchOnChange.bind(this)}/>
                         <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<PlusOutlined/>}
                                 onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
                                 onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}

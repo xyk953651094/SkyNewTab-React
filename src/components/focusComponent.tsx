@@ -1,5 +1,5 @@
 import React from "react";
-import {Button, Col, Form, Input, List, message, Modal, Popover, Row, Select, Space, Switch, Typography, Avatar} from "antd";
+import {Button, Col, Form, Input, List, message, Modal, Popover, Row, Select, Space, Switch, Typography} from "antd";
 import {
     btnMouseOut,
     btnMouseOver,
@@ -9,7 +9,7 @@ import {
 } from "../typescripts/publicFunctions";
 import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
 import "../stylesheets/publicStyles.scss"
-import {DeleteOutlined, LinkOutlined, PauseOutlined, CaretRightOutlined, PlusOutlined} from "@ant-design/icons";
+import {DeleteOutlined, LinkOutlined, PlusOutlined} from "@ant-design/icons";
 
 const focusAudio = new Audio();
 const {Text} = Typography;
@@ -34,8 +34,6 @@ type stateType = {
     focusPeriod: string,
     focusEndTime: string,
     focusSound: string,
-    focusSoundIconUrl: string,
-    focusAudioPaused: boolean
 }
 
 interface FocusComponent {
@@ -58,9 +56,7 @@ class FocusComponent extends React.Component {
             filterList: [],
             focusPeriod: "manual",
             focusEndTime: "未开启专注模式",
-            focusSound: "古镇雨滴",
-            focusSoundIconUrl: "https://www.soundvery.com/KUpload/image/20240111/20240111145630_9331.png",
-            focusAudioPaused: true
+            focusSound: "none",
         };
     }
 
@@ -104,11 +100,7 @@ class FocusComponent extends React.Component {
 
         // 关闭时停止播放白噪音
         if (!checked && !focusAudio.paused) {
-            this.setState({
-                focusAudioPaused: true
-            }, () => {
-                focusAudio.pause();
-            });
+            focusAudio.pause();
         }
     }
 
@@ -193,44 +185,15 @@ class FocusComponent extends React.Component {
     }
 
     focusSoundSelectOnChange(value: string) {
-        let tempFocusSoundIconUrl: string;
-        switch (value) {
-            case "古镇雨滴": {
-                tempFocusSoundIconUrl = "https://www.soundvery.com/KUpload/image/20240111/20240111145630_9331.png";
-                break;
-            }
-            case "松树林小雪": {
-                tempFocusSoundIconUrl = "https://www.soundvery.com/KUpload/image/20240125/20240125190604_0946.png";
-                break;
-            }
-            default: {
-                tempFocusSoundIconUrl = "https://www.soundvery.com/KUpload/image/20240111/20240111145630_9331.png";
-            }
-        }
-
         this.setState({
             focusSound: value,
-            focusSoundIconUrl: tempFocusSoundIconUrl,
-            focusAudioPaused: false
         }, () => {
-            this.playFocusSound(value);
-        });
-    }
-
-    playBtnOnClick() {
-        if (focusAudio.paused) {
-            this.setState({
-                focusAudioPaused: false
-            }, () => {
-                this.playFocusSound(this.state.focusSound);
-            });
-        } else {
-            this.setState({
-                focusAudioPaused: true
-            }, () => {
+            if (value === "none" ) {
                 focusAudio.pause();
-            });
-        }
+            } else {
+                this.playFocusSound(value);
+            }
+        });
     }
 
     playFocusSound(focusSound: string) {
@@ -261,6 +224,7 @@ class FocusComponent extends React.Component {
                         focusMode: false,
                         focusPeriod: "manual",
                         focusEndTime: "未开启专注模式",
+                        focusSound: "none",
                     }, () => {
                         this.resetFocusModeStorage();
                         message.info("已关闭专注模式");
@@ -297,6 +261,7 @@ class FocusComponent extends React.Component {
                     focusMode: false,
                     focusPeriod: "manual",
                     focusEndTime: "未开启专注模式",
+                    focusSound: "none",
                 }, () => {
                     this.resetFocusModeStorage();
                 })
@@ -334,7 +299,7 @@ class FocusComponent extends React.Component {
         let tempFocusPeriod = "manual";
         let focusPeriodStorage = localStorage.getItem("focusPeriod");
         if (focusPeriodStorage) {
-            tempFocusPeriod = JSON.parse(focusPeriodStorage);
+            tempFocusPeriod = tempFocusMode ? JSON.parse(focusPeriodStorage) : "manual";
         } else {
             localStorage.setItem("focusPeriod", JSON.stringify("manual"));
         }
@@ -433,58 +398,32 @@ class FocusComponent extends React.Component {
                     </List.Item>
                 )}
                 header={
-                    <Space direction={"vertical"}>
-                        <Space>
-                            <Button type={"text"} shape={this.props.preferenceData.buttonShape}
-                                    icon={<i className="bi bi-hourglass-split"></i>}
-                                    onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
-                                    onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}
-                                    style={{color: this.state.fontColor, cursor: "default"}}>
-                                {"自动结束"}
-                            </Button>
-                            <Select value={this.state.focusPeriod} style={{width: 120}} placement={"topLeft"}
-                                    disabled={this.state.focusMode}
-                                    onChange={this.focusTimeSelectOnChange.bind(this)}
-                                    options={[
-                                        {value: "manual", label: "手动结束"},
-                                        {value: "900000", label: "15 分钟后"},
-                                        {value: "1800000", label: "30 分钟后"},
-                                        {value: "2700000", label: "45 分钟后"},
-                                        {value: "3600000", label: "60 分钟后"},
-                                    ]}
-                            />
-                            <Button type={"text"} shape={this.props.preferenceData.buttonShape}
-                                    onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
-                                    onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}
-                                    style={{color: this.state.fontColor, cursor: "default"}}>
-                                {"结束时间：" + this.state.focusEndTime}
-                            </Button>
-                        </Space>
-                        <Space>
-                            <Button type={"text"} shape={this.props.preferenceData.buttonShape}
-                                    icon={<i className="bi bi-music-note-beamed"></i>}
-                                    onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
-                                    onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}
-                                    style={{color: this.state.fontColor, cursor: "default"}}>
-                                {"专注噪音"}
-                            </Button>
-                            <Select defaultValue={this.state.focusSound} style={{width: 120}}
-                                    onChange={this.focusSoundSelectOnChange.bind(this)}
-                                    options={[
-                                        {value: "古镇雨滴", label: "古镇雨滴"},
-                                        {value: "松树林小雪", label: "松树林小雪"}
-                                    ]}
-                            />
-                            <Button type={"text"} shape={this.props.preferenceData.buttonShape}
-                                    icon={this.state.focusAudioPaused ? <CaretRightOutlined /> : <PauseOutlined />}
-                                    onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
-                                    onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}
-                                    onClick={this.playBtnOnClick.bind(this)}
-                                    style={{color: this.state.fontColor}}>
-                                {this.state.focusAudioPaused ? "播放" : "暂停"}
-                            </Button>
-                            <Avatar size={"large"} src={this.state.focusSoundIconUrl} />
-                        </Space>
+                    <Space>
+                        <Select defaultValue={this.state.focusSound} style={{width: 120}}
+                                onChange={this.focusSoundSelectOnChange.bind(this)}
+                                options={[
+                                    {value: "none", label: "关闭白噪音"},
+                                    {value: "古镇雨滴", label: "古镇雨滴"},
+                                    {value: "松树林小雪", label: "松树林小雪"}
+                                ]}
+                        />
+                        <Select value={this.state.focusPeriod} style={{width: 120}} placement={"topLeft"}
+                                disabled={this.state.focusMode}
+                                onChange={this.focusTimeSelectOnChange.bind(this)}
+                                options={[
+                                    {value: "manual", label: "手动结束"},
+                                    {value: "900000", label: "15 分钟后"},
+                                    {value: "1800000", label: "30 分钟后"},
+                                    {value: "2700000", label: "45 分钟后"},
+                                    {value: "3600000", label: "60 分钟后"},
+                                ]}
+                        />
+                        <Button type={"text"} shape={this.props.preferenceData.buttonShape}
+                                onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
+                                onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}
+                                style={{color: this.state.fontColor, cursor: "default"}}>
+                            {"结束时间：" + this.state.focusEndTime}
+                        </Button>
                     </Space>
                 }
             />

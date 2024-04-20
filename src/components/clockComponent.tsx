@@ -1,14 +1,16 @@
 import React from "react";
-import {Col, Row, Space, Typography} from "antd";
+import {Button, Col, Row, Space, Typography} from "antd";
 import "../stylesheets/clockComponent.scss"
 import {getTimeDetails} from "../typescripts/publicFunctions";
-import {ThemeColorInterface} from "../typescripts/publicInterface";
+import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
 import $ from "jquery";
+import {ClockCircleOutlined} from "@ant-design/icons";
 
 const {Text} = Typography;
 
 type propType = {
     themeColor: ThemeColorInterface,
+    preferenceData: PreferenceDataInterface,
 }
 
 type stateType = {
@@ -32,7 +34,7 @@ class ClockComponent extends React.Component {
             fontColor: "",
             currentTime: getTimeDetails(new Date()).showTime,
             currentWeek: getTimeDetails(new Date()).showWeek,
-            currentDate: getTimeDetails(new Date()).showDate,
+            currentDate: getTimeDetails(new Date()).showDate5,
         };
     }
 
@@ -54,7 +56,7 @@ class ClockComponent extends React.Component {
             this.setState({
                 currentTime: timeDetails.showTime,
                 currentWeek: timeDetails.showWeek,
-                currentDate: timeDetails.showDate,
+                currentDate: timeDetails.showDate5,
             })
         }, 1000);
     }
@@ -89,6 +91,11 @@ class ClockComponent extends React.Component {
                     </Space>
                 </Col>
             </Row>
+            // <Button type={"text"} size={"large"} shape={this.props.preferenceData.buttonShape} className={"componentTheme zIndexHigh"}
+            //         style={{color: this.state.fontColor, backgroundColor: this.state.backgroundColor}}
+            //         icon={<ClockCircleOutlined />}>
+            //     {this.state.currentDate + " " + this.state.currentWeek + " " + this.state.currentTime}
+            // </Button>
         );
     }
 }

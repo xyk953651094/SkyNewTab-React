@@ -178,18 +178,18 @@ class AuthorComponent extends React.Component {
                             <Avatar size={64} shape={"square"} src={this.state.imagePreviewUrl} alt={"信息"}/>
                             <Space direction={"vertical"}>
                                 <Button type={"text"} shape={this.props.preferenceData.buttonShape}
-                                        icon={<EnvironmentOutlined/>}
-                                        style={{color: this.state.fontColor, cursor: "default"}}
-                                        onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
-                                        onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}>
-                                    {this.state.imageLocation.length < btnMaxSize ? this.state.imageLocation : this.state.imageLocation.substring(0, btnMaxSize) + "..."}
-                                </Button>
-                                <Button type={"text"} shape={this.props.preferenceData.buttonShape}
                                         icon={<InfoCircleOutlined/>}
                                         style={{color: this.state.fontColor, cursor: "default"}}
                                         onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
                                         onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}>
                                     {this.state.imageDescription.length < btnMaxSize ? this.state.imageDescription : this.state.imageDescription.substring(0, btnMaxSize) + "..."}
+                                </Button>
+                                <Button type={"text"} shape={this.props.preferenceData.buttonShape}
+                                        icon={<EnvironmentOutlined/>}
+                                        style={{color: this.state.fontColor, cursor: "default"}}
+                                        onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
+                                        onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}>
+                                    {this.state.imageLocation.length < btnMaxSize ? this.state.imageLocation : this.state.imageLocation.substring(0, btnMaxSize) + "..."}
                                 </Button>
                             </Space>
                         </Space>

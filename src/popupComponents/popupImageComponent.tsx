@@ -166,18 +166,18 @@ class PopupImageComponent extends React.Component {
                                 style={{color: this.props.fontColor}}>
                             {this.state.authorName.length < btnMaxSize ? this.state.authorName : this.state.authorName.substring(0, btnMaxSize) + "..."}
                         </Button>
+                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<InfoCircleOutlined/>}
+                                onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
+                                onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
+                                onClick={this.imageLinkBtnOnClick.bind(this)} style={{color: this.props.fontColor}}>
+                            {this.state.imageDescription.length < btnMaxSize ? this.state.imageDescription : this.state.imageDescription.substring(0, btnMaxSize) + "..."}
+                        </Button>
                         <Button type={"text"} shape={this.props.preferenceData.buttonShape}
                                 icon={<EnvironmentOutlined/>}
                                 onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
                                 onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
                                 onClick={this.imageLocationBtnOnClick.bind(this)} style={{color: this.props.fontColor}}>
                             {this.state.imageLocation.length < btnMaxSize ? this.state.imageLocation : this.state.imageLocation.substring(0, btnMaxSize) + "..."}
-                        </Button>
-                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<InfoCircleOutlined/>}
-                                onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
-                                onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
-                                onClick={this.imageLinkBtnOnClick.bind(this)} style={{color: this.props.fontColor}}>
-                            {this.state.imageDescription.length < btnMaxSize ? this.state.imageDescription : this.state.imageDescription.substring(0, btnMaxSize) + "..."}
                         </Button>
                     </Space>
                 </Space>
