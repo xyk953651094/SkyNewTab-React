@@ -169,9 +169,17 @@ class App extends React.Component {
                 $(".ant-switch-inner-checked").css("color", getFontColor(this.state.themeColor.themeColor));
                 $(".ant-form-item-extra").css("color", this.state.themeColor.componentFontColor);
 
-                let focusMode = localStorage.getItem("focusMode");
-                if (focusMode) {
-                    resetSwitchColor("#focusModeSwitch", JSON.parse(focusMode), this.state.themeColor.themeColor);
+                let dailyNotificationStorage = localStorage.getItem("dailyNotification");
+                if (dailyNotificationStorage) {
+                    resetSwitchColor("#dailyNotificationSwitch", JSON.parse(dailyNotificationStorage), this.state.themeColor.themeColor);
+                }
+                let todoNotificationStorage = localStorage.getItem("todoNotification");
+                if (todoNotificationStorage) {
+                    resetSwitchColor("#todoNotificationSwitch", JSON.parse(todoNotificationStorage), this.state.themeColor.themeColor);
+                }
+                let focusModeStorage = localStorage.getItem("focusMode");
+                if (focusModeStorage) {
+                    resetSwitchColor("#focusModeSwitch", JSON.parse(focusModeStorage), this.state.themeColor.themeColor);
                 }
             }
 
@@ -327,11 +335,17 @@ class App extends React.Component {
                     />
                     <Row>
                         <Col xs={24} sm={24} md={24} lg={0} xl={0}>
-                            <ClockComponent themeColor={this.state.themeColor}/>
+                            <ClockComponent
+                                themeColor={this.state.themeColor}
+                                preferenceData={this.state.preferenceData}
+                            />
                         </Col>
                         <Col xs={0} sm={0} md={0} lg={24} xl={24}>
                             <Space direction={"vertical"} align={"center"}>
-                                <ClockComponent themeColor={this.state.themeColor}/>
+                                <ClockComponent
+                                    themeColor={this.state.themeColor}
+                                    preferenceData={this.state.preferenceData}
+                                />
                                 <SearchComponent
                                     themeColor={this.state.themeColor}
                                     preferenceData={this.state.preferenceData}

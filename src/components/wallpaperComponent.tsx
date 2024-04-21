@@ -107,11 +107,11 @@ class WallpaperComponent extends React.Component {
             "content_filter": "high",
         };
 
-        message.loading("正在获取图片", 0);
+        message.loading({content: "正在获取图片", duration: 0, key: "message1"});
         httpRequest(headers, url, data, "GET")
             .then(function (resultData: any) {
-                message.destroy();
-                message.loading("正在加载图片", 0);
+                message.destroy("message1");
+                message.loading({content: "正在加载图片", duration: 0, key: "message2"});
 
                 // 缓存历史图片
                 let lastImageStorage = localStorage.getItem("lastImage"); // 上一张图片
@@ -142,16 +142,16 @@ class WallpaperComponent extends React.Component {
                 tempThis.setWallpaper(resultData);
             })
             .catch(function () {
-                message.destroy();
+                message.destroy("message2");
 
                 // 请求失败时使用上一次请求结果
                 let lastImage: any = localStorage.getItem("lastImage");
                 if (lastImage) {
-                    message.loading("获取图片失败，正在加载缓存图片", 0);
+                    message.loading({content: "获取图片失败，正在加载缓存图片", duration: 0, key: "message3"});
                     lastImage = JSON.parse(lastImage);
                     tempThis.setWallpaper(lastImage);
                 } else {
-                    message.error("获取图片失败，请检查网络连接");
+                    message.error({content: "获取图片失败，请检查网络连接", duration: 0, key: "message4"});
                 }
             })
             .finally(function () {
@@ -171,11 +171,11 @@ class WallpaperComponent extends React.Component {
             } else {  // 切换间隔内使用上一次请求结果
                 let lastImage: any = localStorage.getItem("lastImage");
                 if (lastImage) {
-                    message.loading("正在加载缓存图片", 0);
+                    message.loading({content: "正在加载缓存图片", duration: 0, key: "message5"});
                     lastImage = JSON.parse(lastImage);
                     this.setWallpaper(lastImage);
                 } else {
-                    message.error("无缓存图片可加载，请尝试重置插件");
+                    message.error({content: "无缓存图片可加载，请尝试重置插件", duration: 0, key: "message6"});
                 }
             }
 
@@ -192,7 +192,10 @@ class WallpaperComponent extends React.Component {
                         display: "block",
                     }, () => {
                         $("#backgroundCanvas").removeClass("wallpaperFadeIn").addClass("wallpaperFadeOut");
-                        message.destroy();
+                        message.destroy("message3");
+                        message.destroy("message4");
+                        message.destroy("message5");
+                        message.destroy("message6");
 
                         // 设置动态效果
                         backgroundImage.classList.add("wallpaperFadeIn");
