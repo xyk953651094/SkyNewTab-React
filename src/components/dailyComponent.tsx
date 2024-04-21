@@ -314,7 +314,7 @@ class DailyComponent extends React.Component {
                 </Col>
                 <Col span={16} style={{textAlign: "right"}}>
                     <Space>
-                        <Switch checkedChildren="已开启" unCheckedChildren="已关闭" id={"dailyNotificationSwitch"}
+                        <Switch checkedChildren="已提醒" unCheckedChildren="不提醒" id={"dailyNotificationSwitch"}
                                 checked={this.state.notification} onChange={this.notificationSwitchOnChange.bind(this)}/>
                         <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<PlusOutlined/>}
                                 onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}

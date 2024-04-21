@@ -4,16 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="提升使用体验">
+    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="倒数日待办事项新增提醒开关">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/authorComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/authorComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/clockComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/clockComponent.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/dailyComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dailyComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/focusComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/focusComponent.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/todoComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/todoComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/popupComponents/popupImageComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/popupComponents/popupImageComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/wallpaperComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/wallpaperComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/menuComponents/menuPreferenceComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/menuComponents/menuPreferenceComponent.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -600,7 +596,8 @@
       <workItem from="1713511995932" duration="127000" />
       <workItem from="1713512544112" duration="4666000" />
       <workItem from="1713530873782" duration="2947000" />
-      <workItem from="1713578894871" duration="4391000" />
+      <workItem from="1713578894871" duration="4681000" />
+      <workItem from="1713667987284" duration="2125000" />
     </task>
     <task id="LOCAL-00001" summary="优化抽屉蒙版的显示效果&#10;优化代码质量">
       <created>1683952184207</created>
@@ -720,14 +717,6 @@
       <option name="presentableId" value="LOCAL-00017" />
       <option name="project" value="LOCAL" />
       <updated>1687402693401</updated>
-    </task>
-    <task id="LOCAL-00186" summary="提升使用体验">
-      <option name="closed" value="true" />
-      <created>1708934910173</created>
-      <option name="number" value="00186" />
-      <option name="presentableId" value="LOCAL-00186" />
-      <option name="project" value="LOCAL" />
-      <updated>1708934910174</updated>
     </task>
     <task id="LOCAL-00187" summary="提升使用体验">
       <option name="closed" value="true" />
@@ -977,7 +966,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713257649283</updated>
     </task>
-    <option name="localTasksCounter" value="218" />
+    <task id="LOCAL-00218" summary="倒数日待办事项新增提醒开关">
+      <option name="closed" value="true" />
+      <created>1713583851246</created>
+      <option name="number" value="00218" />
+      <option name="presentableId" value="LOCAL-00218" />
+      <option name="project" value="LOCAL" />
+      <updated>1713583851246</updated>
+    </task>
+    <option name="localTasksCounter" value="219" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -1007,7 +1004,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="模块化公用的 popover 组件和 button 组件（测试版）" />
     <MESSAGE value="优化使用体验" />
     <MESSAGE value="新增专注模式" />
     <MESSAGE value="新增 modal 公共组件" />
@@ -1032,7 +1028,8 @@
     <MESSAGE value="完善部分表述" />
     <MESSAGE value="专注模式新增自动结束功能" />
     <MESSAGE value="提升使用体验" />
-    <option name="LAST_COMMIT_MESSAGE" value="提升使用体验" />
+    <MESSAGE value="倒数日待办事项新增提醒开关" />
+    <option name="LAST_COMMIT_MESSAGE" value="倒数日待办事项新增提醒开关" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
