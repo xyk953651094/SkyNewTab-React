@@ -379,7 +379,7 @@ class DailyComponent extends React.Component {
             <Row>
                 <Popover title={popoverTitle} content={popoverContent} placement={"bottomRight"}
                          color={this.state.backgroundColor}
-                         overlayStyle={{width: "650px"}}>
+                         overlayStyle={{width: "600px"}}>
                     <Button shape={this.props.preferenceData.buttonShape} icon={<CalendarOutlined/>} size={"large"}
                             id={"dailyBtn"}
                             className={"componentTheme zIndexHigh"}
