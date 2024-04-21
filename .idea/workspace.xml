@@ -6,10 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="倒数日待办事项新增提醒开关">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/dailyComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dailyComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/todoComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/todoComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/wallpaperComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/wallpaperComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/menuComponents/menuPreferenceComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/menuComponents/menuPreferenceComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/extensionFiles/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/extensionFiles/manifest.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -597,7 +596,8 @@
       <workItem from="1713512544112" duration="4666000" />
       <workItem from="1713530873782" duration="2947000" />
       <workItem from="1713578894871" duration="4681000" />
-      <workItem from="1713667987284" duration="2125000" />
+      <workItem from="1713667987284" duration="3815000" />
+      <workItem from="1713690649240" duration="915000" />
     </task>
     <task id="LOCAL-00001" summary="优化抽屉蒙版的显示效果&#10;优化代码质量">
       <created>1683952184207</created>
@@ -717,22 +717,6 @@
       <option name="presentableId" value="LOCAL-00017" />
       <option name="project" value="LOCAL" />
       <updated>1687402693401</updated>
-    </task>
-    <task id="LOCAL-00187" summary="提升使用体验">
-      <option name="closed" value="true" />
-      <created>1708935092596</created>
-      <option name="number" value="00187" />
-      <option name="presentableId" value="LOCAL-00187" />
-      <option name="project" value="LOCAL" />
-      <updated>1708935092596</updated>
-    </task>
-    <task id="LOCAL-00188" summary="提升使用体验">
-      <option name="closed" value="true" />
-      <created>1708935832665</created>
-      <option name="number" value="00188" />
-      <option name="presentableId" value="LOCAL-00188" />
-      <option name="project" value="LOCAL" />
-      <updated>1708935832665</updated>
     </task>
     <task id="LOCAL-00189" summary="提升使用体验">
       <option name="closed" value="true" />
@@ -974,7 +958,23 @@
       <option name="project" value="LOCAL" />
       <updated>1713583851246</updated>
     </task>
-    <option name="localTasksCounter" value="219" />
+    <task id="LOCAL-00219" summary="倒数日待办事项新增提醒开关">
+      <option name="closed" value="true" />
+      <created>1713672483507</created>
+      <option name="number" value="00219" />
+      <option name="presentableId" value="LOCAL-00219" />
+      <option name="project" value="LOCAL" />
+      <updated>1713672483507</updated>
+    </task>
+    <task id="LOCAL-00220" summary="倒数日待办事项新增提醒开关">
+      <option name="closed" value="true" />
+      <created>1713673580878</created>
+      <option name="number" value="00220" />
+      <option name="presentableId" value="LOCAL-00220" />
+      <option name="project" value="LOCAL" />
+      <updated>1713673580878</updated>
+    </task>
+    <option name="localTasksCounter" value="221" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
