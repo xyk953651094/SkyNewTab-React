@@ -110,6 +110,7 @@ class FocusComponent extends React.Component {
         }, () => {
             localStorage.removeItem("filterList");
             this.setExtensionStorage("filterList", this.state.filterList);
+            message.success("删除成功");
         });
     }
 
@@ -131,6 +132,7 @@ class FocusComponent extends React.Component {
         }, () => {
             localStorage.setItem("filterList", JSON.stringify(this.state.filterList));
             this.setExtensionStorage("filterList", this.state.filterList);
+            message.success("删除成功");
         })
     }
 

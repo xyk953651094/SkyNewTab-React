@@ -70,6 +70,7 @@ class TodoComponent extends React.Component {
             todoList: [],
         }, () => {
             localStorage.removeItem("todos");
+            message.success("全部完成");
         })
     }
 
@@ -94,6 +95,7 @@ class TodoComponent extends React.Component {
             todoList: tempTodoList,
         }, () => {
             localStorage.setItem("todos", JSON.stringify(this.state.todoList));
+            message.success("已完成");
         })
     }
 

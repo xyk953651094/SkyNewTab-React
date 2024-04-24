@@ -59,6 +59,7 @@ class DailyComponent extends React.Component {
             dailyList: [],
         }, () => {
             localStorage.removeItem("daily");
+            message.success("删除成功");
         })
     }
 
@@ -83,8 +84,8 @@ class DailyComponent extends React.Component {
             dailyList: tempDailyList,
         }, () => {
             localStorage.setItem("daily", JSON.stringify(this.state.dailyList));
+            message.success("删除成功");
         })
-
     }
 
     notificationSwitchOnChange(checked: boolean) {

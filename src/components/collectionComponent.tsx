@@ -1,6 +1,6 @@
 import React from "react";
 import {Button, Col, Form, Input, List, message, Modal, Row, Space, Tooltip, Typography} from "antd";
-import {DeleteOutlined, EditOutlined, LinkOutlined, PlusOutlined, PushpinOutlined} from "@ant-design/icons";
+import {DeleteOutlined, EditOutlined, PlusOutlined, InfoCircleOutlined} from "@ant-design/icons";
 import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
 import {btnMouseOut, btnMouseOver} from "../typescripts/publicFunctions";
 import $ from "jquery";
@@ -116,6 +116,70 @@ class CollectionComponent extends React.Component {
         })
     }
 
+    editNameInputOnPressEnter(item: any, e: any) {
+        if (e.target.value.length > 0) {
+            let collections = [];
+            let tempCollections = localStorage.getItem("collections");
+            if (tempCollections) {
+                collections = JSON.parse(tempCollections);
+
+                let index = -1;
+                for (let i = 0; i < this.state.collectionData.length; i++) {
+                    if (item.timeStamp === this.state.collectionData[i].timeStamp) {
+                        index = i;
+                        break;
+                    }
+                }
+                if (index !== -1) {
+                    collections[index].webName = e.target.value;
+
+                    localStorage.setItem("collections", JSON.stringify(collections));
+                    this.setState({
+                        collectionData: collections,
+                        collectionSize: collections.length
+                    })
+                    message.success("修改成功");
+                } else {
+                    message.error("修改失败");
+                }
+            }
+        } else {
+            message.warning("链接名称不能为空");
+        }
+    }
+
+    editUrlInputOnPressEnter(item: any, e: any) {
+        if (e.target.value.length > 0) {
+            let collections = [];
+            let tempCollections = localStorage.getItem("collections");
+            if (tempCollections) {
+                collections = JSON.parse(tempCollections);
+
+                let index = -1;
+                for (let i = 0; i < this.state.collectionData.length; i++) {
+                    if (item.timeStamp === this.state.collectionData[i].timeStamp) {
+                        index = i;
+                        break;
+                    }
+                }
+                if (index !== -1) {
+                    collections[index].webUrl = e.target.value;
+
+                    localStorage.setItem("collections", JSON.stringify(collections));
+                    this.setState({
+                        collectionData: collections,
+                        collectionSize: collections.length
+                    })
+                    message.success("修改成功");
+                } else {
+                    message.error("修改失败");
+                }
+            }
+        } else {
+            message.warning("链接地址不能为空");
+        }
+    }
+
     editModalOkBtnOnClick() {
         this.setState({
             displayEditModal: false
@@ -148,6 +212,8 @@ class CollectionComponent extends React.Component {
             this.setState({
                 collectionData: collections,
                 collectionSize: collections.length
+            }, () => {
+                message.success("删除成功");
             })
         }
     }
@@ -280,41 +346,33 @@ class CollectionComponent extends React.Component {
                                closeIcon={false} centered
                                open={this.state.displayEditModal} onOk={this.editModalOkBtnOnClick.bind(this)}
                                onCancel={this.editModalCancelBtnOnClick.bind(this)}
+                               destroyOnClose={true}
                                styles={{mask: {backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)"}}}
                         >
                             <List
                                 dataSource={this.state.collectionData}
                                 renderItem={(item: any) => (
                                     <List.Item actions={[
-                                        <Button type={"text"} shape={this.state.buttonShape} icon={<DeleteOutlined/>}
-                                                onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
-                                                onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}
-                                                onClick={this.removeBtnOnClick.bind(this, item)}
-                                                style={{color: this.state.fontColor}}>
-                                        </Button>
+                                        <Space>
+                                            <Button type={"text"} shape={this.state.buttonShape} icon={<DeleteOutlined/>}
+                                                    onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
+                                                    onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}
+                                                    onClick={this.removeBtnOnClick.bind(this, item)}
+                                                    style={{color: this.state.fontColor}}>
+                                            </Button>
+                                        </Space>
                                     ]}>
-                                        <Row style={{width: "100%"}}>
-                                            <Col span={8}>
-                                                <Button type={"text"} shape={this.props.preferenceData.buttonShape}
-                                                        icon={<PushpinOutlined/>}
-                                                        onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
-                                                        onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}
-                                                        style={{color: this.state.fontColor, cursor: "default"}}>
-                                                    {item.webName}
-                                                </Button>
-                                            </Col>
-                                            <Col span={16}>
-                                                <Button type={"text"} shape={this.props.preferenceData.buttonShape}
-                                                        icon={<LinkOutlined/>}
-                                                        onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
-                                                        onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}
-                                                        style={{color: this.state.fontColor, cursor: "default"}}>
-                                                    {item.webUrl.length < 30 ? item.webUrl : item.webUrl.substring(0, 30) + "..."}
-                                                </Button>
-                                            </Col>
-                                        </Row>
+                                        <Space>
+                                            <Input style={{width: 150}} defaultValue={item.webName} onPressEnter={this.editNameInputOnPressEnter.bind(this, item)} maxLength={5} allowClear showCount/>
+                                            <Input style={{width: 250}} defaultValue={item.webUrl} onPressEnter={this.editUrlInputOnPressEnter.bind(this, item)} allowClear/>
+                                        </Space>
                                     </List.Item>
                                 )}
+                                footer={
+                                    <Text style={{color: this.state.fontColor}}>
+                                        {"在输入框中修改内容后按回车生效"}
+                                    </Text>
+                                }
                             />
                         </Modal>
                     </Space>
