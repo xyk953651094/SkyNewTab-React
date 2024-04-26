@@ -369,7 +369,7 @@ class CollectionComponent extends React.Component {
                                     </List.Item>
                                 )}
                                 footer={
-                                    <Text style={{color: this.state.fontColor}}>
+                                    <Text style={{color: this.state.fontColor, display: this.state.collectionData.length > 0 ? "inline-block" : "none"}}>
                                         {"在输入框中修改内容后按回车生效"}
                                     </Text>
                                 }
