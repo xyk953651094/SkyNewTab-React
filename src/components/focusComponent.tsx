@@ -77,6 +77,10 @@ class FocusComponent extends React.Component {
         let tempFocusEndTime: string;
         let tempFocusEndTimeStamp: number = -1;
         if (checked) {
+            if (this.state.filterList.length === 0) {
+                message.warning("请添加黑名单");
+            }
+
             if (this.state.focusPeriod === "manual") {
                 tempFocusEndTime = "手动结束";
                 tempFocusEndTimeStamp = 0;

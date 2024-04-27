@@ -13,12 +13,14 @@ import {
     Select,
     Space,
     Switch,
-    Typography
+    Typography,
+    TimePicker, TimePickerProps
 } from "antd";
-import {CheckOutlined, CheckSquareOutlined, PlusOutlined, TagOutlined} from "@ant-design/icons";
-import {btnMouseOut, btnMouseOver, changeThemeColor} from "../typescripts/publicFunctions";
+import {CheckOutlined, CheckSquareOutlined, PlusOutlined, TagOutlined, ClockCircleOutlined} from "@ant-design/icons";
+import {btnMouseOut, btnMouseOver, changeThemeColor, isEmpty} from "../typescripts/publicFunctions";
 import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
 import $ from "jquery";
+import dayjs from "dayjs";
 
 const {Text} = Typography;
 const todoMaxSize = 10;
@@ -38,6 +40,7 @@ type stateType = {
     displayModal: boolean,
     inputValue: string,
     todoList: any,
+    selectedTodoTime: string,
     tag: string,
     priority: string,
 }
@@ -60,6 +63,7 @@ class TodoComponent extends React.Component {
             displayModal: false,
             inputValue: "",
             todoList: [],
+            selectedTodoTime: "",
             tag: "工作",
             priority: "★",
         };
@@ -104,6 +108,9 @@ class TodoComponent extends React.Component {
             notification: checked,
         }, () => {
             localStorage.setItem("todoNotification", JSON.stringify(checked));
+            if (this.state.todoList.length === 0) {
+                message.warning("请添加待办事项");
+            }
         })
     }
 
@@ -132,6 +139,7 @@ class TodoComponent extends React.Component {
             tempTodoList.push({
                 "title": this.state.inputValue,
                 "tag": this.state.tag,
+                "time": this.state.selectedTodoTime,
                 "priority": this.state.priority,
                 "timeStamp": Date.now()
             });
@@ -183,6 +191,18 @@ class TodoComponent extends React.Component {
         this.setState({
             tag: tempTag
         })
+    }
+
+    timePickerOnChange: TimePickerProps['onChange'] = (time, timeString) => {
+        if (timeString && typeof timeString === "string") {
+            this.setState({
+                selectedTodoTime: timeString,
+            })
+        } else {
+            this.setState({
+                selectedTodoTime: "",
+            })
+        }
     }
 
     rateOnChange(value: number) {
@@ -278,7 +298,7 @@ class TodoComponent extends React.Component {
                         ]}
                     >
                         <Row style={{width: "100%"}}>
-                            <Col span={12}>
+                            <Col span={9}>
                                 <Button type={"text"} shape={this.props.preferenceData.buttonShape}
                                         icon={<CheckSquareOutlined/>}
                                         onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
@@ -287,7 +307,16 @@ class TodoComponent extends React.Component {
                                     {item.title}
                                 </Button>
                             </Col>
-                            <Col span={12}>
+                            <Col span={5}>
+                                <Button type={"text"} shape={this.props.preferenceData.buttonShape}
+                                        icon={<ClockCircleOutlined />}
+                                        onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
+                                        onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}
+                                        style={{color: this.state.fontColor, cursor: "default"}}>
+                                    {isEmpty(item.time) ? "未设置" : item.time}
+                                </Button>
+                            </Col>
+                            <Col span={10}>
                                 <Button type={"text"} shape={this.props.preferenceData.buttonShape}
                                         icon={<TagOutlined/>}
                                         onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
@@ -306,7 +335,7 @@ class TodoComponent extends React.Component {
             <Row>
                 <Popover title={popoverTitle} content={popoverContent} placement="bottomRight"
                          color={this.state.backgroundColor}
-                         overlayStyle={{width: "550px"}}>
+                         overlayStyle={{width: "600px"}}>
                     <Button shape={this.props.preferenceData.buttonShape} icon={<CheckSquareOutlined/>} size={"large"}
                             id={"todoBtn"}
                             className={"componentTheme zIndexHigh"}
@@ -342,6 +371,12 @@ class TodoComponent extends React.Component {
                                     {value: 'other', label: '其它'},
                                 ]}
                             />
+                        </Form.Item>
+                        <Form.Item label={"截止时间"} name={"todoTime"}>
+                            <TimePicker format={"HH:mm"} minuteStep={5}
+                                        defaultOpenValue={dayjs("09:00", "HH:mm")}
+                                        onChange={this.timePickerOnChange}
+                                        placeholder={"可选，注意插件并不会通知截止时间"} style={{width: "100%"}}/>
                         </Form.Item>
                         <Form.Item label={"优先级别"} name={"todoRate"} initialValue={1}>
                             <Rate onChange={this.rateOnChange.bind(this)} style={{
