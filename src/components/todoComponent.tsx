@@ -307,22 +307,22 @@ class TodoComponent extends React.Component {
                                     {item.title}
                                 </Button>
                             </Col>
-                            <Col span={5}>
-                                <Button type={"text"} shape={this.props.preferenceData.buttonShape}
-                                        icon={<ClockCircleOutlined />}
-                                        onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
-                                        onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}
-                                        style={{color: this.state.fontColor, cursor: "default"}}>
-                                    {isEmpty(item.time) ? "未设置" : item.time}
-                                </Button>
-                            </Col>
-                            <Col span={10}>
+                            <Col span={9}>
                                 <Button type={"text"} shape={this.props.preferenceData.buttonShape}
                                         icon={<TagOutlined/>}
                                         onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
                                         onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}
                                         style={{color: this.state.fontColor, cursor: "default"}}>
                                     {item.tag + " ｜ " + item.priority}
+                                </Button>
+                            </Col>
+                            <Col span={6}>
+                                <Button type={"text"} shape={this.props.preferenceData.buttonShape}
+                                        icon={<ClockCircleOutlined />}
+                                        onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
+                                        onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}
+                                        style={{color: this.state.fontColor, cursor: "default", display: isEmpty(item.time) ? "none" : "block"}}>
+                                    {isEmpty(item.time) ? "" : item.time}
                                 </Button>
                             </Col>
                         </Row>

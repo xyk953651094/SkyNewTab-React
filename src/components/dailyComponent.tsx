@@ -2,7 +2,7 @@ import React from "react";
 import {DatePickerProps, Select} from 'antd';
 import dayjs from 'dayjs';
 import {Button, Col, DatePicker, Form, Input, List, message, Modal, Popover, Row, Space, Typography, Switch} from "antd";
-import {CalendarOutlined, ClockCircleOutlined, DeleteOutlined, PlusOutlined} from "@ant-design/icons";
+import {CalendarOutlined, ClockCircleOutlined, DeleteOutlined, PlusOutlined, ReloadOutlined} from "@ant-design/icons";
 import {btnMouseOut, btnMouseOver, changeThemeColor, getTimeDetails, isEmpty} from "../typescripts/publicFunctions";
 import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
 
@@ -360,7 +360,7 @@ class DailyComponent extends React.Component {
                                     {item.title}
                                 </Button>
                             </Col>
-                            <Col span={15}>
+                            <Col span={11}>
                                 <Button type={"text"} shape={this.props.preferenceData.buttonShape}
                                         icon={<ClockCircleOutlined/>}
                                         onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
@@ -368,9 +368,17 @@ class DailyComponent extends React.Component {
                                         style={{color: this.state.fontColor, cursor: "default"}}>
                                     {
                                         getTimeDetails(new Date(item.selectedTimeStamp)).showDate4 + " ｜ " +
-                                        this.getDailyDescription(item.selectedTimeStamp) +
-                                        (isEmpty(item.loop) ? "" : " · " + item.loop)
+                                        this.getDailyDescription(item.selectedTimeStamp)
                                     }
+                                </Button>
+                            </Col>
+                            <Col span={4}>
+                                <Button type={"text"} shape={this.props.preferenceData.buttonShape}
+                                        icon={<ReloadOutlined />}
+                                        onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
+                                        onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}
+                                        style={{color: this.state.fontColor, cursor: "default", display: isEmpty(item.loop) ? "none" : "block"}}>
+                                    {isEmpty(item.loop) ? "" : item.loop}
                                 </Button>
                             </Col>
                         </Row>
@@ -383,7 +391,7 @@ class DailyComponent extends React.Component {
             <Row>
                 <Popover title={popoverTitle} content={popoverContent} placement={"bottomRight"}
                          color={this.state.backgroundColor}
-                         overlayStyle={{width: "600px"}}>
+                         overlayStyle={{width: "650px"}}>
                     <Button shape={this.props.preferenceData.buttonShape} icon={<CalendarOutlined/>} size={"large"}
                             id={"dailyBtn"}
                             className={"componentTheme zIndexHigh"}
