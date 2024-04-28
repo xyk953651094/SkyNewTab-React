@@ -19,8 +19,7 @@
 ## 安装
 * Chrome、Edge、Firefox：前往插件商店搜索“云开新标签页”（推荐）
 * Safari：由于成本原因，暂不提供安装方式
-* 其他浏览器（Brave、Avast、Whale、Opera、WaterFox 等）：前往 Chrome 插件商店或 FireFox 插件商店搜索“云开新标签页”（推荐）
-* 下载发布（Releases）页面提供的安装包自行安装
+* 其他浏览器：前往 Chrome 插件商店或 FireFox 插件商店搜索“云开新标签页”
 
 ## 帮助
 * GitHub Pages：https://xyk953651094.github.io/SkyDocuments

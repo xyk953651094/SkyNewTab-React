@@ -18,7 +18,6 @@ import {
 import {CheckOutlined, CheckSquareOutlined, PlusOutlined, TagOutlined} from "@ant-design/icons";
 import {btnMouseOut, btnMouseOver, changeThemeColor} from "../typescripts/publicFunctions";
 import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
-import $ from "jquery";
 
 const {Text} = Typography;
 const todoMaxSize = 10;
@@ -70,6 +69,7 @@ class TodoComponent extends React.Component {
             todoList: [],
         }, () => {
             localStorage.removeItem("todos");
+            message.success("全部完成");
         })
     }
 
@@ -94,6 +94,7 @@ class TodoComponent extends React.Component {
             todoList: tempTodoList,
         }, () => {
             localStorage.setItem("todos", JSON.stringify(this.state.todoList));
+            message.success("已完成");
         })
     }
 
@@ -102,6 +103,9 @@ class TodoComponent extends React.Component {
             notification: checked,
         }, () => {
             localStorage.setItem("todoNotification", JSON.stringify(checked));
+            if (this.state.todoList.length === 0) {
+                message.warning("请添加待办事项");
+            }
         })
     }
 
@@ -203,7 +207,7 @@ class TodoComponent extends React.Component {
         if (todoListStorage) {
             tempTodoList = JSON.parse(todoListStorage);
 
-            if (tempNotification) {
+            if (tempNotification && tempTodoList.length > 0) {
                 message.warning("剩余 " + tempTodoList.length + " 个待办事项未处理");
             }
         }
@@ -276,7 +280,7 @@ class TodoComponent extends React.Component {
                         ]}
                     >
                         <Row style={{width: "100%"}}>
-                            <Col span={12}>
+                            <Col span={14}>
                                 <Button type={"text"} shape={this.props.preferenceData.buttonShape}
                                         icon={<CheckSquareOutlined/>}
                                         onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
@@ -285,7 +289,7 @@ class TodoComponent extends React.Component {
                                     {item.title}
                                 </Button>
                             </Col>
-                            <Col span={12}>
+                            <Col span={10}>
                                 <Button type={"text"} shape={this.props.preferenceData.buttonShape}
                                         icon={<TagOutlined/>}
                                         onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
@@ -304,7 +308,7 @@ class TodoComponent extends React.Component {
             <Row>
                 <Popover title={popoverTitle} content={popoverContent} placement="bottomRight"
                          color={this.state.backgroundColor}
-                         overlayStyle={{width: "550px"}}>
+                         overlayStyle={{width: "600px"}}>
                     <Button shape={this.props.preferenceData.buttonShape} icon={<CheckSquareOutlined/>} size={"large"}
                             id={"todoBtn"}
                             className={"componentTheme zIndexHigh"}
@@ -327,7 +331,7 @@ class TodoComponent extends React.Component {
                     <Form>
                         <Form.Item label={"待办事项"} name={"todoInput"}>
                             <Input placeholder="请输入待办内容" value={this.state.inputValue} onChange={this.inputOnChange.bind(this)}
-                                   maxLength={10} showCount allowClear/>
+                                   maxLength={15} showCount allowClear/>
                         </Form.Item>
                         <Form.Item label={"标签分类"} name={"todoSelect"} initialValue={"work"}>
                             <Select

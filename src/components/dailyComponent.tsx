@@ -59,6 +59,7 @@ class DailyComponent extends React.Component {
             dailyList: [],
         }, () => {
             localStorage.removeItem("daily");
+            message.success("删除成功");
         })
     }
 
@@ -83,8 +84,8 @@ class DailyComponent extends React.Component {
             dailyList: tempDailyList,
         }, () => {
             localStorage.setItem("daily", JSON.stringify(this.state.dailyList));
+            message.success("删除成功");
         })
-
     }
 
     notificationSwitchOnChange(checked: boolean) {
@@ -92,6 +93,9 @@ class DailyComponent extends React.Component {
             notification: checked,
         }, () => {
             localStorage.setItem("dailyNotification", JSON.stringify(checked));
+            if (this.state.dailyList.length === 0) {
+                message.warning("请添加倒数日");
+            }
         })
     }
 
@@ -347,7 +351,7 @@ class DailyComponent extends React.Component {
                         ]}
                     >
                         <Row style={{width: "100%"}}>
-                            <Col span={10}>
+                            <Col span={9}>
                                 <Button type={"text"} shape={this.props.preferenceData.buttonShape}
                                         icon={<CalendarOutlined/>}
                                         onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
@@ -356,7 +360,7 @@ class DailyComponent extends React.Component {
                                     {item.title}
                                 </Button>
                             </Col>
-                            <Col span={14}>
+                            <Col span={15}>
                                 <Button type={"text"} shape={this.props.preferenceData.buttonShape}
                                         icon={<ClockCircleOutlined/>}
                                         onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
