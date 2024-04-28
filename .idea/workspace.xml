@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="专注模式新增本地白噪音与专注时长">
+    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="优化倒数日、待办事项的界面">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/dailyComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dailyComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/focusComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/focusComponent.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/todoComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/todoComponent.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -604,6 +602,8 @@
       <workItem from="1714015876619" duration="1041000" />
       <workItem from="1714099237653" duration="7091000" />
       <workItem from="1714128433003" duration="6805000" />
+      <workItem from="1714219235289" duration="3670000" />
+      <workItem from="1714270970361" duration="1582000" />
     </task>
     <task id="LOCAL-00001" summary="优化抽屉蒙版的显示效果&#10;优化代码质量">
       <created>1683952184207</created>
@@ -723,22 +723,6 @@
       <option name="presentableId" value="LOCAL-00017" />
       <option name="project" value="LOCAL" />
       <updated>1687402693401</updated>
-    </task>
-    <task id="LOCAL-00196" summary="新增导入导出数据">
-      <option name="closed" value="true" />
-      <created>1709436502891</created>
-      <option name="number" value="00196" />
-      <option name="presentableId" value="LOCAL-00196" />
-      <option name="project" value="LOCAL" />
-      <updated>1709436502891</updated>
-    </task>
-    <task id="LOCAL-00197" summary="新增导入导出数据">
-      <option name="closed" value="true" />
-      <created>1709437027062</created>
-      <option name="number" value="00197" />
-      <option name="presentableId" value="LOCAL-00197" />
-      <option name="project" value="LOCAL" />
-      <updated>1709437027062</updated>
     </task>
     <task id="LOCAL-00198" summary="新增公众号入口">
       <option name="closed" value="true" />
@@ -980,7 +964,23 @@
       <option name="project" value="LOCAL" />
       <updated>1714108258015</updated>
     </task>
-    <option name="localTasksCounter" value="228" />
+    <task id="LOCAL-00228" summary="提升使用体验">
+      <option name="closed" value="true" />
+      <created>1714219426822</created>
+      <option name="number" value="00228" />
+      <option name="presentableId" value="LOCAL-00228" />
+      <option name="project" value="LOCAL" />
+      <updated>1714219426822</updated>
+    </task>
+    <task id="LOCAL-00229" summary="优化倒数日、待办事项的界面">
+      <option name="closed" value="true" />
+      <created>1714223491610</created>
+      <option name="number" value="00229" />
+      <option name="presentableId" value="LOCAL-00229" />
+      <option name="project" value="LOCAL" />
+      <updated>1714223491610</updated>
+    </task>
+    <option name="localTasksCounter" value="230" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -1010,7 +1010,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="新增 modal 公共组件" />
     <MESSAGE value="优化专注模式界面" />
     <MESSAGE value="优化代码质量" />
     <MESSAGE value="新增节日祝福通知" />
@@ -1030,12 +1029,13 @@
     <MESSAGE value="专注模式新增专注时段功能" />
     <MESSAGE value="完善部分表述" />
     <MESSAGE value="专注模式新增自动结束功能" />
-    <MESSAGE value="提升使用体验" />
     <MESSAGE value="倒数日待办事项新增提醒开关" />
     <MESSAGE value="修复已知问题" />
     <MESSAGE value="新增编辑快捷链接功能" />
     <MESSAGE value="专注模式新增本地白噪音与专注时长" />
-    <option name="LAST_COMMIT_MESSAGE" value="专注模式新增本地白噪音与专注时长" />
+    <MESSAGE value="提升使用体验" />
+    <MESSAGE value="优化倒数日、待办事项的界面" />
+    <option name="LAST_COMMIT_MESSAGE" value="优化倒数日、待办事项的界面" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
