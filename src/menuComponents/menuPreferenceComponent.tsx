@@ -486,7 +486,7 @@ class MenuPreferenceComponent extends React.Component {
                                          onChange={this.imageQualityRadioOnChange.bind(this)}>
                                 <Row>
                                     <Col span={12}><Radio value={"full"} id={"full"}>清晰</Radio></Col>
-                                    <Col span={12}><Radio value={"regular"} id={"regular"}>省流</Radio></Col>
+                                    <Col span={12}><Radio value={"regular"} id={"regular"}>标准</Radio></Col>
                                 </Row>
                             </Radio.Group>
                         </Form.Item>
@@ -530,8 +530,8 @@ class MenuPreferenceComponent extends React.Component {
                                                              value={"_8zFHuhRhyo"} id={"_8zFHuhRhyo"}>灵魂</Checkbox></Col>
                                     <Col span={12}><Checkbox name={"arts-culture"}
                                                              value={"bDo48cUhwnY"} id={"bDo48cUhwnY"}>文化</Checkbox></Col>
-                                    <Col span={12}><Checkbox name={"history"}
-                                                             value={"dijpbw99kQQ"} id={"dijpbw99kQQ"}>历史</Checkbox></Col>
+                                    {/*<Col span={12}><Checkbox name={"history"}*/}
+                                    {/*                         value={"dijpbw99kQQ"} id={"dijpbw99kQQ"}>历史</Checkbox></Col>*/}
                                     <Col span={12}><Checkbox name={"athletics"}
                                                              value={"Bn-DjrcBrwo"} id={"Bn-DjrcBrwo"}>体育</Checkbox></Col>
                                 </Row>
