@@ -1,5 +1,4 @@
 import React from "react";
-import fs from 'fs';
 import {
     Button,
     Card, Checkbox,
@@ -14,8 +13,7 @@ import {
     Typography,
     Upload
 } from "antd";
-import type { UploadProps } from 'antd';
-import {CheckOutlined, RedoOutlined, SettingOutlined, StopOutlined, ImportOutlined, ExportOutlined} from "@ant-design/icons";
+import {CheckOutlined, RedoOutlined, SettingOutlined, StopOutlined, ImportOutlined, ExportOutlined, IdcardOutlined} from "@ant-design/icons";
 import {
     btnMouseOut,
     btnMouseOver,
@@ -42,6 +40,8 @@ type stateType = {
     imageTopicStatus: string,
     customTopicStatus: string,
     customTopicInputValue: string,
+    displayAccessKeyModal: boolean,
+    accessKeyInputValue: string,
     displayResetPreferenceModal: boolean,
     displayClearStorageModal: boolean,
     preferenceData: PreferenceDataInterface
@@ -62,6 +62,8 @@ class MenuPreferenceComponent extends React.Component {
             imageTopicStatus: "已启用图片主题",
             customTopicStatus: "已禁用自定主题",
             customTopicInputValue: "",
+            displayAccessKeyModal: false,
+            accessKeyInputValue: "",
             displayResetPreferenceModal: false,
             displayClearStorageModal: false,
             preferenceData: getPreferenceDataStorage(),
@@ -350,6 +352,34 @@ class MenuPreferenceComponent extends React.Component {
         }
     }
 
+    // 访问密钥
+    accessKeyBtnOnClick() {
+        this.setState({
+            displayAccessKeyModal: true,
+        })
+    }
+    accessKeyInputOnChange(e: any) {
+        this.setState({
+            accessKeyInputValue: e.target.value,
+        })
+    }
+    accessKeyOkBtnOnClick() {
+        this.setState({
+            displayAccessKeyModal: false,
+            preferenceData: this.setPreferenceData({accessKey: this.state.accessKeyInputValue}),
+            formDisabled: true,
+        }, () => {
+            localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
+            message.success("已修改访问密钥，下次获取图片时生效");
+            this.refreshWindow();
+        })
+    }
+    accessKeyCancelBtnOnClick() {
+        this.setState({
+            displayAccessKeyModal: false,
+        })
+    }
+
     // 重置设置
     resetPreferenceBtnOnClick() {
         let resetTimeStampStorage = localStorage.getItem("resetTimeStamp");
@@ -613,6 +643,15 @@ class MenuPreferenceComponent extends React.Component {
                                 </Button>
                             </Space>
                         </Form.Item>
+                        <Form.Item name={"accessKeyButton"} label={"访问密钥"}>
+                            <Button type={"text"} shape={this.state.preferenceData.buttonShape} icon={<IdcardOutlined />}
+                                    onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
+                                    onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
+                                    onClick={this.accessKeyBtnOnClick.bind(this)}
+                                    style={{color: this.props.fontColor}}>
+                                自定义 Unsplash Access Key
+                            </Button>
+                        </Form.Item>
                         <Form.Item name={"clearStorageButton"} label={"危险设置"} extra={"出现异常时可尝试重置设置或插件"}>
                             <Space>
                                 <Button type={"text"} shape={this.state.preferenceData.buttonShape} icon={<RedoOutlined/>}
@@ -633,6 +672,26 @@ class MenuPreferenceComponent extends React.Component {
                         </Form.Item>
                     </Form>
                 </Card>
+                <Modal title={
+                    <Text style={{color: this.props.fontColor}}>
+                        {"自定义 Unsplash Access Key"}
+                    </Text>
+                }
+                       closeIcon={false}
+                       centered
+                       open={this.state.displayAccessKeyModal}
+                       onOk={this.accessKeyOkBtnOnClick.bind(this)}
+                       onCancel={this.accessKeyCancelBtnOnClick.bind(this)}
+                       destroyOnClose={true}
+                       styles={{mask: {backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)"}}}
+                >
+                    <Form>
+                        <Form.Item label={"访问密钥"} name={"accessKeyInput"} extra={"自定义访问密钥为空时将使用插件默认访问密钥"}>
+                            <Input placeholder="请输入自定义访问密钥，详情请前往帮助文档查看" value={this.state.accessKeyInputValue} onChange={this.accessKeyInputOnChange.bind(this)}
+                                   allowClear/>
+                        </Form.Item>
+                    </Form>
+                </Modal>
                 <Modal title={
                     <Text style={{color: this.props.fontColor}}>
                         {"确定重置设置？"}

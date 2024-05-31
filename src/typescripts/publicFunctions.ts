@@ -351,6 +351,10 @@ export function fixPreferenceData(preferenceData: PreferenceDataInterface) {
         preferenceData.simpleMode = defaultPreferenceData.simpleMode;
         isFixed = true;
     }
+    if (preferenceData.accessKey === undefined || preferenceData.accessKey === null) {
+        preferenceData.accessKey = defaultPreferenceData.accessKey;
+        isFixed = true;
+    }
 
     if (isFixed) {
         localStorage.setItem("preferenceData", JSON.stringify(preferenceData));  // 重新保存设置

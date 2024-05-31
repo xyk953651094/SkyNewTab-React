@@ -10,6 +10,7 @@ export interface PreferenceDataInterface {
     searchEngine: "bing" | "google",
     buttonShape: "circle" | "default" | "round" | undefined,
     simpleMode: boolean,
+    accessKey: string
 }
 
 export interface ThemeColorInterface {

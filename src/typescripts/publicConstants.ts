@@ -73,6 +73,7 @@ export let defaultPreferenceData: PreferenceDataInterface = {
     searchEngine: "bing",
     buttonShape: "round",
     simpleMode: false,
+    accessKey: ""
 }
 
 export let imageTopics = [
