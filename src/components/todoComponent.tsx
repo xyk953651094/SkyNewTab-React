@@ -207,7 +207,7 @@ class TodoComponent extends React.Component {
         if (todoListStorage) {
             tempTodoList = JSON.parse(todoListStorage);
 
-            if (tempNotification && tempTodoList.length > 0) {
+            if (tempNotification && tempTodoList.length > 0 && !this.props.preferenceData.simpleMode) {
                 message.warning("剩余 " + tempTodoList.length + " 个待办事项未处理");
             }
         }

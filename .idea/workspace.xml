@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="新增自定 unsplash access key">
+    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="完善部分表述">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/extensionFiles/_locales/zh_CN/messages.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/extensionFiles/_locales/zh_CN/messages.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/dailyComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dailyComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/todoComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/todoComponent.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -612,7 +612,8 @@
       <workItem from="1717126937755" duration="8268000" />
       <workItem from="1717904936797" duration="122000" />
       <workItem from="1717905073908" duration="341000" />
-      <workItem from="1718096733022" duration="637000" />
+      <workItem from="1718096733022" duration="946000" />
+      <workItem from="1718101095524" duration="309000" />
     </task>
     <task id="LOCAL-00001" summary="优化抽屉蒙版的显示效果&#10;优化代码质量">
       <created>1683952184207</created>
@@ -732,14 +733,6 @@
       <option name="presentableId" value="LOCAL-00017" />
       <option name="project" value="LOCAL" />
       <updated>1687402693401</updated>
-    </task>
-    <task id="LOCAL-00204" summary="优化界面">
-      <option name="closed" value="true" />
-      <created>1709822171135</created>
-      <option name="number" value="00204" />
-      <option name="presentableId" value="LOCAL-00204" />
-      <option name="project" value="LOCAL" />
-      <updated>1709822171136</updated>
     </task>
     <task id="LOCAL-00205" summary="倒数日、待办事项新增排序功能，待办事项新增标签">
       <option name="closed" value="true" />
@@ -989,7 +982,15 @@
       <option name="project" value="LOCAL" />
       <updated>1717150636773</updated>
     </task>
-    <option name="localTasksCounter" value="236" />
+    <task id="LOCAL-00236" summary="完善部分表述">
+      <option name="closed" value="true" />
+      <created>1718099033981</created>
+      <option name="number" value="00236" />
+      <option name="presentableId" value="LOCAL-00236" />
+      <option name="project" value="LOCAL" />
+      <updated>1718099033982</updated>
+    </task>
+    <option name="localTasksCounter" value="237" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -1034,7 +1035,6 @@
     <MESSAGE value="移除专注时段，减少插件体积" />
     <MESSAGE value="倒数日新增循环周期功能" />
     <MESSAGE value="专注模式新增专注时段功能" />
-    <MESSAGE value="完善部分表述" />
     <MESSAGE value="专注模式新增自动结束功能" />
     <MESSAGE value="倒数日待办事项新增提醒开关" />
     <MESSAGE value="修复已知问题" />
@@ -1044,7 +1044,8 @@
     <MESSAGE value="优化倒数日、待办事项的界面" />
     <MESSAGE value="优化使用体验" />
     <MESSAGE value="新增自定 unsplash access key" />
-    <option name="LAST_COMMIT_MESSAGE" value="新增自定 unsplash access key" />
+    <MESSAGE value="完善部分表述" />
+    <option name="LAST_COMMIT_MESSAGE" value="完善部分表述" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
