@@ -65,10 +65,6 @@ class GreetComponent extends React.Component {
         };
     }
 
-    historyBtnOnClick() {
-        window.open(this.state.searchEngineUrl + "历史上的今天", "_self");
-    }
-
     infoBtnOnClick() {
         window.open(this.state.searchEngineUrl + "万年历", "_self");
     }
@@ -192,26 +188,17 @@ class GreetComponent extends React.Component {
                     <Text style={{color: this.state.fontColor}}>{"万年历"}</Text>
                 </Col>
                 <Col span={14} style={{textAlign: "right"}}>
-                    <Space>
-                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<HistoryOutlined/>}
-                                onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
-                                onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}
-                                onClick={this.historyBtnOnClick.bind(this)}
-                                style={{color: this.state.fontColor}}>
-                            {"历史上的今天"}
-                        </Button>
-                        <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<MoreOutlined/>}
-                                onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
-                                onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}
-                                onClick={this.infoBtnOnClick.bind(this)}
-                                style={{color: this.state.fontColor}}>
-                            {"更多信息"}
-                        </Button>
-                        {/*<ButtonComponent buttonIcon={<MoreOutlined/>} buttonShape={this.props.preferenceData.buttonShape}*/}
-                        {/*                 buttonCursor={"pointer"} buttonContent={"更多信息"}*/}
-                        {/*                 buttonOnClick={this.infoBtnOnClick.bind(this)} themeColor={this.props.themeColor}*/}
-                        {/*/>*/}
-                    </Space>
+                    <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<MoreOutlined/>}
+                            onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
+                            onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}
+                            onClick={this.infoBtnOnClick.bind(this)}
+                            style={{color: this.state.fontColor}}>
+                        {"更多信息"}
+                    </Button>
+                    {/*<ButtonComponent buttonIcon={<MoreOutlined/>} buttonShape={this.props.preferenceData.buttonShape}*/}
+                    {/*                 buttonCursor={"pointer"} buttonContent={"更多信息"}*/}
+                    {/*                 buttonOnClick={this.infoBtnOnClick.bind(this)} themeColor={this.props.themeColor}*/}
+                    {/*/>*/}
                 </Col>
             </Row>
         );

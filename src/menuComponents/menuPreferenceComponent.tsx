@@ -13,7 +13,14 @@ import {
     Typography,
     Upload
 } from "antd";
-import {CheckOutlined, RedoOutlined, SettingOutlined, StopOutlined, ImportOutlined, ExportOutlined, IdcardOutlined} from "@ant-design/icons";
+import {
+    TagOutlined,
+    RedoOutlined,
+    SettingOutlined,
+    ImportOutlined,
+    ExportOutlined,
+    IdcardOutlined
+} from "@ant-design/icons";
 import {
     btnMouseOut,
     btnMouseOver,
@@ -39,6 +46,7 @@ type stateType = {
     disableImageTopic: boolean,
     imageTopicStatus: string,
     customTopicStatus: string,
+    displayCustomTopicModal: boolean,
     customTopicInputValue: string,
     displayAccessKeyModal: boolean,
     accessKeyInputValue: string,
@@ -61,6 +69,7 @@ class MenuPreferenceComponent extends React.Component {
             disableImageTopic: false,
             imageTopicStatus: "已启用图片主题",
             customTopicStatus: "已禁用自定主题",
+            displayCustomTopicModal: false,
             customTopicInputValue: "",
             displayAccessKeyModal: false,
             accessKeyInputValue: "",
@@ -140,47 +149,89 @@ class MenuPreferenceComponent extends React.Component {
     }
 
     // 自定主题
+    customTopicBtnOnClick() {
+        this.setState({
+            displayCustomTopicModal: true,
+        })
+    }
+
     customTopicInputOnChange(e: any) {
         this.setState({
             customTopicInputValue: e.target.value
         })
     }
 
-    submitCustomTopicBtnOnClick() {
-        this.setState({
-            preferenceData: this.setPreferenceData({customTopic: this.state.customTopicInputValue}),
-            disableImageTopic: !isEmpty(this.state.customTopicInputValue),
-            imageTopicStatus: isEmpty(this.state.customTopicInputValue)? "已启用图片主题" : "已禁用图片主题",
-            customTopicStatus: isEmpty(this.state.customTopicInputValue)? "已禁用自定主题" : "已启用自定主题",
-        }, () => {
-            localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
-            this.props.getPreferenceData(this.state.preferenceData);
+    customTopicOkBtnOnClick() {
+        if (this.state.customTopicInputValue.length !== 0) {
+            this.setState({
+                displayCustomTopicModal: false,
+                preferenceData: this.setPreferenceData({customTopic: this.state.customTopicInputValue}),
+                disableImageTopic: !isEmpty(this.state.customTopicInputValue),
+                imageTopicStatus: isEmpty(this.state.customTopicInputValue)? "已启用图片主题" : "已禁用图片主题",
+                customTopicStatus: isEmpty(this.state.customTopicInputValue)? "已禁用自定主题" : "已启用自定主题",
+            }, () => {
+                localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
+                this.props.getPreferenceData(this.state.preferenceData);
 
-            if(!isEmpty(this.state.customTopicInputValue)) {
-                message.success("已启用自定主题，下次切换图片时生效");
-            } else {
-                this.setState({
-                    formDisabled: true,
-                }, () => {
-                    message.success("已禁用自定主题，一秒后刷新页面");
-                    this.refreshWindow();
-                })
-            }
+                if(!isEmpty(this.state.customTopicInputValue)) {
+                    message.success("已启用自定主题，下次切换图片时生效");
+                } else {
+                    this.setState({
+                        formDisabled: true,
+                    }, () => {
+                        message.success("已禁用自定主题，一秒后刷新页面");
+                        this.refreshWindow();
+                    })
+                }
+            })
+        } else {
+            this.setState({
+                displayCustomTopicModal: false,
+                formDisabled: true,
+                preferenceData: this.setPreferenceData({customTopic: ""}),
+                disableImageTopic: false,
+                imageTopicStatus: "已启用图片主题",
+                customTopicStatus: "已禁用自定主题",
+            }, () => {
+                localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
+                this.props.getPreferenceData(this.state.preferenceData);
+                message.success("已禁用自定主题，一秒后刷新页面");
+                this.refreshWindow();
+            })
+        }
+    }
+
+    customTopicCancelBtnOnClick() {
+        this.setState({
+            displayCustomTopicModal: false,
         })
     }
 
-    clearCustomTopicBtnOnClick() {
+    // 访问密钥
+    accessKeyBtnOnClick() {
         this.setState({
+            displayAccessKeyModal: true,
+        })
+    }
+    accessKeyInputOnChange(e: any) {
+        this.setState({
+            accessKeyInputValue: e.target.value,
+        })
+    }
+    accessKeyOkBtnOnClick() {
+        this.setState({
+            displayAccessKeyModal: false,
+            preferenceData: this.setPreferenceData({accessKey: this.state.accessKeyInputValue}),
             formDisabled: true,
-            preferenceData: this.setPreferenceData({customTopic: ""}),
-            disableImageTopic: false,
-            imageTopicStatus: "已启用图片主题",
-            customTopicStatus: "已禁用自定主题",
         }, () => {
             localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
-            this.props.getPreferenceData(this.state.preferenceData);
-            message.success("已禁用自定主题，一秒后刷新页面");
+            message.success("已修改访问密钥，下次获取图片时生效");
             this.refreshWindow();
+        })
+    }
+    accessKeyCancelBtnOnClick() {
+        this.setState({
+            displayAccessKeyModal: false,
         })
     }
 
@@ -350,34 +401,6 @@ class MenuPreferenceComponent extends React.Component {
             URL.revokeObjectURL(objectURL);
             message.success("导出数据成功");
         }
-    }
-
-    // 访问密钥
-    accessKeyBtnOnClick() {
-        this.setState({
-            displayAccessKeyModal: true,
-        })
-    }
-    accessKeyInputOnChange(e: any) {
-        this.setState({
-            accessKeyInputValue: e.target.value,
-        })
-    }
-    accessKeyOkBtnOnClick() {
-        this.setState({
-            displayAccessKeyModal: false,
-            preferenceData: this.setPreferenceData({accessKey: this.state.accessKeyInputValue}),
-            formDisabled: true,
-        }, () => {
-            localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
-            message.success("已修改访问密钥，下次获取图片时生效");
-            this.refreshWindow();
-        })
-    }
-    accessKeyCancelBtnOnClick() {
-        this.setState({
-            displayAccessKeyModal: false,
-        })
     }
 
     // 重置设置
@@ -568,25 +591,23 @@ class MenuPreferenceComponent extends React.Component {
                             </Checkbox.Group>
                         </Form.Item>
                         <Form.Item label={"自定主题"} extra={this.state.customTopicStatus}>
-                            <Space>
-                                <Form.Item name={"customTopic"} noStyle>
-                                    <Input style={{width: 170}} placeholder="英文搜索最准确" value={this.state.customTopicInputValue} onChange={this.customTopicInputOnChange.bind(this)} allowClear/>
-                                </Form.Item>
-                                <Button type={"text"} shape={this.state.preferenceData.buttonShape === "round" ? "circle" : "default"}
-                                        icon={<CheckOutlined/>}
-                                        onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
-                                        onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
-                                        onClick={this.submitCustomTopicBtnOnClick.bind(this)}
-                                        style={{color: this.props.fontColor}}>
-                                </Button>
-                                <Button type={"text"} shape={this.state.preferenceData.buttonShape === "round" ? "circle" : "default"}
-                                        icon={<StopOutlined/>}
-                                        onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
-                                        onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
-                                        onClick={this.clearCustomTopicBtnOnClick.bind(this)}
-                                        style={{color: this.props.fontColor}}>
-                                </Button>
-                            </Space>
+                            <Button type={"text"} shape={this.state.preferenceData.buttonShape === "round" ? "circle" : "default"}
+                                    icon={<TagOutlined />}
+                                    onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
+                                    onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
+                                    onClick={this.customTopicBtnOnClick.bind(this)}
+                                    style={{color: this.props.fontColor}}>
+                                {"自定义 Unsplash 图片主题"}
+                            </Button>
+                        </Form.Item>
+                        <Form.Item name={"accessKeyButton"} label={"自定密钥"}>
+                            <Button type={"text"} shape={this.state.preferenceData.buttonShape} icon={<IdcardOutlined />}
+                                    onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
+                                    onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
+                                    onClick={this.accessKeyBtnOnClick.bind(this)}
+                                    style={{color: this.props.fontColor}}>
+                                自定义 Unsplash 访问密钥
+                            </Button>
                         </Form.Item>
                         <Form.Item name={"changeImageTime"} label={"切换间隔"}
                                    extra={"上次切换：" + this.state.lastImageRequestTime}>
@@ -643,15 +664,6 @@ class MenuPreferenceComponent extends React.Component {
                                 </Button>
                             </Space>
                         </Form.Item>
-                        <Form.Item name={"accessKeyButton"} label={"访问密钥"}>
-                            <Button type={"text"} shape={this.state.preferenceData.buttonShape} icon={<IdcardOutlined />}
-                                    onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
-                                    onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
-                                    onClick={this.accessKeyBtnOnClick.bind(this)}
-                                    style={{color: this.props.fontColor}}>
-                                自定义 Unsplash Access Key
-                            </Button>
-                        </Form.Item>
                         <Form.Item name={"clearStorageButton"} label={"危险设置"} extra={"出现异常时可尝试重置设置或插件"}>
                             <Space>
                                 <Button type={"text"} shape={this.state.preferenceData.buttonShape} icon={<RedoOutlined/>}
@@ -673,9 +685,43 @@ class MenuPreferenceComponent extends React.Component {
                     </Form>
                 </Card>
                 <Modal title={
-                    <Text style={{color: this.props.fontColor}}>
-                        {"自定义 Unsplash Access Key"}
-                    </Text>
+                    <Row align={"middle"}>
+                        <Col span={12}>
+                            <Text style={{color: this.props.fontColor}}>
+                                {"自定义 Unsplash 图片主题"}
+                            </Text>
+                        </Col>
+                        <Col span={12} style={{textAlign: "right"}}>
+                            <TagOutlined />
+                        </Col>
+                    </Row>
+                }
+                       closeIcon={false}
+                       centered
+                       open={this.state.displayCustomTopicModal}
+                       onOk={this.customTopicOkBtnOnClick.bind(this)}
+                       onCancel={this.customTopicCancelBtnOnClick.bind(this)}
+                       destroyOnClose={true}
+                       styles={{mask: {backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)"}}}
+                >
+                    <Form initialValues={this.state.preferenceData}>
+                        <Form.Item label={"自定主题"} name={"customTopic"} extra={"自定义图片主题为空时将使用选择的图片主题"}>
+                            <Input placeholder="请输入自定义图片主题，英文结果更准确，例如 flower" value={this.state.customTopicInputValue} onChange={this.customTopicInputOnChange.bind(this)}
+                                   allowClear/>
+                        </Form.Item>
+                    </Form>
+                </Modal>
+                <Modal title={
+                    <Row align={"middle"}>
+                        <Col span={12}>
+                            <Text style={{color: this.props.fontColor}}>
+                                {"自定义 Unsplash Access Key"}
+                            </Text>
+                        </Col>
+                        <Col span={12} style={{textAlign: "right"}}>
+                            <IdcardOutlined />
+                        </Col>
+                    </Row>
                 }
                        closeIcon={false}
                        centered
@@ -685,17 +731,24 @@ class MenuPreferenceComponent extends React.Component {
                        destroyOnClose={true}
                        styles={{mask: {backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)"}}}
                 >
-                    <Form>
-                        <Form.Item label={"访问密钥"} name={"accessKeyInput"} extra={"自定义访问密钥为空时将使用插件默认访问密钥"}>
+                    <Form initialValues={this.state.preferenceData}>
+                        <Form.Item label={"访问密钥"} name={"accessKey"} extra={"自定义访问密钥为空时将使用插件默认访问密钥"}>
                             <Input placeholder="请输入自定义访问密钥，详情请前往帮助文档查看" value={this.state.accessKeyInputValue} onChange={this.accessKeyInputOnChange.bind(this)}
                                    allowClear/>
                         </Form.Item>
                     </Form>
                 </Modal>
                 <Modal title={
-                    <Text style={{color: this.props.fontColor}}>
-                        {"确定重置设置？"}
-                    </Text>
+                    <Row align={"middle"}>
+                        <Col span={12}>
+                            <Text style={{color: this.props.fontColor}}>
+                                {"确定重置设置？"}
+                            </Text>
+                        </Col>
+                        <Col span={12} style={{textAlign: "right"}}>
+                            <RedoOutlined />
+                        </Col>
+                    </Row>
                 }
                        closeIcon={false}
                        centered
@@ -710,9 +763,16 @@ class MenuPreferenceComponent extends React.Component {
                     </Text>
                 </Modal>
                 <Modal title={
-                    <Text style={{color: this.props.fontColor}}>
-                        {"确定重置插件？"}
-                    </Text>
+                    <Row align={"middle"}>
+                        <Col span={12}>
+                            <Text style={{color: this.props.fontColor}}>
+                                {"确定重置插件？"}
+                            </Text>
+                        </Col>
+                        <Col span={12} style={{textAlign: "right"}}>
+                            <RedoOutlined />
+                        </Col>
+                    </Row>
                 }
                        closeIcon={false}
                        centered

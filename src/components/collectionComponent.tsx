@@ -1,6 +1,6 @@
 import React from "react";
 import {Button, Col, Form, Input, List, message, Modal, Row, Space, Tooltip, Typography} from "antd";
-import {DeleteOutlined, EditOutlined, PlusOutlined, InfoCircleOutlined} from "@ant-design/icons";
+import {DeleteOutlined, EditOutlined, PlusOutlined, LinkOutlined} from "@ant-design/icons";
 import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
 import {btnMouseOut, btnMouseOver} from "../typescripts/publicFunctions";
 import $ from "jquery";
@@ -270,21 +270,18 @@ class CollectionComponent extends React.Component {
                         {
                             this.state.collectionData.map((item: any) => {
                                 return (
-                                    <Tooltip title={item.webUrl} key={item.timeStamp} placement={"bottom"}
-                                             color={this.state.backgroundColor}>
-                                        <Button shape={this.props.preferenceData.buttonShape}
-                                                className={"componentTheme"}
-                                                key={item.timeStamp}
-                                                onClick={() => {
-                                                    window.open(item.webUrl, "_self")
-                                                }}
-                                                style={{
-                                                    color: this.state.fontColor,
-                                                    backgroundColor: this.state.backgroundColor
-                                                }}>
-                                            {item.webName}
-                                        </Button>
-                                    </Tooltip>
+                                    <Button shape={this.props.preferenceData.buttonShape}
+                                            className={"componentTheme"}
+                                            key={item.timeStamp}
+                                            onClick={() => {
+                                                window.open(item.webUrl, "_self")
+                                            }}
+                                            style={{
+                                                color: this.state.fontColor,
+                                                backgroundColor: this.state.backgroundColor
+                                            }}>
+                                        {item.webName}
+                                    </Button>
                                 )
                             })
                         }
@@ -304,9 +301,16 @@ class CollectionComponent extends React.Component {
                                     icon={<DeleteOutlined/>} onClick={this.removeAllBtnOnClick.bind(this)}/>
                         </Tooltip>
                         <Modal title={
-                            <Text style={{color: this.state.fontColor}}>
-                                {"添加链接 " + this.state.collectionSize + " / " + this.state.collectionMaxSize}
-                            </Text>
+                            <Row align={"middle"}>
+                                <Col span={12}>
+                                    <Text style={{color: this.state.fontColor}}>
+                                        {"添加链接 " + this.state.collectionSize + " / " + this.state.collectionMaxSize}
+                                    </Text>
+                                </Col>
+                                <Col span={12} style={{textAlign: "right"}}>
+                                    <LinkOutlined />
+                                </Col>
+                            </Row>
                         }
                                closeIcon={false} centered
                                open={this.state.displayAddModal} onOk={this.addModalOkBtnOnClick.bind(this)}
