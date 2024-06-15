@@ -9,7 +9,7 @@ import {
 } from "../typescripts/publicFunctions";
 import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
 import "../stylesheets/publicStyles.scss"
-import {StopOutlined, DeleteOutlined, LinkOutlined, PlusOutlined} from "@ant-design/icons";
+import {StopOutlined, DeleteOutlined, PlusOutlined} from "@ant-design/icons";
 import focusSoundOne from "../assets/focusSounds/古镇雨滴.mp3";
 import focusSoundTwo from "../assets/focusSounds/松树林小雪.mp3";
 import focusSoundThree from "../assets/focusSounds/漓江水.mp3";
@@ -412,7 +412,7 @@ class FocusComponent extends React.Component {
                         ]}
                     >
                         <Button type={"text"} shape={this.props.preferenceData.buttonShape}
-                                icon={<LinkOutlined />}
+                                icon={<StopOutlined />}
                                 onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
                                 onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}
                                 style={{color: this.state.fontColor, cursor: "default"}}>

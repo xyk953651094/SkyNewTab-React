@@ -270,18 +270,19 @@ class CollectionComponent extends React.Component {
                         {
                             this.state.collectionData.map((item: any) => {
                                 return (
-                                    <Button shape={this.props.preferenceData.buttonShape}
-                                            className={"componentTheme"}
-                                            key={item.timeStamp}
-                                            onClick={() => {
-                                                window.open(item.webUrl, "_self")
-                                            }}
-                                            style={{
-                                                color: this.state.fontColor,
-                                                backgroundColor: this.state.backgroundColor
-                                            }}>
-                                        {item.webName}
-                                    </Button>
+                                    <Tooltip title={"前往 " + item.webName} placement={"bottom"} color={this.state.backgroundColor} key={item.timeStamp}>
+                                        <Button shape={this.props.preferenceData.buttonShape}
+                                                className={"componentTheme"}
+                                                onClick={() => {
+                                                    window.open(item.webUrl, "_self")
+                                                }}
+                                                style={{
+                                                    color: this.state.fontColor,
+                                                    backgroundColor: this.state.backgroundColor
+                                                }}>
+                                            {item.webName}
+                                        </Button>
+                                    </Tooltip>
                                 )
                             })
                         }

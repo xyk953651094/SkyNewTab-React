@@ -4,14 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="修复极简模式已知问题">
+    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="移除历史上的今天按钮，移除显示快捷链接url，弹窗右上角新增图标">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/collectionComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/collectionComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/dailyComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dailyComponent.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/focusComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/focusComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/greetComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/greetComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/todoComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/todoComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/menuComponents/menuPreferenceComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/menuComponents/menuPreferenceComponent.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -620,6 +616,8 @@
       <workItem from="1718101095524" duration="451000" />
       <workItem from="1718109991987" duration="4466000" />
       <workItem from="1718199363710" duration="1878000" />
+      <workItem from="1718269709007" duration="716000" />
+      <workItem from="1718452496116" duration="2221000" />
     </task>
     <task id="LOCAL-00001" summary="优化抽屉蒙版的显示效果&#10;优化代码质量">
       <created>1683952184207</created>
@@ -739,14 +737,6 @@
       <option name="presentableId" value="LOCAL-00017" />
       <option name="project" value="LOCAL" />
       <updated>1687402693401</updated>
-    </task>
-    <task id="LOCAL-00206" summary="关闭专注模式自动暂停白噪音">
-      <option name="closed" value="true" />
-      <created>1710155810286</created>
-      <option name="number" value="00206" />
-      <option name="presentableId" value="LOCAL-00206" />
-      <option name="project" value="LOCAL" />
-      <updated>1710155810288</updated>
     </task>
     <task id="LOCAL-00207" summary="简化移动端菜单栏">
       <option name="closed" value="true" />
@@ -996,7 +986,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718101430489</updated>
     </task>
-    <option name="localTasksCounter" value="238" />
+    <task id="LOCAL-00238" summary="移除历史上的今天按钮，移除显示快捷链接url，弹窗右上角新增图标">
+      <option name="closed" value="true" />
+      <created>1718269809827</created>
+      <option name="number" value="00238" />
+      <option name="presentableId" value="LOCAL-00238" />
+      <option name="project" value="LOCAL" />
+      <updated>1718269809827</updated>
+    </task>
+    <option name="localTasksCounter" value="239" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -1026,7 +1024,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="新增白噪音" />
     <MESSAGE value="新增公众号入口" />
     <MESSAGE value="移除不必要的点击事件，移动端移除时间与搜索组件" />
     <MESSAGE value="新增导入导出数据" />
@@ -1051,7 +1048,8 @@
     <MESSAGE value="新增自定 unsplash access key" />
     <MESSAGE value="完善部分表述" />
     <MESSAGE value="修复极简模式已知问题" />
-    <option name="LAST_COMMIT_MESSAGE" value="修复极简模式已知问题" />
+    <MESSAGE value="移除历史上的今天按钮，移除显示快捷链接url，弹窗右上角新增图标" />
+    <option name="LAST_COMMIT_MESSAGE" value="移除历史上的今天按钮，移除显示快捷链接url，弹窗右上角新增图标" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
