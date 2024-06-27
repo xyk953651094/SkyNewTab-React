@@ -207,7 +207,7 @@ class TodoComponent extends React.Component {
         if (todoListStorage) {
             tempTodoList = JSON.parse(todoListStorage);
 
-            if (tempNotification && tempTodoList.length > 0) {
+            if (tempNotification && tempTodoList.length > 0 && !this.props.preferenceData.simpleMode) {
                 message.warning("剩余 " + tempTodoList.length + " 个待办事项未处理");
             }
         }
@@ -318,9 +318,16 @@ class TodoComponent extends React.Component {
                     </Button>
                 </Popover>
                 <Modal title={
-                    <Text style={{color: this.state.fontColor}}>
-                        {"添加待办事项 " + this.state.todoList.length + " / " + todoMaxSize}
-                    </Text>
+                    <Row align={"middle"}>
+                        <Col span={12}>
+                            <Text style={{color: this.state.fontColor}}>
+                                {"添加待办事项 " + this.state.todoList.length + " / " + todoMaxSize}
+                            </Text>
+                        </Col>
+                        <Col span={12} style={{textAlign: "right"}}>
+                            <CheckSquareOutlined />
+                        </Col>
+                    </Row>
                 }
                        closeIcon={false} centered
                        open={this.state.displayModal} onOk={this.modalOkBtnOnClick.bind(this)}

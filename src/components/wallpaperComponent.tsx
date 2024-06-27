@@ -100,7 +100,7 @@ class WallpaperComponent extends React.Component {
         let headers = {};
         let url = "https://api.unsplash.com/photos/random?";
         let data = {
-            "client_id": clientId,
+            "client_id": this.props.preferenceData.accessKey === "" ? clientId : this.props.preferenceData.accessKey,
             "orientation": (device === "iPhone" || device === "Android") ? "portrait" : "landscape",
             "topics": isEmpty(imageQuery) ? tempImageTopics : "",
             "query": imageQuery,

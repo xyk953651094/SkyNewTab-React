@@ -226,7 +226,7 @@ class DailyComponent extends React.Component {
                 let todayTimeStamp = new Date(getTimeDetails(new Date()).showDate5).getTime();
 
                 // 倒数日通知
-                if (tempNotification && value.selectedTimeStamp === todayTimeStamp) {
+                if (tempNotification && value.selectedTimeStamp === todayTimeStamp && !this.props.preferenceData.simpleMode) {
                     message.info("今日" + value.title);
                 }
 
@@ -393,9 +393,16 @@ class DailyComponent extends React.Component {
                     </Button>
                 </Popover>
                 <Modal title={
-                    <Text style={{color: this.state.fontColor}}>
-                        {"添加倒数日 " + this.state.dailyList.length + " / " + dailyMaxSize}
-                    </Text>
+                    <Row align={"middle"}>
+                        <Col span={12}>
+                            <Text style={{color: this.state.fontColor}}>
+                                {"添加倒数日 " + this.state.dailyList.length + " / " + dailyMaxSize}
+                            </Text>
+                        </Col>
+                        <Col span={12} style={{textAlign: "right"}}>
+                            <CalendarOutlined />
+                        </Col>
+                    </Row>
                 }
                        closeIcon={false}
                        centered

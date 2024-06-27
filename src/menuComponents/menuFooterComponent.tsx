@@ -27,11 +27,10 @@ class MenuFooterComponent extends React.Component {
         return (
             <Space>
                 <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<StarOutlined />}
-                        href={"https://afdian.net/a/xyk953651094"} target={"_self"}
                         onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
                         onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
-                        style={{color: this.props.fontColor}}>
-                    {"如果喜欢这款插件，请考虑捐助或五星好评"}
+                        style={{color: this.props.fontColor, cursor: "default"}}>
+                    {"如果喜欢这款插件，请考虑五星好评"}
                 </Button>
             </Space>
         );

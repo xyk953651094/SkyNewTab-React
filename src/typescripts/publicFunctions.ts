@@ -6,8 +6,25 @@ import $ from "jquery";
 import {CheckboxValueType} from "antd/es/checkbox/Group";
 
 // 网络请求
-export function httpRequest(headers: object, url: string, data: object, method: "GET" | "POST") {
+export async function httpRequest(headers: object, url: string, data: object, method: "GET" | "POST") {
+    // 验证输入数据
+    if (!headers || typeof headers !== "object") {
+        throw new Error("Invalid headers");
+    }
+    if (!url) {
+        throw new Error("Invalid URL");
+    }
+    if (!data || typeof data !== "object") {
+        throw new Error("Invalid data");
+    }
+
     return new Promise(function (resolve, reject) {
+        // 显式地拒绝不支持的HTTP方法
+        if (method !== "GET" && method !== "POST") {
+            reject(new Error("Unsupported HTTP method"));
+            return;
+        }
+
         $.ajax({
             headers: headers,
             url: url,
@@ -17,8 +34,9 @@ export function httpRequest(headers: object, url: string, data: object, method: 
             success: (resultData: any) => {
                 resolve(resultData);
             },
-            error: function () {
-                reject();
+            error: function (xhr: any, status: string, error: string) {
+                const errorMsg = `Request failed: ${status} ${error}`;
+                reject(new Error(errorMsg)); // 提供详细的错误信息
             }
         });
     })
@@ -26,63 +44,41 @@ export function httpRequest(headers: object, url: string, data: object, method: 
 
 // 获取日期与时间
 export function getTimeDetails(param: Date) {
-    let year: string | number = param.getFullYear();
-    let month: string | number = param.getMonth() + 1;
-    let day: string | number = param.getDate();
-    let hour: string | number = param.getHours();
-    let minute: string | number = param.getMinutes();
-    let second: string | number = param.getSeconds();
-    let week: string | number = param.getDay();
-    let localeDate: string = param.toLocaleString("zh-Hans-u-ca-chinese");
-
-    year = year.toString();
-    month = month < 10 ? ("0" + month) : month.toString();
-    day = day < 10 ? ("0" + day) : day.toString();
-    hour = hour < 10 ? ("0" + hour) : hour.toString();
-    minute = minute < 10 ? ("0" + minute) : minute.toString();
-    second = second < 10 ? ("0" + second) : second.toString();
-    switch (week) {
-        case 0:
-            week = "周日";
-            break;
-        case 1:
-            week = "周一";
-            break;
-        case 2:
-            week = "周二";
-            break;
-        case 3:
-            week = "周三";
-            break;
-        case 4:
-            week = "周四";
-            break;
-        case 5:
-            week = "周五";
-            break;
-        case 6:
-            week = "周六";
-            break;
-        default:
-            week = "";
+    if (!(param instanceof Date) || isNaN(param.getTime())) {
+        throw new Error("Invalid Date provided.");
     }
 
+    // 辅助函数，用于将数字格式化为两位字符串
+    function formatNumber(value: number): string {
+        return value < 10 ? `0${value}` : value.toString();
+    }
+
+    const year = param.getFullYear().toString();
+    const month = formatNumber(param.getMonth() + 1);
+    const day = formatNumber(param.getDate());
+    const hour = formatNumber(param.getHours());
+    const minute = formatNumber(param.getMinutes());
+    const second = formatNumber(param.getSeconds());
+    const week = ["周日", "周一", "周二", "周三", "周四", "周五", "周六"][param.getDay()];
+
+    const localeDate: string = "农历" + param.toLocaleString("zh-Hans-u-ca-chinese").split(" ")[0] + "日";
+
     return {
-        year: year, month: month, day: day, hour: hour, minute: minute, second: second,
+        year, month, day, hour, minute, second,
         showWeek: week,
-        showDate: year + "/" + month + "/" + day,
-        showDate2: year + "." + month + "." + day,
-        showDate3: year + month + day,
-        showDate4: year + "年" + month + "月" + day + "日",
-        showDate5: year + "-" + month + "-" + day,
-        showTime: hour + ":" + minute,
-        showDetail: year + "/" + month + "/" + day + " " + hour + ":" + minute + ":" + second,
-        showLocaleDate: "农历" + localeDate.split(" ")[0] + "日"
+        showDate: `${year}/${month}/${day}`,
+        showDate2: `${year}.${month}.${day}`,
+        showDate3: `${year}${month}${day}`,
+        showDate4: `${year}年${month}月${day}日`,
+        showDate5: `${year}-${month}-${day}`,
+        showTime: `${hour}:${minute}`,
+        showDetail: `${year}/${month}/${day} ${hour}:${minute}:${second}`,
+        showLocaleDate: `${localeDate}`
     };
 }
 
 // 判断字符串是否合规
-export function isEmpty(param: string) {
+export function isEmpty(param: any) {
     return (param === null || param === undefined || param.length === 0);
 }
 
@@ -258,17 +254,17 @@ export function getDevice() {
 
 export function getBrowserType() {
     let userAgent = navigator.userAgent;
-    let browser='Other';
-    if (userAgent.indexOf('Chrome') !== -1 && userAgent.indexOf('Safari') !== -1){
+    let browser="Other";
+    if (userAgent.indexOf("Chrome") !== -1 && userAgent.indexOf("Safari") !== -1){
         browser="Chrome";
     }
-    else if (userAgent.indexOf('Edge') !== -1){
+    else if (userAgent.indexOf("Edge") !== -1){
         browser="Edge";
     }
-    else if (userAgent.indexOf('Firefox') !== -1){
+    else if (userAgent.indexOf("Firefox") !== -1){
         browser = "Firefox";
     }
-    else if (userAgent.indexOf('Safari') !== -1 && userAgent.indexOf('Chrome') === -1){
+    else if (userAgent.indexOf("Safari") !== -1 && userAgent.indexOf("Chrome") === -1){
         browser="Safari";
     }
     return browser;
@@ -310,6 +306,34 @@ export function getSearchEngineDetail(searchEngine: string) {
 // 补全设置数据
 export function fixPreferenceData(preferenceData: PreferenceDataInterface) {
     let isFixed = false;
+
+    // // 抽象出一个辅助函数来设置默认值
+    // const setDefaultValue = <T>(value: T, defaultValue: T) => {
+    //     if (value === undefined || value === null) {
+    //         return defaultValue;
+    //     }
+    //     return value;
+    // };
+    //
+    // // 使用辅助函数遍历需要检查的属性
+    // ["dynamicEffect", "imageQuality", "imageTopics", "customTopic", "changeImageTime", "nightMode", "noImageMode", "searchEngine", "buttonShape", "simpleMode", "accessKey"].forEach(prop => {
+    //     const defaultValue = defaultPreferenceData[prop];
+    //     if (defaultValue !== undefined) {
+    //         preferenceData[prop] = setDefaultValue(preferenceData[prop], defaultValue);
+    //         isFixed = true;
+    //     }
+    // });
+    //
+    // // 如果有修改，则更新 localStorage
+    // if (isFixed) {
+    //     try {
+    //         localStorage.setItem("preferenceData", JSON.stringify(preferenceData));
+    //     } catch (error) {
+    //         console.error("Error updating preferenceData in localStorage:", error);
+    //         // 可以添加错误处理逻辑，例如回退到上一个版本的数据
+    //     }
+    // }
+
     if (!preferenceData.dynamicEffect) {
         preferenceData.dynamicEffect = defaultPreferenceData.dynamicEffect;
         isFixed = true;
@@ -349,6 +373,10 @@ export function fixPreferenceData(preferenceData: PreferenceDataInterface) {
     }
     if (preferenceData.simpleMode === undefined || preferenceData.simpleMode === null) {
         preferenceData.simpleMode = defaultPreferenceData.simpleMode;
+        isFixed = true;
+    }
+    if (preferenceData.accessKey === undefined || preferenceData.accessKey === null) {
+        preferenceData.accessKey = defaultPreferenceData.accessKey;
         isFixed = true;
     }
 
