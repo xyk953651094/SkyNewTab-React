@@ -591,7 +591,7 @@ class MenuPreferenceComponent extends React.Component {
                             </Checkbox.Group>
                         </Form.Item>
                         <Form.Item label={"自定主题"} extra={this.state.customTopicStatus}>
-                            <Button type={"text"} shape={this.state.preferenceData.buttonShape === "round" ? "circle" : "default"}
+                            <Button type={"text"} shape={this.state.preferenceData.buttonShape}
                                     icon={<TagOutlined />}
                                     onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
                                     onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
@@ -601,7 +601,8 @@ class MenuPreferenceComponent extends React.Component {
                             </Button>
                         </Form.Item>
                         <Form.Item name={"accessKeyButton"} label={"自定密钥"}>
-                            <Button type={"text"} shape={this.state.preferenceData.buttonShape} icon={<IdcardOutlined />}
+                            <Button type={"text"} shape={this.state.preferenceData.buttonShape}
+                                    icon={<IdcardOutlined />}
                                     onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
                                     onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
                                     onClick={this.accessKeyBtnOnClick.bind(this)}

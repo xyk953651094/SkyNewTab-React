@@ -54,13 +54,6 @@ class PopupFooterComponent extends React.Component {
                         style={{color: this.props.fontColor}}>
                     博客
                 </Button>
-                <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<GiftOutlined/>}
-                        href={"https://afdian.net/a/xyk953651094/"} target={"_blank"}
-                        onMouseOver={btnMouseOver.bind(this, this.props.hoverColor)}
-                        onMouseOut={btnMouseOut.bind(this, this.props.fontColor)}
-                        style={{color: this.props.fontColor}}>
-                    捐助
-                </Button>
             </Space>
         );
     }
