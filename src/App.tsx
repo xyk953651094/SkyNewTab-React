@@ -115,7 +115,7 @@ class App extends React.Component {
             notification.open({
                 icon: null,
                 message: "已更新至版本 V" + currentVersion,
-                description: "详细内容请前往 GitHub 或 GitLab 主页查看",
+                description: "详细内容请前往菜单栏更新日志查看",
                 placement: "bottomLeft",
                 duration: 5,
                 closeIcon: false
