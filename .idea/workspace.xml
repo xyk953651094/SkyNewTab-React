@@ -6,11 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="提升使用体验">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/extensionFiles/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/extensionFiles/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/menuComponents/menuHeaderComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/menuComponents/menuHeaderComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/popupComponents/popupFooterComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/popupComponents/popupFooterComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/typescripts/publicFunctions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/typescripts/publicFunctions.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -630,7 +626,8 @@
       <workItem from="1719501149487" duration="197000" />
       <workItem from="1719547530446" duration="1254000" />
       <workItem from="1719831082776" duration="833000" />
-      <workItem from="1719967829663" duration="1750000" />
+      <workItem from="1719967829663" duration="2113000" />
+      <workItem from="1720772691010" duration="7880000" />
     </task>
     <task id="LOCAL-00001" summary="优化抽屉蒙版的显示效果&#10;优化代码质量">
       <created>1683952184207</created>
@@ -750,14 +747,6 @@
       <option name="presentableId" value="LOCAL-00017" />
       <option name="project" value="LOCAL" />
       <updated>1687402693401</updated>
-    </task>
-    <task id="LOCAL-00210" summary="移除专注时段，减少插件体积">
-      <option name="closed" value="true" />
-      <created>1710732071623</created>
-      <option name="number" value="00210" />
-      <option name="presentableId" value="LOCAL-00210" />
-      <option name="project" value="LOCAL" />
-      <updated>1710732071624</updated>
     </task>
     <task id="LOCAL-00211" summary="倒数日新增循环周期功能">
       <option name="closed" value="true" />
@@ -1007,7 +996,15 @@
       <option name="project" value="LOCAL" />
       <updated>1719501062180</updated>
     </task>
-    <option name="localTasksCounter" value="242" />
+    <task id="LOCAL-00242" summary="提升使用体验">
+      <option name="closed" value="true" />
+      <created>1719970084112</created>
+      <option name="number" value="00242" />
+      <option name="presentableId" value="LOCAL-00242" />
+      <option name="project" value="LOCAL" />
+      <updated>1719970084113</updated>
+    </task>
+    <option name="localTasksCounter" value="243" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
