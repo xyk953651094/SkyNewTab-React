@@ -1,4 +1,4 @@
-import {darkThemeArray, defaultPreferenceData, lightThemeArray} from "./publicConstants"
+import {colorRegExp, darkThemeArray, defaultPreferenceData, lightThemeArray} from "./publicConstants"
 import "jquery-color"
 import {PreferenceDataInterface, ThemeColorInterface} from "./publicInterface";
 
@@ -194,7 +194,7 @@ export function setColorTheme() {
 // 根据图片背景颜色获取元素反色效果
 export function getReverseColor(color: string) {
     // 验证输入是否为7字符长且以#开头
-    if (!/^#[0-9A-Fa-f]{6}$/.test(color)) {
+    if (!colorRegExp.test(color)) {
         throw new Error("Invalid color format. Expected a 6-digit hexadecimal color code prefixed with '#'.");
     }
 
@@ -218,7 +218,7 @@ export function getReverseColor(color: string) {
 
 // 根据图片背景颜色改变字体颜色效果
 export function getFontColor(color: string) {
-    let rgb = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(color);
+    let rgb = /^#([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(color);
 
     if (!rgb) {
         return "#ffffff";
@@ -426,6 +426,10 @@ export function getImageHistoryStorage() {
 
 // 过渡动画
 export function changeThemeColor(element: string, backgroundColor: string, fontColor: string, time: number = 300) {
+    if (!colorRegExp.test(backgroundColor) || !colorRegExp.test(fontColor)) {
+        throw new Error("Invalid color format. Expected a 6-digit hexadecimal color code prefixed with '#'.");
+    }
+
     $(element).animate({
         backgroundColor: backgroundColor,
         color: fontColor,
@@ -442,17 +446,33 @@ export function fadeOut(element: string, time = 300) {
 
 // 按钮（clockComponent 不适用公共方法，已单独实现）
 export function btnMouseOver(hoverColor: string, e: any) {
-    e.currentTarget.style.backgroundColor = hoverColor;
-    e.currentTarget.style.color = getFontColor(hoverColor);
+    if (!colorRegExp.test(hoverColor)) {
+        throw new Error("Invalid color format. Expected a 6-digit hexadecimal color code prefixed with '#'.");
+    }
+
+    if (e.currentTarget && (e.currentTarget as HTMLElement).style) {
+        (e.currentTarget as HTMLElement).style.backgroundColor = hoverColor;
+        (e.currentTarget as HTMLElement).style.color = getFontColor(hoverColor);
+    }
 }
 
 export function btnMouseOut(fontColor: string, e: any) {
-    e.currentTarget.style.backgroundColor = "transparent";
-    e.currentTarget.style.color = fontColor;
+    if (!colorRegExp.test(fontColor)) {
+        throw new Error("Invalid color format. Expected a 6-digit hexadecimal color code prefixed with '#'.");
+    }
+
+    if (e.currentTarget && (e.currentTarget as HTMLElement).style) {
+        (e.currentTarget as HTMLElement).style.backgroundColor = "transparent";
+        (e.currentTarget as HTMLElement).style.color = fontColor;
+    }
 }
 
 // 修改菜单栏表单控件时变化主题颜色
 export function resetRadioColor(selectedRadio: string | undefined, allRadios: string[], themeColor: string) {
+    if (!colorRegExp.test(themeColor)) {
+        throw new Error("Invalid color format. Expected a 6-digit hexadecimal color code prefixed with '#'.");
+    }
+
     // 重置所有不是当前选中的选项的颜色
     for (let i = 0; i < allRadios.length; i++) {
         let currentRadio = $("#" + allRadios[i]);
@@ -468,6 +488,10 @@ export function resetRadioColor(selectedRadio: string | undefined, allRadios: st
 }
 
 export function resetCheckboxColor(selectedCheckboxes: CheckboxValueType[], allCheckboxes: string[], themeColor: string) {
+    if (!colorRegExp.test(themeColor)) {
+        throw new Error("Invalid color format. Expected a 6-digit hexadecimal color code prefixed with '#'.");
+    }
+
     // 重置所有不是当前选中的选项的颜色
     for (let i = 0; i < allCheckboxes.length; i++) {
         let currentCheckbox = $("#" + allCheckboxes[i]);
@@ -483,6 +507,10 @@ export function resetCheckboxColor(selectedCheckboxes: CheckboxValueType[], allC
 }
 
 export function resetSwitchColor(element: string, checked: boolean, themeColor: string) {
+    if (!colorRegExp.test(themeColor)) {
+        throw new Error("Invalid color format. Expected a 6-digit hexadecimal color code prefixed with '#'.");
+    }
+
     if (!checked) {
         $(element).children(".ant-switch-inner").css("backgroundColor", "rgb(0, 0, 0, 0)");
     }
