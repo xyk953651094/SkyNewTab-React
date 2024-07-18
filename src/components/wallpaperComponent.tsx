@@ -142,7 +142,7 @@ class WallpaperComponent extends React.Component {
                 tempThis.setWallpaper(resultData);
             })
             .catch(function () {
-                message.destroy("message2");
+                message.destroy("message1");
 
                 // 请求失败时使用上一次请求结果
                 let lastImage: any = localStorage.getItem("lastImage");
