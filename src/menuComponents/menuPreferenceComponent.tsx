@@ -266,14 +266,14 @@ class MenuPreferenceComponent extends React.Component {
     noImageModeSwitchOnChange(checked: boolean, e: any) {
         this.setState({
             formDisabled: true,
-            preferenceData: this.setPreferenceData({noImageMode: checked}),
+            preferenceData: this.setPreferenceData({nightMode: !checked, noImageMode: checked}),  // 同时调整亮度
         }, () => {
             localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
             this.props.getPreferenceData(this.state.preferenceData);
             if (checked) {
-                message.success("已开启纯色模式，一秒后刷新页面");
+                message.success("已开启纯色模式并恢复背景亮度，一秒后刷新页面");
             } else {
-                message.success("已关闭纯色模式，一秒后刷新页面");
+                message.success("已关闭纯色模式并降低背景亮度，一秒后刷新页面");
             }
             // resetSwitchColor("#noImageModeSwitch", checked, this.props.hoverColor);
             this.refreshWindow();

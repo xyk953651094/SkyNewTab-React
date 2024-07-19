@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="优化代码质量">
+    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="修复已知问题">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/wallpaperComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/wallpaperComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/menuComponents/menuPreferenceComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/menuComponents/menuPreferenceComponent.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -631,7 +631,8 @@
       <workItem from="1721027118499" duration="5567000" />
       <workItem from="1721207816626" duration="5391000" />
       <workItem from="1721221483426" duration="428000" />
-      <workItem from="1721291992959" duration="1398000" />
+      <workItem from="1721291992959" duration="1520000" />
+      <workItem from="1721300374035" duration="584000" />
     </task>
     <task id="LOCAL-00001" summary="优化抽屉蒙版的显示效果&#10;优化代码质量">
       <created>1683952184207</created>
@@ -751,14 +752,6 @@
       <option name="presentableId" value="LOCAL-00017" />
       <option name="project" value="LOCAL" />
       <updated>1687402693401</updated>
-    </task>
-    <task id="LOCAL-00214" summary="专注模式新增自动结束功能">
-      <option name="closed" value="true" />
-      <created>1712223443182</created>
-      <option name="number" value="00214" />
-      <option name="presentableId" value="LOCAL-00214" />
-      <option name="project" value="LOCAL" />
-      <updated>1712223443183</updated>
     </task>
     <task id="LOCAL-00215" summary="专注模式新增自动结束功能">
       <option name="closed" value="true" />
@@ -1008,7 +1001,15 @@
       <option name="project" value="LOCAL" />
       <updated>1721221534185</updated>
     </task>
-    <option name="localTasksCounter" value="246" />
+    <task id="LOCAL-00246" summary="修复已知问题">
+      <option name="closed" value="true" />
+      <created>1721296301654</created>
+      <option name="number" value="00246" />
+      <option name="presentableId" value="LOCAL-00246" />
+      <option name="project" value="LOCAL" />
+      <updated>1721296301655</updated>
+    </task>
+    <option name="localTasksCounter" value="247" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -1052,7 +1053,6 @@
     <MESSAGE value="专注模式新增专注时段功能" />
     <MESSAGE value="专注模式新增自动结束功能" />
     <MESSAGE value="倒数日待办事项新增提醒开关" />
-    <MESSAGE value="修复已知问题" />
     <MESSAGE value="新增编辑快捷链接功能" />
     <MESSAGE value="专注模式新增本地白噪音与专注时长" />
     <MESSAGE value="优化倒数日、待办事项的界面" />
@@ -1063,7 +1063,8 @@
     <MESSAGE value="移除历史上的今天按钮，移除显示快捷链接url，弹窗右上角新增图标" />
     <MESSAGE value="提升使用体验" />
     <MESSAGE value="优化代码质量" />
-    <option name="LAST_COMMIT_MESSAGE" value="优化代码质量" />
+    <MESSAGE value="修复已知问题" />
+    <option name="LAST_COMMIT_MESSAGE" value="修复已知问题" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
