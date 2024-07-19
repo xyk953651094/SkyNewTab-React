@@ -1,7 +1,7 @@
 import React from "react";
 import {Layout, List, message} from "antd";
 import "../stylesheets/popupComponent.scss"
-import {getFontColor, getPreferenceDataStorage, getReverseColor} from "../typescripts/publicFunctions";
+import {getFontColor, getPreferenceDataStorage, getReverseColor, setThemeColor} from "../typescripts/publicFunctions";
 import PopupImageComponent from "../popupComponents/popupImageComponent";
 import PopupStatusComponent from "../popupComponents/popupStatusComponent";
 import PopupFooterComponent from "../popupComponents/popupFooterComponent";
@@ -40,26 +40,33 @@ class PopupComponent extends React.Component {
     }
 
     componentDidMount() {
-        let imageData = localStorage.getItem("lastImage");
-        // let tempPreferenceData = localStorage.getItem("preferenceData");
-        if (imageData) {
-            let tempImageData = JSON.parse(imageData);
-
+        const bodyEle = $("body");
+        if (this.state.preferenceData.noImageMode) {
+            const tempThemeColor = setThemeColor();
             this.setState({
-                imageData: tempImageData,
-                hoverColor: getReverseColor(tempImageData.color),
-                backgroundColor: tempImageData.color,
-                fontColor: getFontColor(tempImageData.color),
-                // preferenceData: getPreferenceDataStorage(),
-            }, () => {
-                $("body").css({"backgroundColor": this.state.backgroundColor});
-            });
+                hoverColor: tempThemeColor.componentBackgroundColor,
+                backgroundColor: tempThemeColor.themeColor,
+                fontColor: getFontColor(tempThemeColor.themeColor),
+            })
         } else {
-            message.error("暂无图片信息");
+            let imageData = localStorage.getItem("lastImage");
+            if (imageData) {
+                const tempImageData = JSON.parse(imageData);
+                this.setState({
+                    imageData: tempImageData,
+                    hoverColor: getReverseColor(tempImageData.color),
+                    backgroundColor: tempImageData.color,
+                    fontColor: getFontColor(tempImageData.color),
+                }, () => {
+                    bodyEle.css({"backgroundColor": this.state.backgroundColor});
+                });
+            } else {
+                message.error("暂无图片信息");
+            }
         }
 
         // 修改各类弹窗样式
-        $("body").bind("DOMNodeInserted", () => {
+        bodyEle.bind("DOMNodeInserted", () => {
             // message
             let messageEle = $(".ant-message");
             if (messageEle.length && messageEle.length > 0) {

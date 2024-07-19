@@ -21,7 +21,7 @@ import {
     getImageHistoryStorage,
     getPreferenceDataStorage,
     getReverseColor, resetCheckboxColor, resetRadioColor, resetSwitchColor,
-    setColorTheme
+    setThemeColor
 } from "./typescripts/publicFunctions";
 import {PreferenceDataInterface, ThemeColorInterface} from "./typescripts/publicInterface";
 
@@ -104,7 +104,7 @@ class App extends React.Component {
         // 未加载图片前随机设置颜色主题
         if (this.state.themeColor.themeColor === "") {
             this.setState({
-                themeColor: setColorTheme()
+                themeColor: setThemeColor()
             })
         }
 

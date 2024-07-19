@@ -1,4 +1,9 @@
-import {colorRegExp, darkThemeArray, defaultPreferenceData, lightThemeArray} from "./publicConstants"
+import {
+    colorRegExp,
+    darkColors,
+    defaultPreferenceData,
+    lightColors,
+} from "./publicConstants"
 import "jquery-color"
 import {PreferenceDataInterface, ThemeColorInterface} from "./publicInterface";
 
@@ -163,32 +168,31 @@ export function getWeatherIcon(weatherInfo: string) {
 }
 
 // 请求unsplash图片前随机显示多彩颜色主题
-export function setColorTheme() {
+export function setThemeColor() {
     let currentHour = parseInt(getTimeDetails(new Date()).hour);
-    let themeArray = lightThemeArray;
+    let lightRandomNum = Math.floor(Math.random() * lightColors.length);
+    let darkRandomNum = Math.floor(Math.random() * darkColors.length);
+
+    let themeColor: ThemeColorInterface = {
+        "themeColor": lightColors[lightRandomNum],
+        "componentBackgroundColor": darkColors[darkRandomNum],
+        "componentFontColor": getFontColor(darkColors[darkRandomNum])
+    };
     if (currentHour > 18 || currentHour < 6) {  // 夜间显示深色背景
-        themeArray = darkThemeArray;
+        themeColor = {
+            "themeColor": darkColors[lightRandomNum],
+            "componentBackgroundColor": lightColors[darkRandomNum],
+            "componentFontColor": getFontColor(lightColors[darkRandomNum])
+        };
     }
 
-    // 确保 themeArray 是有效的数组
-    if (!themeArray || !Array.isArray(themeArray) || themeArray.length === 0) {
-        throw new Error("Invalid themeArray.");
-    }
-
-    let randomNum = Math.floor(Math.random() * themeArray.length);
     let body = document.getElementsByTagName("body")[0];
     if (body) {
-        body.style.backgroundColor = themeArray[randomNum].bodyBackgroundColor;    // 设置body背景颜色
+        body.style.backgroundColor = themeColor.themeColor;    // 设置body背景颜色
     } else {
         console.error("Unable to find the <body> element.");
     }
-
-    let returnValue: ThemeColorInterface = {
-        "themeColor": themeArray[randomNum].bodyBackgroundColor,
-        "componentBackgroundColor": themeArray[randomNum].componentBackgroundColor,
-        "componentFontColor": getFontColor(themeArray[randomNum].componentBackgroundColor),
-    }
-    return returnValue;  // 返回各组件背景颜色
+    return themeColor;
 }
 
 // 根据图片背景颜色获取元素反色效果
