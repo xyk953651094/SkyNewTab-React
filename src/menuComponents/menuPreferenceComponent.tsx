@@ -497,12 +497,16 @@ class MenuPreferenceComponent extends React.Component {
                 <Card title={"偏好设置"} size={"small"}
                       extra={<SettingOutlined style={{color: this.props.fontColor}}/>}
                       style={{border: "1px solid " + this.props.fontColor}}
-                      headStyle={{
-                          backgroundColor: this.props.backgroundColor,
-                          color: this.props.fontColor,
-                          borderBottom: "2px solid " + this.props.fontColor
+                      styles={{
+                          header: {
+                              backgroundColor: this.props.backgroundColor,
+                              color: this.props.fontColor,
+                              borderBottom: "2px solid " + this.props.fontColor
+                          },
+                          body: {
+                              backgroundColor: this.props.backgroundColor
+                          }
                       }}
-                      bodyStyle={{backgroundColor: this.props.backgroundColor}}
                 >
                     <Form colon={false} initialValues={this.state.preferenceData} disabled={this.state.formDisabled}>
                         <Form.Item name={"searchEngine"} label={"搜索引擎"} style={{display: ["iPhone", "Android"].indexOf(device) === -1 ? "block" : "none"}}>
