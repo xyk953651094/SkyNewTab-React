@@ -21,7 +21,7 @@ import {
     getImageHistoryStorage,
     getPreferenceDataStorage,
     getReverseColor, resetCheckboxColor, resetRadioColor, resetSwitchColor,
-    setColorTheme
+    setThemeColor
 } from "./typescripts/publicFunctions";
 import {PreferenceDataInterface, ThemeColorInterface} from "./typescripts/publicInterface";
 
@@ -104,7 +104,7 @@ class App extends React.Component {
         // 未加载图片前随机设置颜色主题
         if (this.state.themeColor.themeColor === "") {
             this.setState({
-                themeColor: setColorTheme()
+                themeColor: setThemeColor()
             })
         }
 
@@ -115,7 +115,7 @@ class App extends React.Component {
             notification.open({
                 icon: null,
                 message: "已更新至版本 V" + currentVersion,
-                description: "详细内容请前往 GitHub 或 GitLab 主页查看",
+                description: "详细内容请前往菜单栏更新日志查看",
                 placement: "bottomLeft",
                 duration: 5,
                 closeIcon: false
@@ -126,7 +126,7 @@ class App extends React.Component {
                 notification.open({
                     icon: null,
                     message: "支持作者",
-                    description: "如果喜欢这款插件，请考虑捐助或五星好评",
+                    description: "如果喜欢这款插件，请考虑五星好评",
                     placement: "bottomLeft",
                     duration: 5,
                     closeIcon: false

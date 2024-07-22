@@ -29,12 +29,16 @@ class MenuInfoComponent extends React.Component {
             <Card title={"产品信息"} size={"small"}
                   extra={<InfoCircleOutlined style={{color: this.props.fontColor}}/>}
                   style={{border: "1px solid " + this.props.fontColor}}
-                  headStyle={{
-                      backgroundColor: this.props.backgroundColor,
-                      color: this.props.fontColor,
-                      borderBottom: "2px solid " + this.props.fontColor
+                  styles={{
+                      header: {
+                          backgroundColor: this.props.backgroundColor,
+                          color: this.props.fontColor,
+                          borderBottom: "2px solid " + this.props.fontColor
+                      },
+                      body: {
+                          backgroundColor: this.props.backgroundColor
+                      }
                   }}
-                  bodyStyle={{backgroundColor: this.props.backgroundColor}}
             >
                 <Row gutter={[0, 8]}>
                     <Col span="12">
