@@ -149,125 +149,121 @@ class App extends React.Component {
         }
 
         // 修改各类弹窗样式
-        $("body").bind("DOMNodeInserted", () => {
-            // 通用
-            $(".ant-list-header, .ant-list-item").css("borderBlockEndColor", this.state.themeColor.componentFontColor);
-            $(".ant-list-header, .ant-list-item, .ant-list-footer").css("padding", "6px 0");
-            $(".ant-list-item-meta-title").css("color", this.state.themeColor.componentFontColor);
-            $(".ant-list-item-meta-description").css("color", this.state.themeColor.componentFontColor);
-            $(".ant-list-item-action").css("marginInlineStart", "0");
-            $(".ant-empty-description").css("color", this.state.themeColor.componentFontColor);
-            $("div.ant-typography").css("margin-bottom", "0");
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                // 插入节点时
+                if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+                    // 通用
+                    $(".ant-list-header, .ant-list-item").css("borderBlockEndColor", this.state.themeColor.componentFontColor);
+                    $(".ant-list-header, .ant-list-item, .ant-list-footer").css("padding", "6px 0");
+                    $(".ant-list-item-meta-title").css("color", this.state.themeColor.componentFontColor);
+                    $(".ant-list-item-meta-description").css("color", this.state.themeColor.componentFontColor);
+                    $(".ant-list-item-action").css("marginInlineStart", "0");
+                    $(".ant-empty-description").css("color", this.state.themeColor.componentFontColor);
+                    $("div.ant-typography").css("margin-bottom", "0");
 
-            // popover
-            let popoverEle = $(".ant-popover");
-            if (popoverEle.length && popoverEle.length > 0) {
-                $(".ant-popover-title").css("color", this.state.themeColor.componentFontColor);
-                $(".ant-popover-inner-content").css("color", this.state.themeColor.componentFontColor);
-                $(".ant-switch-inner-checked").css("color", getFontColor(this.state.themeColor.themeColor));
-                $(".ant-form-item-extra").css("color", this.state.themeColor.componentFontColor);
+                    // popover
+                    let popoverEle = $(".ant-popover");
+                    if (popoverEle.length && popoverEle.length > 0) {
+                        $(".ant-popover-title").css("color", this.state.themeColor.componentFontColor);
+                        $(".ant-popover-inner-content").css("color", this.state.themeColor.componentFontColor);
+                        $(".ant-switch-inner-checked").css("color", getFontColor(this.state.themeColor.themeColor));
+                        $(".ant-form-item-extra").css("color", this.state.themeColor.componentFontColor);
 
-                let dailyNotificationStorage = localStorage.getItem("dailyNotification");
-                if (dailyNotificationStorage) {
-                    resetSwitchColor("#dailyNotificationSwitch", JSON.parse(dailyNotificationStorage), this.state.themeColor.themeColor);
+                        let dailyNotificationStorage = localStorage.getItem("dailyNotification");
+                        if (dailyNotificationStorage) {
+                            resetSwitchColor("#dailyNotificationSwitch", JSON.parse(dailyNotificationStorage), this.state.themeColor.themeColor);
+                        }
+                        let todoNotificationStorage = localStorage.getItem("todoNotification");
+                        if (todoNotificationStorage) {
+                            resetSwitchColor("#todoNotificationSwitch", JSON.parse(todoNotificationStorage), this.state.themeColor.themeColor);
+                        }
+                        let focusModeStorage = localStorage.getItem("focusMode");
+                        if (focusModeStorage) {
+                            resetSwitchColor("#focusModeSwitch", JSON.parse(focusModeStorage), this.state.themeColor.themeColor);
+                        }
+                    }
+
+                    // toolTip
+                    let toolTipEle = $(".ant-tooltip");
+                    if (toolTipEle.length && toolTipEle.length > 0) {
+                        $(".ant-tooltip-inner").css("color", this.state.themeColor.componentFontColor);
+                    }
+
+                    // message
+                    let messageEle = $(".ant-message");
+                    if (messageEle.length && messageEle.length > 0) {
+                        $(".ant-message-notice-content").css({
+                            "backgroundColor": this.state.themeColor.componentBackgroundColor,
+                            "color": this.state.themeColor.componentFontColor
+                        });
+                        $(".ant-message-custom-content > .anticon").css("color", this.state.themeColor.componentFontColor);
+                    }
+
+                    // notification
+                    let notificationEle = $(".ant-notification");
+                    if (notificationEle.length && notificationEle.length > 0) {
+                        $(".ant-notification-notice").css({"backgroundColor": this.state.themeColor.componentBackgroundColor,});
+                        $(".ant-notification-notice-icon").css("color", this.state.themeColor.componentFontColor);
+                        $(".ant-notification-notice-message").css("color", this.state.themeColor.componentFontColor);
+                        $(".ant-notification-notice-description").css("color", this.state.themeColor.componentFontColor);
+                    }
+
+                    // drawer
+                    let drawerEle = $(".ant-drawer");
+                    if (drawerEle.length && drawerEle.length > 0) {
+                        $(".ant-drawer-close").css("color", this.state.themeColor.componentFontColor);
+                        $(".ant-drawer-title").css("color", this.state.themeColor.componentFontColor);
+                        $(".ant-form-item-label > label").css("color", this.state.themeColor.componentFontColor);
+                        $(".ant-form-item-extra").css("color", this.state.themeColor.componentFontColor);
+                        $(".ant-radio-wrapper").children(":last-child").css("color", this.state.themeColor.componentFontColor);
+                        $(".ant-checkbox-wrapper").children(":last-child").css("color", this.state.themeColor.componentFontColor);
+                        $(".ant-switch-inner-checked").css("color", getFontColor(this.state.themeColor.themeColor));
+                        $(".ant-collapse").css("backgroundColor", this.state.themeColor.componentBackgroundColor);
+                        $(".ant-collapse-header").css("color", this.state.themeColor.componentFontColor);
+
+                        // preferenceImageComponent
+                        resetRadioColor(this.state.preferenceData.dynamicEffect, ["all", "translate", "rotate", "close"], this.state.themeColor.themeColor);
+                        resetRadioColor(this.state.preferenceData.imageQuality, ["full", "regular"], this.state.themeColor.themeColor);
+                        resetCheckboxColor(this.state.preferenceData.imageTopics, imageTopics, this.state.themeColor.themeColor);
+                        resetSwitchColor("#nightModeSwitch", this.state.preferenceData.nightMode, this.state.themeColor.themeColor);
+                        resetSwitchColor("#noImageModeSwitch", this.state.preferenceData.noImageMode, this.state.themeColor.themeColor);
+
+                        // preferenceFunctionComponent
+                        resetRadioColor(this.state.preferenceData.searchEngine, ["bing", "google"], this.state.themeColor.themeColor);
+                        resetRadioColor(this.state.preferenceData.buttonShape, ["round", "default"], this.state.themeColor.themeColor);
+                        resetSwitchColor("#simpleModeSwitch", this.state.preferenceData.simpleMode, this.state.themeColor.themeColor);
+                    }
+
+                    // modal
+                    let modalEle = $(".ant-modal");
+                    if (modalEle.length && modalEle.length > 0) {
+                        $(".ant-modal-content").css("backgroundColor", this.state.themeColor.componentBackgroundColor);
+                        $(".ant-modal-title").css({
+                            "backgroundColor": this.state.themeColor.componentBackgroundColor,
+                            "color": this.state.themeColor.componentFontColor
+                        });
+                        $(".ant-form-item-label > label").css("color", this.state.themeColor.componentFontColor);
+                        $(".ant-modal-footer > .ant-btn").css("color", this.state.themeColor.componentFontColor);
+                        if (this.state.preferenceData.buttonShape === "round") {
+                            $(".ant-modal-footer > .ant-btn").removeClass("ant-btn-default ant-btn-primary").addClass("ant-btn-round ant-btn-text");
+                        } else {
+                            $(".ant-modal-footer > .ant-btn").removeClass("ant-btn-round ant-btn-default ant-btn-primary").addClass("ant-btn-text");
+                        }
+
+                        $(".ant-modal-footer > .ant-btn").on("mouseover", (e: any) => {
+                            e.currentTarget.style.backgroundColor = this.state.themeColor.themeColor;
+                            e.currentTarget.style.color = getFontColor(this.state.themeColor.themeColor);
+                        });
+                        $(".ant-modal-footer > .ant-btn").on("mouseout", (e: any) => {
+                            e.currentTarget.style.backgroundColor = "transparent";
+                            e.currentTarget.style.color = this.state.themeColor.componentFontColor;
+                        });
+                    }
                 }
-                let todoNotificationStorage = localStorage.getItem("todoNotification");
-                if (todoNotificationStorage) {
-                    resetSwitchColor("#todoNotificationSwitch", JSON.parse(todoNotificationStorage), this.state.themeColor.themeColor);
-                }
-                let focusModeStorage = localStorage.getItem("focusMode");
-                if (focusModeStorage) {
-                    resetSwitchColor("#focusModeSwitch", JSON.parse(focusModeStorage), this.state.themeColor.themeColor);
-                }
-            }
-
-            // toolTip
-            let toolTipEle = $(".ant-tooltip");
-            if (toolTipEle.length && toolTipEle.length > 0) {
-                $(".ant-tooltip-inner").css("color", this.state.themeColor.componentFontColor);
-            }
-
-            // message
-            let messageEle = $(".ant-message");
-            if (messageEle.length && messageEle.length > 0) {
-                $(".ant-message-notice-content").css({
-                    "backgroundColor": this.state.themeColor.componentBackgroundColor,
-                    "color": this.state.themeColor.componentFontColor
-                });
-                $(".ant-message-custom-content > .anticon").css("color", this.state.themeColor.componentFontColor);
-            }
-
-            // notification
-            let notificationEle = $(".ant-notification");
-            if (notificationEle.length && notificationEle.length > 0) {
-                $(".ant-notification-notice").css({"backgroundColor": this.state.themeColor.componentBackgroundColor,});
-                $(".ant-notification-notice-icon").css("color", this.state.themeColor.componentFontColor);
-                $(".ant-notification-notice-message").css("color", this.state.themeColor.componentFontColor);
-                $(".ant-notification-notice-description").css("color", this.state.themeColor.componentFontColor);
-            }
-
-            // drawer
-            let drawerEle = $(".ant-drawer");
-            if (drawerEle.length && drawerEle.length > 0) {
-                $(".ant-drawer-close").css("color", this.state.themeColor.componentFontColor);
-                $(".ant-drawer-title").css("color", this.state.themeColor.componentFontColor);
-                $(".ant-form-item-label > label").css("color", this.state.themeColor.componentFontColor);
-                $(".ant-form-item-extra").css("color", this.state.themeColor.componentFontColor);
-                $(".ant-radio-wrapper").children(":last-child").css("color", this.state.themeColor.componentFontColor);
-                $(".ant-checkbox-wrapper").children(":last-child").css("color", this.state.themeColor.componentFontColor);
-                $(".ant-switch-inner-checked").css("color", getFontColor(this.state.themeColor.themeColor));
-                $(".ant-collapse").css("backgroundColor", this.state.themeColor.componentBackgroundColor);
-                $(".ant-collapse-header").css("color", this.state.themeColor.componentFontColor);
-
-                // preferenceImageComponent
-                resetRadioColor(this.state.preferenceData.dynamicEffect, ["all", "translate", "rotate", "close"], this.state.themeColor.themeColor);
-                resetRadioColor(this.state.preferenceData.imageQuality, ["full", "regular"], this.state.themeColor.themeColor);
-                resetCheckboxColor(this.state.preferenceData.imageTopics, imageTopics, this.state.themeColor.themeColor);
-                resetSwitchColor("#nightModeSwitch", this.state.preferenceData.nightMode, this.state.themeColor.themeColor);
-                resetSwitchColor("#noImageModeSwitch", this.state.preferenceData.noImageMode, this.state.themeColor.themeColor);
-
-                // preferenceFunctionComponent
-                resetRadioColor(this.state.preferenceData.searchEngine, ["bing", "google"], this.state.themeColor.themeColor);
-                resetRadioColor(this.state.preferenceData.buttonShape, ["round", "default"], this.state.themeColor.themeColor);
-                resetSwitchColor("#simpleModeSwitch", this.state.preferenceData.simpleMode, this.state.themeColor.themeColor);
-            }
-
-            // modal
-            let modalEle = $(".ant-modal");
-            if (modalEle.length && modalEle.length > 0) {
-                $(".ant-modal-content").css("backgroundColor", this.state.themeColor.componentBackgroundColor);
-                $(".ant-modal-title").css({
-                    "backgroundColor": this.state.themeColor.componentBackgroundColor,
-                    "color": this.state.themeColor.componentFontColor
-                });
-                $(".ant-form-item-label > label").css("color", this.state.themeColor.componentFontColor);
-                $(".ant-modal-footer > .ant-btn").css("color", this.state.themeColor.componentFontColor);
-                if (this.state.preferenceData.buttonShape === "round") {
-                    $(".ant-modal-footer > .ant-btn").removeClass("ant-btn-default ant-btn-primary").addClass("ant-btn-round ant-btn-text");
-                } else {
-                    $(".ant-modal-footer > .ant-btn").removeClass("ant-btn-round ant-btn-default ant-btn-primary").addClass("ant-btn-text");
-                }
-
-                $(".ant-modal-footer > .ant-btn").on("mouseover", (e: any) => {
-                    e.currentTarget.style.backgroundColor = this.state.themeColor.themeColor;
-                    e.currentTarget.style.color = getFontColor(this.state.themeColor.themeColor);
-                });
-                $(".ant-modal-footer > .ant-btn").on("mouseout", (e: any) => {
-                    e.currentTarget.style.backgroundColor = "transparent";
-                    e.currentTarget.style.color = this.state.themeColor.componentFontColor;
-                });
-            }
+            });
         });
-
-        // const observer = new MutationObserver((mutations) => {
-        //     mutations.forEach((mutation) => {
-        //         // 插入节点时
-        //         if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
-        //
-        //         }
-        //     });
-        // });
-        // observer.observe(document.body, {childList: true});
+        observer.observe(document.body, {childList: true});
     }
 
     render() {
