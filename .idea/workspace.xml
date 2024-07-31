@@ -4,13 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="提升使用体验">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="修复已知问题">
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/extensionFiles/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/extensionFiles/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/menuComponents/menuHeaderComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/menuComponents/menuHeaderComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/popupComponents/popupFooterComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/popupComponents/popupFooterComponent.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -644,7 +639,7 @@
       <workItem from="1721637044935" duration="1287000" />
       <workItem from="1722066915663" duration="49000" />
       <workItem from="1722419227807" duration="695000" />
-      <workItem from="1722420265205" duration="1633000" />
+      <workItem from="1722420265205" duration="2073000" />
     </task>
     <task id="LOCAL-00001" summary="优化抽屉蒙版的显示效果&#10;优化代码质量">
       <created>1683952184207</created>
@@ -764,14 +759,6 @@
       <option name="presentableId" value="LOCAL-00017" />
       <option name="project" value="LOCAL" />
       <updated>1687402693401</updated>
-    </task>
-    <task id="LOCAL-00218" summary="倒数日待办事项新增提醒开关">
-      <option name="closed" value="true" />
-      <created>1713583851246</created>
-      <option name="number" value="00218" />
-      <option name="presentableId" value="LOCAL-00218" />
-      <option name="project" value="LOCAL" />
-      <updated>1713583851246</updated>
     </task>
     <task id="LOCAL-00219" summary="倒数日待办事项新增提醒开关">
       <option name="closed" value="true" />
@@ -1021,7 +1008,15 @@
       <option name="project" value="LOCAL" />
       <updated>1721534728202</updated>
     </task>
-    <option name="localTasksCounter" value="250" />
+    <task id="LOCAL-00250" summary="修复已知问题">
+      <option name="closed" value="true" />
+      <created>1722431740760</created>
+      <option name="number" value="00250" />
+      <option name="presentableId" value="LOCAL-00250" />
+      <option name="project" value="LOCAL" />
+      <updated>1722431740760</updated>
+    </task>
+    <option name="localTasksCounter" value="251" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -1072,11 +1067,11 @@
     <MESSAGE value="修复极简模式已知问题" />
     <MESSAGE value="移除历史上的今天按钮，移除显示快捷链接url，弹窗右上角新增图标" />
     <MESSAGE value="优化代码质量" />
-    <MESSAGE value="修复已知问题" />
     <MESSAGE value="开启纯色模式时自动关闭降低亮度选项" />
     <MESSAGE value="完善纯色模式" />
     <MESSAGE value="提升使用体验" />
-    <option name="LAST_COMMIT_MESSAGE" value="提升使用体验" />
+    <MESSAGE value="修复已知问题" />
+    <option name="LAST_COMMIT_MESSAGE" value="修复已知问题" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
