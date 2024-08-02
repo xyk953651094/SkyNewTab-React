@@ -390,35 +390,69 @@ export function fixPreferenceData(preferenceData: PreferenceDataInterface) {
 export function getExtensionStorage(key: string, defaultValue: any = null) {
     try {
         // if (["Chrome", "Edge"].indexOf(browserType) !== -1) {
-        //     chrome.storage.local.get({key}).then((result) => {
+        //     chrome.storage.sync.get({key}).then((result) => {
         //         return result;
         //     });
         // }
         // else if (["Firefox", "Safari"].indexOf(browserType) !== -1) {
-        //     browser.storage.local.get({key}).then((result) => {
+        //     browser.storage.sync.get({key}).then((result) => {
         //         return result;
         //     });
         // }
 
-        return localStorage.getItem(key);
+        let tempData = localStorage.getItem(key);
+        if (tempData) {
+            return JSON.parse(tempData);
+        }
+        return defaultValue;
     } catch (error) {
-        console.error("Error reading from localStorage:", error);
+        console.error("Error reading from storage:", error);
         return defaultValue;
     }
 }
 
-export function setExtensionStorage(key: string, value: string) {
+export function setExtensionStorage(key: string, value: any) {
     try {
         // if (["Chrome", "Edge"].indexOf(browserType) !== -1) {
-        //     chrome.storage.local.set({[key]: value});
+        //     chrome.storage.sync.set({[key]: value});
         // }
         // else if (["Firefox", "Safari"].indexOf(browserType) !== -1) {
-        //     browser.storage.local.set({[key]: value});
+        //     browser.storage.sync.set({[key]: value});
         // }
 
-        localStorage.setItem(key, value);
+        localStorage.setItem(key, JSON.stringify(value));
     } catch (error) {
-        console.error("Error writing to localStorage:", error);
+        console.error("Error writing to storage:", error);
+    }
+}
+
+export function removeExtensionStorage(key: string) {
+    try {
+        // if (["Chrome", "Edge"].indexOf(browserType) !== -1) {
+        //     chrome.storage.sync.remove(key);
+        // }
+        // else if (["Firefox", "Safari"].indexOf(browserType) !== -1) {
+        //     browser.storage.sync.remove(key);
+        // }
+
+        localStorage.removeItem(key);
+    } catch (error) {
+        console.error("Error removing from storage:", error);
+    }
+}
+
+export function clearExtensionStorage() {
+    try {
+        // if (["Chrome", "Edge"].indexOf(browserType) !== -1) {
+        //     chrome.storage.sync.clear();
+        // }
+        // else if (["Firefox", "Safari"].indexOf(browserType) !== -1) {
+        //     browser.storage.sync.clear();
+        // }
+
+        localStorage.clear();
+    } catch (error) {
+        console.error("Error clearing storage:", error);
     }
 }
 

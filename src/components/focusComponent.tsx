@@ -82,7 +82,7 @@ class FocusComponent extends React.Component {
         let tempFocusEndTimeStamp: number = -1;
         if (checked) {
             if (this.state.filterList.length === 0) {
-                message.warning("请添加黑名单");
+                message.warning("请先添加名单");
             }
 
             if (this.state.focusPeriod === "manual") {
@@ -388,7 +388,7 @@ class FocusComponent extends React.Component {
                                 onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
                                 onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}
                                 style={{color: this.state.fontColor}} onClick={this.showAddModalBtnOnClick.bind(this)}>
-                            {"添加黑名单"}
+                            {"添加名单"}
                         </Button>
                         <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<DeleteOutlined/>}
                                 onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
@@ -476,7 +476,7 @@ class FocusComponent extends React.Component {
                     <Row align={"middle"}>
                         <Col span={12}>
                             <Text style={{color: this.state.fontColor}}>
-                                {"添加黑名单 " + this.state.filterList.length + " / " + focusMaxSize}
+                                {"添加名单 " + this.state.filterList.length + " / " + focusMaxSize}
                             </Text>
                         </Col>
                         <Col span={12} style={{textAlign: "right"}}>
@@ -492,7 +492,7 @@ class FocusComponent extends React.Component {
                        styles={{mask: {backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)"}}}
                 >
                     <Form>
-                        <Form.Item label={"网站域名"} name={"focusInput"} extra={"开启专注模式后，访问黑名单中的域名时将自动跳转至本插件"}>
+                        <Form.Item label={"网站域名"} name={"focusInput"} extra={"开启专注模式后，访问名单中的域名时将自动跳转至本插件"}>
                             <Input placeholder="example.com" value={this.state.inputValue} onChange={this.inputOnChange.bind(this)}
                                    maxLength={30} showCount allowClear/>
                         </Form.Item>
