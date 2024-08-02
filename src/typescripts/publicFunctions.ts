@@ -387,17 +387,35 @@ export function fixPreferenceData(preferenceData: PreferenceDataInterface) {
 }
 
 // 封装对 localStorage 的操作，增加异常处理
-export function getLocalStorageItem(key: string) {
+export function getExtensionStorage(key: string, defaultValue: any = null) {
     try {
+        // if (["Chrome", "Edge"].indexOf(browserType) !== -1) {
+        //     chrome.storage.local.get({key}).then((result) => {
+        //         return result;
+        //     });
+        // }
+        // else if (["Firefox", "Safari"].indexOf(browserType) !== -1) {
+        //     browser.storage.local.get({key}).then((result) => {
+        //         return result;
+        //     });
+        // }
+
         return localStorage.getItem(key);
     } catch (error) {
         console.error("Error reading from localStorage:", error);
-        return null;
+        return defaultValue;
     }
 }
 
-export function setLocalStorageItem(key: string, value: string) {
+export function setExtensionStorage(key: string, value: string) {
     try {
+        // if (["Chrome", "Edge"].indexOf(browserType) !== -1) {
+        //     chrome.storage.local.set({[key]: value});
+        // }
+        // else if (["Firefox", "Safari"].indexOf(browserType) !== -1) {
+        //     browser.storage.local.set({[key]: value});
+        // }
+
         localStorage.setItem(key, value);
     } catch (error) {
         console.error("Error writing to localStorage:", error);
