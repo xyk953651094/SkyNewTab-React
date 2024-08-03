@@ -17,69 +17,68 @@ function getBrowserType() {
     }
     return "Other";
 }
-
-function forbiddenWeb(url) {
-    if (["Chrome", "Edge"].indexOf(browserType) !== -1) {
-        chrome.storage.local.get(["focusMode", "filterList", "focusEndTimeStamp"]).then((result) => {
-            let focusMode = result.focusMode;
-            let filterList = result.filterList;
-            let focusEndTimeStamp = result.focusEndTimeStamp;
-            if (focusMode === true && filterList !== null && filterList.length > 0) {  // 已开启专注模式且有过滤列表
-                if (focusEndTimeStamp === 0 || (focusEndTimeStamp > 0 && Date.now() < focusEndTimeStamp)) {  // 时间在专注时段内
-                    let isInBlackList = false;
-                    for (let i = 0; i < filterList.length; i++) {
-                        if (url.indexOf(filterList[i].domain) !== -1) {
-                            isInBlackList = true;
-                        }
-                    }
-
-                    if (isInBlackList === true) {
-                        chrome.tabs.update({url: browserType + "://newtab"});
-                    }
-                }
-            }
-        });
-    }
-    else if (["Firefox", "Safari"].indexOf(browserType) !== -1) {
-        browser.storage.local.get(["focusMode", "filterList", "focusEndTimeStamp"]).then((result) => {
-            let focusMode = result.focusMode;
-            let filterList = result.filterList;
-            let focusEndTimeStamp = result.focusEndTimeStamp;
-            if (focusMode === true && filterList !== null && filterList.length > 0) {  // 已开启专注模式且有过滤列表
-                if (focusEndTimeStamp === 0 || (focusEndTimeStamp > 0 && Date.now() < focusEndTimeStamp)) {  // 时间在专注时段内
-                    let isInBlackList = false;
-                    for (let i = 0; i < filterList.length; i++) {
-                        if (url.indexOf(filterList[i].domain) !== -1) {
-                            isInBlackList = true;
-                        }
-                    }
-
-                    if (isInBlackList === true) {
-                        browser.tabs.update({url: "./mainPage.html"});
-                    }
-                }
-            }
-        });
-    }
-}
-
 const browserType = getBrowserType();
-if (["Chrome", "Edge"].indexOf(browserType) !== -1) {
-    chrome.tabs.onUpdated.addListener(function (tabID, changeInfo, tab) {
-        if(changeInfo.url) {
-            forbiddenWeb(changeInfo.url);
-        }
+
+function checkAndRedirect(storageAPI, url, tabUpdateURL) {
+    return new Promise((resolve, reject) => {
+        storageAPI.get(["focusMode", "filterList", "focusEndTimeStamp"]).then((result) => {
+            const { focusMode, filterList, focusEndTimeStamp } = result;
+            if (focusMode === true && Array.isArray(filterList) && filterList.length > 0) {
+                if (focusEndTimeStamp === 0 || (focusEndTimeStamp > 0 && Date.now() < focusEndTimeStamp)) {
+                    if (isUrlInBlacklist(url, filterList)) {
+                        storageAPI.set({ lastBlockedUrl: url }).catch(reject);
+                        chrome.tabs.update(tabUpdateURL);
+                        resolve();
+                    }
+                }
+            }
+            resolve();
+        }).catch(reject);
     });
 }
-else if (["Firefox", "Safari"].indexOf(browserType) !== -1) {
-    browser.tabs.onUpdated.addListener(
-        function (tabID, changeInfo, tab) {
-            if(changeInfo.url) {
-                forbiddenWeb(changeInfo.url);
-            }
+
+function isUrlInBlacklist(url, filterList) {
+    for (const item of filterList) {
+        if (url.indexOf(item.domain) !== -1) {
+            return true;
         }
-    )
+    }
+    return false;
 }
-else {
-    console.log("该功能不支持当前的浏览器，请使用 Chrome、Edge、Firefox、Safari")
+
+function forbiddenWeb(url) {
+    if (["Chrome", "Edge"].includes(browserType)) {
+        checkAndRedirect(chrome.storage.local, url, { url: browserType + "://newtab" })
+            .catch((err) => console.error("Error processing request for Chrome/Edge:", err));
+    } else if (["Firefox", "Safari"].includes(browserType)) {
+        checkAndRedirect(browser.storage.local, url, { url: "./mainPage.html" })
+            .catch((err) => console.error("Error processing request for Firefox/Safari:", err));
+    }
 }
+
+// 统一的事件监听器回调函数
+function tabUpdatedListener(tabID, changeInfo, tab) {
+    if (changeInfo.url) {
+        try {
+            // 对URL进行简单的格式验证
+            const validUrl = new URL(changeInfo.url);
+            forbiddenWeb(validUrl.href);
+        } catch (error) {
+            console.error("处理URL时发生错误：", error);
+        }
+    }
+}
+
+// 根据浏览器类型选择正确的API来附加监听器
+function attachTabListener() {
+    if (["Chrome", "Edge"].includes(browserType)) {
+        chrome.tabs.onUpdated.addListener(tabUpdatedListener);
+    } else if (["Firefox", "Safari"].includes(browserType)) {
+        browser.tabs.onUpdated.addListener(tabUpdatedListener);
+    } else {
+        console.log("该功能不支持当前的浏览器，请使用 Chrome、Edge、Firefox、Safari");
+    }
+}
+
+// 调用函数以附加监听器
+attachTabListener();
