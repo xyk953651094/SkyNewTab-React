@@ -1,21 +1,21 @@
 /* global chrome */  /* 加上这行才能使用 chrome */
 /* global browser */
 function getBrowserType() {
-    let userAgent = navigator.userAgent;
-    let browser='Other';
-    if (userAgent.indexOf('Chrome') !== -1 && userAgent.indexOf('Safari') !== -1){
-        browser="Chrome";
+    const userAgent = navigator.userAgent;
+
+    const browserDetection = {
+        "Chrome": userAgent.includes("Chrome") && userAgent.includes("Safari") && !userAgent.includes("Edg"),
+        "Edge": userAgent.includes("Edg"),
+        "Firefox": userAgent.includes("Firefox"),
+        "Safari": !userAgent.includes("Chrome") && userAgent.includes("Safari"),
+    };
+
+    for (const browser in browserDetection) {
+        if (browserDetection[browser]) {
+            return browser;
+        }
     }
-    else if (userAgent.indexOf('Edge') !== -1){
-        browser="Edge";
-    }
-    else if (userAgent.indexOf('Firefox') !== -1){
-        browser = "Firefox";
-    }
-    else if (userAgent.indexOf('Safari') !== -1 && userAgent.indexOf('Chrome') === -1){
-        browser="Safari";
-    }
-    return browser;
+    return "Other";
 }
 
 function forbiddenWeb(url) {

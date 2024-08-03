@@ -318,10 +318,10 @@ export function getBrowserType() {
     }
 
     const browserDetection: BrowserDetectionInterface = {
-        "Chrome": userAgent.includes("Chrome") && !userAgent.includes("Safari"),
-        "Edge": userAgent.includes("Edge"),
+        "Chrome": userAgent.includes("Chrome") && userAgent.includes("Safari") && !userAgent.includes("Edg"),
+        "Edge": userAgent.includes("Edg"),
         "Firefox": userAgent.includes("Firefox"),
-        "Safari": userAgent.includes("Safari") && !userAgent.includes("Chrome"),
+        "Safari": !userAgent.includes("Chrome") && userAgent.includes("Safari"),
     };
 
     for (const browser in browserDetection) {
@@ -389,22 +389,26 @@ export function fixPreferenceData(preferenceData: PreferenceDataInterface) {
 // 封装对 localStorage 的操作，增加异常处理
 export function getExtensionStorage(key: string, defaultValue: any = null) {
     try {
+        let tempStorage;
         // if (["Chrome", "Edge"].indexOf(browserType) !== -1) {
-        //     chrome.storage.sync.get({key}).then((result) => {
-        //         return result;
-        //     });
+        //     tempStorage = chrome.storage.local.get({key});
         // }
         // else if (["Firefox", "Safari"].indexOf(browserType) !== -1) {
-        //     browser.storage.sync.get({key}).then((result) => {
-        //         return result;
-        //     });
+        //     tempStorage = browser.storage.local.get({key});
         // }
+        // return tempStorage;
 
-        let tempData = localStorage.getItem(key);
-        if (tempData) {
-            return JSON.parse(tempData);
+        tempStorage = localStorage.getItem(key);
+        if (tempStorage) {
+            try {
+                return JSON.parse(tempStorage);
+            } catch(error) {
+                return tempStorage;  // 不是 JSON 的纯字符串
+            }
+        } else {
+            localStorage.setItem(key, JSON.stringify(defaultValue));
+            return defaultValue;
         }
-        return defaultValue;
     } catch (error) {
         console.error("Error reading from storage:", error);
         return defaultValue;
@@ -414,10 +418,10 @@ export function getExtensionStorage(key: string, defaultValue: any = null) {
 export function setExtensionStorage(key: string, value: any) {
     try {
         // if (["Chrome", "Edge"].indexOf(browserType) !== -1) {
-        //     chrome.storage.sync.set({[key]: value});
+        //     chrome.storage.local.set({[key]: value});
         // }
         // else if (["Firefox", "Safari"].indexOf(browserType) !== -1) {
-        //     browser.storage.sync.set({[key]: value});
+        //     browser.storage.local.set({[key]: value});
         // }
 
         localStorage.setItem(key, JSON.stringify(value));
@@ -429,10 +433,10 @@ export function setExtensionStorage(key: string, value: any) {
 export function removeExtensionStorage(key: string) {
     try {
         // if (["Chrome", "Edge"].indexOf(browserType) !== -1) {
-        //     chrome.storage.sync.remove(key);
+        //     chrome.storage.local.remove(key);
         // }
         // else if (["Firefox", "Safari"].indexOf(browserType) !== -1) {
-        //     browser.storage.sync.remove(key);
+        //     browser.storage.local.remove(key);
         // }
 
         localStorage.removeItem(key);
@@ -444,10 +448,10 @@ export function removeExtensionStorage(key: string) {
 export function clearExtensionStorage() {
     try {
         // if (["Chrome", "Edge"].indexOf(browserType) !== -1) {
-        //     chrome.storage.sync.clear();
+        //     chrome.storage.local.clear();
         // }
         // else if (["Firefox", "Safari"].indexOf(browserType) !== -1) {
-        //     browser.storage.sync.clear();
+        //     browser.storage.local.clear();
         // }
 
         localStorage.clear();
