@@ -201,7 +201,7 @@ class AuthorComponent extends React.Component {
         return (
             <Popover title={popoverTitle} content={popoverContent} placement={"topRight"}
                      color={this.state.backgroundColor}
-                     overlayStyle={{minWidth: "550px"}}>
+                     overlayStyle={{minWidth: "600px"}}>
                 <Button shape={this.props.preferenceData.buttonShape} icon={<CameraOutlined/>} size={"large"}
                         id={"authorBtn"}
                         className={"componentTheme zIndexHigh"}

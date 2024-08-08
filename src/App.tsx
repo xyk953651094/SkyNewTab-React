@@ -16,11 +16,11 @@ import HistoryComponent from "./components/historyComponent";
 import {Col, Layout, notification, Row, Space } from "antd";
 import "./stylesheets/publicStyles.scss"
 import {
-    changeThemeColor,
+    changeThemeColor, getExtensionStorage,
     getFontColor,
     getImageHistoryStorage,
     getPreferenceDataStorage,
-    getReverseColor, resetCheckboxColor, resetRadioColor, resetSwitchColor,
+    getReverseColor, resetCheckboxColor, resetRadioColor, resetSwitchColor, setExtensionStorage,
     setThemeColor
 } from "./typescripts/publicFunctions";
 import {PreferenceDataInterface, ThemeColorInterface} from "./typescripts/publicInterface";
@@ -109,8 +109,8 @@ class App extends React.Component {
         }
 
         // 版本号提醒
-        let storageVersion = localStorage.getItem("SkyNewTabReactVersion");
         let currentVersion = require('../package.json').version;
+        let storageVersion = getExtensionStorage("SkyNewTabReactVersion", "0.0.0");
         if (storageVersion !== currentVersion) {
             notification.open({
                 icon: null,
@@ -120,7 +120,7 @@ class App extends React.Component {
                 duration: 5,
                 closeIcon: false
             });
-            localStorage.setItem("SkyNewTabReactVersion", currentVersion);
+            setExtensionStorage("SkyNewTabReactVersion", currentVersion);
 
             setTimeout(() => {
                 notification.open({
@@ -170,18 +170,12 @@ class App extends React.Component {
                         $(".ant-switch-inner-checked").css("color", getFontColor(this.state.themeColor.themeColor));
                         $(".ant-form-item-extra").css("color", this.state.themeColor.componentFontColor);
 
-                        let dailyNotificationStorage = localStorage.getItem("dailyNotification");
-                        if (dailyNotificationStorage) {
-                            resetSwitchColor("#dailyNotificationSwitch", JSON.parse(dailyNotificationStorage), this.state.themeColor.themeColor);
-                        }
-                        let todoNotificationStorage = localStorage.getItem("todoNotification");
-                        if (todoNotificationStorage) {
-                            resetSwitchColor("#todoNotificationSwitch", JSON.parse(todoNotificationStorage), this.state.themeColor.themeColor);
-                        }
-                        let focusModeStorage = localStorage.getItem("focusMode");
-                        if (focusModeStorage) {
-                            resetSwitchColor("#focusModeSwitch", JSON.parse(focusModeStorage), this.state.themeColor.themeColor);
-                        }
+                        let dailyNotificationStorage = getExtensionStorage("dailyNotification", false);
+                        let todoNotificationStorage = getExtensionStorage("todoNotification", false);
+                        let focusModeStorage = getExtensionStorage("focusMode", false);
+                        resetSwitchColor("#dailyNotificationSwitch", dailyNotificationStorage, this.state.themeColor.themeColor);
+                        resetSwitchColor("#todoNotificationSwitch", todoNotificationStorage, this.state.themeColor.themeColor);
+                        resetSwitchColor("#focusModeSwitch", focusModeStorage, this.state.themeColor.themeColor);
                     }
 
                     // toolTip

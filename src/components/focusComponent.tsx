@@ -1,10 +1,10 @@
 import React from "react";
 import {Button, Col, Form, Input, List, message, Modal, Popover, Row, Select, Space, Switch, Typography} from "antd";
+import {browserType} from "../typescripts/publicConstants"
 import {
     btnMouseOut,
     btnMouseOver,
     changeThemeColor,
-    getBrowserType,
     getTimeDetails
 } from "../typescripts/publicFunctions";
 import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
@@ -18,7 +18,6 @@ import focusSoundFour from "../assets/focusSounds/泉水水滴.mp3";
 const focusAudio = new Audio();
 const {Text} = Typography;
 const focusMaxSize = 10;
-const browserType = getBrowserType();
 
 type propType = {
     themeColor: ThemeColorInterface,
