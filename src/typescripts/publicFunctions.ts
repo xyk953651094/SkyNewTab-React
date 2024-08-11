@@ -3,6 +3,7 @@ import {
     darkColors,
     defaultPreferenceData,
     lightColors,
+    browserType
 } from "./publicConstants"
 import "jquery-color"
 import {PreferenceDataInterface, ThemeColorInterface} from "./publicInterface";
@@ -387,14 +388,20 @@ export function fixPreferenceData(preferenceData: PreferenceDataInterface) {
 }
 
 // 封装对 localStorage 的操作，增加异常处理
-export function getExtensionStorage(key: string, defaultValue: any) {
+export async function getExtensionStorage(key: string, defaultValue: any) {
     try {
         let tempStorage;
+
+        // 生产环境
         // if (["Chrome", "Edge"].indexOf(browserType) !== -1) {
-        //     tempStorage = chrome.storage.local.get({key});
+        //     await chrome.storage.local.get(key).then((result) => {
+        //         tempStorage = result[key];
+        //     });
         // }
         // else if (["Firefox", "Safari"].indexOf(browserType) !== -1) {
-        //     tempStorage = browser.storage.local.get({key});
+        //     await browser.storage.local.get(key).then((result) => {
+        //         tempStorage = result[key];
+        //     });
         // }
         //
         // if (tempStorage === null || tempStorage === undefined) {
@@ -405,6 +412,7 @@ export function getExtensionStorage(key: string, defaultValue: any) {
         // }
         // return tempStorage;
 
+        // 开发环境
         tempStorage = localStorage.getItem(key);
         if (tempStorage) {
             try {
@@ -426,14 +434,16 @@ export function getExtensionStorage(key: string, defaultValue: any) {
 
 export function setExtensionStorage(key: string, value: any) {
     try {
-        // if (["Chrome", "Edge"].indexOf(browserType) !== -1) {
-        //     chrome.storage.local.set({[key]: value});
-        // }
-        // else if (["Firefox", "Safari"].indexOf(browserType) !== -1) {
-        //     browser.storage.local.set({[key]: value});
-        // }
+        // 生产环境
+        if (["Chrome", "Edge"].indexOf(browserType) !== -1) {
+            chrome.storage.local.set({[key]: value});
+        }
+        else if (["Firefox", "Safari"].indexOf(browserType) !== -1) {
+            browser.storage.local.set({[key]: value});
+        }
 
-        localStorage.setItem(key, JSON.stringify(value));
+        // 开发环境
+        // localStorage.setItem(key, JSON.stringify(value));
     } catch (error) {
         console.error("Error writing to storage:", error);
     }
@@ -441,6 +451,7 @@ export function setExtensionStorage(key: string, value: any) {
 
 export function removeExtensionStorage(key: string) {
     try {
+        // 生产环境
         // if (["Chrome", "Edge"].indexOf(browserType) !== -1) {
         //     chrome.storage.local.remove(key);
         // }
@@ -448,6 +459,7 @@ export function removeExtensionStorage(key: string) {
         //     browser.storage.local.remove(key);
         // }
 
+        // 开发环境
         localStorage.removeItem(key);
     } catch (error) {
         console.error("Error removing from storage:", error);
@@ -456,6 +468,7 @@ export function removeExtensionStorage(key: string) {
 
 export function clearExtensionStorage() {
     try {
+        // 生产环境
         // if (["Chrome", "Edge"].indexOf(browserType) !== -1) {
         //     chrome.storage.local.clear();
         // }
@@ -463,6 +476,7 @@ export function clearExtensionStorage() {
         //     browser.storage.local.clear();
         // }
 
+        // 开发环境
         localStorage.clear();
     } catch (error) {
         console.error("Error clearing storage:", error);

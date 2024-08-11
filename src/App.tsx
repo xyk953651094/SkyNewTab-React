@@ -110,43 +110,44 @@ class App extends React.Component {
 
         // 版本号提醒
         let currentVersion = require('../package.json').version;
-        let storageVersion = getExtensionStorage("SkyNewTabReactVersion", "0.0.0");
-        if (storageVersion !== currentVersion) {
-            notification.open({
-                icon: null,
-                message: "已更新至版本 V" + currentVersion,
-                description: "详细内容请前往菜单栏更新日志查看",
-                placement: "bottomLeft",
-                duration: 5,
-                closeIcon: false
-            });
-            setExtensionStorage("SkyNewTabReactVersion", currentVersion);
-
-            setTimeout(() => {
+        getExtensionStorage("SkyNewTabReactVersion", "0.0.0").then((storageVersion: string) => {
+            if (storageVersion !== currentVersion) {
                 notification.open({
                     icon: null,
-                    message: "支持作者",
-                    description: "如果喜欢这款插件，请考虑五星好评",
+                    message: "已更新至版本 V" + currentVersion,
+                    description: "详细内容请前往菜单栏更新日志查看",
                     placement: "bottomLeft",
                     duration: 5,
                     closeIcon: false
                 });
-            }, 1000);
+                setExtensionStorage("SkyNewTabReactVersion", currentVersion);
 
-            // 额外提醒
-            // if (currentVersion === "3.1.0") {
-            //     setTimeout(() => {
-            //         notification.open({
-            //             icon: null,
-            //             message: "重要通知",
-            //             description: "本次更新修改了偏好设置中的切换间隔，如出现异常请点击重置设置按钮",
-            //             placement: "bottomLeft",
-            //             duration: 10,
-            //             closeIcon: false
-            //         });
-            //     }, 2000);
-            // }
-        }
+                setTimeout(() => {
+                    notification.open({
+                        icon: null,
+                        message: "支持作者",
+                        description: "如果喜欢这款插件，请考虑五星好评",
+                        placement: "bottomLeft",
+                        duration: 5,
+                        closeIcon: false
+                    });
+                }, 1000);
+
+                // 额外提醒
+                // if (currentVersion === "3.1.0") {
+                //     setTimeout(() => {
+                //         notification.open({
+                //             icon: null,
+                //             message: "重要通知",
+                //             description: "本次更新修改了偏好设置中的切换间隔，如出现异常请点击重置设置按钮",
+                //             placement: "bottomLeft",
+                //             duration: 10,
+                //             closeIcon: false
+                //         });
+                //     }, 2000);
+                // }
+            }
+        });
 
         // 修改各类弹窗样式
         const observer = new MutationObserver((mutations) => {
@@ -170,12 +171,15 @@ class App extends React.Component {
                         $(".ant-switch-inner-checked").css("color", getFontColor(this.state.themeColor.themeColor));
                         $(".ant-form-item-extra").css("color", this.state.themeColor.componentFontColor);
 
-                        let dailyNotificationStorage = getExtensionStorage("dailyNotification", false);
-                        let todoNotificationStorage = getExtensionStorage("todoNotification", false);
-                        let focusModeStorage = getExtensionStorage("focusMode", false);
-                        resetSwitchColor("#dailyNotificationSwitch", dailyNotificationStorage, this.state.themeColor.themeColor);
-                        resetSwitchColor("#todoNotificationSwitch", todoNotificationStorage, this.state.themeColor.themeColor);
-                        resetSwitchColor("#focusModeSwitch", focusModeStorage, this.state.themeColor.themeColor);
+                        getExtensionStorage("dailyNotification", false).then((dailyNotificationStorage) => {
+                            resetSwitchColor("#dailyNotificationSwitch", dailyNotificationStorage, this.state.themeColor.themeColor);
+                        });
+                        getExtensionStorage("todoNotification", false).then((todoNotificationStorage) => {
+                            resetSwitchColor("#todoNotificationSwitch", todoNotificationStorage, this.state.themeColor.themeColor);
+                        });
+                        getExtensionStorage("focusMode", false).then((focusModeStorage) => {
+                            resetSwitchColor("#focusModeSwitch", focusModeStorage, this.state.themeColor.themeColor);
+                        });
                     }
 
                     // toolTip
