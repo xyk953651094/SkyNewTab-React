@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="优化代码质量">
+    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="优化存储方式">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/typescripts/publicFunctions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/typescripts/publicFunctions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/extensionFiles/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/extensionFiles/manifest.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,7 +111,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-WS-241.18034.50" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-WS-242.23339.15" />
       </set>
     </attachedChunks>
   </component>
@@ -649,7 +649,9 @@
       <workItem from="1722693846102" duration="1418000" />
       <workItem from="1723105716274" duration="6432000" />
       <workItem from="1723362988645" duration="782000" />
-      <workItem from="1723364155219" duration="6054000" />
+      <workItem from="1723364155219" duration="6397000" />
+      <workItem from="1726231065916" duration="172000" />
+      <workItem from="1727708953215" duration="362000" />
     </task>
     <task id="LOCAL-00001" summary="优化抽屉蒙版的显示效果&#10;优化代码质量">
       <created>1683952184207</created>
@@ -769,14 +771,6 @@
       <option name="presentableId" value="LOCAL-00017" />
       <option name="project" value="LOCAL" />
       <updated>1687402693401</updated>
-    </task>
-    <task id="LOCAL-00225" summary="专注模式新增本地白噪音与专注时长">
-      <option name="closed" value="true" />
-      <created>1714103882048</created>
-      <option name="number" value="00225" />
-      <option name="presentableId" value="LOCAL-00225" />
-      <option name="project" value="LOCAL" />
-      <updated>1714103882049</updated>
     </task>
     <task id="LOCAL-00226" summary="专注模式新增本地白噪音与专注时长">
       <option name="closed" value="true" />
@@ -1026,7 +1020,15 @@
       <option name="project" value="LOCAL" />
       <updated>1723124439665</updated>
     </task>
-    <option name="localTasksCounter" value="257" />
+    <task id="LOCAL-00257" summary="优化存储方式">
+      <option name="closed" value="true" />
+      <created>1723370944556</created>
+      <option name="number" value="00257" />
+      <option name="presentableId" value="LOCAL-00257" />
+      <option name="project" value="LOCAL" />
+      <updated>1723370944557</updated>
+    </task>
+    <option name="localTasksCounter" value="258" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -1056,7 +1058,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="优化界面" />
     <MESSAGE value="倒数日、待办事项新增排序功能，待办事项新增标签" />
     <MESSAGE value="关闭专注模式自动暂停白噪音" />
     <MESSAGE value="简化移动端菜单栏" />
@@ -1081,7 +1082,8 @@
     <MESSAGE value="提升使用体验" />
     <MESSAGE value="优化本地数据存储" />
     <MESSAGE value="优化代码质量" />
-    <option name="LAST_COMMIT_MESSAGE" value="优化代码质量" />
+    <MESSAGE value="优化存储方式" />
+    <option name="LAST_COMMIT_MESSAGE" value="优化存储方式" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
