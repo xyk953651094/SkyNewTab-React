@@ -111,9 +111,6 @@ class App extends React.Component {
         // 版本号提醒
         let currentVersion = require('../package.json').version;
         getExtensionStorage("SkyNewTabReactVersion", "0.0.0").then((storageVersion: string) => {
-            console.log(storageVersion)
-            console.log(currentVersion)
-
             if (storageVersion !== currentVersion) {
                 notification.open({
                     icon: null,

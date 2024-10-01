@@ -2,7 +2,7 @@ import React from "react";
 import {Button, Col, Form, Input, List, message, Modal, Row, Space, Tooltip, Typography} from "antd";
 import {DeleteOutlined, EditOutlined, PlusOutlined, LinkOutlined} from "@ant-design/icons";
 import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
-import {btnMouseOut, btnMouseOver} from "../typescripts/publicFunctions";
+import {btnMouseOut, btnMouseOver, getExtensionStorage, setExtensionStorage, removeExtensionStorage} from "../typescripts/publicFunctions";
 import $ from "jquery";
 
 const {Text} = Typography;
@@ -18,7 +18,6 @@ type stateType = {
     backgroundColor: string,
     fontColor: string,
     buttonShape: "circle" | "default" | "round" | undefined,
-    collections: any,
     displayAddModal: boolean,
     displayEditModal: boolean,
     collectionData: any,
@@ -40,7 +39,6 @@ class CollectionComponent extends React.Component {
             backgroundColor: "",
             fontColor: "",
             buttonShape: "circle",
-            collections: [],
             displayAddModal: false,
             displayEditModal: false,
             collectionData: [],
@@ -51,47 +49,43 @@ class CollectionComponent extends React.Component {
 
     // 添加导航弹窗
     showAddModalBtnOnClick() {
-        let collections = [];
-        let tempCollections = localStorage.getItem("collections");
-        if (tempCollections) {
-            collections = JSON.parse(tempCollections);
-        }
-        if (collections.length < this.state.collectionMaxSize) {
-            this.setState({
-                displayAddModal: true
-            })
-        } else {
-            message.error("链接数量最多为" + this.state.collectionMaxSize + "个");
-        }
+        let tempThis = this;
+        getExtensionStorage("collections", []).then((collections: any) => {
+            if (collections.length < this.state.collectionMaxSize) {
+                tempThis.setState({
+                    displayAddModal: true
+                })
+            } else {
+                message.error("链接数量最多为" + this.state.collectionMaxSize + "个");
+            }
+        });
     }
 
     addModalOkBtnOnClick() {
         let webName = $("#webNameInput").val();
         let webUrl = $("#webUrlInput").val();
         if (webName && webUrl && webName.length > 0 && webUrl.length > 0) {
-            let collections = [];
-            let tempCollections = localStorage.getItem("collections");
-            if (tempCollections) {
-                collections = JSON.parse(tempCollections);
-            }
-            if (collections.length < this.state.collectionMaxSize) {
-                let urlRegExp = new RegExp("(https?|ftp|file)://[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]", "g");
-                if (urlRegExp.exec(webUrl) !== null) {
-                    collections.push({"webName": webName, "webUrl": webUrl, "timeStamp": Date.now()});
-                    localStorage.setItem("collections", JSON.stringify(collections));
+            let tempThis = this;
+            getExtensionStorage("collections", []).then((collections: any) => {
+                if (collections.length < this.state.collectionMaxSize) {
+                    let urlRegExp = new RegExp("(https?|ftp|file)://[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]", "g");
+                    if (urlRegExp.exec(webUrl) !== null) {
+                        collections.push({"webName": webName, "webUrl": webUrl, "timeStamp": Date.now()});
+                        setExtensionStorage("collections", collections);
 
-                    this.setState({
-                        displayAddModal: false,
-                        collectionData: collections,
-                        collectionSize: collections.length
-                    });
-                    message.success("添加成功");
+                        tempThis.setState({
+                            displayAddModal: false,
+                            collectionData: collections,
+                            collectionSize: collections.length
+                        });
+                        message.success("添加成功");
+                    } else {
+                        message.error("链接地址格式错误");
+                    }
                 } else {
-                    message.error("链接地址格式错误");
+                    message.error("链接数量最多为" + this.state.collectionMaxSize + "个");
                 }
-            } else {
-                message.error("链接数量最多为" + this.state.collectionMaxSize + "个");
-            }
+            });
         } else {
             message.error("表单不能为空");
         }
@@ -105,44 +99,41 @@ class CollectionComponent extends React.Component {
 
     // 编辑导航弹窗
     showEditModalBtnOnClick() {
-        let collections = [];
-        let tempCollections = localStorage.getItem("collections");
-        if (tempCollections) {
-            collections = JSON.parse(tempCollections);
-        }
-        this.setState({
-            displayEditModal: true,
-            collectionData: collections
-        })
+        let tempThis = this;
+        getExtensionStorage("collections", []).then((collections: any) => {
+            tempThis.setState({
+                displayEditModal: true,
+                collectionData: collections
+            })
+        });
     }
 
     editNameInputOnPressEnter(item: any, e: any) {
         if (e.target.value.length > 0) {
-            let collections = [];
-            let tempCollections = localStorage.getItem("collections");
-            if (tempCollections) {
-                collections = JSON.parse(tempCollections);
+            let tempThis = this;
+            getExtensionStorage("collections", null).then((collections: any) => {
+                if (collections !== null) {
+                    let index = -1;
+                    for (let i = 0; i < this.state.collectionData.length; i++) {
+                        if (item.timeStamp === this.state.collectionData[i].timeStamp) {
+                            index = i;
+                            break;
+                        }
+                    }
+                    if (index !== -1) {
+                        collections[index].webName = e.target.value;
 
-                let index = -1;
-                for (let i = 0; i < this.state.collectionData.length; i++) {
-                    if (item.timeStamp === this.state.collectionData[i].timeStamp) {
-                        index = i;
-                        break;
+                        setExtensionStorage("collections", collections);
+                        tempThis.setState({
+                            collectionData: collections,
+                            collectionSize: collections.length
+                        })
+                        message.success("修改成功");
+                    } else {
+                        message.error("修改失败");
                     }
                 }
-                if (index !== -1) {
-                    collections[index].webName = e.target.value;
-
-                    localStorage.setItem("collections", JSON.stringify(collections));
-                    this.setState({
-                        collectionData: collections,
-                        collectionSize: collections.length
-                    })
-                    message.success("修改成功");
-                } else {
-                    message.error("修改失败");
-                }
-            }
+            });
         } else {
             message.warning("链接名称不能为空");
         }
@@ -150,31 +141,30 @@ class CollectionComponent extends React.Component {
 
     editUrlInputOnPressEnter(item: any, e: any) {
         if (e.target.value.length > 0) {
-            let collections = [];
-            let tempCollections = localStorage.getItem("collections");
-            if (tempCollections) {
-                collections = JSON.parse(tempCollections);
+            let tempThis = this;
+            getExtensionStorage("collections", null).then((collections: any) => {
+                if (collections !== null) {
+                    let index = -1;
+                    for (let i = 0; i < this.state.collectionData.length; i++) {
+                        if (item.timeStamp === this.state.collectionData[i].timeStamp) {
+                            index = i;
+                            break;
+                        }
+                    }
+                    if (index !== -1) {
+                        collections[index].webUrl = e.target.value;
 
-                let index = -1;
-                for (let i = 0; i < this.state.collectionData.length; i++) {
-                    if (item.timeStamp === this.state.collectionData[i].timeStamp) {
-                        index = i;
-                        break;
+                        setExtensionStorage("collections", collections);
+                        tempThis.setState({
+                            collectionData: collections,
+                            collectionSize: collections.length
+                        })
+                        message.success("修改成功");
+                    } else {
+                        message.error("修改失败");
                     }
                 }
-                if (index !== -1) {
-                    collections[index].webUrl = e.target.value;
-
-                    localStorage.setItem("collections", JSON.stringify(collections));
-                    this.setState({
-                        collectionData: collections,
-                        collectionSize: collections.length
-                    })
-                    message.success("修改成功");
-                } else {
-                    message.error("修改失败");
-                }
-            }
+            });
         } else {
             message.warning("链接地址不能为空");
         }
@@ -193,56 +183,55 @@ class CollectionComponent extends React.Component {
     }
 
     removeBtnOnClick(item: any) {
-        let collections = [];
-        let tempCollections = localStorage.getItem("collections");
-        if (tempCollections) {
-            collections = JSON.parse(tempCollections);
-            let index = -1;
-            for (let i = 0; i < collections.length; i++) {
-                if (item.timeStamp === collections[i].timeStamp) {
-                    index = i;
-                    break;
+        let tempThis = this;
+        getExtensionStorage("collections", null).then((collections: any) => {
+            if (collections !== null) {
+                let index = -1;
+                for (let i = 0; i < collections.length; i++) {
+                    if (item.timeStamp === collections[i].timeStamp) {
+                        index = i;
+                        break;
+                    }
                 }
-            }
-            if (index !== -1) {
-                collections.splice(index, 1);
-            }
-            localStorage.setItem("collections", JSON.stringify(collections));
+                if (index !== -1) {
+                    collections.splice(index, 1);
+                }
+                setExtensionStorage("collections", collections);
 
-            this.setState({
-                collectionData: collections,
-                collectionSize: collections.length
-            }, () => {
-                message.success("删除成功");
-            })
-        }
+                tempThis.setState({
+                    collectionData: collections,
+                    collectionSize: collections.length
+                }, () => {
+                    message.success("删除成功");
+                })
+            }
+        });
     }
 
     removeAllBtnOnClick() {
-        let tempCollections = localStorage.getItem("collections");
-        if (tempCollections) {
-            localStorage.removeItem("collections");
+        let tempThis = this;
+        getExtensionStorage("collections", null).then((collections: any) => {
+            if (collections !== null) {
+                removeExtensionStorage("collections");
 
-            this.setState({
-                collectionData: [],
-                collectionSize: 0,
-            }, () => {
-                message.success("删除成功");
-            })
-        }
+                tempThis.setState({
+                    collectionData: [],
+                    collectionSize: 0,
+                }, () => {
+                    message.success("删除成功");
+                })
+            }
+        });
     }
 
     componentDidMount() {
-        let collections = [];
-        let tempCollections = localStorage.getItem("collections");
-        if (tempCollections) {
-            collections = JSON.parse(tempCollections);
-
-            this.setState({
+        let tempThis = this;
+        getExtensionStorage("collections", []).then((collections: any) => {
+            tempThis.setState({
                 collectionData: collections,
                 collectionSize: collections.length
             })
-        }
+        });
     }
 
     componentWillReceiveProps(nextProps: any, prevProps: any) {
