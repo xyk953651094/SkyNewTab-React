@@ -83,7 +83,7 @@ export let defaultPreferenceData: PreferenceDataInterface = {
 
     searchEngine: "bing",
     buttonShape: "default",
-    simpleMode: false,
+    simpleMode: true,
     accessKey: ""
 }
 

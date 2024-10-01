@@ -111,6 +111,9 @@ class App extends React.Component {
         // 版本号提醒
         let currentVersion = require('../package.json').version;
         getExtensionStorage("SkyNewTabReactVersion", "0.0.0").then((storageVersion: string) => {
+            console.log(storageVersion)
+            console.log(currentVersion)
+
             if (storageVersion !== currentVersion) {
                 notification.open({
                     icon: null,
@@ -122,16 +125,16 @@ class App extends React.Component {
                 });
                 setExtensionStorage("SkyNewTabReactVersion", currentVersion);
 
-                setTimeout(() => {
-                    notification.open({
-                        icon: null,
-                        message: "支持作者",
-                        description: "如果喜欢这款插件，请考虑五星好评",
-                        placement: "bottomLeft",
-                        duration: 5,
-                        closeIcon: false
-                    });
-                }, 1000);
+                // setTimeout(() => {
+                //     notification.open({
+                //         icon: null,
+                //         message: "支持作者",
+                //         description: "如果喜欢这款插件，请考虑五星好评",
+                //         placement: "bottomLeft",
+                //         duration: 5,
+                //         closeIcon: false
+                //     });
+                // }, 1000);
 
                 // 额外提醒
                 // if (currentVersion === "3.1.0") {
