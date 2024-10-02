@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="修复已知问题">
+    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="数据存储由 localStorage 转为 storage API">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/typescripts/publicConstants.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/typescripts/publicConstants.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/typescripts/publicFunctions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/typescripts/publicFunctions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/collectionComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/collectionComponent.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -654,7 +652,9 @@
       <workItem from="1726231065916" duration="172000" />
       <workItem from="1727708953215" duration="362000" />
       <workItem from="1727709330425" duration="786000" />
-      <workItem from="1727759478053" duration="1354000" />
+      <workItem from="1727759478053" duration="6952000" />
+      <workItem from="1727840213639" duration="268000" />
+      <workItem from="1727840498031" duration="2770000" />
     </task>
     <task id="LOCAL-00001" summary="优化抽屉蒙版的显示效果&#10;优化代码质量">
       <created>1683952184207</created>
@@ -774,22 +774,6 @@
       <option name="presentableId" value="LOCAL-00017" />
       <option name="project" value="LOCAL" />
       <updated>1687402693401</updated>
-    </task>
-    <task id="LOCAL-00227" summary="专注模式新增本地白噪音与专注时长">
-      <option name="closed" value="true" />
-      <created>1714108258015</created>
-      <option name="number" value="00227" />
-      <option name="presentableId" value="LOCAL-00227" />
-      <option name="project" value="LOCAL" />
-      <updated>1714108258015</updated>
-    </task>
-    <task id="LOCAL-00228" summary="提升使用体验">
-      <option name="closed" value="true" />
-      <created>1714219426822</created>
-      <option name="number" value="00228" />
-      <option name="presentableId" value="LOCAL-00228" />
-      <option name="project" value="LOCAL" />
-      <updated>1714219426822</updated>
     </task>
     <task id="LOCAL-00229" summary="优化倒数日、待办事项的界面">
       <option name="closed" value="true" />
@@ -1031,7 +1015,23 @@
       <option name="project" value="LOCAL" />
       <updated>1727709437157</updated>
     </task>
-    <option name="localTasksCounter" value="259" />
+    <task id="LOCAL-00259" summary="修复已知问题，初始默认极简模式，移除多余通知">
+      <option name="closed" value="true" />
+      <created>1727762319963</created>
+      <option name="number" value="00259" />
+      <option name="presentableId" value="LOCAL-00259" />
+      <option name="project" value="LOCAL" />
+      <updated>1727762319963</updated>
+    </task>
+    <task id="LOCAL-00260" summary="数据存储由 localStorage 转为 storage API">
+      <option name="closed" value="true" />
+      <created>1727795456775</created>
+      <option name="number" value="00260" />
+      <option name="presentableId" value="LOCAL-00260" />
+      <option name="project" value="LOCAL" />
+      <updated>1727795456776</updated>
+    </task>
+    <option name="localTasksCounter" value="261" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -1061,8 +1061,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="倒数日、待办事项新增排序功能，待办事项新增标签" />
-    <MESSAGE value="关闭专注模式自动暂停白噪音" />
     <MESSAGE value="简化移动端菜单栏" />
     <MESSAGE value="优化菜单栏界面" />
     <MESSAGE value="新增专注时段" />
@@ -1086,7 +1084,9 @@
     <MESSAGE value="优化代码质量" />
     <MESSAGE value="优化存储方式" />
     <MESSAGE value="修复已知问题" />
-    <option name="LAST_COMMIT_MESSAGE" value="修复已知问题" />
+    <MESSAGE value="修复已知问题，初始默认极简模式，移除多余通知" />
+    <MESSAGE value="数据存储由 localStorage 转为 storage API" />
+    <option name="LAST_COMMIT_MESSAGE" value="数据存储由 localStorage 转为 storage API" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
