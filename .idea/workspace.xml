@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="数据存储由 localStorage 转为 storage API">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="优化日期时间的字体大小" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -657,7 +655,7 @@
       <workItem from="1727840498031" duration="2950000" />
       <workItem from="1731145090433" duration="513000" />
       <workItem from="1733582762660" duration="102000" />
-      <workItem from="1733582906329" duration="407000" />
+      <workItem from="1733582906329" duration="713000" />
     </task>
     <task id="LOCAL-00001" summary="优化抽屉蒙版的显示效果&#10;优化代码质量">
       <created>1683952184207</created>
@@ -777,14 +775,6 @@
       <option name="presentableId" value="LOCAL-00017" />
       <option name="project" value="LOCAL" />
       <updated>1687402693401</updated>
-    </task>
-    <task id="LOCAL-00230" summary="优化倒数日、待办事项的界面">
-      <option name="closed" value="true" />
-      <created>1714274796786</created>
-      <option name="number" value="00230" />
-      <option name="presentableId" value="LOCAL-00230" />
-      <option name="project" value="LOCAL" />
-      <updated>1714274796787</updated>
     </task>
     <task id="LOCAL-00231" summary="优化倒数日、待办事项的界面">
       <option name="closed" value="true" />
@@ -1034,7 +1024,15 @@
       <option name="project" value="LOCAL" />
       <updated>1727885377428</updated>
     </task>
-    <option name="localTasksCounter" value="262" />
+    <task id="LOCAL-00262" summary="优化日期时间的字体大小">
+      <option name="closed" value="true" />
+      <created>1733583584493</created>
+      <option name="number" value="00262" />
+      <option name="presentableId" value="LOCAL-00262" />
+      <option name="project" value="LOCAL" />
+      <updated>1733583584493</updated>
+    </task>
+    <option name="localTasksCounter" value="263" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -1064,7 +1062,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="简化移动端菜单栏" />
     <MESSAGE value="优化菜单栏界面" />
     <MESSAGE value="新增专注时段" />
     <MESSAGE value="移除专注时段，减少插件体积" />
@@ -1089,7 +1086,8 @@
     <MESSAGE value="修复已知问题" />
     <MESSAGE value="修复已知问题，初始默认极简模式，移除多余通知" />
     <MESSAGE value="数据存储由 localStorage 转为 storage API" />
-    <option name="LAST_COMMIT_MESSAGE" value="数据存储由 localStorage 转为 storage API" />
+    <MESSAGE value="优化日期时间的字体大小" />
+    <option name="LAST_COMMIT_MESSAGE" value="优化日期时间的字体大小" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
