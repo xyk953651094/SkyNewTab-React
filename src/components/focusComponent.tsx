@@ -463,7 +463,7 @@ class FocusComponent extends React.Component {
                          color={this.state.backgroundColor}
                          overlayStyle={{width: "600px"}}>
                     <Button shape={this.props.preferenceData.buttonShape} size={"large"}
-                            icon={<i className={this.state.focusMode ? "bi bi-cup-hot-fill" : "bi bi-cup-hot"}></i>}
+                            icon={<i className={this.state.focusMode ? "bi bi-cup-hot" : "bi bi-cup"}></i>}
                             id={"focusBtn"}
                             className={"componentTheme zIndexHigh"}
                             style={{cursor: "default", display: this.state.display}}
