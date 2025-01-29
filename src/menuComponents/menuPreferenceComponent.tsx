@@ -262,6 +262,21 @@ class MenuPreferenceComponent extends React.Component {
         })
     }
 
+    blurModeSwitchOnChange(checked: boolean, e: any) {
+        this.setState({
+            preferenceData: this.setPreferenceData({blurMode: checked}),
+        }, () => {
+            localStorage.setItem("preferenceData", JSON.stringify(this.state.preferenceData));
+            this.props.getPreferenceData(this.state.preferenceData);
+            if (checked) {
+                message.success("已开启模糊背景");
+            } else {
+                message.success("已关闭模糊背景");
+            }
+            // resetSwitchColor("#blurModeSwitch", checked, this.props.hoverColor);
+        })
+    }
+
     // 纯色模式
     noImageModeSwitchOnChange(checked: boolean, e: any) {
         this.setState({
@@ -632,6 +647,12 @@ class MenuPreferenceComponent extends React.Component {
                                 <Form.Item name={"nightMode"} label={"降低亮度"} valuePropName={"checked"} style={{display: ["iPhone", "Android"].indexOf(device) === -1 ? "block" : "none"}}>
                                     <Switch checkedChildren="已开启" unCheckedChildren="已关闭" id={"nightModeSwitch"}
                                             onChange={this.nightModeSwitchOnChange.bind(this)}/>
+                                </Form.Item>
+                            </Col>
+                            <Col span={12}>
+                                <Form.Item name={"blurMode"} label={"模糊背景"} valuePropName={"checked"} style={{display: ["iPhone", "Android"].indexOf(device) === -1 ? "block" : "none"}}>
+                                    <Switch checkedChildren="已开启" unCheckedChildren="已关闭" id={"blurModeSwitch"}
+                                            onChange={this.blurModeSwitchOnChange.bind(this)}/>
                                 </Form.Item>
                             </Col>
                             <Col span={12}>

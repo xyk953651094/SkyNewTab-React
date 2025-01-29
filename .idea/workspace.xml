@@ -4,10 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="优化日期时间的字体大小">
+    <list default="true" id="18559e32-a302-4003-9e17-680b9a51389f" name="更改" comment="优化专注模式图标，菜单栏新增各平台插件商店入口">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/focusComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/focusComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/menuComponents/menuHeaderComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/menuComponents/menuHeaderComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/wallpaperComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/wallpaperComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/menuComponents/menuPreferenceComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/menuComponents/menuPreferenceComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stylesheets/searchComponent.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/stylesheets/searchComponent.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stylesheets/wallpaperComponent.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/stylesheets/wallpaperComponent.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/typescripts/publicConstants.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/typescripts/publicConstants.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/typescripts/publicInterface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/typescripts/publicInterface.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,7 +119,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-deb605915726-JavaScript-WS-243.22562.222" />
+        <option value="bundled-js-predefined-d6986cc7102b-822845ee3bb5-JavaScript-WS-243.23654.157" />
       </set>
     </attachedChunks>
   </component>
@@ -669,7 +674,11 @@
       <workItem from="1735435327706" duration="545000" />
       <workItem from="1735436111794" duration="73000" />
       <workItem from="1736045912916" duration="304000" />
-      <workItem from="1737380069638" duration="2222000" />
+      <workItem from="1737380069638" duration="2547000" />
+      <workItem from="1737451285149" duration="490000" />
+      <workItem from="1737857413241" duration="157000" />
+      <workItem from="1737857640510" duration="245000" />
+      <workItem from="1738160178204" duration="1940000" />
     </task>
     <task id="LOCAL-00001" summary="优化抽屉蒙版的显示效果&#10;优化代码质量">
       <created>1683952184207</created>
@@ -789,14 +798,6 @@
       <option name="presentableId" value="LOCAL-00017" />
       <option name="project" value="LOCAL" />
       <updated>1687402693401</updated>
-    </task>
-    <task id="LOCAL-00232" summary="优化倒数日、待办事项的界面">
-      <option name="closed" value="true" />
-      <created>1714308928532</created>
-      <option name="number" value="00232" />
-      <option name="presentableId" value="LOCAL-00232" />
-      <option name="project" value="LOCAL" />
-      <updated>1714308928533</updated>
     </task>
     <task id="LOCAL-00233" summary="优化使用体验">
       <option name="closed" value="true" />
@@ -1046,7 +1047,15 @@
       <option name="project" value="LOCAL" />
       <updated>1733584279570</updated>
     </task>
-    <option name="localTasksCounter" value="264" />
+    <task id="LOCAL-00264" summary="优化专注模式图标，菜单栏新增各平台插件商店入口">
+      <option name="closed" value="true" />
+      <created>1737382434116</created>
+      <option name="number" value="00264" />
+      <option name="presentableId" value="LOCAL-00264" />
+      <option name="project" value="LOCAL" />
+      <updated>1737382434116</updated>
+    </task>
+    <option name="localTasksCounter" value="265" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -1076,7 +1085,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="优化菜单栏界面" />
     <MESSAGE value="新增专注时段" />
     <MESSAGE value="移除专注时段，减少插件体积" />
     <MESSAGE value="倒数日新增循环周期功能" />
@@ -1101,7 +1109,8 @@
     <MESSAGE value="修复已知问题，初始默认极简模式，移除多余通知" />
     <MESSAGE value="数据存储由 localStorage 转为 storage API" />
     <MESSAGE value="优化日期时间的字体大小" />
-    <option name="LAST_COMMIT_MESSAGE" value="优化日期时间的字体大小" />
+    <MESSAGE value="优化专注模式图标，菜单栏新增各平台插件商店入口" />
+    <option name="LAST_COMMIT_MESSAGE" value="优化专注模式图标，菜单栏新增各平台插件商店入口" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

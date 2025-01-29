@@ -220,16 +220,14 @@ class App extends React.Component {
                         $(".ant-collapse").css("backgroundColor", this.state.themeColor.componentBackgroundColor);
                         $(".ant-collapse-header").css("color", this.state.themeColor.componentFontColor);
 
-                        // preferenceImageComponent
+                        resetRadioColor(this.state.preferenceData.searchEngine, ["bing", "google"], this.state.themeColor.themeColor);
+                        resetRadioColor(this.state.preferenceData.buttonShape, ["round", "default"], this.state.themeColor.themeColor);
                         resetRadioColor(this.state.preferenceData.dynamicEffect, ["all", "translate", "rotate", "close"], this.state.themeColor.themeColor);
                         resetRadioColor(this.state.preferenceData.imageQuality, ["full", "regular"], this.state.themeColor.themeColor);
                         resetCheckboxColor(this.state.preferenceData.imageTopics, imageTopics, this.state.themeColor.themeColor);
                         resetSwitchColor("#nightModeSwitch", this.state.preferenceData.nightMode, this.state.themeColor.themeColor);
+                        resetSwitchColor("#blurModeSwitch", this.state.preferenceData.blurMode, this.state.themeColor.themeColor);
                         resetSwitchColor("#noImageModeSwitch", this.state.preferenceData.noImageMode, this.state.themeColor.themeColor);
-
-                        // preferenceFunctionComponent
-                        resetRadioColor(this.state.preferenceData.searchEngine, ["bing", "google"], this.state.themeColor.themeColor);
-                        resetRadioColor(this.state.preferenceData.buttonShape, ["round", "default"], this.state.themeColor.themeColor);
                         resetSwitchColor("#simpleModeSwitch", this.state.preferenceData.simpleMode, this.state.themeColor.themeColor);
                     }
 

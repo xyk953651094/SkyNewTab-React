@@ -79,6 +79,7 @@ export let defaultPreferenceData: PreferenceDataInterface = {
     customTopic: "",
     changeImageTime: "3600000",
     nightMode: true,
+    blurMode: false,
     noImageMode: false,
 
     searchEngine: "bing",

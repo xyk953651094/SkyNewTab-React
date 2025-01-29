@@ -233,6 +233,11 @@ class WallpaperComponent extends React.Component {
                     className={"backgroundMask zIndexMiddle"}
                     style={{display: this.props.preferenceData.nightMode ? "block" : "none"}}
                 />
+                <div
+                    id={"backgroundBlur"}
+                    className={"backgroundBlur zIndexMiddle"}
+                    style={{display: this.props.preferenceData.blurMode ? "block" : "none"}}
+                />
             </>
         );
     }
