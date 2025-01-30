@@ -324,7 +324,7 @@ class DailyComponent extends React.Component {
                                 onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
                                 onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}
                                 style={{color: this.state.fontColor}} onClick={this.showAddModalBtnOnClick.bind(this)}>
-                            {"添加倒数日"}
+                            {"添加倒数"}
                         </Button>
                         <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<DeleteOutlined/>}
                                 onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
@@ -396,7 +396,7 @@ class DailyComponent extends React.Component {
                     <Row align={"middle"}>
                         <Col span={12}>
                             <Text style={{color: this.state.fontColor}}>
-                                {"添加倒数日 " + this.state.dailyList.length + " / " + dailyMaxSize}
+                                {"添加倒数 " + this.state.dailyList.length + " / " + dailyMaxSize}
                             </Text>
                         </Col>
                         <Col span={12} style={{textAlign: "right"}}>

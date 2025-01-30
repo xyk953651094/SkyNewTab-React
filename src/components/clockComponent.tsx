@@ -1,10 +1,9 @@
 import React from "react";
-import {Button, Col, Row, Space, Typography} from "antd";
+import {Col, Row, Space, Typography} from "antd";
 import "../stylesheets/clockComponent.scss"
 import {getTimeDetails} from "../typescripts/publicFunctions";
 import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
 import $ from "jquery";
-import {ClockCircleOutlined} from "@ant-design/icons";
 
 const {Text} = Typography;
 

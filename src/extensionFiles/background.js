@@ -1,85 +1,84 @@
 /* global chrome */  /* 加上这行才能使用 chrome */
 /* global browser */
 function getBrowserType() {
-    let userAgent = navigator.userAgent;
-    let browser='Other';
-    if (userAgent.indexOf('Chrome') !== -1 && userAgent.indexOf('Safari') !== -1){
-        browser="Chrome";
+    const userAgent = navigator.userAgent;
+
+    const browserDetection = {
+        "Chrome": userAgent.includes("Chrome") && userAgent.includes("Safari") && !userAgent.includes("Edg"),
+        "Edge": userAgent.includes("Edg"),
+        "Firefox": userAgent.includes("Firefox"),
+        "Safari": !userAgent.includes("Chrome") && userAgent.includes("Safari"),
+    };
+
+    for (const browser in browserDetection) {
+        if (browserDetection[browser]) {
+            return browser;
+        }
     }
-    else if (userAgent.indexOf('Edge') !== -1){
-        browser="Edge";
+    return "Other";
+}
+const browserType = getBrowserType();
+
+function checkAndRedirect(storageAPI, url, tabUpdateURL) {
+    return new Promise((resolve, reject) => {
+        storageAPI.get(["focusMode", "filterList", "focusEndTimeStamp"]).then((result) => {
+            const { focusMode, filterList, focusEndTimeStamp } = result;
+            if (focusMode === true && Array.isArray(filterList) && filterList.length > 0) {
+                if (focusEndTimeStamp === 0 || (focusEndTimeStamp > 0 && Date.now() < focusEndTimeStamp)) {
+                    if (isUrlInBlacklist(url, filterList)) {
+                        storageAPI.set({ lastBlockedUrl: url }).catch(reject);
+                        chrome.tabs.update(tabUpdateURL);
+                        resolve();
+                    }
+                }
+            }
+            resolve();
+        }).catch(reject);
+    });
+}
+
+function isUrlInBlacklist(url, filterList) {
+    for (const item of filterList) {
+        if (url.indexOf(item.domain) !== -1) {
+            return true;
+        }
     }
-    else if (userAgent.indexOf('Firefox') !== -1){
-        browser = "Firefox";
-    }
-    else if (userAgent.indexOf('Safari') !== -1 && userAgent.indexOf('Chrome') === -1){
-        browser="Safari";
-    }
-    return browser;
+    return false;
 }
 
 function forbiddenWeb(url) {
-    if (["Chrome", "Edge"].indexOf(browserType) !== -1) {
-        chrome.storage.local.get(["focusMode", "filterList", "focusEndTimeStamp"]).then((result) => {
-            let focusMode = result.focusMode;
-            let filterList = result.filterList;
-            let focusEndTimeStamp = result.focusEndTimeStamp;
-            if (focusMode === true && filterList !== null && filterList.length > 0) {  // 已开启专注模式且有过滤列表
-                if (focusEndTimeStamp === 0 || (focusEndTimeStamp > 0 && Date.now() < focusEndTimeStamp)) {  // 时间在专注时段内
-                    let isInBlackList = false;
-                    for (let i = 0; i < filterList.length; i++) {
-                        if (url.indexOf(filterList[i].domain) !== -1) {
-                            isInBlackList = true;
-                        }
-                    }
-
-                    if (isInBlackList === true) {
-                        chrome.tabs.update({url: browserType + "://newtab"});
-                    }
-                }
-            }
-        });
-    }
-    else if (["Firefox", "Safari"].indexOf(browserType) !== -1) {
-        browser.storage.local.get(["focusMode", "filterList", "focusEndTimeStamp"]).then((result) => {
-            let focusMode = result.focusMode;
-            let filterList = result.filterList;
-            let focusEndTimeStamp = result.focusEndTimeStamp;
-            if (focusMode === true && filterList !== null && filterList.length > 0) {  // 已开启专注模式且有过滤列表
-                if (focusEndTimeStamp === 0 || (focusEndTimeStamp > 0 && Date.now() < focusEndTimeStamp)) {  // 时间在专注时段内
-                    let isInBlackList = false;
-                    for (let i = 0; i < filterList.length; i++) {
-                        if (url.indexOf(filterList[i].domain) !== -1) {
-                            isInBlackList = true;
-                        }
-                    }
-
-                    if (isInBlackList === true) {
-                        browser.tabs.update({url: "./mainPage.html"});
-                    }
-                }
-            }
-        });
+    if (["Chrome", "Edge"].includes(browserType)) {
+        checkAndRedirect(chrome.storage.local, url, { url: browserType + "://newtab" })
+            .catch((err) => console.error("Error processing request for Chrome/Edge:", err));
+    } else if (["Firefox", "Safari"].includes(browserType)) {
+        checkAndRedirect(browser.storage.local, url, { url: "./mainPage.html" })
+            .catch((err) => console.error("Error processing request for Firefox/Safari:", err));
     }
 }
 
-const browserType = getBrowserType();
-if (["Chrome", "Edge"].indexOf(browserType) !== -1) {
-    chrome.tabs.onUpdated.addListener(function (tabID, changeInfo, tab) {
-        if(changeInfo.url) {
-            forbiddenWeb(changeInfo.url);
+// 统一的事件监听器回调函数
+function tabUpdatedListener(tabID, changeInfo, tab) {
+    if (changeInfo.url) {
+        try {
+            // 对URL进行简单的格式验证
+            const validUrl = new URL(changeInfo.url);
+            forbiddenWeb(validUrl.href);
+        } catch (error) {
+            console.error("处理URL时发生错误：", error);
         }
-    });
+    }
 }
-else if (["Firefox", "Safari"].indexOf(browserType) !== -1) {
-    browser.tabs.onUpdated.addListener(
-        function (tabID, changeInfo, tab) {
-            if(changeInfo.url) {
-                forbiddenWeb(changeInfo.url);
-            }
-        }
-    )
+
+// 根据浏览器类型选择正确的API来附加监听器
+function attachTabListener() {
+    if (["Chrome", "Edge"].includes(browserType)) {
+        chrome.tabs.onUpdated.addListener(tabUpdatedListener);
+    } else if (["Firefox", "Safari"].includes(browserType)) {
+        browser.tabs.onUpdated.addListener(tabUpdatedListener);
+    } else {
+        console.log("该功能不支持当前的浏览器，请使用 Chrome、Edge、Firefox、Safari");
+    }
 }
-else {
-    console.log("该功能不支持当前的浏览器，请使用 Chrome、Edge、Firefox、Safari")
-}
+
+// 调用函数以附加监听器
+attachTabListener();

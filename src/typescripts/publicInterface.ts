@@ -5,6 +5,7 @@ export interface PreferenceDataInterface {
     customTopic: string,
     changeImageTime: string,
     nightMode: boolean,
+    blurMode: boolean,
     noImageMode: boolean,
 
     searchEngine: "bing" | "google",

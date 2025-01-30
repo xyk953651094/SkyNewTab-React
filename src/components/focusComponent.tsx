@@ -1,10 +1,10 @@
 import React from "react";
 import {Button, Col, Form, Input, List, message, Modal, Popover, Row, Select, Space, Switch, Typography} from "antd";
+import {browserType} from "../typescripts/publicConstants"
 import {
     btnMouseOut,
     btnMouseOver,
     changeThemeColor,
-    getBrowserType,
     getTimeDetails
 } from "../typescripts/publicFunctions";
 import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
@@ -18,7 +18,6 @@ import focusSoundFour from "../assets/focusSounds/泉水水滴.mp3";
 const focusAudio = new Audio();
 const {Text} = Typography;
 const focusMaxSize = 10;
-const browserType = getBrowserType();
 
 type propType = {
     themeColor: ThemeColorInterface,
@@ -65,11 +64,15 @@ class FocusComponent extends React.Component {
     }
 
     setExtensionStorage(key: string, value: any) {
-        if (["Chrome", "Edge"].indexOf(browserType) !== -1) {
-            chrome.storage.local.set({[key]: value});
-        }
-        else if (["Firefox", "Safari"].indexOf(browserType) !== -1) {
-            browser.storage.local.set({[key]: value});
+        try {
+            if (["Chrome", "Edge"].indexOf(browserType) !== -1) {
+                chrome.storage.local.set({[key]: value});
+            }
+            else if (["Firefox", "Safari"].indexOf(browserType) !== -1) {
+                browser.storage.local.set({[key]: value});
+            }
+        } catch (error: any) {
+            console.error("Error writing to localStorage:", error);
         }
     }
 
@@ -78,7 +81,7 @@ class FocusComponent extends React.Component {
         let tempFocusEndTimeStamp: number = -1;
         if (checked) {
             if (this.state.filterList.length === 0) {
-                message.warning("请添加黑名单");
+                message.warning("请先添加名单");
             }
 
             if (this.state.focusPeriod === "manual") {
@@ -384,7 +387,7 @@ class FocusComponent extends React.Component {
                                 onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
                                 onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}
                                 style={{color: this.state.fontColor}} onClick={this.showAddModalBtnOnClick.bind(this)}>
-                            {"添加黑名单"}
+                            {"添加名单"}
                         </Button>
                         <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<DeleteOutlined/>}
                                 onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
@@ -420,7 +423,7 @@ class FocusComponent extends React.Component {
                         </Button>
                     </List.Item>
                 )}
-                header={
+                footer={
                     <Space>
                         <Select defaultValue={this.state.focusSound} style={{width: 160}}
                                 onChange={this.focusSoundSelectOnChange.bind(this)}
@@ -432,7 +435,7 @@ class FocusComponent extends React.Component {
                                     {value: "泉水水滴", label: "声谷 - 泉水水滴"}
                                 ]}
                         />
-                        <Select value={this.state.focusPeriod} style={{width: 120}} placement={"topLeft"}
+                        <Select value={this.state.focusPeriod} style={{width: 120}}
                                 disabled={this.state.focusMode}
                                 onChange={this.focusTimeSelectOnChange.bind(this)}
                                 options={[
@@ -458,9 +461,9 @@ class FocusComponent extends React.Component {
             <>
                 <Popover title={popoverTitle} content={popoverContent} placement={"bottomRight"}
                          color={this.state.backgroundColor}
-                         overlayStyle={{width: "550px"}}>
+                         overlayStyle={{width: "600px"}}>
                     <Button shape={this.props.preferenceData.buttonShape} size={"large"}
-                            icon={<i className={this.state.focusMode ? "bi bi-cup-hot-fill" : "bi bi-cup-hot"}></i>}
+                            icon={<i className={this.state.focusMode ? "bi bi-cup-hot" : "bi bi-cup"}></i>}
                             id={"focusBtn"}
                             className={"componentTheme zIndexHigh"}
                             style={{cursor: "default", display: this.state.display}}
@@ -472,7 +475,7 @@ class FocusComponent extends React.Component {
                     <Row align={"middle"}>
                         <Col span={12}>
                             <Text style={{color: this.state.fontColor}}>
-                                {"添加黑名单 " + this.state.filterList.length + " / " + focusMaxSize}
+                                {"添加名单 " + this.state.filterList.length + " / " + focusMaxSize}
                             </Text>
                         </Col>
                         <Col span={12} style={{textAlign: "right"}}>
@@ -488,7 +491,7 @@ class FocusComponent extends React.Component {
                        styles={{mask: {backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)"}}}
                 >
                     <Form>
-                        <Form.Item label={"网站域名"} name={"focusInput"} extra={"开启专注模式后，访问黑名单中的域名时将自动跳转至本插件"}>
+                        <Form.Item label={"网站域名"} name={"focusInput"} extra={"开启专注模式后，访问名单中的域名时将自动跳转至本插件"}>
                             <Input placeholder="example.com" value={this.state.inputValue} onChange={this.inputOnChange.bind(this)}
                                    maxLength={30} showCount allowClear/>
                         </Form.Item>

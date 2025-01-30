@@ -253,7 +253,7 @@ class TodoComponent extends React.Component {
                                 onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
                                 onMouseOut={btnMouseOut.bind(this, this.state.fontColor)}
                                 style={{color: this.state.fontColor}} onClick={this.showAddModalBtnOnClick.bind(this)}>
-                            {"添加待办事项"}
+                            {"添加待办"}
                         </Button>
                         <Button type={"text"} shape={this.props.preferenceData.buttonShape} icon={<CheckOutlined/>}
                                 onMouseOver={btnMouseOver.bind(this, this.state.hoverColor)}
@@ -321,7 +321,7 @@ class TodoComponent extends React.Component {
                     <Row align={"middle"}>
                         <Col span={12}>
                             <Text style={{color: this.state.fontColor}}>
-                                {"添加待办事项 " + this.state.todoList.length + " / " + todoMaxSize}
+                                {"添加待办 " + this.state.todoList.length + " / " + todoMaxSize}
                             </Text>
                         </Col>
                         <Col span={12} style={{textAlign: "right"}}>

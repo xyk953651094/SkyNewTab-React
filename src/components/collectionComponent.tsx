@@ -2,7 +2,7 @@ import React from "react";
 import {Button, Col, Form, Input, List, message, Modal, Row, Space, Tooltip, Typography} from "antd";
 import {DeleteOutlined, EditOutlined, PlusOutlined, LinkOutlined} from "@ant-design/icons";
 import {PreferenceDataInterface, ThemeColorInterface} from "../typescripts/publicInterface";
-import {btnMouseOut, btnMouseOver} from "../typescripts/publicFunctions";
+import {btnMouseOut, btnMouseOver, getExtensionStorage, setExtensionStorage, removeExtensionStorage} from "../typescripts/publicFunctions";
 import $ from "jquery";
 
 const {Text} = Typography;
@@ -18,7 +18,6 @@ type stateType = {
     backgroundColor: string,
     fontColor: string,
     buttonShape: "circle" | "default" | "round" | undefined,
-    collections: any,
     displayAddModal: boolean,
     displayEditModal: boolean,
     collectionData: any,
@@ -40,7 +39,6 @@ class CollectionComponent extends React.Component {
             backgroundColor: "",
             fontColor: "",
             buttonShape: "circle",
-            collections: [],
             displayAddModal: false,
             displayEditModal: false,
             collectionData: [],
@@ -51,12 +49,7 @@ class CollectionComponent extends React.Component {
 
     // 添加导航弹窗
     showAddModalBtnOnClick() {
-        let collections = [];
-        let tempCollections = localStorage.getItem("collections");
-        if (tempCollections) {
-            collections = JSON.parse(tempCollections);
-        }
-        if (collections.length < this.state.collectionMaxSize) {
+        if (this.state.collectionData.length < this.state.collectionMaxSize) {
             this.setState({
                 displayAddModal: true
             })
@@ -69,21 +62,17 @@ class CollectionComponent extends React.Component {
         let webName = $("#webNameInput").val();
         let webUrl = $("#webUrlInput").val();
         if (webName && webUrl && webName.length > 0 && webUrl.length > 0) {
-            let collections = [];
-            let tempCollections = localStorage.getItem("collections");
-            if (tempCollections) {
-                collections = JSON.parse(tempCollections);
-            }
-            if (collections.length < this.state.collectionMaxSize) {
+            let tempCollectionData = this.state.collectionData;
+            if (tempCollectionData.length < this.state.collectionMaxSize) {
                 let urlRegExp = new RegExp("(https?|ftp|file)://[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]", "g");
                 if (urlRegExp.exec(webUrl) !== null) {
-                    collections.push({"webName": webName, "webUrl": webUrl, "timeStamp": Date.now()});
-                    localStorage.setItem("collections", JSON.stringify(collections));
+                    tempCollectionData.push({"webName": webName, "webUrl": webUrl, "timeStamp": Date.now()});
+                    setExtensionStorage("collections", tempCollectionData);
 
                     this.setState({
                         displayAddModal: false,
-                        collectionData: collections,
-                        collectionSize: collections.length
+                        collectionData: tempCollectionData,
+                        collectionSize: tempCollectionData.length
                     });
                     message.success("添加成功");
                 } else {
@@ -105,43 +94,32 @@ class CollectionComponent extends React.Component {
 
     // 编辑导航弹窗
     showEditModalBtnOnClick() {
-        let collections = [];
-        let tempCollections = localStorage.getItem("collections");
-        if (tempCollections) {
-            collections = JSON.parse(tempCollections);
-        }
         this.setState({
-            displayEditModal: true,
-            collectionData: collections
+            displayEditModal: true
         })
     }
 
     editNameInputOnPressEnter(item: any, e: any) {
         if (e.target.value.length > 0) {
-            let collections = [];
-            let tempCollections = localStorage.getItem("collections");
-            if (tempCollections) {
-                collections = JSON.parse(tempCollections);
-
-                let index = -1;
-                for (let i = 0; i < this.state.collectionData.length; i++) {
-                    if (item.timeStamp === this.state.collectionData[i].timeStamp) {
-                        index = i;
-                        break;
-                    }
+            let index = -1;
+            let tempCollectionData = this.state.collectionData;
+            for (let i = 0; i < tempCollectionData.length; i++) {
+                if (item.timeStamp === tempCollectionData[i].timeStamp) {
+                    index = i;
+                    break;
                 }
-                if (index !== -1) {
-                    collections[index].webName = e.target.value;
+            }
+            if (index !== -1) {
+                tempCollectionData[index].webName = e.target.value;
 
-                    localStorage.setItem("collections", JSON.stringify(collections));
-                    this.setState({
-                        collectionData: collections,
-                        collectionSize: collections.length
-                    })
-                    message.success("修改成功");
-                } else {
-                    message.error("修改失败");
-                }
+                setExtensionStorage("collections", tempCollectionData);
+                this.setState({
+                    collectionData: tempCollectionData,
+                    collectionSize: tempCollectionData.length
+                })
+                message.success("修改成功");
+            } else {
+                message.error("修改失败");
             }
         } else {
             message.warning("链接名称不能为空");
@@ -150,30 +128,25 @@ class CollectionComponent extends React.Component {
 
     editUrlInputOnPressEnter(item: any, e: any) {
         if (e.target.value.length > 0) {
-            let collections = [];
-            let tempCollections = localStorage.getItem("collections");
-            if (tempCollections) {
-                collections = JSON.parse(tempCollections);
-
-                let index = -1;
-                for (let i = 0; i < this.state.collectionData.length; i++) {
-                    if (item.timeStamp === this.state.collectionData[i].timeStamp) {
-                        index = i;
-                        break;
-                    }
+            let index = -1;
+            let tempCollectionData = this.state.collectionData;
+            for (let i = 0; i < tempCollectionData.length; i++) {
+                if (item.timeStamp === tempCollectionData[i].timeStamp) {
+                    index = i;
+                    break;
                 }
-                if (index !== -1) {
-                    collections[index].webUrl = e.target.value;
+            }
+            if (index !== -1) {
+                tempCollectionData[index].webUrl = e.target.value;
 
-                    localStorage.setItem("collections", JSON.stringify(collections));
-                    this.setState({
-                        collectionData: collections,
-                        collectionSize: collections.length
-                    })
-                    message.success("修改成功");
-                } else {
-                    message.error("修改失败");
-                }
+                setExtensionStorage("collections", tempCollectionData);
+                this.setState({
+                    collectionData: tempCollectionData,
+                    collectionSize: tempCollectionData.length
+                })
+                message.success("修改成功");
+            } else {
+                message.error("修改失败");
             }
         } else {
             message.warning("链接地址不能为空");
@@ -193,56 +166,45 @@ class CollectionComponent extends React.Component {
     }
 
     removeBtnOnClick(item: any) {
-        let collections = [];
-        let tempCollections = localStorage.getItem("collections");
-        if (tempCollections) {
-            collections = JSON.parse(tempCollections);
-            let index = -1;
-            for (let i = 0; i < collections.length; i++) {
-                if (item.timeStamp === collections[i].timeStamp) {
-                    index = i;
-                    break;
-                }
+        let index = -1;
+        let tempCollectionData = this.state.collectionData;
+        for (let i = 0; i < tempCollectionData.length; i++) {
+            if (item.timeStamp === tempCollectionData[i].timeStamp) {
+                index = i;
+                break;
             }
-            if (index !== -1) {
-                collections.splice(index, 1);
-            }
-            localStorage.setItem("collections", JSON.stringify(collections));
-
-            this.setState({
-                collectionData: collections,
-                collectionSize: collections.length
-            }, () => {
-                message.success("删除成功");
-            })
         }
+        if (index !== -1) {
+            tempCollectionData.splice(index, 1);
+        }
+        setExtensionStorage("collections", tempCollectionData);
+
+        this.setState({
+            collectionData: tempCollectionData,
+            collectionSize: tempCollectionData.length
+        }, () => {
+            message.success("删除成功");
+        })
     }
 
     removeAllBtnOnClick() {
-        let tempCollections = localStorage.getItem("collections");
-        if (tempCollections) {
-            localStorage.removeItem("collections");
-
-            this.setState({
-                collectionData: [],
-                collectionSize: 0,
-            }, () => {
-                message.success("删除成功");
-            })
-        }
+        removeExtensionStorage("collections");
+        this.setState({
+            collectionData: [],
+            collectionSize: 0,
+        }, () => {
+            message.success("删除成功");
+        })
     }
 
     componentDidMount() {
-        let collections = [];
-        let tempCollections = localStorage.getItem("collections");
-        if (tempCollections) {
-            collections = JSON.parse(tempCollections);
-
-            this.setState({
+        let tempThis = this;
+        getExtensionStorage("collections", []).then((collections: any) => {
+            tempThis.setState({
                 collectionData: collections,
                 collectionSize: collections.length
             })
-        }
+        });
     }
 
     componentWillReceiveProps(nextProps: any, prevProps: any) {
